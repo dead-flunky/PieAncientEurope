@@ -1,0 +1,90 @@
+this is a personal log of the changes from pie AE AFTER KMOD merge
+written and merged by Keldath for Pie and his community with love
+
+i made most tags none mandatory - but some needs to be - see below.
+
+changed tags:
+
+buildings:
+bNoUnhealthyPopulation ==> iUnhealthyPopulationModifier 
+
+leaders:
+
+these 4 tags needs to be under each leader.
+see kmod f1rpo pack for example of values.
+i got to lazy to do it my self :)
+
+<!-- BBAI Victory Strategy -->
+<iCultureVictoryWeight>0</iCultureVictoryWeight>
+<iSpaceVictoryWeight>0</iSpaceVictoryWeight>
+<iConquestVictoryWeight>0</iConquestVictoryWeight>
+<iDominationVictoryWeight>0</iDominationVictoryWeight>
+<iDiplomacyVictoryWeight>0</iDiplomacyVictoryWeight>
+<!-- BBAI Victory Strategy -->
+
+civics:
+
+bNoUnhealthyPopulation ==> iUnhealthyPopulationModifier
+new tag : iExtraHappiness see examlpe in the xml
+
+diplomacy - added kmod diplo part in the end
+
+era:
+added bai tag for all eras: iTechCostModifier
+
+hints :
+added code in the end - 2 kmod chages to existings
+
+tech:
+
+added tags:
+
+ <!--kmod
+      <CommerceModifiers>
+				<iCommerce>0</iCommerce>
+				<iCommerce>10</iCommerce>
+				<iCommerce>0</iCommerce>
+	  </CommerceModifiers>
+      <SpecialistExtraCommerces>
+				<iCommerce>0</iCommerce>
+				<iCommerce>1</iCommerce>
+				<iCommerce>0</iCommerce>
+	  </SpecialistExtraCommerces>
+	  -->
+
+features:
+new tag: iWarmingDefense
+
+units:
+
+added tags: PromotionPrereqOr3 
+
+randomeventsinterface - added changes to sort fn and several other changes
+
+in cvwbdesc i could not find this part : see f1rpo addition:
+
+	for iPlayerLoop in range(gc.getMAX_CIV_PLAYERS()):
+			if gc.getPlayer(iPlayerLoop).isEverAlive(): # f1rpo
+				iPlayerCulture = self.aiPlayerCulture[iPlayerLoop]
+				if (iPlayerCulture > 0):
+					self.city.setCulture(iPlayerLoop, iPlayerCulture, true)
+
+
+civ4artdefines_interface.xml: added xml additions mainly for bug mod.
+
+added : 
+
+added files:
+
+CIV4DetailManager.xml
+buildingsschema.xml
+gameonfobuildingsschema.xml
+civilizationsbuildingsschema.xml
+terrainschema.xml
+unitschema.xml
+BBAI_AI_Variables_GlobalDefines.xml
+BBAI_Game_Options_GlobalDefines.xml
+GlobalDefinesAlt.xml
+LeadFromBehind_GlobalDefines.xml
+TechDiffusion_GlobalDefines.xml
+

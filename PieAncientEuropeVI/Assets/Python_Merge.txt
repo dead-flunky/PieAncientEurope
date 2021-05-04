@@ -1,0 +1,39 @@
+this is a personal log of the changes from pie AE AFTER KMOD merge
+written and merged by Keldath for Pie and his community with love
+
+
+edit:
+i got some python errors, probabaly i miss merged some files, so i made a new one without all the below 
+except the ones i marked with **
+ill continue the merge part by part to some extent.
+most of the py was changed by Pie, he needs to figure out what he wants to take from kmod.
+on top of the additons , karadoc / f1rpo added code to work with the dll i would add those.
+besides the bug.
+if any - i recommend start off from scratch the pie py on this kmod ptrhon mod all together.
+
+
+changed files:
+
+cvcivicsscreen.py - changes an entry
+cvespionageadvisor.py - added entry - min max of espionage issue
+cvpediapromotion.py - changed and added code
+cvdiplomacy.py - many additions
+cvmilitaryadvisor.py - new entries
+cvpediabonus.py - some changes
+cvadvisoruntils.py
+
+
+added files:
+
+CIV4UnitAIInfos.py
+CvEventInterface.py
+CvScreenUtilsInterface.py
+CvScreensInterface.py
+vBUGMilitaryAdvisor.py
+CvSpaceShipScreen.py
+CvOptionsScreen.py
+
+full folders and content added:
+in python: BUG,Contrib,K-Mod
+
+assets: config
