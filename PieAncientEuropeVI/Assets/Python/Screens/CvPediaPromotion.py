@@ -118,6 +118,7 @@ class CvPediaPromotion:
 
     ePromoOr1 = gc.getPromotionInfo(self.iPromotion).getPrereqOrPromotion1()
     ePromoOr2 = gc.getPromotionInfo(self.iPromotion).getPrereqOrPromotion2()
+    ePromoOr3 = gc.getPromotionInfo(self.iPromotion).getPrereqOrPromotion3() # K-Mod newline
     if (ePromoOr1 > -1):
       if (ePromo > -1):
         screen.attachLabel(panelName, "", localText.getText("TXT_KEY_AND", ()))
@@ -130,10 +131,18 @@ class CvPediaPromotion:
       if (ePromoOr2 > -1):
         screen.attachLabel(panelName, "", localText.getText("TXT_KEY_OR", ()))
         screen.attachImageButton( panelName, "", gc.getPromotionInfo(ePromoOr2).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, ePromoOr2, 1, False )
-
+    
+        if (ePromo > -1 and ePromoOr3 < 0): # K-Mod added second condition
+            screen.attachLabel(panelName, "", ")")
+      
+# K-Mod new block
+      if (ePromoOr3 > -1):
+        screen.attachLabel(panelName, "", localText.getText("TXT_KEY_OR", ()))
+        screen.attachImageButton( panelName, "", gc.getPromotionInfo(ePromoOr3).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, ePromoOr3, 1, False )
+      
         if (ePromo > -1):
           screen.attachLabel(panelName, "", ")")
-
+# K-Mod end
     # PAE Unit Rang Promos
     if "_RANG_" in gc.getPromotionInfo(self.iPromotion).getType():
         lFirst = [

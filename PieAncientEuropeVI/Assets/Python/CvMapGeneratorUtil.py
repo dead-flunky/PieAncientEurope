@@ -437,7 +437,7 @@ class HintedWorld(FractalWorld):
                 height += 1
             if size == width*height:
                 iGrain = i
-        assert(iGrain is not None)
+        assert(iGrain != None)
         iFlags = self.map.getMapFractalFlags()
         self.continentsFrac.fracInitHints(self.iNumPlotsX, self.iNumPlotsY, iGrain, self.mapRand, iFlags, self.data, self.fracXExp, self.fracYExp)
 
@@ -448,12 +448,12 @@ class HintedWorld(FractalWorld):
             if abs(x - cont.centerx) + abs(y - cont.centery) > cont.maxradius:
                 return False
         val = self.getValue(x, y)
-        if val is not None:
+        if val != None:
             return False
         for dx in range(-1, 2):
             for dy in range(-1, 2):
                 val = self.getValue(x+dx, y+dy)
-                if val is not None and val >= 192 and ((not cont) or (x+dx, y+dy) not in cont.blocks):
+                if val != None and val >= 192 and ((not cont) or (x+dx, y+dy) not in cont.blocks):
                     return False
         return True
 
@@ -1092,7 +1092,7 @@ class TerrainGenerator:
         This function can be overridden to change the latitudes; for example,
         to make an entire map have temperate terrain, or to make terrain change from east to west
         instead of from north to south"""
-        lat = abs((self.iHeight / 2) - iY)/float(self.iHeight/2)  # 0.0 = equator, 1.0 = pole
+        lat = abs(float((self.iHeight-1)/2 - iY)/float((self.iHeight-1)/2)) # 0.0 = equator, 1.0 = pole
 
         # Adjust latitude using self.variation fractal, to mix things up:
         lat += (128 - self.variation.getHeight(iX, iY))/(255.0 * 5.0)
@@ -1235,7 +1235,7 @@ class FeatureGenerator:
 
     def getLatitudeAtPlot(self, iX, iY):
         "returns a value in the range of 0.0 (tropical) to 1.0 (polar)"
-        return abs((self.iGridH/2) - iY)/float(self.iGridH/2)  # 0.0 = equator, 1.0 = pole
+        return abs(float((self.iGridH-1)/2) - iY)/float((self.iGridH-1)/2) # 0.0 = equator, 1.0 = pole
 
     def addFeaturesAtPlot(self, iX, iY):
         "adds any appropriate features at the plot (iX, iY) where (0,0) is in the SW"
@@ -1321,14 +1321,14 @@ def findStartingPlot(playerID, validFn=None):
 
     iRange = player.startingPlotRange()
     iPass = 0
-
-    while True:
+    
+    while (true):
         iBestValue = 0
         pBestPlot = None
 
         for iX in range(map.getGridWidth()):
             for iY in range(map.getGridHeight()):
-                if validFn is not None and not validFn(playerID, iX, iY):
+            	if validFn != None and not validFn(playerID, iX, iY):
                     continue
                 pLoopPlot = map.plot(iX, iY)
                 val = pLoopPlot.getFoundValue(playerID)
@@ -1345,7 +1345,7 @@ def findStartingPlot(playerID, validFn=None):
                         iBestValue = val
                         pBestPlot = pLoopPlot
 
-        if pBestPlot is not None:
+        if pBestPlot != None:
             return map.plotNum(pBestPlot.getX(), pBestPlot.getY())
 
         print("player", playerID, "pass", iPass, "failed")
@@ -1360,7 +1360,7 @@ def argmin(list):
     best_index = None
     for i in range(len(list)):
         val = list[i]
-        if (best is None) or (val < best):
+        if (best == None) or (val < best):
             best_index = i
             best = val
     return (best_index, best)

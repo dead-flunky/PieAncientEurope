@@ -624,8 +624,18 @@ class CvForeignAdvisor:
     screen.addLineGFC(self.BACKGROUND_ID, self.getNextLineName(), x, y, x + self.W_LEGEND - 2*self.MARGIN_LEGEND, y, gc.getInfoTypeForString("COLOR_CYAN"))
 
     # Our leader head
+# K-mod (moved from below)
+#keldath - why the or true? also - no need for  self.iSelectedLeader?
+    if bSingleLeaderSelected or True:
+    	#iBaseLeader = self.iSelectedLeader
+    	iBaseLeader = self.iSelectedLeader2
+    else:
+    	iBaseLeader = self.iActiveLeader
+    playerBase = gc.getPlayer(iBaseLeader)
+# K-Mod end
     szLeaderHead = self.getNextWidgetName()
-    screen.addCheckBoxGFC(szLeaderHead, gc.getLeaderHeadInfo(gc.getPlayer(self.iActiveLeader).getLeaderType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), self.X_LEADER_CIRCLE_TOP - iLeaderWidth/2, int(fLeaderTop), iLeaderWidth, iLeaderHeight, WidgetTypes.WIDGET_LEADERHEAD, self.iActiveLeader, -1, ButtonStyles.BUTTON_STYLE_LABEL)
+    #screen.addCheckBoxGFC(szLeaderHead, gc.getLeaderHeadInfo(gc.getPlayer(self.iActiveLeader).getLeaderType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), self.X_LEADER_CIRCLE_TOP - iLeaderWidth/2, int(fLeaderTop), iLeaderWidth, iLeaderHeight, WidgetTypes.WIDGET_LEADERHEAD, self.iActiveLeader, -1, ButtonStyles.BUTTON_STYLE_LABEL)
+    screen.addCheckBoxGFC(szLeaderHead, gc.getLeaderHeadInfo(gc.getPlayer(self.iActiveLeader).getLeaderType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), self.X_LEADER_CIRCLE_TOP - iLeaderWidth/2, int(fLeaderTop), iLeaderWidth, iLeaderHeight, WidgetTypes.WIDGET_LEADERHEAD, self.iActiveLeader, iBaseLeader, ButtonStyles.BUTTON_STYLE_LABEL) # K-Mod
     if self.iSelectedLeader2 == self.iActiveLeader:
       screen.addDDSGFC( "SelectionCircle"
           #, ArtFileMgr.getInterfaceArtInfo("WHITE_CIRCLE_40").getPath()
@@ -639,7 +649,24 @@ class CvForeignAdvisor:
     szName = self.getNextWidgetName()
     szLeaderName = u"<font=3>" + playerActive.getName() + u"</font>"
     screen.setLabel(szName, "", szLeaderName, CvUtil.FONT_CENTER_JUSTIFY, self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight + 5, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-
+    
+    # K-Mod. vassal / master label
+    szName = self.getNextWidgetName()
+    szText = u""
+    player = gc.getPlayer(self.iActiveLeader)
+    if iBaseLeader != self.iActiveLeader and gc.getTeam(player.getTeam()).isHasMet(playerBase.getTeam()):
+    	if (gc.getTeam(player.getTeam()).isVassal(playerBase.getTeam())):
+    		szText += localText.getText("TXT_KEY_MISC_VASSAL_SHORT", ())
+    	elif (gc.getTeam(playerBase.getTeam()).isVassal(player.getTeam())):
+    		szText += localText.getText("TXT_KEY_MISC_MASTER", ())
+    	if not gc.getPlayer(self.iActiveLeader).isHuman():
+    		if szText != "":
+    			szText += ", "
+    		szText += gc.getAttitudeInfo(gc.getPlayer(self.iActiveLeader).AI_getAttitude(iBaseLeader)).getDescription()
+    	if szText != "":
+    		szText = " (" + szText + ")"
+    screen.setLabel(szName, "", szText, CvUtil.FONT_CENTER_JUSTIFY, self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight + 25, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
+    #k-mod end
 
     # angle increment in radians (180 degree range)
     if (iCount < 2):
@@ -656,14 +683,14 @@ class CvForeignAdvisor:
         continue
 
       player = gc.getPlayer(iPlayer)
-
-      if bSingleLeaderSelected or True:
-        # attitudes shown are towards single selected leader
-        iBaseLeader = self.iSelectedLeader2
-      else:
+	  #keldath kmod - moved above
+      #if bSingleLeaderSelected or True:
+      #  # attitudes shown are towards single selected leader
+      #  iBaseLeader = self.iSelectedLeader2
+      #else:
         # attitudes shown are towards active leader
-        iBaseLeader = self.iActiveLeader
-      playerBase = gc.getPlayer(iBaseLeader)
+      #  iBaseLeader = self.iActiveLeader
+      #playerBase = gc.getPlayer(iBaseLeader)
 
       iPlayerIndex = leaderMap[iPlayer]
 
@@ -688,18 +715,32 @@ class CvForeignAdvisor:
       szText = u"<font=3>" + player.getName() + u"</font>"
       screen.setLabel(szName, "", szText, CvUtil.FONT_CENTER_JUSTIFY, fX + iLeaderWidth/2, fY + iLeaderHeight + 5, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 
-      # Leader attitude towards active player
+      # Leader attitude towards active player. (rewritten by K-Mod)
       szName = self.getNextWidgetName()
-      if (gc.getTeam(player.getTeam()).isHasMet(playerBase.getTeam()) and iBaseLeader != iPlayer):
-        szText = " (" + gc.getAttitudeInfo(gc.getPlayer(iPlayer).AI_getAttitude(iBaseLeader)).getDescription()
-        if (iBaseLeader != iPlayer):
-          if (gc.getTeam(player.getTeam()).isVassal(playerBase.getTeam())):
-            szText += ", " + localText.getText("TXT_KEY_MISC_VASSAL_SHORT", ())
-          elif (gc.getTeam(playerBase.getTeam()).isVassal(player.getTeam())):
-            szText += ", " + localText.getText("TXT_KEY_MISC_MASTER", ())
-        szText += ")"
-      else:
-        szText = u""
+      szText = u""
+      if iBaseLeader != iPlayer and gc.getTeam(player.getTeam()).isHasMet(playerBase.getTeam()):
+      	if (gc.getTeam(player.getTeam()).isVassal(playerBase.getTeam())):
+      		szText += localText.getText("TXT_KEY_MISC_VASSAL_SHORT", ())
+      	elif (gc.getTeam(playerBase.getTeam()).isVassal(player.getTeam())):
+      		szText += localText.getText("TXT_KEY_MISC_MASTER", ())
+      	if not gc.getPlayer(iPlayer).isHuman():
+      		if szText != "":
+      			szText += ", "
+      		szText += gc.getAttitudeInfo(gc.getPlayer(iPlayer).AI_getAttitude(iBaseLeader)).getDescription()
+      	if szText != "":
+      		szText = " (" + szText + ")"
+     #k-mod end
+     #original code
+     # if (gc.getTeam(player.getTeam()).isHasMet(playerBase.getTeam()) and iBaseLeader != iPlayer):
+     #   szText = " (" + gc.getAttitudeInfo(gc.getPlayer(iPlayer).AI_getAttitude(iBaseLeader)).getDescription()
+     #   if (iBaseLeader != iPlayer):
+     #     if (gc.getTeam(player.getTeam()).isVassal(playerBase.getTeam())):
+     #       szText += ", " + localText.getText("TXT_KEY_MISC_VASSAL_SHORT", ())
+     #     elif (gc.getTeam(playerBase.getTeam()).isVassal(player.getTeam())):
+     #       szText += ", " + localText.getText("TXT_KEY_MISC_MASTER", ())
+     #   szText += ")"
+     # else:
+     #   szText = u""
       screen.setLabel(szName, "", szText, CvUtil.FONT_CENTER_JUSTIFY, fX + iLeaderWidth/2, fY + iLeaderHeight + 25, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 
     # draw lines

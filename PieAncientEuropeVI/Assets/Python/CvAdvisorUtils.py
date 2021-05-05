@@ -28,13 +28,13 @@ def resetNoLiberateCities():
 
 
 def featPopup(iPlayer):
-    if not gc.getPlayer(iPlayer).isOption(PlayerOptionTypes.PLAYEROPTION_ADVISOR_POPUPS):
+    if (not gc.getPlayer(iPlayer).isOption(PlayerOptionTypes.PLAYEROPTION_ADVISOR_POPUPS)):
         return False
-    if not gc.getPlayer(iPlayer).isHuman():
+    if (not gc.getPlayer(iPlayer).isHuman()):
         return False
-    if gc.getGame().isNetworkMultiPlayer():
+    if (gc.getGame().isNetworkMultiPlayer()):
         return False
-    if gc.getGame().getElapsedGameTurns() == 0:
+    if (gc.getGame().getElapsedGameTurns() == 0):
         return False
     return True
 
@@ -438,25 +438,25 @@ def endTurnFeats(iPlayer):
             for iI in range(gc.getNumBuildingInfos()):
                 eCorporation = gc.getBuildingInfo(iI).getFoundsCorporation()
                 if eCorporation != -1 and not gc.getGame().isCorporationFounded(eCorporation):
-                    bValid = True
+                    bValid = true
                     eTeam = gc.getPlayer(iPlayer).getTeam()
                     if not gc.getTeam(eTeam).isHasTech(gc.getBuildingInfo(iI).getPrereqAndTech()):
-                        bValid = False
+                        bValid = false
                     if bValid:
                         for iPrereq in range(gc.getDefineINT("NUM_BUILDING_AND_TECH_PREREQS")):
                             if not gc.getTeam(eTeam).isHasTech(gc.getBuildingInfo(iI).getPrereqAndTechs(iPrereq)):
-                                bValid = False
+                                bValid = false
                                 break
                     if bValid:
                         gc.getPlayer(iPlayer).setFeatAccomplished(FeatTypes.FEAT_CORPORATION_ENABLED, True)
 
                         szBonusList = u""
-                        bFirst = True
+                        bFirst = true
                         for iPrereq in range(gc.getDefineINT("NUM_CORPORATION_PREREQ_BONUSES")):
                             eBonus = gc.getCorporationInfo(eCorporation).getPrereqBonus(iPrereq)
                             if eBonus != -1:
                                 if bFirst:
-                                    bFirst = False
+                                    bFirst = false
                                 else:
                                     szBonusList += localText.getText("TXT_KEY_OR", ())
                                 szBonusList += gc.getBonusInfo(eBonus).getDescription()
@@ -495,8 +495,10 @@ def cityAdvise(pCity, iPlayer):
     if (gc.getPlayer(iPlayer).isOption(PlayerOptionTypes.PLAYEROPTION_ADVISOR_POPUPS) and gc.getPlayer(iPlayer).isHuman() and not gc.getGame().isNetworkMultiPlayer()):
 
         if (gc.getGame().getGameTurn() % 40 == pCity.getGameTurnFounded() % 40):
-            if (not pCity.getID() in g_listNoLiberateCities):
-                eLiberationPlayer = pCity.getLiberationPlayer(False)
+            #if (not pCity.getID() in g_listNoLiberateCities):
+            if (gc.getGame().getGameTurn() - pCity.getGameTurnFounded() > 10 and not pCity.getID() in g_listNoLiberateCities): # K-Mod
+                #eLiberationPlayer = pCity.getLiberationPlayer(False)
+                eLiberationPlayer = pCity.getLiberationPlayer(false)
                 if (eLiberationPlayer != -1):
                     # UNOFFICIAL_PATCH begin
                     if(gc.getTeam(gc.getPlayer(iPlayer).getTeam()).isHasMet(gc.getPlayer(eLiberationPlayer).getTeam())):
@@ -710,7 +712,8 @@ def cityAdvise(pCity, iPlayer):
 
             if (not pCity.isProductionBuilding() and (pCity.getOrderQueueLength() <= 1)):
 
-                if (pCity.healthRate(False, 0) < 0):
+                #if (pCity.healthRate(False, 0) < 0):
+                if (pCity.healthRate(False, 0) < 0 and pCity.happyLevel() > 1): # K-Mod
 
                     if (gc.getGame().getGameTurn() + 2) % 40 == pCity.getGameTurnFounded() % 40:
 
@@ -914,10 +917,14 @@ def cityAdvise(pCity, iPlayer):
                             popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
                             popupInfo.addPopup(iPlayer)
                             g_iAdvisorNags += 1
+# K-Mod start
+                #if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_GOLD) > 10):
+                if (gc.getGame().getGameTurn() + 8) % 40 == pCity.getGameTurnFounded() % 40:
 
-                if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_GOLD) > 10):
-
-                    if (gc.getGame().getGameTurn() + 8) % 40 == pCity.getGameTurnFounded() % 40:
+                    #if (gc.getGame().getGameTurn() + 8) % 40 == pCity.getGameTurnFounded() % 40:
+                    if ((pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_GOLD) > 10 and pCity.findCommerceRateRank(CommerceTypes.COMMERCE_GOLD) <= (gc.getPlayer(iPlayer).getNumCities()+1)/2) or 
+						(gc.getPlayer(iPlayer).getCommercePercent(CommerceTypes.COMMERCE_GOLD) > 20 and pCity.findYieldRateRank(YieldTypes.YIELD_COMMERCE) <= (gc.getPlayer(iPlayer).getNumCities()+2)/3)):
+# K-Mod end
 
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
@@ -955,10 +962,14 @@ def cityAdvise(pCity, iPlayer):
                             popupInfo.addPythonButton(localText.getText("TXT_KEY_POPUP_DEMAND_EXAMINE", ()), "")
                             popupInfo.addPopup(iPlayer)
                             g_iAdvisorNags += 1
+# K-Mod start 
+                #if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_RESEARCH) > 10):
+                if (gc.getGame().getGameTurn() + 10) % 40 == pCity.getGameTurnFounded() % 40:
 
-                if (pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_RESEARCH) > 10):
-
-                    if (gc.getGame().getGameTurn() + 10) % 40 == pCity.getGameTurnFounded() % 40:
+                    #if (gc.getGame().getGameTurn() + 10) % 40 == pCity.getGameTurnFounded() % 40:
+                    if ((pCity.getBaseCommerceRate(CommerceTypes.COMMERCE_RESEARCH) > 10 and pCity.findCommerceRateRank(CommerceTypes.COMMERCE_RESEARCH) <= (gc.getPlayer(iPlayer).getNumCities()+1)/2) or 
+                    	(gc.getPlayer(iPlayer).getCommercePercent(CommerceTypes.COMMERCE_RESEARCH) > 20 and pCity.findYieldRateRank(YieldTypes.YIELD_COMMERCE) <= (gc.getPlayer(iPlayer).getNumCities()+2)/3)):
+# K-Mod end
 
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING

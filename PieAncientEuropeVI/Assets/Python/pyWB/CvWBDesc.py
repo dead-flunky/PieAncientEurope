@@ -25,9 +25,14 @@ bFirstWrite = True
 #############
 def getPlayer(idx):
     "helper function which wraps get player in case of bad index"
-    if (gc.getPlayer(idx).isAlive()):
+    #if (gc.getPlayer(idx).isAlive()):
+     #   return gc.getPlayer(idx)
+    #return None
+    # K-mod<f1rpo> Treat invalid civ ids as the Barbarians
+    if idx < gc.getMAX_CIV_TEAMS() and gc.getPlayer(idx).isAlive():
         return gc.getPlayer(idx)
-    return None
+    return gc.getPlayer(gc.getBARBARIAN_PLAYER())
+    # </f1rpo>
 
 """
 Remove high Ids which does not matching to the loaded DLL version
@@ -650,6 +655,7 @@ class CvPlayerDesc:
         self.stateReligion = ""
         self.szStartingEra = ""
         self.bRandomStartLocation = "false"
+        self.bNeverAlive = False # f1rpo k-mod
 
         self.aaiCivics = []
         self.aaiAttitudeExtras = []
@@ -958,10 +964,10 @@ class CvPlayerDesc:
                     continue
 
                 if parser.findTokenValue(toks, "EndPlayer") != -1:
-                    break
-        else:
-            return False
-        return True
+                    #break
+                    # <f1rpo> Same as in CvTeamDesc.read
+                    return True
+        return False # </f1rpo>
 
 #############
 class CvUnitDesc:
@@ -1506,6 +1512,10 @@ class CvCityDesc:
         self.lCulture = filterPlayerIds2(self.lCulture, barb_idWB)
 
         player = getPlayer(self.owner)
+        # <f1rpo>K-mod
+        if player is None:
+            CvUtil.pyPrint("Error: City owner %d not alive" %(self.owner))
+            return # </f1rpo>
         if (player):
             try:
                 self.city = player.initCity(self.plotX, self.plotY)
@@ -2202,7 +2212,9 @@ class CvWBDesc:
 
             pPlayer = gc.getPlayer(iPlayerLoop)
             pWBPlayer = self.playersDesc[iPlayerLoop]
-
+            # <f1rpo>
+            if pWBPlayer.bNeverAlive:
+                continue # </f1rpo>
             # Random Start Location
             if (pPlayer.getLeaderType() != -1 and pWBPlayer.bRandomStartLocation != "false"):
                 pPlayer.setStartingPlot(pPlayer.findStartingPlot(True), True)
@@ -2335,6 +2347,7 @@ class CvWBDesc:
             pWBPlot = self.plotDesc[iPlotLoop]
             pWBPlot.lCulture = filterPlayerIds2(pWBPlot.lCulture, barb_idWB)
 
+            #if pTeam.isEverAlive(): # f1rpo keldath this was in the kmod code platy changed it
             pPlot = CyMap().plot(pWBPlot.iX, pWBPlot.iY)
             for item in pWBPlot.lCulture:
                 pPlot.setCulture(item[0], item[1], True)
@@ -2349,7 +2362,7 @@ class CvWBDesc:
         # units
         for pDesc in self.plotDesc:
             pDesc.applyUnits()
-
+        CvUtil.pyPrint("applyInitialItems: done") # f1rpo
         return 0  # ok
 
     def read(self, fileName):
@@ -2391,18 +2404,20 @@ class CvWBDesc:
         self.gameDesc.read(f) # read game info
 
         print("Reading teams desc")
-        filePos = f.tell()
+        filePos = f.tell() # f1rpo k-mod also in platy
         self.teamsDesc = []
         numTeamsWB = 0
         for i in range(iNumTeamsDLL):
             teamDesc = CvTeamDesc()
-            if (teamDesc.read(f) == False):         # read team info
+            if (teamDesc.read(f) == false):  #k-mod   # read team info
                 f.seek(filePos)               # abort and backup
                 break
             print("reading team %d" %(i))
             self.teamsDesc.append(teamDesc)
             numTeamsWB += 1
-
+        # <f1rpo>
+        for i in range(len(self.teamsDesc), gc.getMAX_CIV_TEAMS()):
+            self.teamsDesc.append(CvTeamDesc()) # </f1rpo>
         # PAE, Extend to 52 entries regardless if they will be used
         if numTeamsWB < iNumTeamsDLL:
             for i in range(numTeamsWB, iNumTeamsDLL):
@@ -2510,7 +2525,15 @@ class CvWBDesc:
                 # Set barbarian slot manually ?!
                 pass
 
-
+        # <f1rpo>
+        for i in range(len(self.playersDesc), gc.getMAX_CIV_PLAYERS()):
+            deadPlayer = CvPlayerDesc()
+            # (Not sure if it's necessary to assign a team)
+            deadPlayer.team = len(self.playersDesc)
+            deadPlayer.isPlayableCiv = 0
+            deadPlayer.neverAlive = True
+            self.playersDesc.append(deadPlayer)
+        # </f1rpo>
         print("Reading map desc")
         self.mapDesc.read(f)  # read map info
 

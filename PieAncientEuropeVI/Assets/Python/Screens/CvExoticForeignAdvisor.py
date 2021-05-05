@@ -3,6 +3,8 @@
 
 # Thanks to Requies and Elhoim from CivFanatics for this interface mod
 
+# This file has been edited for K-Mod in various places. Some changes marked, others not.
+
 from CvPythonExtensions import *
 import CvUtil
 import ScreenInput
@@ -180,6 +182,11 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
                        "INFO", \
                        "TECH"]
 
+    # K-Mod
+    self.LABEL_WIDTH_LIST = []
+    self.iLanguageLoaded = -1
+    # K-Mod end
+
     self.iDefaultScreen = self.SCREEN_DICT["RELATIONS"]
 
   def interfaceScreen (self, iScreen):
@@ -222,8 +229,29 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 ############################################
     #self.W_SCREEN = screen.getXResolution()
     #self.H_SCREEN = screen.getYResolution()
-    self.X_EXIT = self.W_SCREEN - 10
-    self.DX_LINK = (self.X_EXIT - self.X_LINK) / (len (self.SCREEN_DICT) + 1)
+
+    # RJG Start - following line added as per RJG (http://forums.civfanatics.com/showpost.php?p=6996936&postcount=15)
+    # FROM BUG MA Widescreen START
+    # over-ride screen width, height
+    
+    ##
+    # K-Mod, 7/dec/12, karadoc
+    #returned the window to the standard size
+    ##
+    #self.W_SCREEN = screen.getXResolution() - 40
+    #self.X_SCREEN = (screen.getXResolution() - 24) / 2
+    #self.L_SCREEN = 20
+
+    #if self.W_SCREEN < 1024:
+      #self.W_SCREEN = 1024
+      #self.L_SCREEN = 0
+    
+    self.X_EXIT = self.W_SCREEN - 30
+    # FROM BUG MA Widescreen END
+    
+    #self.X_EXIT = self.W_SCREEN - 10
+    # RJG End
+    #self.DX_LINK = (self.X_EXIT - self.X_LINK) / (len (self.SCREEN_DICT) + 1) # disabled by K-Mod
 
     self.Y_EXIT = self.H_SCREEN - 42
     self.Y_LINK = self.H_SCREEN - 42
@@ -239,7 +267,11 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
 ##########################################
 
     # Set the background and exit button, and show the screen
+    # RJG Start - following line added as per RJG (http://forums.civfanatics.com/showpost.php?p=6996936&postcount=15)
+    # K-Mod, undone
     screen.setDimensions(screen.centerX(0), screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
+    #screen.setDimensions(self.L_SCREEN, screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
+    # RJG end
     screen.showWindowBackground(False)
     screen.setText(self.EXIT_ID, "", self.EXIT_TEXT, CvUtil.FONT_RIGHT_JUSTIFY, self.X_EXIT, self.Y_EXIT, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1 )
 
@@ -277,7 +309,21 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
       return
 
     # Link to other Foreign advisor screens
-    xLink = self.DX_LINK / 2;
+    #xLink = self.DX_LINK / 2;
+    # K-Mod
+    xLink = 0
+    if self.iLanguageLoaded != CyGame().getCurrentLanguage():
+      self.LABEL_WIDTH_LIST[:] = []
+      width_list = []
+      for i in self.ORDER_LIST:
+        width_list.append(CyInterface().determineWidth(localText.getText(self.TXT_KEY_DICT[i], ()).upper()) + 20)
+      total_width = sum(width_list) + CyInterface().determineWidth(localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper()) + 20;
+
+      for i in width_list:
+        self.LABEL_WIDTH_LIST.append((self.X_EXIT * i + total_width/2) / total_width)
+
+      self.iLanguageLoaded = CyGame().getCurrentLanguage()
+    # K-Mod end (except that I've used LABEL_WIDTH_DICT below) 
 
     for i in range (len (self.ORDER_LIST)):
       szTextId = self.getNextWidgetName()
