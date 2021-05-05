@@ -1,8 +1,0 @@
-this is a personal log of the changes from pie AE AFTER KMOD merge
-written and merged by Keldath for Pie and his community with love
-
-added folders:
-
-assets: config
-overwritten the art folder
-
