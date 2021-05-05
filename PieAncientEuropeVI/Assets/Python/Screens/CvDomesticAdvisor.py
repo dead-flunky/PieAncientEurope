@@ -67,16 +67,18 @@ class CvDomesticAdvisor:
     screen.addPanel( "DomesticAdvisorBG", u"", u"", True, False, 0, 0, self.nScreenWidth, self.nScreenHeight, PanelStyles.PANEL_STYLE_MAIN )
     screen.setText("DomesticExit", "Background", localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper(), CvUtil.FONT_RIGHT_JUSTIFY, self.nScreenWidth - 25, self.nScreenHeight - 45, -0.1, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1 )
 
-    bCanLiberate = False
-    (loopCity, iter) = player.firstCity(False)
+    bCanLiberate = false
+    (loopCity, iter) = player.firstCity(false)
     while(loopCity):
-      #if not loopCity.isNone() and loopCity.getOwner() == player.getID(): #only valid cities
-      if loopCity.getLiberationPlayer(False) != -1:
-          bCanLiberate = True
-          break
-      (loopCity, iter) = player.nextCity(iter, False)
-
-    if (bCanLiberate or player.canSplitEmpire()):
+        if loopCity.getLiberationPlayer(false) != -1:
+            # UNOFFICIAL_PATCH begin
+            if not gc.getTeam(gc.getPlayer(loopCity.getLiberationPlayer(false)).getTeam()).isAtWar(CyGame().getActiveTeam()) :
+                bCanLiberate = true
+                break
+            # UNOFFICIAL_PATCH end
+        (loopCity, iter) = player.nextCity(iter, false)
+        
+    if (bCanLiberate or gc.getPlayer(gc.getGame().getActivePlayer()).canSplitEmpire()):
       screen.setImageButton( "DomesticSplit", "", self.nScreenWidth - 180, self.nScreenHeight - 45, 28, 28, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_FREE_COLONY).getActionInfoIndex(), -1 )
       screen.setStyle( "DomesticSplit", "Button_HUDAdvisorVictory_Style" )
 
@@ -175,15 +177,14 @@ class CvDomesticAdvisor:
 
     # Loop through the cities
     i = 0
-    (loopCity, iter) = player.firstCity(False)
-    while loopCity:
-      #if not loopCity.isNone() and loopCity.getOwner() == player.getID(): #only valid cities
+    (pLoopCity, iter) = player.firstCity(false)
+    while(pLoopCity):
       screen.appendTableRow( "CityListBackground" )
-      if (loopCity.getName() in self.listSelectedCities):
+      if (pLoopCity.getName() in self.listSelectedCities):
           screen.selectRow( "CityListBackground", i, True )
-      self.updateTable(loopCity, i)
+      self.updateTable(pLoopCity, i)
       i += 1
-      (loopCity, iter) = player.nextCity(iter, False)
+      (pLoopCity, iter) = player.nextCity(iter, false)
 
 
     self.drawHeaders()
@@ -194,7 +195,7 @@ class CvDomesticAdvisor:
 
     self.updateAppropriateCitySelection()
 
-    CyInterface().setDirty(InterfaceDirtyBits.Domestic_Advisor_DIRTY_BIT, True)
+    CyInterface().setDirty(InterfaceDirtyBits.Domestic_Advisor_DIRTY_BIT, true)
 
   def updateTable(self, pLoopCity, i):
 
@@ -267,7 +268,7 @@ class CvDomesticAdvisor:
       szText = localText.getText("TXT_KEY_COLOR_POSITIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
     elif iNetHappy < 0:
       szText = localText.getText("TXT_KEY_COLOR_NEGATIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
-    screen.setTableInt( "CityListBackground", 6, i, szText, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+    screen.setTableInt( "CityListBackground", 3, i, szText, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
     # Health...
     iNetHealth = pLoopCity.goodHealth() - pLoopCity.badHealth(0)
@@ -276,10 +277,10 @@ class CvDomesticAdvisor:
       szText = localText.getText("TXT_KEY_COLOR_POSITIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
     elif iNetHealth < 0:
       szText = localText.getText("TXT_KEY_COLOR_NEGATIVE", ()) + szText + localText.getText("TXT_KEY_COLOR_REVERT", ())
-    screen.setTableInt( "CityListBackground", 7, i, szText, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+    screen.setTableInt( "CityListBackground", 4, i, szText, "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
     # Food status...
-    iNetFood = pLoopCity.foodDifference(True)
+    iNetFood = pLoopCity.foodDifference(true)
 
     # PAE city supply
     #pCityPlot = gc.getMap().plot( pLoopCity.getX(), pLoopCity.getY() )
@@ -342,8 +343,11 @@ class CvDomesticAdvisor:
     screen.setTableText( "CityListBackground", 18, i, pLoopCity.getProductionName() + " (" + str(pLoopCity.getGeneralProductionTurnsLeft()) + ")", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
     # Liberation
-    if pLoopCity.getLiberationPlayer(False) != -1:
-      screen.setTableText( "CityListBackground", 19, i, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.OCCUPATION_CHAR)) + "</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+    if pLoopCity.getLiberationPlayer(false) != -1:
+        # UNOFFICIAL_PATCH begin
+        if not gc.getTeam(gc.getPlayer(pLoopCity.getLiberationPlayer(false)).getTeam()).isAtWar(CyGame().getActiveTeam()) :
+            screen.setTableText( "CityListBackground", 16, i, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.OCCUPATION_CHAR)) + "</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+        # UNOFFICIAL_PATCH end
 
     # Stop Growth
     if ( pLoopCity.AI_isEmphasize(5) ):
@@ -466,12 +470,12 @@ class CvDomesticAdvisor:
       player = gc.getPlayer(CyGame().getActivePlayer())
 
       i = 0
-      (loopCity, iter) = player.firstCity(False)
-      while loopCity:
-        #if not loopCity.isNone() and loopCity.getOwner() == player.getID(): #only valid cities
-        self.updateTable(loopCity, i)
+      (pLoopCity, iter) = player.firstCity(false)
+      while(pLoopCity):
+        #if not loopCity.isNone() and pLoopCity.getOwner() == player.getID(): #only valid cities
+        self.updateTable(pLoopCity, i)
         i += 1
-        (loopCity, iter) = player.nextCity(iter, False)
+        (pLoopCity, iter) = player.nextCity(iter, false)
 
       self.updateSpecialists()
 

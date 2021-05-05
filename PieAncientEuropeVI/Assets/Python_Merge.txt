@@ -45,3 +45,29 @@ full folders and content added:
 in python: BUG,Contrib,K-Mod
 
 assets: config
+
+edit:
+
+cvMapgenerator.py - done
+cvAdvisorUtils.py - done
+cvPediaPromotion.py - done
+cvPediaBonus.py - done
+cvMilitaryAdvisor.py - done
+cvForeignAdvisor.py - done
+
+cvSespionageAdvisior - done
+cvDomesticAdvisor - done
+cvCivicscreen - done
+cvWbdesc.py - done - probably the neties there are not that important
+cvrandomeventsinterface.py - done - noticed lots of entires from the original are missing, i guess removed by Pie
+
+cvscreeninterface.py : mostly bug content - un merged for now
+cvExoticForeignAdvisor.py - merged just the k-mod changes - bug mod for now removed
+
+
+cvreligion.py - not merged bug changes
+cvtechchooser.py - not merged bug changes
+cvinfoscreen.py - not merged bug changes
+cvmaininterface.py - not merged bug changes
+cvvictory - not merged bug changes
+
