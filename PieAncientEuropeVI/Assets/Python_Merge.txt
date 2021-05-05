@@ -23,6 +23,14 @@ cvpediabonus.py - some changes
 cvadvisoruntils.py
 
 
+cvMapgenerator.py - done
+cvAdvisorUtils.py - done
+cvPediaPromotion.py - done
+cvPediaBonus.py - done
+cvMilitaryAdvisor.py - done - see my notes there - or i think on another file - i forgot
+cvForeignAdvisor.py - done
+
+
 added files:
 
 CIV4UnitAIInfos.py

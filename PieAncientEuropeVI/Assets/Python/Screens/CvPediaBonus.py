@@ -256,7 +256,8 @@ class CvPediaBonus:
 
         screen.attachLabel(childPanelName, "", "  ")
         screen.attachImageButton(childPanelName, "", gc.getImprovementInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, j, 1, False )
-        screen.attachLabel(childPanelName, "", szYield)
+        #screen.attachLabel(childPanelName, "", szYield)
+        screen.attachLabel(childPanelName, "", u"<font=4>" + szYield + u"</font>") # K-Mod
 
   def placeSpecial(self):
 
@@ -270,11 +271,16 @@ class CvPediaBonus:
     screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
     screen.enableSelect(listName, False)
 
-    szSpecialText = CyGameTextMgr().getBonusHelp(self.iBonus, True)
-    splitText = string.split( szSpecialText, "\n" )
-    for special in splitText:
-      if len( special ) != 0:
-        screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+	#original code
+    #szSpecialText = CyGameTextMgr().getBonusHelp(self.iBonus, True)
+    #splitText = string.split( szSpecialText, "\n" )
+    #for special in splitText:
+    #  if len( special ) != 0:
+    #    screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+   # K-Mod
+    szSpecialText = CyGameTextMgr().getBonusHelp(self.iBonus, True)[1:]
+    screen.addMultilineText(listName, szSpecialText, self.X_EFFECTS_PANE+5, self.Y_EFFECTS_PANE+30, self.W_EFFECTS_PANE-10, self.H_EFFECTS_PANE-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+   # K-Mod end
 
   def placeRequires(self):
 
