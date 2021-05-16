@@ -1562,12 +1562,6 @@ class CvCityDesc:
             specialistTypeNum = CvUtil.findInfoTypeNum(gc.getSpecialistInfo, gc.getNumSpecialistInfos(), iSpecialist)
             self.city.changeFreeSpecialistCount(specialistTypeNum, 1)
 
-        for iPlayerLoop in range(gc.getMAX_CIV_PLAYERS()):
-            if gc.getPlayer(iPlayerLoop).isEverAlive(): # f1rpo
-                iPlayerCulture = self.aiPlayerCulture[iPlayerLoop]
-                if iPlayerCulture > 0:
-                    self.city.setCulture(iPlayerLoop, iPlayerCulture, true)
-
         unitTypeNum = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), self.productionUnit)
         buildingTypeNum = CvUtil.findInfoTypeNum(gc.getBuildingInfo, gc.getNumBuildingInfos(), self.productionBuilding)
         projectTypeNum = CvUtil.findInfoTypeNum(gc.getProjectInfo, gc.getNumProjectInfos(), self.productionProject)

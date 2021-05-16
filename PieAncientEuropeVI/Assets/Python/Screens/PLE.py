@@ -857,7 +857,7 @@ class PLE:
 		return i % self.getMaxCol()
 		
 	def getX(self, nCol):
-		return 315 + (nCol * PleOpt.getHoriztonalSpacing())
+		return 315 + (nCol * PleOpt.getHorizontalSpacing())
 		
 	def getY(self, nRow):
 		return self.yResolution - 169 - (nRow * PleOpt.getVerticalSpacing())
