@@ -103,8 +103,8 @@
   <Define>
     <DefineName>USE_ON_UNIT_LOST_CALLBACK</DefineName>
     <iDefineIntVal>0</iDefineIntVal>
- <!-- K-Mod extras -->
   </Define>
+  <!-- K-Mod extras -->
   <Define>
 		<DefineName>USE_AI_UNIT_UPDATE_CALLBACK</DefineName>
 		<iDefineIntVal>0</iDefineIntVal>

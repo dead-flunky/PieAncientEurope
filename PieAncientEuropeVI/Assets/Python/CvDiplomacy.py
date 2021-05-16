@@ -540,7 +540,7 @@ class CvDiplomacy:
 	
 		# If we ask for peace
 # K-Mod
-		elif(self.isComment(eComment, "USER_DIPLOCOMMENT_SUGGEST_PEACE")):
+		elif self.isComment(eComment, "USER_DIPLOCOMMENT_SUGGEST_PEACE"):
 			diploScreen.startTrade(eComment, False)
 			if (diploScreen.counterPropose() == 1):
 				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_TRY_THIS_DEAL"))

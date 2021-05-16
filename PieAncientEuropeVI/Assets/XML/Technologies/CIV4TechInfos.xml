@@ -49,17 +49,17 @@
       <DomainExtraMoves/>
   <!--kmod
       <CommerceModifiers>
-				<iCommerce>0</iCommerce>
-				<iCommerce>10</iCommerce>
-				<iCommerce>0</iCommerce>
-	  </CommerceModifiers>
+                <iCommerce>0</iCommerce>
+                <iCommerce>10</iCommerce>
+                <iCommerce>0</iCommerce>
+      </CommerceModifiers>
       <SpecialistExtraCommerces>
-				<iCommerce>0</iCommerce>
-				<iCommerce>1</iCommerce>
-				<iCommerce>0</iCommerce>
-	  </SpecialistExtraCommerces>
-	  -->
-	  <CommerceFlexible/>
+                <iCommerce>0</iCommerce>
+                <iCommerce>1</iCommerce>
+                <iCommerce>0</iCommerce>
+      </SpecialistExtraCommerces>
+      -->
+      <CommerceFlexible/>
       <TerrainTrades/>
       <bRiverTrade>0</bRiverTrade>
       <Flavors>
@@ -9793,9 +9793,9 @@
       <AndPreReqs>
         <PrereqTech>TECH_HANDELSSCHIFFE</PrereqTech>
       </AndPreReqs>
-			<Quote>TXT_KEY_TECH_BANKING_QUOTE</Quote>
-			<Sound>AS2D_TECH_BANKING</Sound>
-			<SoundMP>AS2D_TECH_MP_BANKING</SoundMP>
+            <Quote>TXT_KEY_TECH_BANKING_QUOTE</Quote>
+            <Sound>AS2D_TECH_BANKING</Sound>
+            <SoundMP>AS2D_TECH_MP_BANKING</SoundMP>
       <Button>Art/Interface/Buttons/Techs/tech_bankwesen.dds</Button>
     </TechInfo>
     <TechInfo>
@@ -12718,7 +12718,7 @@
       <SoundMP>AS2D_TECH_PAE_QUOTE_123</SoundMP>
       <Button>Art/Interface/Buttons/Techs/button_berufssoldaten.dds</Button>
     </TechInfo>
-    
+
     <TechInfo>
       <Type>TECH_GLADIATOR3</Type>
       <Description>TXT_KEY_TECH_GLADIATOR3</Description>
@@ -13646,7 +13646,7 @@
       <Sound>AS2D_TECH_PAE_QUOTE_13</Sound>
       <SoundMP>AS2D_TECH_PAE_QUOTE_13</SoundMP>
       <Button>,Art/Interface/Buttons/TechTree/Medicine.dds,Art/Interface/Buttons/TechTree_Atlas.dds,4,5</Button>
-    </TechInfo>    
+    </TechInfo>
     <TechInfo>
       <Type>TECH_BASILICA</Type>
       <Description>TXT_KEY_TECH_BASILICA</Description>

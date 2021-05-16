@@ -29,19 +29,28 @@
 					get="isUseEraColor" set="setUseEraColor" dirtyBit="GameData" 
 					label="Use Era-Related Colors" 
 					help="When checked, the game date and era are displayed using a color for each era."/>
-			
+			<list   id="Color_ERA_BRONZE" key="ERA_BRONZE" 
+					type="color" default="COLOR_MAGENTA" 
+					get="getBronzeEraColor" set="setBronzeEraColor" dirtyBit="GameData" 
+					label="Bronze Era" 
+					help="Color to use for the Bronze era."/>
 			<list   id="Color_ERA_ANCIENT" key="ERA_ANCIENT" 
-					type="color" default="COLOR_RED" 
+					type="color" default="COLOR_BLUE" 
 					get="getAncientEraColor" set="setAncientEraColor" dirtyBit="GameData" 
 					label="Ancient Era" 
 					help="Color to use for the Ancient era."/>
 			<list   id="Color_ERA_CLASSICAL" key="ERA_CLASSICAL" 
-					type="color" default="COLOR_YELLOW" 
+					type="color" default="COLOR_PURPLE" 
 					get="getClassicalEraColor" set="setClassicalEraColor" dirtyBit="GameData" 
 					label="Classical Era" 
 					help="Color to use for the Classical era."/>
+			<list   id="Color_ERA_LATE_ANTIK" key="ERA_LATE_ANTIK" 
+					type="color" default="COLOR_CYAN" 
+					get="getLateAntikEraColor" set="setLateAntikEraColor" dirtyBit="GameData" 
+					label="Late Antik Era" 
+					help="Color to use for the Late Antik era."/>
 			<list   id="Color_ERA_MEDIEVAL" key="ERA_MEDIEVAL" 
-					type="color" default="COLOR_GREEN" 
+					type="color" default="COLOR_WHITE" 
 					get="getMedievalEraColor" set="setMedievalEraColor" dirtyBit="GameData" 
 					label="Medieval Era" 
 					help="Color to use for the Medieval era."/>
