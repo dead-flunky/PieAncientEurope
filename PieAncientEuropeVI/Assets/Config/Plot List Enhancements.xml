@@ -104,7 +104,7 @@
 			<!-- Button Spacing -->
 			<option id="Horizontal_Spacing" key="Horizontal Item Spacing" 
 					type="int" default="34" 
-					get="getHoriztonalSpacing" dirtyBit="PlotListButtons"/>
+					get="getHorizontalSpacing" dirtyBit="PlotListButtons"/>
 			<option id="Vertical_Spacing" key="Vertical Item Spacing" 
 					type="int" default="42" 
 					get="getVerticalSpacing" dirtyBit="PlotListButtons"/>

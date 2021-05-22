@@ -1,5 +1,5 @@
-# Sid Meier's Civilization 4
-# Copyright Firaxis Games 2005
+## Sid Meier's Civilization 4
+## Copyright Firaxis Games 2005
 from CvPythonExtensions import *
 import CvUtil
 import random
@@ -25,9 +25,7 @@ alternative method to the default process for placing the starting units for eac
 - Bob Thomas        September 23, 2005
 """
 
-
 class FractalWorld:
-
     def __init__(self, fracXExp=CyFractal.FracVals.DEFAULT_FRAC_X_EXP,
                  fracYExp=CyFractal.FracVals.DEFAULT_FRAC_Y_EXP):
         self.gc = CyGlobalContext()
@@ -58,7 +56,7 @@ class FractalWorld:
         # the XML defaults for user selections on Sea Level, Climate, etc.
         return
 
-    def initFractal(self, continent_grain=2, rift_grain=2, has_center_rift=True, invert_heights=False, polar=False):
+    def initFractal(self, continent_grain = 2, rift_grain = 2, has_center_rift = True, invert_heights = False, polar = False):
         "For no rifts, use rift_grain = -1"
         iFlags = self.iFlags
         if invert_heights:
@@ -120,7 +118,7 @@ class FractalWorld:
                     landScore += 1
                     bFoundLand = True
             if bFoundLand:
-                landScore += 30  # the first land is worth about 10 plots of land
+                landScore += 30 # the first land is worth about 10 plots of land
 
             for i in range(stripSize):
                 yy = y + i - stripCenterIndex
@@ -150,7 +148,7 @@ class FractalWorld:
                     landScore += 1
                     bFoundLand = True
             if bFoundLand:
-                landScore += 30  # the first land is worth about 10 plots of land
+                landScore += 30 # the first land is worth about 10 plots of land
 
             for i in range(stripSize):
                 xx = x + i - stripCenterIndex
@@ -220,7 +218,6 @@ cardinal_directions = (1, 0), (0, 1), (-1, 0), (0, -1)
 
 
 class HintedWorld(FractalWorld):
-
     def __init__(self, w=16, h=8, fracXExp=CyFractal.FracVals.DEFAULT_FRAC_X_EXP,
                  fracYExp=CyFractal.FracVals.DEFAULT_FRAC_Y_EXP):
         FractalWorld.__init__(self, fracXExp, fracYExp)
@@ -269,7 +266,6 @@ class HintedWorld(FractalWorld):
 
     # nested class to describe a continent in the hinted world
     class Continent:
-
         def __init__(self, world, numBlocks, x, y, maxradius):
             self.world = world
             self.centerx = x
@@ -354,7 +350,7 @@ class HintedWorld(FractalWorld):
                     else:
                         return True
 
-        print("\tcould not expand continent:")
+        print "\tcould not expand continent:"
         printMap(self.data, self.w, self.h, cont.centerx, cont.centery)
         cont.done = True
         return False
@@ -405,7 +401,7 @@ class HintedWorld(FractalWorld):
         return best_split
 
     def shiftHintsBy(self, splitx, splity):
-        print("shifting hints by ", splitx, splity)
+        print "shifting hints by ", splitx, splity
         if splitx != 0 or splity != 0:
             buf = self.data[:]
             # shift the values in self.data left by best_split
@@ -505,7 +501,7 @@ class HintedWorld(FractalWorld):
 
 
 def printMap(data, w, h, markerx=-1, markery=-1):
-    print("-"*(w+2))
+    print "-"*(w+2)
     hrange = range(h)
     hrange.reverse()
     for y in hrange:
@@ -519,8 +515,8 @@ def printMap(data, w, h, markerx=-1, markery=-1):
             else:
                 str += " "
         str += "|"
-        print(str)
-    print("-"*(w+2))
+        print str
+    print "-"*(w+2)
 
 '''
 SIRIAN's "MULTILAYERED FRACTAL" INSTRUCTIONS
@@ -642,9 +638,7 @@ controlling function and must be customized for each applicable map script.
 # layered over a single map, to generate plot types.
 # Use GeneratePlotsByRegion to organize your fractal layers.
 
-
 class MultilayeredFractal:
-
     def __init__(self, fracXExp=CyFractal.FracVals.DEFAULT_FRAC_X_EXP,
                  fracYExp=CyFractal.FracVals.DEFAULT_FRAC_Y_EXP):
         self.gc = CyGlobalContext()
@@ -652,13 +646,13 @@ class MultilayeredFractal:
         self.iW = self.map.getGridWidth()
         self.iH = self.map.getGridHeight()
         self.dice = self.gc.getGame().getMapRand()
-        self.iFlags = self.map.getMapFractalFlags()  # Defaults for that map type.
-        self.iTerrainFlags = self.map.getMapFractalFlags()  # Defaults for that map type.
-        self.iHorzFlags = CyFractal.FracVals.FRAC_WRAP_X + CyFractal.FracVals.FRAC_POLAR  # Use to prevent flat edges to north or south.
-        self.iVertFlags = CyFractal.FracVals.FRAC_WRAP_Y + CyFractal.FracVals.FRAC_POLAR  # Use to prevent flat edges to east or west.
-        self.iRoundFlags = CyFractal.FracVals.FRAC_POLAR  # Use to prevent flat edges on all sides.
-        self.plotTypes = []  # Regional array
-        self.wholeworldPlotTypes = [PlotTypes.PLOT_OCEAN] * (self.iW*self.iH)  # Global
+        self.iFlags = self.map.getMapFractalFlags() # Defaults for that map type.
+        self.iTerrainFlags = self.map.getMapFractalFlags() # Defaults for that map type.
+        self.iHorzFlags = CyFractal.FracVals.FRAC_WRAP_X + CyFractal.FracVals.FRAC_POLAR # Use to prevent flat edges to north or south.
+        self.iVertFlags = CyFractal.FracVals.FRAC_WRAP_Y + CyFractal.FracVals.FRAC_POLAR # Use to prevent flat edges to east or west.
+        self.iRoundFlags = CyFractal.FracVals.FRAC_POLAR # Use to prevent flat edges on all sides.
+        self.plotTypes = [] # Regional array
+        self.wholeworldPlotTypes = [PlotTypes.PLOT_OCEAN] * (self.iW*self.iH) # Global
         self.fracXExp = fracXExp
         self.fracYExp = fracYExp
         # Note: there is no checkForOverrideDefaultUserInputVariances()
@@ -683,7 +677,7 @@ class MultilayeredFractal:
                     iDestI = iRegionWidth*iDestY + iDestX
                     iSourceX = iDestX + xshift
                     iSourceY = iDestY + yshift
-                    iSourceX %= iRegionWidth  # normalize
+                    iSourceX %= iRegionWidth # normalize
                     iSourceY %= iRegionHeight
 
                     iSourceI = iRegionWidth*iSourceY + iSourceX
@@ -709,7 +703,7 @@ class MultilayeredFractal:
                     landScore += 1
                     bFoundLand = True
             if bFoundLand:
-                landScore += 30  # the first land is worth about 10 plots of land
+                landScore += 30 # the first land is worth about 10 plots of land
 
             for i in range(stripSize):
                 yy = y + i - stripCenterIndex
@@ -739,7 +733,7 @@ class MultilayeredFractal:
                     landScore += 1
                     bFoundLand = True
             if bFoundLand:
-                landScore += 30  # the first land is worth about 10 plots of land
+                landScore += 30 # the first land is worth about 10 plots of land
 
             for i in range(stripSize):
                 xx = x + i - stripCenterIndex
@@ -770,10 +764,10 @@ class MultilayeredFractal:
                               iRegionWestX, iRegionSouthY,
                               iRegionGrain, iRegionHillsGrain,
                               iRegionPlotFlags, iRegionTerrainFlags,
-                              iRegionFracXExp=-1, iRegionFracYExp=-1,
-                              bShift=True, iStrip=15,
-                              rift_grain=-1, has_center_rift=False,
-                              invert_heights=False):
+                              iRegionFracXExp = -1, iRegionFracYExp = -1,
+                              bShift = True, iStrip = 15,
+                              rift_grain = -1, has_center_rift = False,
+                              invert_heights = False):
         # This is the code to generate each fractal.
         # Determine and pass in the appropriate arguments from the controlling function.
         #
@@ -784,7 +778,7 @@ class MultilayeredFractal:
         iSouthY = iRegionSouthY
 
         # Init the plot types array and the regional fractals
-        self.plotTypes = []  # reinit the array for each pass
+        self.plotTypes = [] # reinit the array for each pass
         self.plotTypes = [PlotTypes.PLOT_OCEAN] * (iRegionWidth*iRegionHeight)
         regionContinentsFrac = CyFractal()
         regionHillsFrac = CyFractal()
@@ -893,6 +887,8 @@ class MultilayeredFractal:
         regiononeSouthLat = 0.45
         regiontwoWestLon = 0.45
         regiontwoEastLon = 0.95
+        regiontwoNorthLat = 0.95
+        regiontwoSouthLat = 0.45
         subcontinentLargeHorz = 0.2
         subcontinentLargeVert = 0.32
         subcontinentLargeNorthLat = 0.6
@@ -989,7 +985,6 @@ bShift, iStrip,
 rift_grain, has_center_rift,
 invert_heights
 '''
-
 
 class TerrainGenerator:
     "If iDesertPercent=35, then about 35% of all land will be desert. Plains is similar. \
@@ -1145,7 +1140,6 @@ class TerrainGenerator:
                 return self.terrainSwamp
 
         return terrainVal
-
 
 class FeatureGenerator:
 
@@ -1311,8 +1305,7 @@ def getAreas():
 
     return areas
 
-
-def findStartingPlot(playerID, validFn=None):
+def findStartingPlot(playerID, validFn = None):
     gc = CyGlobalContext()
     map = CyMap()
     player = gc.getPlayer(playerID)
@@ -1321,14 +1314,14 @@ def findStartingPlot(playerID, validFn=None):
 
     iRange = player.startingPlotRange()
     iPass = 0
-    
+
     while (true):
         iBestValue = 0
         pBestPlot = None
 
         for iX in range(map.getGridWidth()):
             for iY in range(map.getGridHeight()):
-            	if validFn != None and not validFn(playerID, iX, iY):
+                if validFn != None and not validFn(playerID, iX, iY):
                     continue
                 pLoopPlot = map.plot(iX, iY)
                 val = pLoopPlot.getFoundValue(playerID)
@@ -1348,12 +1341,11 @@ def findStartingPlot(playerID, validFn=None):
         if pBestPlot != None:
             return map.plotNum(pBestPlot.getX(), pBestPlot.getY())
 
-        print("player", playerID, "pass", iPass, "failed")
+        print "player", playerID, "pass", iPass, "failed"
 
         iPass += 1
 
     return -1
-
 
 def argmin(list):
     best = None
@@ -1365,7 +1357,6 @@ def argmin(list):
             best = val
     return (best_index, best)
 
-
 def pointInRect(point, rect):
     x, y = point
     rectx, recty, rectw, recth = rect
@@ -1376,7 +1367,6 @@ def pointInRect(point, rect):
 
 
 class BonusBalancer:
-
     def __init__(self):
         self.gc = CyGlobalContext()
         self.map = CyMap()
@@ -1420,7 +1410,7 @@ class BonusBalancer:
 
         for i in range(self.gc.getMAX_CIV_PLAYERS()):
             if (self.gc.getPlayer(i).isAlive()):
-                start_plot = self.gc.getPlayer(i).getStartingPlot()  # returns a CyPlot
+                start_plot = self.gc.getPlayer(i).getStartingPlot() # returns a CyPlot
                 startx, starty = start_plot.getX(), start_plot.getY()
 
                 plots = []  # build a list of the plots near the starting plot

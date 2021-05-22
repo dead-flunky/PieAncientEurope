@@ -92,38 +92,39 @@ def onBeginPlayerTurn(iGameTurn, pPlayer):
     iTurnMegaraAthen = 22  # Runde, in der die Popups fuer den Menschen erscheinen sollen
     # Nur, wenn Megara existiert + von Korinth kontrolliert wird
     pMegara = CyMap().plot(55, 30).getPlotCity()
-    if iTeam == iAthen and ((iGameTurn == iTurnMegaraAthen-1 and pPlayer.isHuman()) or (iGameTurn == iTurnMegaraAthen and not pPlayer.isHuman())) and not pMegara.isNone() and pMegara is not None:
-        if pMegara.getOwner() == iKorinth:
-            # Event 3.1: Reaktion Athens
-            if pPlayer.isHuman():
-                popupInfo = CyPopupInfo()
-                popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-                popupInfo.setText(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_DESC", ()))
-                popupInfo.setOnClickedPythonCallback("peloponnesianWarKeinpferd_Megara1")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_OPTION_1", ()), "")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_OPTION_2", ()), "")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_OPTION_3", ()), "")
-                popupInfo.addPopup(iPlayer)
-            else:
-                iAiDecision = CvUtil.myRandom(3, "peloponnesianWarKeinpferd_Megara1")
-                CvScreensInterface.peloponnesianWarKeinpferd_Megara1([iAiDecision])
-    # Event 3.2: Reaktion Spartas (nur wenn Sparta noch keinen Krieg mit Athen hat)
-    iTurnMegaraSparta = 23  # Runde, in der die Popups fuer den Menschen erscheinen sollen
-    # Nur, wenn Megara existiert + von Korinth kontrolliert wird
-    if iTeam == iSparta and ((iGameTurn == iTurnMegaraSparta-1 and pPlayer.isHuman()) or (iGameTurn == iTurnMegaraSparta and not pPlayer.isHuman())) and not pMegara.isNone() and pMegara is not None:
-        if pMegara.getOwner() == iKorinth and not gc.getTeam(iTeam).isAtWar(iAthen):
-            if pPlayer.isHuman():
-                popupInfo = CyPopupInfo()
-                popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-                popupInfo.setText(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_DESC", ()))
-                popupInfo.setOnClickedPythonCallback("peloponnesianWarKeinpferd_Megara2")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_OPTION_1", ()), "")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_OPTION_2", ()), "")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_OPTION_3", ()), "")
-                popupInfo.addPopup(iPlayer)
-            else:
-                iAiDecision = CvUtil.myRandom(3, "peloponnesianWarKeinpferd_Megara2")
-                CvScreensInterface.peloponnesianWarKeinpferd_Megara2([iAiDecision])
+    if pMegara is not None and not pMegara.isNone():
+        if iTeam == iAthen and ((iGameTurn == iTurnMegaraAthen-1 and pPlayer.isHuman()) or (iGameTurn == iTurnMegaraAthen and not pPlayer.isHuman())):
+            if pMegara.getOwner() == iKorinth:
+                # Event 3.1: Reaktion Athens
+                if pPlayer.isHuman():
+                    popupInfo = CyPopupInfo()
+                    popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+                    popupInfo.setText(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_DESC", ()))
+                    popupInfo.setOnClickedPythonCallback("peloponnesianWarKeinpferd_Megara1")
+                    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_OPTION_1", ()), "")
+                    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_OPTION_2", ()), "")
+                    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_ATHEN_OPTION_3", ()), "")
+                    popupInfo.addPopup(iPlayer)
+                else:
+                    iAiDecision = CvUtil.myRandom(3, "peloponnesianWarKeinpferd_Megara1")
+                    CvScreensInterface.peloponnesianWarKeinpferd_Megara1([iAiDecision])
+        # Event 3.2: Reaktion Spartas (nur wenn Sparta noch keinen Krieg mit Athen hat)
+        iTurnMegaraSparta = 23  # Runde, in der die Popups fuer den Menschen erscheinen sollen
+        # Nur, wenn Megara existiert + von Korinth kontrolliert wird
+        if iTeam == iSparta and ((iGameTurn == iTurnMegaraSparta-1 and pPlayer.isHuman()) or (iGameTurn == iTurnMegaraSparta and not pPlayer.isHuman())):
+            if pMegara.getOwner() == iKorinth and not gc.getTeam(iTeam).isAtWar(iAthen):
+                if pPlayer.isHuman():
+                    popupInfo = CyPopupInfo()
+                    popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+                    popupInfo.setText(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_DESC", ()))
+                    popupInfo.setOnClickedPythonCallback("peloponnesianWarKeinpferd_Megara2")
+                    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_OPTION_1", ()), "")
+                    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_OPTION_2", ()), "")
+                    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_EVENT_MEGARA_SPARTA_OPTION_3", ()), "")
+                    popupInfo.addPopup(iPlayer)
+                else:
+                    iAiDecision = CvUtil.myRandom(3, "peloponnesianWarKeinpferd_Megara2")
+                    CvScreensInterface.peloponnesianWarKeinpferd_Megara2([iAiDecision])
     # Event 4: Kriegseintritt Thebens
     iTurnPlataiai = 28  # Runde, in der die Popups fuer den Menschen erscheinen sollen
     if iTeam == iTheben and ((iGameTurn == iTurnPlataiai-1 and pPlayer.isHuman()) or (iGameTurn == iTurnPlataiai and not pPlayer.isHuman())):
@@ -145,13 +146,14 @@ def onBeginPlayerTurn(iGameTurn, pPlayer):
     iTurnSyra1 = 194  # Runde, in der die Popups fuer den Menschen erscheinen sollen
     pSyrakus = CyMap().plot(15, 24).getPlotCity()
     # Nur wenn Syrakus (Stadt) noch existiert und der Civ Syrakus gehoert
-    if iTeam == iAthen and (iGameTurn == iTurnSyra1 - 1) and not pSyrakus.isNone() and pSyrakus is not None:
-        if pSyrakus.getOwner() == iSyrakus:
-            if pPlayer.isHuman():
-                popupInfo = CyPopupInfo()
-                popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
-                popupInfo.setText(CyTranslator().getText("TXT_KEY_EVENT_SYRAKUS_ATHEN_SAVEMONEY", ()))
-                popupInfo.addPopup(iPlayer)
+    if pSyrakus is not None and not pSyrakus.isNone():
+        if iTeam == iAthen and (iGameTurn == iTurnSyra1 - 1):
+            if pSyrakus.getOwner() == iSyrakus:
+                if pPlayer.isHuman():
+                    popupInfo = CyPopupInfo()
+                    popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
+                    popupInfo.setText(CyTranslator().getText("TXT_KEY_EVENT_SYRAKUS_ATHEN_SAVEMONEY", ()))
+                    popupInfo.addPopup(iPlayer)
     # Event 5.2: Athen waehlt Groesse der Flotte
     iTurnSyra2 = 204  # Runde, in der die Popups fuer den Menschen erscheinen sollen
     if iTeam == iAthen and ((iGameTurn == iTurnSyra2 - 1 and pPlayer.isHuman()) or (iGameTurn == iTurnSyra2 and not pPlayer.isHuman())):

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!-- f1rpo: Moved from the "BULL Actions" module b/c the K-Mod DLL now supports
+	 the worker actions, but still doesn't support the rest. -->
+<mod id="WorkerActions" 
+	 name="BULL WorkerActions" 
+	 author="EmperorFool" 
+	 dll="0">
+
+	<options id="WorkerActions" file="BUG Worker Actions.ini">
+		<section id="PreChop">
+			<option id="PreChopForests" key="Pre Chop Forests" 
+					type="boolean" default="False"/>
+			<option id="PreChopImprovements" key="Pre Chop Improvements" 
+					type="boolean" default="False"/>
+		</section>
+	</options>
+</mod>

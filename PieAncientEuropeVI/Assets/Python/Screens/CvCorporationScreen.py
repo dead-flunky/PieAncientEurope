@@ -189,7 +189,7 @@ class CvCorporationScreen:
 
     # Make the scrollable areas for the city list...
 
-    if (CyGame().isDebugMode()):
+    if CyGame().isDebugMode():
       self.szDropdownName = self.DEBUG_DROPDOWN_ID
       screen.addDropDownBoxGFC(self.szDropdownName, 22, 12, 300, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
       for j in range(gc.getMAX_PLAYERS()):
