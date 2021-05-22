@@ -65,7 +65,7 @@ def ResortCivs(Debugging):
     lHumanPlayers = []
     CounterInvalid = 0
 # loop detects human players
-    for ip in xrange(iMaxPlayer):
+    for ip in range(iMaxPlayer):
         CurPlayer = gc.getPlayer(ip)
         if CurPlayer.isHuman():
             lHumanPlayers.append(ip)
@@ -385,7 +385,6 @@ def CutString(string):
         return "-1"
     NewString = string[BeginPos+1:EndPos]
     return str(NewString)
-
 
 class SpawningCiv:
     def __init__(self):
