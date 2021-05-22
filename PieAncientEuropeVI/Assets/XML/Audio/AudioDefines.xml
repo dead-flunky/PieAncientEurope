@@ -11914,21 +11914,21 @@
       <bInGeneric>1</bInGeneric>
  <!-- kmod k-mod-->
     </SoundData>
-	<SoundData>
-			<SoundID>SND_SQUISH</SoundID>
-			<Filename>Sounds/Beep</Filename>
-			<LoadType>DYNAMIC_RES</LoadType>
-			<bIsCompressed>1</bIsCompressed>
-			<bInGeneric>1</bInGeneric>
-		</SoundData>
-		<SoundData>
-			<SoundID>SND_THEIRALLIANCE</SoundID>
-			<Filename>Sounds/TheirAlliance</Filename>
-			<LoadType>DYNAMIC_RES</LoadType>
-			<bIsCompressed>1</bIsCompressed>
-			<bInGeneric>1</bInGeneric>
-<!-- kmod k-mod -->	
-	</SoundData>
+    <SoundData>
+            <SoundID>SND_SQUISH</SoundID>
+            <Filename>Sounds/Beep</Filename>
+            <LoadType>DYNAMIC_RES</LoadType>
+            <bIsCompressed>1</bIsCompressed>
+            <bInGeneric>1</bInGeneric>
+        </SoundData>
+        <SoundData>
+            <SoundID>SND_THEIRALLIANCE</SoundID>
+            <Filename>Sounds/TheirAlliance</Filename>
+            <LoadType>DYNAMIC_RES</LoadType>
+            <bIsCompressed>1</bIsCompressed>
+            <bInGeneric>1</bInGeneric>
+<!-- kmod k-mod -->
+    </SoundData>
     <SoundData>
       <SoundID>MUSIC_PAE_MOD_1</SoundID>
       <Filename>Sounds/Soundtrack/Fumio_Hayasaka-7Samurai</Filename>

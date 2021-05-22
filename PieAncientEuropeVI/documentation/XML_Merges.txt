@@ -8,7 +8,7 @@ changed tags:
 buildings:
 bNoUnhealthyPopulation ==> iUnhealthyPopulationModifier 
 
-leaders:
+leaders: --> done (Flunky)
 
 these 4 tags needs to be under each leader.
 see kmod f1rpo pack for example of values.

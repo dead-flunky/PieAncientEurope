@@ -71,3 +71,5 @@ cvinfoscreen.py - not merged bug changes
 cvmaininterface.py - not merged bug changes
 cvvictory - not merged bug changes
 
+Flunky:
+CvEventManager - done

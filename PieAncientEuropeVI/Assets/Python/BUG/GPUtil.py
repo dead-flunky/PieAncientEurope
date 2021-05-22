@@ -144,6 +144,16 @@ def findNextCity():
 			if (iMinTurns is None or iTurns < iMinTurns):
 				iMinTurns = iTurns
 				bestCity = city
+    # PAE            
+    # pPlayer = gc.getActivePlayer()
+    # iCityPersonRate = iCityPersonProgress = 0
+    # pCity = ""
+    # for i in range(pPlayer.getNumCities()):
+        # if pPlayer.getCity(i).getGreatPeopleProgress() > 0 or pPlayer.getCity(i).getGreatPeopleRate() > 0:
+            # if iCityPersonProgress < pPlayer.getCity(i).getGreatPeopleProgress():
+                # iCityPersonRate = pPlayer.getCity(i).getGreatPeopleRate()
+                # iCityPersonProgress = pPlayer.getCity(i).getGreatPeopleProgress()
+                # pCity = pPlayer.getCity(i)
 	return (bestCity, iMinTurns)
 
 def findMaxCity():

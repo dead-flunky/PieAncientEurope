@@ -82,16 +82,25 @@ def ResortCivs(Debugging):
 # following loop moves all the units off the map
 # it prevents accidential contacts
 # PAE: except Barbarian Units
-    for iMoveAway in xrange(iMaxPlayer):
+    for iMoveAway in range(iMaxPlayer):
         if iMoveAway != gc.getBARBARIAN_PLAYER():
             pLoopCiv = gc.getPlayer(iMoveAway)
-            (loopUnit, pIter) = pLoopCiv.firstUnit(False)
-            while(loopUnit):
-                unitOwner = loopUnit.getOwner()
-                if not loopUnit.isNone() and loopUnit.getOwner() == pLoopCiv.getID():  # only valid units
-                    #loopUnit.setXY(-1,-1, False,False,False)
-                    loopUnit.setXY(gc.getINVALID_PLOT_COORD(), gc.getINVALID_PLOT_COORD(), False, False, False)
-                (loopUnit, pIter) = pLoopCiv.nextUnit(pIter, False)
+            if pLoopCiv and not pLoopCiv.isNone() and pLoopCiv.isAlive():  # only valid players
+                print "pLoopCiv %s" %(pLoopCiv.getName())
+                (loopUnit, pIter) = pLoopCiv.firstUnit(False)
+                while(loopUnit):
+                    unitOwner = loopUnit.getOwner()
+                    
+                    if not loopUnit.isNone() and loopUnit.getOwner() == pLoopCiv.getID():  # only valid units
+                        #loopUnit.setXY(-1,-1, False,False,False)
+                        print "loopUnit %s" %(loopUnit.getName())
+                        loopUnit.setXY(1,1, False, False, False)
+                        #loopUnit.setXY(gc.getINVALID_PLOT_COORD(), gc.getINVALID_PLOT_COORD(), False, False, False)
+                        
+                        print "loopUnit moved %s" %(loopUnit.getName())
+                    (loopUnit, pIter) = pLoopCiv.nextUnit(pIter, False)
+            
+    print "PAE: except Barbarian Units" 
 
 # this loop replaces the current units/moves them to the right place
 # invalid civs are killed, and the number is counted

@@ -98,7 +98,9 @@
 ##
 ## Author: EmperorFool
 
+import types
 from CvPythonExtensions import *
+import CvCameraControls
 import CvEventManager
 import BugData
 import BugUtil
@@ -107,8 +109,14 @@ import CvUtil
 import CvScreensInterface
 # </f1rpo>
 import InputUtil
-import types
 
+# OOS Logging Tool by Gerikes
+import OOSLogger
+# Flag to enable Civ4 shell (See Extras/Pyconsole).
+# Note that the flag will also be used to enable/disable
+# other debugging features of Ramkhamhaeng
+
+CIV4_SHELL = False
 # --------- Better BTS AI mod (1/2) -------------
 import AIAutoPlay
 import ChangePlayer
@@ -121,7 +129,7 @@ BugUtil.fixSets(globals())
 
 DEFAULT_LOGGING = False
 DEFAULT_NOLOG_EVENTS = set((
-	"gameUpdate",
+    "gameUpdate",
 ))
 
 gc = CyGlobalContext()
@@ -129,530 +137,608 @@ g_eventManager = None
 
 class BugEventManager(CvEventManager.CvEventManager):
 
-	"""
-	Extends the standard event manager by adding support for multiple
-	handlers for each event.
-	
-	Instead of modifying this file as you would have done with CvCustomEventManager,
-	use the <event> and <events> tags in your mod's initialization XML file.
-	
-	Methods exist for both adding and removing event handlers.  A set method 
-	also exists to override the default handlers.  Clients should not depend 
-	on event handlers being called in a particular order, though they are
-	called in the order in which they are added.
-	
-	Note that the naming conventions for the event type strings vary from event
-	to event.  Some use initial capitalization, some do not; some eliminate the
-	"on..." prefix used in the event handler function name, some do not.  Look
-	at the unmodified CvEventManager.py source code to determine the correct
-	name for a particular event.
-	
-	Take care with event handlers that also extend CvEventManager.  Since
-	this event manager handles invocation of the base class handler function,
-	additional handlers should not also call the base class function themselves.
-	
-	It's best *not* to extend CvEventManager or CvCustomEventManager. In fact,
-	you are free to use module methods outside classes if you wish. 
-	
-	"""
+    """
+    Extends the standard event manager by adding support for multiple
+    handlers for each event.
 
-	def __init__(self, logging=None, noLogEvents=None):
-		CvEventManager.CvEventManager.__init__(self)
-		
-		global g_eventManager
-		if g_eventManager is not None:
-			raise BugUtil.ConfigError("BugEventManager already created")
-		g_eventManager = self
-		
-		if logging is None:
-			self.setLogging(DEFAULT_LOGGING)
-		else:
-			self.setLogging(logging)
-		if noLogEvents is None:
-			self.setNoLogEvents(DEFAULT_NOLOG_EVENTS)
-		else:
-			self.setNoLogEvents(noLogEvents)
-		
-		self.bDbg = False
-		self.bMultiPlayer = False
-		self.bAllowCheats = False
-		
-		# used to register shortcut handlers
-		self.shortcuts = {}
-		
-		# init fields for BeginActivePlayerTurn
-		self.resetActiveTurn()
-		
-		# map the initial EventHandlerMap values into the new data structure
-		for eventType, eventHandler in self.EventHandlerMap.iteritems():
-			self.setEventHandler(eventType, eventHandler)
+    Instead of modifying this file as you would have done with CvCustomEventManager,
+    use the <event> and <events> tags in your mod's initialization XML file.
 
-		# add new core events; see unused sample handlers below for argument lists
-		self.addEvent("PreGameStart")
-		self.addEvent("BeginActivePlayerTurn")
-		self.addEvent("SwitchHotSeatPlayer")
-		self.addEvent("LanguageChanged")
-		self.addEvent("ResolutionChanged")
-		self.addEvent("PythonReloaded")
+    Methods exist for both adding and removing event handlers.  A set method
+    also exists to override the default handlers.  Clients should not depend
+    on event handlers being called in a particular order, though they are
+    called in the order in which they are added.
 
-		# add events used by this event manager
-		# (K-Mod has moved these into the "configure" fucntion)
+    Note that the naming conventions for the event type strings vary from event
+    to event.  Some use initial capitalization, some do not; some eliminate the
+    "on..." prefix used in the event handler function name, some do not.  Look
+    at the unmodified CvEventManager.py source code to determine the correct
+    name for a particular event.
 
-		# BULL events
-		self.addEvent("unitUpgraded")
-		self.addEvent("unitCaptured")
-		self.addEvent("combatWithdrawal")
-		self.addEvent("combatRetreat")
-		self.addEvent("combatLogCollateral")
-		self.addEvent("combatLogFlanking")
-		self.addEvent("playerRevolution")
-	
-	def setLogging(self, logging):
-		if logging is not None:
-			self.logging = bool(logging)
-	
-	def setNoLogEvents(self, noLogEvents):
-		if noLogEvents is not None:
-			try:
-				"gameUpdate" in noLogEvents
-			except:
-				raise BugUtil.ConfigError("noLogEvents must be tuple, list or set")
-			else:
-				self.noLogEvents = noLogEvents
+    Take care with event handlers that also extend CvEventManager.  Since
+    this event manager handles invocation of the base class handler function,
+    additional handlers should not also call the base class function themselves.
 
-	def hasEvent(self, eventType):
-		"""Returns True if the given event type is defined."""
-		return eventType in self.EventHandlerMap
+    It's best *not* to extend CvEventManager or CvCustomEventManager. In fact,
+    you are free to use module methods outside classes if you wish.
 
-	def _checkEvent(self, eventType):
-		"""Raises ConfigError if the eventType is undefined."""
-		if not self.hasEvent(eventType):
-			raise BugUtil.ConfigError("Event '%s' is undefined" % eventType)
+    """
 
-	def addEvent(self, eventType):
-		"""Creates a new event type without any handlers.
-		
-		Prints a warning if eventType is already defined.
-		"""
-		if self.hasEvent(eventType):
-			BugUtil.warn("BugEventManager - event '%s' already defined", eventType)
-		else:
-			BugUtil.debug("BugEventManager - adding event '%s'", eventType)
-			self.EventHandlerMap[eventType] = []
+    def __init__(self, logging=None, noLogEvents=None):
+        CvEventManager.CvEventManager.__init__(self)
 
-	def addEventHandler(self, eventType, eventHandler=None):
-		"""Adds a handler for the given event type, adding the event if necessary.
-		
-		If eventHandler is None, the event is added if necessary without a handler.
-		
-		A list of supported event types can be found in the initialization 
-		of EventHandlerMap in the CvEventManager class. A debug message is
-		printed if the event type doesn't exist.
+        global g_eventManager
+        if g_eventManager is not None:
+            raise BugUtil.ConfigError("BugEventManager already created")
+        g_eventManager = self
 
-		"""
-		if not self.hasEvent(eventType):
-			self.addEvent(eventType)
-		if eventHandler:
-			self.EventHandlerMap[eventType].append(eventHandler)
+        if logging is None:
+            self.setLogging(DEFAULT_LOGGING)
+        else:
+            self.setLogging(logging)
+        if noLogEvents is None:
+            self.setNoLogEvents(DEFAULT_NOLOG_EVENTS)
+        else:
+            self.setNoLogEvents(noLogEvents)
 
-	def removeEventHandler(self, eventType, eventHandler):
-		"""Removes a handler for the given event type.
-		
-		A list of supported event types can be found in the initialization 
-		of EventHandlerMap in the CvEventManager class.  It is an error if 
-		the given handler is not found in the list of installed handlers.
-		
-		Throws ConfigError if the eventType is undefined.
+        self.bDbg = False
+        self.bMultiPlayer = False
+        self.bAllowCheats = False
 
-		"""
-		self._checkEvent(eventType)
-		self.EventHandlerMap[eventType].remove(eventHandler)
-	
-	def setEventHandler(self, eventType, eventHandler):
-		"""Removes all previously installed event handlers for the given 
-		event type and installs a new handler, adding the event if necessary.
-		
-		A list of supported event types can be found in the initialization 
-		of EventHandlerMap in the CvEventManager class.  This method is 
-		primarily useful for overriding, rather than extending, the default 
-		event handler functionality.
+        self.bPAE_ShowMessagePlayerTurn = False
 
-		"""
-		if not self.hasEvent(eventType):
-			self.addEvent(eventType)
-		if eventHandler is not None:
-			self.EventHandlerMap[eventType] = [eventHandler]
-		else:
-			self.EventHandlerMap[eventType] = []
-	
-	def setPopupHandler(self, eventType, handler):
-		"""Removes all previously installed popup handlers for the given 
-		event type and installs a new pair of handlers.
-		
-		The eventType should be an integer.  It must be unique with respect
-		to the integers assigned to built in events.  The popupHandler should
-		be a list made up of (name, applyFunction, beginFunction).  The name
-		is used in debugging output.  The begin and apply functions are invoked
-		by beginEvent and applyEvent, respectively, to manage a popup dialog
-		in response to the event.
+        # used to register shortcut handlers
+        self.shortcuts = {}
 
-		"""
-		BugUtil.debug("BugEventManager - setting popup handler for event %s (%d)", handler[0], eventType)
-		self.Events[eventType] = handler
-	
-	def setPopupHandlers(self, eventType, name, beginFunction, applyFunction):
-		"""Builds a handler tuple to pass to setPopupHandler().
-		
-		"""
-		self.setPopupHandler(eventType, (name, applyFunction, beginFunction))
-	
-	def removePopupHandler(self, eventType):
-		"""Removes all previously installed popup handlers for the given 
-		event type.
-		
-		The eventType should be an integer. It is an error to fire this
-		eventType after removing its handlers.
+        # init fields for BeginActivePlayerTurn
+        self.resetActiveTurn()
 
-		"""
-		if eventType in self.Events:
-			BugUtil.debug("BugEventManager - removing popup handler for event %d", eventType)
-			del self.Events[eventType]
-		else:
-			BugUtil.warn("BugEventManager - event %d has no popup handler", eventType)
-	
-	def addShortcutHandler(self, keys, handler):
-		"""Adds the given handler to be called when any of the keyboard shortcut(s) is hit.
-		
-		The keys argument may be a single Keystroke, a collection of one or more Keystrokes, or
-		a string which will be converted to such.
-		If any keystrokes have existing handlers, new ones are ignored and a warning is displayed.
-		
-		"""
-		if isinstance(keys, InputUtil.Keystroke):
-			keys = (keys,)
-		elif isinstance(keys, types.StringTypes):
-			keys = InputUtil.stringToKeystrokes(keys)
-		for key in keys:
-			if key in self.shortcuts:
-				BugUtil.error("shortcut %s already assigned", key)
-			else:
-				BugUtil.debug("BugEventManager - setting shortcut handler for %s", key)
-				self.shortcuts[key] = handler
-	
-	
-	def fireEvent(self, eventType, *args):
-		"""Fires the given event passing in all args as a list."""
-		self._dispatchEvent(eventType, args)
+        # map the initial EventHandlerMap values into the new data structure
+        for eventType, eventHandler in self.EventHandlerMap.iteritems():
+            self.setEventHandler(eventType, eventHandler)
 
-	def handleEvent(self, argsList):
-		"""Handles events by calling all installed handlers."""
-		self.bDbg, self.bMultiPlayer, self.bAlt, self.bCtrl, self.bShift, self.bAllowCheats = argsList[-6:]
-		self._dispatchEvent(argsList[0], argsList[1:-6])
-	
-	def _dispatchEvent(self, eventType, argsList):
-		if self.logging:
-			self._logEvent(eventType, argsList)
-		return EVENT_FUNCTION_MAP.get(eventType, BugEventManager._handleDefaultEvent)(self, eventType, argsList)
+        # add new core events; see unused sample handlers below for argument lists
+        self.addEvent("PreGameStart")
+        self.addEvent("BeginActivePlayerTurn")
+        self.addEvent("SwitchHotSeatPlayer")
+        self.addEvent("LanguageChanged")
+        self.addEvent("ResolutionChanged")
+        self.addEvent("PythonReloaded")
 
-	def _logEvent(self, eventType, argsList):
-		if self.logging and eventType not in self.noLogEvents:
-			if argsList:
-				BugUtil.debug("BugEventManager - event %s: %r", eventType, argsList)
-			else:
-				BugUtil.debug("BugEventManager - event %s", eventType)
+        # add events used by this event manager
+        # (K-Mod has moved these into the "configure" fucntion)
 
-	def _handleDefaultEvent(self, eventType, argsList):
-		if self.EventHandlerMap.has_key(eventType):
-			for eventHandler in self.EventHandlerMap[eventType]:
-				try:
-					eventHandler(argsList)
-				except:
-					BugUtil.trace("Error in %s event handler %s", eventType, eventHandler)
+        # BULL events
+        self.addEvent("unitUpgraded")
+        self.addEvent("unitCaptured")
+        self.addEvent("combatWithdrawal")
+        self.addEvent("combatRetreat")
+        self.addEvent("combatLogCollateral")
+        self.addEvent("combatLogFlanking")
+        self.addEvent("playerRevolution")
 
-	def _handleConsumableEvent(self, eventType, argsList):
-		"""Handles events that can be consumed by the handlers, such as
-		keyboard or mouse events.
-		
-		If a handler returns non-zero, processing is terminated, and no 
-		subsequent handlers are invoked.
+    def setLogging(self, logging):
+        'setLogging'
+        if logging is not None:
+            self.logging = bool(logging)
 
-		"""
-		if self.EventHandlerMap.has_key(eventType):
-			for eventHandler in self.EventHandlerMap[eventType]:
-				try:
-					result = eventHandler(argsList)
-					if (result > 0):
-						return result
-				except:
-					BugUtil.trace("Error in %s event handler %s", eventType, eventHandler)
-		return 0
+    def setNoLogEvents(self, noLogEvents):
+        'setNoLogEvents'
+        if noLogEvents is not None:
+            try:
+                "gameUpdate" in noLogEvents
+            except:
+                raise BugUtil.ConfigError("noLogEvents must be tuple, list or set")
+            else:
+                self.noLogEvents = noLogEvents
 
-	def _handleOnPreSaveEvent(self, eventType, argsList):
-		"""Tells BugData to save all script data after other handlers have been called.
-		This won't work as a normal handler because it must be done after other handlers. 
-		"""
-		self._handleDefaultEvent(eventType, argsList)
-		BugData.save()
+    def hasEvent(self, eventType):
+        """Returns True if the given event type is defined."""
+        return eventType in self.EventHandlerMap
 
-	# TODO: this probably needs to be more complex
-	def _handleOnSaveEvent(self, eventType, argsList):
-		"""Handles OnSave events by concatenating the results obtained
-		from each handler to form an overall consolidated save string.
-		"""
-		result = ""
-		if self.EventHandlerMap.has_key(eventType):
-			for eventHandler in self.EventHandlerMap[eventType]:
-				try:
-					result += eventHandler(argsList)
-				except:
-					BugUtil.trace("Error in %s event handler %s", eventType, eventHandler)
-		return result
+    def _checkEvent(self, eventType):
+        """Raises ConfigError if the eventType is undefined."""
+        if not self.hasEvent(eventType):
+            raise BugUtil.ConfigError("Event '%s' is undefined" % eventType)
 
-	def _handleInitBugEvent(self, eventType, argsList):
-		"""Initializes BUG before handling event normally.
-		"""
-		import BugInit
-		BugInit.init()
-		self._handleDefaultEvent(eventType, argsList)
-	
-	
-	def resetActiveTurn(self, argsList=None):
-		self.iActiveTurn = -1
-		self.eActivePlayer = -1
-		self.bEndTurnFired = False
-	
-	def checkActivePlayerTurnStart(self):
-		"""Fires the BeginActivePlayerTurn event if either the active player or game turn
-		have changed since the last check. This signifies that the active player is about
-		to be able to move their units.
-		
-		Called by onGameUpdate() when the End Turn Button is green.
-		"""
-		iTurn = gc.getGame().getGameTurn()
-		ePlayer = gc.getGame().getActivePlayer()
-		if self.iActiveTurn != iTurn or self.eActivePlayer != ePlayer:
-			self.iActiveTurn = iTurn
-			self.eActivePlayer = ePlayer
-			self.bEndTurnFired = False
-			self.fireEvent("BeginActivePlayerTurn", ePlayer, iTurn)
-	
-	def checkActivePlayerTurnEnd(self):
-		"""Fires the endTurnReady event if it hasn't been fired since the active player's turn started.
-		
-		Called by onGameUpdate() when the End Turn Button is red.
-		"""
-		if not self.bEndTurnFired:
-			self.bEndTurnFired = True
-			self.fireEvent("endTurnReady", self.iActiveTurn)
+    def addEvent(self, eventType):
+        """Creates a new event type without any handlers.
 
-	
+        Prints a warning if eventType is already defined.
+        """
+        if self.hasEvent(eventType):
+            BugUtil.warn("BugEventManager - event '%s' already defined", eventType)
+        else:
+            BugUtil.debug("BugEventManager - adding event '%s'", eventType)
+            self.EventHandlerMap[eventType] = []
+
+    def addEventHandler(self, eventType, eventHandler=None):
+        """Adds a handler for the given event type, adding the event if necessary.
+
+        If eventHandler is None, the event is added if necessary without a handler.
+
+        A list of supported event types can be found in the initialization
+        of EventHandlerMap in the CvEventManager class. A debug message is
+        printed if the event type doesn't exist.
+
+        """
+        if not self.hasEvent(eventType):
+            self.addEvent(eventType)
+        if eventHandler:
+            self.EventHandlerMap[eventType].append(eventHandler)
+
+    def removeEventHandler(self, eventType, eventHandler):
+        """Removes a handler for the given event type.
+
+        A list of supported event types can be found in the initialization
+        of EventHandlerMap in the CvEventManager class.  It is an error if
+        the given handler is not found in the list of installed handlers.
+
+        Throws ConfigError if the eventType is undefined.
+
+        """
+        self._checkEvent(eventType)
+        self.EventHandlerMap[eventType].remove(eventHandler)
+
+    def setEventHandler(self, eventType, eventHandler):
+        """Removes all previously installed event handlers for the given
+        event type and installs a new handler, adding the event if necessary.
+
+        A list of supported event types can be found in the initialization
+        of EventHandlerMap in the CvEventManager class.  This method is
+        primarily useful for overriding, rather than extending, the default
+        event handler functionality.
+
+        """
+        if not self.hasEvent(eventType):
+            self.addEvent(eventType)
+        if eventHandler is not None:
+            self.EventHandlerMap[eventType] = [eventHandler]
+        else:
+            self.EventHandlerMap[eventType] = []
+
+    def setPopupHandler(self, eventType, handler):
+        """Removes all previously installed popup handlers for the given
+        event type and installs a new pair of handlers.
+
+        The eventType should be an integer.  It must be unique with respect
+        to the integers assigned to built in events.  The popupHandler should
+        be a list made up of (name, applyFunction, beginFunction).  The name
+        is used in debugging output.  The begin and apply functions are invoked
+        by beginEvent and applyEvent, respectively, to manage a popup dialog
+        in response to the event.
+
+        """
+        BugUtil.debug("BugEventManager - setting popup handler for event %s (%d)",
+                      handler[0], eventType)
+        self.Events[eventType] = handler
+
+    def setPopupHandlers(self, eventType, name, beginFunction, applyFunction):
+        """Builds a handler tuple to pass to setPopupHandler().
+
+        """
+        self.setPopupHandler(eventType, (name, applyFunction, beginFunction))
+
+    def removePopupHandler(self, eventType):
+        """Removes all previously installed popup handlers for the given
+        event type.
+
+        The eventType should be an integer. It is an error to fire this
+        eventType after removing its handlers.
+
+        """
+        if eventType in self.Events:
+            BugUtil.debug("BugEventManager - removing popup handler for event %d", eventType)
+            del self.Events[eventType]
+        else:
+            BugUtil.warn("BugEventManager - event %d has no popup handler", eventType)
+
+    def addShortcutHandler(self, keys, handler):
+        """Adds the given handler to be called when any of the keyboard shortcut(s) is hit.
+
+        The keys argument may be a single Keystroke, a collection of one or more Keystrokes, or
+        a string which will be converted to such.
+        If any keystrokes have existing handlers, new ones are ignored and a warning is displayed.
+
+        """
+        if isinstance(keys, InputUtil.Keystroke):
+            keys = (keys,)
+        elif isinstance(keys, types.StringTypes):
+            keys = InputUtil.stringToKeystrokes(keys)
+        for key in keys:
+            if key in self.shortcuts:
+                BugUtil.error("shortcut %s already assigned", key)
+            else:
+                BugUtil.debug("BugEventManager - setting shortcut handler for %s", key)
+                self.shortcuts[key] = handler
+
+
+    def fireEvent(self, eventType, *args):
+        """Fires the given event passing in all args as a list."""
+        self._dispatchEvent(eventType, args)
+
+    def handleEvent(self, argsList):
+        """Handles events by calling all installed handlers."""
+        self.bDbg, self.bMultiPlayer, self.bAlt, self.bCtrl, self.bShift, self.bAllowCheats = argsList[-6:]
+        self._dispatchEvent(argsList[0], argsList[1:-6])
+
+    def _dispatchEvent(self, eventType, argsList):
+        if self.logging:
+            self._logEvent(eventType, argsList)
+        return EVENT_FUNCTION_MAP.get(eventType, BugEventManager._handleDefaultEvent)(self, eventType, argsList)
+
+    def _logEvent(self, eventType, argsList):
+        if self.logging and eventType not in self.noLogEvents:
+            if argsList:
+                BugUtil.debug("BugEventManager - event %s: %r", eventType, argsList)
+            else:
+                BugUtil.debug("BugEventManager - event %s", eventType)
+
+    def _handleDefaultEvent(self, eventType, argsList):
+        if self.EventHandlerMap.has_key(eventType):
+            for eventHandler in self.EventHandlerMap[eventType]:
+                try:
+                    eventHandler(argsList)
+                except:
+                    BugUtil.trace("Error in %s event handler %s", eventType, eventHandler)
+
+    def _handleConsumableEvent(self, eventType, argsList):
+        """Handles events that can be consumed by the handlers, such as
+        keyboard or mouse events.
+
+        If a handler returns non-zero, processing is terminated, and no
+        subsequent handlers are invoked.
+
+        """
+        if self.EventHandlerMap.has_key(eventType):
+            for eventHandler in self.EventHandlerMap[eventType]:
+                try:
+                    result = eventHandler(argsList)
+                    if result > 0:
+                        return result
+                except:
+                    BugUtil.trace("Error in %s event handler %s", eventType, eventHandler)
+        return 0
+
+    def _handleOnPreSaveEvent(self, eventType, argsList):
+        """Tells BugData to save all script data after other handlers have been called.
+        This won't work as a normal handler because it must be done after other handlers.
+        """
+        self._handleDefaultEvent(eventType, argsList)
+        BugData.save()
+
+    # TODO: this probably needs to be more complex
+    def _handleOnSaveEvent(self, eventType, argsList):
+        """Handles OnSave events by concatenating the results obtained
+        from each handler to form an overall consolidated save string.
+        """
+        result = ""
+        if self.EventHandlerMap.has_key(eventType):
+            for eventHandler in self.EventHandlerMap[eventType]:
+                try:
+                    result += eventHandler(argsList)
+                except:
+                    BugUtil.trace("Error in %s event handler %s", eventType, eventHandler)
+        return result
+
+    def _handleInitBugEvent(self, eventType, argsList):
+        'Initializes BUG before handling event normally.'
+        import BugInit
+        BugInit.init()
+        self._handleDefaultEvent(eventType, argsList)
+
+
+    def resetActiveTurn(self, argsList=None):
+        'resetActiveTurn'
+        self.iActiveTurn = -1
+        self.eActivePlayer = -1
+        self.bEndTurnFired = False
+
+    def checkActivePlayerTurnStart(self):
+        """Fires the BeginActivePlayerTurn event if either the active player or game turn
+        have changed since the last check. This signifies that the active player is about
+        to be able to move their units.
+
+        Called by onGameUpdate() when the End Turn Button is green.
+        """
+        iTurn = gc.getGame().getGameTurn()
+        ePlayer = gc.getGame().getActivePlayer()
+        if self.iActiveTurn != iTurn or self.eActivePlayer != ePlayer:
+            self.iActiveTurn = iTurn
+            self.eActivePlayer = ePlayer
+            self.bEndTurnFired = False
+            self.fireEvent("BeginActivePlayerTurn", ePlayer, iTurn)
+
+    def checkActivePlayerTurnEnd(self):
+        """Fires the endTurnReady event if it hasn't been fired since the active player's turn started.
+
+        Called by onGameUpdate() when the End Turn Button is red.
+        """
+        if not self.bEndTurnFired:
+            self.bEndTurnFired = True
+            self.fireEvent("endTurnReady", self.iActiveTurn)
+
+
 # Used Event Handlers
-	
-	def onGameUpdate(self, argsList):
-		"""
-		Checks for active player turn begin/end.
-		"""
-		eState = CyInterface().getEndTurnState()
-		if eState == EndTurnButtonStates.END_TURN_GO:
-			self.checkActivePlayerTurnStart()
-		else:
-			self.checkActivePlayerTurnEnd()
 
-	def onKbdEvent(self, argsList):
-		"""
-		Handles onKbdEvent by firing the keystroke's handler if it has one registered.
-		"""
-		eventType, key, mx, my, px, py = argsList
-		if eventType == self.EventKeyDown and not InputUtil.isModifier(key):
-			# <f1rpo> (advc.007b)
-			# Added not bCtrl/bAlt/bShift checks so that each cheat is triggered by only one combination of modifier keys
-			theKey = int(key)
-			if not self.bShift and self.bCtrl and self.bAlt and theKey == int(InputTypes.KB_R):
-				BugUtil.warn("Note (K-Mod): Reloading of Art Defines (Ctrl+Alt+R) is disabled")
-				return 1 # Don't use this key combination for anything else
-			# </f1rpo>
-			stroke = InputUtil.Keystroke(key, self.bAlt, self.bCtrl, self.bShift)
-			if stroke in self.shortcuts:
-				BugUtil.debug("BugEventManager - calling handler for shortcut %s", stroke)
-				self.shortcuts[stroke](argsList)
-				return 1
-			# <f1rpo> (advc.007b) Cheats copied from CvEventManager
-			if gc.getGame().isDebugMode():
-				# Shift - T Debug - techs
-				if self.bShift and not self.bCtrl and not self.bAlt and theKey == int(InputTypes.KB_T):
-					self.beginEvent(CvUtil.EventAwardTechsAndGold)
-					return 1
-				elif self.bShift and self.bCtrl and not self.bAlt and theKey == int(InputTypes.KB_W):
-					self.beginEvent(CvUtil.EventShowWonder)
-					return 1
-				# Shift - ] Debug - currently mouse-over'd unit: health+=10
-				elif theKey == int(InputTypes.KB_LBRACKET) and self.bShift and not self.bCtrl and not self.bAlt:
-					unit = CyMap().plot(px, py).getUnit(0)
-					if not unit.isNone():
-						d = min(unit.maxHitPoints()-1, unit.getDamage() + 10)
-						unit.setDamage(d, PlayerTypes.NO_PLAYER)
-				# Shift - [ Debug - currently mouse-over'd unit: health-= 10
-				elif theKey == int(InputTypes.KB_RBRACKET) and self.bShift and not self.bCtrl and not self.bAlt:
-					unit = CyMap().plot(px, py).getUnit(0)
-					if not unit.isNone():
-						d = max(0, unit.getDamage() - 10)
-						unit.setDamage(d, PlayerTypes.NO_PLAYER)
-				# <advc.gfd> Keep Nightinggale's key combination
-				elif theKey == int(InputTypes.KB_F1) and self.bShift and self.bCtrl and not self.bAlt:
-					GameFontDisplay.GameFontDisplay().interfaceScreen()
-					return 1 # </advc.gfd>
-				elif theKey == int(InputTypes.KB_F1):
-					if self.bShift and not self.bCtrl and not self.bAlt:
-						CvScreensInterface.replayScreen.showScreen(False)
-						return 1
-				elif theKey == int(InputTypes.KB_F2):
-					if self.bShift and not self.bCtrl and not self.bAlt:
-						import CvDebugInfoScreen
-						CvScreensInterface.showDebugInfoScreen()
-						return 1
-				elif theKey == int(InputTypes.KB_F3):
-					if self.bShift and not self.bCtrl and not self.bAlt:
-						CvScreensInterface.showDanQuayleScreen(())
-						return 1
-				elif theKey == int(InputTypes.KB_F4):
-					if self.bShift and not self.bCtrl and not self.bAlt:
-						CvScreensInterface.showUnVictoryScreen(())
-						return 1
-				# </f1rpo>
-		return 0
-	
+    def onGameUpdate(self, argsList):
+        """
+        Checks for active player turn begin/end.
+        """
+        if CIV4_SHELL:
+            civ4Console.update(self.glob, self.loc)
+        # Added by Gerikes for OOS logging.
+        OOSLogger.doGameUpdate()
+        # End added by Gerikes for OOS logging.
+
+        eState = CyInterface().getEndTurnState()
+        if eState == EndTurnButtonStates.END_TURN_GO:
+            self.checkActivePlayerTurnStart()
+        else:
+            self.checkActivePlayerTurnEnd()
+
+    def onKbdEvent(self, argsList):
+        'keypress handler - return 1 if the event was consumed'
+        """
+        Handles onKbdEvent by firing the keystroke's handler if it has one registered.
+        """
+
+        eventType, key, mx, my, px, py = argsList
+        game = gc.getGame()
+
+        # if self.bAllowCheats:
+        if gc.getGame().isDebugMode():
+            # notify debug tools of input to allow it to override the control
+            argsList = (eventType, key, self.bCtrl, self.bShift, self.bAlt, mx, my, px, py, game.isNetworkMultiPlayer())
+            if CvDebugTools.g_CvDebugTools.notifyInput(argsList):
+                return 0
+
+        if eventType == self.EventKeyDown and not InputUtil.isModifier(key):
+            theKey = int(key)
+            # <f1rpo> (advc.007b)
+            # Added not bCtrl/bAlt/bShift checks so that each cheat is triggered by only one combination of modifier keys
+            if not self.bShift and self.bCtrl and self.bAlt and theKey == int(InputTypes.KB_R):
+                BugUtil.warn("Note (K-Mod): Reloading of Art Defines (Ctrl+Alt+R) is disabled")
+                return 1 # Don't use this key combination for anything else
+            # </f1rpo>
+
+            stroke = InputUtil.Keystroke(key, self.bAlt, self.bCtrl, self.bShift)
+            if stroke in self.shortcuts:
+                BugUtil.debug("BugEventManager - calling handler for shortcut %s", stroke)
+                self.shortcuts[stroke](argsList)
+                return 1
+
+            # From FfH-Mod: by Kael 07/05/2008
+            if theKey == int(InputTypes.KB_LEFT):
+                if self.bCtrl:
+                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() - 45.0)
+                    return 1
+                elif self.bShift:
+                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() - 10.0)
+                    return 1
+
+            if theKey == int(InputTypes.KB_RIGHT):
+                if self.bCtrl:
+                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() + 45.0)
+                    return 1
+                elif self.bShift:
+                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() + 10.0)
+                    return 1
+            # From FfH: End
+
+            # PAE Spieler am Zug Message aktivieren/deaktvieren: STRG+P / CTRL+P --
+            if theKey == int(InputTypes.KB_P):
+                if self.bCtrl:
+                    if self.bPAE_ShowMessagePlayerTurn:
+                        self.bPAE_ShowMessagePlayerTurn = False
+                        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_PAE_CIV_TURN_DEACTIVATED", ("",)), None, 2, None, ColorTypes(14), 0, 0, False, False)
+                    else:
+                        self.bPAE_ShowMessagePlayerTurn = True
+                        self.iPAE_ShowMessagePlayerHumanID = gc.getGame().getActivePlayer()
+                        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_PAE_CIV_TURN_ACTIVATED", ("",)), None, 2, None, ColorTypes(14), 0, 0, False, False)
+                    return 1
+
+            CvCameraControls.g_CameraControls.handleInput(theKey)
+
+            ## AI AutoPlay ##
+            if CyGame().getAIAutoPlay():
+                if theKey == int(InputTypes.KB_SPACE) or theKey == int(InputTypes.KB_ESCAPE):
+                    CyGame().setAIAutoPlay(0)
+                    return 1
+            ## AI AutoPlay ##
+
+            # <f1rpo> (advc.007b) Cheats copied from CvEventManager
+            # if self.bAllowCheats:
+            if gc.getGame().isDebugMode():
+                # Shift - T (Debug - No MP)
+                if self.bShift and not self.bCtrl and not self.bAlt and theKey == int(InputTypes.KB_T):
+                    self.beginEvent(CvUtil.EventAwardTechsAndGold)
+                    return 1
+                if self.bShift and self.bCtrl and not self.bAlt and theKey == int(InputTypes.KB_W):
+                    self.beginEvent(CvUtil.EventShowWonder)
+                    return 1
+                # Shift - ] Debug - currently mouse-over'd unit, health += 10
+                elif theKey == int(InputTypes.KB_LBRACKET) and self.bShift and not self.bCtrl and not self.bAlt:
+                    unit = CyMap().plot(px, py).getUnit(0)
+                    if not unit.isNone():
+                        d = min(unit.maxHitPoints()-1, unit.getDamage() + 10)
+                        unit.setDamage(d, PlayerTypes.NO_PLAYER)
+                # Shift - [ Debug - currently mouse-over'd unit, health -= 10
+                elif theKey == int(InputTypes.KB_RBRACKET) and self.bShift and not self.bCtrl and not self.bAlt:
+                    unit = CyMap().plot(px, py).getUnit(0)
+                    if not unit.isNone():
+                        d = max(0, unit.getDamage() - 10)
+                        unit.setDamage(d, PlayerTypes.NO_PLAYER)
+                # <advc.gfd> Keep Nightinggale's key combination
+                elif theKey == int(InputTypes.KB_F1) and self.bShift and self.bCtrl and not self.bAlt:
+                    GameFontDisplay.GameFontDisplay().interfaceScreen()
+                    return 1 # </advc.gfd>
+                elif theKey == int(InputTypes.KB_F1):
+                    if self.bShift and self.bAlt:
+                        CyInterface().addImmediateMessage("BEGIN Python file optimization", "")
+                        import ResolveConstantFunctions
+                        ResolveConstantFunctions.main(True)
+                        CyInterface().addImmediateMessage("END Python file optimization", "")
+                        return 1
+                    elif self.bShift and not self.bCtrl and not self.bAlt:
+                        CvScreensInterface.replayScreen.showScreen(False)
+                        return 1
+                    # don't return 1 unless you want the input consumed
+
+                elif theKey == int(InputTypes.KB_F2):
+                    if self.bShift and not self.bCtrl and self.bAlt:
+                        import remote_pdb
+                        remote_pdb.RemotePdb("127.0.0.1", 4444).set_trace()
+                        return 1
+                    elif self.bShift and not self.bCtrl and not self.bAlt:
+                        import CvDebugInfoScreen
+                        CvScreensInterface.showDebugInfoScreen()
+                        return 1
+                elif theKey == int(InputTypes.KB_F3):
+                    if self.bShift and not self.bCtrl and not self.bAlt:
+                        CvScreensInterface.showDanQuayleScreen(())
+                        return 1
+                elif theKey == int(InputTypes.KB_F4):
+                    if self.bShift and not self.bCtrl and not self.bAlt:
+                        CvScreensInterface.showUnVictoryScreen(())
+                        return 1
+                # </f1rpo>
+        return 0
+
 
 # Sample Event Handlers
-	
-	def onPreGameStart(self, argsList):
-		"""Fired from CvAppInterface.preGameStart()."""
-		pass
-	
-	def onBeginActivePlayerTurn(self, argsList):
-		"""Called when the active player can start their turn."""
-		ePlayer, iGameTurn = argsList
-	
-	def onEndTurnReady(self, argsList):
-		"""Called when the active player has moved their last waiting unit."""
-		ePlayer = argsList[0]
-	
-	def onSwitchHotSeatPlayer(self, argsList):
-		"""Called when a hot seat player's turn ends."""
-		ePlayer = argsList[0]
-	
-	def onLanguageChanged(self, argsList):
-		"""Called when the user changes their language selection."""
-		iLanguage = argsList[0]
 
-	def onResolutionChanged(self, argsList):
-		"""Called when the user changes their graphics resolution."""
-		iResolution = argsList[0]
-	
-	
-	def onUnitUpgraded(self, argsList):
-		"""Called when a unit is upgraded."""
-		pOldUnit, pNewUnit, iPrice = argsList
-		BugUtil.debug("%s upgraded to %s for %d%c", 
-				pOldUnit.getName(), pNewUnit.getName(), iPrice, gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
-	
-	def onUnitCaptured(self, argsList):
-		"""Called when a unit is captured."""
-		eOwner, eUnitType, pNewUnit = argsList
-		BugUtil.debug("%s %s captured as %s by %s", 
-				gc.getPlayer(eOwner).getName(), gc.getUnitInfo(eUnitType).getDescription(), 
-				pNewUnit.getName(), gc.getPlayer(pNewUnit.getOwner()).getName())
-	
-	def onCombatWithdrawal(self, argsList):
-		"""Fired when a unit withdraws from combat after doing maximum damage."""
-		pAttacker, pDefender = argsList
-		BugUtil.debug("%s withdraws from %s", 
-				pAttacker.getName(), pDefender.getName())
-	
-	def onCombatRetreat(self, argsList):
-		"""Fired when a unit retreats from combat, escaping death."""
-		pAttacker, pDefender = argsList
-		BugUtil.debug("%s retreats from %s", 
-				pAttacker.getName(), pDefender.getName())
-	
-	def onCombatLogCollateral(self, argsList):
-		"""Fired when a unit inflicts collateral damage to another unit."""
-		pAttacker, pDefender, iDamage = argsList
-		BugUtil.debug("%s bombards %s for %d HP", 
-				pAttacker.getName(), pDefender.getName(), iDamage)
-	
-	def onCombatLogFlanking(self, argsList):
-		"""Fired when a unit inflicts flanking damage to another unit."""
-		pAttacker, pDefender, iDamage = argsList
-		BugUtil.debug("%s flanks %s for %d HP", 
-				pAttacker.getName(), pDefender.getName(), iDamage)
-	
-	
-	def onPlayerRevolution(self, argsList):
-		ePlayer, iAnarchyTurns, leOldCivics, leNewCivics = argsList
-		civics = []
-		for eOldCivic, eNewCivic in zip(leOldCivics, leNewCivics):
-			if eOldCivic != eNewCivic:
-				civics.append(gc.getCivicInfo(eNewCivic).getDescription())
-		BugUtil.debug("Revolution for %s, %d turns: %s", gc.getPlayer(ePlayer).getName(), iAnarchyTurns, ", ".join(civics))
+    def onPreGameStart(self, argsList):
+        """Fired from CvAppInterface.preGameStart()."""
+        pass
+
+    def onBeginActivePlayerTurn(self, argsList):
+        """Called when the active player can start their turn."""
+        ePlayer, iGameTurn = argsList
+
+    def onEndTurnReady(self, argsList):
+        """Called when the active player has moved their last waiting unit."""
+        ePlayer = argsList[0]
+
+    def onSwitchHotSeatPlayer(self, argsList):
+        """Called when a hot seat player's turn ends."""
+        ePlayer = argsList[0]
+
+    def onLanguageChanged(self, argsList):
+        """Called when the user changes their language selection."""
+        iLanguage = argsList[0]
+
+    def onResolutionChanged(self, argsList):
+        """Called when the user changes their graphics resolution."""
+        iResolution = argsList[0]
+
+
+    def onUnitUpgraded(self, argsList):
+        """Called when a unit is upgraded."""
+        pOldUnit, pNewUnit, iPrice = argsList
+        BugUtil.debug("%s upgraded to %s for %d%c",
+                      pOldUnit.getName(), pNewUnit.getName(), iPrice, gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
+
+    def onUnitCaptured(self, argsList):
+        """Called when a unit is captured."""
+        eOwner, eUnitType, pNewUnit = argsList
+        BugUtil.debug("%s %s captured as %s by %s",
+                      gc.getPlayer(eOwner).getName(), gc.getUnitInfo(eUnitType).getDescription(),
+                      pNewUnit.getName(), gc.getPlayer(pNewUnit.getOwner()).getName())
+
+    def onCombatWithdrawal(self, argsList):
+        """Fired when a unit withdraws from combat after doing maximum damage."""
+        pAttacker, pDefender = argsList
+        BugUtil.debug("%s withdraws from %s",
+                      pAttacker.getName(), pDefender.getName())
+
+    def onCombatRetreat(self, argsList):
+        """Fired when a unit retreats from combat, escaping death."""
+        pAttacker, pDefender = argsList
+        BugUtil.debug("%s retreats from %s",
+                      pAttacker.getName(), pDefender.getName())
+
+    def onCombatLogCollateral(self, argsList):
+        """Fired when a unit inflicts collateral damage to another unit."""
+        pAttacker, pDefender, iDamage = argsList
+        BugUtil.debug("%s bombards %s for %d HP",
+                      pAttacker.getName(), pDefender.getName(), iDamage)
+
+    def onCombatLogFlanking(self, argsList):
+        """Fired when a unit inflicts flanking damage to another unit."""
+        pAttacker, pDefender, iDamage = argsList
+        BugUtil.debug("%s flanks %s for %d HP",
+                      pAttacker.getName(), pDefender.getName(), iDamage)
+
+
+    def onPlayerRevolution(self, argsList):
+        ePlayer, iAnarchyTurns, leOldCivics, leNewCivics = argsList
+        civics = []
+        for eOldCivic, eNewCivic in zip(leOldCivics, leNewCivics):
+            if eOldCivic != eNewCivic:
+                civics.append(gc.getCivicInfo(eNewCivic).getDescription())
+        BugUtil.debug("Revolution for %s, %d turns: %s", gc.getPlayer(ePlayer).getName(), iAnarchyTurns, ", ".join(civics))
 
 
 EVENT_FUNCTION_MAP = {
-	"kbdEvent": BugEventManager._handleConsumableEvent,
-	"mouseEvent": BugEventManager._handleConsumableEvent,
-	"OnPreSave": BugEventManager._handleOnPreSaveEvent,
-	"OnSave": BugEventManager._handleOnSaveEvent,
-	"OnLoad": BugEventManager._handleInitBugEvent,
-	"PreGameStart": BugEventManager._handleInitBugEvent,
-	#"GameStart": BugEventManager._handleInitBugEvent,
-	#"windowActivation": BugEventManager._handleInitBugEvent,
+    "kbdEvent": BugEventManager._handleConsumableEvent,
+    "mouseEvent": BugEventManager._handleConsumableEvent,
+    "OnPreSave": BugEventManager._handleOnPreSaveEvent,
+    "OnSave": BugEventManager._handleOnSaveEvent,
+    "OnLoad": BugEventManager._handleInitBugEvent,
+    "PreGameStart": BugEventManager._handleInitBugEvent,
+    #"GameStart": BugEventManager._handleInitBugEvent,
+    #"windowActivation": BugEventManager._handleInitBugEvent,
 }
 
 
 ## Initialization
 
 def configure(logging=None, noLogEvents=None):
-	# """Sets the global event manager's logging options."""
-	# if g_eventManager:
-		# g_eventManager.setLogging(logging)
-		# g_eventManager.setNoLogEvents(noLogEvents)
-	# else:
-		# BugUtil.error("BugEventManager - BugEventManager not setup before configure()")
-	# K-Mod. I've expanded the purpose of this function.
-	"""Sets the global event manager's logging options. And registers some BUG events handlers."""
+    # """Sets the global event manager's logging options."""
+    # if g_eventManager:
+        # g_eventManager.setLogging(logging)
+        # g_eventManager.setNoLogEvents(noLogEvents)
+    # else:
+        # BugUtil.error("BugEventManager - BugEventManager not setup before configure()")
+    # K-Mod. I've expanded the purpose of this function.
+    """Sets the global event manager's logging options. And registers some BUG events handlers."""
 
-	if not g_eventManager:
-		BugUtil.error("BugEventManager - BugEventManager not setup before configure()")
-		return
+    if not g_eventManager:
+        BugUtil.error("BugEventManager - BugEventManager not setup before configure()")
+        return
 
-	g_eventManager.setLogging(logging)
-	g_eventManager.setNoLogEvents(noLogEvents)
+    g_eventManager.setLogging(logging)
+    g_eventManager.setNoLogEvents(noLogEvents)
 
-	# K-Mod. Don't use register BUG events for PitBoss host.
-	# (Note: actually, if this is a PitBoss host, this function won't even be called
-	#  because the BUG core will not initialize any mod components in PitBoss mode.)
-	if CyGame().isPitbossHost():
-		BugUtil.debug("BugEventManager - skipping event registration for PitBoss host")
-		return
-	# K-Mod end
+    # K-Mod. Don't use register BUG events for PitBoss host.
+    # (Note: actually, if this is a PitBoss host, this function won't even be called
+    #  because the BUG core will not initialize any mod components in PitBoss mode.)
+    if CyGame().isPitbossHost():
+        BugUtil.debug("BugEventManager - skipping event registration for PitBoss host")
+        return
+    # K-Mod end
 
-	# --------- Better BTS AI (2/2) (moved by K-Mod) -------------
-	# K-Mod, only enable these feature if the cheat mode is enabled.
-	if getChtLvl():
-		AIAutoPlay.AIAutoPlay(g_eventManager)
-		ChangePlayer.ChangePlayer(g_eventManager)
-		Tester.Tester(g_eventManager)
+    # --------- Better BTS AI (2/2) (moved by K-Mod) -------------
+    # K-Mod, only enable these feature if the cheat mode is enabled.
+    if getChtLvl():
+        AIAutoPlay.AIAutoPlay(g_eventManager)
+        ChangePlayer.ChangePlayer(g_eventManager)
+        Tester.Tester(g_eventManager)
 
-	g_eventManager.addEventHandler("kbdEvent", g_eventManager.onKbdEvent)
-	g_eventManager.addEventHandler("OnLoad", g_eventManager.resetActiveTurn)
-	g_eventManager.addEventHandler("GameStart", g_eventManager.resetActiveTurn)
-	g_eventManager.addEventHandler("gameUpdate", g_eventManager.onGameUpdate)
-	# --
+    g_eventManager.addEventHandler("kbdEvent", g_eventManager.onKbdEvent)
+    g_eventManager.addEventHandler("OnLoad", g_eventManager.resetActiveTurn)
+    g_eventManager.addEventHandler("GameStart", g_eventManager.resetActiveTurn)
+    g_eventManager.addEventHandler("gameUpdate", g_eventManager.onGameUpdate)
+    # --
 
 def hookupPreGameStartEvent():
-	BugUtil.extend(preGameStart, "CvAppInterface", "preGameStart")
+    'hookupPreGameStartEvent'
+    BugUtil.extend(preGameStart, "CvAppInterface", "preGameStart")
 
 def preGameStart(originalFunc):
-	g_eventManager.fireEvent("PreGameStart")
-	originalFunc()
+    'preGameStart'
+    g_eventManager.fireEvent("PreGameStart")
+    originalFunc()
 
 hookupPreGameStartEvent()
