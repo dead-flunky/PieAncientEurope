@@ -16,6 +16,7 @@ from array import *
 
 from CvWBKeys import *
 import CvPlatyBuilderScreen
+import StartingPointsUtil as sp
 
 # globals
 gc = CyGlobalContext()
@@ -384,9 +385,9 @@ class CvTeamDesc:
             f.write("\tEspionageEverAmount=%d\n" %(gc.getTeam(idx).getEspionagePointsEver()))
     ## Platy Builder ##
         for i in range(gc.getMAX_TEAMS()):
-            if i == idx: 
+            if i == idx:
                 continue
-            if gc.getTeam(i).isBarbarian(): 
+            if gc.getTeam(i).isBarbarian():
                 continue
             if pTeam.isHasMet(i):
                 f.write("\tContactWithTeam=%d\n" %(i))
@@ -2212,32 +2213,17 @@ class CvWBDesc:
 
         print("WB apply done\n")
         return 0  # ok
-        
-    # generic string cutting function
-    # first < and > at the end are cut of, then the other
-    # > and < are searched, and what is between is used as value
-    def CutString(string):
-        print("Cutting")
-        string = str(string)
-        string = string.strip()
-        string = string[2:-1]
-        BeginPos = -1
-        EndPos = -1
-        for i in range(len(string)):
-            if string[i] == ">":
-                BeginPos = i
-            elif string[i] == "<":
-                EndPos = i
-                break
-        else:
-            return "-1"
-        NewString = string[BeginPos+1:EndPos]
-        return str(NewString)
-        
+
 ## Platy Builder ##
     def getAssignedStartingPlots(self):
-        print("getAssignedStartingPlots for %d players" %(len(self.playersDesc)))
-        
+        bStartingPoints = False
+        bPlaceBarbCities = False
+        AddPositionsToMap = True
+        Debugging = True
+
+        if Debugging:
+            print("getAssignedStartingPlots for %d players" %(len(self.playersDesc)))
+
         # PAE Maps
         mapNames = {"EuropeStandard": "StartingPoints_EuropeStandard.xml",
                     "EuropeMini": "StartingPoints_EuropeMini.xml",
@@ -2252,269 +2238,189 @@ class CvWBDesc:
                     }
         for plot in self.plotDesc:
             if plot.iX == 0 and plot.iY == 0:
-                sScenarioName = plot.szScriptData
-                print sScenarioName
+                sScenarioName = CvUtil.getKeyData(plot.szScriptData, ["S", "t"])
+                if Debugging:
+                    print("Scenario %s" %(sScenarioName))
                 break
-            
-        # sScenarioName = CvUtil.getScriptData(CyMap().plot(0, 0), ["S", "t"])
+        SpawnCivList = dict()
         if sScenarioName in mapNames:
+            bStartingPoints = True
             MyFile = open("Mods/PieAncientEuropeVI/Assets/XML/Misc/" + mapNames[sScenarioName])
             for CurString in MyFile.readlines():
                 if "CIVILIZATION_" in CurString:
-                    CivString = self.CutString(CurString)
+                    CivString = sp.CutString(CurString)
                     curCiv = gc.getInfoTypeForString(CivString)
-                    SpawnCivList[curCiv] = SpawningCiv()
+                    SpawnCivList[curCiv] = sp.SpawningCiv()
                     SpawnCivList[curCiv].CivString = CivString
                 elif "StartX" in CurString:
-                    SpawnCivList[curCiv].SpawnX.append(int(self.CutString(CurString)))
+                    SpawnCivList[curCiv].SpawnX.append(int(sp.CutString(CurString)))
                 elif "StartY" in CurString:
-                    SpawnCivList[curCiv].SpawnY.append(int(self.CutString(CurString)))
-                # elif "BarbCityName" in CurString:
-                    # BarbCityList.append(BarbarianCity())
-                    # BarbCityList[-1].CityName = self.CutString(CurString)
-                # elif "BarbCityX" in CurString:
-                    # BarbCityList[-1].CityX = int(self.CutString(CurString))
-                # elif "BarbCityY" in CurString:
-                    # BarbCityList[-1].CityY = int(self.CutString(CurString))
-                # elif "BarbCityPopulation" in CurString:
-                    # BarbCityList[-1].CityPopulation = int(self.CutString(CurString))
-                # elif "BarbCityNumDefenders" in CurString:
-                    # BarbCityList[-1].CityNumDefenders = int(self.CutString(CurString))
+                    SpawnCivList[curCiv].SpawnY.append(int(sp.CutString(CurString)))
+                elif "BarbCityName" in CurString:
+                    bPlaceBarbCities = True
+                    BarbCityList.append(sp.BarbarianCity())
+                    BarbCityList[-1].CityName = sp.CutString(CurString)
+                elif "BarbCityX" in CurString:
+                    BarbCityList[-1].CityX = int(sp.CutString(CurString))
+                elif "BarbCityY" in CurString:
+                    BarbCityList[-1].CityY = int(sp.CutString(CurString))
+                elif "BarbCityPopulation" in CurString:
+                    BarbCityList[-1].CityPopulation = int(sp.CutString(CurString))
+                elif "BarbCityNumDefenders" in CurString:
+                    BarbCityList[-1].CityNumDefenders = int(sp.CutString(CurString))
+            
+            if Debugging:
+                print("StartingPoints file %s" %(mapNames[sScenarioName]))
             MyFile.close()
-        
+
+        iMaxValid = 0
+        UsedValidCivList = []
+        for iCiv in SpawnCivList:
+            pCiv = SpawnCivList[iCiv]
+            if pCiv.SpawnX[0] != -1 and pCiv.SpawnY[0] != -1:
+                iMaxValid += 1
+            else:
+                UsedValidCivList.append(iCiv)
+
+        if Debugging:
+            print("valid civs for this map: "+str(iMaxValid))
+            print("max civs: "+str(gc.getMAX_CIV_PLAYERS()))
+
+        aPosUsed = []
+        # loop detects occupied spots
+        for iLoopPlayer in range(gc.getMAX_CIV_PLAYERS()):
+            pLoopPlayer = gc.getPlayer(iLoopPlayer)
+            if pLoopPlayer is not None:
+                pLoopPlot = pLoopPlayer.getStartingPlot()
+                if pLoopPlot is not None: # pLoopPlayer.isAlive() and
+                    aPosUsed.append((pLoopPlot.getX(),pLoopPlot.getY()))
+
         for iPlayerLoop in range(len(self.playersDesc)):
 
             pPlayer = gc.getPlayer(iPlayerLoop)
             pWBPlayer = self.playersDesc[iPlayerLoop]
             # <f1rpo>
             if pWBPlayer.bNeverAlive:
-                print("bNeverAlive")
+                if Debugging:
+                    print("bNeverAlive")
                 continue # </f1rpo>
             # Random Start Location
-            if (pPlayer.getLeaderType() != -1 and pWBPlayer.bRandomStartLocation != "false"):
-                print("bRandomStartLocation")
-                pPlayer.setStartingPlot(pPlayer.findStartingPlot(True), True)
+            if bStartingPoints and pWBPlayer.bRandomStartLocation != "false":
+                if Debugging:
+                    print("findStartingPlot for player %d" %(iPlayerLoop))
 
-            else:
+                iPlayerCiv = pPlayer.getCivilizationType()
 
-                print("Player's starting plot")
-                # Player's starting plot
-                if ((pWBPlayer.iStartingX != -1) and (pWBPlayer.iStartingY != -1)):
-                    pPlayer.setStartingPlot(CyMap().plot(pWBPlayer.iStartingX, pWBPlayer.iStartingY), True)
-                else:
-                    findStartingPlot(iPlayerLoop)
-                    pPlayer.setStartingPlot(CyMap().plot(pWBPlayer.iStartingX, pWBPlayer.iStartingY), True)
+                # IDs of used/invalid civs are stored in a global list, so that
+                # adding new ones is easier
+                if pPlayer.isHuman() and (iPlayerCiv not in SpawnCivList or iPlayerCiv in UsedValidCivList):
+                    CyInterface().addMessage(iLoopPlayer, False, 15, "Invalid Civ for map has been chosen", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+                    CyInterface().addMessage(iLoopPlayer, False, 15, "You will be assigned another civ", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
 
-        return 0  # ok
-
-    def findStartingPlot(playerID):
-       
-        print("findStartingPlot for player %d" %(playerID))
-        CyInterface().addMessage(playerID, False, 15, "Beginning to resort civs", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-                
-
-        
-        if gc.getGame().isOption(GameOptionTypes.GAMEOPTION_ADVANCED_START) or gc.getGame().getGameTurnYear() != gc.getDefineINT("START_YEAR") or sScenarioName not in MapNames:
-            CyPythonMgr().allowDefaultImpl()
-            print("allowDefaultImpl")
-            return
-        else:
-            del SpawnCivList[:]
-            del UsedValidCivList[:]
-            del BarbCityList[:]
-            CurCiv = None
-            BarbCity = None
-            MapName = mapNames(sScenarioName)
-            bPlaceBarbs = True
-            Debugging = True
-            AddPositionsToMap = True
-            pPlayer = gc.getPlayer(playerID)
-            if Debugging:
-                print("preparing to read")
-            
-
-            
-            
-            iMaxValid = sum(1 for pCiv in SpawnCivList if pCiv.SpawnX[0] != -1 and pCiv.SpawnY[0] != -1)
-            # iMaxValid = 0
-            # for pCiv in SpawnCivList:
-                # if pCiv.SpawnX[0] != -1 and pCiv.SpawnY[0] != -1:
-                    # iMaxValid += 1
-            if Debugging:
-                print("valid civs for this map: "+str(iMaxValid))
-                print("max civs: "+str(iMaxPlayer))
-            
-            if Debugging:
-                print("all civs have been read")
-                
-            # loop detects human players
-            lHumanPlayers = []
-            for iPlayer in range(gc.getMAX_CIV_PLAYERS()):
-                if gc.getPlayer(iPlayer).isHuman():
-                    lHumanPlayers.append(iPlayer)
-            iHumanPlayer = lHumanPlayers[0]
-            
-            if Debugging:
-                CyInterface().addMessage(iHumanPlayer, False, 15, "Beginning to resort civs", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-                print("Beginning to resort civs")
-
-            iPlayerCiv = pPlayer.getCivilizationType()
-            if pPlayer.isHuman() and (iPlayerCiv not in SpawnCivList or SpawnCivList[iPlayerCiv].SpawnX[0] == -1 or SpawnCivList[iPlayerCiv].SpawnY[0] == -1):
-                CyInterface().addMessage(iHumanPlayer, False, 15, "Invalid Civ for map has been chosen", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-                CyInterface().addMessage(iHumanPlayer, False, 15, "Civs will not start at correct positions", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-                CyPythonMgr().allowDefaultImpl()
-                print("Invalid Civ for map has been chosen")
-                return 
-
-            if not pPlayer.isAlive():
-                CyInterface().addMessage(iHumanPlayer, False, 15, "Player %d is not alive!" %(playerID), '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-                CyPythonMgr().allowDefaultImpl()
-                print("Player %d is not alive!" %(playerID))
-                return
-            # this loop replaces the current units/moves them to the right place
-            # invalid civs are replaced
-            # IDs of used/invalid civs are stored in a global list, so that
-            # adding new ones is easier
-            aPosUsed = []
-            
-            if Debugging:
-                CyInterface().addMessage(iHumanPlayer, False, 15, "Cycling loaded coordinates!", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-                print("Cycling loaded coordinates!")
-            
-        
-            if Debugging:
-                CyInterface().addMessage(iHumanPlayer, False, 15, "Preparing for re-placing current units!", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-                print("Preparing for re-placing current units!")
-            bReplace = False
-            bSpawn = False
-            if iPlayerCiv not in SpawnCivList:
-                bReplace = True
-            else:
-                pCiv = SpawnCivList[iPlayerCiv]
-                possible_plot_idx = [i for i, p in enumerate(zip(pCiv.SpawnX,pCiv.SpawnY)) if p not in aPosUsed]
-                if pCiv.SpawnX[0] == -1 or pCiv.SpawnY[0] == -1 or not possible_plot_idx:
-                    bReplace = True
                     if Debugging:
-                        CyInterface().addMessage(iHumanPlayer, False, 15, "Encountered invalid civ "+str(pCiv.CivString), '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
-            if bReplace:                    
-                (iNewCiv, iNewLeader) = ChangeThisCiv(CounterInvalid, SpawnCivList, iMaxPlayer, iMaxValid, Debugging)
-                if iNewCiv:
-                    pCiv = SpawnCivList[iNewCiv]
+                        print("Invalid Civ for map has been chosen")
+
+                if not pPlayer.isAlive():
+                    if Debugging:
+                        print("Player %d is not alive!" %(iPlayerLoop))
+                    return 0
+
+                if Debugging:
+                    print("Cycling loaded coordinates!")
+
+                bReplace = False
+                bSpawn = False
+                possible_plot_idx = []
+                if iPlayerCiv in SpawnCivList and not iPlayerCiv in UsedValidCivList:
+                    pCiv = SpawnCivList[iPlayerCiv]
                     possible_plot_idx = [i for i, p in enumerate(zip(pCiv.SpawnX,pCiv.SpawnY)) if p not in aPosUsed]
-                    pPlayer.changeCiv(iNewCiv)
-                    pPlayer.changeCiv(iNewLeader)
-                    bSpawn = True
-                    UsedValidCivList.append(iNewCiv)
+                    if not possible_plot_idx:
+                        bReplace = True
+                        if Debugging:
+                            print("Encountered invalid civ %s" %(pCiv.CivString))
+                            CyInterface().addMessage(iHumanPlayer, False, 15, "Encountered invalid civ "+str(pCiv.CivString), '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+                    else:
+                        bSpawn = True
+                else:
+                    bReplace = True
+
+                maxTry = 10
+                iTry = 0
+                while bReplace and iTry < maxTry:
+                    for iNewCiv in SpawnCivList:
+                        if iNewCiv in UsedValidCivList:
+                            continue
+                        # more Civs to choose from than max. players
+                        if iMaxValid > gc.getMAX_CIV_PLAYERS() and gc.getGame().getMapRand().get(10, "Will i use this civ, o oracle?") == 1:
+                            continue
+                        CurCiv = gc.getCivilizationInfo(iNewCiv)
+                        NumLeaders = CurCiv.getNumLeaders()
+                        LeaderNum = gc.getGame().getMapRand().get(NumLeaders, "OracleSayMeTheLeader")
+                        LeaderCounter = 0
+                        for iLoopLeader in range(gc.getNumLeaderHeadInfos()):
+                            if CurCiv.isLeaders(iLoopLeader):
+                                if NumLeaders == 1:
+                                    iNewLeader = iLoopLeader
+                                    break
+                                elif LeaderCounter == LeaderNum:
+                                    iNewLeader = iLoopLeader
+                                    break
+                                LeaderCounter = LeaderCounter + 1
+                        if iNewLeader:
+                            break
+
+                    if iNewCiv and iNewLeader:
+                        pCiv = SpawnCivList[iNewCiv]
+                        possible_plot_idx = [i for i, p in enumerate(zip(pCiv.SpawnX,pCiv.SpawnY)) if p not in aPosUsed]
+                        if not possible_plot_idx:
+                            iTry += 1
+                            continue
+                        pPlayer.changeCiv(iNewCiv)
+                        pPlayer.changeLeader(iNewLeader)
+                        bReplace = False
+                        bSpawn = True
+                        UsedValidCivList.append(iNewCiv)
+                        break
+                    else:
+                        iTry += 1
+
+                if bSpawn:
+                    iPos = possible_plot_idx[gc.getGame().getMapRand().get(len(possible_plot_idx), "Select starting plot")]
+
+                    iX = pCiv.SpawnX[iPos]
+                    iY = pCiv.SpawnY[iPos]
+                    aPosUsed.append((iX,iY))
+                    pCiv.timesUsed += 1
+                    pPlayer.setStartingPlot(CyMap().plot(iX,iY), True)
                 else:
                     # failed to find a possible replacement civs
-
                     (loopUnit, pIter) = pPlayer.firstUnit(False)
                     while loopUnit:
                         if not loopUnit.isNone() and loopUnit.getOwner() == pPlayer.getID():  # only valid units
                             loopUnit.setXY(1, 1, False, False, False)
                         (loopUnit, pIter) = pPlayer.nextUnit(pIter, False)
                     pPlayer.killUnits()
-            else:
-                pCiv = SpawnCivList[iPlayerCiv]
-                bSpawn = True
-                UsedValidCivList.append(iPlayerCiv)
+            elif pPlayer.getLeaderType() != -1 and pWBPlayer.bRandomStartLocation != "false":
+                if Debugging:
+                    print("bRandomStartLocation")
+                pPlot = pPlayer.findStartingPlot(True)
+                aPosUsed.append((pPlot.getX(), pPlot.getY()))
+                pPlayer.setStartingPlot(pPlot, True)
+            # Player's starting plot
+            elif pWBPlayer.iStartingX != -1 and pWBPlayer.iStartingY != -1:
+                if Debugging:
+                    print("Player's starting plot")
+                aPosUsed.append((pWBPlayer.iStartingX, pWBPlayer.iStartingY))
+                pPlayer.setStartingPlot(CyMap().plot(pWBPlayer.iStartingX, pWBPlayer.iStartingY), True)
                 
-            plotIdx = -1
-            if bSpawn:
-                iPos = possible_plot_idx[gc.getSorenRandNum(len(possible_plot_idx)), "Select starting plot"]
+                    
+        # if bPlaceBarbCities:
+            # PlaceBarbarianCities(BarbCityList, Debugging)
+        # if AddPositionsToMap:
+            # AddCoordinateSignsToMap()
 
-                iX = pCiv.SpawnX[iPos]
-                iY = pCiv.SpawnY[iPos]
-                aPosUsed.append((iX,iY))
-                pCiv.timesUsed += 1
-                plotIdx = CyMap().plotNum(iX, iY)
-                # move existing units to proper spot
-                (loopUnit, pIter) = pLoopCiv.firstUnit(False)
-                while loopUnit:
-                    unitOwner = loopUnit.getOwner()
-                    if not loopUnit.isNone() and loopUnit.getOwner() == pLoopCiv.getID():  # only valid units
+        return 0  # ok
 
-                        loopUnit.setXY(iX, iY, False, False, False)
-                        if Debugging:
-                            idstring = pLoopCiv.getCivilizationAdjective(0)+"unit moved to X="+str(iX)+"and Y="+str(iY)
-                            print(idstring)
-                            CyInterface().addMessage(iHumanPlayer, False, 15, idstring, '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), iY, iY, True, True)
-                    (loopUnit, pIter) = pLoopCiv.nextUnit(pIter, False)
-
-            # if bPlaceBarbCities:
-                # PlaceBarbarianCities(Debugging)
-            if AddPositionsToMap:
-                AddCoordinateSignsToMap()
-                
-            return plotIdx
-
-
-
-    def ChangeThisCiv(CounterInvalid, SpawnCivList, iMaxValid, Debugging):
-        iAllCivs = gc.getNumPlayableCivilizationInfos()
-        iMaxUsed = len(UsedValidCivList)
-
-        for iCiv in range(iAllCivs):
-            if iCiv in UsedValidCivList:
-                continue
-            if Debugging:
-                print("adding new civ")
-            for j, pCiv in enumerate(SpawnCivList):
-                if gc.getInfoTypeForString(pCiv.CivString) == iCiv:
-                    if pCiv.SpawnX[0] == -1 or pCiv.SpawnY[0] == -1:
-                        UsedValidCivList.append(iCiv)
-                        break
-                    if iMaxValid > gc.getMAX_CIV_PLAYERS() and gc.getGame().getMapRand().get(10, "Will i use this civ, o oracle?") == 1:
-                        return False
-                    UsedValidCivList.append(iCiv)
-                    CurCiv = gc.getCivilizationInfo(iCiv)
-                    NumLeaders = CurCiv.getNumLeaders()
-                    dice = gc.getGame().getMapRand()
-                    LeaderNum = dice.get(NumLeaders, "OracleSayMeTheLeader")
-                    LeaderCounter = 0
-                    for iLoopLeader in range(gc.getNumLeaderHeadInfos()):
-                        if CurCiv.isLeaders(iLoopLeader):
-                            if NumLeaders == 1:
-                                iLeader = iLoopLeader
-                                break
-                            elif LeaderCounter == LeaderNum:
-                                    iLeader = iLoopLeader
-                                    break
-                            LeaderCounter = LeaderCounter+1
-                    return (iCiv, iLeader)
-                            
-    # place barbarian cities
-    def PlaceBarbarianCities(Debugging):
-        pBarb = gc.getPlayer(gc.getBARBARIAN_PLAYER())
-        for BarbCity in BarbCityList:
-            iX = BarbCity.CityX
-            iY = BarbCity.CityY
-            pCity = pBarb.initCity(iX, iY)
-            pCity.setName(BarbCity.CityName, 0)
-            pCity.setPopulation(BarbCity.CityPopulation)
-            eWarrior = gc.getInfoTypeForString("UNIT_WARRIOR")
-            for i in range(BarbCity.CityNumDefenders):
-                pBarb.initUnit(eWarrior, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-        FlushVisibleArea()
-
-    # adds signs with the coordinates to the map
-    # so that potential starting positions can easier be modified
-    def AddCoordinateSignsToMap():
-        iMaxX = CyMap().getGridWidth()
-        iMaxY = CyMap().getGridHeight()
-        iMaxPlayer = gc.getMAX_CIV_PLAYERS()
-        iHumanPlayer = -1
-        for iCiv in range(iMaxPlayer):
-            pPlayer = gc.getPlayer(iCiv)
-            if pPlayer.isHuman():
-                iHumanPlayer = iCiv
-                break
-        for iX in range(iMaxX):
-            for iY in range(iMaxY):
-                pPlot = CyMap().plot(iX, iY)
-                PrintString = "X = "+str(iX)+" Y = "+str(iY)
-                CyEngine().addSign(pPlot, iHumanPlayer, PrintString)
-        
     def applyInitialItems(self):
         "add player objects in a last pass"
         for iTeamLoop in range(len(self.teamsDesc)):
@@ -2534,36 +2440,36 @@ class CvWBDesc:
             for techTypeTag in pWBTeam.techTypes:
                 techType = CvUtil.findInfoTypeNum(gc.getTechInfo, gc.getNumTechInfos(), techTypeTag)
                 pTeam.setHasTech(techType, True, PlayerTypes.NO_PLAYER, False, False)
-                
+
             # Espionage Points against Other Teams
             for item in pWBTeam.aaiEspionageAgainstTeams:
                 pTeam.setEspionagePointsAgainstTeam(item[0], item[1])
-                
+
             # Contact with Other Teams
             for item in pWBTeam.bContactWithTeamList:
                 pTeam.meet(item, False)
-            
+
             # Wars
             for item in pWBTeam.bWarWithTeamList:
                 pTeam.declareWar(item, False, WarPlanTypes.NO_WARPLAN)
-            
+
             # Permanent War/Peace
             for item in pWBTeam.bPermanentWarPeaceList:
                 pTeam.setPermanentWarPeace(item, True)
-            
+
             # Open Borders
             for item in pWBTeam.bOpenBordersWithTeamList:
                 pTeam.signOpenBorders(item)
-            
+
             # Defensive Pacts
             for item in pWBTeam.bDefensivePactWithTeamList:
                 pTeam.signDefensivePact(item)
-            
+
             # Vassals
             for item in pWBTeam.bVassalOfTeamList:
                 #pTeam.assignVassal(item, True)
                 pTeam.setVassal(item, True, True)
-            
+
             # Projects
             for project in pWBTeam.projectType:
                 projectTypeNum = CvUtil.findInfoTypeNum(gc.getProjectInfo, gc.getNumProjectInfos(), project)
@@ -2625,11 +2531,11 @@ class CvWBDesc:
             # Civics
             for item in pWBPlayer.aaiCivics:
                 pPlayer.setCivics(item[0],item[1])
-                
+
             # Attitude Extras
             for item in pWBPlayer.aaiAttitudeExtras:
                 pPlayer.AI_setAttitudeExtra(item[0],item[1])
-                
+
             # City List
             for item in pWBPlayer.aszCityList:
                 pPlayer.addCityName(item)
@@ -2651,17 +2557,17 @@ class CvWBDesc:
         for iTeamLoop in range(len(self.teamsDesc)):
             pTeam = gc.getTeam(iTeamLoop)
             pWBTeam = self.teamsDesc[iTeamLoop]
-            
+
             # Reveal whole map
             if pWBTeam.bRevealMap:
                 CyMap().setRevealedPlots(iTeamLoop, True, False)
-                
+
             # Vassal
             if pWBTeam.iVassalPower > 0:
                 pTeam.setVassalPower(pWBTeam.iVassalPower)
             if pWBTeam.iMasterPower > 0:
                 pTeam.setMasterPower(pWBTeam.iMasterPower)
-                
+
             # Espionage Points Ever against All Teams
             if pWBTeam.iEspionageEver > 0:
                 pTeam.setEspionagePointsEver(pWBTeam.iEspionageEver)
@@ -2703,7 +2609,7 @@ class CvWBDesc:
             CvUtil.pyPrint("Error: file %s does not exist" %(fileName+ext,))
             return -1 # failed
 
-        f=file(fileName+ext, "r")   # open text file
+        f = file(fileName+ext, "r")   # open text file
 
         global barb_idWB
         ## Platy Builder ##
@@ -2711,7 +2617,7 @@ class CvWBDesc:
         filePos = f.tell()
         line = parser.getNextLine(f)
         if line.find("Platy") > -1:
-            # WBSave stores barbarian player/team, too.
+            # WBSave stores barbarian player/team, too. Maybe.
             iNumPlayersDLL = gc.getMAX_PLAYERS()
             iNumTeamsDLL = gc.getMAX_TEAMS()
         else:
@@ -2740,27 +2646,14 @@ class CvWBDesc:
         # PAE, Extend to 52 entries regardless if they will be used
         # <f1rpo>
         for i in range(len(self.teamsDesc), iNumTeamsDLL):
-            self.teamsDesc.append(CvTeamDesc()) 
+            self.teamsDesc.append(CvTeamDesc())
         # </f1rpo>
 
 
         print "Reading players desc"
-        filePos = f.tell() # f1rpo
         self.playersDesc = []
         numPlayersWB = 0
-        for i in range(iNumPlayersDLL):
-            playerDesc = CvPlayerDesc()
-            # read player info
-            if not playerDesc.read(f): # Not all entries filled
-                f.seek(filePos)               # abort and backup
-                break
-
-            self.playersDesc.append(playerDesc)
-            numPlayersWB += 1
-            if playerDesc.leaderType == "LEADER_BARBARIAN":
-                barb_idWB = numPlayersWB - 1
-        print("Num players read %d" %(len(self.playersDesc)))
-
+        # <flunky> both loops in one
         # PAE; If the WB save was written with the 52er DLL the Barbarian entry is != 18, but 52.
         # Shift it forward on position 18.
         # Possible Trap: This could be problematic if some trades, etc with the original player of slot 18 was made.
@@ -2768,31 +2661,33 @@ class CvWBDesc:
         while True:
             filePos = f.tell()
             playerDesc = CvPlayerDesc()
-            if playerDesc.read(f):
-                numPlayersWB += 1
-                print("reading EXTRA player %d" %(numPlayersWB))
-                if playerDesc.leaderType == "LEADER_BARBARIAN":
-                    barbarianDesc = playerDesc
-                    barb_idWB = numPlayersWB - 1
-                continue
+            # read player info
+            if not playerDesc.read(f): # Not all entries filled
+                f.seek(filePos)               # abort and backup
+                break
 
-            # Last player slot was already passed. Abort and move up
-            f.seek(filePos)
-            break
+            self.playersDesc.append(playerDesc)
+            if playerDesc.leaderType == "LEADER_BARBARIAN":
+                barbarianDesc = playerDesc
+                barb_idWB = numPlayersWB
+            numPlayersWB += 1
+        print("Num players read %d of %d required" %(len(self.playersDesc), iNumPlayersDLL))
+        # </flunky>
 
         # PAE Expand to 52 entries if extended DLL is used
         if numPlayersWB < iNumPlayersDLL:
             for i in range(numPlayersWB, iNumPlayersDLL):
-                print("append player %d" %(i))
-                playerDesc = CvPlayerDesc()
-                #playerDesc.team = i
-                #playerDesc.bRandomStartLocation = True
-                #playerDesc.isPlayableCiv = 0 # 1 is default
-                self.playersDesc.append(playerDesc)
-
-
-            if (len(self.playersDesc) >= numPlayersWB and
-                    self.playersDesc[numPlayersWB-1].leaderType == "LEADER_BARBARIAN"):
+                print("append extra player %d" %(i))
+                # <f1rpo, Flunky>
+                deadPlayer = CvPlayerDesc()
+                # (Not sure if it's necessary to assign a team)
+                deadPlayer.team = len(self.playersDesc)
+                deadPlayer.isPlayableCiv = 0
+                deadPlayer.neverAlive = True
+                self.playersDesc.append(deadPlayer)
+                # </f1rpo, Flunky>
+                
+            if len(self.playersDesc) >= numPlayersWB and self.playersDesc[numPlayersWB-1].leaderType == "LEADER_BARBARIAN":
                 # Clear AtWar and Contact fields of barbarian
                 # TODO: Stimmt der Index auch bei Verkleinerung?
                 # print("Shift barb player at index %d to %d" %(numPlayersWB-1, iNumPlayersDLL-1))
@@ -2805,10 +2700,6 @@ class CvWBDesc:
                 self.playersDesc[barb_idWB] = CvPlayerDesc()
                 """
 
-        print("Debug status:")
-        print("   numPlayersWB: %d" %(numPlayersWB))
-        print("   iNumPlayersDLL: %d" %(iNumPlayersDLL))
-        print("   barb_idWB: %s" %(str(barb_idWB)))
         #init_filter()
 
         # PAE, Szenario with many players loaded without DLL.
@@ -2838,20 +2729,15 @@ class CvWBDesc:
                     self.playersDesc[barb_idWB].team = iNumTeamsDLL-1
                     #       self.playersDesc[iNumPlayersDLL-1].team = barbTeam
                     self.playersDesc[barb_idWB], self.playersDesc[iNumPlayersDLL-1] = self.playersDesc[iNumPlayersDLL-1], self.playersDesc[18]
-
             else:
                 # Set barbarian slot manually ?!
                 pass
 
-        # <f1rpo>
-        for i in range(len(self.playersDesc), gc.getMAX_CIV_PLAYERS()):
-            deadPlayer = CvPlayerDesc()
-            # (Not sure if it's necessary to assign a team)
-            deadPlayer.team = len(self.playersDesc)
-            deadPlayer.isPlayableCiv = 0
-            deadPlayer.neverAlive = True
-            self.playersDesc.append(deadPlayer)
-        # </f1rpo>
+        print("Debug status:")
+        print("   numPlayersWB: %d" %(numPlayersWB))
+        print("   iNumPlayersDLL: %d" %(iNumPlayersDLL))
+        print("   barb_idWB: %s" %(str(barb_idWB)))
+
         print("Reading map desc")
         self.mapDesc.read(f)  # read map info
 
@@ -2876,19 +2762,3 @@ class CvWBDesc:
         f.close()
         print("WB read done\n")
         return 0
-
-class SpawningCiv:
-    def __init__(self):
-        self.CivString = 0
-        self.SpawnX = []
-        self.SpawnY = []
-        self.timesUsed = 0
-
-class BarbarianCity:
-
-    def __init__(self):
-        self.CityName = 0
-        self.CityX = 0
-        self.CityY = 0
-        self.CityPopulation = 1
-        self.CityNumDefenders = 0
