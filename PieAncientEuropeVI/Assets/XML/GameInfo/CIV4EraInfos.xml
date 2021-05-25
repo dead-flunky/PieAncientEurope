@@ -330,8 +330,8 @@
       <AudioUnitDefeatScript>AS2D_LOSS_EARLY</AudioUnitDefeatScript>
     </EraInfo>
     <EraInfo>
-      <Type>ERA_LATE_ANTIK</Type>
-      <Description>TXT_KEY_ERA_LATE_ANTIK</Description>
+      <Type>ERA_LATE_ANTIQUITY</Type>
+      <Description>TXT_KEY_ERA_LATE_ANTIQUITY</Description>
       <Strategy>TXT_KEY_ERA_CLASSICAL_STRATEGY</Strategy>
       <bNoGoodies>1</bNoGoodies>
       <bNoAnimals>1</bNoAnimals>

@@ -15186,7 +15186,7 @@
       <iCost>12000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>UNITCLASS_SCIENTIST</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15251,7 +15251,7 @@
       <iCost>12000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15312,7 +15312,7 @@
       <iCost>12000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15377,7 +15377,7 @@
       <iCost>12000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15438,7 +15438,7 @@
       <iCost>-1</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15493,7 +15493,7 @@
       <iCost>13000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15554,7 +15554,7 @@
       <iCost>13000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15623,7 +15623,7 @@
       <iCost>13000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15684,7 +15684,7 @@
       <iCost>13000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15747,7 +15747,7 @@
       <iCost>13000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15811,7 +15811,7 @@
       <iCost>10000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15880,7 +15880,7 @@
       <iCost>14000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -15945,7 +15945,7 @@
       <iCost>14000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16006,7 +16006,7 @@
       <iCost>14000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16071,7 +16071,7 @@
       <iCost>10000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16138,7 +16138,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16204,7 +16204,7 @@
       <iCost>14000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16265,7 +16265,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16327,7 +16327,7 @@
       <iCost>14000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16388,7 +16388,7 @@
       <iCost>14000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16451,7 +16451,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16514,7 +16514,7 @@
       <iCost>-1</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16569,7 +16569,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16634,7 +16634,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16696,7 +16696,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16774,7 +16774,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16839,7 +16839,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>UNITCLASS_WURFAXT</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16903,7 +16903,7 @@
       <iCost>15000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -16966,7 +16966,7 @@
       <iCost>1000</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
@@ -17022,7 +17022,7 @@
       <iCost>-1</iCost>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
-      <Era>ERA_LATE_ANTIK</Era>
+      <Era>ERA_LATE_ANTIQUITY</Era>
       <FirstFreeUnitClass>NONE</FirstFreeUnitClass>
       <iFeatureProductionModifier>0</iFeatureProductionModifier>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>

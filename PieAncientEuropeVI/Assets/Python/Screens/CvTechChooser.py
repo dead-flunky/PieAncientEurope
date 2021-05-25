@@ -345,12 +345,12 @@ class CvTechChooser:
             if iMaxY < iY + (self.BOX_INCREMENT_HEIGHT * self.PIXEL_INCREMENT):
                 iMaxY = iY + (self.BOX_INCREMENT_HEIGHT * self.PIXEL_INCREMENT)
 
-# BUG - Tech Era Colors - start
-            szTechRecordShadow = sPanelWidget + "TechRecordShadow" + str(i)
-            iShadowOffset = 9
-            screen.attachPanelAt( sPanel, szTechRecordShadow, u"", u"", True, False, PanelStyles.PANEL_STYLE_TECH, iX - 6 + iShadowOffset, iY - 6 + iShadowOffset, self.getXStart() + 6, 12 + ( self.BOX_INCREMENT_HEIGHT * self.PIXEL_INCREMENT ), WidgetTypes.WIDGET_TECH_CHOOSER_ERA, gc.getTechInfo(i).getEra(), -1 )
-            self.setTechPanelShadowColor(screen, szTechRecordShadow, gc.getTechInfo(i).getEra())
-            screen.hide(szTechRecordShadow)
+# Flunky commented out - BUG - Tech Era Colors - start
+            # szTechRecordShadow = sPanelWidget + "TechRecordShadow" + str(i)
+            # iShadowOffset = 9
+            # screen.attachPanelAt(sPanel, szTechRecordShadow, u"", u"", True, False, PanelStyles.PANEL_STYLE_TECH, iX - 6 + iShadowOffset, iY - 6 + iShadowOffset, self.getXStart() + 6, 12 + ( self.BOX_INCREMENT_HEIGHT * self.PIXEL_INCREMENT ), WidgetTypes.WIDGET_TECH_CHOOSER_ERA, gc.getTechInfo(i).getEra(), -1)
+            # self.setTechPanelShadowColor(screen, szTechRecordShadow, gc.getTechInfo(i).getEra())
+            # screen.hide(szTechRecordShadow)
 # BUG - Tech Era Colors - end
 
             screen.attachPanelAt(sPanel, szTechRecord, u"", u"", True, False, PanelStyles.PANEL_STYLE_TECH, iX - 6, iY - 6, self.getXStart() + 6, 12 + ( self.BOX_INCREMENT_HEIGHT * self.PIXEL_INCREMENT ), WidgetTypes.WIDGET_TECH_TREE, i, -1 )
@@ -371,19 +371,26 @@ class CvTechChooser:
                 screen.setPanelColor(szTechRecord, 104, 158, 165)
                 self.aiCurrentState.append(CIV_IS_RESEARCHING)
             elif gc.getPlayer(self.iCivSelected).canEverResearch(i):
+                # Flunky - start - replaced colour scheme by BUG NJAGC era color
+                if BugOpt.isShowTechEra():
+                    iEra = gc.getTechInfo(i).getEra()
+                    self.setTechPanelShadowColor(screen, szTechRecord, iEra)
+                else:
+                    screen.setPanelColor(szTechRecord, 100, 104, 160)
                 # Dieses Farbschema ist 2x in dieser Datei enthalten !!!
                 # This file contains two copies of this colour scheme
-                iEra = gc.getTechInfo(i).getEra()
-                if iEra == 4: 
-                    screen.setPanelColor(szTechRecord, 130, 70, 0) #braun
-                elif iEra == 3: 
-                    screen.setPanelColor(szTechRecord, 165, 30, 185) #purpur
-                elif iEra == 2: 
-                    screen.setPanelColor(szTechRecord, 100, 104, 160) #blau
-                elif iEra == 1: 
-                    screen.setPanelColor(szTechRecord, 255, 170, 0) #orange
-                else: 
-                    screen.setPanelColor(szTechRecord, 140, 140, 140) #grau
+                # iEra = gc.getTechInfo(i).getEra()
+                # if iEra == 4: 
+                    # screen.setPanelColor(szTechRecord, 130, 70, 0) #braun
+                # elif iEra == 3: 
+                    # screen.setPanelColor(szTechRecord, 165, 30, 185) #purpur
+                # elif iEra == 2: 
+                    # screen.setPanelColor(szTechRecord, 100, 104, 160) #blau
+                # elif iEra == 1: 
+                    # screen.setPanelColor(szTechRecord, 255, 170, 0) #orange
+                # else: 
+                    # screen.setPanelColor(szTechRecord, 140, 140, 140) #grau
+                # Flunky - end
                 self.aiCurrentState.append(CIV_NO_RESEARCH)
             else:
                 screen.setPanelColor(szTechRecord, 206, 65, 69)
@@ -414,13 +421,13 @@ class CvTechChooser:
                 self.addIconsToTechPanel(screen, i, X_START, iX, iY, szTechRecord)
 
             if bTechPanel:
-                if BugOpt.isShowTechEra():
-                    screen.show(szTechRecordShadow)
-                else:
-                    screen.hide(szTechRecordShadow)
+                # if BugOpt.isShowTechEra():
+                    # screen.show(szTechRecordShadow)
+                # else:
+                    # screen.hide(szTechRecordShadow)
                 screen.show(szTechRecord)
             else:
-                screen.hide(szTechRecordShadow)
+                # screen.hide(szTechRecordShadow)
                 screen.hide(szTechRecord)
 
         screen.setViewMin(sPanel, iMaxX + 20, iMaxY + 20)
@@ -1189,18 +1196,26 @@ class CvTechChooser:
                 elif ( gc.getPlayer(self.iCivSelected).isResearchingTech(i) ):
                     screen.setPanelColor(szTechRecord, 104, 158, 165)
                 elif ( gc.getPlayer(self.iCivSelected).canEverResearch(i) ):
-                    # TODO use setTechPanelShadowColor(self, screen, sPanel, iEra)
-                    iEra = gc.getTechInfo(i).getEra()
-                    if iEra == 4: 
-                        screen.setPanelColor(szTechRecord, 130, 70, 0) #braun
-                    elif iEra == 3: 
-                        screen.setPanelColor(szTechRecord, 165, 30, 185) #purpur
-                    elif iEra == 2: 
-                        screen.setPanelColor(szTechRecord, 100, 104, 160) #blau
-                    elif iEra == 1: 
-                        screen.setPanelColor(szTechRecord, 255, 170, 0) #orange
-                    else: 
-                        screen.setPanelColor(szTechRecord, 140, 140, 140) #grau
+                    # Flunky - start - replaced colour scheme by BUG NJAGC era color
+                    if BugOpt.isShowTechEra():
+                        iEra = gc.getTechInfo(i).getEra()
+                        self.setTechPanelShadowColor(screen, szTechRecord, iEra)
+                    else:
+                        screen.setPanelColor(szTechRecord, 100, 104, 160)
+                    # Dieses Farbschema ist 2x in dieser Datei enthalten !!!
+                    # This file contains two copies of this colour scheme
+                    # 
+                    # if iEra == 4: 
+                        # screen.setPanelColor(szTechRecord, 130, 70, 0) #braun
+                    # elif iEra == 3: 
+                        # screen.setPanelColor(szTechRecord, 165, 30, 185) #purpur
+                    # elif iEra == 2: 
+                        # screen.setPanelColor(szTechRecord, 100, 104, 160) #blau
+                    # elif iEra == 1: 
+                        # screen.setPanelColor(szTechRecord, 255, 170, 0) #orange
+                    # else: 
+                        # screen.setPanelColor(szTechRecord, 140, 140, 140) #grau
+                    # Flunky - end
                 else:
                     screen.setPanelColor(szTechRecord, 206, 65, 69)
 
@@ -1217,7 +1232,7 @@ class CvTechChooser:
             if color:
                 rgb = color.getColor() # NiColorA object
                 if rgb:
-                    screen.setPanelColor(sPanel, int(100 * rgb.r), int(100 * rgb.g), int(100 * rgb.b))
+                    screen.setPanelColor(sPanel, int(255 * rgb.r), int(255 * rgb.g), int(255 * rgb.b))
 # BUG - Tech Era Colors - end
 
     # Will draw the arrows

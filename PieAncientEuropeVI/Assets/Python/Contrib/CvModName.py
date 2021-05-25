@@ -1,8 +1,8 @@
 #CvModName.py
 
-modName = "K-Mod"
-displayName = "K-Mod"
-modVersion = ""
+modName = "PAE"
+displayName = "Pies Ancient Europe"
+modVersion = "VI"
 
 civName = "BtS"
 civVersion = "3.19"
