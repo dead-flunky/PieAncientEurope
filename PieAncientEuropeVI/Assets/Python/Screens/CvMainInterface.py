@@ -1555,13 +1555,13 @@ class CvMainInterface:
                         if MainOpt.isShowMinMaxCommerceButtons() and not CyInterface().isCityScreenUp():
                             iMinMaxAdjustX = 20
                             szString = "MaxPercent" + str(eCommerce)
-                            screen.setButtonGFC(szString, u"", "", 70, 50 + (19 * iCount), 20, 20, *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 100, WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, 100, ButtonStyles.BUTTON_STYLE_CITY_PLUS))
+                            screen.setButtonGFC(szString, u"", "", 70, 50 + (19 * iCount), 20, 20, *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 50, WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, 50, ButtonStyles.BUTTON_STYLE_CITY_PLUS))
                             screen.show(szString)
                             screen.enable(szString, bEnable)
                             szString = "MinPercent" + str(eCommerce)
                             screen.setButtonGFC(szString, u"", "", 130, 50 + (19 * iCount), 20, 20,
-                                                 *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 0,
-                                                                WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, -100,
+                                                 *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, -50,
+                                                                WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, -50,
                                                                 ButtonStyles.BUTTON_STYLE_CITY_MINUS) )
                             screen.show(szString)
                             screen.enable(szString, bEnable)
