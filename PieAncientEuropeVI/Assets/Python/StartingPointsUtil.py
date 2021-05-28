@@ -13,8 +13,6 @@ BarbCityList = []
 UsedValidCivList = []
 
 # generic file reading function
-
-
 def ReadMyFile(MyFile, Debugging, AddPositionsToMap, bPlaceCivs, bPlaceBarbCities):
     del SpawnCivList[:]
     del UsedValidCivList[:]
@@ -65,7 +63,7 @@ def ResortCivs(Debugging):
     lHumanPlayers = []
     CounterInvalid = 0
 # loop detects human players
-    for ip in xrange(iMaxPlayer):
+    for ip in range(iMaxPlayer):
         CurPlayer = gc.getPlayer(ip)
         if CurPlayer.isHuman():
             lHumanPlayers.append(ip)
@@ -194,7 +192,7 @@ def ResortCivs(Debugging):
     # return possible
 
 # place barbarian cities
-def PlaceBarbarianCities(Debugging):
+def PlaceBarbarianCities(BarbCityList, Debugging):
     pBarb = gc.getPlayer(gc.getBARBARIAN_PLAYER())
     for BarbCity in BarbCityList:
         iX = BarbCity.CityX
@@ -369,7 +367,7 @@ def AddTechsAndUnits(iCivID, j, CurCiv):
 # first < and > at the end are cut of, then the other
 # > and < are searched, and what is between is used as value
 def CutString(string):
-    print("Cutting")
+    # print("Cutting")
     string = str(string)
     string = string.strip()
     string = string[2:-1]
@@ -386,6 +384,145 @@ def CutString(string):
     NewString = string[BeginPos+1:EndPos]
     return str(NewString)
 
+
+def findStartingPlot(playerID):
+   
+    print("findStartingPlot for player %d" %(playerID))
+    CyInterface().addMessage(playerID, False, 15, "Beginning to resort civs", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+            
+
+    
+    if gc.getGame().isOption(GameOptionTypes.GAMEOPTION_ADVANCED_START) or gc.getGame().getGameTurnYear() != gc.getDefineINT("START_YEAR") or sScenarioName not in MapNames:
+        CyPythonMgr().allowDefaultImpl()
+        print("allowDefaultImpl")
+        return
+    else:
+        del SpawnCivList[:]
+        del UsedValidCivList[:]
+        del BarbCityList[:]
+        CurCiv = None
+        BarbCity = None
+        MapName = mapNames(sScenarioName)
+        bPlaceBarbCities = False
+        Debugging = True
+        AddPositionsToMap = True
+        pPlayer = gc.getPlayer(playerID)
+        if Debugging:
+            print("preparing to read")
+        
+        iMaxValid = sum(1 for pCiv in SpawnCivList if pCiv.SpawnX[0] != -1 and pCiv.SpawnY[0] != -1)
+        # iMaxValid = 0
+        # for pCiv in SpawnCivList:
+            # if pCiv.SpawnX[0] != -1 and pCiv.SpawnY[0] != -1:
+                # iMaxValid += 1
+        if Debugging:
+            print("valid civs for this map: "+str(iMaxValid))
+            print("max civs: "+str(iMaxPlayer))
+        
+        if Debugging:
+            print("all civs have been read")
+            
+        # loop detects human players
+        lHumanPlayers = []
+        for iPlayer in range(gc.getMAX_CIV_PLAYERS()):
+            if gc.getPlayer(iPlayer).isHuman():
+                lHumanPlayers.append(iPlayer)
+        iHumanPlayer = lHumanPlayers[0]
+        
+        if Debugging:
+            CyInterface().addMessage(iHumanPlayer, False, 15, "Beginning to resort civs", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+            print("Beginning to resort civs")
+
+        iPlayerCiv = pPlayer.getCivilizationType()
+        if pPlayer.isHuman() and (iPlayerCiv not in SpawnCivList or SpawnCivList[iPlayerCiv].SpawnX[0] == -1 or SpawnCivList[iPlayerCiv].SpawnY[0] == -1):
+            CyInterface().addMessage(iHumanPlayer, False, 15, "Invalid Civ for map has been chosen", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+            CyInterface().addMessage(iHumanPlayer, False, 15, "Civs will not start at correct positions", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+            CyPythonMgr().allowDefaultImpl()
+            print("Invalid Civ for map has been chosen")
+            return 
+
+        if not pPlayer.isAlive():
+            CyInterface().addMessage(iHumanPlayer, False, 15, "Player %d is not alive!" %(playerID), '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+            CyPythonMgr().allowDefaultImpl()
+            print("Player %d is not alive!" %(playerID))
+            return
+        # this loop replaces the current units/moves them to the right place
+        # invalid civs are replaced
+        # IDs of used/invalid civs are stored in a global list, so that
+        # adding new ones is easier
+        aPosUsed = []
+        
+        if Debugging:
+            CyInterface().addMessage(iHumanPlayer, False, 15, "Cycling loaded coordinates!", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+            print("Cycling loaded coordinates!")
+        
+    
+        if Debugging:
+            CyInterface().addMessage(iHumanPlayer, False, 15, "Preparing for re-placing current units!", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+            print("Preparing for re-placing current units!")
+        bReplace = False
+        bSpawn = False
+        if iPlayerCiv not in SpawnCivList:
+            bReplace = True
+        else:
+            pCiv = SpawnCivList[iPlayerCiv]
+            possible_plot_idx = [i for i, p in enumerate(zip(pCiv.SpawnX,pCiv.SpawnY)) if p not in aPosUsed]
+            if pCiv.SpawnX[0] == -1 or pCiv.SpawnY[0] == -1 or not possible_plot_idx:
+                bReplace = True
+                if Debugging:
+                    CyInterface().addMessage(iHumanPlayer, False, 15, "Encountered invalid civ "+str(pCiv.CivString), '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
+        if bReplace:                    
+            (iNewCiv, iNewLeader) = ChangeThisCiv(CounterInvalid, SpawnCivList, iMaxPlayer, iMaxValid, Debugging)
+            if iNewCiv:
+                pCiv = SpawnCivList[iNewCiv]
+                possible_plot_idx = [i for i, p in enumerate(zip(pCiv.SpawnX,pCiv.SpawnY)) if p not in aPosUsed]
+                pPlayer.changeCiv(iNewCiv)
+                pPlayer.changeCiv(iNewLeader)
+                bSpawn = True
+                UsedValidCivList.append(iNewCiv)
+            else:
+                # failed to find a possible replacement civs
+
+                (loopUnit, pIter) = pPlayer.firstUnit(False)
+                while loopUnit:
+                    if not loopUnit.isNone() and loopUnit.getOwner() == pPlayer.getID():  # only valid units
+                        loopUnit.setXY(1, 1, False, False, False)
+                    (loopUnit, pIter) = pPlayer.nextUnit(pIter, False)
+                pPlayer.killUnits()
+        else:
+            pCiv = SpawnCivList[iPlayerCiv]
+            bSpawn = True
+            UsedValidCivList.append(iPlayerCiv)
+            
+        plotIdx = -1
+        if bSpawn:
+            iPos = possible_plot_idx[gc.getSorenRandNum(len(possible_plot_idx)), "Select starting plot"]
+
+            iX = pCiv.SpawnX[iPos]
+            iY = pCiv.SpawnY[iPos]
+            aPosUsed.append((iX,iY))
+            pCiv.timesUsed += 1
+            # plotIdx = CyMap().plotNum(iX, iY)
+            # move existing units to proper spot
+            # (loopUnit, pIter) = pLoopCiv.firstUnit(False)
+            # while loopUnit:
+                # unitOwner = loopUnit.getOwner()
+                # if not loopUnit.isNone() and loopUnit.getOwner() == pLoopCiv.getID():  # only valid units
+
+                    # loopUnit.setXY(iX, iY, False, False, False)
+                    # if Debugging:
+                        # idstring = pLoopCiv.getCivilizationAdjective(0)+"unit moved to X="+str(iX)+"and Y="+str(iY)
+                        # print(idstring)
+                        # CyInterface().addMessage(iHumanPlayer, False, 15, idstring, '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), iY, iY, True, True)
+                # (loopUnit, pIter) = pLoopCiv.nextUnit(pIter, False)
+
+        if bPlaceBarbCities:
+            PlaceBarbarianCities(Debugging)
+        if AddPositionsToMap:
+            AddCoordinateSignsToMap()
+            
+        # return plotIdx
+        return (iX, iY)
 
 class SpawningCiv:
     def __init__(self):

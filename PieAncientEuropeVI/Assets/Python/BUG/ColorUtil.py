@@ -15,9 +15,12 @@ import BugUtil
 gc = CyGlobalContext()
 
 # tuple of interesting color names to be selectable from dropdowns
-COLOR_KEYS = ( "COLOR_RED", "COLOR_YELLOW", "COLOR_CYAN", "COLOR_GREEN", 
-			   "COLOR_BLUE", "COLOR_MAGENTA", "COLOR_WHITE", "COLOR_LIGHT_GREY", 
-			   "COLOR_GREY", "COLOR_DARK_GREY", "COLOR_BLACK" )
+# Flunky - added color keys for PAE tech chooser
+COLOR_KEYS = ("COLOR_RED", "COLOR_YELLOW", "COLOR_CYAN", "COLOR_GREEN", 
+			  "COLOR_BLUE", "COLOR_MAGENTA", "COLOR_WHITE", "COLOR_LIGHT_GREY", 
+			  "COLOR_GREY", "COLOR_DARK_GREY", "COLOR_BLACK", 
+              "COLOR_ERA_ANCIENT_GREY", "COLOR_ERA_BRONZE_ORANGE", "COLOR_ERA_IRON_BLUE", 
+              "COLOR_ERA_CLASSIC_PURPLE", "COLOR_ERA_LATE_BROWN")
 
 COLOR_INDEX_IDX = 0
 COLOR_TYPE_IDX = 1

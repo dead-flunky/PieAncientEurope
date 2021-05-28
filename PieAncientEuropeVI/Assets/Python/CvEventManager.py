@@ -44,7 +44,7 @@ import CvAdvisorUtils
 # import CvScreenEnums
 
 ### Starting points part 1 (by The_J) ###
-import StartingPointsUtil
+# import StartingPointsUtil
 
 
 
@@ -1974,6 +1974,7 @@ class CvEventManager:
         ### Starting points part 2 ###
         MapName = CyMap().getMapScriptName()
         sScenarioName = CvUtil.getScriptData(CyMap().plot(0, 0), ["S", "t"])
+        """
         if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_ADVANCED_START) and gc.getGame().getGameTurnYear() == gc.getDefineINT("START_YEAR"):
             MapName = ""
             bPlaceCivs = True
@@ -2012,6 +2013,7 @@ class CvEventManager:
                 StartingPointsUtil.ReadMyFile(MyFile, Debugging, AddPositionsToMap, bPlaceCivs, bPlaceBarbs)
                 MyFile.close()
         # --------------------------------
+        """
 
         # Scenarios
         if sScenarioName == "480BC":

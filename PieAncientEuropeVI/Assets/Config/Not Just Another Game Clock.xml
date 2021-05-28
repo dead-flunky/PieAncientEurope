@@ -29,31 +29,31 @@
 					get="isUseEraColor" set="setUseEraColor" dirtyBit="GameData" 
 					label="Use Era-Related Colors" 
 					help="When checked, the game date and era are displayed using a color for each era."/>
-			<list   id="Color_ERA_BRONZE" key="ERA_BRONZE" 
-					type="color" default="COLOR_MAGENTA" 
-					get="getBronzeEraColor" set="setBronzeEraColor" dirtyBit="GameData" 
-					label="Bronze Era" 
-					help="Color to use for the Bronze era."/>
 			<list   id="Color_ERA_ANCIENT" key="ERA_ANCIENT" 
-					type="color" default="COLOR_BLUE" 
+					type="color" default="COLOR_ERA_ANCIENT_GREY" 
 					get="getAncientEraColor" set="setAncientEraColor" dirtyBit="GameData" 
-					label="Ancient Era" 
-					help="Color to use for the Ancient era."/>
+					label="Neolithic Era" 
+					help="Color to use for the Neolithic era."/>
+			<list   id="Color_ERA_BRONZE" key="ERA_BRONZE" 
+					type="color" default="COLOR_ERA_BRONZE_ORANGE" 
+					get="getBronzeEraColor" set="setBronzeEraColor" dirtyBit="GameData" 
+					label="Bronze Age" 
+					help="Color to use for the Bronze Age."/>
 			<list   id="Color_ERA_CLASSICAL" key="ERA_CLASSICAL" 
-					type="color" default="COLOR_PURPLE" 
+					type="color" default="COLOR_ERA_IRON_BLUE" 
 					get="getClassicalEraColor" set="setClassicalEraColor" dirtyBit="GameData" 
 					label="Classical Era" 
-					help="Color to use for the Classical era."/>
-			<list   id="Color_ERA_LATE_ANTIK" key="ERA_LATE_ANTIK" 
-					type="color" default="COLOR_CYAN" 
-					get="getLateAntikEraColor" set="setLateAntikEraColor" dirtyBit="GameData" 
-					label="Late Antik Era" 
-					help="Color to use for the Late Antik era."/>
+					help="Color to use for the Iron Age."/>
 			<list   id="Color_ERA_MEDIEVAL" key="ERA_MEDIEVAL" 
-					type="color" default="COLOR_WHITE" 
+					type="color" default="COLOR_ERA_CLASSIC_PURPLE" 
 					get="getMedievalEraColor" set="setMedievalEraColor" dirtyBit="GameData" 
-					label="Medieval Era" 
-					help="Color to use for the Medieval era."/>
+					label="Classic Antiquity" 
+					help="Color to use for the Classic Antiquity."/>
+			<list   id="Color_ERA_LATE_ANTIQUITY" key="ERA_LATE_ANTIQUITY" 
+					type="color" default="COLOR_ERA_LATE_BROWN" 
+					get="getLateAntiquityEraColor" set="setLateAntiquityEraColor" dirtyBit="GameData" 
+					label="Late Antiquity" 
+					help="Color to use for the Late Antiquity."/>
 			<list   id="Color_ERA_RENAISSANCE" key="ERA_RENAISSANCE" 
 					type="color" default="COLOR_CYAN" 
 					get="getRenaissanceEraColor" set="setRenaissanceEraColor" dirtyBit="GameData" 

@@ -6878,7 +6878,7 @@
           <GlobalReligionCommerce/>
           <GlobalCorporationCommerce/>
           <VictoryPrereq/>
-          <FreeStartEra>ERA_LATE_ANTIK</FreeStartEra>
+          <FreeStartEra>ERA_LATE_ANTIQUITY</FreeStartEra>
           <MaxStartEra/>
           <ObsoleteTech/>
           <PrereqTech>TECH_BASILICA</PrereqTech>

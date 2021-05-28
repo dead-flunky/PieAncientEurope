@@ -54,24 +54,57 @@
 		<Italian>Quando è selezionato, la data e l'era vengono visualizzati utilizzando colori specifici per ogni era.</Italian>
 		<Spanish>La fecha de juego y la era se muestran con un color específico para cada era.</Spanish>
 	</TEXT>
+<!-- Flunky start added color keys for PAE tech chooser -->
 	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_ANCIENT_TEXT</Tag>
-		<English>Ancient Era</English>
-		<French>Antiquité</French>
-		<German>Antike</German>
-		<Italian>Era Antica</Italian>
-		<Spanish>Edad Antigüa</Spanish>
+		<English>Neolithic Era</English>
+		<French>Néolithique</French>
+		<German>Neolithikum</German>
+		<Italian>Neolitico</Italian>
+		<Spanish>Neolítico</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_ANCIENT_HOVER</Tag>
-		<English>Color to use for the Ancient era.</English>
-		<French>Couleur pour l'Antiquité.</French>
-		<German>Bestimmt die Farbe, in der die Epoche "Antike" erscheint</German>
-		<Italian>Colore da utilizzare per l'Era Antica.</Italian>
-		<Spanish>Color a emplear para la Edad Antigüa.</Spanish>
+		<English>Color to use for the Neolithic era.</English>
+		<French>Couleur pour le Néolithique.</French>
+		<German>Bestimmt die Farbe, in der die Epoche "Neolithikum" erscheint</German>
+		<Italian>Colore da utilizzare per il Neolitico.</Italian>
+		<Spanish>Color a emplear para el Neolítico.</Spanish>
+	</TEXT>
+    	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_BRONZE_TEXT</Tag>
+		<English>Bronze Age</English>
+		<French>Âge du Bronze</French>
+		<German>Bronzezeit</German>
+		<Italian>Età del Bronzo</Italian>
+		<Spanish>Edad del Bronce</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_BRONZE_HOVER</Tag>
+		<English>Color to use for the Bronze Age.</English>
+		<French>Couleur pour l'Âge du Bronze.</French>
+		<German>Bestimmt die Farbe, in der die Epoche "Bronzezeit" erscheint</German>
+		<Italian>Colore da utilizzare per l'Età del Bronzo.</Italian>
+		<Spanish>Color a emplear para la Edad del Bronce.</Spanish>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_CLASSICAL_TEXT</Tag>
+		<English>Iron Age</English>
+		<French>Âge du Fer</French>
+		<German>Eisenzeit</German>
+		<Italian>Era del Ferro</Italian>
+		<Spanish>Edad del Hierro</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_CLASSICAL_HOVER</Tag>
+		<English>Color to use for the Iron Age.</English>
+		<French>Couleur pour l'Âge du Fer.</French>
+		<German>Bestimmt die Farbe, in der die Epoche "Eisenzeit" erscheint</German>
+		<Italian>Colore da utilizzare per l'Età del Ferro.</Italian>
+		<Spanish>Color a emplear para la Edad del Hierro.</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_MEDIEVAL_TEXT</Tag>
 		<English>Classical Era</English>
 		<French>Ere Classique</French>
 		<German>Klassik</German>
@@ -79,7 +112,7 @@
 		<Spanish>Edad Clásica</Spanish>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_CLASSICAL_HOVER</Tag>
+		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_MEDIEVAL_HOVER</Tag>
 		<English>Color to use for the Classical era.</English>
 		<French>Couleur pour l'Ere Classique.</French>
 		<German>Bestimmt die Farbe, in der die Epoche "Klassik" erscheint</German>
@@ -87,21 +120,22 @@
 		<Spanish>Color a emplear para la Edad Clásica.</Spanish>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_MEDIEVAL_TEXT</Tag>
-		<English>Medieval Era</English>
-		<French>Moyen Age</French>
-		<German>Mittelalter</German>
-		<Italian>Era Medioevale</Italian>
-		<Spanish>Edad Medieval</Spanish>
+		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_LATE_ANTIQUITY_TEXT</Tag>
+		<English>Late Antiquity</English>
+		<French>Antiquité Tardive</French>
+		<German>Spätantike</German>
+		<Italian>Antichità Tarda</Italian>
+		<Spanish>Antigüedad Tardía</Spanish>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_MEDIEVAL_HOVER</Tag>
-		<English>Color to use for the Medieval era.</English>
-		<French>Couleur pour le Moyen Age.</French>
-		<German>Bestimmt die Farbe, in der die Epoche "Mittelalter" erscheint</German>
-		<Italian>Colore da utilizzare per l'Era Medioevale.</Italian>
-		<Spanish>Color a emplear para la Edad Medieval.</Spanish>
+		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_LATE_ANTIQUITY_HOVER</Tag>
+		<English>Color to use for the Late Antiquity.</English>
+		<French>Couleur pour l'Antiquité Tardive.</French>
+		<German>Bestimmt die Farbe, in der die Epoche "Spätantike" erscheint</German>
+		<Italian>Colore da utilizzare per l'Antichità Tarda.</Italian>
+		<Spanish>Color a emplear para la Antigüedad Tardía.</Spanish>
 	</TEXT>
+<!-- Flunky end -->
 	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_NJAGC__COLOR_ERA_RENAISSANCE_TEXT</Tag>
 		<English>Renaissance Era</English>

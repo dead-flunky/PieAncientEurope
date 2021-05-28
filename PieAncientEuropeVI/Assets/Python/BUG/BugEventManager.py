@@ -107,6 +107,7 @@ import BugUtil
 # <f1rpo> (advc.007b)
 import CvUtil
 import CvScreensInterface
+import CvDebugTools
 # </f1rpo>
 import InputUtil
 

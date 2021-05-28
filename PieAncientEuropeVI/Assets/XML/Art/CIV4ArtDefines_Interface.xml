@@ -548,7 +548,7 @@
         </InterfaceArtInfo>
         <InterfaceArtInfo>
             <Type>INTERFACE_TECH_ESPIONAGE</Type>
-            <Path>Art/Interface/Buttons/Process/ProcessCulture.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,16</Path>
+            <Path>,Art/Interface/Buttons/Process/ProcessCulture.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,16</Path>
         </InterfaceArtInfo>
         <InterfaceArtInfo>
             <Type>INTERFACE_TECH_DEFENSIVEPACT</Type>
