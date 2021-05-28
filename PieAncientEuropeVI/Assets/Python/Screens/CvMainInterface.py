@@ -996,31 +996,30 @@ class CvMainInterface:
         screen.setStackedBarColors("TaxesBar", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_EMPTY"))
         screen.setStackedBarColors("TaxesBar", InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY"))
         screen.hide("TaxesBar")
-# -----
-# BUG - Bars on single line for higher resolution screens - start
-#        xCoord = 268 + (xResolution - 1440) / 2
-#        screen.addStackedBarGFC("GreatGeneralBar-w", xCoord, 2, 84, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_HELP_GREAT_GENERAL, -1, -1)
-#        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_NEGATIVE_RATE")) #gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_STORED") )
-#        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_EMPTY"))
-#        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY"))
-#        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY"))
-#        screen.hide("GreatGeneralBar-w" )
-#
-#        xCoord += 6 + 84
-#        screen.addStackedBarGFC("ResearchBar-w", xCoord, 2, 487, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_RESEARCH, -1, -1 )
-#        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_RESEARCH_STORED") )
-#        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_RESEARCH_RATE") )
-#        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY") )
-#        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY") )
-#        screen.hide("ResearchBar-w" )
-#
-#        xCoord += 6 + 487
-#        screen.addStackedBarGFC("GreatPersonBar-w", xCoord, 2, 320, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_GP_PROGRESS_BAR, -1, -1 )
-#        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_STORED") )
-#        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_RATE") )
-#        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY") )
-#        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY") )
-#        screen.hide("GreatPersonBar-w" )
+# ----- BUG - Bars on single line for higher resolution screens - start
+        xCoord = 268 + (xResolution - 1440) / 2
+        screen.addStackedBarGFC("GreatGeneralBar-w", xCoord, 2, 84, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_HELP_GREAT_GENERAL, -1, -1)
+        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_NEGATIVE_RATE")) #gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_STORED") )
+        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_EMPTY"))
+        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY"))
+        screen.setStackedBarColors("GreatGeneralBar-w", InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY"))
+        screen.hide("GreatGeneralBar-w" )
+
+        xCoord += 6 + 84
+        screen.addStackedBarGFC("ResearchBar-w", xCoord, 2, 487, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_RESEARCH, -1, -1 )
+        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_RESEARCH_STORED") )
+        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_RESEARCH_RATE") )
+        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY") )
+        screen.setStackedBarColors("ResearchBar-w", InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY") )
+        screen.hide("ResearchBar-w" )
+
+        xCoord += 6 + 487
+        screen.addStackedBarGFC("GreatPersonBar-w", xCoord, 2, 320, iStackBarHeight, InfoBarTypes.NUM_INFOBAR_TYPES, WidgetTypes.WIDGET_GP_PROGRESS_BAR, -1, -1 )
+        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_STORED, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_STORED") )
+        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_RATE") )
+        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY") )
+        screen.setStackedBarColors("GreatPersonBar-w", InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY") )
+        screen.hide("GreatPersonBar-w" )
 # BUG - Bars on single line for higher resolution screens - end
 
         # *********************************************************************************
@@ -1556,13 +1555,13 @@ class CvMainInterface:
                         if MainOpt.isShowMinMaxCommerceButtons() and not CyInterface().isCityScreenUp():
                             iMinMaxAdjustX = 20
                             szString = "MaxPercent" + str(eCommerce)
-                            screen.setButtonGFC(szString, u"", "", 70, 50 + (19 * iCount), 20, 20, *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 100, WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, 100, ButtonStyles.BUTTON_STYLE_CITY_PLUS))
+                            screen.setButtonGFC(szString, u"", "", 70, 50 + (19 * iCount), 20, 20, *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 50, WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, 50, ButtonStyles.BUTTON_STYLE_CITY_PLUS))
                             screen.show(szString)
                             screen.enable(szString, bEnable)
                             szString = "MinPercent" + str(eCommerce)
                             screen.setButtonGFC(szString, u"", "", 130, 50 + (19 * iCount), 20, 20,
-                                                 *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 0,
-                                                                WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, -100,
+                                                 *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, -50,
+                                                                WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, -50,
                                                                 ButtonStyles.BUTTON_STYLE_CITY_MINUS) )
                             screen.show(szString)
                             screen.enable(szString, bEnable)
@@ -5048,9 +5047,9 @@ class CvMainInterface:
 
 
 # BUG - Bars on single line for higher resolution screens - start
-        #screen.hide("GreatGeneralBar-w")
-        #screen.hide("ResearchBar-w")
-        #screen.hide("GreatPersonBar-w")
+        screen.hide("GreatGeneralBar-w")
+        screen.hide("ResearchBar-w")
+        screen.hide("GreatPersonBar-w")
 # BUG - Bars on single line for higher resolution screens - end
 
 # BUG - Progress Bar - Tick Marks - start
@@ -5217,18 +5216,19 @@ class CvMainInterface:
                     researchCost = gc.getTeam(gc.getPlayer(ePlayer).getTeam()).getResearchCost(gc.getPlayer(ePlayer).getCurrentResearch())
                     researchRate = gc.getPlayer(ePlayer).calculateResearchRate(-1)
 
-                    iFirst = float(researchProgress + overflowResearch) / researchCost
+                    
+                    iFirst = float(researchProgress + overflowResearch) / float(researchCost)
                     screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_STORED, iFirst)
                     # PAE
-                    # if iFirst == 1:
-                    #    screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, float(researchRate) / float(researchCost))
-                    # else:
-                    #    screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, (float(researchRate) / float(researchCost))) / (1 - iFirst)
-                    # kmod
-                    if researchCost >  researchProgress + overflowResearch:
-                        screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, float(researchRate) / float(researchCost - researchProgress - overflowResearch))
+                    if iFirst == 1:
+                       screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, float(researchRate) / float(researchCost))
                     else:
-                        screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, 0.0)
+                       screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, (float(researchRate) / float(researchCost)) / (1 - iFirst))
+                    # kmod
+                    # if researchCost >  researchProgress + overflowResearch:
+                        # screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, float(researchRate) / float(researchCost - researchProgress - overflowResearch))
+                    # else:
+                        # screen.setBarPercentage(szResearchBar, InfoBarTypes.INFOBAR_RATE, 0.0)
 
                     screen.show(szResearchBar)
 

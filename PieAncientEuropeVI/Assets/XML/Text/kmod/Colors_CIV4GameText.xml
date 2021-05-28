@@ -93,4 +93,46 @@
 		<Italian>Nero</Italian>
 		<Spanish>Negro</Spanish>
 	</TEXT>
+<!-- Flunky - Start -->
+	<TEXT>
+		<Tag>TXT_KEY_COLOR_ERA_ANCIENT_GREY</Tag>
+		<English>Neolithic grey</English>
+		<French>Gris néolithique</French>
+		<German>Neolithikum-Grau</German>
+		<Italian>Grigio neolitico</Italian>
+		<Spanish>Gris neolítico</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COLOR_ERA_BRONZE_ORANGE</Tag>
+		<English>Bronze age orange</English>
+		<French>Orange de l'âge du bronze</French>
+		<German>Bronzezeit-Orange</German>
+		<Italian>Arancio del età del bronzo</Italian>
+		<Spanish>Naranjo del edad del bronce</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COLOR_ERA_IRON_BLUE</Tag>
+		<English>Iron Age blue</English>
+		<French>Bleu de l'âge du fer</French>
+		<German>Eisenzeit-Blau</German>
+		<Italian>Blu del età del ferro</Italian>
+		<Spanish>Azul del edad del hierro</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COLOR_ERA_CLASSIC_PURPLE</Tag>
+		<English>Classic antiquity purple</English>
+		<French>Pourpre antiquité classique</French>
+		<German>Klassik-Purpur</German>
+		<Italian>Porpora antichità classica</Italian>
+		<Spanish>Purpúreo antigüedad clásica</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_COLOR_ERA_LATE_BROWN</Tag>
+		<English>Late antiquity brown</English>
+		<French>Brun antiquité tardive</French>
+		<German>Spätantike-Braun</German>
+		<Italian>Marrone antichità tarda</Italian>
+		<Spanish>Moreno antigüedad tardía</Spanish>
+	</TEXT>
+<!-- Flunky - End -->
 </Civ4GameText>
