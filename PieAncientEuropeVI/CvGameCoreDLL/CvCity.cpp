@@ -5515,7 +5515,12 @@ void CvCity::changePopulation(int iChange)
 
 long CvCity::getRealPopulation() const
 {
+    // Flunky for PAE: reduced population numbers for the statistic
+    // BtS original
+    /* 
 	return (((long)(pow((float)getPopulation(), 2.8f))) * 1000);
+    */
+	return (((long)(pow((float)getPopulation(), 2.8f))) * 100 + 400);
 }
 
 int CvCity::getHighestPopulation() const
