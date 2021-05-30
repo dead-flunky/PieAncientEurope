@@ -282,6 +282,11 @@ void CvEventReporter::unitSpreadReligionAttempt(CvUnit* pUnit, ReligionTypes eRe
 {
 	m_kPythonEventMgr.reportUnitSpreadReligionAttempt(pUnit, eReligion, bSuccess);
 }
+// Flunky PAE Inquisition
+void CvEventReporter::unitDriveOutReligionAttempt(CvUnit* pUnit, ReligionTypes eReligion, bool bSuccess)
+{
+	m_kPythonEventMgr.reportUnitDriveOutReligionAttempt(pUnit, eReligion, bSuccess);
+}
 
 void CvEventReporter::unitGifted(CvUnit* pUnit, PlayerTypes eGiftingPlayer, CvPlot* pPlotLocation)
 {

@@ -97,6 +97,8 @@ public:
 
 	bool canFound(CyPlot* pPlot, bool bTestVisible);
 	bool canSpread(CyPlot* pPlot, int /*ReligionTypes*/ eReligion, bool bTestVisible);
+    // Flunky PAE Inquisition
+	bool canDriveOut(CyPlot* pPlot, int /*ReligionTypes*/ eReligion, bool bTestVisible);
 	bool canJoin(CyPlot* pPlot, int /*SpecialistTypes*/ eSpecialist);
 	bool canConstruct(CyPlot* pPlot, int /*BuildingTypes*/ eBuilding);
 

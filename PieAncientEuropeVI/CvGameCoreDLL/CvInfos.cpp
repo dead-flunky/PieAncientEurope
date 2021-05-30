@@ -2624,6 +2624,7 @@ int CvActionInfo::getMissionData() const
 	if	(
 				(ACTIONSUBTYPE_BUILD == m_eSubType)				||
 				(ACTIONSUBTYPE_RELIGION == m_eSubType)		||
+				(ACTIONSUBTYPE_INQUISITION == m_eSubType)		|| // Flunky PAE Inquisition
 				(ACTIONSUBTYPE_CORPORATION == m_eSubType)		||
 				(ACTIONSUBTYPE_SPECIALIST == m_eSubType)	||
 				(ACTIONSUBTYPE_BUILDING == m_eSubType)
@@ -2688,6 +2689,11 @@ int CvActionInfo::getMissionType() const
 		return GC.getBuildInfo((BuildTypes)m_iOriginalIndex).getMissionType();
 	}
 	else if (ACTIONSUBTYPE_RELIGION == m_eSubType)
+	{
+		return GC.getReligionInfo((ReligionTypes)m_iOriginalIndex).getMissionType();
+	}
+    // Flunky PAE Inquisition TODO religion info might need two mission types to return?
+	else if (ACTIONSUBTYPE_INQUISITION == m_eSubType)
 	{
 		return GC.getReligionInfo((ReligionTypes)m_iOriginalIndex).getMissionType();
 	}
@@ -2823,6 +2829,10 @@ CvHotkeyInfo* CvActionInfo::getHotkeyInfo() const
 			return &GC.getUnitInfo((UnitTypes)getOriginalIndex());
 			break;
 		case ACTIONSUBTYPE_RELIGION:
+			return &GC.getReligionInfo((ReligionTypes)getOriginalIndex());
+			break;
+        // Flunky PAE Inquisition
+		case ACTIONSUBTYPE_INQUISITION:
 			return &GC.getReligionInfo((ReligionTypes)getOriginalIndex());
 			break;
 		case ACTIONSUBTYPE_CORPORATION:

@@ -5900,6 +5900,168 @@ bool CvUnit::spread(ReligionTypes eReligion)
 	return true;
 }
 
+// Flunky PAE Inquisition TODO implement
+bool CvUnit::canDriveOut(const CvPlot* pPlot, ReligionTypes eReligion, bool bTestVisible) const
+{
+
+	if (eReligion == NO_RELIGION)
+	{
+		return false;
+	}
+    
+    // don't drive out the missionaries own religion
+	if (m_pUnitInfo->getReligionSpreads(eReligion) > 0)
+	{
+		return false;
+	}
+
+	CvCity* pCity = pPlot->getPlotCity();
+
+	if (pCity == NULL)
+	{
+		return false;
+	}
+
+    // if pCity.isHasReligion(iReligion):
+	if (!pCity->isHasReligion(eReligion))
+	{
+		return false;
+	}
+    
+    // if pCity.isHasReligion(iStateReligion):
+    ReligionTypes eStateReligion = GET_PLAYER(getOwnerINLINE()).getStateReligion();
+    if (eStateReligion == -1 || eReligion == eStateReligion || !pCity->isHasReligion(eStateReligion))
+        return false;
+    
+	if (!canEnterArea(pPlot->getTeam(), pPlot->area()))
+		return false;
+
+    // if pCity.getOwner() == iUnitOwner or gc.getTeam(pCityPlayer.getTeam()).isVassal(gc.getPlayer(iUnitOwner).getTeam()):
+    if (pCity->getTeam() != getTeam() && !pCity->getTeam().isVassal(getTeam()))
+        return false;
+    
+    // if iReligion != iStateReligion:
+    if (eReligion == GET_PLAYER(pCity->getOwnerINLINE()).getStateReligion())
+        return false;
+        
+	if (GC.getUSE_CANNOT_DRIVE_OUT_RELIGION_CALLBACK())
+	{
+		CyArgsList argsList;
+		argsList.add(getOwnerINLINE());
+		argsList.add(getID());
+		argsList.add((int) eReligion);
+		argsList.add(pPlot->getX());
+		argsList.add(pPlot->getY());
+		long lResult=0;
+		gDLL->getPythonIFace()->callFunction(PYGameModule, "cannotDriveOutReligion", argsList.makeFunctionArgs(), &lResult);
+		if (lResult > 0)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+// Flunky PAE Inquisition TODO implement
+bool CvUnit::driveOut(ReligionTypes eReligion)
+{
+	CvCity* pCity;
+	CvWString szBuffer;
+	//int iSpreadProb;
+
+	if (!canDriveOut(plot(), eReligion))
+	{
+		return false;
+	}
+
+	pCity = plot()->getPlotCity();
+
+	if (pCity != NULL)
+	{
+        // iHC from PAE has no effect, since the state religion cannot be driven out
+        // int iHC = eReligion == GET_PLAYER(getOwner()).getStateReligion() ? 15 :-25;
+		int iPresentReligions = pCity->getReligionCount();
+		int iDriveOutProb = 70 - iPresentReligions * 5;
+		
+		bool bSuccess;
+        
+		if (GC.getGameINLINE().getSorenRandNum(100, "Unit Drive Out Religion") < iDriveOutProb)
+		{
+			pCity->setHasReligion(eReligion, false, true, false);
+			bSuccess = true;
+            szBuffer = gDLL->getText("TXT_KEY_MESSAGE_INQUISITION", getNameKey(), GC.getReligionInfo(eReligion).getChar(), pCity->getNameKey());
+			gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_PLAGUE", MESSAGE_TYPE_INFO, getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pCity->getX_INLINE(), pCity->getY_INLINE());
+			
+            // # remove its buildings
+            // iRange = gc.getNumBuildingInfos()
+            // for iBuildingLoop in range(iRange):
+                // if pCity.isHasBuilding(iBuildingLoop):
+                    // pBuilding = gc.getBuildingInfo(iBuildingLoop)
+                    // if pBuilding.getPrereqReligion() == iReligion:
+                      // # Wunder sollen nicht betroffen werden
+                      // iBuildingClass = pBuilding.getBuildingClassType()
+                      // #thisBuildingClass = gc.getBuildingClassInfo(iBuildingClass)
+                      // #if thisBuildingClass.getMaxGlobalInstances() == -1 \
+                      // #and thisBuildingClass.getMaxTeamInstances() == -1 and thisBuildingClass.getMaxPlayerInstances() == -1:
+                      // if not isWorldWonderClass(iBuildingClass) and not isTeamWonderClass(iBuildingClass) and not isNationalWonderClass(iBuildingClass):
+                        // pCity.setNumRealBuilding(iBuildingLoop, 0)
+                        // #if pPlayer.isHuman():
+                        // ##Meldung dass das Gebaeude zerstoert wurde
+                        // #CyInterface().addMessage(iPlayer,True,15,CyTranslator().getText("TXT_KEY_MESSAGE_INQUISITION_Bildersturm",(pCity.getName(),)),"AS2D_PLAGUE",2,szButton,ColorTypes(8),pCity.getX(),pCity.getY(),True,True)
+            // # increasing Anger or Sympathy for an AI
+            // iRange = gc.getMAX_PLAYERS()
+            // for iSecondPlayer in range(iRange):
+                // pSecondPlayer = gc.getPlayer(iSecondPlayer)
+                // pReligion = gc.getReligionInfo(iReligion)
+
+                // # increases Anger for all AIs which have this religion as State Religion
+                // if iReligion == pSecondPlayer.getStateReligion() and pSecondPlayer.isAlive():
+                    // pSecondPlayer.AI_changeAttitudeExtra(iPlayer, -2)
+                // # increases Sympathy for all AIs which have the same State Religion as the inquisitor
+                // elif pPlayer.getStateReligion() == pSecondPlayer.getStateReligion() and pSecondPlayer.isAlive():
+                    // pSecondPlayer.AI_changeAttitudeExtra(iPlayer, 1)
+
+                // # info for all
+                // if pSecondPlayer.isHuman():
+                    // iSecTeam = pSecondPlayer.getTeam()
+                    // if gc.getTeam(iSecTeam).isHasMet(pPlayer.getTeam()):
+                        // CyInterface().addMessage(iSecondPlayer, True, 15, CyTranslator().getText("TXT_KEY_MESSAGE_INQUISITION_GLOBAL", (pCity.getName(), pReligion.getText())), None, 2, szButton, ColorTypes(10), pCity.getX(), pCity.getY(), True, True)
+            // # info for the player
+            // CyInterface().addMessage(iPlayer, True, 20, CyTranslator().getText("TXT_KEY_MESSAGE_INQUISITION_GLOBAL_NEG", (pCity.getName(), pReligion.getText())), None, 2, szButton, ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
+            // CyInterface().addMessage(iPlayer, True, 20, CyTranslator().getText("TXT_KEY_MESSAGE_INQUISITION_GLOBAL_POS", (pCity.getName(), pReligion.getText())), None, 2, szButton, ColorTypes(8), pCity.getX(), pCity.getY(), True, True)
+
+            // Flunky: comment says "even if mission fails" but executes only on success
+            // # decrease population by 1, even if mission fails
+            if (pCity.getPopulation() > 1)
+                pCity.changePopulation(-1)
+                // doCheckCityState(pCity)            
+                        
+
+		}
+		else
+		{
+			szBuffer = gDLL->getText("TXT_KEY_MESSAGE_INQUISITION_FAIL", getNameKey(), GC.getReligionInfo(eReligion).getChar(), pCity->getNameKey());
+			gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_SABOTAGE", MESSAGE_TYPE_INFO, getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pCity->getX_INLINE(), pCity->getY_INLINE());
+			bSuccess = false;
+		}
+
+        // # City Revolt
+        pCity.changeOccupationTimer(1)
+        
+		// Python Event
+		CvEventReporter::getInstance().unitDriveOutReligionAttempt(this, eReligion, bSuccess);
+	}
+
+	if (plot()->isActiveVisible(false))
+	{
+		NotifyEntity(MISSION_INQUISITION);
+	}
+
+	kill(true);
+
+	return true;
+}
 
 bool CvUnit::canSpreadCorporation(const CvPlot* pPlot, CorporationTypes eCorporation, bool bTestVisible) const
 {
@@ -7862,6 +8024,7 @@ BuildTypes CvUnit::getBuildType() const
 		case MISSION_STEAL_PLANS:
 		case MISSION_FOUND:
 		case MISSION_SPREAD:
+		case MISSION_INQUISITION: // Flunky PAE Inquisition
 		case MISSION_SPREAD_CORPORATION:
 		case MISSION_JOIN:
 		case MISSION_CONSTRUCT:

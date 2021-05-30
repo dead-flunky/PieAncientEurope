@@ -207,6 +207,11 @@ public:
 
 	bool canSpread(const CvPlot* pPlot, ReligionTypes eReligion, bool bTestVisible = false) const;					// Exposed to Python
 	bool spread(ReligionTypes eReligion);
+    
+    // Flunky PAE Inquisition
+    bool canDriveOut(const CvPlot* pPlot, ReligionTypes eReligion, bool bTestVisible = false) const;					// Exposed to Python
+	bool driveOut(ReligionTypes eReligion);
+
 
 	bool canSpreadCorporation(const CvPlot* pPlot, CorporationTypes eCorporation, bool bTestVisible = false) const;					// Exposed to Python
 	bool spreadCorporation(CorporationTypes eCorporation);

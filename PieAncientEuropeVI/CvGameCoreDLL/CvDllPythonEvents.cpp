@@ -796,6 +796,24 @@ void CvDllPythonEvents::reportUnitSpreadReligionAttempt(CvUnit* pUnit, ReligionT
 	}
 }
 
+// Flunky PAE Inquisition
+void CvDllPythonEvents::reportUnitDriveOutReligionAttempt(CvUnit* pUnit, ReligionTypes eReligion, bool bSuccess)
+{
+	if (preEvent())
+	{
+		CyArgsList eventData;
+		eventData.add("unitDriveOutReligionAttempt");						// add key to lookup python handler fxn
+
+		CyUnit* pCyUnit = new CyUnit(pUnit);
+		eventData.add(gDLL->getPythonIFace()->makePythonObject(pCyUnit));
+		eventData.add((int) eReligion);
+		eventData.add(bSuccess);
+
+		postEvent(eventData);
+		delete pCyUnit;
+	}
+}
+
 void CvDllPythonEvents::reportUnitGifted(CvUnit* pUnit, PlayerTypes eGiftingPlayer, CvPlot* pPlotLocation)
 {
 	if (preEvent())

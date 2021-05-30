@@ -2719,6 +2719,7 @@ void getMissionTypeString(CvWString& szString, MissionTypes eMissionType)
 	case MISSION_STEAL_PLANS: szString = L"MISSION_STEAL_PLANS"; break;
 	case MISSION_FOUND: szString = L"MISSION_FOUND"; break;
 	case MISSION_SPREAD: szString = L"MISSION_SPREAD"; break;
+	case MISSION_INQUISITION: szString = L"MISSION_INQUISITION"; break; // Flunky PAE Inquisition
 	case MISSION_SPREAD_CORPORATION: szString = L"MISSION_SPREAD_CORPORATION"; break;
 	case MISSION_JOIN: szString = L"MISSION_JOIN"; break;
 	case MISSION_CONSTRUCT: szString = L"MISSION_CONSTRUCT"; break;

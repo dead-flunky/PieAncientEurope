@@ -228,6 +228,7 @@ class CvEventManager:
             'UnitRename'                : self.onUnitRename,
             'unitPillage'               : self.onUnitPillage,
             'unitSpreadReligionAttempt' : self.onUnitSpreadReligionAttempt,
+            'unitDriveOutReligionAttempt' : self.onUnitDriveOutReligionAttempt, # Flunky PAE Inquisition
             'unitGifted'                : self.onUnitGifted,
             'unitBuildImprovement'      : self.onUnitBuildImprovement,
             'goodyReceived'             : self.onGoodyReceived,
@@ -3876,6 +3877,11 @@ class CvEventManager:
     def onUnitSpreadReligionAttempt(self, argsList):
         'Unit tries to spread religion to a city'
         # pUnit, iReligion, bSuccess = argsList
+
+    # Flunky PAE Inquisition
+    def onUnitDriveOutReligionAttempt(self, argsList):
+        'Unit tries to drive out religion from a city'
+        pUnit, iReligion, bSuccess = argsList
 
     def onUnitGifted(self, argsList):
         'Unit is gifted from one player to another'

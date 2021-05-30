@@ -314,6 +314,12 @@ bool CyUnit::canSpread(CyPlot* pPlot, int /*ReligionTypes*/ eReligion, bool bTes
 	return m_pUnit ? m_pUnit->canSpread(pPlot->getPlot(), (ReligionTypes) eReligion, bTestVisible) : false;
 }
 
+// Flunky PAE Inquisition
+bool CyUnit::canDriveOut(CyPlot* pPlot, int /*ReligionTypes*/ eReligion, bool bTestVisible)
+{
+	return m_pUnit ? m_pUnit->canDriveOut(pPlot->getPlot(), (ReligionTypes) eReligion, bTestVisible) : false;
+}
+
 bool CyUnit::canJoin(CyPlot* pPlot, int /*SpecialistTypes*/ eSpecialist)
 {
 	return m_pUnit ? m_pUnit->canFound(pPlot->getPlot(), (SpecialistTypes) eSpecialist) : false;

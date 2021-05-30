@@ -2282,6 +2282,26 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					GAMETEXT.setReligionHelpCity(szBuffer, eReligion, pMissionCity, false, true);
 				}
 			}
+			// Flunky PAE Inquisition TODO just copied from MISSION_SPREAD
+			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_INQUISITION)
+			{
+				// eReligion = ((ReligionTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData()));
+
+				// if (pMissionCity)
+				// {
+					// if (pMissionCity->getTeam() != pHeadSelectedUnit->getTeam()) // XXX still true???
+					// {
+                        // if (eReligion == GET_PLAYER(pMissionCity->getOwnerINLINE()).getStateReligion())
+                        // {
+                            // szBuffer.append(NEWLINE);
+                            // szBuffer.append(gDLL->getText("TXT_KEY_ACTION_CANNOT_DRIVE_OUT_STATE_RELIGION"));
+                        // }
+					// }
+
+					// szBuffer.append(NEWLINE);
+					// GAMETEXT.setReligionHelpCity(szBuffer, eReligion, pMissionCity, false, true);
+				// }
+			}
 			else if (GC.getActionInfo(widgetDataStruct.m_iData1).getMissionType() == MISSION_SPREAD_CORPORATION)
 			{
 				CorporationTypes eCorporation = ((CorporationTypes)(GC.getActionInfo(widgetDataStruct.m_iData1).getMissionData()));

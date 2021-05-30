@@ -12890,6 +12890,231 @@ bool CvUnitAI::AI_spreadReligion()
 	return false;
 }
 
+// Flunky PAE Inquisition TODO implement
+// Returns true if a mission was pushed...
+// This function has been introduced for PAE
+bool CvUnitAI::AI_driveOutReligion()
+{
+	// PROFILE_FUNC();
+
+	// const CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE()); // K-Mod
+
+	// bool bCultureVictory = kOwner.AI_isDoVictoryStrategy(AI_VICTORY_CULTURE2);
+
+	// ReligionTypes eReligion = NO_RELIGION;
+
+	// if (kOwner.getStateReligion() != NO_RELIGION)
+	// {
+		// if (m_pUnitInfo->getReligionSpreads(kOwner.getStateReligion()) > 0)
+		// {
+			// eReligion = kOwner.getStateReligion();
+		// }
+	// }
+
+	// if (eReligion == NO_RELIGION)
+	// {
+		// for (int iI = 0; iI < GC.getNumReligionInfos(); iI++)
+		// {
+			// //if (bCultureVictory || GET_TEAM(getTeam()).hasHolyCity((ReligionTypes)iI))
+			// {
+				// if (m_pUnitInfo->getReligionSpreads((ReligionTypes)iI) > 0)
+				// {
+					// eReligion = ((ReligionTypes)iI);
+					// break;
+				// }
+			// }
+		// }
+	// }
+
+	// if (eReligion == NO_RELIGION)
+	// {
+		// return false;
+	// }
+
+	// bool bHasHolyCity = GET_TEAM(getTeam()).hasHolyCity(eReligion);
+	// bool bHasAnyHolyCity = bHasHolyCity;
+	// if (!bHasAnyHolyCity)
+	// {
+		// for (int iI = 0; !bHasAnyHolyCity && iI < GC.getNumReligionInfos(); iI++)
+		// {
+			// bHasAnyHolyCity = GET_TEAM(getTeam()).hasHolyCity((ReligionTypes)iI);
+		// }
+	// }
+
+	// int iBestValue = 0;
+	// CvPlot* pBestPlot = NULL;
+	// CvPlot* pBestSpreadPlot = NULL;
+
+	// // BBAI TODO: Could also use CvPlayerAI::AI_missionaryValue to determine which player to target ...
+	// for (int iI = 0; iI < MAX_PLAYERS; iI++)
+	// {
+		// const CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
+
+		// if (kLoopPlayer.isAlive())
+		// {
+		    // int iPlayerMultiplierPercent = 0;
+
+			// if (kLoopPlayer.getTeam() != getTeam() && canEnterTerritory(kLoopPlayer.getTeam()))
+			// {
+				// if (bHasHolyCity)
+				// {
+					// iPlayerMultiplierPercent = 100;
+					// if (!bCultureVictory || (eReligion == kOwner.getStateReligion()))
+					// {
+						// if (kLoopPlayer.getStateReligion() == NO_RELIGION)
+						// {
+							// if (0 == (kLoopPlayer.getNonStateReligionHappiness()))
+							// {
+								// iPlayerMultiplierPercent += 600;
+							// }
+						// }
+						// else if (kLoopPlayer.getStateReligion() == eReligion)
+						// {
+							// iPlayerMultiplierPercent += 300;
+						// }
+						// else
+						// {
+							// if (kLoopPlayer.hasHolyCity(kLoopPlayer.getStateReligion()))
+							// {
+								// iPlayerMultiplierPercent += 50;
+							// }
+							// else
+							// {
+								// iPlayerMultiplierPercent += 300;
+							// }
+						// }
+						
+						// int iReligionCount = kLoopPlayer.countTotalHasReligion();
+						// //int iCityCount = kOwner.getNumCities();
+						// int iCityCount = kLoopPlayer.getNumCities(); // K-Mod!
+						// //magic formula to produce normalized adjustment factor based on religious infusion
+						// int iAdjustment = (100 * (iCityCount + 1));
+						// iAdjustment /= ((iCityCount + 1) + iReligionCount);
+						// iAdjustment = (((iAdjustment - 25) * 4) / 3);
+						
+						// iAdjustment = std::max(10, iAdjustment);
+						
+						// iPlayerMultiplierPercent *= iAdjustment;
+						// iPlayerMultiplierPercent /= 100;
+					// }
+				// }
+			// }
+			// else if (iI == getOwnerINLINE())
+			// {
+				// iPlayerMultiplierPercent = (bCultureVictory ? 1600 : 400) + (kOwner.getStateReligion() == eReligion ? 100 : 0);
+			// }
+			// else if (bHasHolyCity && kLoopPlayer.getTeam() == getTeam())
+			// {
+				// iPlayerMultiplierPercent = kLoopPlayer.getStateReligion() == eReligion ? 600 : 300;
+			// }
+			
+			// if (iPlayerMultiplierPercent > 0)
+			// {
+				// int iLoop;
+				// for (CvCity* pLoopCity = kLoopPlayer.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kLoopPlayer.nextCity(&iLoop))
+				// {
+					// if (AI_plotValid(pLoopCity->plot()) && pLoopCity->area() == area())
+					// {
+						// //if (canSpread(pLoopCity->plot(), eReligion))
+						// if (kOwner.AI_deduceCitySite(pLoopCity) && canSpread(pLoopCity->plot(), eReligion))
+						// {
+							// if (!(pLoopCity->plot()->isVisibleEnemyUnit(this)))
+							// {
+								// if (kOwner.AI_plotTargetMissionAIs(pLoopCity->plot(), MISSIONAI_SPREAD, getGroup()) == 0)
+								// {
+									// int iPathTurns;
+									// if (generatePath(pLoopCity->plot(), MOVE_NO_ENEMY_TERRITORY, true, &iPathTurns))
+									// {
+										// int iValue = 16 + pLoopCity->getPopulation() * 4; // was 7 +
+
+										// iValue *= iPlayerMultiplierPercent;
+										// iValue /= 100;
+										
+										// int iCityReligionCount = pLoopCity->getReligionCount();
+										// int iReligionCountFactor = iCityReligionCount;
+
+										// if (kLoopPlayer.getTeam() == kOwner.getTeam())
+										// {
+											// // count cities with no religion the same as cities with 2 religions
+											// // prefer a city with exactly 1 religion already
+											// if (iCityReligionCount == 0)
+											// {
+												// iReligionCountFactor = 2;
+											// }
+											// else if (iCityReligionCount == 1)
+											// {
+												// iValue *= 2;
+											// }
+										// }
+										// else
+										// {
+											// // absolutely prefer cities with zero religions
+											// if (iCityReligionCount == 0)
+											// {
+												// iValue *= 2;
+											// }
+
+											// // not our city, so prefer the lowest number of religions (increment so no divide by zero)
+											// iReligionCountFactor++;
+										// }
+
+										// iValue /= iReligionCountFactor;
+
+										// FAssert(iPathTurns > 0);
+										
+										// bool bForceMove = false;
+										// if (isHuman())
+										// {
+											// //If human, prefer to spread to the player where automated from.
+											// if (plot()->getOwnerINLINE() == pLoopCity->getOwnerINLINE())
+											// {
+												// iValue *= 10;
+												// if (pLoopCity->isRevealed(getTeam(), false))
+												// {
+													// bForceMove = true;
+												// }
+											// }
+										// }
+
+										// iValue *= 1000;
+
+										// if (iPathTurns > 0)
+											// iValue /= (iPathTurns + 2);
+
+										// if (iValue > iBestValue)
+										// {
+											// iBestValue = iValue;
+											// pBestPlot = bForceMove ? pLoopCity->plot() : getPathEndTurnPlot();
+											// pBestSpreadPlot = pLoopCity->plot();
+										// }
+									// }
+								// }
+							// }
+						// }
+					// }
+				// }
+			// }
+		// }
+	// }
+
+	// if ((pBestPlot != NULL) && (pBestSpreadPlot != NULL))
+	// {
+		// if (atPlot(pBestSpreadPlot))
+		// {
+			// getGroup()->pushMission(MISSION_INQUISITION, eReligion);
+			// return true;
+		// }
+		// else
+		// {
+			// FAssert(!atPlot(pBestPlot));
+			// getGroup()->pushMission(MISSION_MOVE_TO, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), MOVE_NO_ENEMY_TERRITORY, false, false, MISSIONAI_SPREAD, pBestSpreadPlot);
+			// return true;
+		// }
+	// }
+
+	return false;
+}
+
 
 // K-Mod: I've basically rewritten this whole function.
 // Returns true if a mission was pushed...
@@ -18377,7 +18602,23 @@ bool CvUnitAI::AI_specialSeaTransportMissionary()
 						}
 					}
 				}
+                // Flunky PAE Inquisition TODO calculate value
+                for (iJ = 0; iJ < GC.getNumReligionInfos(); iJ++)
+				{
+					if (pMissionaryUnit->canDriveOut(pLoopPlot, ((ReligionTypes)iJ)))
+					{
+						// if (GET_PLAYER(getOwnerINLINE()).getStateReligion() == ((ReligionTypes)iJ))
+						// {
+							// iValue += 3;
+						// }
 
+						// if (GET_PLAYER(getOwnerINLINE()).hasHolyCity((ReligionTypes)iJ))
+						// {
+							// iValue++;
+						// }
+					}
+				}
+                
 				for (iJ = 0; iJ < GC.getNumCorporationInfos(); iJ++)
 				{
 					if (pMissionaryUnit->canSpreadCorporation(pLoopPlot, ((CorporationTypes)iJ)))

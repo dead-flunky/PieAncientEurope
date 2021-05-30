@@ -644,6 +644,7 @@ CvPlot* CvSelectionGroup::lastMissionPlot()
 		case MISSION_STEAL_PLANS:
 		case MISSION_FOUND:
 		case MISSION_SPREAD:
+		case MISSION_INQUISITION: // Flunky PAE Inquisition
 		case MISSION_SPREAD_CORPORATION:
 		case MISSION_JOIN:
 		case MISSION_CONSTRUCT:
@@ -821,6 +822,7 @@ void CvSelectionGroup::startMission()
 		case MISSION_STEAL_PLANS:
 		case MISSION_FOUND:
 		case MISSION_SPREAD:
+		case MISSION_INQUISITION: // Flunky PAE Inquisition
 		case MISSION_SPREAD_CORPORATION:
 		case MISSION_JOIN:
 		case MISSION_CONSTRUCT:
@@ -1063,6 +1065,13 @@ void CvSelectionGroup::startMission()
 
 				case MISSION_SPREAD:
 					if (pLoopUnit->spread((ReligionTypes)(headMissionQueueNode()->m_data.iData1)))
+					{
+						bAction = true;
+					}
+					break;
+                // Flunky PAE Inquisition
+				case MISSION_INQUISITION:
+					if (pLoopUnit->driveOut((ReligionTypes)(headMissionQueueNode()->m_data.iData1)))
 					{
 						bAction = true;
 					}
@@ -1434,6 +1443,7 @@ bool CvSelectionGroup::continueMission_bulk(int iSteps)
 				case MISSION_STEAL_PLANS:
 				case MISSION_FOUND:
 				case MISSION_SPREAD:
+				case MISSION_INQUISITION: // Flunky PAE Inquisition
 				case MISSION_SPREAD_CORPORATION:
 				case MISSION_JOIN:
 				case MISSION_CONSTRUCT:
@@ -1521,6 +1531,7 @@ bool CvSelectionGroup::continueMission_bulk(int iSteps)
 			case MISSION_STEAL_PLANS:
 			case MISSION_FOUND:
 			case MISSION_SPREAD:
+			case MISSION_INQUISITION: // Flunky PAE Inquisition
 			case MISSION_SPREAD_CORPORATION:
 			case MISSION_JOIN:
 			case MISSION_CONSTRUCT:
@@ -4004,6 +4015,11 @@ bool CvSelectionGroup::canDoMission(int iMission, int iData1, int iData2, CvPlot
 
 		case MISSION_SPREAD:
 			if (pLoopUnit->canSpread(pPlot, (ReligionTypes)iData1, bTestVisible) && (!bCheckMoves || pLoopUnit->canMove()))
+				return true;
+			break;
+        // Flunky PAE Inquisition
+        case MISSION_INQUISITION:
+			if (pLoopUnit->canDriveOut(pPlot, (ReligionTypes)iData1, bTestVisible) && (!bCheckMoves || pLoopUnit->canMove()))
 				return true;
 			break;
 

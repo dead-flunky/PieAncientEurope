@@ -62,7 +62,9 @@ public:
 	void reportUnitRename(CvUnit *pUnit);
 	void reportUnitPillage(CvUnit* pUnit, ImprovementTypes eImprovement, RouteTypes eRoute, PlayerTypes ePlayer);
 	void reportUnitSpreadReligionAttempt(CvUnit* pUnit, ReligionTypes eReligion, bool bSuccess);
-	void reportUnitGifted(CvUnit* pUnit, PlayerTypes eGiftingPlayer, CvPlot* pPlotLocation);
+	// Flunky PAE Inquisition
+    void reportUnitDriveOutReligionAttempt(CvUnit* pUnit, ReligionTypes eReligion, bool bSuccess);
+    void reportUnitGifted(CvUnit* pUnit, PlayerTypes eGiftingPlayer, CvPlot* pPlotLocation);
 	void reportUnitBuildImprovement(CvUnit* pUnit, BuildTypes eBuild, bool bFinished);
 
 	void reportGoodyReceived(PlayerTypes ePlayer, CvPlot *pGoodyPlot, CvUnit *pGoodyUnit, GoodyTypes eGoodyType);
