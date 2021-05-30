@@ -2868,7 +2868,10 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 					if (GC.getImprovementInfo(eImprovement).getDefenseModifier() != 0)
 					{
 						szBuffer.append(NEWLINE);
-						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_DEFENSE_MODIFIER", GC.getImprovementInfo(eImprovement).getDefenseModifier()));
+// Super Forts begin *bombard* *text*
+						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_DEFENSE_MODIFIER", (GC.getImprovementInfo(eImprovement).getDefenseModifier() - pMissionPlot->getDefenseDamage())));
+//						szBuffer.append(gDLL->getText("TXT_KEY_ACTION_DEFENSE_MODIFIER", GC.getImprovementInfo(eImprovement).getDefenseModifier()));
+// Super Forts end
 					}
 
 					if (GC.getImprovementInfo(eImprovement).getImprovementUpgrade() != NO_IMPROVEMENT)

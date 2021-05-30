@@ -89,7 +89,10 @@ public:
 /*                                                                                              */
 /* General AI                                                                                   */
 /************************************************************************************************/
-	int getBombardTurns( CvCity* pCity );
+/*super forts doto*/
+	int getBombardTurns(CvCity* pCity /*super forts doto*/, CvPlot* pPlot=NULL);
+	int getFortBombardTurns(CvPlot* pPlot);
+/*super forts doto*/
 	bool isHasPathToAreaPlayerCity( PlayerTypes ePlayer, int iFlags = 0, int iMaxPathTurns = -1 );
 	bool isHasPathToAreaEnemyCity( bool bIgnoreMinors = true, int iFlags = 0, int iMaxPathTurns = -1 );
 	bool isStranded() const; // Note: K-Mod no longer uses the stranded cache. I have a new system.
