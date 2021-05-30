@@ -1142,15 +1142,16 @@ def popupVassalTech2(argsList):
         iData4 = -1
     CyMessageControl().sendModNetMessage( 703, iData1, iData2, iData3, iData4 )
 
-def popupReliaustreibung(argsList):
-    iButtonId = argsList[0]
-    iData1 = argsList[1]
-    iData2 = argsList[2]
-    iData3 = argsList[3]
-    iData4 = argsList[4]
-    # iPlayer, iCity, iUnit , iCancelButton
-    if iButtonId != iData4:
-         CyMessageControl().sendModNetMessage( 704, iData1, iData2, iButtonId, iData3 )
+# Flunky PAE Inquisition to dll
+# def popupReliaustreibung(argsList):
+    # iButtonId = argsList[0]
+    # iData1 = argsList[1]
+    # iData2 = argsList[2]
+    # iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # # iPlayer, iCity, iUnit , iCancelButton
+    # if iButtonId != iData4:
+         # CyMessageControl().sendModNetMessage( 704, iData1, iData2, iButtonId, iData3 )
 
 def popupRenegadeCity(argsList):
     iButtonId = argsList[0]

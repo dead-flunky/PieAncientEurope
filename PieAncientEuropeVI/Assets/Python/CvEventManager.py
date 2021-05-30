@@ -401,14 +401,15 @@ class CvEventManager:
 
         # iData1 = iMessageID (!)
 
+        # Flunky PAE Inquisition to dll
         # Inquisitor
-        if iData1 == 665:
-            pPlot = CyMap().plot(iData2, iData3)
-            pCity = pPlot.getPlotCity()
-            # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Inquisitor iData4: ",iData4)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-            pPlayer = gc.getPlayer(iData4)
-            pUnit = pPlayer.getUnit(iData5)
-            PAE_City.doInquisitorPersecution(pCity, pUnit)
+        # if iData1 == 665:
+            # pPlot = CyMap().plot(iData2, iData3)
+            # pCity = pPlot.getPlotCity()
+            # # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Inquisitor iData4: ",iData4)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+            # pPlayer = gc.getPlayer(iData4)
+            # pUnit = pPlayer.getUnit(iData5)
+            # PAE_City.doInquisitorPersecution(pCity, pUnit)
         # Horse down
         elif iData1 == 666:
             # pPlot = CyMap().plot(iData2, iData3)
@@ -645,10 +646,11 @@ class CvEventManager:
             # NO:  : iTechCost = -1
             PAE_Vassal.do703(iData2, iData3, iData4, iData5)
 
+        # Flunky PAE Inquisition to dll
         # Religionsaustreibung
-        elif iData1 == 704:
-            # 704, iPlayer, iCity, iButton, iUnit
-            PAE_City.doInquisitorPersecution2(iData2, iData3, iData4, -1, iData5)
+        # elif iData1 == 704:
+            # # 704, iPlayer, iCity, iButton, iUnit
+            # PAE_City.doInquisitorPersecution2(iData2, iData3, iData4, -1, iData5)
 
         # Veteran -> Eliteunit, Bsp: Principes + Hastati Combat4 -> Triarii mit Combat3 - Belobigung
         elif iData1 == 705:

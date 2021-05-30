@@ -2854,18 +2854,19 @@ class CvMainInterface:
                         #     iCount = iCount + 1
 
                         # ----------
+                        # Flunky PAE Inquisition to dll - here is the button art
                         # Inquisitor
-                        if bCity and iUnitType == gc.getInfoTypeForString("UNIT_INQUISITOR"):
-                            if PAE_Unit.InquisitionPossible(pCity, iUnitOwner):
-                                screen.appendMultiListButton("BottomButtonContainer", ArtFileMgr.getInterfaceArtInfo("INTERFACE_GODS_PERSICUTION").getPath(), 0, WidgetTypes.WIDGET_GENERAL, 665, 665, False)
-                                screen.show("BottomButtonContainer")
-                                screen.enableMultiListPulse("BottomButtonContainer", True, 0, iCount)
-                                iCount = iCount + 1
-                                return 0
+                        # if bCity and iUnitType == gc.getInfoTypeForString("UNIT_INQUISITOR"):
+                            # if PAE_Unit.InquisitionPossible(pCity, iUnitOwner):
+                                # screen.appendMultiListButton("BottomButtonContainer", ArtFileMgr.getInterfaceArtInfo("INTERFACE_GODS_PERSICUTION").getPath(), 0, WidgetTypes.WIDGET_GENERAL, 665, 665, False)
+                                # screen.show("BottomButtonContainer")
+                                # screen.enableMultiListPulse("BottomButtonContainer", True, 0, iCount)
+                                # iCount = iCount + 1
+                                # return 0
 
                         # --------------------
                         # Hunter / Jaeger -> INFO BUTTON ob Cities in Reichweite sind
-                        elif iUnitType == gc.getInfoTypeForString("UNIT_HUNTER"):
+                        if iUnitType == gc.getInfoTypeForString("UNIT_HUNTER"):
                             bOK = False
                             (loopCity, pIter) = pUnitOwner.firstCity(False)
                             while loopCity:
@@ -8713,12 +8714,13 @@ class CvMainInterface:
                 iData2 = inputClass.getData2()
                 bOption = inputClass.getOption()
 
+                # Flunky PAE Inquisition to dll
                 # Inquisitor
-                if iData1 == 665 and iData2 == 665:
-                    CyMessageControl().sendModNetMessage(665, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
+                # if iData1 == 665 and iData2 == 665:
+                    # CyMessageControl().sendModNetMessage(665, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
 
                 # Horse down
-                elif iData1 == 666 and iData2 == 666:
+                if iData1 == 666 and iData2 == 666:
                     CyAudioGame().Play2DSound('AS2D_HORSE_DOWN')
                     CyMessageControl().sendModNetMessage(666, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
 
