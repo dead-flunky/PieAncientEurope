@@ -440,7 +440,9 @@ public:
 
 	int AI_getPlotAirbaseValue(CvPlot* pPlot) const;
 	int AI_getPlotCanalValue(CvPlot* pPlot) const;
-
+	// Super Forts *choke*
+	int AI_getPlotChokeValue(CvPlot* pPlot) const;
+	// Super Forts end
 	int AI_getHappinessWeight(int iHappy, int iExtraPop, bool bPercent=false) const;
 	int AI_getHealthWeight(int iHealth, int iExtraPop, bool bPercent=false) const;
 

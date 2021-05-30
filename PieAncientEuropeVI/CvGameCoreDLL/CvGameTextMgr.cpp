@@ -4541,6 +4541,18 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 		szTempBuffer.Format(L"\nWERiverFlow: %c", tempChar);
 		szString.append(szTempBuffer);
 
+//super forts - from mnai - doto added	
+		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+		{
+	// Choke value
+			szTempBuffer.Format(L"\nChoke Value: %d", pPlot->getChokeValue());
+			szString.append(szTempBuffer);
+
+	// Canal value
+			szTempBuffer.Format(L"\nCanal Value: %d", pPlot->getCanalValue());
+			szString.append(szTempBuffer);
+	}
+//super forts
 		if(pPlot->getRouteType() != NO_ROUTE)
 		{
 			szTempBuffer.Format(L"\nRoute: %s", GC.getRouteInfo(pPlot->getRouteType()).getDescription());
@@ -5548,19 +5560,37 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 
 			if (GC.getImprovementInfo(eImprovement).getImprovementUpgrade() != NO_IMPROVEMENT)
 			{
-				if ((pPlot->getUpgradeProgress() > 0) || pPlot->isBeingWorked())
+// Super Forts begin *text* *upgrade*			
+				if (pPlot->getUpgradeProgress() > 0 
+				|| pPlot->isBeingWorked()&& !GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify() &&
+				  !GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+// Super Forts end
+				//if ((pPlot->getUpgradeProgress() > 0) || pPlot->isBeingWorked())
 				{
 					iTurns = pPlot->getUpgradeTimeLeft(eImprovement, eRevealOwner);
 
 					szString.append(gDLL->getText("TXT_KEY_PLOT_IMP_UPGRADE", iTurns, GC.getImprovementInfo((ImprovementTypes) GC.getImprovementInfo(eImprovement).getImprovementUpgrade()).getTextKeyWide()));
 				}
+// Super Forts begin *text* *upgrade* from mnai
+				else if (GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify() && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+				{
+					szString.append(gDLL->getText("TXT_KEY_PLOT_FORTIFY_TO_UPGRADE", GC.getImprovementInfo((ImprovementTypes) GC.getImprovementInfo(eImprovement).getImprovementUpgrade()).getTextKeyWide()));
+				}
+// Super Forts end
 				else
 				{
 					szString.append(gDLL->getText("TXT_KEY_PLOT_WORK_TO_UPGRADE", GC.getImprovementInfo((ImprovementTypes) GC.getImprovementInfo(eImprovement).getImprovementUpgrade()).getTextKeyWide()));
 				}
 			}
 		}
-
+		// Super Forts doto add to the plot
+		if (pPlot->getCultureRangeForts(pPlot->getOwnerINLINE()) > 0 && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+		{
+			//szTempBuffer.Format(L"\nFort Control by: %s", GET_PLAYER(kPlot.getOwnerINLINE()).getCivilizationAdjective(0));
+			szTempBuffer.Format(L"\nFort Control by:" SETCOLR L"%s" ENDCOLR,  TEXT_COLOR("COLOR_HIGHLIGHT_TEXT"), GET_PLAYER(pPlot->getOwnerINLINE()).getCivilizationAdjective(0));
+			szString.append(szTempBuffer);
+		}
+		// Super Forts end doto
 		if (pPlot->getRevealedRouteType(GC.getGameINLINE().getActiveTeam(), true) != NO_ROUTE)
 		{
 			szString.append(NEWLINE);
@@ -13921,6 +13951,13 @@ void CvGameTextMgr::setImprovementHelp(CvWStringBuffer &szBuffer, ImprovementTyp
 
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_EVOLVES", GC.getImprovementInfo((ImprovementTypes) info.getImprovementUpgrade()).getTextKeyWide(), iTurns));
+// Super Forts begin *text* *upgrade*
+		if (info.isUpgradeRequiresFortify() && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+		{
+			szBuffer.append(NEWLINE);
+			szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_FORTIFY_TO_UPGRADE"));
+		}
+// Super Forts end
 	}
 
 	int iLast = -1;
@@ -13976,9 +14013,48 @@ void CvGameTextMgr::setImprovementHelp(CvWStringBuffer &szBuffer, ImprovementTyp
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_LESS_GROWTH"));
 	}
-
+// Super Forts begin *text* *bombard*
+	if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	{
+		if (info.isBombardable() && (info.getDefenseModifier() > 0))
+		{
+			szBuffer.append(NEWLINE);
+			szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_BOMBARD"));
+		}
+		if (info.getUniqueRange() > 0)
+		{
+			szBuffer.append(NEWLINE);
+			szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_UNIQUE_RANGE", info.getUniqueRange()));
+		}
+	}
+// Super Forts end
 	if (bCivilopediaText)
 	{
+		// Super Forts begin *text*
+		if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+		{
+			if (info.getCulture() > 0)
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_PLOT_CULTURE", info.getCulture()));
+			}
+			if (info.getCultureRange() > 0 && ((info.getCulture() > 0) || info.isActsAsCity()))
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_CULTURE_RANGE", info.getCultureRange()));
+			}
+			if (info.getVisibilityChange() > 0)
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_VISIBILITY_RANGE", info.getVisibilityChange()));
+			}
+			if (info.getSeeFrom() > 0)
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_SEE_FROM", info.getSeeFrom()));
+			}
+		}
+// Super Forts end	
 		if (info.getPillageGold() > 0)
 		{
 			szBuffer.append(NEWLINE);

@@ -140,6 +140,9 @@ protected:
 	bool AI_guardBonus(int iMinValue = 0);
 	int AI_getPlotDefendersNeeded(CvPlot* pPlot, int iExtra);
 	bool AI_guardFort(bool bSearch = true);
+// Super Forts begin *AI_defense*
+	bool AI_guardFortMinDefender(bool bSearch = true);
+// Super Forts end
 	bool AI_guardCitySite();
 	bool AI_guardSpy(int iRandomPercent);
 	bool AI_destroySpy();
@@ -180,6 +183,9 @@ protected:
 	//bool AI_goToTargetBarbCity(int iMaxPathTurns = 10); // disabled by K-Mod. (duplicate code ftl)
 	bool AI_pillageAroundCity(CvCity* pTargetCity, int iBonusValueThreshold = 0, int iFlags = 0, int iMaxPathTurns = MAX_INT);
 	bool AI_bombardCity();
+//super forts doto - cleaner code
+	bool AI_bombardFort();
+//super forts doto - cleaner code
 	bool AI_cityAttack(int iRange, int iOddsThreshold, int iFlags = 0, bool bFollow = false);
 	bool AI_anyAttack(int iRange, int iOddsThreshold, int iFlags = 0, int iMinStack = 0, bool bAllowCities = true, bool bFollow = false);
 /************************************************************************************************/

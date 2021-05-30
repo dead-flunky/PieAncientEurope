@@ -2634,9 +2634,18 @@ bool CvSelectionGroup::visibilityRange()
 //
 // Approximate how many turns this group would take to reduce pCity's defense modifier to zero
 //
-int CvSelectionGroup::getBombardTurns(CvCity* pCity)
+int CvSelectionGroup::getBombardTurns(CvCity* pCity /*super forts doto*/, CvPlot* pPlot)
 {
 	PROFILE_FUNC();
+	/*
+super forts doto
+	i decided to duplicate this function and cut the not needed parts it felt cleaner
+	*/
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pCity == NULL)
+	{
+		return getFortBombardTurns(pPlot);
+	}
+	//super forts doto
 
 	bool bHasBomber = (getOwnerINLINE() != NO_PLAYER ? (GET_PLAYER(getOwnerINLINE()).AI_calculateTotalBombard(DOMAIN_AIR) > 0) : false);
 	bool bIgnoreBuildingDefense = bHasBomber;
@@ -2667,7 +2676,7 @@ int CvSelectionGroup::getBombardTurns(CvCity* pCity)
 		}
 	}
 
-
+	/* MARKED OUT ADVC DID IT BETTER SEE BELOW - DOTO ADDED
 	if( pCity->getTotalDefense(bIgnoreBuildingDefense) == 0 )
 	{
 		return 0;
@@ -2682,7 +2691,78 @@ int CvSelectionGroup::getBombardTurns(CvCity* pCity)
 		iBombardTurns += (GC.getMAX_CITY_DEFENSE_DAMAGE() * iTotalBombardRate) - 1;
 		iBombardTurns /= std::max(1, (GC.getMAX_CITY_DEFENSE_DAMAGE() * iTotalBombardRate));
 	}
+	*/
+	//if( gUnitLogLevel > 2 ) logBBAI("      Bombard of %S will take %d turns at rate %d and current damage %d with bombard def %d", pCity->getName().GetCString(), iBombardTurns, iTotalBombardRate, pCity->getDefenseDamage(), (bIgnoreBuildingDefense ? 0 : pCity->getBuildingBombardDefense()));
 
+		// advc (minor bugfix?): BBAI had not passed bIgnoreBuildingDefense consistently
+	int const iTotalDefense = pCity->getTotalDefense(bIgnoreBuildingDefense);
+	if (iTotalDefense <= 0)
+		return 0;
+	int const iHP = GC.getMAX_CITY_DEFENSE_DAMAGE() - pCity->getDefenseDamage();
+	if (iHP <= 0)
+		return 0;
+	int iBombardTurns = ROUND_DIVIDE(iHP * iTotalDefense,
+		std::max(1, GC.getMAX_CITY_DEFENSE_DAMAGE() * iTotalBombardRate));
+	//if (gUnitLogLevel > 2) logBBAI("      Bombard of %S will take %d turns at rate %d and current damage %d with bombard def %d", pCity->getName().GetCString(), iBombardTurns, iTotalBombardRate, pCity->getDefenseDamage(), (bIgnoreBuildingDefense ? 0 : pCity->getBuildingBombardDefense()));
+	return iBombardTurns;
+}
+
+int CvSelectionGroup::getFortBombardTurns(CvPlot* pPlot)
+{
+	PROFILE_FUNC();
+
+	bool bHasBomber = (getOwnerINLINE() != NO_PLAYER ? (GET_PLAYER(getOwnerINLINE()).AI_calculateTotalBombard(DOMAIN_AIR) > 0) : false);
+	bool bIgnoreBuildingDefense = bHasBomber;
+	int iTotalBombardRate = (bHasBomber ? 16 : 0);
+	int iUnitBombardRate = 0;
+
+	CLLNode<IDInfo>* pUnitNode = headUnitNode();
+	while (pUnitNode != NULL)
+	{
+		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
+		pUnitNode = nextUnitNode(pUnitNode);
+
+		if (pLoopUnit->bombardRate() > 0)
+		{
+			iUnitBombardRate = pLoopUnit->bombardRate();
+
+		/*	if (pLoopUnit->ignoreBuildingDefense())
+			{
+				bIgnoreBuildingDefense = true;
+			}
+			else
+			{*/
+				iUnitBombardRate *= std::max(25, (100 - pPlot->getDefenseDamage()));
+				iUnitBombardRate /= 100;
+			/*}*/
+
+			iTotalBombardRate += iUnitBombardRate;
+		}
+	}
+
+	int const iTotalDefense = pPlot->getDefenseDamage();
+	if (iTotalDefense <= 0)
+	{
+		return 0;
+	}
+
+	//int iBombardTurns = iTotalDefense;
+	//TAKEN FROM ADVC FIX FOR KMOD - DOTO ADDED
+	int const iHP = GC.getMAX_CITY_DEFENSE_DAMAGE() - iTotalDefense;
+	if (iHP <= 0)
+		return 0;
+
+	int iBombardTurns = ROUND_DIVIDE(iHP * iTotalDefense,
+		std::max(1, GC.getMAX_CITY_DEFENSE_DAMAGE() * iTotalBombardRate));
+	/*
+	if (iTotalBombardRate > 0)
+	{
+		iBombardTurns = (GC.getMAX_CITY_DEFENSE_DAMAGE() - pCity->getDefenseDamage());
+		iBombardTurns *= pCity->getTotalDefense(false);
+		iBombardTurns += (GC.getMAX_CITY_DEFENSE_DAMAGE() * iTotalBombardRate) - 1;
+		iBombardTurns /= std::max(1, (GC.getMAX_CITY_DEFENSE_DAMAGE() * iTotalBombardRate));
+	}
+	*/
 	//if( gUnitLogLevel > 2 ) logBBAI("      Bombard of %S will take %d turns at rate %d and current damage %d with bombard def %d", pCity->getName().GetCString(), iBombardTurns, iTotalBombardRate, pCity->getDefenseDamage(), (bIgnoreBuildingDefense ? 0 : pCity->getBuildingBombardDefense()));
 
 	return iBombardTurns;

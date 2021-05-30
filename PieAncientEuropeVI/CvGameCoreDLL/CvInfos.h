@@ -2868,6 +2868,15 @@ public:
 	int getImprovementUpgrade() const;				// Exposed to Python
 	void setImprovementUpgrade(int i);
 
+	// Super Forts begin *XML*
+	int getCulture() const;
+	int getCultureRange() const;
+	int getVisibilityChange() const;
+	int getSeeFrom() const;
+	int getUniqueRange() const;
+	bool isBombardable() const;
+	bool isUpgradeRequiresFortify() const;
+	// Super Forts end
 	bool isActsAsCity() const;				// Exposed to Python
 	bool isHillsMakesValid() const;				// Exposed to Python
 	bool isFreshWaterMakesValid() const;				// Exposed to Python
@@ -2946,6 +2955,15 @@ protected:
 	int m_iImprovementPillage;
 	int m_iImprovementUpgrade;
 
+	// Super Forts begin *XML*
+	int m_iCulture;
+	int m_iCultureRange;
+	int m_iVisibilityChange;
+	int m_iSeeFrom;
+	int m_iUniqueRange;
+	bool m_bBombardable;
+	bool m_bUpgradeRequiresFortify;
+	// Super Forts end
 	bool m_bActsAsCity;				
 	bool m_bHillsMakesValid;				
 	bool m_bFreshWaterMakesValid;	

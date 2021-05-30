@@ -2563,7 +2563,20 @@ void CvPlayer::killCities()
 	{
 		pLoopCity->kill(false);
 	}
-
+	// Super Forts begin *culture* - Clears culture from forts when a player dies
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	{
+		PlayerTypes ePlayer = getID();
+		for (int iI = 0; iI < GC.getMapINLINE().numPlots(); iI++)
+		{
+			CvPlot* pLoopPlot = GC.getMapINLINE().plotByIndex(iI);
+			if (pLoopPlot->getOwner() == ePlayer)
+			{
+				pLoopPlot->setOwner(pLoopPlot->calculateCulturalOwner(), true, false);
+			}
+		}
+	}
+	// Super Forts end
 	GC.getGameINLINE().updatePlotGroups();
 }
 
