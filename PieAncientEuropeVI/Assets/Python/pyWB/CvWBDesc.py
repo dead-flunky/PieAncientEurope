@@ -2305,7 +2305,7 @@ class CvWBDesc:
                     print("bNeverAlive")
                 continue # </f1rpo>
             # Random Start Location
-            if bStartingPoints and pWBPlayer.bRandomStartLocation != "false":
+            if bStartingPoints: #"and pWBPlayer.bRandomStartLocation != "false":
                 if Debugging:
                     print("findStartingPlot for player %d" %(iPlayerLoop))
 
