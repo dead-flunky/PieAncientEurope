@@ -7793,8 +7793,9 @@ class CvMainInterface:
             #        sButton = lVincent[pPlayer.AI_getAttitude(CyGame().getActivePlayer())]
 
             # PAE
+            # Flunky: don't call AI_getAttitude on ourselves
             sButton = ""
-            if not pPlayer.isHuman():
+            if gc.getGame().getActivePlayer() != iPlayer and not pPlayer.isHuman():
                 iAtt = pPlayer.AI_getAttitude(gc.getGame().getActivePlayer())
                 sButton = u"%c" % (CyGame().getSymbolID(FontSymbols.POWER_CHAR) + 4 + iAtt)
             # None was: ArtFileMgr.getInterfaceArtInfo(sButton).getPath()

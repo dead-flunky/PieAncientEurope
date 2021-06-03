@@ -248,12 +248,14 @@ class CvDiplomacy:
 
 			#if (gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
 			# K-Mod. The AI should not just accept target requests from anyone...
-			if (gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()) and
-				(gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(gc.getGame().getActivePlayer()) >= AttitudeTypes.ATTITUDE_PLEASED or
-				gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() == gc.getGame().getActiveTeam() or
-				gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()))):
-			# K-Mod end
-				self.addUserComment("USER_DIPLOCOMMENT_TARGET", -1, -1)
+            # Flunky make sure to not check on ourselves
+            if gc.getGame().getActivePlayer() != self.diploScreen.getWhoTradingWith():
+                if (gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()) and
+                    (gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(gc.getGame().getActivePlayer()) >= AttitudeTypes.ATTITUDE_PLEASED or
+                    gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() == gc.getGame().getActiveTeam() or
+                    gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()))):
+                # K-Mod end
+                    self.addUserComment("USER_DIPLOCOMMENT_TARGET", -1, -1)
 
 			# K-Mod. Allow masters to tell their vassals to prepare for war
 			if (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAtWarCount(true) == 0 and
@@ -466,9 +468,10 @@ class CvDiplomacy:
 			
 			# check attitude of other player towards me
 			if (self.isUsed(diploInfo.getAttitudeTypes, i, AttitudeTypes.NUM_ATTITUDE_TYPES)):
-				att = theirPlayer.AI_getAttitude(CyGame().getActivePlayer())
-				if (not diploInfo.getAttitudeTypes(i, att)):
-					continue
+                if theirPlayer != CyGame().getActivePlayer():
+                    att = theirPlayer.AI_getAttitude(CyGame().getActivePlayer())
+                    if (not diploInfo.getAttitudeTypes(i, att)):
+                        continue
 			
 			# check civ type
 			if (self.isUsed(diploInfo.getCivilizationTypes, i, gc.getNumCivilizationInfos()) and
@@ -714,18 +717,19 @@ class CvDiplomacy:
 
 		# If we want to ask them to what their attitude is on a specific player
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_ATTITUDE_PLAYER")):
-			eAttitude = gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(iData1)
-			
-			if (eAttitude == AttitudeTypes.ATTITUDE_FURIOUS):
-				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_FURIOUS"), gc.getPlayer(iData1).getNameKey())
-			elif (eAttitude == AttitudeTypes.ATTITUDE_ANNOYED):
-				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_ANNOYED"), gc.getPlayer(iData1).getNameKey())
-			elif (eAttitude == AttitudeTypes.ATTITUDE_CAUTIOUS):
-				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_CAUTIOUS"), gc.getPlayer(iData1).getNameKey())
-			elif (eAttitude == AttitudeTypes.ATTITUDE_PLEASED):
-				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_PLEASED"), gc.getPlayer(iData1).getNameKey())
-			else:
-				self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_FRIENDLY"), gc.getPlayer(iData1).getNameKey())
+            if iData1 != self.diploScreen.getWhoTradingWith():
+                eAttitude = gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(iData1)
+                
+                if (eAttitude == AttitudeTypes.ATTITUDE_FURIOUS):
+                    self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_FURIOUS"), gc.getPlayer(iData1).getNameKey())
+                elif (eAttitude == AttitudeTypes.ATTITUDE_ANNOYED):
+                    self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_ANNOYED"), gc.getPlayer(iData1).getNameKey())
+                elif (eAttitude == AttitudeTypes.ATTITUDE_CAUTIOUS):
+                    self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_CAUTIOUS"), gc.getPlayer(iData1).getNameKey())
+                elif (eAttitude == AttitudeTypes.ATTITUDE_PLEASED):
+                    self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_PLEASED"), gc.getPlayer(iData1).getNameKey())
+                else:
+                    self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_FRIENDLY"), gc.getPlayer(iData1).getNameKey())
 
 		# If we want to ask them to change their target
 		elif (self.isComment(eComment, "USER_DIPLOCOMMENT_TARGET")):

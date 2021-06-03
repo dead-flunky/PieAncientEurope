@@ -315,7 +315,8 @@ def stackDoTurn(iPlayer, iGameTurn):
                         # 4 = Gracious
                         #keldath fix start
                         iAtt = 4
-                        if pLoopOwner != iPlayer:
+                        # Flunky: was pLoopOwner != iPlayer
+                        if iLoopOwner != iPlayer:
                             iAtt = pLoopOwner.AI_getAttitude(iPlayer)
                         #keldath fix start
                         if iAtt == 4:
