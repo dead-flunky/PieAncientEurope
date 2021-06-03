@@ -107,7 +107,7 @@ def onModNetMessage(argsList):
             # ATTITUDE_FURIOUS
             if not lNeighbors:
                 popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN1_1", ("",)))
-            else: 
+            else:
                 for iLoopPlayer in lNeighbors:
                     # Flunky keldath fix
                     if iLoopPlayer == iPlayer:
@@ -655,39 +655,38 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
     # ATTITUDE_FURIOUS
     lNeighbors = []
     if iTargetPlayer == -1:
-      iRangeMaxPlayers = gc.getMAX_PLAYERS()
-      for iLoopPlayer in range(iRangeMaxPlayers):
-        #keldath fix
-        if iLoopPlayer == iPlayer:
-            continue
-        #keldath fix
-        pLoopPlayer = gc.getPlayer(iLoopPlayer)
-        if iLoopPlayer != gc.getBARBARIAN_PLAYER() and iLoopPlayer != iPlayer:
-            if pLoopPlayer.isAlive():
-                if gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
-                    eAtt = pPlayer.AI_getAttitude(iLoopPlayer)
-                    if eAtt == AttitudeTypes.ATTITUDE_ANNOYED or eAtt == AttitudeTypes.ATTITUDE_FURIOUS:
-                        # Check: Coastal cities for naval mercenary units
-                        iAttackAtSea = 0
-                        iCoastalCities = 0
-                        iLandCities = 0
-                        iNumCities = pLoopPlayer.getNumCities()
-                        for i in range(iNumCities):
-                            if pLoopPlayer.getCity(i).isCoastal(20):
-                                iCoastalCities += 1
-                            else:
-                                iLandCities += 1
+        iRangeMaxPlayers = gc.getMAX_PLAYERS()
+        for iLoopPlayer in range(iRangeMaxPlayers):
+            #keldath fix
+            if iLoopPlayer == iPlayer:
+                continue
+            #keldath fix
+            pLoopPlayer = gc.getPlayer(iLoopPlayer)
+            if iLoopPlayer != gc.getBARBARIAN_PLAYER() and iLoopPlayer != iPlayer:
+                if pLoopPlayer.isAlive():
+                    if gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
+                        eAtt = pPlayer.AI_getAttitude(iLoopPlayer)
+                        if eAtt == AttitudeTypes.ATTITUDE_ANNOYED or eAtt == AttitudeTypes.ATTITUDE_FURIOUS:
+                            # Check: Coastal cities for naval mercenary units
+                            iAttackAtSea = 0
+                            iCoastalCities = 0
+                            iLandCities = 0
+                            iNumCities = pLoopPlayer.getNumCities()
+                            for i in range(iNumCities):
+                                if pLoopPlayer.getCity(i).isCoastal(20):
+                                    iCoastalCities += 1
+                                else:
+                                    iLandCities += 1
+                            if iCoastalCities > 0:
+                                if iCoastalCities >= iLandCities:
+                                    if CvUtil.myRandom(2, "iAttackAtSea") == 1:
+                                        iAttackAtSea = 1
+                                else:
+                                    iChance = (iNumCities * 2) - iCoastalCities
+                                    if CvUtil.myRandom(iChance, "iAttackAtSea2") == 0:
+                                        iAttackAtSea = 1
 
-                        if iCoastalCities > 0:
-                            if iCoastalCities >= iLandCities:
-                                if CvUtil.myRandom(2, "iAttackAtSea") == 1:
-                                    iAttackAtSea = 1
-                            else:
-                                iChance = (iNumCities * 2) - iCoastalCities
-                                if CvUtil.myRandom(iChance, "iAttackAtSea2") == 0:
-                                    iAttackAtSea = 1
-
-                        lNeighbors.append((iLoopPlayer, iAttackAtSea))
+                            lNeighbors.append((iLoopPlayer, iAttackAtSea))
 
     # iFaktor: 1111 - 4434
     # ---- inter/national
@@ -717,11 +716,11 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
 
     if lNeighbors or iTargetPlayer != -1:
         if iTargetPlayer != -1:
-          iTargetAtSea = 0
+            iTargetAtSea = 0
         else:
-          iRand = CvUtil.myRandom(len(lNeighbors), "doAIPlanAssignMercenaries select neighbour")
-          iTargetPlayer = lNeighbors[iRand][0]
-          iTargetAtSea = lNeighbors[iRand][1]
+            iRand = CvUtil.myRandom(len(lNeighbors), "doAIPlanAssignMercenaries select neighbour")
+            iTargetPlayer = lNeighbors[iRand][0]
+            iTargetAtSea = lNeighbors[iRand][1]
         iGold = pPlayer.getGold()
 
         # inter/national
@@ -1207,12 +1206,12 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                         iLandPlots = 0
                         for x2 in range(3):
                             for y2 in range(3):
-                                loopPlot2 = gc.getMap().plot(iX-1+x2, iY-1+y2)
+                                loopPlot2 = gc.getMap().plot(iX - 1 + x2, iY - 1 + y2)
                                 if loopPlot2 and not loopPlot2.isNone():
                                     if not loopPlot2.isWater():
                                         iLandPlots += 1
 
-                              # earlier break
+                                # earlier break
                                 if x2 == 1 and y2 > 0 and iLandPlots <= 1:
                                     break
 

@@ -586,7 +586,7 @@ def doInquisitorPersecution2(iPlayer, iCity, iButton, iReligion, iUnit):
     lCityReligions = []
     for iReligionLoop in range(iNumReligions):
         if pCity.isHasReligion(iReligionLoop):
-            if pCity.isHolyCityByType(iReligionLoop) == 0 and iReligionLoop != iStateReligion:
+            if not pCity.isHolyCityByType(iReligionLoop) and iReligionLoop != iStateReligion:
                 lCityReligions.append(iReligionLoop)
 
     # Wenn die Religion ueber PopUp kommt, muss sie mittels Buttonreihenfolge gefunden werden
