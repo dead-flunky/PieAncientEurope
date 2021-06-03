@@ -113,7 +113,8 @@ def getAttitudeString (nPlayer, nTarget):
 
 def getAttitudeCategory (nPlayer, nTarget):
 	"""Returns the attitude level nPlayer has toward nTarget [0,4]."""
-	if hasAttitude(nPlayer, nTarget):
+	#keldath fix
+	if hasAttitude(nPlayer, nTarget) and not nPlayer.isHuman():
 		return gc.getPlayer(nPlayer).AI_getAttitude(nTarget)
 	return None
 

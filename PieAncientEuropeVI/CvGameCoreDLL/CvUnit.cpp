@@ -2570,11 +2570,13 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 
 	if (isAnimal())
 	{
+		//keldath for PAE - animals can get into owned tiles
+		/*
 		if (pPlot->isOwned())
 		{
 			return false;
 		}
-
+		*/
 		if (!bAttack)
 		{
 			if (pPlot->getBonusType() != NO_BONUS)

@@ -2400,8 +2400,11 @@ class CvEventManager:
                                         iFaktor = 2
                                     iTechCost = int (gc.getTechInfo(iTech).getResearchCost() / iFaktor)
                                     # Attitude to Player
-                                    iAttSymbol = CyGame().getSymbolID(FontSymbols.POWER_CHAR) + 4 + vPlayer.AI_getAttitude(iPlayer)
-
+                                    #keldath fix
+                                    iAttSymbol = CyGame().getSymbolID(FontSymbols.POWER_CHAR) + 4
+                                    if not iPlayer.isHuman():
+                                        iAttSymbol += vPlayer.AI_getAttitude(iPlayer)
+                                    #keldath fix
                                     popupInfo = CyPopupInfo()
                                     popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
                                     popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASSAL_TECH", (vPlayer.getName(), vPlayer.getCivilizationShortDescription(0), gc.getTechInfo(iTech).getDescription(), iTechCost, iAttSymbol)))
