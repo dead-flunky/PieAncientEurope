@@ -607,7 +607,7 @@ def calculateBonusSellingPrice(pUnit, pCity, bCalcOnly, iBonus2=-1):
 
     # Einkauf und Verkauf in der gleichen Stadt (=> undo)
     if not bCalcOnly and pUnit.getX() == iX and pUnit.getY() == iY:
-      return _calculateBonusBuyingPrice(eBonus, iSeller, iBuyer) # Switch positions of seller and buyer
+        return _calculateBonusBuyingPrice(eBonus, iSeller, iBuyer) # Switch positions of seller and buyer
     
     # Basiswert + Population + Distanz + Wunderbonus + Haltung + Verfügbarkeit - Korruption
     
@@ -616,16 +616,13 @@ def calculateBonusSellingPrice(pUnit, pCity, bCalcOnly, iBonus2=-1):
     iPop = pCity.getPopulation()
     
     # Stadt hat dieses Bonusgut nicht im Handelsnetz
-    if not pCity.hasBonus(eBonus): iModifier += 20
+    if not pCity.hasBonus(eBonus): 
+        iModifier += 20
     # Wunderbonus
     iModifier += pCity.getNumWorldWonders() * 5
     # Furious = 0, Annoyed = 1, Cautious = 2, Pleased = 3, Friendly = 4
-    #keldath fix
-    attfix = 0
     if iSeller != iBuyer:
-        attfix = gc.getPlayer(iSeller).AI_getAttitude(iBuyer)
-    if iSeller != iBuyer: iModifier += 5 * attfix
-    #keldath fix
+        iModifier += 5 * gc.getPlayer(iSeller).AI_getAttitude(iBuyer)
     
     # Zwischensumme
     iSum = iBasis * (iPop + iModifier)/100 + iBasis*iDistance // (75 - iBasis)

@@ -2373,8 +2373,10 @@ class CvEventManager:
                 if pTeam.isHasTech(iTech):
 
                     # Vasallen finden
-                    iRange = gc.getMAX_PLAYERS()
-                    for iVassal in range(iRange):
+                    for iVassal in range(gc.getMAX_PLAYERS()):
+                        # Flunky: we are not our own vassal
+                        if iVassal == iPlayer: 
+                            continue
                         vPlayer = gc.getPlayer(iVassal)
                         if vPlayer.isAlive():
                             iTeam = vPlayer.getTeam()
@@ -2402,7 +2404,8 @@ class CvEventManager:
                                     # Attitude to Player
                                     #keldath fix
                                     iAttSymbol = CyGame().getSymbolID(FontSymbols.POWER_CHAR) + 4
-                                    if not iPlayer.isHuman():
+                                    # Flunky: was iPlayer.isHuman()
+                                    if not pPlayer.isHuman():
                                         iAttSymbol += vPlayer.AI_getAttitude(iPlayer)
                                     #keldath fix
                                     popupInfo = CyPopupInfo()

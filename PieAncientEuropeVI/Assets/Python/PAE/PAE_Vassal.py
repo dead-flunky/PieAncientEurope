@@ -49,7 +49,8 @@ def onCityAcquired(pCity, iNewOwner, iPreviousOwner):
                     attFix = 0
                     #can use also if not pPlayer.isHuman():
                     #maybe this is the best check: if loopPlayer.isAlive() and not loopPlayer.isHuman() and not loopPlayer.isBarbarian():
-                    if pPlayer != iPreviousOwner and pPlayer != iNewOwner:
+                    # Flunky: was pPlayer != iPreviousOwner and pPlayer != iNewOwner:
+                    if iVassal != iPreviousOwner and iVassal != iNewOwner:
                         attFix = pPlayer.AI_getAttitude(iPreviousOwner) - pPlayer.AI_getAttitude(iNewOwner)
 
                     if iVassalPower + iWinnerPower > iLoserPower and (CvUtil.myRandom(30, "weiters trotzdem loyal zum Hegemon") + attFix) < 10:

@@ -107,8 +107,19 @@ def onModNetMessage(argsList):
             # ATTITUDE_FURIOUS
             if not lNeighbors:
                 popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN1_1", ("",)))
-            elif iLoopPlayer != iPlayer:#keldath fix
+            else:
                 for iLoopPlayer in lNeighbors:
+                    # Flunky keldath fix
+                    if iLoopPlayer == iPlayer:
+                        continue
+                    szBuffer = {
+                        AttitudeTypes.ATTITUDE_FRIENDLY:"<color=0,255,0,255>",
+                        AttitudeTypes.ATTITUDE_PLEASED:"<color=0,155,0,255>",
+                        AttitudeTypes.ATTITUDE_CAUTIOUS:"<color=255,255,0,255>",
+                        AttitudeTypes.ATTITUDE_ANNOYED:"<color=255,180,0,255>",
+                        AttitudeTypes.ATTITUDE_FURIOUS:"<color=255,0,0,255>"
+                    }[pLoopPlayer.AI_getAttitude(iPlayer)]
+                    """
                     pLoopPlayer = gc.getPlayer(iLoopPlayer)
                     eAtt = pLoopPlayer.AI_getAttitude(iPlayer)
                     if eAtt == AttitudeTypes.ATTITUDE_FRIENDLY:
@@ -121,6 +132,7 @@ def onModNetMessage(argsList):
                         szBuffer = "<color=255,180,0,255>"
                     elif eAtt == AttitudeTypes.ATTITUDE_FURIOUS:
                         szBuffer = "<color=255,0,0,255>"
+                    """
 
                     szBuffer = szBuffer + " (" + localText.getText("TXT_KEY_"+str(eAtt), ()) + ")"
                     popupInfo.addPythonButton(pLoopPlayer.getCivilizationShortDescription(0) + szBuffer, gc.getCivilizationInfo(pLoopPlayer.getCivilizationType()).getButton())
@@ -398,6 +410,14 @@ def onModNetMessage(argsList):
                     if iPlayer == iLoopPlayer:
                         continue
                     #keldath fix
+                    szBuffer = {
+                        AttitudeTypes.ATTITUDE_FRIENDLY:"<color=0,255,0,255>",
+                        AttitudeTypes.ATTITUDE_PLEASED:"<color=0,155,0,255>",
+                        AttitudeTypes.ATTITUDE_CAUTIOUS:"<color=255,255,0,255>",
+                        AttitudeTypes.ATTITUDE_ANNOYED:"<color=255,180,0,255>",
+                        AttitudeTypes.ATTITUDE_FURIOUS:"<color=255,0,0,255>"
+                    }[pLoopPlayer.AI_getAttitude(iPlayer)]
+                    """
                     pLoopPlayer = gc.getPlayer(iLoopPlayer)
                     eAtt = pLoopPlayer.AI_getAttitude(iPlayer)
                     if eAtt == AttitudeTypes.ATTITUDE_FRIENDLY:
@@ -410,6 +430,7 @@ def onModNetMessage(argsList):
                         szBuffer = "<color=255,180,0,255>"
                     elif eAtt == AttitudeTypes.ATTITUDE_FURIOUS:
                         szBuffer = "<color=255,0,0,255>"
+                    """
 
                     szText = szText + localText.getText("[NEWLINE][ICON_STAR] <color=255,255,255,255>", ()) + pLoopPlayer.getCivilizationShortDescription(0) + szBuffer + " (" + localText.getText("TXT_KEY_"+str(eAtt), ()) + ")"
 
@@ -634,39 +655,38 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
     # ATTITUDE_FURIOUS
     lNeighbors = []
     if iTargetPlayer == -1:
-      iRangeMaxPlayers = gc.getMAX_PLAYERS()
-      for iLoopPlayer in range(iRangeMaxPlayers):
-        #keldath fix
-        if iLoopPlayer == iPlayer:
-            continue
-        #keldath fix
-        pLoopPlayer = gc.getPlayer(iLoopPlayer)
-        if iLoopPlayer != gc.getBARBARIAN_PLAYER() and iLoopPlayer != iPlayer:
-            if pLoopPlayer.isAlive():
-                if gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
-                    eAtt = pPlayer.AI_getAttitude(iLoopPlayer)
-                    if eAtt == AttitudeTypes.ATTITUDE_ANNOYED or eAtt == AttitudeTypes.ATTITUDE_FURIOUS:
-                        # Check: Coastal cities for naval mercenary units
-                        iAttackAtSea = 0
-                        iCoastalCities = 0
-                        iLandCities = 0
-                        iNumCities = pLoopPlayer.getNumCities()
-                        for i in range(iNumCities):
-                            if pLoopPlayer.getCity(i).isCoastal(20):
-                                iCoastalCities += 1
-                            else:
-                                iLandCities += 1
+        iRangeMaxPlayers = gc.getMAX_PLAYERS()
+        for iLoopPlayer in range(iRangeMaxPlayers):
+            #keldath fix
+            if iLoopPlayer == iPlayer:
+                continue
+            #keldath fix
+            pLoopPlayer = gc.getPlayer(iLoopPlayer)
+            if iLoopPlayer != gc.getBARBARIAN_PLAYER() and iLoopPlayer != iPlayer:
+                if pLoopPlayer.isAlive():
+                    if gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
+                        eAtt = pPlayer.AI_getAttitude(iLoopPlayer)
+                        if eAtt == AttitudeTypes.ATTITUDE_ANNOYED or eAtt == AttitudeTypes.ATTITUDE_FURIOUS:
+                            # Check: Coastal cities for naval mercenary units
+                            iAttackAtSea = 0
+                            iCoastalCities = 0
+                            iLandCities = 0
+                            iNumCities = pLoopPlayer.getNumCities()
+                            for i in range(iNumCities):
+                                if pLoopPlayer.getCity(i).isCoastal(20):
+                                    iCoastalCities += 1
+                                else:
+                                    iLandCities += 1
+                            if iCoastalCities > 0:
+                                if iCoastalCities >= iLandCities:
+                                    if CvUtil.myRandom(2, "iAttackAtSea") == 1:
+                                        iAttackAtSea = 1
+                                else:
+                                    iChance = (iNumCities * 2) - iCoastalCities
+                                    if CvUtil.myRandom(iChance, "iAttackAtSea2") == 0:
+                                        iAttackAtSea = 1
 
-                        if iCoastalCities > 0:
-                            if iCoastalCities >= iLandCities:
-                                if CvUtil.myRandom(2, "iAttackAtSea") == 1:
-                                    iAttackAtSea = 1
-                            else:
-                                iChance = (iNumCities * 2) - iCoastalCities
-                                if CvUtil.myRandom(iChance, "iAttackAtSea2") == 0:
-                                    iAttackAtSea = 1
-
-                        lNeighbors.append((iLoopPlayer, iAttackAtSea))
+                            lNeighbors.append((iLoopPlayer, iAttackAtSea))
 
     # iFaktor: 1111 - 4434
     # ---- inter/national
@@ -694,13 +714,13 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
     #4 +90       iFaktor: +3000
     #6 +120      iFaktor: +4000
 
-    if len(lNeighbors) or iTargetPlayer != -1:
+    if lNeighbors or iTargetPlayer != -1:
         if iTargetPlayer != -1:
-          iTargetAtSea = 0
+            iTargetAtSea = 0
         else:
-          iRand = CvUtil.myRandom(len(lNeighbors), "doAIPlanAssignMercenaries select neighbour")
-          iTargetPlayer = lNeighbors[iRand][0]
-          iTargetAtSea = lNeighbors[iRand][1]
+            iRand = CvUtil.myRandom(len(lNeighbors), "doAIPlanAssignMercenaries select neighbour")
+            iTargetPlayer = lNeighbors[iRand][0]
+            iTargetAtSea = lNeighbors[iRand][1]
         iGold = pPlayer.getGold()
 
         # inter/national
@@ -880,9 +900,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
             for iLoopPlayer in range(iRange):
                 pLoopPlayer = gc.getPlayer(iLoopPlayer)
                 # Nachbarn inkludieren
-                if pLoopPlayer.isAlive():
-                    if gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
-                        lNeighbors.append(pLoopPlayer)
+                if pLoopPlayer.isAlive() and gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
+                    lNeighbors.append(pLoopPlayer)
         # ------------------
 
         # Unit initials
@@ -1054,7 +1073,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                         gc.getInfoTypeForString("UNIT_ROME_DECAREME")
                     ]
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KONTERE")) # Gaulos
-                    if iUnit == -1: iUnit = gc.getInfoTypeForString("UNIT_KONTERE")
+                    if iUnit == -1:
+                        iUnit = gc.getInfoTypeForString("UNIT_KONTERE")
                     lNeighborUnits.append(iUnit)
 
                 # Land units
@@ -1065,19 +1085,26 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                         gc.getInfoTypeForString("UNIT_SWORDSMAN")
                     ]
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_SPECIAL1"))
-                    if iUnit != -1: lNeighborUnits.append(iUnit)
+                    if iUnit != -1: 
+                        lNeighborUnits.append(iUnit)
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_SPECIAL2"))
-                    if iUnit != -1: lNeighborUnits.append(iUnit)
+                    if iUnit != -1: 
+                        lNeighborUnits.append(iUnit)
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_SPECIAL3"))
-                    if iUnit != -1: lNeighborUnits.append(iUnit)
+                    if iUnit != -1: 
+                        lNeighborUnits.append(iUnit)
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_SPECIAL4"))
-                    if iUnit != -1: lNeighborUnits.append(iUnit)
+                    if iUnit != -1: 
+                        lNeighborUnits.append(iUnit)
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_ELITE1"))
-                    if iUnit != -1: lNeighborUnits.append(iUnit)
+                    if iUnit != -1: 
+                        lNeighborUnits.append(iUnit)
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_ELITE2"))
-                    if iUnit != -1: lNeighborUnits.append(iUnit)
+                    if iUnit != -1: 
+                        lNeighborUnits.append(iUnit)
                     iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_ELITE3"))
-                    if iUnit != -1: lNeighborUnits.append(iUnit)
+                    if iUnit != -1: 
+                        lNeighborUnits.append(iUnit)
 
                 for iUnitElite in lNeighborUnits:
                     if iUnitElite is not None and iUnitElite != -1:
@@ -1133,7 +1160,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                 if iUnitSword == -1:
                     if pNeighborTeam.isHasTech(gc.getInfoTypeForString("TECH_BEWAFFNUNG3")):
                         iUnitSword = pPlayerCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KURZSCHWERT"))
-                        if iUnitSword == -1: iUnitSword = gc.getInfoTypeForString("UNIT_KURZSCHWERT")
+                        if iUnitSword == -1: 
+                            iUnitSword = gc.getInfoTypeForString("UNIT_KURZSCHWERT")
             if not bLongsword:
                 if pNeighbor.hasBonus(iBonus2):
                     if pNeighborTeam.isHasTech(gc.getInfoTypeForString("TECH_BEWAFFNUNG5")):
@@ -1178,12 +1206,12 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                         iLandPlots = 0
                         for x2 in range(3):
                             for y2 in range(3):
-                                loopPlot2 = gc.getMap().plot(iX-1+x2, iY-1+y2)
-                                if loopPlot2 is not None and not loopPlot2.isNone():
+                                loopPlot2 = gc.getMap().plot(iX - 1 + x2, iY - 1 + y2)
+                                if loopPlot2 and not loopPlot2.isNone():
                                     if not loopPlot2.isWater():
                                         iLandPlots += 1
 
-                              # earlier break
+                                # earlier break
                                 if x2 == 1 and y2 > 0 and iLandPlots <= 1:
                                     break
 
@@ -1220,14 +1248,14 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
         # Plot: Nach-Check: Nicht in der Naehe des Auftraggebers
         for loopPlot in CivPlots:
-            if loopPlot is not None and not loopPlot.isNone():
+            if loopPlot and not loopPlot.isNone():
                 iLX = loopPlot.getX()
                 iLY = loopPlot.getY()
                 bDone = False
                 for x2 in [-2, 0, 2]:
                     for y2 in [-2, 0, 2]:
                         loopPlot2 = plotXY(iLX, iLY, x2, y2)
-                        if loopPlot2 is not None and not loopPlot2.isNone():
+                        if loopPlot2 and not loopPlot2.isNone():
                             if loopPlot2.getNumUnits() > 0:
                                 iRange = loopPlot2.getNumUnits()
                                 for iUnit in range(iRange):
@@ -1262,7 +1290,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
             pBarbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
             # set units
             # elite
-            if sFaktor[3] == "4" and len(lEliteUnits):
+            if sFaktor[3] == "4" and lEliteUnits:
 
                 # Naval units
                 if sFaktor[1] == "5":
@@ -1506,8 +1534,7 @@ def doHireMercenariesPopup(iCity, iTypeButton, iUnitButton, iPlayer):
 
     # Check neighbours
     lNeighbors = []
-    iRange = gc.getMAX_PLAYERS()
-    for iLoopPlayer in range(iRange):
+    for iLoopPlayer in range(gc.getMAX_PLAYERS()):
         if pCity.isConnectedToCapital(iLoopPlayer):
             lNeighbors.append(gc.getPlayer(iLoopPlayer))
 
@@ -1587,7 +1614,8 @@ def doHireMercenariesINIT(pPlayer, lNeighbors):
         gc.getInfoTypeForString("UNIT_SPEARMAN"),
     ]
     iUnit = gc.getCivilizationInfo(pPlayer.getCivilizationType()).getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KURZSCHWERT"))
-    if iUnit == -1: iUnit = gc.getInfoTypeForString("UNIT_KURZSCHWERT")
+    if iUnit == -1: 
+        iUnit = gc.getInfoTypeForString("UNIT_KURZSCHWERT")
     lEarlyInfantry.append(iUnit)
     lInfantry = [
         gc.getInfoTypeForString("UNIT_SCHILDTRAEGER"),
@@ -1646,7 +1674,11 @@ def doHireMercenariesINIT(pPlayer, lNeighbors):
 
 def getTortureCosts(iPlayer):
     iEra = gc.getPlayer(iPlayer).getCurrentEra()
-    if iEra > 3: return 44
-    elif iEra == 3: return 28
-    elif iEra == 2: return 16
-    else: return 8
+    if iEra > 3: 
+        return 44
+    elif iEra == 3: 
+        return 28
+    elif iEra == 2: 
+        return 16
+    else: 
+        return 8

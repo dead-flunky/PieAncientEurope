@@ -285,14 +285,48 @@ def stackDoTurn(iPlayer, iGameTurn):
                 # PAE V: deaktiviert (weil Einheitengrenze sowieso vom Verbrauch abgezogen wird)
                 #else: iSupplyChange += 20
             # Fremdes Terrain
-            else:
-                if iLoopOwner != -1:
-                    pLoopOwner = gc.getPlayer(iLoopOwner)
-                    iTeamPlot = pLoopOwner.getTeam()
-                    pTeamPlot = gc.getTeam(iTeamPlot)
+            elif iLoopOwner != -1:
+                pLoopOwner = gc.getPlayer(iLoopOwner)
+                iTeamPlot = pLoopOwner.getTeam()
+                pTeamPlot = gc.getTeam(iTeamPlot)
 
-                    # Versorger auf Vassalenterrain - Aufladechance - Stadt: 100%, Land 20%
-                    if pTeamPlot.isVassal(iTeam):
+                # Versorger auf Vassalenterrain - Aufladechance - Stadt: 100%, Land 20%
+                if pTeamPlot.isVassal(iTeam):
+                    if loopPlot.isCity():
+                        pCity = loopPlot.getPlotCity()
+                        # PAE V
+                        if pCity.getYieldRate(0) - loopPlot.getNumDefenders(iPlayer) > 0:
+                            iSupplyChange += pCity.getYieldRate(0) - loopPlot.getNumDefenders(iLoopOwner)
+                        # PAE IV
+                        #if pCity.happyLevel() - pCity.unhappyLevel(0) > 0 and pCity.goodHealth() - pCity.badHealth(False) > 0: iSupplyChange += 50
+                    elif CvUtil.myRandom(10, "Versorger_1") < 2:
+                        iSupplyChange += 20
+                    if pPlayer.isHuman() and iSupplyChange > 0:
+                        CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_1", (pLoopOwner.getCivilizationAdjective(3), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
+
+                # Versorger auf freundlichem Terrain - Aufladechance 30%, 20% oder 10%
+                elif not pTeam.isAtWar(iTeamPlot):
+                    # Attitudes
+                    # 0 = Furious
+                    # 1 = Annoyed
+                    # 2 = Cautious
+                    # 3 = Polite
+                    # 4 = Gracious
+                    #keldath fix start
+                    iAtt = 4
+                    # Flunky: was pLoopOwner != iPlayer
+                    if iLoopOwner != iPlayer:
+                        iAtt = pLoopOwner.AI_getAttitude(iPlayer)
+                    #keldath fix end
+                    if iAtt == 4:
+                        iChance = 6
+                    elif iAtt == 3:
+                        iChance = 4
+                    elif iAtt == 2:
+                        iChance = 2
+                    else:
+                        iChance = 0
+                    if iChance > 0 and CvUtil.myRandom(20, "Versorger_2") < iChance:
                         if loopPlot.isCity():
                             pCity = loopPlot.getPlotCity()
                             # PAE V
@@ -300,50 +334,16 @@ def stackDoTurn(iPlayer, iGameTurn):
                                 iSupplyChange += pCity.getYieldRate(0) - loopPlot.getNumDefenders(iLoopOwner)
                             # PAE IV
                             #if pCity.happyLevel() - pCity.unhappyLevel(0) > 0 and pCity.goodHealth() - pCity.badHealth(False) > 0: iSupplyChange += 50
-                        elif CvUtil.myRandom(10, "Versorger_1") < 2:
+                        else:
                             iSupplyChange += 20
                         if pPlayer.isHuman() and iSupplyChange > 0:
-                            CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_1", (pLoopOwner.getCivilizationAdjective(3), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
-                        
-                    # Versorger auf freundlichem Terrain - Aufladechance 30%, 20% oder 10%
-                    elif not pTeam.isAtWar(iTeamPlot):
-                        # Attitudes
-                        # 0 = Furious
-                        # 1 = Annoyed
-                        # 2 = Cautious
-                        # 3 = Polite
-                        # 4 = Gracious
-                        #keldath fix start
-                        iAtt = 4
-                        if pLoopOwner != iPlayer:
-                            iAtt = pLoopOwner.AI_getAttitude(iPlayer)
-                        #keldath fix start
-                        if iAtt == 4:
-                            iChance = 6
-                        elif iAtt == 3:
-                            iChance = 4
-                        elif iAtt == 2:
-                            iChance = 2
-                        else:
-                            iChance = 0
-                        if iChance > 0 and CvUtil.myRandom(20, "Versorger_2") < iChance:
-                            if loopPlot.isCity():
-                                pCity = loopPlot.getPlotCity()
-                                # PAE V
-                                if pCity.getYieldRate(0) - loopPlot.getNumDefenders(iPlayer) > 0:
-                                    iSupplyChange += pCity.getYieldRate(0) - loopPlot.getNumDefenders(iLoopOwner)
-                                # PAE IV
-                                #if pCity.happyLevel() - pCity.unhappyLevel(0) > 0 and pCity.goodHealth() - pCity.badHealth(False) > 0: iSupplyChange += 50
-                            else:
-                                iSupplyChange += 20
-                            if pPlayer.isHuman() and iSupplyChange > 0:
-                                CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_2", (pLoopOwner.getCivilizationAdjectiveKey(), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
+                            CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_2", (pLoopOwner.getCivilizationAdjectiveKey(), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
 
 
-                    # Versorger steht auf feindlichem Terrain
-                    else:
-                        # Plot wird beschlagnahmt
-                        iSupplyChange += 10
+                # Versorger steht auf feindlichem Terrain
+                else:
+                    # Plot wird beschlagnahmt
+                    iSupplyChange += 10
 
             # Farm/Pasture
             if loopPlot.getImprovementType() in lImpFood: iSupplyChange += 10
@@ -3516,6 +3516,7 @@ def TrojanHorsePossible(g_pSelectedUnit):
                         if iDefense > 50:
                             return True
     return False
+
 def InquisitionPossible(pCity, iUnitOwner):
     pCityPlayer = gc.getPlayer(pCity.getOwner())
     if pCity.getOwner() == iUnitOwner or gc.getTeam(pCityPlayer.getTeam()).isVassal(gc.getPlayer(iUnitOwner).getTeam()):
