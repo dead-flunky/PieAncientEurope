@@ -2416,6 +2416,8 @@
       <bNoDefensiveBonus>0</bNoDefensiveBonus>
       <bIgnoreBuildingDefense>0</bIgnoreBuildingDefense>
       <bCanMoveImpassable>0</bCanMoveImpassable>
+<!-- keldath pae - can move on ice example-->
+      <bCanMoveIce>1</bCanMoveIce>
       <bCanMoveAllTerrain>0</bCanMoveAllTerrain>
       <bFlatMovementCost>0</bFlatMovementCost>
       <bIgnoreTerrainCost>0</bIgnoreTerrainCost>

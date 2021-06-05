@@ -3167,6 +3167,8 @@ m_bFirstStrikeImmune(false),
 m_bNoDefensiveBonus(false),
 m_bIgnoreBuildingDefense(false),
 m_bCanMoveImpassable(false),
+//pae keldath move on ice
+m_bCanMoveIce(false),
 m_bCanMoveAllTerrain(false),
 m_bFlatMovementCost(false),
 m_bIgnoreTerrainCost(false),
@@ -3769,7 +3771,12 @@ bool CvUnitInfo::isCanMoveImpassable() const
 {
 	return m_bCanMoveImpassable;
 }
-
+//pae keldath move on ice
+bool CvUnitInfo::isCanMoveIce() const
+{
+	return m_bCanMoveIce;
+}
+//pae keldath move on ice
 bool CvUnitInfo::isCanMoveAllTerrain() const
 {
 	return m_bCanMoveAllTerrain;
@@ -4362,6 +4369,8 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_bNoDefensiveBonus);
 	stream->Read(&m_bIgnoreBuildingDefense);
 	stream->Read(&m_bCanMoveImpassable);
+	//pae keldath move on ice
+	stream->Read(&m_bCanMoveIce);
 	stream->Read(&m_bCanMoveAllTerrain);
 	stream->Read(&m_bFlatMovementCost);
 	stream->Read(&m_bIgnoreTerrainCost);
@@ -4658,6 +4667,8 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(m_bNoDefensiveBonus);
 	stream->Write(m_bIgnoreBuildingDefense);
 	stream->Write(m_bCanMoveImpassable);
+	//pae keldath move on ice
+	stream->Write(m_bCanMoveIce);
 	stream->Write(m_bCanMoveAllTerrain);
 	stream->Write(m_bFlatMovementCost);
 	stream->Write(m_bIgnoreTerrainCost);
@@ -4800,6 +4811,8 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bNoDefensiveBonus, "bNoDefensiveBonus");
 	pXML->GetChildXmlValByName(&m_bIgnoreBuildingDefense, "bIgnoreBuildingDefense");
 	pXML->GetChildXmlValByName(&m_bCanMoveImpassable, "bCanMoveImpassable");
+	//pae keldath move on ice
+	pXML->GetChildXmlValByName(&m_bCanMoveIce, "bCanMoveIce");
 	pXML->GetChildXmlValByName(&m_bCanMoveAllTerrain, "bCanMoveAllTerrain");
 	pXML->GetChildXmlValByName(&m_bFlatMovementCost, "bFlatMovementCost");
 	pXML->GetChildXmlValByName(&m_bIgnoreTerrainCost, "bIgnoreTerrainCost");

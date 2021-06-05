@@ -1676,4 +1676,10 @@
 		<iDefineIntVal>5</iDefineIntVal>
 	</Define>
 <!-- Super Forts end -->
+<!-- KELDATH PAE - unit can move on ice - add also a tag in unit info's -->
+  <Define>
+    <DefineName>MOVE_ON_ICE</DefineName>
+    <iDefineIntVal>1</iDefineIntVal>
+  </Define>
+  <!-- Super Forts end -->
 </Civ4Defines>

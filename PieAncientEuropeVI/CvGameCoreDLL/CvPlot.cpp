@@ -4418,6 +4418,16 @@ bool CvPlot::isFortImprovement() const
 	return true;
 }
 
+//pae keldath move on ice
+bool CvPlot::isIce() const
+{
+	if (getFeatureType() == GC.getInfoTypeForString("FEATURE_ICE") 
+			&& GC.getDefineINT("MOVE_ON_ICE"))
+		return true;
+
+	return false;
+}
+//pae keldath move on ice
 bool CvPlot::isOccupation() const
 {
 	CvCity* pCity;

@@ -920,7 +920,9 @@ public:
 	bool isFirstStrikeImmune() const;				// Exposed to Python
 	bool isNoDefensiveBonus() const;				// Exposed to Python
 	bool isIgnoreBuildingDefense() const;				// Exposed to Python
+//pae keldath move on ice
 	bool isCanMoveImpassable() const;				// Exposed to Python
+	bool isCanMoveIce() const;				// Exposed to Python
 	bool isCanMoveAllTerrain() const;				// Exposed to Python
 	bool isFlatMovementCost() const;				// Exposed to Python
 	bool isIgnoreTerrainCost() const;				// Exposed to Python
@@ -1102,6 +1104,8 @@ protected:
 	bool m_bNoDefensiveBonus;
 	bool m_bIgnoreBuildingDefense;
 	bool m_bCanMoveImpassable;
+//pae keldath move on ice
+	bool m_bCanMoveIce;
 	bool m_bCanMoveAllTerrain;
 	bool m_bFlatMovementCost;
 	bool m_bIgnoreTerrainCost;

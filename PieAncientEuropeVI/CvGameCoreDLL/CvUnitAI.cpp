@@ -20251,26 +20251,14 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 						BuildTypes eBestTempBuild = NO_BUILD;
 
 						if (eImprovement != NO_IMPROVEMENT &&
-							((kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION) && eImprovement != GC.getDefineINT("RUINS_IMPROVEMENT")) ||
-							kOwner.doesImprovementConnectBonus(eImprovement, eNonObsoleteBonus)))
+							(((kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION) && eImprovement != GC.getDefineINT("RUINS_IMPROVEMENT")) ||
+							kOwner.doesImprovementConnectBonus(eImprovement, eNonObsoleteBonus))
+// Super Forts begin *AI_worker* (No need to loop through builds if the improvement is permanent)
+							|| superForts && GC.getImprovementInfo(eImprovement).isPermanent())
+							)
 						{
 							bDoImprove = false;
 						}
-						// Super Forts begin *AI_worker* (No need to loop through builds if the improvement is permanent)
-						/*Keldath changes = not sure about the:
-							kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION)
-							&& eImprovement != GC.getDefineINT("RUINS_IMPROVEMENT"))
-							left the first
-						*/
-						else if (eImprovement != NO_IMPROVEMENT && 
-									(kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION) 
-										//&& eImprovement != GC.getDefineINT("RUINS_IMPROVEMENT"))
-									)
-									&& superForts && GC.getImprovementInfo(eImprovement).isPermanent())
-						{
-							bDoImprove = false;
-						}
-						// Super Forts end
 						else if (pWorkingCity)
 						{
 							// Let "best build" handle improvement replacements near cities.

@@ -8355,8 +8355,13 @@ void CvGameTextMgr::setBasicUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit,
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_UNIT_CAN_MOVE_IMPASSABLE"));
 	}
-
-
+//pae keldath move on ice
+	if (GC.getUnitInfo(eUnit).isCanMoveIce())
+	{
+		szBuffer.append(NEWLINE);
+		szBuffer.append(gDLL->getText(L"Unit Can MOve on Ice"));
+	}
+//pae keldath move on ice
 	if (GC.getUnitInfo(eUnit).isNoBadGoodies())
 	{
 		szBuffer.append(NEWLINE);
