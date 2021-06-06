@@ -1330,6 +1330,15 @@ void CvUnitAI::AI_animalMove()
 		{
 			return;
 		}
+//pae keldath - make animals search wider area, in a scale
+		if (AI_anyAttack(2, 0))
+		{
+			return;
+		}
+		if (AI_anyAttack(3, 0))
+		{
+			return;
+		}
 	}
 
 	if (AI_heal())
