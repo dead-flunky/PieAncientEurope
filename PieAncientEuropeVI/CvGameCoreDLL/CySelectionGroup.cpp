@@ -47,6 +47,12 @@ CyPlot* CySelectionGroup::lastMissionPlot()
 
 bool CySelectionGroup::canStartMission(int iMission, int iData1, int iData2, CyPlot* pPlot, bool bTestVisible)
 {
+	
+	// Flunky looking for -1
+	if (iMission == MISSION_BUILD){
+		FAssertMsg(iData1 < GC.getNumBuildInfos(), "Index out of bounds CySelectionGroup::canStartMission");
+		FAssertMsg(-1 < iData1, "Index out of bounds CySelectionGroup::canStartMission");
+	}
 	return m_pSelectionGroup ? m_pSelectionGroup->canStartMission(iMission, iData1, iData2, pPlot->getPlot(), bTestVisible) : false;
 }
 

@@ -458,6 +458,10 @@ void CyPlayer::removeBuildingClass(int /*BuildingClassTypes*/ eBuildingClass)
 
 bool CyPlayer::canBuild(CyPlot* pPlot, int /*BuildTypes*/ eBuild, bool bTestEra, bool bTestVisible)
 {
+	
+	// Flunky looking for -1
+	FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build CyPlayer::canBuild");
+	FAssertMsg(eBuild > -1, "Invalid Build CyPlayer::canBuild");
 	return m_pPlayer ? m_pPlayer->canBuild(pPlot->getPlot(), (BuildTypes)eBuild, bTestEra, bTestVisible) : false;
 }
 

@@ -170,6 +170,10 @@ bool CyPlot::canHaveImprovement(int /* ImprovementTypes */ eImprovement, int /*T
 
 bool CyPlot::canBuild(int /*BuildTypes*/ eBuild, int /*PlayerTypes*/ ePlayer, bool bTestVisible)
 {
+	
+	// Flunky looking for -1
+	FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build CyPlot::canBuild");
+	FAssertMsg(eBuild > -1, "Invalid Build CyPlot::canBuild");
 	return m_pPlot ? m_pPlot->canBuild((BuildTypes) eBuild, (PlayerTypes) ePlayer, bTestVisible) : false;
 }
 

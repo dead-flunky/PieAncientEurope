@@ -7014,7 +7014,7 @@ void CvPlayer::processBuilding(BuildingTypes eBuilding, int iChange, CvArea* pAr
 bool CvPlayer::canBuild(const CvPlot* pPlot, BuildTypes eBuild, bool bTestEra, bool bTestVisible) const
 {
 	PROFILE_FUNC();
-
+	
 	if (!(pPlot->canBuild(eBuild, getID(), bTestVisible)))
 	{
 		return false;
@@ -9470,6 +9470,8 @@ void CvPlayer::changeWorkerSpeedModifier(int iChange)
 // Returns the work rate for the first unit that can build <eBuild>.
 int CvPlayer::getWorkRate(BuildTypes eBuild) const
 {
+    FAssertMsg(eBuild < GC.getNumBuildInfos(), "Index out of bounds getWorkRate");
+    FAssertMsg(-1 < eBuild, "Index out of bounds getWorkRate");
 	int iRate = 0;
 	CvCivilizationInfo& kCiv = GC.getCivilizationInfo(getCivilizationType());
 

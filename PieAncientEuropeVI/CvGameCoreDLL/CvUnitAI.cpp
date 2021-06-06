@@ -950,7 +950,9 @@ bool CvUnitAI::AI_bestCityBuild(CvCity* pCity, CvPlot** ppBestPlot, BuildTypes* 
 					{
 						BuildTypes eBuild = pCity->AI_getBestBuild(iI);
 						FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build");
-
+						
+						// Flunky looking for -1
+						FAssertMsg(eBuild > -1, "Invalid Build AI_bestCityBuild");
 						//if (eBuild != NO_BUILD)
 						if (eBuild != NO_BUILD && canBuild(pLoopPlot, eBuild)) // K-Mod
 						{
@@ -19493,7 +19495,10 @@ bool CvUnitAI::AI_improveLocalPlot(int iRange, CvCity* pIgnoreCity)
 				continue;
 			// K-Mod note. This was the original condition for the rest of the block:
 			//if (((NULL == pIgnoreCity) || ((pCity->AI_getWorkersNeeded() > 0) && (pCity->AI_getWorkersHave() < (1 + pCity->AI_getWorkersNeeded() * 2 / 3)))) && (pCity->AI_getBestBuild(iIndex) != NO_BUILD))
-
+			
+			// Flunky looking for -1
+			FAssertMsg(pCity->AI_getBestBuild(iIndex) < GC.getNumBuildInfos(), "Invalid Build AI_improveLocalPlot");
+			FAssertMsg(pCity->AI_getBestBuild(iIndex) > -1, "Invalid Build AI_improveLocalPlot");
 			if (!canBuild(pLoopPlot, pCity->AI_getBestBuild(iIndex)))
 				continue;
 
@@ -20275,6 +20280,10 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 						{
 							// Let "best build" handle improvement replacements near cities.
 							BuildTypes eBuild = pWorkingCity->AI_getBestBuild(plotCityXY(pWorkingCity, pLoopPlot));
+							
+							// Flunky looking for -1
+							FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build doesImprovementConnectBonus");
+							FAssertMsg(eBuild > -1, "Invalid Build doesImprovementConnectBonus");
 							if (eBuild != NO_BUILD && kOwner.doesImprovementConnectBonus((ImprovementTypes)GC.getBuildInfo(eBuild).getImprovement(), eNonObsoleteBonus) && canBuild(pLoopPlot, eBuild))
 							{
 								bDoImprove = true;

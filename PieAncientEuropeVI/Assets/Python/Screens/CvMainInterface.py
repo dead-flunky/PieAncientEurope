@@ -7586,8 +7586,10 @@ class CvMainInterface:
 
                         if gc.getMissionInfo(pSelectedGroup.getMissionType(i)).isBuild():
                             if i == 0:
-                                szLeftBuffer = gc.getBuildInfo(pSelectedGroup.getMissionData1(i)).getDescription()
-                                szRightBuffer = localText.getText("INTERFACE_CITY_TURNS", (pSelectedGroup.plot().getBuildTurnsLeft(pSelectedGroup.getMissionData1(i), 0, 0), ))
+                                # Flunky make sure to check only for valid buildTypes
+                                if pSelectedGroup.getMissionData1(i) > -1 and pSelectedGroup.getMissionData1(i) < gc.getNumBuildInfos():
+                                    szLeftBuffer = gc.getBuildInfo(pSelectedGroup.getMissionData1(i)).getDescription()
+                                    szRightBuffer = localText.getText("INTERFACE_CITY_TURNS", (pSelectedGroup.plot().getBuildTurnsLeft(pSelectedGroup.getMissionData1(i), 0, 0), ))
                             else:
                                 szLeftBuffer = u"%s..." % (gc.getBuildInfo(pSelectedGroup.getMissionData1(i)).getDescription())
                         else:

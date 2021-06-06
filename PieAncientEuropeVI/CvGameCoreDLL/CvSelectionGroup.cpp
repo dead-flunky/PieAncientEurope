@@ -683,7 +683,11 @@ bool CvSelectionGroup::canStartMission(int iMission, int iData1, int iData2, CvP
 		if (isBusy())
 			return false;
 	}
-
+	// Flunky looking for -1
+	if (iMission == MISSION_BUILD){
+		FAssertMsg(iData1 < GC.getNumBuildInfos(), "Index out of bounds canStartMission");
+		FAssertMsg(-1 < iData1, "Index out of bounds canStartMission");
+	}
 	return canDoMission(iMission, iData1, iData2, pPlot, bTestVisible, false); // K-Mod. (original code merged into CvSelectionGroup::canDoMission
 }
 
@@ -727,7 +731,11 @@ void CvSelectionGroup::startMission()
 	bool bAction = false;
 	bool bNuke = false;
 	bool bNotify = false;
-
+	// Flunky looking for -1
+	if (headMissionQueueNode()->m_data.eMissionType == MISSION_BUILD){
+		FAssertMsg(headMissionQueueNode()->m_data.iData1 < GC.getNumBuildInfos(), "Index out of bounds startMission");
+		FAssertMsg(-1 < headMissionQueueNode()->m_data.iData1, "Index out of bounds startMission");
+	}
 	if (!canStartMission(headMissionQueueNode()->m_data.eMissionType, headMissionQueueNode()->m_data.iData1, headMissionQueueNode()->m_data.iData2, plot()))
 	{
 		bDelete = true;
@@ -3570,6 +3578,8 @@ bool CvSelectionGroup::groupBuild(BuildTypes eBuild)
 
 	FAssert(getOwnerINLINE() != NO_PLAYER);
 	FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build");
+	// Flunky assert also > -1
+	FAssertMsg(eBuild > -1, "Invalid Build groupBuild");
 
 	bContinue = false;
 
@@ -3904,7 +3914,12 @@ bool CvSelectionGroup::readyForMission()
 		else
 			return false;
 	}
-
+	
+	// Flunky looking for -1
+	if (kData.eMissionType == MISSION_BUILD){
+		FAssertMsg(kData.iData1 < GC.getNumBuildInfos(), "Index out of bounds readyForMission");
+		FAssertMsg(-1 < kData.iData1, "Index out of bounds readyForMission");
+	}
 	return canDoMission(kData.eMissionType, kData.iData1, kData.iData2, plot(), false, bCheckMoves) || canAllMove();
 	// note: if the whole group can move, but they can't do the mission, then the mission will be canceled inside CvSelectionGroup::continueMission.
 }
@@ -4137,7 +4152,9 @@ bool CvSelectionGroup::canDoMission(int iMission, int iData1, int iData2, CvPlot
 			break;
 
 		case MISSION_BUILD:
-            FAssertMsg(((BuildTypes)iData1) < GC.getNumBuildInfos(), "Invalid Build");
+            FAssertMsg(((BuildTypes)iData1) < GC.getNumBuildInfos(), "Invalid Build");	
+			// Flunky looking for -1
+			FAssertMsg(((BuildTypes)iData1) > -1, "Invalid Build MISSION_BUILD");
             if (pLoopUnit->canBuild(pPlot, (BuildTypes)iData1, bTestVisible) && (!bCheckMoves || pLoopUnit->canMove()))
                 return true;
 			break;

@@ -1742,7 +1742,9 @@ bool CvUnit::isActionRecommended(int iAction)
 			BuildTypes eBuild = (BuildTypes)GC.getActionInfo(iAction).getMissionData();
 			FAssert(eBuild != NO_BUILD);
 			FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build");
-
+			
+			// Flunky looking for -1
+			FAssertMsg(eBuild > -1, "Invalid Build MISSION_BUILD");
 			if (canBuild(pPlot, eBuild))
 			{
 				/// K-Mod
@@ -7086,7 +7088,8 @@ bool CvUnit::goldenAge()
 
 bool CvUnit::canBuild(const CvPlot* pPlot, BuildTypes eBuild, bool bTestVisible) const
 {
-    FAssertMsg(eBuild < GC.getNumBuildInfos(), "Index out of bounds");
+    FAssertMsg(eBuild < GC.getNumBuildInfos(), "Index out of bounds canBuild");
+    FAssertMsg(-1 < eBuild, "Index out of bounds canBuild");
 	if (!(m_pUnitInfo->getBuilds(eBuild)))
 	{
 		return false;
@@ -7111,7 +7114,9 @@ bool CvUnit::build(BuildTypes eBuild)
 	bool bFinished;
 
 	FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build");
-
+	
+	// Flunky looking for -1
+	FAssertMsg(eBuild > -1, "Invalid Build build");
 	if (!canBuild(plot(), eBuild))
 	{
 		return false;
@@ -12500,7 +12505,8 @@ void CvUnit::write(FDataStreamBase* pStream)
 bool CvUnit::canAdvance(const CvPlot* pPlot, int iThreshold) const
 {
 	FAssert(canFight());
-	FAssert(!(isAnimal() && pPlot->isCity()));
+	// Flunky PAE: animals may attack cities. 
+	// FAssert(!(isAnimal() && pPlot->isCity()));
 	FAssert(getDomainType() != DOMAIN_AIR);
 	FAssert(getDomainType() != DOMAIN_IMMOBILE);
 

@@ -2648,7 +2648,10 @@ void CvDLLWidgetData::parseActionHelp(CvWidgetDataStruct &widgetDataStruct, CvWS
 				while (pSelectedUnitNode != NULL)
 				{
 					pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
-
+					
+					// Flunky looking for -1
+					FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build MISSION_BUILD");
+					FAssertMsg(eBuild > -1, "Invalid Build MISSION_BUILD");
 					if (pSelectedUnit->canBuild(pMissionPlot, eBuild))
 					{
 						bValid = true;

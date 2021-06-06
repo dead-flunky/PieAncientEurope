@@ -396,6 +396,10 @@ bool CyUnit::canGoldenAge(CyPlot* pPlot, bool bTestVisible)
 
 bool CyUnit::canBuild(CyPlot* pPlot, int /*BuildTypes*/ eBuild, bool bTestVisible)
 {
+	
+	// Flunky looking for -1
+	FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build CyUnit::canBuild");
+	FAssertMsg(eBuild > -1, "Invalid Build CyUnit::canBuild");
 	return m_pUnit ? m_pUnit->canBuild(pPlot->getPlot(), (BuildTypes) eBuild, bTestVisible) : false;
 }
 

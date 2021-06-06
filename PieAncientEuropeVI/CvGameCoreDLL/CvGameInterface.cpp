@@ -1325,7 +1325,19 @@ bool CvGame::canHandleAction(int iAction, CvPlot* pPlot, bool bTestVisible, bool
 					{
 						pMissionPlot = pSelectedInterfaceList->plot();
 					}
-
+					
+					// Flunky looking for -1
+					if (GC.getActionInfo(iAction).getMissionType() == MISSION_BUILD){
+						if (GC.getActionInfo(iAction).getSubType() == ACTIONSUBTYPE_MISSION){
+							FAssertMsg(GC.getActionInfo(iAction).getMissionData() < GC.getNumBuildInfos(), "Index out of bounds ACTIONSUBTYPE_MISSION");
+							FAssertMsg(-1 < GC.getActionInfo(iAction).getMissionData(), "Index out of bounds ACTIONSUBTYPE_MISSION");
+						}
+						else
+						{
+							FAssertMsg(GC.getActionInfo(iAction).getMissionData() < GC.getNumBuildInfos(), "Index out of bounds canHandleAction");
+							FAssertMsg(-1 < GC.getActionInfo(iAction).getMissionData(), "Index out of bounds canHandleAction");
+						}
+					}
 					if (pSelectedInterfaceList->canStartMission(GC.getActionInfo(iAction).getMissionType(), GC.getActionInfo(iAction).getMissionData(), -1, pMissionPlot, bTestVisible, bUseCache))
 					{
 						return true;
