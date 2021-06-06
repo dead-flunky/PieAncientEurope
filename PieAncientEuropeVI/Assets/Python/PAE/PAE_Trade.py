@@ -621,6 +621,7 @@ def calculateBonusSellingPrice(pUnit, pCity, bCalcOnly, iBonus2=-1):
     # Wunderbonus
     iModifier += pCity.getNumWorldWonders() * 5
     # Furious = 0, Annoyed = 1, Cautious = 2, Pleased = 3, Friendly = 4
+    #keldath fix - already checked
     if iSeller != iBuyer:
         iModifier += 5 * gc.getPlayer(iSeller).AI_getAttitude(iBuyer)
     

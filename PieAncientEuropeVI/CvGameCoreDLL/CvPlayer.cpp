@@ -16273,14 +16273,10 @@ int CvPlayer::getAdvancedStartUnitCost(UnitTypes eUnit, bool bAdd, CvPlot* pPlot
 				{
 					return -1;
 				}
-//pae keldath move on ice
-				if (pPlot->isImpassable() && (!GC.getUnitInfo(eUnit).isCanMoveImpassable()
-					&& (!GC.getUnitInfo(eUnit).isCanMoveIce() && pPlot->isIce()))
-					)
+				if (pPlot->isImpassable() && (!GC.getUnitInfo(eUnit).isCanMoveImpassable()))
 				{
 					return -1;
 				}
-//pae keldath move on ice
 				if (pPlot->getFeatureType() != NO_FEATURE)
 				{
 					if (GC.getUnitInfo(eUnit).getFeatureImpassable(pPlot->getFeatureType()))

@@ -102,7 +102,6 @@ public:
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
-
 	void unloadAll();
 	bool alwaysInvisible() const;																																							// Exposed to Python
 	bool isInvisible(TeamTypes eTeam) const;																								// Exposed to Python

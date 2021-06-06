@@ -1678,7 +1678,7 @@
 <!-- Super Forts end -->
 <!-- KELDATH PAE - unit can move on ice - add also a tag in unit info's -->
   <Define>
-    <DefineName>MOVE_ON_ICE</DefineName>
+    <DefineName>FEATURE_MOVE_ON_WATER</DefineName>
     <iDefineIntVal>1</iDefineIntVal>
   </Define>
   <!-- Super Forts end -->

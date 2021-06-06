@@ -4418,16 +4418,6 @@ bool CvPlot::isFortImprovement() const
 	return true;
 }
 
-//pae keldath move on ice
-bool CvPlot::isIce() const
-{
-	if (getFeatureType() == GC.getInfoTypeForString("FEATURE_ICE") 
-			&& GC.getDefineINT("MOVE_ON_ICE"))
-		return true;
-
-	return false;
-}
-//pae keldath move on ice
 bool CvPlot::isOccupation() const
 {
 	CvCity* pCity;
@@ -4829,8 +4819,17 @@ bool CvPlot::isValidDomainForAction(const CvUnit& unit) const
 	case DOMAIN_AIR:
 		return false;
 		break;
-
+//pae keldath movable feature on water
 	case DOMAIN_LAND:
+		//pae keldath movable feature on water
+		//without this code if a unit stands on water / feature on water - it will jump
+		if ((GC.getDefineINT("FEATURE_MOVE_ON_WATER") && getFeatureType() != NO_FEATURE) ? GC.getFeatureInfo(getFeatureType()).isWaterMovable() : false)
+		{
+			return true;
+		}
+		//pae keldath movable feature on water
+		return (!isWater() || unit.canMoveAllTerrain());//org
+		break;
 	case DOMAIN_IMMOBILE:
 		return (!isWater() || unit.canMoveAllTerrain());
 		break;
@@ -4855,7 +4854,12 @@ bool CvPlot::isImpassable() const
 	{
 		return false;
 	}
-
+//pae keldath movable feature on water
+	if ((GC.getDefineINT("FEATURE_MOVE_ON_WATER") && getFeatureType() != NO_FEATURE) ? GC.getFeatureInfo(getFeatureType()).isWaterMovable() : false)
+	{
+		return false;
+	}
+//pae keldath movable feature on water
 	return ((getFeatureType() == NO_FEATURE) ? GC.getTerrainInfo(getTerrainType()).isImpassable() : GC.getFeatureInfo(getFeatureType()).isImpassable());
 }
 

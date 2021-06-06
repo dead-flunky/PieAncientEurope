@@ -124,6 +124,8 @@
 	<ElementType name="bRequiresFlatlands" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bRequiresRiver" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bAddsFreshWater" content="textOnly" dt:type="boolean"/>
+	<!-- pae keldath movable feature on water -->
+	<ElementType name="bWaterMovable" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoCity" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoImprovement" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bVisibleAlways" content="textOnly" dt:type="boolean"/>
@@ -164,6 +166,8 @@
 		<element type="bRequiresRiver"/>
 		<element type="bAddsFreshWater"/>
 		<element type="bImpassable"/>
+<!-- pae keldath movable feature on water -->
+		<element type="bWaterMovable" minOccurs="0"/>
 		<element type="bNoCity"/>
 		<element type="bNoImprovement"/>
 		<element type="bVisibleAlways"/>

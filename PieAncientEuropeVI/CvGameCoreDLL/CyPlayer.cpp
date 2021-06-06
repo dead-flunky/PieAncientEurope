@@ -2094,6 +2094,14 @@ bool CyPlayer::AI_demandRebukedWar(int /*PlayerTypes*/ ePlayer)
 
 AttitudeTypes CyPlayer::AI_getAttitude(int /*PlayerTypes*/ ePlayer)
 {
+	//Keldath Pae - there are lots of python places that call this 
+	//which was probably implemented wrong since there are calls on self attitude.
+	//Flunky and me changed places to check this out, but i decided to add a bypass here.
+	//best practice is to fix the python, it also adds performance issues.
+	if ((PlayerTypes)ePlayer == getID())
+	{
+		return NO_ATTITUDE;
+	}
 	return m_pPlayer ? m_pPlayer->AI_getAttitude((PlayerTypes)ePlayer) : NO_ATTITUDE;
 }
 

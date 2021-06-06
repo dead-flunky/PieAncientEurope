@@ -127,8 +127,6 @@
 	<ElementType name="bNoDefensiveBonus" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bIgnoreBuildingDefense" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bCanMoveImpassable" content="textOnly" dt:type="boolean"/>
-<!--pae keldath can move on ice -->
-	<ElementType name="bCanMoveIce" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bCanMoveAllTerrain" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bFlatMovementCost" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bIgnoreTerrainCost" content="textOnly" dt:type="boolean"/>
@@ -551,8 +549,6 @@
 		<element type="bNoDefensiveBonus"/>
 		<element type="bIgnoreBuildingDefense"/>
 		<element type="bCanMoveImpassable"/>
-<!-- keldath pae move on ice -->
-		<element type="bCanMoveIce" minOccurs="0"/>
 		<element type="bCanMoveAllTerrain"/>
 		<element type="bFlatMovementCost"/>
 		<element type="bIgnoreTerrainCost"/>

@@ -4108,6 +4108,8 @@ class CvEventManager:
                     if iCityId != pCapitalCity.getID():
                         pCity = gc.getGame().getHolyCity(iReligion)
                         pCity.setHasReligion(iReligion, 0, 0, 0)
+                        #keldath fix - before setting a new holy city - make sure it get the designated religion
+                        pCity.changeReligionInfluence(iReligion,1)
                         gc.getGame().setHolyCity(iReligion, pCapitalCity, 0)
                         pCity.setHasReligion(iReligion, 1, 0, 0)
                         iCityId = pCapitalCity.getID()

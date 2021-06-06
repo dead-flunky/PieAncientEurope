@@ -1499,13 +1499,15 @@ int pathDestValid(int iToX, int iToY, const void* pointer, FAStar* finder)
 			int iGroupAreaID = pSelectionGroup->getArea();
 			if (pToPlot->getArea() != iGroupAreaID)
 			{
-				if( !(pSelectionGroup->canMoveAllTerrain()) )
+				if (!(pSelectionGroup->canMoveAllTerrain()))
+
 				{
 					if (!(pToPlot->isAdjacentToArea(iGroupAreaID)))
 					{
 						return FALSE;
 					}
 				}
+				
 			}
 		}	
 
