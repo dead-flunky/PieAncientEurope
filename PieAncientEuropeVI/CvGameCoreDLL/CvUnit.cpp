@@ -2599,7 +2599,7 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 			for (int iI = 0; iI < pCity->getNumBuildings(); iI++)
 			{
 				int bIndex = GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
-				walls = GC.getInfoTypeForString("BUILDING_WALLS") == bIndex;
+				walls = GC.getInfoTypeForString("BUILDINGCLASS_WALLS") == bIndex;
 				castle = GC.getInfoTypeForString("BUILDINGCLASS_CASTLE") == bIndex;
 			}
 			if (walls || castle)
