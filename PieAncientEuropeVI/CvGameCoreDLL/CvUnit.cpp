@@ -2450,12 +2450,13 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 	{
 		return false;
 	}
-
-	if (!m_pUnitInfo->isCanMoveImpassable() && pPlot->isImpassable())
+//pae keldath move on ice
+	if ((!m_pUnitInfo->isCanMoveImpassable() && pPlot->isImpassable()) ||
+		(!m_pUnitInfo->isCanMoveIce() && pPlot->isIce()))
 	{
 		return false;
 	}
-
+//pae keldath move on ice
 	// Cannot move around in unrevealed land freely
 	if (m_pUnitInfo->isNoRevealMap() && willRevealByMove(pPlot))
 	{
@@ -2548,6 +2549,12 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		break;
 
 	case DOMAIN_LAND:
+		//pae keldath move on ice
+		if (m_pUnitInfo->isCanMoveIce() && pPlot->isIce())
+		{
+			break;
+		}
+		//pae keldath move on ice
 		if (pPlot->isWater() && !canMoveAllTerrain())
 		{
 			if (!pPlot->isCity() || 0 == GC.getDefineINT("LAND_UNITS_CAN_ATTACK_WATER_CITIES"))
@@ -2572,13 +2579,28 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 
 	if (isAnimal())
 	{
-		//keldath for PAE - animals can get into owned tiles
+//keldath for PAE - animals can get into owned tiles -start
 		/*
 		if (pPlot->isOwned())
 		{
 			return false;
 		}
 		*/
+		//keldath for PAE - animals cannot get into cities - due to the above.
+		if (pPlot->isCity())
+		{
+			return false;
+		}
+		//super forts improvement check - prefer animals cant enter / attack forts owned.
+		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pPlot->getImprovementType() != NO_IMPROVEMENT)
+		{
+			if (GC.getImprovementInfo(pPlot->getImprovementType()).isActsAsCity()
+				&& pPlot->isOwned())
+			{
+				return false;
+			}
+		}
+//keldath for PAE - animals can get into owned tiles -start	end		
 		if (!bAttack)
 		{
 			if (pPlot->getBonusType() != NO_BONUS)
@@ -9321,7 +9343,12 @@ bool CvUnit::canMoveImpassable() const
 {
 	return m_pUnitInfo->isCanMoveImpassable();
 }
-
+//pae keldath move on ice
+bool CvUnit::canMoveIce() const
+{
+	return m_pUnitInfo->isCanMoveIce();
+}
+//pae keldath move on ice
 bool CvUnit::canMoveAllTerrain() const
 {
 	return m_pUnitInfo->isCanMoveAllTerrain();

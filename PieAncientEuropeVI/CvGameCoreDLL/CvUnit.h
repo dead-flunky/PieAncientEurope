@@ -382,6 +382,8 @@ public:
 	bool noDefensiveBonus() const;																					// Exposed to Python
 	bool ignoreBuildingDefense() const;																								// Exposed to Python
 	bool canMoveImpassable() const;																										// Exposed to Python
+//pae keldath move on ice
+	bool canMoveIce() const;																										// Exposed to Python
 	bool canMoveAllTerrain() const;																										// Exposed to Python
 	bool flatMovementCost() const;																										// Exposed to Python
 	bool ignoreTerrainCost() const;																										// Exposed to Python

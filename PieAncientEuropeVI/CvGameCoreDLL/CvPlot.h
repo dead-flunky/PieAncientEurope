@@ -222,7 +222,8 @@ public:
 	bool isEnemyCity(const CvUnit& kUnit) const;																													// Exposed to Python
 	//super forts - doto keldath
 	bool isFortImprovement() const;				// Exposed to Python
-
+//pae keldath move on ice
+	bool isIce() const;				// Exposed to Python
 	bool isOccupation() const;																																				// Exposed to Python
 	bool isBeingWorked() const;																															// Exposed to Python
 

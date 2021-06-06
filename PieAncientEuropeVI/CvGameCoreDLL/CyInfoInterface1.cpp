@@ -303,6 +303,8 @@ void CyInfoPythonInterface1()
 		.def("isNoDefensiveBonus", &CvUnitInfo::isNoDefensiveBonus, "bool ()")
 		.def("isIgnoreBuildingDefense", &CvUnitInfo::isIgnoreBuildingDefense, "bool ()")
 		.def("isCanMoveImpassable", &CvUnitInfo::isCanMoveImpassable, "bool ()")
+//pae keldath move on ice
+		.def("isCanMoveIce", &CvUnitInfo::isCanMoveIce, "bool ()")
 		.def("isCanMoveAllTerrain", &CvUnitInfo::isCanMoveAllTerrain, "bool ()")
 		.def("isFlatMovementCost", &CvUnitInfo::isFlatMovementCost, "bool ()")
 		.def("isIgnoreTerrainCost", &CvUnitInfo::isIgnoreTerrainCost, "bool ()")
