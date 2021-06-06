@@ -2416,8 +2416,6 @@
       <bNoDefensiveBonus>0</bNoDefensiveBonus>
       <bIgnoreBuildingDefense>0</bIgnoreBuildingDefense>
       <bCanMoveImpassable>0</bCanMoveImpassable>
-<!-- keldath pae - can move on ice example-->
-      <bCanMoveIce>1</bCanMoveIce>
       <bCanMoveAllTerrain>0</bCanMoveAllTerrain>
       <bFlatMovementCost>0</bFlatMovementCost>
       <bIgnoreTerrainCost>0</bIgnoreTerrainCost>
@@ -27276,7 +27274,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_PILUMNI</Description>
@@ -30442,7 +30440,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_CROSSBOWMAN_ROME</Description>
@@ -31228,7 +31226,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_THRAKIEN_PELTAST</Description>
@@ -31642,7 +31640,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_CHARIOT_RUNNER</Description>
@@ -31845,7 +31843,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_SKIRMISHER</Description>
@@ -32047,7 +32045,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_SKIRMISHER_MACEDON</Description>
@@ -32249,7 +32247,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_VELITES</Description>
@@ -32456,7 +32454,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_GERMANNE</Description>
@@ -32653,7 +32651,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_UNSTERBLICH</Description>
@@ -50055,7 +50053,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_BEGLEITHUND</Description>
@@ -50270,7 +50268,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND</Description>
@@ -50485,7 +50483,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND_TIBET</Description>
@@ -50700,7 +50698,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND_MACEDON</Description>
@@ -50915,7 +50913,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND_BRITEN</Description>
@@ -51130,7 +51128,7 @@
       <Capture>UNITCLASS_BURNING_PIGS</Capture>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_COLLATERAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_BURNING_PIGS</Description>

@@ -596,7 +596,8 @@ def doSeewind():
     terr_ocean2 = gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN")
     feat_ice = gc.getInfoTypeForString("FEATURE_ICE")
 
-    iNumDirection = 8
+    #keldath fix - a list starts at 0 :)
+    iNumDirection = 7#8
     iWindplots = 6 # amount of wind arrows (plots) per wind
     OceanPlots = []
     iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")

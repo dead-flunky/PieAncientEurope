@@ -621,8 +621,12 @@ def calculateBonusSellingPrice(pUnit, pCity, bCalcOnly, iBonus2=-1):
     # Wunderbonus
     iModifier += pCity.getNumWorldWonders() * 5
     # Furious = 0, Annoyed = 1, Cautious = 2, Pleased = 3, Friendly = 4
+    #keldath fix
+    attfix = 0
     if iSeller != iBuyer:
-        iModifier += 5 * gc.getPlayer(iSeller).AI_getAttitude(iBuyer)
+        attfix = gc.getPlayer(iSeller).AI_getAttitude(iBuyer)
+    if iSeller != iBuyer: iModifier += 5 * attfix
+    #keldath fix
     
     # Zwischensumme
     iSum = iBasis * (iPop + iModifier)/100 + iBasis*iDistance // (75 - iBasis)
