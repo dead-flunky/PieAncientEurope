@@ -920,9 +920,7 @@ public:
 	bool isFirstStrikeImmune() const;				// Exposed to Python
 	bool isNoDefensiveBonus() const;				// Exposed to Python
 	bool isIgnoreBuildingDefense() const;				// Exposed to Python
-//pae keldath move on ice
 	bool isCanMoveImpassable() const;				// Exposed to Python
-	bool isCanMoveIce() const;				// Exposed to Python
 	bool isCanMoveAllTerrain() const;				// Exposed to Python
 	bool isFlatMovementCost() const;				// Exposed to Python
 	bool isIgnoreTerrainCost() const;				// Exposed to Python
@@ -1104,8 +1102,6 @@ protected:
 	bool m_bNoDefensiveBonus;
 	bool m_bIgnoreBuildingDefense;
 	bool m_bCanMoveImpassable;
-//pae keldath move on ice
-	bool m_bCanMoveIce;
 	bool m_bCanMoveAllTerrain;
 	bool m_bFlatMovementCost;
 	bool m_bIgnoreTerrainCost;
@@ -3189,6 +3185,8 @@ public:
 	bool isRequiresRiver() const;			// Exposed to Python
 	bool isAddsFreshWater() const;		// Exposed to Python
 	bool isImpassable() const;				// Exposed to Python
+//pae keldath feature movable on water
+	bool isWaterMovable() const;				// Exposed to Python
 	bool isNoCity() const;						// Exposed to Python
 	bool isNoImprovement() const;			// Exposed to Python
 	bool isVisibleAlways() const;			// Exposed to Python
@@ -3240,8 +3238,10 @@ protected:
 	bool m_bRequiresFlatlands;
 	bool m_bRequiresRiver;
 	bool m_bAddsFreshWater;	
-	bool m_bImpassable;			
-	bool m_bNoCity;					
+	bool m_bImpassable;
+//pae keldath movable feature on water
+	bool m_bWaterMovable;
+	bool m_bNoCity;
 	bool m_bNoImprovement;	
 	bool m_bVisibleAlways;	
 	bool m_bNukeImmune;	
@@ -3424,6 +3424,8 @@ protected:
 
 	bool m_bWater;					
 	bool m_bImpassable;
+//pae keldath movable feature on water
+	bool m_bWaterMovable;
 	bool m_bFound;
 	bool m_bFoundCoast;
 	bool m_bFoundFreshWater;

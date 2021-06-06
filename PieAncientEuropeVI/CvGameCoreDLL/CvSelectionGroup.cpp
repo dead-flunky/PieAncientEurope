@@ -2845,7 +2845,6 @@ bool CvSelectionGroup::canMoveAllTerrain() const
 	{
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
-
 		if (!(pLoopUnit->canMoveAllTerrain()))
 		{
 			return false;

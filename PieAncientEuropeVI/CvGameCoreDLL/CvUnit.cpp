@@ -2448,13 +2448,12 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 	{
 		return false;
 	}
-//pae keldath move on ice
-	if ((!m_pUnitInfo->isCanMoveImpassable() && pPlot->isImpassable()) ||
-		(!m_pUnitInfo->isCanMoveIce() && pPlot->isIce()))
+
+	if ((!m_pUnitInfo->isCanMoveImpassable() && pPlot->isImpassable()))
 	{
 		return false;
 	}
-//pae keldath move on ice
+	
 	// Cannot move around in unrevealed land freely
 	if (m_pUnitInfo->isNoRevealMap() && willRevealByMove(pPlot))
 	{
@@ -2548,9 +2547,14 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 
 	case DOMAIN_LAND:
 		//pae keldath move on ice
-		if (m_pUnitInfo->isCanMoveIce() && pPlot->isIce())
+		//GC.getFeatureInfo(pPlot->getFeatureType())
+		//FeatureTypes eFeature = pPlot->getFeatureType();
+		if (pPlot->getFeatureType() != NO_FEATURE)
 		{
-			break;
+			if (GC.getFeatureInfo(pPlot->getFeatureType()).isWaterMovable())
+			{
+				break;
+			}
 		}
 		//pae keldath move on ice
 		if (pPlot->isWater() && !canMoveAllTerrain())
@@ -2585,9 +2589,23 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		}
 		*/
 		//keldath for PAE - animals cannot get into cities - due to the above.
+		//by Pie request - if a city has either def buiding, animals cannot attack cities. i hope...
 		if (pPlot->isCity())
+			
 		{
-			return false;
+			bool walls = false;
+			bool castle = false;
+			CvCity* pCity = pPlot->getPlotCity();
+			for (int iI = 0; iI < pCity->getNumBuildings(); iI++)
+			{
+				int bIndex = GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
+				walls = GC.getInfoTypeForString("BUILDING_WALLS") == bIndex;
+				castle = GC.getInfoTypeForString("BUILDINGCLASS_CASTLE") == bIndex;
+			}
+			if (walls || castle)
+			{
+				return false;
+			}
 		}
 		//super forts improvement check - prefer animals cant enter / attack forts owned.
 		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pPlot->getImprovementType() != NO_IMPROVEMENT)
@@ -9333,17 +9351,11 @@ bool CvUnit::ignoreBuildingDefense() const
 	return m_pUnitInfo->isIgnoreBuildingDefense();
 }
 
-
 bool CvUnit::canMoveImpassable() const
 {
-	return m_pUnitInfo->isCanMoveImpassable();
+	return m_pUnitInfo->isCanMoveImpassable();	
 }
-//pae keldath move on ice
-bool CvUnit::canMoveIce() const
-{
-	return m_pUnitInfo->isCanMoveIce();
-}
-//pae keldath move on ice
+
 bool CvUnit::canMoveAllTerrain() const
 {
 	return m_pUnitInfo->isCanMoveAllTerrain();
