@@ -79,37 +79,37 @@ BUG_FIRST_EVENT = 5050
 g_nextEventID = BUG_FIRST_EVENT
 g_bugEvents = {}
 def getNewEventID(name=None, silent=True):
-	"""
-	Defines a new event and returns its unique ID to be passed to BugEventManager.beginEvent(id).
-	If name is given, it is stored in a map for lookup by ID later for debugging.
-	"""
-	global g_nextEventID
-	id = g_nextEventID
-	g_nextEventID += 1
-	if name:
-		g_bugEvents[id] = name
-	if silent:
-		addSilentEvent(id)
-	return id
+    """
+    Defines a new event and returns its unique ID to be passed to BugEventManager.beginEvent(id).
+    If name is given, it is stored in a map for lookup by ID later for debugging.
+    """
+    global g_nextEventID
+    id = g_nextEventID
+    g_nextEventID += 1
+    if name:
+        g_bugEvents[id] = name
+    if silent:
+        addSilentEvent(id)
+    return id
 
 def getEventName(id):
-	return g_bugEvents[id]
+    return g_bugEvents[id]
 
 def addSilentEvent(id):
-	if id not in SilentEvents:
-		SilentEvents.append(id)
+    if id not in SilentEvents:
+        SilentEvents.append(id)
 
 # Screen IDs
 BUG_FIRST_SCREEN = 1000
 g_nextScreenID = BUG_FIRST_SCREEN
 def getNewScreenID():
-	"""
-	Returns the next unique screen ID to be used with CyGInterfaceScreen.
-	"""
-	global g_nextScreenID
-	id = g_nextScreenID
-	g_nextScreenID += 1
-	return id
+    """
+    Returns the next unique screen ID to be used with CyGInterfaceScreen.
+    """
+    global g_nextScreenID
+    id = g_nextScreenID
+    g_nextScreenID += 1
+    return id
 # BUG - Core - end
 
 # Popup defines (TODO: Expose these from C++)
@@ -256,12 +256,12 @@ def shuffle(num, rand):
 
 def spawnUnit(iUnit, pPlot, pPlayer):
     #iType = gc.getUnitInfo(iUnit).getDefaultUnitAIType()
-    if gc.getUnitInfo(iUnit).getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"): 
-    	eType = UnitAITypes.UNITAI_ASSAULT_SEA
-    elif gc.getUnitInfo(iUnit).getCombat() > 0: 
-    	eType = UnitAITypes.UNITAI_ATTACK
-    else: 
-    	eType = UnitAITypes.NO_UNITAI
+    if gc.getUnitInfo(iUnit).getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"):
+        eType = UnitAITypes.UNITAI_ASSAULT_SEA
+    elif gc.getUnitInfo(iUnit).getCombat() > 0:
+        eType = UnitAITypes.UNITAI_ATTACK
+    else:
+        eType = UnitAITypes.NO_UNITAI
     pUnit = pPlayer.initUnit(iUnit, pPlot.getX(), pPlot.getY(), eType, DirectionTypes.DIRECTION_SOUTH)
     return pUnit
     # TODO check why BUG: return 1
@@ -313,157 +313,157 @@ def getIcon(iconEntry): # returns Font Icons
 def combatDetailMessageBuilder(cdUnit, ePlayer, iChange):
     if cdUnit.iExtraCombatPercent != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_EXTRA_COMBAT_PERCENT",
-            					(cdUnit.iExtraCombatPercent * iChange,))
+                                (cdUnit.iExtraCombatPercent * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAnimalCombatModifierTA != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_ANIMAL_COMBAT",
-            					(cdUnit.iAnimalCombatModifierTA * iChange,))
+                                (cdUnit.iAnimalCombatModifierTA * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAIAnimalCombatModifierTA != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_AI_ANIMAL_COMBAT",
-            					(cdUnit.iAIAnimalCombatModifierTA * iChange,))
+                                (cdUnit.iAIAnimalCombatModifierTA * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAnimalCombatModifierAA != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_ANIMAL_COMBAT",
-            					(cdUnit.iAnimalCombatModifierAA * iChange,))
+                                (cdUnit.iAnimalCombatModifierAA * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAIAnimalCombatModifierAA != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_AI_ANIMAL_COMBAT",
-            					(cdUnit.iAIAnimalCombatModifierAA * iChange,))
+                                (cdUnit.iAIAnimalCombatModifierAA * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iBarbarianCombatModifierTB != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_BARBARIAN_COMBAT",
-            					(cdUnit.iBarbarianCombatModifierTB * iChange,))
+                                (cdUnit.iBarbarianCombatModifierTB * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAIBarbarianCombatModifierTB != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_BARBARIAN_AI_COMBAT",
-            					(cdUnit.iAIBarbarianCombatModifierTB * iChange,))
+                                (cdUnit.iAIBarbarianCombatModifierTB * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iBarbarianCombatModifierAB != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_BARBARIAN_COMBAT",
-            					(cdUnit.iBarbarianCombatModifierAB * iChange,))
+                                (cdUnit.iBarbarianCombatModifierAB * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAIBarbarianCombatModifierAB != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_BARBARIAN_AI_COMBAT",
-            					(cdUnit.iAIBarbarianCombatModifierAB * iChange,))
+                                (cdUnit.iAIBarbarianCombatModifierAB * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iPlotDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_PLOT_DEFENSE",
-            					(cdUnit.iPlotDefenseModifier * iChange,))
+                                (cdUnit.iPlotDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iFortifyModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_FORTIFY",
-            					(cdUnit.iFortifyModifier * iChange,))
+                                (cdUnit.iFortifyModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iCityDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CITY_DEFENSE",
-            					(cdUnit.iCityDefenseModifier * iChange,))
+                                (cdUnit.iCityDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iHillsAttackModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_HILLS_ATTACK",
-            					(cdUnit.iHillsAttackModifier * iChange,))
+                                (cdUnit.iHillsAttackModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iHillsDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_HILLS",
-            					(cdUnit.iHillsDefenseModifier * iChange,))
+                                (cdUnit.iHillsDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iFeatureAttackModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_FEATURE_ATTACK",
-            					(cdUnit.iFeatureAttackModifier * iChange,))
+                                (cdUnit.iFeatureAttackModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iFeatureDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_FEATURE",
-            					(cdUnit.iFeatureDefenseModifier * iChange,))
+                                (cdUnit.iFeatureDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iTerrainAttackModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_TERRAIN_ATTACK",
-            					(cdUnit.iTerrainAttackModifier * iChange,))
+                                (cdUnit.iTerrainAttackModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iTerrainDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_TERRAIN",
-            					(cdUnit.iTerrainDefenseModifier * iChange,))
+                                (cdUnit.iTerrainDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iCityAttackModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CITY_ATTACK",
-            					(cdUnit.iCityAttackModifier * iChange,))
+                                (cdUnit.iCityAttackModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iDomainDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CITY_DOMAIN_DEFENSE",
-            					(cdUnit.iDomainDefenseModifier * iChange,))
+                                (cdUnit.iDomainDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iCityBarbarianDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CITY_BARBARIAN_DEFENSE",
-            					(cdUnit.iCityBarbarianDefenseModifier * iChange,))
+                                (cdUnit.iCityBarbarianDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iClassDefenseModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_DEFENSE",
-            					(cdUnit.iClassDefenseModifier * iChange,))
+                                (cdUnit.iClassDefenseModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iClassAttackModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_ATTACK",
-            					(cdUnit.iClassAttackModifier * iChange,))
+                                (cdUnit.iClassAttackModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iCombatModifierT != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_COMBAT",
-            					(cdUnit.iCombatModifierT * iChange,))
+                                (cdUnit.iCombatModifierT * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iCombatModifierA != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_COMBAT",
-            					(cdUnit.iCombatModifierA * iChange,))
+                                (cdUnit.iCombatModifierA * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iDomainModifierA != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_DOMAIN",
-            					(cdUnit.iDomainModifierA * iChange,))
+                                (cdUnit.iDomainModifierA * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iDomainModifierT != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_DOMAIN",
-            					(cdUnit.iDomainModifierT * iChange,))
+                                (cdUnit.iDomainModifierT * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAnimalCombatModifierA != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_ANIMAL_COMBAT",
-            					(cdUnit.iAnimalCombatModifierA * iChange,))
+                                (cdUnit.iAnimalCombatModifierA * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAnimalCombatModifierT != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_ANIMAL_COMBAT",
-            					(cdUnit.iAnimalCombatModifierT * iChange,))
+                                (cdUnit.iAnimalCombatModifierT * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iRiverAttackModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_RIVER_ATTACK",
-            					(cdUnit.iRiverAttackModifier * iChange,))
+                                (cdUnit.iRiverAttackModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
     if cdUnit.iAmphibAttackModifier != 0:
         msg = localText.getText("TXT_KEY_COMBAT_MESSAGE_CLASS_AMPHIB_ATTACK",
-            					(cdUnit.iAmphibAttackModifier * iChange,))
+                                (cdUnit.iAmphibAttackModifier * iChange,))
         CyInterface().addCombatMessage(ePlayer, msg)
 
 
