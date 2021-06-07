@@ -11,6 +11,6 @@
 <!-- ** Rewritten hints ** -->
 <TEXT>
 	<Tag>TXT_KEY_TERRAIN_WATER_MOVE</Tag>
-	<English>Land Units can Walk on this Feature if its on Water</English>
+	<English>Land units can walk on this feature if it's on water</English>
 </TEXT>
 </Civ4GameText>

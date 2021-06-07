@@ -27275,6 +27275,7 @@
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_PILUMNI</Description>
@@ -30441,6 +30442,7 @@
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_CROSSBOWMAN_ROME</Description>
@@ -31227,6 +31229,7 @@
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_THRAKIEN_PELTAST</Description>
@@ -31641,6 +31644,7 @@
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_CHARIOT_RUNNER</Description>
@@ -31844,6 +31848,7 @@
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_SKIRMISHER</Description>
@@ -32046,6 +32051,7 @@
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_SKIRMISHER_MACEDON</Description>
@@ -32248,6 +32254,7 @@
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_VELITES</Description>
@@ -32455,6 +32462,7 @@
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_GERMANNE</Description>
@@ -32652,6 +32660,7 @@
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_UNSTERBLICH</Description>
@@ -50054,6 +50063,7 @@
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_BEGLEITHUND</Description>
@@ -50269,6 +50279,7 @@
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND</Description>
@@ -50484,6 +50495,7 @@
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND_TIBET</Description>
@@ -50699,6 +50711,7 @@
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND_MACEDON</Description>
@@ -50914,6 +50927,7 @@
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_KAMPFHUND_BRITEN</Description>
@@ -51129,6 +51143,7 @@
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
+      <!-- keldath: UNITAI_COLLATERAL doesn't execute-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_BURNING_PIGS</Description>
