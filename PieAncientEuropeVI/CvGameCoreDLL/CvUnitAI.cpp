@@ -16069,28 +16069,28 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iFlags, int iMin
 			if (!bAllowCities && pLoopPlot->isCity())
 				continue;
 // Super Forts begin *AI_offense* - modified if statement so forts will be attacked too
-				if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-				{	
-					bool checkCity = bDeclareWar
-						? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-						: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
-					bool checkPlot = bDeclareWar
-						? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-						: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
-					if (checkCity || checkPlot)
-					{
-						continue;
-					}
-				}
-				else
+			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+			{	
+				bool checkCity = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
+				bool checkPlot = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
+				if (checkCity || checkPlot)
 				{
-			if (bDeclareWar
-				? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-				: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
-			{
-				continue;
-			}
+					continue;
 				}
+			}
+			else
+			{
+				if (bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
+				{
+					continue;
+				}
+			}
 	// Super Forts end			
 			int iEnemyDefenders = bDeclareWar ? pLoopPlot->getNumVisiblePotentialEnemyDefenders(this) : pLoopPlot->getNumVisibleEnemyDefenders(this);
 			if (iEnemyDefenders < iMinStack)

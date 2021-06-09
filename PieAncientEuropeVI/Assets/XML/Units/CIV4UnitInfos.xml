@@ -1992,7 +1992,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>NONE</Combat>
+      <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -4477,14 +4477,14 @@
       <Capture>UNITCLASS_GOLDKARREN</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_IMMOBILE</Domain>
-      <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_STRANDGUT</Description>
       <Civilopedia>TXT_KEY_UNIT_TREIBGUT_PEDIA</Civilopedia>
       <Strategy>TXT_KEY_UNIT_STRANDGUT_STRATEGY</Strategy>
       <Advisor>NONE</Advisor>
-      <bAnimal>1</bAnimal>
+      <bAnimal>0</bAnimal>
       <bFood>0</bFood>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
