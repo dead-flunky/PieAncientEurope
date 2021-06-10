@@ -12550,7 +12550,8 @@ void CvUnit::write(FDataStreamBase* pStream)
 bool CvUnit::canAdvance(const CvPlot* pPlot, int iThreshold) const
 {
 	FAssert(canFight());
-	FAssert(!(isAnimal() && pPlot->isCity()));
+	// Flunky outdated assert.
+	//FAssert(!(isAnimal() && pPlot->isCity()));
 	FAssert(getDomainType() != DOMAIN_AIR);
 	FAssert(getDomainType() != DOMAIN_IMMOBILE);
 
