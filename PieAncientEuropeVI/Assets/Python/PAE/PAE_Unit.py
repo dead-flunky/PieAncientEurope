@@ -1283,8 +1283,8 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
         gc.getInfoTypeForString("PROMOTION_CITY_GARRISON1")
     ]
     iFirstPromos = 0
-    for iPromo in lFirstPromos:
-        if pUnitTarget.isHasPromotion(iPromo):
+    for i in lFirstPromos:
+        if pUnitTarget.isHasPromotion(i):
             iFirstPromos += 1
 
     iDivisor = 1
