@@ -1239,7 +1239,8 @@ def doAIUnitFormations(pUnit, bOffensive, bCity, bElefant):
 # PAE UNIT BATTLE PROMOTION
 def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnimal):
     # Keine Seeeinheiten
-    if pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"): return False
+    if pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"):
+        return False
     # Unit promos --------------------
     # UNITCOMBAT_ARCHER: PROMOTION_COVER1
     # UNITCOMBAT_SKIRMISHER: PROMOTION_PARADE_SKIRM1
@@ -1282,8 +1283,8 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
         gc.getInfoTypeForString("PROMOTION_CITY_GARRISON1")
     ]
     iFirstPromos = 0
-    for i in lFirstPromos:
-        if pUnitTarget.isHasPromotion(i):
+    for iPromo in lFirstPromos:
+        if pUnitTarget.isHasPromotion(iPromo):
             iFirstPromos += 1
 
     iDivisor = 1
@@ -3355,7 +3356,7 @@ def huntingResult(pLoser, pWinner):
             (loopCity, pIter) = pWinnerPlayer.nextCity(pIter, False)
 
         if CityArray:
-            iFoodMin, iFoodRand = L.DJagd.get(iLoserUnitType, L.DJagd[None])
+            iFoodMin, iFoodRand = L.DJagd.get(iLoserUnitType, (2, 2))
 
             # Hunter gets full bonus
             if iWinnerUnitType == gc.getInfoTypeForString("UNIT_HUNTER"):

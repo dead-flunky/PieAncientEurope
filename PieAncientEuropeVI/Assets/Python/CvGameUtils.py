@@ -121,6 +121,7 @@ class CvGameUtils:
 
     def updateColoredPlots(self):
         # ***Flunky TEST***
+        print "updateColoredPlots"
         CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("updateColoredPlots",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         pHeadSelectedUnit = CyInterface().getHeadSelectedUnit()
         if pHeadSelectedUnit is None or pHeadSelectedUnit.isNone():

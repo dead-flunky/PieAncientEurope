@@ -2578,10 +2578,10 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		FAssert(false);
 		break;
 	}
-
-	if (isAnimal())
+	// Flunky - animals can go everywhere in our land. 
+	if (isAnimal() && pPlot->getTeam() != getTeam())
 	{
-//keldath for PAE - animals can get into owned tiles -start
+		//keldath for PAE - animals can get into owned tiles -start
 		/*
 		if (pPlot->isOwned())
 		{
@@ -2590,45 +2590,56 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		*/
 		//keldath for PAE - animals cannot get into cities - due to the above.
 		//by Pie request - if a city has either def buiding, animals cannot attack cities. i hope...
+
+		// Flunky - make it dependent on defense modifier, not specific building class. Also for improvements instead of ActsAsCity
+		int iMinDefenseForAnimals = 25;
+
 		if (pPlot->isCity())
 			
 		{
-			bool walls = false;
-			bool castle = false;
+			/*bool walls = false;
+			bool castle = false;*/
 			CvCity* pCity = pPlot->getPlotCity();
 			for (int iI = 0; iI < pCity->getNumBuildings(); iI++)
 			{
-				int bIndex = GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
+				if (pCity->getNumBuilding((BuildingTypes) iI) > 0)
+				{
+					if (GC.getBuildingInfo((BuildingTypes)iI).getDefenseModifier() >= iMinDefenseForAnimals)
+					{
+						return false;
+					}
+				}
+				/*int bIndex = GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
 				walls = GC.getInfoTypeForString("BUILDINGCLASS_WALLS") == bIndex;
-				castle = GC.getInfoTypeForString("BUILDINGCLASS_CASTLE") == bIndex;
+				castle = GC.getInfoTypeForString("BUILDINGCLASS_CASTLE") == bIndex;*/
 			}
-			if (walls || castle)
+			/*if (walls || castle)
 			{
 				return false;
-			}
+			}*/
 		}
 		//super forts improvement check - prefer animals cant enter / attack forts owned.
 		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pPlot->getImprovementType() != NO_IMPROVEMENT)
 		{
-			if (GC.getImprovementInfo(pPlot->getImprovementType()).isActsAsCity()
-				&& pPlot->isOwned())
+			if (/*GC.getImprovementInfo(pPlot->getImprovementType()).isActsAsCity() &&*/ GC.getImprovementInfo(pPlot->getImprovementType()).getDefenseModifier() >= iMinDefenseForAnimals && pPlot->isOwned())
 			{
 				return false;
 			}
 		}
-//keldath for PAE - animals can get into owned tiles -start	end		
+		//keldath for PAE - animals can get into owned tiles - end		
+		// Flunky for PAE - animals can get onto BONUS and IMPROVEMENT tiles 
 		if (!bAttack)
 		{
-			if (pPlot->getBonusType() != NO_BONUS)
-			{
-				return false;
-			}
+			//if (pPlot->getBonusType() != NO_BONUS)
+			//{
+				//return false;
+			//}
 
-			if (pPlot->getImprovementType() != NO_IMPROVEMENT)
-			{
-				return false;
-			}
-
+			//if (pPlot->getImprovementType() != NO_IMPROVEMENT)
+			//{
+				//return false;
+			//}
+			// TODO: maybe allow stacking with other animals of the same unitType?
 			if (pPlot->getNumUnits() > 0)
 			{
 				return false;

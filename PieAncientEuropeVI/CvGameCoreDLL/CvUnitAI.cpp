@@ -1255,8 +1255,13 @@ int CvUnitAI::AI_sacrificeValue(const CvPlot* pPlot) const
 		// K-Mod end
 	}
 
-	//return iValue;
-	return std::min((long)MAX_INT, iValue); // K-Mod
+	// Flunky: did the long manage to overflow or is there another way to get negative values?
+	if (iValue < 0 || iValue > (long)MAX_INT)
+	{
+		iValue = (long)MAX_INT;
+	}
+	return iValue;
+	//return std::min((long)MAX_INT, iValue); // K-Mod
 }
 
 // Protected Functions...
