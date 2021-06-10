@@ -1255,8 +1255,13 @@ int CvUnitAI::AI_sacrificeValue(const CvPlot* pPlot) const
 		// K-Mod end
 	}
 
-	//return iValue;
-	return std::min((long)MAX_INT, iValue); // K-Mod
+	// Flunky: did the long manage to overflow or is there another way to get negative values?
+	if (iValue < 0 || iValue > (long)MAX_INT)
+	{
+		iValue = (long)MAX_INT;
+	}
+	return iValue;
+	//return std::min((long)MAX_INT, iValue); // K-Mod
 }
 
 // Protected Functions...
@@ -16069,28 +16074,28 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iFlags, int iMin
 			if (!bAllowCities && pLoopPlot->isCity())
 				continue;
 // Super Forts begin *AI_offense* - modified if statement so forts will be attacked too
-				if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-				{	
-					bool checkCity = bDeclareWar
-						? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-						: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
-					bool checkPlot = bDeclareWar
-						? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-						: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
-					if (checkCity || checkPlot)
-					{
-						continue;
-					}
-				}
-				else
+			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+			{	
+				bool checkCity = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
+				bool checkPlot = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
+				if (checkCity || checkPlot)
 				{
-			if (bDeclareWar
-				? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-				: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
-			{
-				continue;
-			}
+					continue;
 				}
+			}
+			else
+			{
+				if (bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
+				{
+					continue;
+				}
+			}
 	// Super Forts end			
 			int iEnemyDefenders = bDeclareWar ? pLoopPlot->getNumVisiblePotentialEnemyDefenders(this) : pLoopPlot->getNumVisibleEnemyDefenders(this);
 			if (iEnemyDefenders < iMinStack)

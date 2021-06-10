@@ -1239,7 +1239,8 @@ def doAIUnitFormations(pUnit, bOffensive, bCity, bElefant):
 # PAE UNIT BATTLE PROMOTION
 def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnimal):
     # Keine Seeeinheiten
-    if pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"): return False
+    if pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"):
+        return False
     # Unit promos --------------------
     # UNITCOMBAT_ARCHER: PROMOTION_COVER1
     # UNITCOMBAT_SKIRMISHER: PROMOTION_PARADE_SKIRM1
@@ -3355,7 +3356,7 @@ def huntingResult(pLoser, pWinner):
             (loopCity, pIter) = pWinnerPlayer.nextCity(pIter, False)
 
         if CityArray:
-            iFoodMin, iFoodRand = L.DJagd.get(iLoserUnitType, L.DJagd[None])
+            iFoodMin, iFoodRand = L.DJagd.get(iLoserUnitType, (2, 2))
 
             # Hunter gets full bonus
             if iWinnerUnitType == gc.getInfoTypeForString("UNIT_HUNTER"):
@@ -3368,13 +3369,11 @@ def huntingResult(pLoser, pWinner):
                 CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_ADD_FOOD", (pWinner.getName(), CityArray[iCity].getName(), iFoodAdd)), None, 2, pLoser.getButton(), ColorTypes(13), pLoser.getX(), pLoser.getY(), True, True)
 
 def huntingDistance(pPlot1, pPlot2):
-    if pPlot1 is not None and not pPlot1.isNone():
-      if pPlot2 is not None and not pPlot2.isNone():
+    if pPlot1 and not pPlot1.isNone() and pPlot2 and not pPlot2.isNone():
         #if pPlot1.getArea() == pPlot2.getArea():
         #iDist = gc.getMap().calculatePathDistance(pPlot1, pPlot2)
-        iDist = plotDistance(pPlot1.getX(), pPlot1.getY(), pPlot2.getX(), pPlot2.getY())        
-        if iDist > -1 and iDist <= 4:
-          return True
+        iDist = plotDistance(pPlot1.getX(), pPlot1.getY(), pPlot2.getX(), pPlot2.getY())
+        return iDist > -1 and iDist <= 4
     return False
 
 def convertToPirate(city, unit):

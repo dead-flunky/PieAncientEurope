@@ -177,8 +177,8 @@
     <GameOptionInfo>
       <Type>GAMEOPTION_SUPER_FORTS</Type>
       <Description>Super Forts</Description>
-      <Help>Allows Forts To have A ranged Culture Around Them and Bombard + more</Help>
-      <bDefault>0</bDefault>
+      <Help>Allows Forts to have a ranged culture around them and bombard + more</Help>
+      <bDefault>1</bDefault>
       <bVisible>1</bVisible>
     </GameOptionInfo>   	
   </GameOptionInfos>

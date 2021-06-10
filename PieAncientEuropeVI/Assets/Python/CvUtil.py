@@ -5,7 +5,7 @@
 import traceback
 
 # for file ops
-import os
+# import os
 import sys
 
 # For Civ game code access
