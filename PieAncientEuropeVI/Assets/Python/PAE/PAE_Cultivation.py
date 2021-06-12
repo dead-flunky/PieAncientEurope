@@ -81,7 +81,7 @@ def getCityCultivatablePlots(pCity, eBonus):
         if pLoopPlot is not None and not pLoopPlot.isNone():
             ePlotBonus = pLoopPlot.getBonusType(-1)
             if ePlotBonus == eBonus: return []
-            if ePlotBonus == -1 and _isBonusCultivationChance(pCity.getOwner(), pLoopPlot, eBonus, False, pCity):
+            if ePlotBonus == -1 and isBonusCultivationChance(pCity.getOwner(), pLoopPlot, eBonus, False, pCity):
               plots.append(pLoopPlot)
     return plots
 
@@ -93,7 +93,7 @@ def isCityHasBonus(pCity, eBonus):
               return True
     return False
 
-def _isBonusCultivationChance(iPlayer, pPlot, eBonus, bVisibleOnly=True, pCity=None):
+def isBonusCultivationChance(iPlayer, pPlot, eBonus, bVisibleOnly=True, pCity=None):
     """
         Returns chance to cultivate eBonus on pPlot. Currently: either 0 (impossible) or 80 (possible)
         bVisibleOnly: Non-cultivatable bonuses cannot be replaced. If there is an invisible (tech reveal) bonus on pPlot, player receives NO information.
@@ -228,7 +228,7 @@ def doCultivateBonus(pPlot, pUnit, eBonus):
     iPlayer = pUnit.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
     bOnlyVisible = False
-    bCanCultivate = _isBonusCultivationChance(iPlayer, pPlot, eBonus, bOnlyVisible, None)
+    bCanCultivate = isBonusCultivationChance(iPlayer, pPlot, eBonus, bOnlyVisible, None)
     if eBonus in L.LBonusLivestock: iChance = 100
     elif not pPlayer.hasBonus(eBonus): iChance = 100
     elif eBonus in L.LBonusStratCultivatable: iChance = 100
@@ -272,7 +272,7 @@ def getCityCultivationPlot(pCity, eBonus):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             ePlotBonus = pLoopPlot.getBonusType(-1)
-            if ePlotBonus == -1 and _isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, False, pCity):
+            if ePlotBonus == -1 and isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, False, pCity):
                 iImprovement = pLoopPlot.getImprovementType()
                 if iImprovement != -1 and gc.getImprovementInfo(iImprovement).isImprovementBonusMakesValid(eBonus): lPrio1.append(pLoopPlot)
                 elif iImprovement == -1: lPrio2.append(pLoopPlot)
@@ -307,7 +307,7 @@ def isBonusCultivatable(pUnit):
         # Cultivation from city (comfort function), no replacement of existing bonuses
         return _bonusIsCultivatableFromCity(pUnit.getOwner(), pPlot.getPlotCity(), eBonus, False)
     # Cultivation on current plot, bonus can be replaced (player knows what he's doing)
-    return _isBonusCultivationChance(pUnit.getOwner(), pPlot, eBonus, False, None)
+    return isBonusCultivationChance(pUnit.getOwner(), pPlot, eBonus, False, None)
 
 # Returns True if eBonus can be (principally) cultivated by iPlayer from pCity
 # Independent from cultivation unit, only checks fertility conditions
@@ -316,7 +316,7 @@ def _bonusIsCultivatableFromCity(iPlayer, pCity, eBonus, bVisibleOnly=True):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             ePlotBonus = pLoopPlot.getBonusType(-1)
-            if ePlotBonus == -1 and _isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, bVisibleOnly, pCity):
+            if ePlotBonus == -1 and isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, bVisibleOnly, pCity):
               #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, pCity.getName() + ": true  ", None, 2, None, ColorTypes(10), 0, 0, False, False)
               return True
     return False
@@ -339,7 +339,7 @@ def AI_bestCultivation(pCity, iSkipN=-1, eBonus=-1):
                     if ePlotBonus == -1 or bAlreadyImproved or iPass > 0:
                         # second pass: no improved plots or matching improved plots
                         if eImprovement == -1 or bAlreadyImproved or iPass > 0:
-                            if _isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, False, pCity):
+                            if isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, False, pCity):
                                 if iSkipN > 0:
                                     iSkipN -= 1
                                     continue
@@ -378,7 +378,7 @@ def doCultivation_AI(pUnit):
 
         iValue = 0
         pCityPlot = loopCity.plot()
-        iDistance = CyMap().calculatePathDistance(pUnitPlot, pCityPlot)
+        iDistance = gc.getMap().calculatePathDistance(pUnitPlot, pCityPlot)
         # exclude unreachable cities
         if iDistance != -1:
             if eBonusOnBoard in L.LBonusPlantation:
@@ -554,9 +554,9 @@ def _calculateBonusBuyingPrice4Cultivation(eBonus, iBuyer, pPlot):
                 return iPrice
 
     # Bonus in realm: national price
-    iRange = CyMap().numPlots()
+    iRange = gc.getMap().numPlots()
     for iI in range(iRange):
-        pLoopPlot = CyMap().plotByIndex(iI)
+        pLoopPlot = gc.getMap().plotByIndex(iI)
         if pLoopPlot.getOwner() == iBuyer:
             if pLoopPlot.getBonusType(pLoopPlot.getTeam()) == eBonus:
                 return iPrice * 2
@@ -639,7 +639,7 @@ def _isBonusCultivableInRealm(iPlayer,eBonus):
             for iI in range(gc.getNUM_CITY_PLOTS()):
                 pLoopPlot = loopCity.getCityIndexPlot(iI)
                 if pLoopPlot is not None and not pLoopPlot.isNone():
-                    if _isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, True, loopCity):
+                    if isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, True, loopCity):
                         return True
         (loopCity, pIter) = pPlayer.nextCity(pIter, False)
     return False

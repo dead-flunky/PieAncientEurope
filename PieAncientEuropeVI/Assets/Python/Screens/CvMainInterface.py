@@ -2885,7 +2885,7 @@ class CvMainInterface:
                             if pPlot.getOwner() == iUnitOwner:
                                 # Check plot
                                 eBonus = gc.getInfoTypeForString("BONUS_HORSE")
-                                if PAE_Cultivation._isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
+                                if PAE_Cultivation.isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
                                     screen.appendMultiListButton("BottomButtonContainer", ",Art/Interface/Buttons/Buildings/Barracks.dds,Art/Interface/Buttons/Warlords_Atlas_1.dds,7,1", 0, WidgetTypes.WIDGET_GENERAL, 721, 14, False)
                                     screen.show("BottomButtonContainer")
                                     screen.enableMultiListPulse("BottomButtonContainer", True, 0, iCount)
@@ -2898,7 +2898,7 @@ class CvMainInterface:
                             if pPlot.getOwner() == iUnitOwner:
                                 # Check plot
                                 eBonus = gc.getInfoTypeForString("BONUS_CAMEL")
-                                if PAE_Cultivation._isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
+                                if PAE_Cultivation.isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
                                     screen.appendMultiListButton("BottomButtonContainer", "Art/Interface/Buttons/Buildings/button_camel_stable.dds", 0, WidgetTypes.WIDGET_GENERAL, 721, 4, False)
                                     screen.show("BottomButtonContainer")
                                     screen.enableMultiListPulse("BottomButtonContainer", True, 0, iCount)
