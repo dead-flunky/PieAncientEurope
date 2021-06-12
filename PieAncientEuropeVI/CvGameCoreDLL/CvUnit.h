@@ -855,6 +855,10 @@ protected:
 	int m_iBaseCombat;
 	DirectionTypes m_eFacingDirection;
 	int m_iImmobileTimer;
+	// Flunky PAE - Flight
+	int m_iExtraFlight;
+	int m_iExtraFlightDamageProtection;
+	bool m_bFlight;
 
 	bool m_bMadeAttack;
 	bool m_bMadeInterception;
@@ -891,6 +895,8 @@ protected:
 
 	bool canAdvance(const CvPlot* pPlot, int iThreshold) const;
 	void collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit = NULL);
+	// Flunky: wrapped for PAE archers
+	void collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit, bool bRangedStrike);
 	void flankingStrikeCombat(const CvPlot* pPlot, int iAttackerStrength, int iAttackerFirepower, int iDefenderOdds, int iDefenderDamage, CvUnit* pSkipUnit = NULL);
 
 	bool interceptTest(const CvPlot* pPlot);
@@ -926,6 +932,19 @@ public:
 	int LFGgetDefensiveValueAdjustment() const; // K-Mod
 	bool LFBisBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttacker, int* pBestDefenderRank) const;
 	int LFBgetDefenderCombatOdds(const CvUnit* pAttacker) const;
+
+	// Flunky PAE - Flight
+	int flightMaxHealth();
+	int flightProbability(int iWinnerDamage);
+	
+	int getExtraFlight() const;
+	void changeExtraFlight(int iChange);
+
+	int getExtraFlightDamageProtection() const;
+	void changeExtraFlightDamageProtection(int iChange);
+
+	bool isFlight();
+	void setFlight(bool bFlight);
 };
 
 #endif

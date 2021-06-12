@@ -1679,6 +1679,9 @@ m_iPillageChange(0),
 m_iUpgradeDiscount(0),
 m_iExperiencePercent(0),
 m_iKamikazePercent(0),
+// Flunky PAE - Flight
+m_iFlightChanceChange(0),
+m_iFlightMaxHealth(0),
 m_bLeader(false),
 m_bBlitz(false),
 m_bAmphib(false),
@@ -1928,6 +1931,15 @@ int CvPromotionInfo::getKamikazePercent() const
 {
 	return m_iKamikazePercent;
 }
+// Flunky PAE - Flight
+int CvPromotionInfo::getFlightChanceChange() const
+{
+	return m_iFlightChanceChange;
+}
+int CvPromotionInfo::getFlightMaxHealth() const
+{
+	return m_iFlightMaxHealth;
+}
 
 bool CvPromotionInfo::isLeader() const			
 {
@@ -1968,6 +1980,7 @@ bool CvPromotionInfo::isImmuneToFirstStrikes() const
 {
 	return m_bImmuneToFirstStrikes;
 }
+
 
 const TCHAR* CvPromotionInfo::getSound() const										
 {
@@ -2088,6 +2101,9 @@ void CvPromotionInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iUpgradeDiscount);
 	stream->Read(&m_iExperiencePercent);
 	stream->Read(&m_iKamikazePercent);
+	// Flunky PAE - Flight
+	stream->Read(&m_iFlightChanceChange);
+	stream->Read(&m_iFlightMaxHealth);
 
 	stream->Read(&m_bLeader);
 	stream->Read(&m_bBlitz);
@@ -2183,6 +2199,9 @@ void CvPromotionInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iUpgradeDiscount);
 	stream->Write(m_iExperiencePercent);
 	stream->Write(m_iKamikazePercent);
+	// Flunky PAE - Flight
+	stream->Write(m_iFlightChanceChange);
+	stream->Write(m_iFlightMaxHealth);
 
 	stream->Write(m_bLeader);
 	stream->Write(m_bBlitz);
@@ -2268,6 +2287,10 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iUpgradeDiscount, "iUpgradeDiscount");
 	pXML->GetChildXmlValByName(&m_iExperiencePercent, "iExperiencePercent");
 	pXML->GetChildXmlValByName(&m_iKamikazePercent, "iKamikazePercent");
+	
+	// Flunky PAE - Flight
+	pXML->GetChildXmlValByName(&m_iFlightChanceChange, "iFlightChanceChange");
+	pXML->GetChildXmlValByName(&m_iFlightMaxHealth, "iFlightMaxHealth");
 
 	pXML->SetVariableListTagPair(&m_piTerrainAttackPercent, "TerrainAttacks", sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piTerrainDefensePercent, "TerrainDefenses", sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
