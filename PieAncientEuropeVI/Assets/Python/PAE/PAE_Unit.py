@@ -2404,8 +2404,8 @@ def flee(pLoser, pWinner, iWinnerDamage):
     NewUnit = None
     
     iMaxHealth = 10 # Standard: max 10% Gesundheit
-    iChance = 2 # Standard Fluchtchance: 20%
-    iChanceShipsAndRiders = 3 # Standard: 30%
+    iChance = 20 # Standard Fluchtchance: 20%
+    iChanceShipsAndRiders = 30 # Standard: 30%
     
     iGeneralForm = gc.getInfoTypeForString("PROMOTION_FORM_LEADER_POSITION")
     bGeneralForm = False
@@ -2423,74 +2423,72 @@ def flee(pLoser, pWinner, iWinnerDamage):
         # Tiere
         if pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL:
             if pLoser.getUnitType() == gc.getInfoTypeForString("UNIT_UR") or pLoser.getLevel() > 2:
-                iChance = 8
+                iChance = 80
                 iMaxHealth = 50
             elif pLoser.getLevel() > 1:
-                iChance = 6
+                iChance = 60
                 iMaxHealth = 35
             else:
-                iChance = 4
+                iChance = 40
                 iMaxHealth = 25
         
         # nun nach Chance geordnet
         # Promo Flucht III - 80%, max 20
         elif pLoser.isHasPromotion(gc.getInfoTypeForString("PROMOTION_FLUCHT3")):
-            iChance = 8
+            iChance = 80
             iMaxHealth = 20
         # Metropole
         elif bIsCity and iCityStatus == 4:
-            iChance = 7
+            iChance = 70
             iMaxHealth = 20
         # Provinzstadt
         elif bIsCity and iCityStatus == 3:
-            iChance = 6
+            iChance = 60
             iMaxHealth = 18
         # Promo Flucht II - 60%, max 15
         elif pLoser.isHasPromotion(gc.getInfoTypeForString("PROMOTION_FLUCHT2")):
-            iChance = 6
+            iChance = 60
             iMaxHealth = 15
         # Stadt
         elif bIsCity and iCityStatus == 2:
-            iChance = 4
+            iChance = 40
             iMaxHealth = 15
         # Gemeinde
         elif pLoserPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_TOWN"):
             bIsVillage = True
-            iChance = 4
+            iChance = 40
             iMaxHealth = 15
         # Promo Flucht I - 40%, max 10
         elif pLoser.isHasPromotion(gc.getInfoTypeForString("PROMOTION_FLUCHT1")):
-            iChance = 4
+            iChance = 40
         elif (pLoserPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_VILLAGE")
           or pLoserPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL")):
             bIsVillage = True
-            iChance = 3
+            iChance = 30
             iMaxHealth = 12
 
 
         # Bei Schiffen eine Extra-Berechnung
         if pLoser.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"):
             if iWinnerDamage >= 50:
-                iChance = 8  # 80%: somit muss man womoeglich ein Schiff 2x angreifen, bevor es sinkt
-            elif iChance < 4:
+                iChance = 80  # 80%: somit muss man womoeglich ein Schiff 2x angreifen, bevor es sinkt
+            elif iChance < iChanceShipsAndRiders:
                 iChance = iChanceShipsAndRiders
 
         # Berittene
-        elif iChance < 4 and pLoser.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"):
+        elif iChance < iChanceShipsAndRiders and pLoser.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"):
             iChance = iChanceShipsAndRiders
 
         # Generals Formation
         if pLoser.isHasPromotion(iGeneralForm):
-            iChance = 10
+            iChance = 100
             bGeneralForm = True
-
-        iRand = CvUtil.myRandom(10, "Escape")
 
         # ***TEST***
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Fluchtchance (Zeile 2924)", iRand)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Max Health (Zeile 2925)", iMaxHealth)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-        if iRand < iChance:
+        if CvUtil.myRandom(100, "Escape") < iChance:
             bUnitFlucht = True
 
             # Create a new unit

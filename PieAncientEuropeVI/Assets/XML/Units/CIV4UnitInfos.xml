@@ -11,7 +11,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -228,7 +228,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -445,7 +445,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -648,7 +648,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -839,7 +839,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -1030,7 +1030,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -1234,7 +1234,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -1424,7 +1424,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -1605,7 +1605,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -1801,7 +1801,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -1992,7 +1992,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -2188,7 +2188,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
-      <Combat>UNITCOMBAT_MELEE</Combat>
+      <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
       <Invisible>NONE</Invisible>
@@ -2746,7 +2746,7 @@
       <Capture>NONE</Capture>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
-      <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
+      <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI><!--Flunky: is this right?-->
       <Invisible>NONE</Invisible>
       <SeeInvisible>NONE</SeeInvisible>
       <Description>TXT_KEY_UNIT_CAMP</Description>
@@ -7052,7 +7052,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>10</iCityAttack>
       <iCityDefense>10</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -13187,7 +13187,7 @@
           <bUnitAI>1</bUnitAI>
         </UnitAI>
         <UnitAI>
-          <UnitAIType>UNITAI_WORKER</UnitAIType>
+          <UnitAIType>UNITAI_WORKER</UnitAIType><!--Flunky: TODO introduce UNITAI_MILITARY_WORKER for towers/forts/roman roads-->
           <bUnitAI>1</bUnitAI>
         </UnitAI>
       </UnitAIs>
@@ -13256,7 +13256,7 @@
       <iCollateralDamageMaxUnits>1</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -14726,7 +14726,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -14939,7 +14939,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -15152,7 +15152,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -15361,7 +15361,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -15775,7 +15775,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -15967,7 +15967,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -16159,7 +16159,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -25999,7 +25999,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -26198,7 +26198,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -26393,7 +26393,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -26588,7 +26588,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -26792,7 +26792,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -26997,7 +26997,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -27203,7 +27203,7 @@
       <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>20</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -34334,7 +34334,7 @@
       <iCollateralDamageMaxUnits>3</iCollateralDamageMaxUnits>
       <iCityAttack>-50</iCityAttack>
       <iCityDefense>-50</iCityDefense>
-      <iAnimalCombat>0</iAnimalCombat>
+      <iAnimalCombat>50</iAnimalCombat>
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <TerrainNatives/>
@@ -50116,10 +50116,11 @@
       <UnitCombatDefenders/>
       <FlankingStrikes/>
       <UnitAIs>
-        <UnitAI>
+        <!--<UnitAI>
           <UnitAIType>UNITAI_COLLATERAL</UnitAIType>
           <bUnitAI>1</bUnitAI>
-        </UnitAI>
+        </UnitAI>--> 
+        <!-- Flunky: has no collateral damage right now-->
         <UnitAI>
           <UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
           <bUnitAI>1</bUnitAI>
@@ -50202,8 +50203,8 @@
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
       <iCollateralDamage>0</iCollateralDamage>
-      <iCollateralDamageLimit>50</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
+      <iCollateralDamageLimit>0</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
       <iCityAttack>-50</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
