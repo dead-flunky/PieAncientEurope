@@ -360,6 +360,9 @@
 	<ElementType name="iHillsAttack" content="textOnly" dt:type="int"/>
 	<ElementType name="iHillsDefense" content="textOnly" dt:type="int"/>
 	<ElementType name="iKamikazePercent" content="textOnly" dt:type="int"/>
+    <!-- Flunky PAE - Flight -->
+	<ElementType name="iFlightChanceChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iFlightMaxHealth" content="textOnly" dt:type="int"/>
 	<ElementType name="iRevoltProtection" content="textOnly" dt:type="int"/>
 	<ElementType name="iCollateralDamageProtection" content="textOnly" dt:type="int"/>
 	<ElementType name="iPillageChange" content="textOnly" dt:type="int"/>
@@ -872,6 +875,9 @@
 		<element type="iHillsAttack"/>
 		<element type="iHillsDefense"/>
 		<element type="iKamikazePercent"/>
+        <!-- Flunky PAE - Flight -->
+		<element type="iFlightChanceChange"/>
+		<element type="iFlightMaxHealth"/>
 		<element type="iRevoltProtection"/>
 		<element type="iCollateralDamageProtection"/>
 		<element type="iPillageChange"/>

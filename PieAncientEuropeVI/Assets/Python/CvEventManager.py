@@ -2854,8 +2854,9 @@ class CvEventManager:
                 iWinnerDamage = pWinner.getDamage()
             # pLoser tries to flee if pLoser is not being domesticated and pLoser is not Treibgut
             # Generals Formation (PROMOTION_FORM_LEADER_POSITION)
-            bUnitFlucht, pLoserFlucht = PAE_Unit.flee(pLoser, pWinner, iWinnerDamage)
-            if bUnitFlucht and pLoserFlucht is not None:
+            # Flunky: moved to dll
+            # bUnitFlucht, pLoserFlucht = PAE_Unit.flee(pLoser, pWinner, iWinnerDamage)
+            if bUnitFlucht and pLoserFlucht:
                 PAE_Unit.doUnitGetsPromo(pLoserFlucht, pWinner, pLoserPlot, False, bWinnerAnimal)
             else:
                 # Feature: Wenn die Generalseinheit stirbt, ist in jeder Stadt Civil War! (GG Great General dies)

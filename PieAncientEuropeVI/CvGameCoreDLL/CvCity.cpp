@@ -12029,6 +12029,27 @@ void CvCity::updateTradeRoutes()
 	SAFE_DELETE_ARRAY(paiBestValue);
 }
 
+// Flunky PAE - cityStatus
+int CvCity::getCityStatus(){
+	
+//# PAE Stadtstatus
+//# 0: Siedlung
+//# 1: Dorf
+//# 2: Stadt
+//# 3: Provinzstadt
+//# 4: Metropole
+
+    if (getNumBuilding((BuildingTypes) GC.getInfoTypeForString("BUILDING_METROPOLE")) > 0)
+		return 4;
+    if (getNumBuilding((BuildingTypes) GC.getInfoTypeForString("BUILDING_PROVINZ")) > 0)
+        return 3;
+    if (getNumBuilding((BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT")) > 0)
+        return 2;
+    if (getNumBuilding((BuildingTypes) GC.getInfoTypeForString("BUILDING_KOLONIE")) > 0)
+        return 1;
+
+    return 0;
+}
 
 void CvCity::clearOrderQueue()
 {

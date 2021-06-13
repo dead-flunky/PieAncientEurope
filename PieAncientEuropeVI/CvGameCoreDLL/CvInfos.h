@@ -506,6 +506,10 @@ public:
 	bool isAlwaysHeal() const;				// Exposed to Python
 	bool isHillsDoubleMove() const;				// Exposed to Python
 	bool isImmuneToFirstStrikes() const;				// Exposed to Python
+	
+	// Flunky PAE - Flight Promotions
+    int getFlightChanceChange() const;
+    int getFlightMaxHealth() const;
 
 	const TCHAR* getSound() const;				// Exposed to Python
 	void setSound(const TCHAR* szVal);
@@ -569,8 +573,11 @@ protected:
 	int m_iPillageChange;
 	int m_iUpgradeDiscount;
 	int m_iExperiencePercent;
-	int m_iKamikazePercent;
-
+	int m_iKamikazePercent;		
+	// Flunky PAE - Flight
+	int m_iFlightChanceChange;
+	int m_iFlightMaxHealth;
+	
 	bool m_bLeader;
 	bool m_bBlitz;									
 	bool m_bAmphib;								
@@ -578,8 +585,7 @@ protected:
 	bool m_bEnemyRoute;						
 	bool m_bAlwaysHeal;						
 	bool m_bHillsDoubleMove;				
-	bool m_bImmuneToFirstStrikes;				
-
+	bool m_bImmuneToFirstStrikes;		
 	CvString m_szSound;
 
 	// Arrays
