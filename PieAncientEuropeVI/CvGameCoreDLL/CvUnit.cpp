@@ -3631,6 +3631,7 @@ void CvUnit::gift(bool bTestTransport)
 		kRecievingPlayer.AI_changeMemoryCount(eOwner, MEMORY_GIVE_HELP, 1);
 	}
 	// Note: I'm not currently considering special units with < 0 production cost.
+	// Flunky TODO: consider special units with < 0 production cost.
 	if (pGiftUnit->isCombat())
 	{
 		int iEffectiveWarRating = plot()->area()->getAreaAIType(kRecievingPlayer.getTeam()) != AREAAI_NEUTRAL
@@ -4179,13 +4180,13 @@ int CvUnit::healRate(const CvPlot* pPlot, bool bLocation, bool bUnits) const
 		{
 			pLoopPlot = plotDirection(pPlot->getX_INLINE(), pPlot->getY_INLINE(), ((DirectionTypes)iI));
 
-			if (pLoopPlot != NULL)
+			if (pLoopPlot)
 			{
 				if (pLoopPlot->area() == pPlot->area())
 				{
 					pUnitNode = pLoopPlot->headUnitNode();
 
-					while (pUnitNode != NULL)
+					while (pUnitNode)
 					{
 						pLoopUnit = ::getUnit(pUnitNode->m_data);
 						pUnitNode = pLoopPlot->nextUnitNode(pUnitNode);
@@ -12002,7 +12003,7 @@ void CvUnit::setCombatUnit(CvUnit* pCombatUnit, bool bAttacking)
 				&& pCombatUnit->plot()->getPlotCity() 
 				&& pCombatUnit->plot()->getPlotCity()->getBuildingDefense() > 0 
 				&& cityAttackModifier() >= GC.getDefineINT("MIN_CITY_ATTACK_MODIFIER_FOR_SIEGE_TOWER")) */
-			if (showSeigeTower(pCombatUnit)) // K-Mod
+			if (showSiegeTower(pCombatUnit)) // K-Mod
 			{
 				CvDLLEntity::SetSiegeTower(true);
 			}
@@ -12047,9 +12048,9 @@ void CvUnit::setCombatUnit(CvUnit* pCombatUnit, bool bAttacking)
 	}
 }
 
-// K-Mod. Return true if the combat animation should include a seige tower
+// K-Mod. Return true if the combat animation should include a siege tower
 // (code copied from setCombatUnit, above)
-bool CvUnit::showSeigeTower(CvUnit* pDefender) const
+bool CvUnit::showSiegeTower(CvUnit* pDefender) const
 {
 	return getDomainType() == DOMAIN_LAND
 		&& !m_pUnitInfo->isIgnoreBuildingDefense()
@@ -13488,17 +13489,17 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 
 	int extraTime = 0;
 
-	// extra time for seige towers and surrendering leaders.
+	// extra time for siege towers and surrendering leaders.
 	if ((pAttackUnit->getLeaderUnitType() != NO_UNIT && pAttackUnit->isDead()) ||
 		(pDefenceUnit->getLeaderUnitType() != NO_UNIT && pDefenceUnit->isDead()) ||
-		pAttackUnit->showSeigeTower(pDefenceUnit))
+		pAttackUnit->showSiegeTower(pDefenceUnit))
 	{
 		extraTime = BATTLE_TURNS_MELEE;
 	}
 
 	// K-Mod note: the original code used:
 	//   gDLL->getEntityIFace()->GetSiegeTower(pAttackUnit->getUnitEntity()) || gDLL->getEntityIFace()->GetSiegeTower(pDefenceUnit->getUnitEntity())
-	// I've changed that to use showSeigeTower, because GetSiegeTower does not work for the Pitboss host, and therefore can cause OOS errors.
+	// I've changed that to use showSiegeTower, because GetSiegeTower does not work for the Pitboss host, and therefore can cause OOS errors.
 
 	return BATTLE_TURNS_SETUP + BATTLE_TURNS_ENDING + kBattle.getNumMeleeRounds() * BATTLE_TURNS_MELEE + kBattle.getNumRangedRounds() * BATTLE_TURNS_MELEE + extraTime;
 }
