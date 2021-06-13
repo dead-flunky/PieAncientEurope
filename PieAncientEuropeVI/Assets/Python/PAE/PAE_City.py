@@ -791,7 +791,8 @@ def doCityRevolt(pCity, iTurns):
     # ***TEST***
     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("City Revolt (Zeile 6485)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-    if iTurns < 2: iTurns = 2
+    if iTurns < 2:
+        iTurns = 2
 
     # Einheiten stilllegen
     iRange = pPlot.getNumUnits()

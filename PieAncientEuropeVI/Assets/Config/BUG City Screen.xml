@@ -72,10 +72,10 @@
 			
 			<!-- Show Only Present and Extra Religions/Corporations by johny smith -->
 			<option id="OnlyPresentReligions" key="Only Present Religions" 
-					type="boolean" default="False" 
+					type="boolean" default="True" 
 					get="isShowOnlyPresentReligions" dirtyBit="CityScreen"/>
 			<option id="OnlyPresentCorporations" key="Only Present Corporations" 
-					type="boolean" default="False" 
+					type="boolean" default="True" 
 					get="isShowOnlyPresentCorporations" dirtyBit="CityScreen"/>
 			
 			<!-- Specialist Stacker by TheLopez -->
