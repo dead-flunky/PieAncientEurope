@@ -2885,7 +2885,7 @@ class CvMainInterface:
                             if pPlot.getOwner() == iUnitOwner:
                                 # Check plot
                                 eBonus = gc.getInfoTypeForString("BONUS_HORSE")
-                                if PAE_Cultivation._isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
+                                if PAE_Cultivation.isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
                                     screen.appendMultiListButton("BottomButtonContainer", ",Art/Interface/Buttons/Buildings/Barracks.dds,Art/Interface/Buttons/Warlords_Atlas_1.dds,7,1", 0, WidgetTypes.WIDGET_GENERAL, 721, 14, False)
                                     screen.show("BottomButtonContainer")
                                     screen.enableMultiListPulse("BottomButtonContainer", True, 0, iCount)
@@ -2898,7 +2898,7 @@ class CvMainInterface:
                             if pPlot.getOwner() == iUnitOwner:
                                 # Check plot
                                 eBonus = gc.getInfoTypeForString("BONUS_CAMEL")
-                                if PAE_Cultivation._isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
+                                if PAE_Cultivation.isBonusCultivationChance(iUnitOwner, pPlot, eBonus, False, None):
                                     screen.appendMultiListButton("BottomButtonContainer", "Art/Interface/Buttons/Buildings/button_camel_stable.dds", 0, WidgetTypes.WIDGET_GENERAL, 721, 4, False)
                                     screen.show("BottomButtonContainer")
                                     screen.enableMultiListPulse("BottomButtonContainer", True, 0, iCount)
@@ -4825,7 +4825,7 @@ class CvMainInterface:
         else:
             stackWidth = 1
         return stackWidth
-        
+
     def superSpecialistStackWidth(self, currentSuperSpecialistCount):
         if currentSuperSpecialistCount < 9:
             stackWidth = 25
@@ -6139,73 +6139,22 @@ class CvMainInterface:
                 szBuffer = u""
 
 # BUG - Limit/Extra Religions - start
+                lReligions = []
                 if CityScreenOpt.isShowOnlyPresentReligions():
                     lReligions = ReligionUtil.getCityReligions(pHeadSelectedCity)
-                    iCountReligions = len(lReligions)
-                    iMaxWidth = 250 # 228
-                    iMaxButtons = iCountReligions
-                    if iCountReligions < 8:
-                        iButtonSize = 24
-                        iButtonSpace = 10
-                    #elif iCountReligions >= iMaxButtons:
-                        #iButtonSize = iMaxWidth / iMaxButtons
-                        #iButtonSpace = 0
-                    elif iCountReligions == 8:
-                        iButtonSize = 24
-                        iButtonSpace = 5
-                    elif iCountReligions == 9:
-                        iButtonSize = 24
-                        iButtonSpace = 2
-                    elif iCountReligions == 10:
-                        iButtonSize = 21
-                        iButtonSpace = 2
-                    elif iCountReligions == 11:
-                        iButtonSize = 20
-                        iButtonSpace = 1
-                    elif iCountReligions == 12:
-                        iButtonSize = 18
-                        iButtonSpace = 1
-                    elif iCountReligions == 13:
-                        iButtonSize = 18
-                        iButtonSpace = 0
-                    elif iCountReligions == 14:
-                        iButtonSize = 16
-                        iButtonSpace = 0
-                    elif iCountReligions == 15:
-                        iButtonSize = 15
-                        iButtonSpace = 0
-                    elif iCountReligions == 16:
-                        iButtonSize = 14
-                        iButtonSpace = 0
-                    elif iCountReligions == 17:
-                        iButtonSize = 13
-                        iButtonSpace = 0
-                    elif iCountReligions == 18:
-                        iButtonSize = 13
-                        iButtonSpace = 0
-                    elif 37 > iCountReligions > 18:
-                        iMaxButtons = 18
-                        iButtonSize = 13
-                        iButtonSpace = 0
-                    elif iCountReligions == 37 or iCountReligions == 38:
-                        iMaxWidth = 240
-                        iMaxButtons = int(round(iCountReligions / 2.0, 0)) # int(round(gc.getNumReligionInfos() / 2.0, 0))
-                        iButtonSize = iMaxWidth / iMaxButtons
-                        iButtonSpace = (iMaxWidth - (iButtonSize * iMaxButtons)) // (iMaxButtons - 1)
-                    else:
-                        iMaxButtons = int(round(iCountReligions / 2.0, 0)) # int(round(gc.getNumReligionInfos() / 2.0, 0))
-                        iButtonSize = iMaxWidth / iMaxButtons
-                        iButtonSpace = (iMaxWidth - (iButtonSize * iMaxButtons)) // (iMaxButtons - 1)
+                else:
+                    lReligions = range(gc.getNumReligionInfos())
 
-                    for ii in range(iCountReligions):
-                        i = lReligions[ii]
-                        xCoord = xResolution - 242 + ((ii % iMaxButtons) * (iButtonSize + iButtonSpace))
-                        # xCoord = xResolution - 242 + (i * 34) # Original Civ4 Code
-                        yCoord = 42 + iButtonSize * (ii // iMaxButtons)
-                        # yCoord = 42 # Original Civ4 Code
+                iMaxWidth, iMaxButtons, iButtonSize, iButtonSpace = self.getButtonSize(len(lReligions))
+                for ii, i in enumerate(lReligions):
+                    xCoord = xResolution - 242 + ((ii % iMaxButtons) * (iButtonSize + iButtonSpace))
+                    # xCoord = xResolution - 242 + (i * 34) # Original Civ4 Code
+                    yCoord = 42 + iButtonSize * (ii // iMaxButtons)
+                    # yCoord = 42 # Original Civ4 Code
 
-                        bEnable = True
+                    bEnable = True
 
+                    if pHeadSelectedCity.isHasReligion(i):
                         if pHeadSelectedCity.isHolyCityByType(i):
                             szTempBuffer = u"%c" %(gc.getReligionInfo(i).getHolyCityChar())
                             # < 47 Religions Mod Start >
@@ -6244,142 +6193,43 @@ class CvMainInterface:
 
                         szButton = gc.getReligionInfo(i).getButton()
 
-                        szName = "ReligionDDS" + str(i)
-                        screen.setImageButton(szName, szButton, xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1)
-                        screen.enable(szName, bEnable)
+                    else:
+
+                        bEnable = False
+                        szButton = gc.getReligionInfo(i).getButton()
+
+                    szName = "ReligionDDS" + str(i)
+                    screen.setImageButton(szName, szButton, xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1)
+                    screen.enable(szName, bEnable)
+                    screen.show(szName)
+
+                    # Holy City Overlay
+                    if pHeadSelectedCity.isHolyCityByType(i):
+                        szName = "ReligionHolyCityDDS" + str(i)
+                        screen.addDDSGFC(szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1)
                         screen.show(szName)
-
-                        # Holy City Overlay
-                        if pHeadSelectedCity.isHolyCityByType(i):
-                            szName = "ReligionHolyCityDDS" + str(i)
-                            screen.addDDSGFC(szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1)
-                            screen.show(szName)
-                else:
-                    for i in range(gc.getNumReligionInfos()):
-                        xCoord = xResolution - 242 + (i * 34)
-                        yCoord = 42
-
-                        bEnable = True
-
-                        if pHeadSelectedCity.isHasReligion(i):
-                            if pHeadSelectedCity.isHolyCityByType(i):
-                                szTempBuffer = u"%c" %(gc.getReligionInfo(i).getHolyCityChar())
-                                szName = "ReligionHolyCityDDS" + str(i)
-                                screen.show( szName )
-                            else:
-                                szTempBuffer = u"%c" %(gc.getReligionInfo(i).getChar())
-                            szBuffer = szBuffer + szTempBuffer
-
-                            j = 0
-                            for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
-                                iCommerce = pHeadSelectedCity.getReligionCommerceByReligion(j, i)
-
-                                if iCommerce != 0:
-                                    if iCommerce > 0:
-                                        szTempBuffer = u",%s%d%c" %("+", iCommerce, gc.getCommerceInfo(j).getChar() )
-                                        szBuffer = szBuffer + szTempBuffer
-                                    else:
-                                        szTempBuffer = u",%s%d%c" %( "", iCommerce, gc.getCommerceInfo(j).getChar() )
-                                        szBuffer = szBuffer + szTempBuffer
-
-                            iHappiness = pHeadSelectedCity.getReligionHappiness(i)
-
-                            if iHappiness != 0:
-                                if iHappiness > 0:
-                                    szTempBuffer = u",+%d%c" %(iHappiness, CyGame().getSymbolID(FontSymbols.HAPPY_CHAR) )
-                                    szBuffer = szBuffer + szTempBuffer
-                                else:
-                                    szTempBuffer = u",+%d%c" %(-(iHappiness), CyGame().getSymbolID(FontSymbols.UNHAPPY_CHAR) )
-                                    szBuffer = szBuffer + szTempBuffer
-
-                            szBuffer = szBuffer + " "
-                            szButton = gc.getReligionInfo(i).getButton()
-
-                        else:
-
-                            bEnable = False
-                            szButton = gc.getReligionInfo(i).getButton()
-
-                        szName = "ReligionDDS" + str(i)
-                        screen.setImageButton(szName, szButton, xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1)
-                        screen.enable(szName, bEnable)
-                        screen.show(szName)
-                        if pHeadSelectedCity.isHolyCityByType(i):
-                            szName = "ReligionHolyCityDDS" + str(i)
-                            screen.addDDSGFC(szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_RELIGION_CITY, i, -1)
-                            screen.show(szName)
 # BUG - Limit/Extra Religions - end
+
 # BUG - Limit/Extra Corporations - start
+                lCorporations = []
                 if CityScreenOpt.isShowOnlyPresentCorporations():
                     lCorporations = []
                     for i in range(gc.getNumCorporationInfos()):
-                        if not pHeadSelectedCity.isHasCorporation(i):
-                            continue
-                        lCorporations += [i]
-                    iCountCorporations = len(lCorporations)
-                    iMaxWidth = 250 # 228
-                    iMaxButtons = iCountCorporations
-                    if iCountCorporations < 8:
-                        iButtonSize = 24
-                        iButtonSpace = 10
-                    #elif iCountCorporations >= iMaxButtons:
-                        #iButtonSize = iMaxWidth / iMaxButtons
-                        #iButtonSpace = 0
-                    elif iCountCorporations == 8:
-                        iButtonSize = 24
-                        iButtonSpace = 5
-                    elif iCountCorporations == 9:
-                        iButtonSize = 24
-                        iButtonSpace = 2
-                    elif iCountCorporations == 10:
-                        iButtonSize = 21
-                        iButtonSpace = 2
-                    elif iCountCorporations == 11:
-                        iButtonSize = 20
-                        iButtonSpace = 1
-                    elif iCountCorporations == 12:
-                        iButtonSize = 18
-                        iButtonSpace = 1
-                    elif iCountCorporations == 13:
-                        iButtonSize = 18
-                        iButtonSpace = 0
-                    elif iCountCorporations == 14:
-                        iButtonSize = 16
-                        iButtonSpace = 0
-                    elif iCountCorporations == 15:
-                        iButtonSize = 15
-                        iButtonSpace = 0
-                    elif iCountCorporations == 16:
-                        iButtonSize = 14
-                        iButtonSpace = 0
-                    elif iCountCorporations == 17:
-                        iButtonSize = 13
-                        iButtonSpace = 0
-                    elif iCountCorporations == 18:
-                        iButtonSize = 13
-                        iButtonSpace = 0
-                    elif 37 > iCountCorporations > 18:
-                        iMaxButtons = 18
-                        iButtonSize = 13
-                        iButtonSpace = 0
-                    elif iCountCorporations == 37 or iCountCorporations == 38:
-                        iMaxWidth = 240
-                        iMaxButtons = int(round(iCountCorporations / 2.0, 0)) # int(round(gc.getNumCorporationInfos() / 2.0, 0))
-                        iButtonSize = iMaxWidth / iMaxButtons
-                        iButtonSpace = (iMaxWidth - (iButtonSize * iMaxButtons)) // (iMaxButtons - 1)
-                    else:
-                        iMaxButtons = int(round(iCountCorporations / 2.0, 0)) # int(round(gc.getNumCorporationInfos() / 2.0, 0))
-                        iButtonSize = iMaxWidth / iMaxButtons
-                        iButtonSpace = (iMaxWidth - (iButtonSize * iMaxButtons)) // (iMaxButtons - 1)
-                    for ii in range(iCountCorporations):
-                        i = lCorporations[ii]
-                        xCoord = xResolution - 242 + ((ii % iMaxButtons) * (iButtonSize + iButtonSpace))
-                        # xCoord = xResolution - 242 + (i * 34) # Original Civ4 Code
-                        yCoord = 66 + iButtonSize * (ii // iMaxButtons)
-                        # yCoord = 66 # Original Civ4 Code
+                        if pHeadSelectedCity.isHasCorporation(i):
+                            lCorporations += [i]
+                else:
+                    lCorporations = range(gc.getNumCorporationInfos())
 
-                        bEnable = True
+                iMaxWidth, iMaxButtons, iButtonSize, iButtonSpace = self.getButtonSize(len(lCorporations))
+                for ii, i in enumerate(lCorporations):
+                    xCoord = xResolution - 242 + ((ii % iMaxButtons) * (iButtonSize + iButtonSpace))
+                    # xCoord = xResolution - 242 + (i * 34) # Original Civ4 Code
+                    yCoord = 66 + iButtonSize * (ii // iMaxButtons)
+                    # yCoord = 66 # Original Civ4 Code
 
+                    bEnable = True
+
+                    if pHeadSelectedCity.isHasCorporation(i):
                         if pHeadSelectedCity.isHeadquartersByType(i):
                             szTempBuffer = u"%c" %(gc.getCorporationInfo(i).getHeadquarterChar())
                             #szName = "CorporationHeadquarterDDS" + str(i)
@@ -6393,10 +6243,10 @@ class CvMainInterface:
 
                             if iYield != 0:
                                 if iYield > 0:
-                                    szTempBuffer = u",%s%d%c" %("+", iYield, gc.getYieldInfo(j).getChar())
+                                    szTempBuffer = u",+%d%c" %(iYield, gc.getYieldInfo(j).getChar())
                                     szBuffer = szBuffer + szTempBuffer
                                 else:
-                                    szTempBuffer = u",%s%d%c" %("", iYield, gc.getYieldInfo(j).getChar())
+                                    szTempBuffer = u",%d%c" %(iYield, gc.getYieldInfo(j).getChar())
                                     szBuffer = szBuffer + szTempBuffer
 
                         for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
@@ -6404,79 +6254,27 @@ class CvMainInterface:
 
                             if iCommerce != 0:
                                 if iCommerce > 0:
-                                    szTempBuffer = u",%s%d%c" %("+", iCommerce, gc.getCommerceInfo(j).getChar())
+                                    szTempBuffer = u",+%d%c" %(iCommerce, gc.getCommerceInfo(j).getChar())
                                     szBuffer = szBuffer + szTempBuffer
                                 else:
-                                    szTempBuffer = u",%s%d%c" %("", iCommerce, gc.getCommerceInfo(j).getChar())
+                                    szTempBuffer = u",%d%c" %(iCommerce, gc.getCommerceInfo(j).getChar())
                                     szBuffer = szBuffer + szTempBuffer
 
                         szBuffer += ""
                         szButton = gc.getCorporationInfo(i).getButton()
-                        szName = "CorporationDDS" + str(i)
-                        screen.setImageButton( szName, szButton, xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1 )
-                        screen.enable( szName, bEnable )
+                    else:
+                        bEnable = False
+                        szButton = gc.getCorporationInfo(i).getButton()
+                    szName = "CorporationDDS" + str(i)
+                    screen.setImageButton(szName, szButton, xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1)
+                    screen.enable(szName, bEnable)
+                    screen.show(szName)
+                    # Holy City Overlay
+                    if pHeadSelectedCity.isHeadquartersByType(i):
+                        szName = "CorporationHeadquarterDDS" + str(i)
+                        screen.addDDSGFC( szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1 )
                         screen.show(szName)
-                        # Holy City Overlay
-                        if pHeadSelectedCity.isHeadquartersByType(i):
-                            szName = "CorporationHeadquarterDDS" + str(i)
-                            screen.addDDSGFC( szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, iButtonSize, iButtonSize, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1 )
-                            screen.show(szName)
-                else:
 
-                    for i in range(gc.getNumCorporationInfos()):
-                        xCoord = xResolution - 242 + (i * 34)
-                        yCoord = 66
-
-                        bEnable = True
-
-                        if pHeadSelectedCity.isHasCorporation(i):
-                            if pHeadSelectedCity.isHeadquartersByType(i):
-                                szTempBuffer = u"%c" %(gc.getCorporationInfo(i).getHeadquarterChar())
-                                szName = "CorporationHeadquarterDDS" + str(i)
-                                screen.show(szName)
-                            else:
-                                szTempBuffer = u"%c" %(gc.getCorporationInfo(i).getChar())
-                            szBuffer = szBuffer + szTempBuffer
-
-                            for j in range(YieldTypes.NUM_YIELD_TYPES):
-                                iYield = pHeadSelectedCity.getCorporationYieldByCorporation(j, i)
-
-                                if iYield != 0:
-                                    if iYield > 0:
-                                        szTempBuffer = u",+%d%c" %(iYield, gc.getYieldInfo(j).getChar() )
-                                        szBuffer = szBuffer + szTempBuffer
-                                    else:
-                                        szTempBuffer = u",%d%c" %(iYield, gc.getYieldInfo(j).getChar() )
-                                        szBuffer = szBuffer + szTempBuffer
-
-                            for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
-                                iCommerce = pHeadSelectedCity.getCorporationCommerceByCorporation(j, i)
-
-                                if iCommerce != 0:
-                                    if iCommerce > 0:
-                                        szTempBuffer = u",+%d%c" %(iCommerce, gc.getCommerceInfo(j).getChar() )
-                                        szBuffer = szBuffer + szTempBuffer
-                                    else:
-                                        szTempBuffer = u",%d%c" %(iCommerce, gc.getCommerceInfo(j).getChar() )
-                                        szBuffer = szBuffer + szTempBuffer
-
-                            szBuffer += " "
-
-                            szButton = gc.getCorporationInfo(i).getButton()
-
-                        else:
-
-                            bEnable = False
-                            szButton = gc.getCorporationInfo(i).getButton()
-
-                        szName = "CorporationDDS" + str(i)
-                        screen.setImageButton( szName, szButton, xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1 )
-                        screen.enable( szName, bEnable )
-                        screen.show( szName )
-                        if pHeadSelectedCity.isHeadquartersByType(i):
-                            szName = "CorporationHeadquarterDDS" + str(i)
-                            screen.addDDSGFC( szName, ArtFileMgr.getInterfaceArtInfo("INTERFACE_HOLYCITY_OVERLAY").getPath(), xCoord, yCoord, 24, 24, WidgetTypes.WIDGET_HELP_CORPORATION_CITY, i, -1 )
-                            screen.show(szName)
 # BUG - Limit/Extra Corporations - end
                 # Emigration Bar / Emigrant -----------------------------------
                 iTech = gc.getInfoTypeForString("TECH_COLONIZATION")
@@ -6918,6 +6716,61 @@ class CvMainInterface:
                 self.setMinimapButtonVisibility(True)
 
         return 0
+
+    def getButtonSize(self, iCount):
+
+        iMaxWidth = 250 # 228
+        iMaxButtons = iCount
+        if iCount < 8:
+            iButtonSize = 24
+            iButtonSpace = 10
+        elif iCount == 8:
+            iButtonSize = 24
+            iButtonSpace = 5
+        elif iCount == 9:
+            iButtonSize = 24
+            iButtonSpace = 2
+        elif iCount == 10:
+            iButtonSize = 21
+            iButtonSpace = 2
+        elif iCount == 11:
+            iButtonSize = 20
+            iButtonSpace = 1
+        elif iCount == 12:
+            iButtonSize = 18
+            iButtonSpace = 1
+        elif iCount == 13:
+            iButtonSize = 18
+            iButtonSpace = 0
+        elif iCount == 14:
+            iButtonSize = 16
+            iButtonSpace = 0
+        elif iCount == 15:
+            iButtonSize = 15
+            iButtonSpace = 0
+        elif iCount == 16:
+            iButtonSize = 14
+            iButtonSpace = 0
+        elif iCount == 17:
+            iButtonSize = 13
+            iButtonSpace = 0
+        elif iCount == 18:
+            iButtonSize = 13
+            iButtonSpace = 0
+        elif 37 > iCount > 18:
+            iMaxButtons = 18
+            iButtonSize = 13
+            iButtonSpace = 0
+        elif iCount == 37 or iCount == 38:
+            iMaxWidth = 240
+            iMaxButtons = int(round(iCount / 2.0, 0))
+            iButtonSize = iMaxWidth / iMaxButtons
+            iButtonSpace = (iMaxWidth - (iButtonSize * iMaxButtons)) // (iMaxButtons - 1)
+        else:
+            iMaxButtons = int(round(iCount / 2.0, 0))
+            iButtonSize = iMaxWidth / iMaxButtons
+            iButtonSpace = (iMaxWidth - (iButtonSize * iMaxButtons)) // (iMaxButtons - 1)
+        return iMaxWidth, iMaxButtons, iButtonSize, iButtonSpace
 
     # Will update the info pane strings
     # PAE VI: changed for more Unit Info lines / PAE Unit Info bottom left
