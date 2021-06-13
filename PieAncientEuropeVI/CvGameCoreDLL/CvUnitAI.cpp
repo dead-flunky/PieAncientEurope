@@ -1255,8 +1255,13 @@ int CvUnitAI::AI_sacrificeValue(const CvPlot* pPlot) const
 		// K-Mod end
 	}
 
-	//return iValue;
-	return std::min((long)MAX_INT, iValue); // K-Mod
+	// Flunky: did the long manage to overflow or is there another way to get negative values?
+	if (iValue < 0 || iValue > (long)MAX_INT)
+	{
+		iValue = (long)MAX_INT;
+	}
+	return iValue;
+	//return std::min((long)MAX_INT, iValue); // K-Mod
 }
 
 // Protected Functions...
@@ -1327,6 +1332,15 @@ void CvUnitAI::AI_animalMove()
 	if (GC.getGameINLINE().getSorenRandNum(100, "Animal Attack") < GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAnimalAttackProb())
 	{
 		if (AI_anyAttack(1, 0))
+		{
+			return;
+		}
+//pae keldath - make animals search wider area, in a scale
+		if (AI_anyAttack(2, 0))
+		{
+			return;
+		}
+		if (AI_anyAttack(3, 0))
 		{
 			return;
 		}
@@ -1645,7 +1659,9 @@ void CvUnitAI::AI_settleMove()
 void CvUnitAI::AI_workerMove()
 {
 	PROFILE_FUNC();
-	
+// Super Forts begin - doto	
+	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
+// Super Forts begin - doto	
 	CvCity* pCity;
 	bool bCanRoute;
 	bool bNextCity;
@@ -1656,14 +1672,17 @@ void CvUnitAI::AI_workerMove()
 	const CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 
 	// XXX could be trouble...
-	if (plot()->getOwnerINLINE() != getOwnerINLINE())
+// Super Forts begin *AI_worker* (removing this to allow workers to build outside borders)
+//doto - should we really allow this to be commented out?
+	if (!superForts &&
+		plot()->getOwnerINLINE() != getOwnerINLINE())
 	{
 		if (AI_retreatToCity())
 		{
 			return;
 		}
 	}
-
+	// Super Forts end
 	if (!isHuman())
 	{
 		if (plot()->getOwnerINLINE() == getOwnerINLINE())
@@ -1803,18 +1822,36 @@ void CvUnitAI::AI_workerMove()
 	if (GC.getGame().getSorenRandNum(5, "AI Worker build Fort with Priority"))
 	{
 		//bool bCanal = ((100 * area()->getNumCities()) / std::max(1, GC.getGame().getNumCities()) < 85);
-		bool bCanal = false; // K-Mod. The current AI for canals doesn't work anyway; so lets skip it to save time.
+		//bool bCanal = false; // K-Mod. The current AI for canals doesn't work anyway; so lets skip it to save time.
+/// Super Forts begin *canal* *choke* - doto adjustment		
+		//bool const bCanal = false; //doto - cant const it - reassigning below
+		bool bCanal = false;
+		if (superForts)
+		{
+			bCanal = kOwner.countNumCoastalCities() > 0; 
+		}		
 		bool bAirbase = false;
 		bAirbase = (kOwner.AI_totalUnitAIs(UNITAI_PARADROP) || kOwner.AI_totalUnitAIs(UNITAI_ATTACK_AIR) || kOwner.AI_totalUnitAIs(UNITAI_MISSILE_AIR));
 		
-		if (bCanal || bAirbase)
+		if (superForts)
+		{
+			if (AI_fortTerritory(bCanal, bAirbase))
+				return;
+		}	
+		//sf - doto original if statement	
+		else if (bCanal || bAirbase)
 		{
 			if (AI_fortTerritory(bCanal, bAirbase))
 			{
 				return;
 			}
 		}
-		bBuildFort = true;
+		//bBuildFort = true;
+		if (!superForts)
+			bBuildFort = true;//original
+		else if (superForts)	
+			bBuildFort = bCanal && bAirbase;
+// Super Forts begin *canal* *choke* -doto	
 	}
 
 
@@ -1900,7 +1937,16 @@ void CvUnitAI::AI_workerMove()
 		return;
 	}
 
-	if (!bBuildFort)
+	// Super Forts begin *canal* *choke* -doto adjustment
+	if (!bBuildFort && superForts)
+	{
+		if (AI_fortTerritory(true, true /*bCanal, bAirbase*/))
+		{
+			return;
+		}
+	}
+	//original if statement - doto comment
+	else if (!bBuildFort && !superForts)
 	{
 		//bool bCanal = ((100 * area()->getNumCities()) / std::max(1, GC.getGame().getNumCities()) < 85);
 		bool bCanal = false; // K-Mod. The current AI for canals doesn't work anyway; so lets skip it to save time.
@@ -1915,7 +1961,7 @@ void CvUnitAI::AI_workerMove()
 			}
 		}
 	}
-
+// Super Forts end
 	if (bCanRoute)
 	{
 		if (AI_routeTerritory())
@@ -2832,9 +2878,19 @@ void CvUnitAI::AI_attackCityMove()
 			bIgnoreFaster = true;
 		}
 	}
-
+// Super Forts begin
+	//bool const bInCity = getPlot().isCity();//original advc
+	//doto usage of advc fn that is similar to original iscity
+		//bool const bInCity = getPlot().isCityExternal(true);
+	//doto adjustment to advc added an improvement test
 	bool bInCity = plot()->isCity();
-
+	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
+	if (superForts)
+	{
+		//overwrite the check above with also improvement
+		bInCity = bInCity || plot()->isFortImprovement();
+	}
+// Super Forts end
 	if( bInCity && plot()->getOwnerINLINE() == getOwnerINLINE() )
 	{
 		// force heal if we in our own city and damaged
@@ -2849,7 +2905,20 @@ void CvUnitAI::AI_attackCityMove()
 		{
 			// BBAI TODO: split out slow units ... will need to test to make sure this doesn't cause loops
 		}
-
+// Super Forts begin *AI_offense* - allow stack to split after capturing a fort in addition to cities
+//doto changes		
+		if (superForts)
+		{
+			if (plot()->getOwnershipDuration() <= 1)
+			{
+				CvSelectionGroup* pOldGroup = getGroup();
+				pOldGroup->AI_separateNonAI(UNITAI_ATTACK_CITY);
+				if (pOldGroup != getGroup())
+					return;
+			}
+		}
+		else
+		{
 		if ((GC.getGame().getGameTurn() - plot()->getPlotCity()->getGameTurnAcquired()) <= 1)
 		{
 			CvSelectionGroup* pOldGroup = getGroup();
@@ -2861,7 +2930,8 @@ void CvUnitAI::AI_attackCityMove()
 				return;
 			}
 		}
-
+		}
+// Super Forts begin *AI_offense* - allow stack to split after capturing a fort in addition to cities
 		if (AI_guardCity(false)) // note. this will eject a unit to defend the city rather then using the whole group
 		{
 			return;
@@ -2962,9 +3032,169 @@ void CvUnitAI::AI_attackCityMove()
 		if (bReadyToAttack || bAtWar || (!plot()->isCity() && getGroup()->getNumUnits() > 1))
 			pTargetCity = AI_pickTargetCity(iMoveFlags, MAX_INT, bHuntBarbs);
 	}
+//super forts DOTO keldath
+	
+	CvPlot* pTargetImprovment = NULL;
+	pTargetImprovment = superForts ? bombardImprovementTarget(plot()) : NULL; // was 12 (K-Mod)
 
+//super forts keldath
 	bool bTargetTooStrong = false; // K-Mod. This is used to prevent the AI from oscillating between moving to attack moving to pillage.
 	int iStepDistToTarget = MAX_INT;
+//super forts DOTO keldath
+//I duplicated this entire bulk here
+//cause there are quite a few code parts that handle only city
+//todo is to separate this bulk code into external function
+	if (superForts && pTargetCity == NULL && pTargetImprovment != NULL)
+	{
+		int iAttackRatio = GC.getBBAI_ATTACK_CITY_STACK_RATIO();
+		int iAttackRatioSkipBombard = GC.getBBAI_SKIP_BOMBARD_MIN_STACK_RATIO();
+		iStepDistToTarget = stepDistance(pTargetImprovment->getX_INLINE(), pTargetImprovment->getY_INLINE(), getX_INLINE(), getY_INLINE());
+
+		// K-Mod - I'm going to scale the attack ratio based on our war strategy
+		if (isBarbarian())
+		{
+			iAttackRatio = 80;
+		}
+		else
+		{
+			int iAdjustment = 5;
+			iAdjustment += GET_TEAM(getTeam()).AI_getWarPlan(pTargetImprovment->getTeam()) == WARPLAN_LIMITED ? 10 : 0;			
+			iAdjustment += kOwner.AI_isDoStrategy(AI_STRATEGY_CRUSH) ? -10 : 0;
+			//iAdjustment += iAdjustment >= 0 && pTargetCity == area()->getTargetCity(getOwnerINLINE()) ? -10 : 0;
+			iAdjustment += range((GET_TEAM(getTeam()).AI_getEnemyPowerPercent(true)-100)/12, -10, 0);
+			iAdjustment += iStepDistToTarget <= 1 /*&& pTargetImprovment->isOccupation()*/ ? range(111-(iAttackRatio+iAdjustment), -10, 0) : 0;
+			iAttackRatio += iAdjustment;
+			iAttackRatioSkipBombard += iAdjustment;
+			FAssert(iAttackRatioSkipBombard >= iAttackRatio);
+			FAssert(iAttackRatio >= 100);
+		}
+		// K-Mod end
+
+		int iComparePostBombard = getGroup()->AI_compareStacks(pTargetImprovment, true);
+		int iBombardTurns = getGroup()->getBombardTurns(NULL,pTargetImprovment);
+		// K-Mod note: AI_compareStacks will try to use the AI memory if it can't see.
+		{
+			// K-Mod
+			// The defense modifier is counted in AI_compareStacks. So if we add it again, we'd be double counting.
+			// I'm going to subtract defence, but unfortunately this will reduce based on the total rather than the base.
+			//int iDefenseModifier = pTargetImprovment->getDefenseModifier(false);
+			ImprovementTypes eImprovement = pTargetImprovment->getImprovementType();
+			int iDefenseModifier = GC.getImprovementInfo(eImprovement).getDefenseModifier();			
+			int iReducedModifier = iDefenseModifier;
+			iReducedModifier *= std::min(20, iBombardTurns);
+			iReducedModifier /= 20;
+			//Mountains Mod - keldath addition - back to servie
+			int iMod = 0; 
+			if (pTargetImprovment->isHills())	
+			{
+				iMod += GC.getHILLS_EXTRA_DEFENSE();
+			}
+			int iBase = 210 + iMod;
+			//Mountains Mod - keldath addition - back to servie
+			iComparePostBombard *= iBase;
+			iComparePostBombard /= std::max(1, iBase + iReducedModifier - iDefenseModifier); // def. mod. < 200. I promise.
+			// iBase > 100 is to offset the over-reduction from compounding.
+			// With iBase == 200, bombarding a defence bonus of 100% will reduce effective defence by 50%
+		}
+
+		bTargetTooStrong = iComparePostBombard < iAttackRatio;
+
+		if (iStepDistToTarget <= 2)
+		{
+			// K-Mod. I've rearranged and rewriten most of this section - removing the bbai code.
+			if (bTargetTooStrong)
+			{
+				if (AI_stackVsStack(2, iAttackRatio, 80, iMoveFlags))
+					return;
+
+				FAssert(getDomainType() == DOMAIN_LAND);
+				int iOurOffense = kOwner.AI_localAttackStrength(plot(), getTeam(), DOMAIN_LAND, 1, false);
+				int iEnemyOffense = kOwner.AI_localAttackStrength(plot(), NO_TEAM, DOMAIN_LAND, 2, false);
+
+				// If in danger, seek defensive ground
+				if (4*iOurOffense < 3*iEnemyOffense)
+				{
+					if (AI_omniGroup(UNITAI_ATTACK_CITY, -1, -1, true, iMoveFlags, 3, true, false, bIgnoreFaster, false, false)) // including smaller groups
+						return;
+
+					if (iAttackRatio/2 > iComparePostBombard && 4*iEnemyOffense/5 > kOwner.AI_localDefenceStrength(plot(), getTeam()))
+					{
+						// we don't have anywhere near enough attack power, and we are in serious danger.
+						// unfortunately, if we are "bReadyToAttack", we'll probably end up coming straight back here...
+						if (!bReadyToAttack && AI_retreatToCity())
+							return;
+					}
+					if (getGroup()->AI_getMissionAIType() == MISSIONAI_PILLAGE && plot()->defenseModifier(getTeam(), false) > 0)
+					{
+						if (isEnemy(plot()->getTeam()) && canPillage(plot()))
+						{
+							getGroup()->pushMission(MISSION_PILLAGE, -1, -1, 0, false, false, MISSIONAI_PILLAGE, plot());
+							return;
+						}
+					}
+
+					if (AI_choke(2, true, iMoveFlags))
+					{
+						return;
+					}
+				}
+				else
+				{
+					if (AI_omniGroup(UNITAI_ATTACK_CITY, -1, -1, true, iMoveFlags, 3, true, false, bIgnoreFaster)) // bigger groups only
+						return;
+
+					if (canBombard(plot()))
+					{
+						getGroup()->pushMission(MISSION_BOMBARD, -1, -1, 0, false, false, MISSIONAI_ASSAULT, pTargetCity->plot());
+						return;
+					}
+
+					if (AI_omniGroup(UNITAI_ATTACK_CITY, -1, -1, true, iMoveFlags, 3, true, false, bIgnoreFaster, false, false)) // any size
+						return;
+				}
+			}
+
+			if (iStepDistToTarget == 1)
+			{
+				// Consider getting into a better position for attack.
+				if (iComparePostBombard < GC.getBBAI_SKIP_BOMBARD_BASE_STACK_RATIO() && // only if we don't already have overwhelming force
+					(iComparePostBombard < iAttackRatioSkipBombard ||
+					2 * pTargetImprovment->getDefenseDamage() < GC.getMAX_CITY_DEFENSE_DAMAGE()/ 2 ||
+					plot()->isRiverCrossing(directionXY(plot(), pTargetImprovment))))
+				{
+					// Only move into attack position if we have a chance.
+					// Without this check, the AI can get stuck alternating between this, and pillage.
+					// I've tried to roughly take into account how much our ratio would improve by removing a river penalty.
+/*					if ((getGroup()->canBombard(plot()) && iBombardTurns > 2) ||
+						(plot()->isRiverCrossing(directionXY(plot(), pTargetCity->plot())) && 150 * iComparePostBombard >= (150 + GC.getRIVER_ATTACK_MODIFIER()) * iAttackRatio))
+					{
+						if (AI_goToTargetCity(iMoveFlags, 2, pTargetCity))
+							return;
+					}
+*/
+					// Note: bombard may skip if stack is powerful enough
+					if (AI_bombardCity())
+						return;
+				}
+				else if (iComparePostBombard >= iAttackRatio && AI_bombardCity()) // we're satisfied with our position already. But we still want to consider bombarding.
+					return;
+
+				if (iComparePostBombard >= iAttackRatio)
+				{
+					// in position; and no desire to bombard.  So attack!
+					if (AI_stackAttackCity(iAttackRatio))
+						return;
+				}
+				
+			}
+/*
+			if (iComparePostBombard >= iAttackRatio && AI_goToTargetCity(iMoveFlags, 4, pTargetCity))
+				return;
+*/
+			// K-Mod end	
+	}
+}
+//super forts DOTO keldath unbool - decalred above
 	// Note. I've rearranged some parts of the code below, sometimes without comment.
 	if (pTargetCity != NULL)
 	{
@@ -4416,7 +4646,13 @@ void CvUnitAI::AI_cityDefenseMove()
 	{
 		return;
 	}
-
+// Super Forts begin *AI_defense*
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && AI_guardFortMinDefender(true))
+	{
+		//logBBAI("    Unit %d (%S) guard fort at [%d, %d] (MinDefender pass 1) \n", getID(), getName().GetCString(), getX(), getY());	
+		return;
+	}
+// Super Forts end
 	if (AI_guardCity(true))
 	{
 		return;
@@ -4605,7 +4841,21 @@ void CvUnitAI::AI_cityDefenseExtraMove()
 	{
 		return;
 	}
+// Super Forts begin *AI_defense*
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && AI_guardFortMinDefender(true))
+	{
+		//logBBAI("    Unit %d (%S) guard fort at [%d, %d] (MinDefender pass 2) \n", getID(), getName().GetCString(), getX(), getY());
+		return;
+	}
 
+	if (GC.getGame().isOption(GAMEOPTION_SUPER_FORTS) && (AI_getBirthmark() % 4) == 0)
+	{
+		if (AI_guardFort(true))
+		{
+			return;
+		}
+	}
+// Super Forts end
 	pCity = plot()->getPlotCity();
 
 	if ((pCity != NULL) && (pCity->getOwnerINLINE() == getOwnerINLINE())) // XXX check for other team?
@@ -11779,6 +12029,32 @@ int CvUnitAI::AI_getPlotDefendersNeeded(CvPlot* pPlot, int iExtra)
 {
 	int iNeeded = iExtra;
 	BonusTypes eNonObsoleteBonus = pPlot->getNonObsoleteBonusType(getTeam());
+	// Super Forts begin *AI_defense* - doto adjustment
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	{
+		CvPlayerAI& kPlayer = GET_PLAYER(getOwner());
+		if (eNonObsoleteBonus != NO_BONUS)
+		{
+			if (kPlayer.AI_bonusVal(eNonObsoleteBonus, -1) > 10)
+			{
+				++iNeeded;
+			}
+		}
+		if (kPlayer.AI_getPlotDanger(pPlot) > 0)
+		{
+			++iNeeded;
+			if ((kPlayer.AI_getPlotCanalValue(pPlot) > 0)
+				|| (kPlayer.AI_getPlotChokeValue(pPlot) > 0)
+				|| (kPlayer.AI_getPlotAirbaseValue(pPlot) > 0))
+			{
+				++iNeeded;
+			}
+		}
+	}
+	// Super Forts end
+	else
+	{
+	// Original Code
 	if (eNonObsoleteBonus != NO_BONUS)
 	{
 		iNeeded += (GET_PLAYER(getOwnerINLINE()).AI_bonusVal(eNonObsoleteBonus, 1) + 10) / 19;
@@ -11830,6 +12106,8 @@ int CvUnitAI::AI_getPlotDefendersNeeded(CvPlot* pPlot, int iExtra)
 			iNeeded = 0;
 		}
 	}
+	}
+// Super Forts end *AI_defense*
 
 	return iNeeded;
 }
@@ -11845,7 +12123,23 @@ bool CvUnitAI::AI_guardFort(bool bSearch)
 		{
 			if (GC.getImprovementInfo(eImprovement).isActsAsCity())
 			{
-				if (plot()->plotCount(PUF_isCityAIType, -1, -1, getOwnerINLINE()) <= AI_getPlotDefendersNeeded(plot(), 0))
+// Super Forts begin *AI_defense* - just tweaked a number here (iExtra now 1 instead of 0)				
+//doto adjustment
+				bool plotcountCheck = true;
+				if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+				{
+					plotcountCheck = plot()->plotCount(PUF_isCityAIType, -1, -1, getOwner()) <=
+						AI_getPlotDefendersNeeded(plot(), 1);
+				}
+				else
+				{
+				//original code with a var
+					plotcountCheck = plot()->plotCount(PUF_isCityAIType, -1, -1, getOwner()) <=
+						AI_getPlotDefendersNeeded(plot(),0);
+				}
+//changed the if to a var
+				if (plotcountCheck)
+// Super Forts end
 				{
 					getGroup()->pushMission(isFortifyable() ? MISSION_FORTIFY : MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_BONUS, plot());
 					return true;
@@ -11876,8 +12170,19 @@ bool CvUnitAI::AI_guardFort(bool bSearch)
 				{
 					if (GC.getImprovementInfo(eImprovement).isActsAsCity())
 					{
-						int iValue = AI_getPlotDefendersNeeded(pLoopPlot, 0);
-
+						//int iValue = AI_getPlotDefendersNeeded(pLoopPlot, 0);
+// Super Forts begin *AI_defense* - just tweaked a number here (iExtra now 1 instead of 0)
+//doto adjustment	
+						int iValue = 0;
+						if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+						{
+							iValue = AI_getPlotDefendersNeeded(pLoopPlot,1);
+						}
+						else
+						{
+							iValue = AI_getPlotDefendersNeeded(pLoopPlot,0);
+						}
+// Super Forts end
 						if (iValue > 0)
 						{
 							if (!(pLoopPlot->isVisibleEnemyUnit(this)))
@@ -11924,6 +12229,97 @@ bool CvUnitAI::AI_guardFort(bool bSearch)
 
 	return false;
 }
+// Super Forts begin *AI_defense* - this is designed to ensure each fort has one defender (or improvements that require a fortified unit to upgrade)
+bool CvUnitAI::AI_guardFortMinDefender(bool bSearch)
+{
+	PROFILE_FUNC();
+	
+	if (plot()->getOwner() == getOwner())
+	{
+		ImprovementTypes eImprovement = plot()->getImprovementType();
+		if (eImprovement != NO_IMPROVEMENT)
+		{
+			if (GC.getImprovementInfo(eImprovement).isActsAsCity() || GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify())
+			{
+				if (plot()->plotCount(PUF_isCityAIType, -1, -1, getOwner()) <= 1)
+				{
+					getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_BONUS, plot());
+					return true;
+				}
+			}
+		}
+	}
+	
+	if (!bSearch)
+	{
+		return false;
+	}
+
+	int iBestValue = 0;
+	CvPlot* pBestPlot = NULL;
+	CvPlot* pBestGuardPlot = NULL;
+
+	for (int iI = 0; iI < GC.getMap().numPlots(); iI++)
+	{
+		CvPlot* pLoopPlot = GC.getMap().plotByIndex(iI);
+
+		if (AI_plotValid(pLoopPlot) && !atPlot(pLoopPlot))
+		{
+			if (pLoopPlot->getOwner() == getOwner())
+			{
+				ImprovementTypes eImprovement = pLoopPlot->getImprovementType();
+				if (eImprovement != NO_IMPROVEMENT)
+				{
+					if (GC.getImprovementInfo(eImprovement).isActsAsCity() || GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify())
+					{
+						if (!(pLoopPlot->isVisibleEnemyUnit(this)))
+						{
+							if (pLoopPlot->plotCount(PUF_isCityAIType, -1, -1, getOwner()) == 0)
+							{
+								if (GET_PLAYER(getOwner()).AI_plotTargetMissionAIs(pLoopPlot, MISSIONAI_GUARD_BONUS, getGroup()) == 0)
+								{
+									int iPathTurns;
+									if (generatePath(pLoopPlot, 0, true, &iPathTurns))
+									{
+										int iValue = 1000;
+
+										iValue /= (iPathTurns + 2);
+
+										if (iValue > iBestValue)
+										{
+											iBestValue = iValue;
+											pBestPlot = getPathEndTurnPlot();
+											pBestGuardPlot = pLoopPlot;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if ((pBestPlot != NULL) && (pBestGuardPlot != NULL))
+	{
+		if (atPlot(pBestGuardPlot))
+		{
+			getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_BONUS, pBestGuardPlot);
+			return true;
+		}
+		else
+		{
+			FAssert(!atPlot(pBestPlot));
+			getGroup()->pushMission(MISSION_MOVE_TO, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), 0, false, false, MISSIONAI_GUARD_BONUS, pBestGuardPlot);
+			return true;
+		}
+	}
+
+	return false;
+}
+// Super Forts end
+
 // Returns true if a mission was pushed...
 bool CvUnitAI::AI_guardCitySite()
 {
@@ -15474,7 +15870,49 @@ bool CvUnitAI::AI_pillageAroundCity(CvCity* pTargetCity, int iBonusValueThreshol
 
 	return false;
 }
+//super forts doto - exoirted fn from AI_bombardCity  originally
+//see end of file fn that is AI_bombardCity with super forts 
+bool CvUnitAI::AI_bombardFort()
+{
+	// check if we need to declare war before bombarding!
+	for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
+	{
+		CvPlot* pLoopPlot = plotDirection(plot()->getX_INLINE(), plot()->getY_INLINE(), ((DirectionTypes)iI));
 
+		if (pLoopPlot != NULL && pLoopPlot->isFortImprovement())
+		{
+			AI_considerDOW(pLoopPlot);
+			break; // assume there can only be one city adjacent to us.
+		}
+	}
+
+	if (!canBombard(plot()))
+		return false;
+
+	CvPlot* pTargetPlot = bombardImprovementTarget(plot());
+
+	FAssertMsg(pTargetPlot != NULL, "BombardImprovement is not assigned a valid value");
+
+	int iAttackOdds = getGroup()->AI_attackOdds(pTargetPlot, true);
+	int iBase = GC.getBBAI_SKIP_BOMBARD_BASE_STACK_RATIO();
+	int iMin = GC.getBBAI_SKIP_BOMBARD_MIN_STACK_RATIO();
+	int iBombardTurns = getGroup()->getBombardTurns(NULL,pTargetPlot);
+	int maxfortdefensedamage = GC.getImprovementInfo(pTargetPlot->getImprovementType()).getDefenseModifier();		
+	iBase = (iBase * (maxfortdefensedamage-pTargetPlot->getDefenseDamage()) + iMin * pTargetPlot->getDefenseDamage())/std::max(1, maxfortdefensedamage);
+	int iThreshold = (iBase * (100 - iAttackOdds) + (1 + iBombardTurns/2) * iMin * iAttackOdds) / (100 + (iBombardTurns/2) * iAttackOdds);
+	int iComparison = getGroup()->AI_compareStacks(pTargetPlot, true);
+
+	if (iComparison > iThreshold)
+	{
+		if( gUnitLogLevel > 2 ) logBBAI("Stack skipping bombard of %S with compare %d, starting odds %d, bombard turns %d, threshold %d", L"Fort", iComparison, iAttackOdds, iBombardTurns, iThreshold);
+		return false;
+	}
+
+	//getGroup()->pushMission(MISSION_BOMBARD);
+	getGroup()->pushMission(MISSION_BOMBARD, -1, -1, 0, false, false, MISSIONAI_ASSAULT, pTargetPlot); // K-Mod
+	return true;
+}
+//super forts doto
 // Returns true if a mission was pushed...
 // This function has been completely rewriten (and greatly simplified) for K-Mod
 bool CvUnitAI::AI_bombardCity()
@@ -15495,6 +15933,15 @@ bool CvUnitAI::AI_bombardCity()
 		return false;
 
 	CvCity* pBombardCity = bombardTarget(plot());
+// Super Forts *bombard*
+//doto cleaner code - exported to fn.
+/*if theres no city - then its a fort
+canBombard checks that.*/
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
+		pBombardCity == NULL)
+	{	
+		return AI_bombardFort();
+	}	
 
 	FAssertMsg(pBombardCity != NULL, "BombardCity is not assigned a valid value");
 
@@ -15541,7 +15988,11 @@ bool CvUnitAI::AI_cityAttack(int iRange, int iOddsThreshold, int iFlags, bool bF
 			{
 				if (AI_plotValid(pLoopPlot))
 				{
-					if (pLoopPlot->isCity() && (bDeclareWar ? AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) : isEnemy(pLoopPlot->getTeam(), pLoopPlot)))
+// Super Forts doto begin *AI_offense* - modified if statement so forts will be attacked too								
+					if ((GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && 
+						(pLoopPlot->isFortImprovement()) ||
+						(pLoopPlot->isCity() && (bDeclareWar ? AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) : isEnemy(pLoopPlot->getTeam(), pLoopPlot)))))
+//doto change - added improvement specific check
 					{
 						int iPathTurns;
 						if (!atPlot(pLoopPlot) && (bFollow ? canMoveOrAttackInto(pLoopPlot, bDeclareWar) : generatePath(pLoopPlot, iFlags, true, &iPathTurns, iRange)))
@@ -15622,14 +16073,30 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iFlags, int iMin
 
 			if (!bAllowCities && pLoopPlot->isCity())
 				continue;
-
-			if (bDeclareWar
-				? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-				: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
-			{
-				continue;
+// Super Forts begin *AI_offense* - modified if statement so forts will be attacked too
+			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+			{	
+				bool checkCity = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
+				bool checkPlot = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
+				if (checkCity || checkPlot)
+				{
+					continue;
+				}
 			}
-
+			else
+			{
+				if (bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
+				{
+					continue;
+				}
+			}
+	// Super Forts end			
 			int iEnemyDefenders = bDeclareWar ? pLoopPlot->getNumVisiblePotentialEnemyDefenders(this) : pLoopPlot->getNumVisibleEnemyDefenders(this);
 			if (iEnemyDefenders < iMinStack)
 				continue;
@@ -15778,7 +16245,11 @@ bool CvUnitAI::AI_leaveAttack(int iRange, int iOddsThreshold, int iStrengthThres
 
 			if (pLoopPlot == NULL || !AI_plotValid(pLoopPlot))
 				continue;
-
+//doto unused in advc
+// Super Forts begin *AI_offense* - modified if statement so forts will be attacked too
+		//if (pLoopPlot->isVisibleEnemyUnit(this) || (pLoopPlot->isCity(GC.getGameINLINE().isOption(GAMEOPTION_ADVANCED_TACTICS)) && AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot)))
+		//if (pLoopPlot->isVisibleEnemyUnit(this) || (pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot))) - Original code
+// Super Forts end
 			/*if (pLoopPlot->isVisibleEnemyUnit(this) || (pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot)))
 			{
 				//if (pLoopPlot->getNumVisibleEnemyDefenders(this) > 0) */
@@ -19480,6 +19951,8 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 	// K-Mod end
 
 	int iBestValue = 0;
+// Super Fort doto	
+	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
 	BuildTypes eBestBuild = NO_BUILD;
 	CvPlot* pBestPlot = NULL;
 
@@ -19490,18 +19963,81 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 
 		if (AI_plotValid(pLoopPlot))
 		{
-			if (pLoopPlot->getOwnerINLINE() == getOwnerINLINE()) // XXX team???
+			if (pLoopPlot->getOwnerINLINE() == getOwnerINLINE()
+// Super Forts *canal* *choke* begin
+				|| 
+				(superForts && (pLoopPlot->getOwnerINLINE() == NO_PLAYER && pLoopPlot->isRevealed(getTeam(), false))) 
+// Super Forts end
+			) // XXX team???
 			{
-				if (pLoopPlot->getImprovementType() == NO_IMPROVEMENT)
+				if (pLoopPlot->getImprovementType() == NO_IMPROVEMENT
+					// Super Forts *canal* *choke* begin
+					|| (superForts && pLoopPlot->getImprovementType() == NO_IMPROVEMENT && pLoopPlot->isCityRadius())
+			//changed from (superForts && !kPlot.isCityRadius()))
+			//im thinking if a plot is improved and its withing city borders, dont build fort
+// Super Forts end) 
+				)
 				{
 					int iValue = 0;
 					iValue += bCanal ? kOwner.AI_getPlotCanalValue(pLoopPlot) : 0;
 					iValue += bAirbase ? kOwner.AI_getPlotAirbaseValue(pLoopPlot) : 0;
+					// Super Forts *choke* begin doto
+					if (superForts)
+					{
+						iValue += kOwner.AI_getPlotChokeValue(pLoopPlot);
+					}	
+/*	doto - super forts - this code is from mnai - probably add value for bonus on tile	
+					if ((superForts)
+					{
+						CvPlot* pAdjacentPlot;
+						for (int iI = 0; iI < NUM_DIRECTION_TYPES; ++iI)
+						{
+							pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
 
-					if (iValue > 0)
+							if (pAdjacentPlot != NULL)
+					{
+								if(pAdjacentPlot->getOwnerINLINE() == NO_PLAYER)
+								{
+									BonusTypes eNonObsoleteBonus = pAdjacentPlot->getNonObsoleteBonusType(getTeam());
+									if (eNonObsoleteBonus != NO_BONUS)
+									{
+										if (!GET_PLAYER(getOwnerINLINE()).hasBonus(eNonObsoleteBonus) || GC.getBonusInfo(eNonObsoleteBonus).isMana())
+										{
+											iValue += 250;
+										}
+										else
+										{
+											iValue += 50;
+									}
+						}
+					}
+				}
+			}
+		}
+*/		
+// Super Fort
+					int iMinAcceptableValue = 0;
+					if(superForts && pLoopPlot->getOwnerINLINE() == NO_PLAYER)
+					{	// Don't go outside borders for low values
+						iMinAcceptableValue += 150;
+					}
+					//if(iValue <= 0)
+					if(iValue <= iMinAcceptableValue /*org value 0*/)
 					{
 						int iBestTempBuildValue = MAX_INT;
 						BuildTypes eBestTempBuild = NO_BUILD;
+// Super Forts *canal* *choke* begin
+						int iPlotValue = iValue;
+						if (superForts)
+						{	
+							iPlotValue += bCanal ? 0 : kOwner.AI_getPlotCanalValue(pLoopPlot) / 4;
+							iPlotValue += bAirbase ? 0 : kOwner.AI_getPlotAirbaseValue(pLoopPlot) / 4;
+						}	
+// Super Forts end
+
+		/*  K-Mod note: the following code may choose the improvement poorly if there are
+			multiple fort options to choose from. I don't want to spend time fixing it now,
+			because K-Mod only has one type of fort anyway. */
 
 						// K-Mod note: the following code may choose the improvement poorly if there are multiple fort options to choose from.
 						// I don't want to spend time fixing it now, because K-Mod only has one type of fort anyway.
@@ -19555,14 +20091,37 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 
 								if (bValid)
 								{
-									if (GET_PLAYER(getOwnerINLINE()).AI_plotTargetMissionAIs(pLoopPlot, MISSIONAI_BUILD, getGroup(), 3) == 0)
+									// Super Forts begin *canal* *choke*
+//doto added orgValue to allow optionanal game option -> superForts
+									int orgValue = 3;
+									if (superForts)
+										orgValue = 1;	
+									//if (GET_PLAYER(getOwnerINLINE()).AI_plotTargetMissionAIs(pLoopPlot, MISSIONAI_BUILD, getGroup(), 3) == 0)
+									if (GET_PLAYER(getOwnerINLINE()).AI_plotTargetMissionAIs(pLoopPlot, MISSIONAI_BUILD, getGroup(), orgValue) == 0)
 									{
 										int iPathTurns;
 										if (generatePath(pLoopPlot, 0, true, &iPathTurns))
 										{
-											iValue *= 1000;
+											//superForts
+											iValue *= (!superForts ? 1000 : 1);
 											iValue /= (iPathTurns + 1);
-
+												// Super Forts start doto
+											if (superForts)
+											{
+												iValue = iPlotValue * 100;
+												iValue /= (iPathTurns + 1);
+												if(pLoopPlot->getOwner() == NO_PLAYER)
+												{
+												CvCity* pNearestCity = GC.getMapINLINE().findCity(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), getOwnerINLINE(), NO_TEAM, false);
+												if((pNearestCity == NULL) || 
+													(plotDistance(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), pNearestCity->getX_INLINE(), pNearestCity->getY_INLINE()) > GC.getDefineINT("AI_WORKER_MAX_DISTANCE_FROM_CITY_OUT_BORDERS")) ||
+													(iPathTurns > (GC.getDefineINT("AI_WORKER_MAX_DISTANCE_FROM_CITY_OUT_BORDERS") / 2)))
+												{
+													iValue = 0;
+												}
+											}
+										}
+// Super Forts end
 											if (iValue > iBestValue)
 											{
 												iBestValue = iValue;
@@ -19599,7 +20158,9 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyway.)
 {
 	PROFILE_FUNC();
-
+//super forts doto	
+	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
+//super forts doto
 	const CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 
 	bool bBestBuildIsRoute = false;
@@ -19618,7 +20179,12 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 		if (pLoopPlot->getOwnerINLINE() == getOwnerINLINE() && AI_plotValid(pLoopPlot))
 		{
 			bool bCanImprove = (pLoopPlot->area() == area());
-			if (!bCanImprove)
+// Super Forts begin *AI_worker*
+//super forts doto		
+			bool superForstcheck = superForts && !(pLoopPlot->getOwner() == NO_PLAYER
+				&& !pLoopPlot->isRevealed(getTeam(), false));
+			if (!bCanImprove || !superForstcheck)
+// Super Forts end
 			{
 				if (DOMAIN_SEA == getDomainType() && pLoopPlot->isWater() && plot()->isAdjacentToArea(pLoopPlot->area()))
 				{
@@ -19633,7 +20199,40 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 				if (eNonObsoleteBonus != NO_BONUS)
 				{
 					bool bIsConnected = pLoopPlot->isConnectedToCapital(getOwnerINLINE());
-					if ((pLoopPlot->getWorkingCity() != NULL) || (bIsConnected || bCanRoute))
+					// Super Forts begin *AI_worker* - This section makes sure the plot is "close enough" to a city to be worth building on
+					bool bCloseEnough = false;
+					if (superForts)
+					{			
+						if(pLoopPlot->getOwner() == getOwner())
+						{
+							bCloseEnough = true;
+						}
+						// Automated human workers will not look outside borders to build forts on bonuses the player already has
+						else if(!isHuman() || !GET_PLAYER(getOwnerINLINE()).hasBonus(eNonObsoleteBonus))
+						{
+							CvCity* pNearestCity = GC.getMapINLINE().findCity(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), getOwnerINLINE(), NO_TEAM, false);
+							int iPathTurns;
+							if ((pNearestCity != NULL) && generatePath(pLoopPlot, 0, true, &iPathTurns))
+							{
+								int iDistanceModifier = 1;
+								if(GET_PLAYER(getOwnerINLINE()).hasBonus(eNonObsoleteBonus))
+								{
+								iDistanceModifier = 2; // AI will not travel as far for bonuses they already have
+								}
+
+								if((plotDistance(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), pNearestCity->getX_INLINE(), pNearestCity->getY_INLINE())*iDistanceModifier) <= GC.getDefineINT("AI_WORKER_MAX_DISTANCE_FROM_CITY_OUT_BORDERS"))
+								{
+									if (iPathTurns <= (GC.getDefineINT("AI_WORKER_MAX_DISTANCE_FROM_CITY_OUT_BORDERS") / 2))
+									{
+										bCloseEnough = true;
+									}
+								}
+							}
+						}
+					}
+					if (((pLoopPlot->getWorkingCity() != NULL) || (bIsConnected || bCanRoute)) && bCloseEnough)
+ // Super Forts end
+                    //if ((pLoopPlot->getWorkingCity() != NULL) || (bIsConnected || bCanRoute))
 					{
 						/* original bts code
 						ImprovementTypes eImprovement = pLoopPlot->getImprovementType();
@@ -19666,8 +20265,11 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 						BuildTypes eBestTempBuild = NO_BUILD;
 
 						if (eImprovement != NO_IMPROVEMENT &&
-							((kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION) && eImprovement != GC.getDefineINT("RUINS_IMPROVEMENT")) ||
-							kOwner.doesImprovementConnectBonus(eImprovement, eNonObsoleteBonus)))
+							(((kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION) && eImprovement != GC.getDefineINT("RUINS_IMPROVEMENT")) ||
+							kOwner.doesImprovementConnectBonus(eImprovement, eNonObsoleteBonus))
+// Super Forts begin *AI_worker* (No need to loop through builds if the improvement is permanent)
+							|| superForts && GC.getImprovementInfo(eImprovement).isPermanent())
+							)
 						{
 							bDoImprove = false;
 						}
@@ -19696,6 +20298,13 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 								//if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
 								{
 									//if (GC.getImprovementInfo((ImprovementTypes) GC.getBuildInfo(eBuild).getImprovement()).isImprovementBonusTrade(eNonObsoleteBonus) || (!pLoopPlot->isCityRadius() && GC.getImprovementInfo((ImprovementTypes) GC.getBuildInfo(eBuild).getImprovement()).isActsAsCity()))
+						// Super Forts *AI_worker* (added if statement)
+									if(((pLoopPlot->getOwnerINLINE() == getOwnerINLINE() 
+										|| (GC.getImprovementInfo((ImprovementTypes)GC.getBuildInfo(eBuild).getImprovement()).isActsAsCity() 
+										&& GC.getImprovementInfo((ImprovementTypes)GC.getBuildInfo(eBuild).getImprovement()).isOutsideBorders()))
+										)|| !superForts)
+									{
+					  // Super Forts *AI_worker* (added if statement)
 									if (kOwner.doesImprovementConnectBonus((ImprovementTypes)GC.getBuildInfo(eBuild).getImprovement(), eNonObsoleteBonus)) // K-Mod
 									{
 										if (canBuild(pLoopPlot, eBuild))
@@ -19716,6 +20325,8 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 											}
 										}
 									}
+									// Super Forts (closing bracket of if statement added above)
+									}
 								}
 							}
 						}
@@ -19723,6 +20334,12 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 						{
 							bDoImprove = false;
 						}
+						// Super Forts begin *AI_worker* (if not building an improvement and you don't own the plot then continue so the AI doesn't consider building a route)
+						if(superForts && !bDoImprove && pLoopPlot->getOwnerINLINE() != getOwnerINLINE())
+						{
+							continue;
+						}
+						// Super Forts begin *AI_worker* (if not building an improvement and you don't own the plot then continue so the AI doesn't consider building a route)
 
 						if ((eBestTempBuild != NO_BUILD) || (bCanRoute && !bIsConnected))
 						{
@@ -19748,7 +20365,11 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 								}
 
 								int iMaxWorkers = 1;
-								if ((eBestTempBuild != NO_BUILD) && (!GC.getBuildInfo(eBestTempBuild).isKill()))
+								// Super Forts begin *AI_worker* 
+								if ((superForts && (eBestTempBuild != NO_BUILD) && (GC.getBuildInfo(eBestTempBuild).getTime() > 0))
+									|| (eBestTempBuild != NO_BUILD) && (!GC.getBuildInfo(eBestTempBuild).isKill()))
+								//if ((eBestTempBuild != NO_BUILD) && (!GC.getBuildInfo(eBestTempBuild).isKill())) - Original Code
+								// Super Forts end
 								{
 									//allow teaming.
 									iMaxWorkers = AI_calculatePlotWorkersNeeded(pLoopPlot, eBestTempBuild);
@@ -24316,7 +24937,9 @@ bool CvUnitAI::AI_stackAttackCity(int iPowerThreshold)
 	int iSearchRange = 1;
 
 	FAssert(canMove());
-
+//super forts Doto 
+	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
+//super forts Doto adjustments
 	for (int iDX = -(iSearchRange); iDX <= iSearchRange; iDX++)
 	{
 		for (int iDY = -(iSearchRange); iDY <= iSearchRange; iDY++)
@@ -24325,8 +24948,13 @@ bool CvUnitAI::AI_stackAttackCity(int iPowerThreshold)
 
 			if (pLoopPlot != NULL && AI_plotValid(pLoopPlot))
 			{
+				// Super Forts begin *AI_offense* - modified if statement so forts are attacked too
+				if ((pLoopPlot->isFortImprovement() && superForts
+					&&pLoopPlot->isVisibleEnemyUnit(this) && pLoopPlot->getTeam() == NO_TEAM)
+					 || pLoopPlot->isCity())
 				//if (pLoopPlot->isCity() || (pLoopPlot->isCity(true) && pLoopPlot->isVisibleEnemyUnit(this)))
-				if (pLoopPlot->isCity()) // K-Mod. We want to attack a city. We don't care about guarded forts!
+				//if (pLoopPlot->isCity()) // K-Mod. We want to attack a city. We don't care about guarded forts!
+				// Super Forts end
 				{
 					if (AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot))
 					{
@@ -24342,8 +24970,14 @@ bool CvUnitAI::AI_stackAttackCity(int iPowerThreshold)
 								// ... But I think it's fair to assume that if our group has any bombard, it the head unit will have it.
 								if (getGroup()->getHeadUnit()->bombardRate() > 0)
 								{
+//super forts Doto adjustments
+//had to condition the pCity , other wise - its null..
 									// if we can bombard, then we should do a rough calculation to give us a 'skip bombard' threshold.
+									if (pCity != NULL)
 									iPowerThreshold = ((GC.getMAX_CITY_DEFENSE_DAMAGE()-pCity->getDefenseDamage()) * GC.getBBAI_SKIP_BOMBARD_BASE_STACK_RATIO() + pCity->getDefenseDamage() * GC.getBBAI_SKIP_BOMBARD_MIN_STACK_RATIO()) / std::max(1, GC.getMAX_CITY_DEFENSE_DAMAGE());
+									else if (superForts)
+										iPowerThreshold = ((GC.getMAX_CITY_DEFENSE_DAMAGE()-pLoopPlot->getDefenseDamage()) * GC.getBBAI_SKIP_BOMBARD_BASE_STACK_RATIO() + pLoopPlot->getDefenseDamage() * GC.getBBAI_SKIP_BOMBARD_MIN_STACK_RATIO()) / std::max(1, GC.getMAX_CITY_DEFENSE_DAMAGE());
+//super forts Doto adjustments	
 								}
 								else
 								{
@@ -24368,7 +25002,11 @@ bool CvUnitAI::AI_stackAttackCity(int iPowerThreshold)
 
 	if (pCityPlot != NULL)
 	{
-		if( gUnitLogLevel >= 1 && pCityPlot->getPlotCity() != NULL )
+		if( gUnitLogLevel >= 1 && pCityPlot->getPlotCity() != NULL
+		/*super forts Doto - not sure i realy need this */
+			|| (superForts && pCityPlot->isFortImprovement())
+/*super forts Doto */
+		 )
 		{
 			logBBAI("    Stack for player %d (%S) decides to attack city %S with stack ratio %d", getOwner(), GET_PLAYER(getOwnerINLINE()).getCivilizationDescription(0), pCityPlot->getPlotCity()->getName(0).GetCString(), getGroup()->AI_compareStacks(pCityPlot, true) );
 			logBBAI("    City %S has defense modifier %d, %d with ignore building", pCityPlot->getPlotCity()->getName(0).GetCString(), pCityPlot->getPlotCity()->getDefenseModifier(false), pCityPlot->getPlotCity()->getDefenseModifier(true) );
@@ -24864,7 +25502,8 @@ bool CvUnitAI::AI_solveBlockageProblem(CvPlot* pDestPlot, bool bDeclareWar)
 						{
 							pBestPlot = getPathEndTurnPlot();
 						}
-
+//super forts - doto - try to avoid assert  - moving to a blocked tile
+//blockade mod vet?
 						FAssert(!atPlot(pBestPlot));
 						getGroup()->pushMission(MISSION_MOVE_TO, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), MOVE_DIRECT_ATTACK);
 						return true;						

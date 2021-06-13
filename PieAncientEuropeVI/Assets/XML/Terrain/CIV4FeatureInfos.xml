@@ -31,6 +31,8 @@
       <bRequiresRiver>0</bRequiresRiver>
       <bAddsFreshWater>0</bAddsFreshWater>
       <bImpassable>0</bImpassable>
+<!-- pae keldath movable feature on water -->     
+      <bWaterMovable>1</bWaterMovable>
       <bNoCity>1</bNoCity>
       <bNoImprovement>0</bNoImprovement>
       <bVisibleAlways>0</bVisibleAlways>
@@ -1121,7 +1123,7 @@
       <iDefense>0</iDefense>
       <iAppearance>0</iAppearance>
       <iDisappearance>1800</iDisappearance>
-      <iGrowth>0</iGrowth>      
+      <iGrowth>0</iGrowth>
       <iTurnDamage>10</iTurnDamage>
 <!--kmod-->
       <iWarmingDefense>10</iWarmingDefense>

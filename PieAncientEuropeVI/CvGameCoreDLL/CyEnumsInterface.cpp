@@ -550,6 +550,8 @@ void CyEnumsPythonInterface()
 		.value("GAMEOPTION_NO_EVENTS", GAMEOPTION_NO_EVENTS)
 		.value("GAMEOPTION_NO_ESPIONAGE", GAMEOPTION_NO_ESPIONAGE)
 		.value("NUM_GAMEOPTION_TYPES", NUM_GAMEOPTION_TYPES)
+//super forts
+		.value("GAMEOPTION_SUPER_FORTS", GAMEOPTION_SUPER_FORTS)
 		;
 
 	python::enum_<MultiplayerOptionTypes>("MultiplayerOptionTypes")

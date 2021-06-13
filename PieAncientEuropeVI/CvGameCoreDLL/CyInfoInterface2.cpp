@@ -397,6 +397,8 @@ void CyInfoPythonInterface2()
 		.def("isRequiresRiver", &CvFeatureInfo::isRequiresRiver, "bool ()")
 		.def("isAddsFreshWater", &CvFeatureInfo::isAddsFreshWater, "bool ()")
 		.def("isImpassable", &CvFeatureInfo::isImpassable, "bool ()")
+	//pae kedlath movable feature on water
+		.def("isWaterMovable", &CvFeatureInfo::isWaterMovable, "bool ()")
 		.def("isNoCity", &CvFeatureInfo::isNoCity, "bool ()")
 		.def("isNoImprovement", &CvFeatureInfo::isNoImprovement, "bool ()")
 		.def("isVisibleAlways", &CvFeatureInfo::isVisibleAlways, "bool ()")

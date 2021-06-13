@@ -2868,6 +2868,15 @@ public:
 	int getImprovementUpgrade() const;				// Exposed to Python
 	void setImprovementUpgrade(int i);
 
+	// Super Forts begin *XML*
+	int getCulture() const;
+	int getCultureRange() const;
+	int getVisibilityChange() const;
+	int getSeeFrom() const;
+	int getUniqueRange() const;
+	bool isBombardable() const;
+	bool isUpgradeRequiresFortify() const;
+	// Super Forts end
 	bool isActsAsCity() const;				// Exposed to Python
 	bool isHillsMakesValid() const;				// Exposed to Python
 	bool isFreshWaterMakesValid() const;				// Exposed to Python
@@ -2946,6 +2955,15 @@ protected:
 	int m_iImprovementPillage;
 	int m_iImprovementUpgrade;
 
+	// Super Forts begin *XML*
+	int m_iCulture;
+	int m_iCultureRange;
+	int m_iVisibilityChange;
+	int m_iSeeFrom;
+	int m_iUniqueRange;
+	bool m_bBombardable;
+	bool m_bUpgradeRequiresFortify;
+	// Super Forts end
 	bool m_bActsAsCity;				
 	bool m_bHillsMakesValid;				
 	bool m_bFreshWaterMakesValid;	
@@ -3167,6 +3185,8 @@ public:
 	bool isRequiresRiver() const;			// Exposed to Python
 	bool isAddsFreshWater() const;		// Exposed to Python
 	bool isImpassable() const;				// Exposed to Python
+//pae keldath feature movable on water
+	bool isWaterMovable() const;				// Exposed to Python
 	bool isNoCity() const;						// Exposed to Python
 	bool isNoImprovement() const;			// Exposed to Python
 	bool isVisibleAlways() const;			// Exposed to Python
@@ -3218,8 +3238,10 @@ protected:
 	bool m_bRequiresFlatlands;
 	bool m_bRequiresRiver;
 	bool m_bAddsFreshWater;	
-	bool m_bImpassable;			
-	bool m_bNoCity;					
+	bool m_bImpassable;
+//pae keldath movable feature on water
+	bool m_bWaterMovable;
+	bool m_bNoCity;
 	bool m_bNoImprovement;	
 	bool m_bVisibleAlways;	
 	bool m_bNukeImmune;	
@@ -3402,6 +3424,8 @@ protected:
 
 	bool m_bWater;					
 	bool m_bImpassable;
+//pae keldath movable feature on water
+	bool m_bWaterMovable;
 	bool m_bFound;
 	bool m_bFoundCoast;
 	bool m_bFoundFreshWater;
