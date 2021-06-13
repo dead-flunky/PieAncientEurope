@@ -2563,7 +2563,20 @@ void CvPlayer::killCities()
 	{
 		pLoopCity->kill(false);
 	}
-
+	// Super Forts begin *culture* - Clears culture from forts when a player dies
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	{
+		PlayerTypes ePlayer = getID();
+		for (int iI = 0; iI < GC.getMapINLINE().numPlots(); iI++)
+		{
+			CvPlot* pLoopPlot = GC.getMapINLINE().plotByIndex(iI);
+			if (pLoopPlot->getOwner() == ePlayer)
+			{
+				pLoopPlot->setOwner(pLoopPlot->calculateCulturalOwner(), true, false);
+			}
+		}
+	}
+	// Super Forts end
 	GC.getGameINLINE().updatePlotGroups();
 }
 
@@ -12618,8 +12631,9 @@ bool CvPlayer::isUnitClassMaxedOut(UnitClassTypes eIndex, int iExtra) const
 	{
 		return false;
 	}
-
-	FAssertMsg(getUnitClassCount(eIndex) <= GC.getUnitClassInfo(eIndex).getMaxPlayerInstances(), "getUnitClassCount is expected to be less than maximum bound of MaxPlayerInstances (invalid index)");
+	
+	// Flunky: units can defect to another civ and can be captured etc. So they are often above the limit
+	// FAssertMsg(getUnitClassCount(eIndex) <= GC.getUnitClassInfo(eIndex).getMaxPlayerInstances(), "getUnitClassCount is expected to be less than maximum bound of MaxPlayerInstances (invalid index)");
 
 	return ((getUnitClassCount(eIndex) + iExtra) >= GC.getUnitClassInfo(eIndex).getMaxPlayerInstances());
 }
@@ -16260,12 +16274,10 @@ int CvPlayer::getAdvancedStartUnitCost(UnitTypes eUnit, bool bAdd, CvPlot* pPlot
 				{
 					return -1;
 				}
-
-				if (pPlot->isImpassable() && !GC.getUnitInfo(eUnit).isCanMoveImpassable())
+				if (pPlot->isImpassable() && (!GC.getUnitInfo(eUnit).isCanMoveImpassable()))
 				{
 					return -1;
 				}
-
 				if (pPlot->getFeatureType() != NO_FEATURE)
 				{
 					if (GC.getUnitInfo(eUnit).getFeatureImpassable(pPlot->getFeatureType()))

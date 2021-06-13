@@ -316,4 +316,12 @@ void CyMap::updateMinOriginalStartDist(CyArea* pArea)
 		m_pMap->updateMinOriginalStartDist(pArea->getArea());
 	}
 }
-
+// Super Forts
+void CyMap::calculateCanalAndChokePoints()
+{
+	if(m_pMap)
+	{
+		m_pMap->calculateCanalAndChokePoints();
+	}
+}
+// Super Forts end

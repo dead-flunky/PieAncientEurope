@@ -2163,6 +2163,9 @@ class CvEventManager:
                     popupInfo.setOption1(True)
                     popupInfo.addPopup(iPlayer)
 
+# Super Forts
+		CyMap().calculateCanalAndChokePoints()
+					
         CvAdvisorUtils.resetNoLiberateCities()
 
     def onGameEnd(self, argsList):
@@ -2370,8 +2373,10 @@ class CvEventManager:
                 if pTeam.isHasTech(iTech):
 
                     # Vasallen finden
-                    iRange = gc.getMAX_PLAYERS()
-                    for iVassal in range(iRange):
+                    for iVassal in range(gc.getMAX_PLAYERS()):
+                        # Flunky: we are not our own vassal
+                        if iVassal == iPlayer: 
+                            continue
                         vPlayer = gc.getPlayer(iVassal)
                         if vPlayer.isAlive():
                             iTeam = vPlayer.getTeam()
@@ -2397,8 +2402,12 @@ class CvEventManager:
                                         iFaktor = 2
                                     iTechCost = int (gc.getTechInfo(iTech).getResearchCost() / iFaktor)
                                     # Attitude to Player
-                                    iAttSymbol = CyGame().getSymbolID(FontSymbols.POWER_CHAR) + 4 + vPlayer.AI_getAttitude(iPlayer)
-
+                                    #keldath fix
+                                    iAttSymbol = CyGame().getSymbolID(FontSymbols.POWER_CHAR) + 4
+                                    # Flunky: was iPlayer.isHuman()
+                                    if not pPlayer.isHuman():
+                                        iAttSymbol += vPlayer.AI_getAttitude(iPlayer)
+                                    #keldath fix
                                     popupInfo = CyPopupInfo()
                                     popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
                                     popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASSAL_TECH", (vPlayer.getName(), vPlayer.getCivilizationShortDescription(0), gc.getTechInfo(iTech).getDescription(), iTechCost, iAttSymbol)))
@@ -4099,6 +4108,8 @@ class CvEventManager:
                     if iCityId != pCapitalCity.getID():
                         pCity = gc.getGame().getHolyCity(iReligion)
                         pCity.setHasReligion(iReligion, 0, 0, 0)
+                        #keldath fix - before setting a new holy city - make sure it get the designated religion
+                        pCity.changeReligionInfluence(iReligion,1)
                         gc.getGame().setHolyCity(iReligion, pCapitalCity, 0)
                         pCity.setHasReligion(iReligion, 1, 0, 0)
                         iCityId = pCapitalCity.getID()

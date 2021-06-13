@@ -231,9 +231,9 @@ def createMilitaryAdvisor():
 
 def showMilitaryAdvisor():
     if CyGame().getActivePlayer() != -1:
-        if (AdvisorOpt.isBUG_MA()):
+        # if (AdvisorOpt.isBUG_MA()):
             # TODO: move to CvBUGMilitaryAdvisor.interfaceScreen()
-            militaryAdvisor.IconGridActive = False
+            # militaryAdvisor.IconGridActive = False
         militaryAdvisor.interfaceScreen()
 # BUG - Military Advisor - end
 
@@ -841,7 +841,7 @@ def cityWarningOnClickedCallback(argsList):
     bOption1 = argsList[6]
     bOption2 = argsList[7]
     city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
-    if city is not None and not city.isNone():
+    if city and not city.isNone():
         if iButtonId == 0:
             if city.isProductionProcess():
                 CyMessageControl().sendPushOrder(iData1, iData2, iData3, False, False, False)
@@ -881,7 +881,7 @@ def colonyOnClickedCallback(argsList):
     bOption1 = argsList[6]
     bOption2 = argsList[7]
     city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
-    if city is not None and not city.isNone():
+    if city and not city.isNone():
         if iButtonId == 0:
             CyMessageControl().sendEmpireSplit(CyGlobalContext().getGame().getActivePlayer(), city.area().getID())
         elif iButtonId == 2:
@@ -932,6 +932,11 @@ def popupHunsPayment(argsList):
     iButtonId = argsList[0]
     iData1 = argsList[1]
     iData2 = argsList[2]
+    # iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     if iButtonId == 1: # = YES - NetID , iPlayer , unitID
       CyMessageControl().sendModNetMessage( 674, iData1, iData2, 0, 0 )
@@ -941,6 +946,10 @@ def popupRevoltPayment(argsList):
     iData1 = argsList[1]
     iData2 = argsList[2]
     iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
     #  NetID , iPlayer , City ID , RevoltTurns , 0 | 1 | 2
     CyMessageControl().sendModNetMessage( 675, iData1, iData2, iData3, iButtonId )
 
@@ -949,6 +958,10 @@ def popupProvinzPayment(argsList):
     iData1 = argsList[1]
     iData2 = argsList[2]
     iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # NetID , iPlayer, CityID , ButtonID
     CyMessageControl().sendModNetMessage( 678, iData1, iData2, iButtonId, iData3 )
@@ -959,6 +972,11 @@ def popupSellUnit(argsList):
     iButtonId = argsList[0]
     iData1 = argsList[1]
     iData2 = argsList[2]
+    # iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # NetID , confirm = 1, nix , iPlayer, iUnitID
     if iButtonId == 0:
@@ -971,6 +989,9 @@ def popupVassal01(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # = YES - NetID , iWinner , iLoser, iGold
     if iButtonId == 0:
@@ -985,6 +1006,9 @@ def popupVassal03(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # = YES - NetID , iWinner , iLoser, iGold1, iGold2
     if iButtonId == 0:
@@ -1000,6 +1024,9 @@ def popupVassal04(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # = YES - NetID , iWinner , iLoser, iGold1, iGold2
     if iButtonId == 0:
@@ -1012,6 +1039,10 @@ def popupVassal05(argsList):
     iData1 = argsList[1]
     iData2 = argsList[2]
     iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # = YES - NetID , iWinner , iLoser, iGold1
     if iButtonId == 0:
@@ -1026,6 +1057,10 @@ def popupVassal06(argsList):
     iData1 = argsList[1]
     iData2 = argsList[2]
     iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # = YES - NetID , iWinner , iLoser, iGold1
     if iButtonId == 0:
@@ -1041,6 +1076,9 @@ def popupVassal07(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3] # 0/1
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # = YES - NetID , iWinner , iLoser, 0 , 0/1 (Loser/Winnerauswahl)
     if iButtonId == 0:
@@ -1052,6 +1090,9 @@ def popupVassal08(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # = YES - NetID , iWinner , iLoser (Hegemon), iVassal , iGold
     if iButtonId == 0:
@@ -1062,6 +1103,10 @@ def popupVassal09(argsList):
     iData1 = argsList[1]
     iData2 = argsList[2]
     iData3 = argsList[3]
+    # iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # iWinner , iLoser (Hegemon), iVassal , 0=Yes,1=No
     CyMessageControl().sendModNetMessage( 688, iData1, iData2, iData3, iButtonId ) # Yes or No
@@ -1072,6 +1117,9 @@ def popupVassal10(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # iWinner , iLoser (Hegemon), iVassal , iGold
     # NO: Kein Interesse: Gold=0
@@ -1085,6 +1133,9 @@ def popupVassal11(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # iWinner , iLoser (Hegemon), iVassal , iGold
     # iButton:
@@ -1102,6 +1153,9 @@ def popupVassal12(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     if iButtonId == 0:
         CyMessageControl().sendModNetMessage( 691, iData1, iData2, iData3, iData4 ) # Yes
@@ -1112,6 +1166,9 @@ def popupVassalTech(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # iHegemon (HI) , iVassal, iTech , iTechCost
     # iButton:
@@ -1133,6 +1190,9 @@ def popupVassalTech2(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
 
     # iHegemon (HI) , iVassal, iTech , iTechCost
     # iButton:
@@ -1148,6 +1208,9 @@ def popupReliaustreibung(argsList):
     iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
+    # szText = argsList[5]
+    # bOption1 = argsList[6]
+    # bOption2 = argsList[7]
     # iPlayer, iCity, iUnit , iCancelButton
     if iButtonId != iData4:
          CyMessageControl().sendModNetMessage( 704, iData1, iData2, iButtonId, iData3 )
@@ -1218,6 +1281,8 @@ def popupMercenariesHireUnits(argsList):
 def popupMercenariesAssign1(argsList):
     # iData3 = iPlayer, iData4 = Cancel
     iButtonId = argsList[0]
+    # iData1 = argsList[1]
+    # iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
 
@@ -1230,6 +1295,7 @@ def popupMercenariesAssign2(argsList):
     # iData1 = iTargetCIV, iData3 = iPlayer, iData4 = Cancel
     iButtonId = argsList[0]
     iData1 = argsList[1]
+    # iData2 = argsList[2]
     iData3 = argsList[3]
     iData4 = argsList[4]
 
@@ -2101,7 +2167,7 @@ def peloponnesianWarKeinpferd_Plataiai1(argsList):
             iAthenX = 57
             iAthenY = 30
             pAthenCity = CyMap().plot(iAthenX, iAthenY).getPlotCity()
-            if pAthenCity is not None and not pAthenCity.isNone():
+            if pAthenCity and not pAthenCity.isNone():
                 if pAthenCity.getOwner() == iAthen:
                     # Fluechtlinge
                     pAthenCity.changePopulation(1)
@@ -2387,30 +2453,8 @@ HandleInputMap = {  MAIN_INTERFACE : mainInterface,
 #######################################################################################
 ## Handle Navigation Map
 #######################################################################################
-# PAE was
-"""
-HandleNavigationMap = { MAIN_INTERFACE : mainInterface,
-                        PEDIA_MAIN : pediaMainScreen,
-                        PEDIA_TECH : pediaMainScreen,
-                        PEDIA_UNIT : pediaMainScreen,
-                        PEDIA_BUILDING : pediaMainScreen,
-                        PEDIA_PROMOTION : pediaMainScreen,
-                        PEDIA_PROJECT : pediaMainScreen,
-                        PEDIA_UNIT_CHART : pediaMainScreen,
-                        PEDIA_BONUS : pediaMainScreen,
-                        PEDIA_IMPROVEMENT : pediaMainScreen,
-                        PEDIA_TERRAIN : pediaMainScreen,
-                        PEDIA_FEATURE : pediaMainScreen,
-                        PEDIA_CIVIC : pediaMainScreen,
-                        PEDIA_CIVILIZATION : pediaMainScreen,
-                        PEDIA_LEADER : pediaMainScreen,
-                        PEDIA_HISTORY : pediaMainScreen,
-                        PEDIA_RELIGION : pediaMainScreen,
-                        PEDIA_CORPORATION : pediaMainScreen
-                        # add new screens here
-                       }
-"""
-HandleNavigationMap = {}
+
+# HandleNavigationMap = {}
 
 # BUG - Options - start
 def init():

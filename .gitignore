@@ -1,0 +1,11 @@
+*.bak
+/PieAncientEuropeVI/CvGameCoreDLL/Project/Makefile.settings
+/PieAncientEuropeVI/CvGameCoreDLL/Project/temp_files/Debug/*.obj
+/PieAncientEuropeVI/CvGameCoreDLL/Project/*.sdf
+/PieAncientEuropeVI/CvGameCoreDLL/Project/temp_files/Debug/*.exp
+/CvGameCoreDLL_orig
+*.suo
+*.ilk
+*.lib
+*.pch
+*.pdb

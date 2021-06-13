@@ -124,6 +124,8 @@
 	<ElementType name="bRequiresFlatlands" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bRequiresRiver" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bAddsFreshWater" content="textOnly" dt:type="boolean"/>
+	<!-- pae keldath movable feature on water -->
+	<ElementType name="bWaterMovable" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoCity" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoImprovement" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bVisibleAlways" content="textOnly" dt:type="boolean"/>
@@ -164,6 +166,8 @@
 		<element type="bRequiresRiver"/>
 		<element type="bAddsFreshWater"/>
 		<element type="bImpassable"/>
+<!-- pae keldath movable feature on water -->
+		<element type="bWaterMovable" minOccurs="0"/>
 		<element type="bNoCity"/>
 		<element type="bNoImprovement"/>
 		<element type="bVisibleAlways"/>
@@ -415,6 +419,13 @@
 	<ElementType name="FeatureMakesValids" content="eltOnly">
 		<element type="FeatureMakesValid" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+<!-- Super Forts begin -->
+	<ElementType name="iCulture" content="textOnly" dt:type="int"/>
+	<ElementType name="iCultureRange" content="textOnly" dt:type="int"/>
+	<ElementType name="iVisibilityChange" content="textOnly" dt:type="int"/>
+	<ElementType name="bBombardable" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bUpgradeRequiresFortify" content="textOnly" dt:type="boolean"/>
+<!-- Super Forts end -->
 	<ElementType name="ImprovementInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="Description"/>
@@ -460,6 +471,15 @@
 		<element type="RouteYieldChanges"/>
 		<element type="WorldSoundscapeAudioScript" minOccurs="0"/>
 		<element type="bGraphicalOnly"/>
+<!-- Super Forts begin -->
+		<element type="iCulture" minOccurs="0"/>
+		<element type="iCultureRange" minOccurs="0"/>
+		<element type="iVisibilityChange" minOccurs="0"/>
+		<element type="iSeeFrom" minOccurs="0"/>
+		<element type="iUnique" minOccurs="0"/>
+		<element type="bBombardable" minOccurs="0"/>
+		<element type="bUpgradeRequiresFortify" minOccurs="0"/>
+<!-- Super Forts end -->
 	</ElementType>
 	<ElementType name="ImprovementInfos" content="eltOnly">
 		<element type="ImprovementInfo" maxOccurs="*"/>

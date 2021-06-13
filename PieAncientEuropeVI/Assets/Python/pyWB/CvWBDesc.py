@@ -1524,13 +1524,13 @@ class CvCityDesc:
 
         player = getPlayer(self.owner)
         # <f1rpo>K-mod
-        if player is None:
+        if not player:
             CvUtil.pyPrint("Error: City owner %d not alive" %(self.owner))
             return # </f1rpo>
 
         self.city = player.initCity(self.plotX, self.plotY)
 
-        if self.name is not None:
+        if self.name:
             self.city.setName(self.name, False)
 
         if self.population > -1:
@@ -1539,23 +1539,23 @@ class CvCityDesc:
         for item in self.lCulture:
             self.city.setCulture(item[0], item[1], True)
 
-        for bldg in (self.bldgType):
+        for bldg in self.bldgType:
             bldgTypeNum = CvUtil.findInfoTypeNum(gc.getBuildingInfo, gc.getNumBuildingInfos(), bldg)
             self.city.setNumRealBuilding(bldgTypeNum, 1)
 
-        for religion in (self.religions):
+        for religion in self.religions:
             religionTypeNum = CvUtil.findInfoTypeNum(gc.getReligionInfo, gc.getNumReligionInfos(), religion)
             self.city.setHasReligion(religionTypeNum, True, False, True)
 
-        for holyCityRel in (self.holyCityReligions):
+        for holyCityRel in self.holyCityReligions:
             religionTypeNum = CvUtil.findInfoTypeNum(gc.getReligionInfo, gc.getNumReligionInfos(), holyCityRel)
             gc.getGame().setHolyCity(religionTypeNum, self.city, False)
 
-        for corporation in (self.corporations):
+        for corporation in self.corporations:
             corporationTypeNum = CvUtil.findInfoTypeNum(gc.getCorporationInfo, gc.getNumCorporationInfos(), corporation)
             self.city.setHasCorporation(corporationTypeNum, True, False, True)
 
-        for headquarters in (self.headquarterCorporations):
+        for headquarters in self.headquarterCorporations:
             corporationTypeNum = CvUtil.findInfoTypeNum(gc.getCorporationInfo, gc.getNumCorporationInfos(), headquarters)
             gc.getGame().setHeadquarters(corporationTypeNum, self.city, False)
 
@@ -1857,10 +1857,10 @@ class CvPlotDesc:
             routeTypeNum = CvUtil.findInfoTypeNum(gc.getRouteInfo, gc.getNumRouteInfos(), self.routeType)
             plot.setRouteType(routeTypeNum)
 
-        if self.szLandmark != "":
+        if self.szLandmark:
             CyEngine().addLandmark(CyMap().plot(self.iX, self.iY), "%s" %(self.szLandmark))
 
-        if self.szScriptData != "":
+        if self.szScriptData:
             plot.setScriptData(self.szScriptData)  # Usage of CvUtil.setScriptData would be wrong!
 
     def applyUnits(self):
@@ -1918,7 +1918,7 @@ class CvMapDesc:
         self.__init__()
         parser = CvWBParser()
         if not parser.findNextToken(f, "BeginMap"):
-            print "can't find map"
+            print("can't find map")
             return
         while True:
             nextLine = parser.getNextLine(f)
@@ -2019,7 +2019,7 @@ class CvSignDesc:
         self.__init__()
         parser = CvWBParser()
         if not parser.findNextToken(f, "BeginSign"):
-            print "can't find sign"
+            print("can't find sign")
             return
         while True:
             nextLine = parser.getNextLine(f)
@@ -2305,7 +2305,7 @@ class CvWBDesc:
                     print("bNeverAlive")
                 continue # </f1rpo>
             # Random Start Location
-            if bStartingPoints and pWBPlayer.bRandomStartLocation != "false":
+            if bStartingPoints: #"and pWBPlayer.bRandomStartLocation != "false":
                 if Debugging:
                     print("findStartingPlot for player %d" %(iPlayerLoop))
 
@@ -2423,7 +2423,7 @@ class CvWBDesc:
 
     def applyInitialItems(self):
         "add player objects in a last pass"
-        for iTeamLoop in range(len(self.teamsDesc)):
+        for iTeamLoop in xrange(len(self.teamsDesc)):
             pTeam = gc.getTeam(iTeamLoop)
             pWBTeam = self.teamsDesc[iTeamLoop]
 
@@ -2554,7 +2554,7 @@ class CvWBDesc:
         for pDesc in self.plotDesc:
             pDesc.applyCity()
 
-        for iTeamLoop in range(len(self.teamsDesc)):
+        for iTeamLoop in xrange(len(self.teamsDesc)):
             pTeam = gc.getTeam(iTeamLoop)
             pWBTeam = self.teamsDesc[iTeamLoop]
 

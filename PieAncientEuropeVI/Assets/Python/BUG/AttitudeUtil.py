@@ -113,7 +113,8 @@ def getAttitudeString (nPlayer, nTarget):
 
 def getAttitudeCategory (nPlayer, nTarget):
 	"""Returns the attitude level nPlayer has toward nTarget [0,4]."""
-	if hasAttitude(nPlayer, nTarget):
+	#keldath fix - has attitude already checks nPlayer != nTarget
+	if hasAttitude(nPlayer, nTarget) and not gc.getPlayer(nPlayer).isHuman():
 		return gc.getPlayer(nPlayer).AI_getAttitude(nTarget)
 	return None
 
@@ -229,7 +230,8 @@ class Attitude:
 		# This might be better off being something descriptive such as
 		# "players have not met" or "players are the same"
 		self.sAttitudeString = ""
-		if (iThisPlayer != iTargetPlayer and pThisTeam.isHasMet(iTargetTeam)):
+		#keldath fix attitude call on selfs - already checked
+		if iThisPlayer != iTargetPlayer and pThisTeam.isHasMet(iTargetTeam):
 			self.eAttitudeType = gc.getPlayer(iThisPlayer).AI_getAttitude(iTargetPlayer)
 			self.sAttitudeString = CyGameTextMgr().getAttitudeString(iThisPlayer, iTargetPlayer)
 			for sLine in self.sAttitudeString.split("\n"):

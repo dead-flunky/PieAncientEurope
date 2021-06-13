@@ -749,7 +749,8 @@ enum GameOptionTypes				// Exposed to Python
 	GAMEOPTION_NO_GOODY_HUTS,
 	GAMEOPTION_NO_EVENTS,
 	GAMEOPTION_NO_ESPIONAGE,
-
+//super forts
+    GAMEOPTION_SUPER_FORTS,
 #ifdef _USRDLL
 	NUM_GAMEOPTION_TYPES
 #endif

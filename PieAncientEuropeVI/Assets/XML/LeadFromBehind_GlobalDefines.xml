@@ -14,8 +14,8 @@
 		<iDefineIntVal>1</iDefineIntVal>
 	</Define>
 	<Define>
-		<DefineName>LFB_BASEDONLIMITED</DefineName>  <!-- note: in PAE decreased from 3 to 1 -->
-		<iDefineIntVal>1</iDefineIntVal>
+		<DefineName>LFB_BASEDONLIMITED</DefineName>
+		<iDefineIntVal>1</iDefineIntVal>  <!-- note: in PAE decreased from 3 to 1 -->
 	</Define>
 	<Define>
 		<DefineName>LFB_BASEDONHEALER</DefineName>
