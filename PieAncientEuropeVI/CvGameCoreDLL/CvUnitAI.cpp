@@ -1257,8 +1257,13 @@ int CvUnitAI::AI_sacrificeValue(const CvPlot* pPlot) const
 		// K-Mod end
 	}
 
-	//return iValue;
-	return std::min((long)MAX_INT, iValue); // K-Mod
+	// Flunky: did the long manage to overflow or is there another way to get negative values?
+	if (iValue < 0 || iValue > (long)MAX_INT)
+	{
+		iValue = (long)MAX_INT;
+	}
+	return iValue;
+	//return std::min((long)MAX_INT, iValue); // K-Mod
 }
 
 // Protected Functions...
@@ -1329,6 +1334,15 @@ void CvUnitAI::AI_animalMove()
 	if (GC.getGameINLINE().getSorenRandNum(100, "Animal Attack") < GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAnimalAttackProb())
 	{
 		if (AI_anyAttack(1, 0))
+		{
+			return;
+		}
+//pae keldath - make animals search wider area, in a scale
+		if (AI_anyAttack(2, 0))
+		{
+			return;
+		}
+		if (AI_anyAttack(3, 0))
 		{
 			return;
 		}
@@ -16062,28 +16076,28 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iFlags, int iMin
 			if (!bAllowCities && pLoopPlot->isCity())
 				continue;
 // Super Forts begin *AI_offense* - modified if statement so forts will be attacked too
-				if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-				{	
-					bool checkCity = bDeclareWar
-						? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-						: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
-					bool checkPlot = bDeclareWar
-						? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-						: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
-					if (checkCity || checkPlot)
-					{
-						continue;
-					}
-				}
-				else
+			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+			{	
+				bool checkCity = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
+				bool checkPlot = bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
+				if (checkCity || checkPlot)
 				{
-			if (bDeclareWar
-				? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-				: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
-			{
-				continue;
-			}
+					continue;
 				}
+			}
+			else
+			{
+				if (bDeclareWar
+					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
+					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this))
+				{
+					continue;
+				}
+			}
 	// Super Forts end			
 			int iEnemyDefenders = bDeclareWar ? pLoopPlot->getNumVisiblePotentialEnemyDefenders(this) : pLoopPlot->getNumVisibleEnemyDefenders(this);
 			if (iEnemyDefenders < iMinStack)
@@ -19495,10 +19509,7 @@ bool CvUnitAI::AI_improveLocalPlot(int iRange, CvCity* pIgnoreCity)
 				continue;
 			// K-Mod note. This was the original condition for the rest of the block:
 			//if (((NULL == pIgnoreCity) || ((pCity->AI_getWorkersNeeded() > 0) && (pCity->AI_getWorkersHave() < (1 + pCity->AI_getWorkersNeeded() * 2 / 3)))) && (pCity->AI_getBestBuild(iIndex) != NO_BUILD))
-			
-			// Flunky looking for -1
-			FAssertMsg(pCity->AI_getBestBuild(iIndex) < GC.getNumBuildInfos(), "Invalid Build AI_improveLocalPlot");
-			FAssertMsg(pCity->AI_getBestBuild(iIndex) > -1, "Invalid Build AI_improveLocalPlot");
+
 			if (!canBuild(pLoopPlot, pCity->AI_getBestBuild(iIndex)))
 				continue;
 
@@ -20036,7 +20047,8 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 						{
 							BuildTypes eBuild = ((BuildTypes)iJ);
 							FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build");
-
+							// Flunky: if checking GC.getNumBuildInfos, also check -1
+							FAssertMsg(eBuild > -1, "Index out of bounds");
 							if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
 							{
 								if (GC.getImprovementInfo((ImprovementTypes)(GC.getBuildInfo(eBuild).getImprovement())).isActsAsCity())
@@ -20268,10 +20280,6 @@ bool CvUnitAI::AI_improveBonus() // K-Mod. (all that junk wasn't being used anyw
 						{
 							// Let "best build" handle improvement replacements near cities.
 							BuildTypes eBuild = pWorkingCity->AI_getBestBuild(plotCityXY(pWorkingCity, pLoopPlot));
-							
-							// Flunky looking for -1
-							FAssertMsg(eBuild < GC.getNumBuildInfos(), "Invalid Build doesImprovementConnectBonus");
-							FAssertMsg(eBuild > -1, "Invalid Build doesImprovementConnectBonus");
 							if (eBuild != NO_BUILD && kOwner.doesImprovementConnectBonus((ImprovementTypes)GC.getBuildInfo(eBuild).getImprovement(), eNonObsoleteBonus) && canBuild(pLoopPlot, eBuild))
 							{
 								bDoImprove = true;

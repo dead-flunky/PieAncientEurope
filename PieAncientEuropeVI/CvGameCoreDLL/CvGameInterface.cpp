@@ -1295,8 +1295,8 @@ bool CvGame::canHandleAction(int iAction, CvPlot* pPlot, bool bTestVisible, bool
 			if (isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || GET_PLAYER(pHeadSelectedUnit->getOwnerINLINE()).isTurnActive())
 			{
 				CvSelectionGroup* pSelectedInterfaceList = gDLL->getInterfaceIFace()->getSelectionList();
-
-				if (GC.getActionInfo(iAction).getMissionType() != NO_MISSION)
+				// Flunky if ACTIONSUBTYPE_MISSION, there might be MISSION_BUILD without MissionData
+				if (GC.getActionInfo(iAction).getMissionType() != NO_MISSION && !(GC.getActionInfo(iAction).getSubType() == ACTIONSUBTYPE_MISSION && GC.getActionInfo(iAction).getMissionType() == MISSION_BUILD))
 				{
 					if (gDLL->getInterfaceIFace()->mirrorsSelectionGroup())
 					{
