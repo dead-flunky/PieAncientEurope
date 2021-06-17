@@ -16,15 +16,16 @@
 	 
 	<options id="MainInterface" file="BUG Main Interface.ini">
 		<section id="Main">
+            <!-- # Flunky PAE remove OptionsKey and OptionsButton options -->
 			<!-- Options Screen Shortcut Reminder -->
-			<option id="OptionsKey" key="Options Shortcut Reminder" 
-					type="boolean" default="False" 
-					get="isShowOptionsKeyReminder" set="setShowOptionsKeyReminder" dirtyBit="GameData"/>
+			<!-- <option id="OptionsKey" key="Options Shortcut Reminder"  -->
+					<!-- type="boolean" default="False"  -->
+					<!-- get="isShowOptionsKeyReminder" set="setShowOptionsKeyReminder" dirtyBit="GameData"/> -->
 			
 			<!-- Options Screen Button -->
-			<option id="OptionsButton" key="Options Button" 
-					type="boolean" default="False"
-					get="isShowOptionsButton" set="setShowOptionsButton" dirtyBit="GameData"/>
+			<!-- <option id="OptionsButton" key="Options Button"  -->
+					<!-- type="boolean" default="False" -->
+					<!-- get="isShowOptionsButton" set="setShowOptionsButton" dirtyBit="GameData"/> -->
 
 			<!-- Gold Rate Warning -->
 			<option id="GoldRateWarning" key="Gold Rate Warning" 
@@ -45,9 +46,9 @@
 			</list>
 			
 			<!-- Great General Progress Bar by NeverMind -->
-			<option id="Combat_Counter" key="Combat Counter" 
-					type="boolean" default="True"
-					get="isShowGGProgressBar" dirtyBit="GameData"/>
+			<!-- <option id="Combat_Counter" key="Combat Counter"  -->
+					<!-- type="boolean" default="True" -->
+					<!-- get="isShowGGProgressBar" dirtyBit="GameData"/> -->
 			
 			<!-- Min/Max Commerce Buttons by codewarrior -->
 			<option id="MinMax_Commerce" key="MinMax Commerce" 
@@ -68,7 +69,7 @@
 
 			<!-- Field of View -->
 			<option id="FieldOfView" key="Field of View" 
-					type="boolean" default="False" 
+					type="boolean" default="True" 
 					get="isShowFieldOfView" dirtyBit="MiscButtons"/>
 			<option id="FieldOfView_Remember" key="Remember Field of View" 
 					type="boolean" default="True"

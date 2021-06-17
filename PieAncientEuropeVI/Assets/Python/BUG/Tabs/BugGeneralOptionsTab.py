@@ -21,8 +21,8 @@ class BugGeneralOptionsTab(BugOptionsTab.BugOptionsTab):
 
 		left, center, right = self.addThreeColumnLayout(screen, column, "Top", True)
 		
-		self.createGreatPersonGeneralPanel(screen, left)
-		self.addSpacer(screen, left, "General1")
+		# self.createGreatPersonGeneralPanel(screen, left)
+		# self.addSpacer(screen, left, "General1")
 		self.createTechSplashPanel(screen, left)
 		self.addSpacer(screen, left, "General2")
 		#self.createLeaderheadPanel(screen, left)
@@ -39,12 +39,12 @@ class BugGeneralOptionsTab(BugOptionsTab.BugOptionsTab):
 #			self.addSpacer(screen, right, "General5")
 #			self.createBuffyPanel(screen, right)
 
-	def createGreatPersonGeneralPanel(self, screen, panel):
-		self.addLabel(screen, panel, "ProgressBars", "Progress Bars:")
-		self.addCheckboxTextDropdown(screen, panel, panel, "MainInterface__GPBar", "MainInterface__GPBar_Types")
+	# def createGreatPersonGeneralPanel(self, screen, panel):
+		# self.addLabel(screen, panel, "ProgressBars", "Progress Bars:")
+		# self.addCheckboxTextDropdown(screen, panel, panel, "MainInterface__GPBar", "MainInterface__GPBar_Types")
 		#self.addCheckbox(screen, panel, "MainInterface__GPBar")
 		#self.addTextDropdown(screen, panel, panel, "MainInterface__GPBar_Types", True)
-		self.addCheckbox(screen, panel, "MainInterface__Combat_Counter")
+		# self.addCheckbox(screen, panel, "MainInterface__Combat_Counter")
 		
 	def createLeaderheadPanel(self, screen, panel):
 		self.addLabel(screen, panel, "Leaderheads", "Leaderheads:")

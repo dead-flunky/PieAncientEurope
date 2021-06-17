@@ -21,12 +21,17 @@ class BugSystemOptionsTab(BugOptionsTab.BugOptionsTab):
 		panel = self.createMainPanel(screen)
 		column = self.addOneColumnLayout(screen, panel)
 
-		left, right = self.addTwoColumnLayout(screen, column, "Bottom", False)
-		self.addCheckbox(screen, left, "MainInterface__OptionsKey")
-		self.addCheckbox(screen, left, "MainInterface__OptionsButton")
-		screen.setLayoutFlag(right, "LAYOUT_RIGHT")
-		screen.setLayoutFlag(right, "LAYOUT_SIZE_HPREFERREDEXPANDING")
-		self.addLabel(screen, right, "Version", 
+        # Flunky PAE remove OptionsKey and OptionsButton options
+		# left, right = self.addTwoColumnLayout(screen, column, "Bottom", False)
+		# self.addCheckbox(screen, left, "MainInterface__OptionsKey")
+		# self.addCheckbox(screen, left, "MainInterface__OptionsButton")
+		# screen.setLayoutFlag(right, "LAYOUT_RIGHT")
+		# screen.setLayoutFlag(right, "LAYOUT_SIZE_HPREFERREDEXPANDING")
+		# self.addLabel(screen, right, "Version", 
+					  # CvModName.getDisplayNameAndVersion() + " (" + CvModName.getCivNameAndVersion() + ")")
+		screen.setLayoutFlag(column, "LAYOUT_RIGHT")
+		screen.setLayoutFlag(column, "LAYOUT_SIZE_HPREFERREDEXPANDING")
+		self.addLabel(screen, column, "Version", 
 					  CvModName.getDisplayNameAndVersion() + " (" + CvModName.getCivNameAndVersion() + ")")
 		
 #		screen.attachHSeparator(column, column + "Sep1")		

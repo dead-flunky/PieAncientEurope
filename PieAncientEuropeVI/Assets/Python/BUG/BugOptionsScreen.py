@@ -38,7 +38,7 @@ def showOptionsScreen(argsList=None):
 	if not CoreOpt.isOptionsScreenOpened():
 		# the first time the Options screen is opened, disable the shortcut reminder
 		CoreOpt.setOptionsScreenOpened(True)
-		MainOpt.setShowOptionsKeyReminder(False)
+		# MainOpt.setShowOptionsKeyReminder(False)
 	getOptionsScreen().interfaceScreen()
 
 
