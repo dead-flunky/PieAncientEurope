@@ -97,6 +97,8 @@
 	</ElementType>
 	<ElementType name="Special" content="textOnly"/>
 	<ElementType name="Capture" content="textOnly"/>
+    <!-- Flunky PAE Domestication -->
+	<ElementType name="PrereqCaptureTech" content="textOnly"/>
 	<ElementType name="Combat" content="textOnly"/>
 	<ElementType name="Domain" content="textOnly"/>
 	<ElementType name="DefaultUnitAI" content="textOnly"/>
@@ -520,6 +522,8 @@
 		<element type="UniqueNames"/>
 		<element type="Special"/>
 		<element type="Capture"/>
+        <!-- Flunky PAE Domestication -->
+        <element type="PrereqCaptureTech"/>
 		<element type="Combat"/>
 		<element type="Domain"/>
 		<element type="DefaultUnitAI"/>

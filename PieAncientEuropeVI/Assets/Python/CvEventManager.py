@@ -2617,7 +2617,7 @@ class CvEventManager:
         pWinnerPlot = pWinner.plot()
         # PAE
         bUnitDone = False
-        bWinnerIsDead = False
+        bWinnerIsDead = pWinner.isDead()
         bNavalUnit = pWinner.getDomainType() == DomainTypes.DOMAIN_SEA
 
         # PAE Debug Mark
@@ -2625,12 +2625,14 @@ class CvEventManager:
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Loser "+pLoser.getName()+" "+str(pLoserPlot.getX())+"|"+str(pLoserPlot.getY()),1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
         #### ---- Anfang unabhaengige Ereignisse ---- ####
-        bWinnerAnimal = (pWinner.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
+        bWinnerAnimal = (pWinner.isAnimal() or 
+                         pWinner.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
                          iWinnerUnitType in L.LUnitCanBeDomesticated or
                          iWinnerUnitType in L.LUnitWildAnimals or
                          iWinnerUnitType in L.LUnitWarAnimals or
                          iWinnerUnitType in L.LUnitDomesticated)
-        bLoserAnimal = (pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
+        bLoserAnimal = (pLoser.isAnimal() or 
+                        pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
                         iLoserUnitType in L.LUnitCanBeDomesticated or
                         iLoserUnitType in L.LUnitWildAnimals or
                         iLoserUnitType in L.LUnitWarAnimals or
@@ -2689,17 +2691,16 @@ class CvEventManager:
         # Techboost for winning unit (when its technology is unknown)
         iTech = gc.getUnitInfo(iLoserUnitType).getPrereqAndTech()
         pWinnerTeam = gc.getTeam(pWinnerPlayer.getTeam())
-        if not pWinnerTeam.isHasTech(iTech):
-            if pWinnerPlayer.canResearch(iTech, False):
-                iCost = gc.getTechInfo(iTech).getResearchCost()
-                iCost = iCost/10
-                if iCost <= 1:
-                    iCost = 1
-                else:
-                    iCost = iCost + CvUtil.myRandom(iCost, "Techboost")
-                pWinnerTeam.changeResearchProgress(iTech, iCost, iWinnerPlayer)
-                if pWinnerPlayer.isHuman():
-                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TECH_BY_UNIT", (gc.getTechInfo(iTech).getDescription(), iCost)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+        if not pWinnerTeam.isHasTech(iTech) and pWinnerPlayer.canResearch(iTech, False):
+            iCost = gc.getTechInfo(iTech).getResearchCost()
+            iCost = iCost/10
+            if iCost <= 1:
+                iCost = 1
+            else:
+                iCost = iCost + CvUtil.myRandom(iCost, "Techboost")
+            pWinnerTeam.changeResearchProgress(iTech, iCost, iWinnerPlayer)
+            if pWinnerPlayer.isHuman():
+                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TECH_BY_UNIT", (gc.getTechInfo(iTech).getDescription(), iCost)), None, 2, None, ColorTypes(8), 0, 0, False, False)
 
         # Improvement destruction during battle / destroy imp
         iImprovement = pLoserPlot.getImprovementType()
@@ -2708,10 +2709,8 @@ class CvEventManager:
                 iChance = 5  # 5%
 
                 # Forts only 2%, except with catapults
-                bFortress = False
                 if iImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT") or iImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT2"):
                     iChance = 2
-                    bFortress = True
 
                     # Get attacking unit
                     if pWinner.isAttacking():
@@ -2736,7 +2735,7 @@ class CvEventManager:
                             CyInterface().addMessage(iPlotOwner, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_IMPROVEMENT_DESTROYED_COMBAT_PLOT_OWNER", (pWinnerPlayer.getName(), pLoserPlayer.getName(), gc.getImprovementInfo(iImprovement).getDescription())), "AS2D_DESTROY", 2, gc.getImprovementInfo(iImprovement).getButton(), ColorTypes(13), pLoserPlot.getX(), pLoserPlot.getY(), True, True)
 
                     # Destroy improvement
-                    if bFortress:
+                    if iImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT") or iImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT2"):
                         pLoserPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_CITY_RUINS"))
                     elif iImprovement == gc.getInfoTypeForString("IMPROVEMENT_TOWN"):
                         pLoserPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_VILLAGE"))
@@ -2750,55 +2749,55 @@ class CvEventManager:
                         pLoserPlot.setImprovementType(-1)
         #### ---- Ende unabhaengige Ereignisse ---- ####
 
-
+        # Flunky modified dll such that kamikaze from promotions kills with a chance and doesn't give strength (except for planes)
         #### ---- betrifft Winner ---- ####
-        iPromoFuror1 = gc.getInfoTypeForString('PROMOTION_FUROR1')
-        if pWinner.isHasPromotion(iPromoFuror1):
-            iPromoFuror2 = gc.getInfoTypeForString('PROMOTION_FUROR2')
-            iPromoFuror3 = gc.getInfoTypeForString('PROMOTION_FUROR3')
-            # ------- Furor germanicus / teutonicus: 30% / 20% / 10% Chance
-            iWinnerST = pWinner.baseCombatStr()
-            iLoserST = pLoser.baseCombatStr()
-            # weak units without death calc (eg animal)
-            # enemy units should be equal
-            if iLoserST >= (iWinnerST / 5) * 4:
-                iChanceSuicide = 3
-                if pWinner.isHasPromotion(iPromoFuror3):
-                    iChanceSuicide = 1
-                elif pWinner.isHasPromotion(iPromoFuror2):
-                    iChanceSuicide = 2
+        # iPromoFuror1 = gc.getInfoTypeForString('PROMOTION_FUROR1')
+        # if pWinner.isHasPromotion(iPromoFuror1):
+            # iPromoFuror2 = gc.getInfoTypeForString('PROMOTION_FUROR2')
+            # iPromoFuror3 = gc.getInfoTypeForString('PROMOTION_FUROR3')
+            # # ------- Furor germanicus / teutonicus: 30% / 20% / 10% Chance
+            # iWinnerST = pWinner.baseCombatStr()
+            # iLoserST = pLoser.baseCombatStr()
+            # # weak units without death calc (eg animal)
+            # # enemy units should be equal
+            # if iLoserST >= (iWinnerST / 5) * 4:
+                # iChanceSuicide = 30
+                # if pWinner.isHasPromotion(iPromoFuror3):
+                    # iChanceSuicide = 10
+                # elif pWinner.isHasPromotion(iPromoFuror2):
+                    # iChanceSuicide = 20
 
-                if CvUtil.myRandom(10, "Furor") < iChanceSuicide:
-                    pWinner.kill(True, -1)
-                    bWinnerIsDead = True
-                    if pWinnerPlayer.isHuman():
-                      CyInterface().addMessage(iWinnerPlayer, True, 5,
-                      CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_FUROR_SUICIDE", (pWinner.getName(), 0)),
-                      None, 2, pWinner.getButton(), ColorTypes(7), pWinner.getX(), pWinner.getY(), True, True)
+                # if CvUtil.myRandom(100, "Furor") < iChanceSuicide:
+                    # pWinner.kill(True, -1)
+                    # bWinnerIsDead = True
+                    # if pWinnerPlayer.isHuman():
+                      # CyInterface().addMessage(iWinnerPlayer, True, 5,
+                      # CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_FUROR_SUICIDE", (pWinner.getName(), 0)),
+                      # None, 2, pWinner.getButton(), ColorTypes(7), pWinner.getX(), pWinner.getY(), True, True)
 
         # Einheiten, die Wälder niederbrennen können
-        elif pWinner.getUnitType() in L.LFireUnits or pLoser.getUnitType() in L.LFireUnits:
-
-            # Brandchance 20%
-            if pWinner.getUnitType() in L.LFireUnits:
-                if pLoserPlot.getFeatureType() in L.LForests:
-                    if CvUtil.myRandom(5, "WinnerUnitBurnsForest") == 1:
-                        pLoserPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
-                        pLoser.getGroup().setActivityType(-1) # to reload the map!
-            # Falls auch der Gegner Feuer unterm Hintern hat
-            if pLoser.getUnitType() in L.LFireUnits:
-                if pWinnerPlot.getFeatureType() in L.LForests:
-                    if CvUtil.myRandom(5, "LoserUnitBurnsForest") == 1:
-                        pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
-                        pWinner.getGroup().setActivityType(-1) # to reload the map!
-
-            # Angreifende brennende Schweine killen
-            if pWinner.getUnitType() == gc.getInfoTypeForString("UNIT_BURNING_PIGS"):
-                # Parallele zu isSuicide() im SDK direkt nach dieser Funktion:
-                # pWinner.doCommand(CommandTypes.COMMAND_DELETE, 1, 1)
-                pWinner.kill(True, -1)  # RAMK_CTD
-                # Weil bSuicide in XML scheinbar so funktioniert, dass auf jeden Fall der Gegner stirbt (was ich nicht will)
-                bWinnerIsDead = True
+        
+        # Brandchance 20%
+        if pWinner.getUnitType() in L.LFireUnits:
+            if pLoserPlot.getFeatureType() in L.LForests:
+                if CvUtil.myRandom(5, "WinnerUnitBurnsForest") == 1:
+                    pLoserPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
+                    pLoser.getGroup().setActivityType(-1) # to reload the map!
+        # Falls auch der Gegner Feuer unterm Hintern hat
+        if pLoser.getUnitType() in L.LFireUnits:
+            if pWinnerPlot.getFeatureType() in L.LForests:
+                if CvUtil.myRandom(5, "LoserUnitBurnsForest") == 1:
+                    pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
+                    pWinner.getGroup().setActivityType(-1) # to reload the map!
+            
+        # Flunky PAE fixed bSuicide to iSuicide in dll, also including kamikaze from promotions
+        # # Angreifende brennende Schweine killen
+        # if pWinner.getUnitType() == gc.getInfoTypeForString("UNIT_BURNING_PIGS"):
+            # # Parallele zu isSuicide() im SDK direkt nach dieser Funktion:
+            # # pWinner.doCommand(CommandTypes.COMMAND_DELETE, 1, 1)
+            # pWinner.kill(True, -1)  # RAMK_CTD
+            # # Weil bSuicide in XML scheinbar so funktioniert, dass auf jeden Fall der Gegner stirbt (was ich nicht will)
+            # bWinnerIsDead = True
 
 
         # Promotions for winner (Combat Stufen, Terrain Promos, City Promos)
@@ -2810,11 +2809,13 @@ class CvEventManager:
             # ------- Unit gets certain promotion PAE V Beta 2 Patch 7
             if not bDone and pLoser.getUnitCombatType() != -1 and not bNavalUnit and not bWinnerAnimal and not (bLoserAnimal and pLoser.isOnlyDefensive()):
                 if pWinner.isMadeAttack() and pWinnerPlayer.isTurnActive():
-                    bUnitDone = PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pLoserPlot, True, bLoserAnimal)
+                    # bUnitDone = 
+                    PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pLoserPlot, True, bLoserAnimal)
                 else:
-                    bUnitDone = PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pWinnerPlot, False, bLoserAnimal)
+                    # bUnitDone = 
+                    PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pWinnerPlot, False, bLoserAnimal)
             # damit es unten wieder weiter geht
-            bUnitDone = False
+            # bUnitDone = False
 
         # Auto Formation Flight
         #iFormation = gc.getInfoTypeForString("PROMOTION_FORM_WHITEFLAG")
@@ -2824,8 +2825,7 @@ class CvEventManager:
         #### ---- betrifft Loser ---- ####
         # ------- Loser Unit Elephant makes 20% collateral damage to friendly units
         if iLoserUnitType == gc.getInfoTypeForString("UNIT_WAR_ELEPHANT"):
-            iRange = pLoserPlot.getNumUnits()
-            for iLoopUnit in range(iRange):
+            for iLoopUnit in range(pLoserPlot.getNumUnits()):
                 pLoopUnit = pLoserPlot.getUnit(iLoopUnit)
                 if pLoopUnit.getDamage() + 20 < 100:
                     pLoopUnit.changeDamage(20, False)
@@ -2841,9 +2841,8 @@ class CvEventManager:
                 PAE_Unit.doCheckAngst(pWinner,pLoser)
 
         # AI: Unit Formations
-        if not pLoserPlayer.isHuman():
-            if pLoserPlot.getNumUnits() > 4:
-                PAE_Unit.doAIPlotFormations(pLoserPlot, iLoserPlayer)
+        if not pLoserPlayer.isHuman() and pLoserPlot.getNumUnits() > 4:
+            PAE_Unit.doAIPlotFormations(pLoserPlot, iLoserPlayer)
 
         # Einheit soll alles ausladen, wenn besiegt   #pie
         # Geht nicht, leider wird zuerst das Cargo und dann die Einheit gekillt! Schade!
@@ -2857,44 +2856,40 @@ class CvEventManager:
             # ---- LAND: Player can earn gold by winning a battle
             # Flunky: but dead warriors don't take loot
             if not bLoserAnimal:
-                iCost = unitY.getProductionCost()
-                if iCost > 0:
-                    iGold = int(iCost / 10)
-                    if iGold > 1:
-                        iGold = CvUtil.myRandom(iGold, "LandeinheitenKillMoney")
+                iGold = int(unitY.getProductionCost() / 10)
+                if iGold > 1:
+                    iGold = CvUtil.myRandom(iGold, "LandeinheitenKillMoney")
+                    if iGold > 0:
                         pWinnerPlayer.changeGold(iGold)
-                        if iGold > 0:
-                            if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MONEY_UNIT_KILLED", ("", iGold)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                        if pWinnerPlayer.isHuman():
+                            CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MONEY_UNIT_KILLED", ("", iGold)), None, 2, None, ColorTypes(8), 0, 0, False, False)
                     # ***TEST***
                     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Gold durch Einheitensieg (Zeile 1711)",iGold)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
             # ------- Certain animals can be captured, when domestication has been researched
             # ------- Bestimmte Tiere koennen eingefangen werden, wenn Domestizier-Tech erforscht wurde
-            elif iLoserUnitType in L.LUnitCanBeDomesticated:
-                iTech = -1
-                if iLoserUnitType == gc.getInfoTypeForString("UNIT_HORSE"):
-                    iTech = gc.getInfoTypeForString("TECH_PFERDEZUCHT")
-                elif iLoserUnitType == gc.getInfoTypeForString("UNIT_CAMEL"):
-                    iTech = gc.getInfoTypeForString("TECH_KAMELZUCHT")
-                elif iLoserUnitType == gc.getInfoTypeForString("UNIT_ELEFANT"):
-                    iTech = gc.getInfoTypeForString("TECH_ELEFANTENZUCHT")
+            # elif iLoserUnitType in L.LUnitCanBeDomesticated:
+                # iTech = -1
+                # if iLoserUnitType == gc.getInfoTypeForString("UNIT_HORSE"):
+                    # iTech = gc.getInfoTypeForString("TECH_PFERDEZUCHT")
+                # elif iLoserUnitType == gc.getInfoTypeForString("UNIT_CAMEL"):
+                    # iTech = gc.getInfoTypeForString("TECH_KAMELZUCHT")
+                # elif iLoserUnitType == gc.getInfoTypeForString("UNIT_ELEFANT"):
+                    # iTech = gc.getInfoTypeForString("TECH_ELEFANTENZUCHT")
 
-                if iTech != -1:
-                    iThisTeam = pWinnerPlayer.getTeam()
-                    if gc.getTeam(iThisTeam).isHasTech(iTech):
-                        bUnitDone = True
-                        # Create a new unit
-                        NewUnit = pWinnerPlayer.initUnit(iLoserUnitType, pWinner.getX(), pWinner.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                        NewUnit.finishMoves()
-                        if pWinnerPlayer.isHuman():
-                            CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_UNIT_EROBERT", (unitY.getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                # if iTech != -1:
+                    # iThisTeam = pWinnerPlayer.getTeam()
+                    # if gc.getTeam(iThisTeam).isHasTech(iTech):
+                        # bUnitDone = True
+                        # # Create a new unit
+                        # NewUnit = pWinnerPlayer.initUnit(iLoserUnitType, pWinner.getX(), pWinner.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+                        # NewUnit.finishMoves()
+                        # if pWinnerPlayer.isHuman():
+                            # CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_UNIT_EROBERT", (unitY.getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
         # ----- Ende Loser Unit (not captured)
 
-        bUnitFlucht = False
-        bCityRenegade = False
-        bUnitRenegades = False
-        pLoserFlucht = None
+        # bUnitFlucht = False
+        # pLoserFlucht = None
 
         if not bUnitDone:
 
@@ -2906,8 +2901,8 @@ class CvEventManager:
             # else:
                 # iWinnerDamage = pWinner.getDamage()
             # bUnitFlucht, pLoserFlucht = PAE_Unit.flee(pLoser, pWinner, iWinnerDamage)
-            if bUnitFlucht and pLoserFlucht:
-                PAE_Unit.doUnitGetsPromo(pLoserFlucht, pWinner, pLoserPlot, False, bWinnerAnimal)
+            if pLoser.isFlight():
+                PAE_Unit.doUnitGetsPromo(pLoser, pWinner, pLoserPlot, False, bWinnerAnimal)
             else:
                 # Feature: Wenn die Generalseinheit stirbt, ist in jeder Stadt Civil War! (GG Great General dies)
                 # Richtet sich nach der Anzahl der lebenden Generals
@@ -2978,25 +2973,25 @@ class CvEventManager:
 
                         # ---- Script DATAs in Units
                         PAE_Mercenaries.startMercTorture(pLoser, iWinnerPlayer)
-
+                bCityRenegade = False
                 # Stadtverteidigung
                 if pLoserPlot.isCity():
-                  pCity = pLoserPlot.getPlotCity()
-                  if pCity.getOwner() == iLoserPlayer:
-                    # AI
-                    if not pLoserPlayer.isHuman():
-                      # PAE V ab Patch 3: Einheiten mobilisieren
-                      # PAE 6.6 nur wenn die Angreifer doppelt so stark sind wie die Verteidiger
-                      if pWinnerPlot.getNumUnits() >= pLoserPlot.getNumUnits() * 2:
-                        PAE_Unit.doMobiliseFortifiedArmy(pCity)
+                    pCity = pLoserPlot.getPlotCity()
+                    if pCity.getOwner() == iLoserPlayer:
+                        # AI
+                        if not pLoserPlayer.isHuman():
+                            # PAE V ab Patch 3: Einheiten mobilisieren
+                            # PAE 6.6 nur wenn die Angreifer doppelt so stark sind wie die Verteidiger
+                            if pWinnerPlot.getNumUnits() >= pLoserPlot.getNumUnits() * 2:
+                                PAE_Unit.doMobiliseFortifiedArmy(pCity)
 
-                    # ------ ueberlaufende Stadt - City renegades - renegade city
-                    if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_CITY_RAZING):
-                      # nicht bei captureable units erlauben, da sie sonst bei renegade gecaptured wird und dann die ID zum killen weg ist (CtD)
-                      if pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT:
-                        # pLoser wird nicht angetastet
-                        #CvUtil.pyPrint('EventManager 2951: Unit %s, ID: %d' % (pLoser.getName(),pLoser.getID()))
-                        bCityRenegade = PAE_City.doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer)
+                        # ------ ueberlaufende Stadt - City renegades - renegade city
+                        if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_CITY_RAZING):
+                            # nicht bei captureable units erlauben, da sie sonst bei renegade gecaptured wird und dann die ID zum killen weg ist (CtD)
+                            if pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT:
+                                # pLoser wird nicht angetastet
+                                #CvUtil.pyPrint('EventManager 2951: Unit %s, ID: %d' % (pLoser.getName(),pLoser.getID()))
+                                bCityRenegade = PAE_City.doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer)
 
 
                 if not bCityRenegade:

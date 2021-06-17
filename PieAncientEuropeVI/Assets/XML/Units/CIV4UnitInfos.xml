@@ -11,6 +11,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -230,6 +231,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -449,6 +451,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -654,6 +657,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -847,6 +851,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -1040,6 +1045,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -1452,6 +1458,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -1644,6 +1651,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -1827,6 +1835,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -2025,6 +2034,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -2218,6 +2228,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -2416,6 +2427,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -2613,6 +2625,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_SETTLE</DefaultUnitAI>
@@ -2795,6 +2808,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_SETTLE</DefaultUnitAI>
@@ -2978,6 +2992,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI><!--Flunky: is this right?-->
@@ -3152,6 +3167,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_WORKER</DefaultUnitAI>
@@ -3415,6 +3431,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_WORK_ELEPHANT</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_WORKER</DefaultUnitAI>
@@ -3696,6 +3713,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_SUPPLY_WAGON</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_HEALER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -3871,6 +3889,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_HEALER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -4050,6 +4069,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_HEALER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -4224,6 +4244,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_SUPPLY_FOOD</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -4389,6 +4410,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_GOLDKARREN</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -4558,6 +4580,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_EXPLORE_SEA</DefaultUnitAI>
@@ -4727,6 +4750,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_GOLDKARREN</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_IMMOBILE</Domain>
       <DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
@@ -4896,6 +4920,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_GOLDKARREN</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -5090,6 +5115,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_GOLDKARREN</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -5272,6 +5298,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -5477,6 +5504,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -5666,6 +5694,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -5866,6 +5895,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_RECON</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
@@ -6050,6 +6080,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_RECON</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
@@ -6234,6 +6265,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_RECON</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
@@ -6413,6 +6445,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_SPY</DefaultUnitAI>
@@ -6592,6 +6625,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -6792,6 +6826,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -6996,6 +7031,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -7195,6 +7231,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -7410,6 +7447,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -7636,6 +7674,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -7850,6 +7889,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -8064,6 +8104,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -8269,6 +8310,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -8501,6 +8543,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -8716,6 +8759,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -8946,6 +8990,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -9185,6 +9230,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -9384,6 +9430,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -9573,6 +9620,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -9771,6 +9819,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -9970,6 +10019,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -10176,6 +10226,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -10407,6 +10458,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -10631,6 +10683,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -10872,6 +10925,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -11094,6 +11148,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -11288,6 +11343,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -11486,6 +11542,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -11676,6 +11733,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -11871,6 +11929,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -12062,6 +12121,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -12252,6 +12312,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -12438,6 +12499,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -12637,6 +12699,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -12835,6 +12898,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -13050,6 +13114,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -13271,6 +13336,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -13457,6 +13523,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
@@ -13658,6 +13725,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -13867,6 +13935,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -14087,6 +14156,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -14294,6 +14364,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -14505,6 +14576,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -14718,6 +14790,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -14943,6 +15016,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -15158,6 +15232,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -15373,6 +15448,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -15584,6 +15660,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -15799,6 +15876,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -16014,6 +16092,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -16208,6 +16287,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -16402,6 +16482,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -16613,6 +16694,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -16820,6 +16902,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -17006,6 +17089,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -17219,6 +17303,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -17428,6 +17513,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -17618,6 +17704,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -17812,6 +17899,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -18006,6 +18094,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -18200,6 +18289,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -18394,6 +18484,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -18584,6 +18675,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -18783,6 +18875,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -18970,6 +19063,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -19150,6 +19244,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -19327,6 +19422,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -19509,6 +19605,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -19696,6 +19793,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -20019,6 +20117,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -20342,6 +20441,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -20532,6 +20632,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -20816,6 +20917,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -21087,6 +21189,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -21290,6 +21393,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -21491,6 +21595,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -21759,6 +21864,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -21958,6 +22064,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -22153,6 +22260,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -22344,6 +22452,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -22530,6 +22639,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -22722,6 +22832,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -22908,6 +23019,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -23094,6 +23206,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -23288,6 +23401,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -23490,6 +23604,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -23704,6 +23819,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -23908,6 +24024,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -24099,6 +24216,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -24290,6 +24408,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -24477,6 +24596,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -24762,6 +24882,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -24946,6 +25067,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -25135,6 +25257,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -25347,6 +25470,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -25579,6 +25703,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -25761,6 +25886,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -25956,6 +26082,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -26151,6 +26278,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -26333,6 +26461,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -26536,6 +26665,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -26733,6 +26863,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -26930,6 +27061,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -27127,6 +27259,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -27338,6 +27471,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -27540,6 +27674,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -27748,6 +27883,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -27990,6 +28126,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -28187,6 +28324,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -28374,6 +28512,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -28678,6 +28817,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
@@ -28865,6 +29005,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -29055,6 +29196,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -29245,6 +29387,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -29430,6 +29573,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -29620,6 +29764,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -29813,6 +29958,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -30001,6 +30147,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -30191,6 +30338,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -30379,6 +30527,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -30567,6 +30716,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -30757,6 +30907,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -30947,6 +31098,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -31117,6 +31269,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ARCHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -31320,6 +31473,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -31531,6 +31685,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -31742,6 +31897,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -31943,6 +32099,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -32161,6 +32318,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -32367,6 +32525,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -32572,6 +32731,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -32777,6 +32937,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -32987,6 +33148,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -33187,6 +33349,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -33392,6 +33555,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -33624,6 +33788,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -33876,6 +34041,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -34149,6 +34315,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -34421,6 +34588,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -34697,6 +34865,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -34984,6 +35153,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -35256,6 +35426,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -35528,6 +35699,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -35807,6 +35979,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -36074,6 +36247,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -36341,6 +36515,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_CHARIOT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -36616,6 +36791,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -36881,6 +37057,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -37141,6 +37318,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -37401,6 +37579,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -37666,6 +37845,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -37931,6 +38111,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -38196,6 +38377,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -38468,6 +38650,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -38735,6 +38918,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -39014,6 +39198,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -39321,6 +39506,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -39595,6 +39781,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -39834,6 +40021,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -40112,6 +40300,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -40376,6 +40565,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -40642,6 +40832,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -40903,6 +41094,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -41168,6 +41360,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -41436,6 +41629,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -41701,6 +41895,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -41971,6 +42166,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -42241,6 +42437,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -42501,6 +42698,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -42761,6 +42959,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -43031,6 +43230,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -43301,6 +43501,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -43563,6 +43764,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -43832,6 +44034,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -44121,6 +44324,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -44438,6 +44642,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -44700,6 +44905,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -44995,6 +45201,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -45257,6 +45464,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -45523,6 +45731,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -45789,6 +45998,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -46051,6 +46261,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -46322,6 +46533,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -46586,6 +46798,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -46855,6 +47068,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -47115,6 +47329,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -47375,6 +47590,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -47671,6 +47887,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -47958,6 +48175,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -48245,6 +48463,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_ELEPHANT</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -48460,6 +48679,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_RAM</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -48639,6 +48859,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_BATTERING_RAM</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -48823,6 +49044,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_BATTERING_RAM</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -49007,6 +49229,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_BATTERING_RAM2</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -49186,6 +49409,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -49355,6 +49579,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_CATAPULT</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -49537,6 +49762,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_CATAPULT</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -49724,6 +49950,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_FIRE_CATAPULT</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -49911,6 +50138,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_BALLISTA</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -50117,6 +50345,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_BALLISTA</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -50323,6 +50552,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_SCORPION</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SKIRMISHER</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -50546,6 +50776,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_TROJAN_HORSE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SIEGE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -50728,6 +50959,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -50947,6 +51179,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -51165,6 +51398,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -51383,6 +51617,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -51601,6 +51836,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -51819,6 +52055,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_BURNING_PIGS</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -51862,7 +52099,7 @@
       <bPrereqBonuses>0</bPrereqBonuses>
       <bPrereqReligion>0</bPrereqReligion>
       <bMechanized>0</bMechanized>
-      <bSuicide>0</bSuicide>
+      <bSuicide>1</bSuicide>
       <bHiddenNationality>0</bHiddenNationality>
       <bAlwaysHostile>0</bAlwaysHostile>
       <UnitClassUpgrades/>
@@ -52020,6 +52257,7 @@
                         <UniqueNames/>
                         <Special>NONE</Special>
                         <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
                         <Combat>NONE</Combat>
                         <Domain>DOMAIN_SEA</Domain>
                         <DefaultUnitAI>UNITAI_WORKER_SEA</DefaultUnitAI>
@@ -52224,6 +52462,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_SEA</DefaultUnitAI>
@@ -52422,6 +52661,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
@@ -52620,6 +52860,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_PIRATE_SEA</DefaultUnitAI>
@@ -52827,6 +53068,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
@@ -53027,6 +53269,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_PIRATE_SEA</DefaultUnitAI>
@@ -53222,6 +53465,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
@@ -53425,6 +53669,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_PIRATE_SEA</DefaultUnitAI>
@@ -53623,6 +53868,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
@@ -53818,6 +54064,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_SEA</DefaultUnitAI>
@@ -54004,6 +54251,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_SEA</DefaultUnitAI>
@@ -54197,6 +54445,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
@@ -54384,6 +54633,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_PIRATE_SEA</DefaultUnitAI>
@@ -54579,6 +54829,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_PIRATE_SEA</DefaultUnitAI>
@@ -54849,6 +55100,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_PROPHET</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_PROPHET</DefaultUnitAI>
@@ -55148,6 +55400,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_ARTIST</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ARTIST</DefaultUnitAI>
@@ -55414,6 +55667,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SCIENTIST</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_SCIENTIST</DefaultUnitAI>
@@ -55679,6 +55933,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_MERCHANT</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -55965,6 +56220,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_ENGINEER</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ENGINEER</DefaultUnitAI>
@@ -56149,6 +56405,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_GREAT_GENERAL</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_GENERAL</DefaultUnitAI>
@@ -56424,6 +56681,7 @@
       </UniqueNames>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -56608,6 +56866,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -56786,6 +57045,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -56964,6 +57224,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57142,6 +57403,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57320,6 +57582,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57498,6 +57761,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57676,6 +57940,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57854,6 +58119,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58032,6 +58298,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58210,6 +58477,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58388,6 +58656,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58566,6 +58835,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58744,6 +59014,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58922,6 +59193,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -59095,6 +59367,7 @@
 			<UniqueNames/>
 			<Special>NONE</Special>
 			<Capture>UNITCLASS_RELIC</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
 			<Combat>NONE</Combat>
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -59268,6 +59541,7 @@
         <UniqueNames/>
         <Special>SPECIALUNIT_PEOPLE</Special>
         <Capture>UNITCLASS_EXECUTIVE_1</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
         <Combat>NONE</Combat>
         <Domain>DOMAIN_LAND</Domain>
         <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -59436,6 +59710,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_2</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -59606,6 +59881,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_3</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -59776,6 +60052,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_4</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -59946,6 +60223,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_5</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -60116,6 +60394,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_6</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -60286,6 +60565,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_7</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -60456,6 +60736,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_8</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -60626,6 +60907,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
       <Capture>UNITCLASS_EXECUTIVE_9</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -60796,6 +61078,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_WORKER</DefaultUnitAI>
@@ -61072,6 +61355,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ENGINEER</DefaultUnitAI>
@@ -61246,6 +61530,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -61411,6 +61696,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -61602,6 +61888,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -61793,6 +62080,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -61984,6 +62272,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -62204,6 +62493,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -62369,6 +62659,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -62534,6 +62825,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -62699,6 +62991,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -62864,6 +63157,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -63028,7 +63322,8 @@
       <Type>UNIT_HORSE</Type>
       <UniqueNames/>
       <Special>NONE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_HORSE</Capture>
+      <PrereqCaptureTech>TECH_PFERDEZUCHT</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ENGINEER</DefaultUnitAI>
@@ -63212,7 +63507,8 @@
       <Type>UNIT_CAMEL</Type>
       <UniqueNames/>
       <Special>NONE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_CAMEL</Capture>
+      <PrereqCaptureTech>TECH_KAMELZUCHT</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
@@ -63414,7 +63710,8 @@
       <Type>UNIT_ELEFANT</Type>
       <UniqueNames/>
       <Special>NONE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_ELEFANT</Capture>
+      <PrereqCaptureTech>TECH_ELEFANTENZUCHT</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ENGINEER</DefaultUnitAI>
@@ -63618,6 +63915,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>UNITCLASS_SLAVE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -63814,6 +64112,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
@@ -64021,6 +64320,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MOUNTED</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -64287,6 +64587,7 @@
       <UniqueNames/>
       <Special>SPECIALUNIT_FUSSTRUPPEN</Special>
       <Capture>UNITCLASS_GLADIATOR</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MERCHANT</DefaultUnitAI>
@@ -64470,6 +64771,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -64634,6 +64936,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -64798,6 +65101,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -64962,6 +65266,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -65126,6 +65431,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -65290,6 +65596,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -65454,6 +65761,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_MELEE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_RESERVE</DefaultUnitAI>
@@ -65618,6 +65926,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
@@ -65797,6 +66106,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SPEARMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
@@ -66005,6 +66315,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -66205,6 +66516,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_SWORDSMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
@@ -66405,6 +66717,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_NAVAL</Combat>
       <Domain>DOMAIN_SEA</Domain>
       <DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
@@ -66575,6 +66888,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>UNITCOMBAT_AXEMAN</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>

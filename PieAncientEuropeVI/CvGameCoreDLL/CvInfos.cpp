@@ -3146,6 +3146,8 @@ m_iPowerValue(0),
 m_iUnitClassType(NO_UNITCLASS),
 m_iSpecialUnitType(NO_SPECIALUNIT),
 m_iUnitCaptureClassType(NO_UNITCLASS),
+// Flunky domestication
+m_iPrereqCaptureTech(NO_TECH),
 m_iUnitCombatType(NO_UNITCOMBAT),
 m_iDomainType(NO_DOMAIN),
 m_iDefaultUnitAIType(NO_UNITAI),
@@ -3203,7 +3205,8 @@ m_bPrereqReligion(false),
 m_bMechanized(false),
 m_bRenderBelowWater(false),
 m_bRenderAlways(false),
-m_bSuicide(false),
+// Flunky PAE suicide not 0/100
+m_iSuicide(0),
 m_bLineOfSight(false),
 m_bHiddenNationality(false),
 m_bAlwaysHostile(false),
@@ -3570,6 +3573,12 @@ int CvUnitInfo::getUnitCaptureClassType() const
 	return m_iUnitCaptureClassType;
 }
 
+// Flunky PAE Domestication
+int CvUnitInfo::getPrereqCaptureTech() const
+{
+	return m_iPrereqCaptureTech;
+}
+
 int CvUnitInfo::getUnitCombatType() const			
 {
 	return m_iUnitCombatType;
@@ -3853,7 +3862,13 @@ bool CvUnitInfo::isRenderAlways() const
 
 bool CvUnitInfo::isSuicide() const
 {
-	return m_bSuicide;
+	return m_iSuicide > 0;
+}
+
+// Flunky PAE suicide not 0/100
+int CvUnitInfo::getSuicideChance() const
+{
+	return m_iSuicide;
 }
 
 bool CvUnitInfo::isLineOfSight() const
@@ -4344,6 +4359,8 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iUnitClassType);
 	stream->Read(&m_iSpecialUnitType);
 	stream->Read(&m_iUnitCaptureClassType);
+	// Flunky PAE Domestication
+	stream->Read(&m_iPrereqCaptureTech);
 	stream->Read(&m_iUnitCombatType);
 	stream->Read(&m_iDomainType);
 	stream->Read(&m_iDefaultUnitAIType);
@@ -4411,7 +4428,7 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_bMechanized);
 	stream->Read(&m_bRenderBelowWater);
 	stream->Read(&m_bRenderAlways);
-	stream->Read(&m_bSuicide);
+	stream->Read(&m_iSuicide);
 	stream->Read(&m_bLineOfSight);
 	stream->Read(&m_bHiddenNationality);
 	stream->Read(&m_bAlwaysHostile);
@@ -4647,6 +4664,8 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iUnitClassType);
 	stream->Write(m_iSpecialUnitType);
 	stream->Write(m_iUnitCaptureClassType);
+	// Flunky PAE Domestication
+	stream->Write(m_iPrereqCaptureTech);
 	stream->Write(m_iUnitCombatType);
 	stream->Write(m_iDomainType);
 	stream->Write(m_iDefaultUnitAIType);
@@ -4711,7 +4730,7 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 	stream->Write(m_bMechanized);
 	stream->Write(m_bRenderBelowWater);
 	stream->Write(m_bRenderAlways);
-	stream->Write(m_bSuicide);
+	stream->Write(m_iSuicide);
 	stream->Write(m_bLineOfSight);
 	stream->Write(m_bHiddenNationality);
 	stream->Write(m_bAlwaysHostile);
@@ -4793,6 +4812,10 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(szTextVal, "Capture");
 	m_iUnitCaptureClassType = pXML->FindInInfoClass(szTextVal);
 
+	// Flunky PAE Domestication
+	pXML->GetChildXmlValByName(szTextVal, "PrereqCaptureTech");
+	m_iPrereqCaptureTech = pXML->FindInInfoClass(szTextVal);
+
 	pXML->GetChildXmlValByName(szTextVal, "Combat");
 	m_iUnitCombatType = pXML->FindInInfoClass(szTextVal);
 
@@ -4857,7 +4880,7 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_bMechanized,"bMechanized",false);
 	pXML->GetChildXmlValByName(&m_bRenderBelowWater,"bRenderBelowWater",false);
 	pXML->GetChildXmlValByName(&m_bRenderAlways,"bRenderAlways",false);
-	pXML->GetChildXmlValByName(&m_bSuicide,"bSuicide");
+	pXML->GetChildXmlValByName(&m_iSuicide,"iSuicide");
 	pXML->GetChildXmlValByName(&m_bLineOfSight,"bLineOfSight",false);
 	pXML->GetChildXmlValByName(&m_bHiddenNationality,"bHiddenNationality",false);
 	pXML->GetChildXmlValByName(&m_bAlwaysHostile,"bAlwaysHostile",false);

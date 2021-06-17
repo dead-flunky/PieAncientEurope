@@ -632,8 +632,10 @@ void CvUnit::kill(bool bDelay, PlayerTypes ePlayer)
 	CvEventReporter::getInstance().unitLost(this);
 
 	GET_PLAYER(getOwnerINLINE()).deleteUnit(getID());
-
-	if ((eCapturingPlayer != NO_PLAYER) && (eCaptureUnitType != NO_UNIT) && !(GET_PLAYER(eCapturingPlayer).isBarbarian()))
+	TechTypes eTech = (TechTypes) GC.getUnitInfo(eCaptureUnitType).getPrereqCaptureTech();
+	if ((eCapturingPlayer != NO_PLAYER) && (eCaptureUnitType != NO_UNIT) && !(GET_PLAYER(eCapturingPlayer).isBarbarian()) && 
+		/* Flunky PAE Domestication*/
+		(eTech == NO_TECH || GET_TEAM(GET_PLAYER(eCapturingPlayer).getTeam()).isHasTech(eTech)))
 	{
 		if (GET_PLAYER(eCapturingPlayer).isHuman() || GET_PLAYER(eCapturingPlayer).AI_captureUnit(eCaptureUnitType, pPlot) || 0 == GC.getDefineINT("AI_CAN_DISBAND_UNITS"))
 		{
@@ -809,7 +811,7 @@ void CvUnit::updateAirStrike(CvPlot* pPlot, bool bQuick, bool bFinish)
 
 	getGroup()->clearMissionQueue();
 
-	if (isSuicide() && !isDead())
+	if (GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance() && !isDead())
 	{
 		kill(true);
 	}
@@ -1113,8 +1115,8 @@ void CvUnit::updateAirCombat(bool bQuick)
 		setAttackPlot(NULL, false);
 		setCombatUnit(NULL);
 		pInterceptor->setCombatUnit(NULL);
-
-		if (!isDead() && isSuicide())
+		
+		if (!isDead() && GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance())
 		{
 			kill(true);
 		}
@@ -1803,12 +1805,13 @@ void CvUnit::updateCombat(bool bQuick)
 
 			bool bAdvance = false;
 
-			if (isSuicide())
+			if (GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance())
 			{
 				kill(true);
 
-				pDefender->kill(false);
-				pDefender = NULL;
+				// Flunky PAE: bSuicide should not necessarily result in killing the opponent. 
+				//pDefender->kill(false);
+				//pDefender = NULL;
 			}
 			else
 			{
@@ -5051,7 +5054,7 @@ bool CvUnit::airBomb(int iX, int iY)
 		gDLL->getEntityIFace()->AddMission(&kAirMission);
 	}
 
-	if (isSuicide())
+	if (GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance())
 	{
 		kill(true);
 	}
@@ -9009,7 +9012,8 @@ int CvUnit::maxCombatStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDet
 			}
 		}
 
-		if (pAttacker->getKamikazePercent() != 0)
+		// Flunky PAE Kamikaze only kills, do the combat strength with iCombatPercent
+		/*if (pAttacker->getKamikazePercent() != 0)
 		{
 			iExtraModifier = pAttacker->getKamikazePercent();
 			iTempModifier += iExtraModifier;
@@ -9017,7 +9021,7 @@ int CvUnit::maxCombatStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDet
 			{
 				pCombatDetails->iKamikazeModifier = iExtraModifier;
 			}
-		}
+		}*/
 		
 		// if we are attacking an unknown defender, then use the reverse of the modifier
 		if (bAttackingUnknownDefender)
@@ -10431,6 +10435,7 @@ void CvUnit::setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow, bool b
 			pOldPlot->area()->changeNumAIUnits(getOwnerINLINE(), AI_getUnitAIType(), -1);
 		}
 
+		// Flunky TODO: only if barbarian animal
 		if (isAnimal())
 		{
 			pOldPlot->area()->changeAnimalsPerPlayer(getOwnerINLINE(), -1);
@@ -13669,6 +13674,11 @@ bool CvUnit::isPotentialEnemy(TeamTypes eTeam, const CvPlot* pPlot) const
 bool CvUnit::isSuicide() const
 {
 	return (m_pUnitInfo->isSuicide() || getKamikazePercent() != 0);
+}
+
+int CvUnit::getSuicideChance() const
+{
+	return std::max(m_pUnitInfo->getSuicideChance(), getKamikazePercent());
 }
 
 int CvUnit::getDropRange() const
