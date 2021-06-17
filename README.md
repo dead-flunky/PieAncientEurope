@@ -13,5 +13,5 @@
  no point in keeping the whole mod here.
  so this should act as a patch until such time this will be complete and merged by Pie into his base mod.
 
-# Ceredits
- f1rpo, Karadoc and every one on civfanatics.
+# Credits
+ f1rpo, Karadoc and everyone on civfanatics.
