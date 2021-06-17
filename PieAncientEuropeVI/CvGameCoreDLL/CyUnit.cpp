@@ -1512,7 +1512,6 @@ bool CyUnit::isCargo()
 {
 	return m_pUnit ? m_pUnit->isCargo() : false;
 }
-
 void CyUnit::setTransportUnit(CyUnit* pTransportUnit)
 {
 	if (m_pUnit)
@@ -1522,6 +1521,12 @@ void CyUnit::setTransportUnit(CyUnit* pTransportUnit)
 int CyUnit::getExtraDomainModifier(int /*DomainTypes*/ eIndex)
 {
 	return m_pUnit ? m_pUnit->getExtraDomainModifier((DomainTypes) eIndex) : -1;
+}
+
+// Flunky PAE Flight
+bool CyUnit::isFlight()
+{
+		return m_pUnit ? m_pUnit->isFlight() : false;
 }
 
 std::wstring CyUnit::getName()

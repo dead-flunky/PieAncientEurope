@@ -38,7 +38,7 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 		.def("getDeclareWarMove", &CyUnit::getDeclareWarMove, "TeamTypes (CyPlot* pPlot)")
 		.def("canMoveInto", &CyUnit::canMoveInto, "bool (CyPlot* pPlot, bool bAttack, bool bDeclareWar, bool bIgnoreLoad)")
 		.def("canMoveOrAttackInto", &CyUnit::canMoveOrAttackInto, "bool (CyPlot* pPlot, bool bDeclareWar)")
-		//.def("canMoveThrough", &CyUnit::canMoveThrough, "bool (CyPlot* pPlot)")
+#		//.def("canMoveThrough", &CyUnit::canMoveThrough, "bool (CyPlot* pPlot)")
 		.def("jumpToNearestValidPlot", &CyUnit::jumpToNearestValidPlot, "bool ()")
 
 		.def("canAutomate", &CyUnit::canAutomate, "bool (int (AutomateTypes) eAutomate)")
@@ -251,7 +251,7 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 		.def("isFull", &CyUnit::isFull, "bool ()")
 		.def("cargoSpaceAvailable", &CyUnit::cargoSpaceAvailable, "int ()")
 		.def("hasCargo", &CyUnit::hasCargo, "bool ()")
-		//.def("canCargoAllMove", &CyUnit::canCargoAllMove, "bool ()")
+#//.def("canCargoAllMove", &CyUnit::canCargoAllMove, "bool ()")
 		.def("getUnitAICargo", &CyUnit::getUnitAICargo, "int (int (UnitAITypes) eUnitAI)")
 		.def("getID", &CyUnit::getID, "int ()")
 
@@ -355,6 +355,19 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 		.def("isCargo", &CyUnit::isCargo, "bool ()")
 		.def("setTransportUnit", &CyUnit::setTransportUnit, "void (CyUnit* pTransportUnit)")
 
+#		// Flunky PAE Flight - commented out what is not needed right now
+#		//.def("flightMaxHealth", &CyUnit::flightMaxHealth, "int ()")
+#		//.def("flightProbability", &CyUnit::flightProbability, "void (int)")
+
+#		//.def("getExtraFlight", &CyUnit::getExtraFlight, "int ()")
+#		//.def("changeExtraFlight", &CyUnit::changeExtraFlight, "void (int)")
+
+#		//.def("getExtraFlightDamageProtection", &CyUnit::getExtraFlightDamageProtection, "int ()")
+#		//.def("changeExtraFlightDamageProtection", &CyUnit::changeExtraFlightDamageProtection, "void (int)")
+	
+		.def("isFlight", &CyUnit::isFlight, "bool ()")
+#		//.def("setFlight", &CyUnit::setFlight, "void (int iNewValue)")
+
 		.def("getExtraDomainModifier", &CyUnit::getExtraDomainModifier, "int ()")
 
 		.def("getName", &CyUnit::getName, "str () - Returns the name of a unit along with its type description in parens if using a custom name")
@@ -384,7 +397,7 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 		.def("getUnitAIType", &CyUnit::getUnitAIType, "int UnitAIType () - returns the int value of the UnitAIType")
 		.def("setUnitAIType", &CyUnit::setUnitAIType, "void UnitAIType (int iUnitAIType) - sets the unit's UnitAIType")
 
-		// Python Helper Functions
+#		// Python Helper Functions
 		.def("centerCamera", &CyUnit::centerCamera, "void () - Centers the Camera on the unit")
 		.def("attackForDamage", &CyUnit::attackForDamage, "void attackForDamage(CyUnit *defender, int attakerDamageChange, int defenderDamageChange)")
 		.def("rangeStrike", &CyUnit::rangeStrike, "void rangeStrike(int iX, int iY)")

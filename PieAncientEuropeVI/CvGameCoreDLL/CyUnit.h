@@ -368,6 +368,9 @@ public:
 
 	int getExtraDomainModifier(int /*DomainTypes*/ eIndex);
 
+	// Flunky PAE Flight
+	bool isFlight();
+
 	std::wstring getName();
 	std::wstring getNameForm(int iForm);
 	std::wstring getNameKey();
