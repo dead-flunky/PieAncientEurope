@@ -120,7 +120,7 @@ def getDisplayCity():
 	Returns the city to display in the progress bar.
 	"""
 	pHeadSelectedCity = CyInterface().getHeadSelectedCity()
-	if (pHeadSelectedCity and pHeadSelectedCity.getTeam() == gc.getGame().getActiveTeam()):
+	if pHeadSelectedCity and pHeadSelectedCity.getTeam() == gc.getGame().getActiveTeam():
 		city = pHeadSelectedCity
 		iTurns = getCityTurns(city)
 	else:
@@ -138,10 +138,10 @@ def findNextCity():
 	bestCity = None
 	for city in PlayerUtil.playerCities(player):
 		iRate = city.getGreatPeopleRate()
-		if (iRate > 0):
+		if iRate > 0:
 			iProgress = city.getGreatPeopleProgress()
 			iTurns = (iThreshold - iProgress + iRate - 1) / iRate
-			if (iMinTurns is None or iTurns < iMinTurns):
+			if iMinTurns is None or iTurns < iMinTurns:
 				iMinTurns = iTurns
 				bestCity = city
     # PAE            
@@ -162,17 +162,17 @@ def findMaxCity():
 	bestCity = None
 	for city in PlayerUtil.playerCities(player):
 		iProgress = city.getGreatPeopleProgress()
-		if (iProgress > iMaxProgress):
+		if iProgress > iMaxProgress:
 			iMaxProgress = iProgress
 			bestCity = city
 	return (bestCity, iMaxProgress)
 
 def getCityTurns(city):
-	if (city):
+	if city:
 		player = gc.getPlayer(city.getOwner())
 		iThreshold = player.greatPeopleThreshold(False)
 		iRate = city.getGreatPeopleRate()
-		if (iRate > 0):
+		if iRate > 0:
 			iProgress = city.getGreatPeopleProgress()
 			iTurns = (iThreshold - iProgress + iRate - 1) / iRate
 			return iTurns
@@ -185,7 +185,7 @@ def calcPercentages(city):
 		iTotal += city.getGreatPeopleUnitProgress(iUnit)
 	# Calc individual percentages based on rates and total
 	percents = []
-	if (iTotal > 0):
+	if iTotal > 0:
 		iLeftover = 100
 		for iUnit in range(gc.getNumUnitInfos()):
 #			iUnit = getUnitType(gpType)
@@ -195,7 +195,7 @@ def calcPercentages(city):
 				iLeftover -= iPercent
 				percents.append((iPercent, iUnit))
 		# Add remaining from 100 to first in list to match Civ4
-		if (iLeftover > 0):
+		if iLeftover > 0:
 			percents[0] = (percents[0][0] + iLeftover, percents[0][1])
 	return percents
 
@@ -229,11 +229,11 @@ def getHoverText(eWidgetType, iData1, iData2, bOption):
 
 def getGreatPeopleText(city, iGPTurns, iGPBarWidth, bGPBarTypesNone, bGPBarTypesOne, bIncludeCityName):
 	sGreatPeopleChar = u"%c" % CyGame().getSymbolID(FontSymbols.GREAT_PEOPLE_CHAR)
-	if (not city):
+	if not city:
 		szText = BugUtil.getText("INTERFACE_GREAT_PERSON_NONE", (sGreatPeopleChar, ))
-	elif (bGPBarTypesNone):
-		if (iGPTurns):
-			if (bIncludeCityName):
+	elif bGPBarTypesNone:
+		if iGPTurns:
+			if bIncludeCityName:
 				szText = BugUtil.getText("INTERFACE_GREAT_PERSON_CITY_TURNS", (sGreatPeopleChar, city.getName(), iGPTurns))
 			else:
 				szText = BugUtil.getText("INTERFACE_GREAT_PERSON_TURNS", (sGreatPeopleChar, iGPTurns))
@@ -244,41 +244,41 @@ def getGreatPeopleText(city, iGPTurns, iGPBarWidth, bGPBarTypesNone, bGPBarTypes
 				szText = sGreatPeopleChar
 	else:
 		lPercents = calcPercentages(city)
-		if (len(lPercents) == 0):
-			if (iGPTurns):
-				if (bIncludeCityName):
+		if not lPercents:
+			if iGPTurns:
+				if bIncludeCityName:
 					szText = BugUtil.getText("INTERFACE_GREAT_PERSON_CITY_TURNS", (sGreatPeopleChar, city.getName(), iGPTurns))
 				else:
 					szText = BugUtil.getText("INTERFACE_GREAT_PERSON_TURNS", (sGreatPeopleChar, iGPTurns))
 			else:
-				if (bIncludeCityName):
+				if bIncludeCityName:
 					szText = BugUtil.getText("INTERFACE_GREAT_PERSON_CITY", (sGreatPeopleChar, city.getName()))
 				else:
 					szText = sGreatPeopleChar
 		else:
 			lPercents.sort()
 			lPercents.reverse()
-			if (bGPBarTypesOne or len(lPercents) == 1):
+			if bGPBarTypesOne or len(lPercents) == 1:
 				iPercent, iUnit = lPercents[0]
 				pInfo = gc.getUnitInfo(iUnit)
-				if (iGPTurns):
-					if (bIncludeCityName):
+				if iGPTurns:
+					if bIncludeCityName:
 						szText = BugUtil.getText("INTERFACE_GREAT_PERSON_CITY_TURNS", (pInfo.getDescription(), city.getName(), iGPTurns))
 					else:
 						szText = BugUtil.getText("INTERFACE_GREAT_PERSON_TURNS", (pInfo.getDescription(), iGPTurns))
 				else:
-					if (bIncludeCityName):
+					if bIncludeCityName:
 						szText = BugUtil.getText("INTERFACE_GREAT_PERSON_CITY", (pInfo.getDescription(), city.getName()))
 					else:
 						szText = unicode(pInfo.getDescription())
 			else:
-				if (iGPTurns):
-					if (bIncludeCityName):
+				if iGPTurns:
+					if bIncludeCityName:
 						szText = BugUtil.getText("INTERFACE_GREAT_PERSON_CITY_TURNS", (sGreatPeopleChar, city.getName(), iGPTurns))
 					else:
 						szText = BugUtil.getText("INTERFACE_GREAT_PERSON_TURNS", (sGreatPeopleChar, iGPTurns))
 				else:
-					if (bIncludeCityName):
+					if bIncludeCityName:
 						szText = BugUtil.getText("INTERFACE_GREAT_PERSON_CITY", (sGreatPeopleChar, city.getName()))
 					else:
 						szText = sGreatPeopleChar + u":"
@@ -286,10 +286,10 @@ def getGreatPeopleText(city, iGPTurns, iGPBarWidth, bGPBarTypesNone, bGPBarTypes
 				for iPercent, iUnit in lPercents:
 					szNewTypes = szTypes + u" %c%d%%" % (getUnitIcon(iUnit), iPercent)
 					szNewText = szText + u"<font=2> -%s</font>" % szTypes
-					if (CyInterface().determineWidth(szNewText) > iGPBarWidth - 10):
+					if CyInterface().determineWidth(szNewText) > iGPBarWidth - 10:
 						# Keep under width
 						break
 					szTypes = szNewTypes
-				if (len(szTypes) > 0):
+				if szTypes:
 					szText += u"<font=2> -%s</font>" % szTypes
 	return szText

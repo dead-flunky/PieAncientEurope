@@ -1098,11 +1098,11 @@ class CvMainInterface:
         screen.hide("CityScrollPlus")
 
 # BUG - City Arrows - start
-        screen.setButtonGFC("MainCityScrollMinus", u"", "", xResolution - 275, yResolution - 165, 32, 32, WidgetTypes.WIDGET_CITY_SCROLL, -1, -1, ButtonStyles.BUTTON_STYLE_ARROW_LEFT)
-        screen.hide("MainCityScrollMinus")
+        # screen.setButtonGFC("MainCityScrollMinus", u"", "", xResolution - 275, yResolution - 165, 32, 32, WidgetTypes.WIDGET_CITY_SCROLL, -1, -1, ButtonStyles.BUTTON_STYLE_ARROW_LEFT)
+        # screen.hide("MainCityScrollMinus")
 
-        screen.setButtonGFC("MainCityScrollPlus", u"", "", xResolution - 255, yResolution - 165, 32, 32, WidgetTypes.WIDGET_CITY_SCROLL, 1, -1, ButtonStyles.BUTTON_STYLE_ARROW_RIGHT)
-        screen.hide("MainCityScrollPlus")
+        # screen.setButtonGFC("MainCityScrollPlus", u"", "", xResolution - 255, yResolution - 165, 32, 32, WidgetTypes.WIDGET_CITY_SCROLL, 1, -1, ButtonStyles.BUTTON_STYLE_ARROW_RIGHT)
+        # screen.hide("MainCityScrollPlus")
 # BUG - City Arrows - end
 
 # BUG - PLE - begin
@@ -1173,9 +1173,9 @@ class CvMainInterface:
 
 #       sBUGOptionsScreenButton = ArtFileMgr.getInterfaceArtInfo("BUG_OPTIONS_SCREEN_BUTTON").getPath()
 #       screen.setImageButton("BUGOptionsScreenWidget", sBUGOptionsScreenButton,  iBtnX + 30, iBtnY - 2, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_BUG_OPTION_SCREEN, -1, -1)
-        screen.setImageButton("BUGOptionsScreenWidget", "", iBtnX + 30, iBtnY - 2, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_BUG_OPTION_SCREEN, -1, -1 )
-        screen.setStyle("BUGOptionsScreenWidget", "Button_HUDAdvisorCorporation_Style" )
-        screen.hide("BUGOptionsScreenWidget")
+        # screen.setImageButton("BUGOptionsScreenWidget", "", iBtnX + 30, iBtnY - 2, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_BUG_OPTION_SCREEN, -1, -1 )
+        # screen.setStyle("BUGOptionsScreenWidget", "Button_HUDAdvisorCorporation_Style" )
+        # screen.hide("BUGOptionsScreenWidget")
 # BUG - BUG Option Button - End
 
         screen.addPanel("BuildingListBackground", u"", u"", True, False, 10, 287, 238, 30, PanelStyles.PANEL_STYLE_STANDARD)
@@ -1662,11 +1662,11 @@ class CvMainInterface:
             screen.hide("InfoAdvisorButton")
 
 # BUG - City Arrows - start
-            screen.hide( "MainCityScrollMinus" )
-            screen.hide( "MainCityScrollPlus" )
+            # screen.hide( "MainCityScrollMinus" )
+            # screen.hide( "MainCityScrollPlus" )
 # BUG - City Arrows - end
 # BUG - BUG Option Button - Start
-            screen.hide("BUGOptionsScreenWidget")
+            # screen.hide("BUGOptionsScreenWidget")
 # BUG - BUG Option Button - End
 
 # BUG - field of view slider - start
@@ -1699,11 +1699,11 @@ class CvMainInterface:
             screen.hide("VictoryAdvisorButton")
             screen.hide("InfoAdvisorButton")
 # BUG - City Arrows - start
-            screen.hide("MainCityScrollMinus")
-            screen.hide("MainCityScrollPlus")
+            # screen.hide("MainCityScrollMinus")
+            # screen.hide("MainCityScrollPlus")
 # BUG - City Arrows - end
 # BUG - BUG Option Button - Start
-            screen.hide("BUGOptionsScreenWidget")
+            # screen.hide("BUGOptionsScreenWidget")
 # BUG - BUG Option Button - End
 # BUG - field of view slider - start
             screen.hide(self.szSliderTextId)
@@ -1735,8 +1735,8 @@ class CvMainInterface:
             screen.show("VictoryAdvisorButton")
             screen.show("InfoAdvisorButton")
 # BUG - City Arrows - start
-            screen.hide("MainCityScrollMinus")
-            screen.hide("MainCityScrollPlus")
+            # screen.hide("MainCityScrollMinus")
+            # screen.hide("MainCityScrollPlus")
 # BUG - City Arrows - end
 # BUG - BUG Option Button - Start
             # if MainOpt.isShowOptionsButton():
@@ -1793,11 +1793,11 @@ class CvMainInterface:
             screen.hide("InfoAdvisorButton")
 
 # BUG - City Arrows - start
-            screen.hide( "MainCityScrollMinus" )
-            screen.hide( "MainCityScrollPlus" )
+            # screen.hide( "MainCityScrollMinus" )
+            # screen.hide( "MainCityScrollPlus" )
 # BUG - City Arrows - end
 # BUG - BUG Option Button - Start
-            screen.hide("BUGOptionsScreenWidget")
+            # screen.hide("BUGOptionsScreenWidget")
 # BUG - BUG Option Button - End
             screen.hide("TradeRouteAdvisorButton")
             screen.hide("TradeRouteAdvisorButton2")
@@ -1825,12 +1825,12 @@ class CvMainInterface:
             screen.show("InfoAdvisorButton")
 
 # BUG - City Arrows - start
-            screen.hide( "MainCityScrollMinus" )
-            screen.hide( "MainCityScrollPlus" )
+            # screen.hide( "MainCityScrollMinus" )
+            # screen.hide( "MainCityScrollPlus" )
 # BUG - City Arrows - end
 # BUG - BUG Option Button - Start
-            if MainOpt.isShowOptionsButton():
-                screen.show("BUGOptionsScreenWidget")
+            # if MainOpt.isShowOptionsButton():
+                # screen.show("BUGOptionsScreenWidget")
 # BUG - BUG Option Button - End
 
             screen.moveToFront("TurnLogButton")
@@ -1883,16 +1883,16 @@ class CvMainInterface:
             screen.show("InfoAdvisorButton")
 
 # BUG - City Arrows - start
-            if (MainOpt.isShowCityCycleArrows()):
-                screen.show( "MainCityScrollMinus" )
-                screen.show( "MainCityScrollPlus" )
-            else:
-                screen.hide( "MainCityScrollMinus" )
-                screen.hide( "MainCityScrollPlus" )
+            # if (MainOpt.isShowCityCycleArrows()):
+                # screen.show( "MainCityScrollMinus" )
+                # screen.show( "MainCityScrollPlus" )
+            # else:
+                # screen.hide( "MainCityScrollMinus" )
+                # screen.hide( "MainCityScrollPlus" )
 # BUG - City Arrows - end
 # BUG - BUG Option Button - Start
-            if MainOpt.isShowOptionsButton():
-                screen.show("BUGOptionsScreenWidget")
+            # if MainOpt.isShowOptionsButton():
+                # screen.show("BUGOptionsScreenWidget")
 # BUG - BUG Option Button - End
 
             screen.moveToFront("TurnLogButton")
@@ -1909,12 +1909,12 @@ class CvMainInterface:
             screen.moveToFront("InfoAdvisorButton")
 
 # BUG - field of view slider - start
-            if MainOpt.isShowFieldOfView():
-                screen.show(self.szSliderTextId)
-                screen.show(self.szSliderId)
-            else:
-                screen.hide(self.szSliderTextId)
-                screen.hide(self.szSliderId)
+            # if MainOpt.isShowFieldOfView():
+            screen.show(self.szSliderTextId)
+            screen.show(self.szSliderId)
+            # else:
+                # screen.hide(self.szSliderTextId)
+                # screen.hide(self.szSliderId)
 # BUG - field of view slider - end
 
 # BUG - BUG Option Button - Start
@@ -1955,14 +1955,6 @@ class CvMainInterface:
 
 #       BugUtil.debug("updatePlotListButtons end - %s %s %s", self.bVanCurrentlyShowing, self.bPLECurrentlyShowing, self.bBUGCurrentlyShowing)
         return 0
-
-#       if PleOpt.isPLE_Style():
-#           self.updatePlotListButtons_PLE(screen)
-#           self.bPLECurrentlyShowing = True
-#       else:
-#           self.updatePlotListButtons_Orig(screen)
-#           self.bVanCurrentlyShowing = True
-#       return 0
 
     def updatePlotListButtons_Hide( self, screen ):
 #       BugUtil.debug("updatePlotListButtons_Hide - %s %s %s", self.bVanCurrentlyShowing, self.bPLECurrentlyShowing, self.bBUGCurrentlyShowing)
@@ -5045,8 +5037,8 @@ class CvMainInterface:
                 if gc.getPlayer(ePlayer).isAnarchy():
 
 # BUG - Bars on single line for higher resolution screens - start
-                    if (xResolution >= 1440
-                    and (MainOpt.isShowGGProgressBar() or MainOpt.isShowGPProgressBar())):
+                    if xResolution >= 1440: #\
+                       # and (MainOpt.isShowGGProgressBar() or MainOpt.isShowGPProgressBar()):
                         xCoord = 268 + (xResolution - 1440) / 2 + 84 + 6 + 487 / 2
                     else:
                         xCoord = screen.centerX(512)
@@ -5066,8 +5058,8 @@ class CvMainInterface:
                     szText = CyGameTextMgr().getResearchStr(ePlayer)
 
 # BUG - Bars on single line for higher resolution screens - start
-                    if (xResolution >= 1440
-                    and (MainOpt.isShowGGProgressBar() or MainOpt.isShowGPProgressBar())):
+                    if xResolution >= 1440: #\
+                       # and (MainOpt.isShowGGProgressBar() or MainOpt.isShowGPProgressBar()):
                         szResearchBar = "ResearchBar-w"
                         xCoord = 268 + (xResolution - 1440) / 2 + 84 + 6 + 487 / 2
                     else:
@@ -5127,7 +5119,7 @@ class CvMainInterface:
 # PAE - Great Person Bar - start
 # BUG - Great Person Bar - start
     def updateGreatPersonBar(self, screen):
-        if not CyInterface().isCityScreenUp() and MainOpt.isShowGPProgressBar():
+        if not CyInterface().isCityScreenUp(): # and MainOpt.isShowGPProgressBar()
             pGPCity, iGPTurns = GPUtil.getDisplayCity()
             szText = GPUtil.getGreatPeopleText(pGPCity, iGPTurns, GP_BAR_WIDTH, MainOpt.isGPBarTypesNone(), MainOpt.isGPBarTypesOne(), True)
             szText = u"<font=2>%s</font>" % (szText)
@@ -5203,7 +5195,7 @@ class CvMainInterface:
 
 # PAE - Great General Bar - start - edited for PAE from BUG
     def updateGreatGeneralBar(self, screen):
-        if not CyInterface().isCityScreenUp() and MainOpt.isShowGGProgressBar():
+        if not CyInterface().isCityScreenUp(): #and MainOpt.isShowGGProgressBar()
             pPlayer = gc.getActivePlayer()
             iCombatExp = pPlayer.getCombatExperience()
             iThresholdExp = pPlayer.greatPeopleThreshold(True)
@@ -8093,8 +8085,8 @@ class CvMainInterface:
         xResolution = screen.getXResolution()
 
 # BUG - Bars on single line for higher resolution screens - start
-        if (xResolution >= 1440
-        and (MainOpt.isShowGGProgressBar() or MainOpt.isShowGPProgressBar())):
+        if xResolution >= 1440: #\
+           # and (MainOpt.isShowGGProgressBar() or MainOpt.isShowGPProgressBar()):
             xCoord = 268 + (xResolution - 1440) / 2
             xCoord += 6 + 84
             screen.moveItem(szButtonID, 264 + (xResolution - 1024)/2 + 34*(iCount % 15), 0 + (34 * (iCount / 15)), -0.3)
@@ -8360,10 +8352,10 @@ class CvMainInterface:
 # BUG - PLE - end
 
 # BUG - BUG Option Button - Start
-            if inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED:
-                if inputClass.getFunctionName() == "BUGOptionsScreenWidget":
-                    BugOptionsScreen.showOptionsScreen()
-                    return 1
+            # if inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED:
+                # if inputClass.getFunctionName() == "BUGOptionsScreenWidget":
+                    # BugOptionsScreen.showOptionsScreen()
+                    # return 1
 # BUG - BUG Option Button - End
 
 

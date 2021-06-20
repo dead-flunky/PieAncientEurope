@@ -121,8 +121,8 @@ class CvGameUtils:
 
     def updateColoredPlots(self):
         # ***Flunky TEST***
-        print "updateColoredPlots"
-        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("updateColoredPlots", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+        # print "updateColoredPlots"
+        # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("updateColoredPlots", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         pHeadSelectedUnit = CyInterface().getHeadSelectedUnit()
         if not pHeadSelectedUnit or pHeadSelectedUnit.isNone():
             return False
@@ -310,7 +310,7 @@ class CvGameUtils:
         # Hunter
         if iUnitType == gc.getInfoTypeForString("UNIT_HUNTER"):
             # ***Flunky TEST***
-            CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Hunter", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+            # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Hunter", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
             (loopCity, pIter) = pPlayer.firstCity(False)
             while loopCity:
                 loopPlot = loopCity.plot()

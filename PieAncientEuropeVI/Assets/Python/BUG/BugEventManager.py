@@ -207,7 +207,7 @@ class BugEventManager(CvEventManager.CvEventManager):
         self.addEvent("PythonReloaded")
 
         # add events used by this event manager
-        # (K-Mod has moved these into the "configure" fucntion)
+        # (K-Mod has moved these into the "configure" function)
 
         # BULL events
         self.addEvent("unitUpgraded")

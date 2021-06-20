@@ -177,7 +177,7 @@ class Dispatcher:
 		self._setDefault("showExamineCityButton", True)
 		self._setDefault("getRecommendedUnit", UnitTypes.NO_UNIT)
 		self._setDefault("getRecommendedBuilding", BuildingTypes.NO_BUILDING)
-		self._setDefault("updateColoredPlots", False)
+		# self._setDefault("updateColoredPlots", False)
 		self._setDefault("isActionRecommended", False)
 		self._setDefault("unitCannotMoveInto", False)
 		self._setDefault("cannotHandleAction", False)
@@ -226,7 +226,7 @@ class Dispatcher:
 		self._setDefault("getUnitCostMod", -1)
 		self._setDefault("getBuildingCostMod", -1)
 		self._setDefault("canUpgradeAnywhere", False)
-		self._setDefault("getWidgetHelp", u"")
+		# self._setDefault("getWidgetHelp", u"")
 		self._setDefault("getUpgradePriceOverride", -1)
 	
 	def _createCallback(self, name, func, default=None, log=None):

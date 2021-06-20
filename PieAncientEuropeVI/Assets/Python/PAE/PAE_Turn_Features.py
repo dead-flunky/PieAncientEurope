@@ -653,6 +653,7 @@ def doSeewind():
                         break
 
                 if bSet:
+                    CvUtil.pyPrint(u'Seewind %d was selected of %d possibilities' %(iDirection, len(L.LSeewind)))
                     loopPlot.setFeatureType(L.LSeewind[iDirection], 0)
                     iDirection = (iDirection + CvUtil.myRandom(3, "doSeewind3") - 1) % iNumDirection
                     loopPlot = plotDirection(loopPlot.getX(), loopPlot.getY(), DirectionTypes(iDirection))
