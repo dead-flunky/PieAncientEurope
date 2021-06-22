@@ -55,7 +55,7 @@ def handleBugExitButtonInput(argsList):
     #szName = argsList[0]
     getOptionsScreen().close()
     return 1
-        
+
 def handleBugHelpButtonInput(argsList):
     "Opens the BUG help file"
     #szName = argsList[0]
@@ -112,7 +112,7 @@ def handleResolutionDropdownInput(argsList):
 
 class BugOptionsScreen:
     "BUG Mod Options Screen"
-    
+
     def __init__(self):
         self.iScreenHeight = 50
         self.options = BugOptions.getOptions()

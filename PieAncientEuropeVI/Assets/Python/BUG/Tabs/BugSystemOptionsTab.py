@@ -21,7 +21,7 @@ class BugSystemOptionsTab(BugOptionsTab.BugOptionsTab):
 		panel = self.createMainPanel(screen)
 		column = self.addOneColumnLayout(screen, panel)
 
-        # Flunky PAE remove OptionsKey and OptionsButton options
+		# Flunky PAE remove OptionsKey and OptionsButton options
 		# left, right = self.addTwoColumnLayout(screen, column, "Bottom", False)
 		# self.addCheckbox(screen, left, "MainInterface__OptionsKey")
 		# self.addCheckbox(screen, left, "MainInterface__OptionsButton")

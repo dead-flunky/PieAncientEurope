@@ -560,12 +560,7 @@ def _calculateBonusBuyingPrice(eBonus, iBuyer, iSeller):
           return iValue
                 
         # Furious = 0, Annoyed = 1, Cautious = 2, Pleased = 3, Friendly = 4
-        #keldath fix
-        attFix = 0
-        if iBuyer != iSeller:
-            attFix = gc.getPlayer(iBuyer).AI_getAttitude(iSeller)
-        iAttitudeModifier = 125 - 5 * attFix
-        #keldath fix
+        iAttitudeModifier = 125 - 5 * gc.getPlayer(iBuyer).AI_getAttitude(iSeller)
     return (iValue * iAttitudeModifier) // 100
 
 
@@ -616,12 +611,11 @@ def calculateBonusSellingPrice(pUnit, pCity, bCalcOnly, iBonus2=-1):
     iPop = pCity.getPopulation()
     
     # Stadt hat dieses Bonusgut nicht im Handelsnetz
-    if not pCity.hasBonus(eBonus): 
+    if not pCity.hasBonus(eBonus):
         iModifier += 20
     # Wunderbonus
     iModifier += pCity.getNumWorldWonders() * 5
     # Furious = 0, Annoyed = 1, Cautious = 2, Pleased = 3, Friendly = 4
-    #keldath fix - already checked
     if iSeller != iBuyer:
         iModifier += 5 * gc.getPlayer(iSeller).AI_getAttitude(iBuyer)
     

@@ -10081,7 +10081,7 @@
   </Script2DSound>
   <Script2DSound>
     <ScriptID>AS2D_THEIRMAKEPEACE</ScriptID>
-    <SoundID>SND_THEIRALLIANCE</SoundID>
+    <SoundID>SND_THEIRMAKEPEACE</SoundID>
     <SoundType>GAME_INTERFACE</SoundType>
     <iMinVolume>80</iMinVolume>
     <iMaxVolume>80</iMaxVolume>

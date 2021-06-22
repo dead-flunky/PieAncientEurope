@@ -1335,7 +1335,7 @@ class CvMainInterface:
                     screen.setEndTurnState("EndTurnText", acOutput)
                     bShow = True
 # BUG - Options - start
-                # elif ( MainOpt.isShowOptionsKeyReminder() ):
+                # elif MainOpt.isShowOptionsKeyReminder():
                     # if BugPath.isMac():
                         # acOutput = localText.getText("TXT_KEY_BUG_OPTIONS_KEY_REMINDER_MAC", (BugPath.getModName(),))
                     # else:

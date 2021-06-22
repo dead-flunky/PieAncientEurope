@@ -317,7 +317,7 @@ def doPlotFeatures():
                             iCaves += 1
                             #if loopPlot.getNumUnits() <= 1:
                             if CvUtil.myRandom(15, "cave bear") == 1:
-                                if not PAE_Barbaren.checkNearbyUnits(loopPlot,3): # (Plot, Radius):
+                                if not PAE_Barbaren.checkNearbyUnits(loopPlot,3): # (Plot, Radius)
                                     setUnitIntoCave(loopPlot)
                                 continue
                         # Goody huts
@@ -638,7 +638,7 @@ def doSeewind():
             if loopPlot and not loopPlot.isNone():
                 if loopPlot.getFeatureType() == iDarkIce:
                     continue
-                # Flunky: disables, because already checked
+                # Flunky: disabled, because already checked
                 # if loopPlot.getFeatureType() != feat_ice and (loopPlot.getTerrainType() == terr_ocean or loopPlot.getTerrainType() == terr_ocean2):
                     # Im Umkreis von 5 soll kein weiteres Windfeature sein
                 bSet = True
@@ -801,7 +801,8 @@ def doMoveGrasshoppers(pPlot):
         # Heuschrecken auf dem neuen Plot erzeugen
         lPlots[iRand].setFeatureType(iFeatGrasshopper, 0)
         # Farmen auf dem neuen Plot vernichten (ausgenommen Weiden)
-        if lPlots[iRand].getImprovementType() != gc.getInfoTypeForString("IMPROVEMENT_PASTURE") and lPlots[iRand].getImprovementType() in L.LFarms:
+        if lPlots[iRand].getImprovementType() != gc.getInfoTypeForString("IMPROVEMENT_PASTURE") \
+           and lPlots[iRand].getImprovementType() in L.LFarms:
             lPlots[iRand].setImprovementType(-1)
 
 
@@ -965,7 +966,7 @@ def doOlympicGames():
         # erst ab 2 CIVs
         if len(lPlayers) <= 1:
             return
-            
+
         iRand = CvUtil.myRandom(len(lCities4Olympiade), "CityOfOlympiadWinner")
         pCity = lCities4Olympiade[iRand]
 

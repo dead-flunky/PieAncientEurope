@@ -1034,7 +1034,7 @@ class CvUnitDesc:
         if unit.getDamage() > 0:
             f.write("\t\tDamage=%d\n" %(unit.getDamage(),))
         f.write("\t\tLevel=%d, Experience=%d\n" %(unit.getLevel(), unit.getExperience()))
-        for i in range(gc.getNumPromotionInfos()):
+        for i in xrange(gc.getNumPromotionInfos()):
             if unit.isHasPromotion(i):
                 f.write("\t\tPromotionType=%s\n" %(gc.getPromotionInfo(i).getType()))
 
@@ -1452,7 +1452,7 @@ class CvCityDesc:
                 continue
 
         ## Platy Builder ##
-            for iPlayerLoop in range(gc.getMAX_PLAYERS()):
+            for iPlayerLoop in xrange(gc.getMAX_PLAYERS()):
                 szCityTag = ("Player%dCulture" %(iPlayerLoop))
                 v = parser.findTokenValue(toks, szCityTag)
                 if v!=-1:
@@ -2295,7 +2295,7 @@ class CvWBDesc:
                 if pLoopPlot is not None: # pLoopPlayer.isAlive() and
                     aPosUsed.append((pLoopPlot.getX(),pLoopPlot.getY()))
 
-        for iPlayerLoop in range(len(self.playersDesc)):
+        for iPlayerLoop in xrange(len(self.playersDesc)):
 
             pPlayer = gc.getPlayer(iPlayerLoop)
             pWBPlayer = self.playersDesc[iPlayerLoop]
@@ -2415,9 +2415,11 @@ class CvWBDesc:
                 
                     
         # if bPlaceBarbCities:
-            # PlaceBarbarianCities(BarbCityList, Debugging)
+            # sp.PlaceBarbarianCities(BarbCityList, Debugging)
         # if AddPositionsToMap:
-            # AddCoordinateSignsToMap()
+            # sp.AddCoordinateSignsToMap()
+            
+        # sp.FlushVisibleArea()
 
         return 0  # ok
 

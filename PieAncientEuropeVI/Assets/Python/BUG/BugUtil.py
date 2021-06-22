@@ -232,7 +232,7 @@ LEVEL_PREFIXES = (
     "ERROR: ",
 )
 
-screenLogLevel = DEBUG
+screenLogLevel = WARN
 fileLogLevel = DEBUG
 minimumLogLevel = min(screenLogLevel, fileLogLevel)
 

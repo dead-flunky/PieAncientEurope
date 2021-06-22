@@ -3660,7 +3660,7 @@ def getRangeCut(string):
 # 3: Provinzstadt
 # 4: Metropole
 def getCityStatus(pCity, iPlayer, iCity, bReturnButton):
-    if pCity == None:
+    if not pCity:
         pCity = gc.getPlayer(iPlayer).getCity(iCity)
     if pCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_METROPOLE")):
         if bReturnButton:
