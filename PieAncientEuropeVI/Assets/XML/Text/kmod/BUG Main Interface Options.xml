@@ -110,22 +110,22 @@
 		<Italian>Quando è selezionato, mostra la barra di avanzamento per il prossimo Grande Generale.</Italian>
 		<Spanish>Muestra una barra de progreso para el próximo Gran General.</Spanish>
 	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__MINMAX_COMMERCE_TEXT</Tag>
-		<English>Min/Max Commerce Buttons</English>
-		<French>Min/Max Commerce Buttons</French>
-		<German>Min/Max Investitionsanteile</German>
-		<Italian>Bottoni del Commercio minimo/massimo</Italian>
-		<Spanish>Comercio Mínimo/Máximo</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__MINMAX_COMMERCE_HOVER</Tag>
-		<English>When checked, displays a second pair of +/- buttons for each commerce type that set the rate to 100% and 0% respectively.</English>
-		<French>When checked, displays a second pair of +/- buttons for each commerce type that set the rate to 100% and 0% respectively.</French>
-		<German>Zeigt ein zweites Paar "+/-"-Schaltflächen für jede Art Investitionsanteil an, die diese auf 100% beziehungsweise 0% setzen</German>
-		<Italian>Quando è selezionato, mostra una seconda coppia di bottoni +/- per ogni tipo di commercio che impostano il valore rispettivamente al 100% ed allo 0%.</Italian>
-		<Spanish>Muestra un segundo par de botones +/- buttons que permiten fijar la producción a 100% y 0% respectivamente.</Spanish>
-	</TEXT>
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__MINMAX_COMMERCE_TEXT</Tag> -->
+		<!-- <English>Min/Max Commerce Buttons</English> -->
+		<!-- <French>Min/Max Commerce Buttons</French> -->
+		<!-- <German>Min/Max Investitionsanteile</German> -->
+		<!-- <Italian>Bottoni del Commercio minimo/massimo</Italian> -->
+		<!-- <Spanish>Comercio Mínimo/Máximo</Spanish> -->
+	<!-- </TEXT> -->
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__MINMAX_COMMERCE_HOVER</Tag> -->
+		<!-- <English>When checked, displays a second pair of +/- buttons for each commerce type that set the rate to 100% and 0% respectively.</English> -->
+		<!-- <French>When checked, displays a second pair of +/- buttons for each commerce type that set the rate to 100% and 0% respectively.</French> -->
+		<!-- <German>Zeigt ein zweites Paar "+/-"-Schaltflächen für jede Art Investitionsanteil an, die diese auf 100% beziehungsweise 0% setzen</German> -->
+		<!-- <Italian>Quando è selezionato, mostra una seconda coppia di bottoni +/- per ogni tipo di commercio che impostano il valore rispettivamente al 100% ed allo 0%.</Italian> -->
+		<!-- <Spanish>Muestra un segundo par de botones +/- buttons que permiten fijar la producción a 100% y 0% respectivamente.</Spanish> -->
+	<!-- </TEXT> -->
 	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__CITYARROWS_TEXT</Tag>
 		<English>City Cycle Arrows</English>
@@ -143,54 +143,54 @@
 		<Spanish>Muestra flechas encima de tu bandera que permiten ciclar entre distintas ciudades.</Spanish>
 	</TEXT>
 
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_TEXT</Tag>
-		<English>Field of View</English>
-		<French>Field of View</French>
-		<German>Field of View (FOV)</German>
-		<Italian>Campo visuale</Italian>
-		<Spanish>Campo de Visión</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_HOVER</Tag>
-		<English>When checked, displays a slide bar which can be used to change the field of view.</English>
-		<French>When checked, displays a slide bar which can be used to change the field of view.</French>
-		<German>Zeigt im Hauptbildschirm einen Schieberegler an, mit dem das Sichtfeld (engl. "Field of View") eingestellt werden kann</German>
-		<Italian>Quando è selezionato, visualizza un cursore che può essere utilizzato per regolare il campo visuale.</Italian>
-		<Spanish>Muestra una barra deslizante que permite modificar el campo de visión.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__PROGRESSBARSTICKMARKS_TEXT</Tag>
-		<English>Tick Marks</English>
-		<French>Tick Marks</French>
-		<German>Teilstriche</German>
-		<Italian>Trattini di avanzamento</Italian>
-		<Spanish>Progreso Estimado</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__PROGRESSBARSTICKMARKS_HOVER</Tag>
-		<English>When checked, displays tick marks on selected progress bars that illustrate estimated future turn progress.</English>
-		<French>When checked, displays tick marks on selected progress bars that illustrate estimated future turn progress.</French>
-		<German>Zeigt Teilstriche auf ausgewählten Fortschrittsbalken an, die deren voraussichtlichen Verlauf in zukünftigen Runden darstellen</German>
-		<Italian>Visualizza sulle barre di avanzamento selezionate dei trattini che mostrano il progresso stimato per i turni successivi.</Italian>
-		<Spanish>Muestra líneas en las barras de progreso seleccionadas que muestran el progreso estimado en turnos futuros.</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_REMEMBER_TEXT</Tag>
-		<English>Remember Field of View</English>
-		<French>Remember Field of View</French>
-		<German>FOV-Einstellung merken</German>
-		<Italian>Conseva il Campo visuale</Italian>
-		<Spanish>Recordar Campo de Visión</Spanish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_REMEMBER_HOVER</Tag>
-		<English>When checked, the Field of View value is remembered from game to game.</English>
-		<French>When checked, the Field of View value is remembered from game to game.</French>
-		<German>Merkt sich die letzte gewählte Einstellung für das Sichtfeld (engl. "Field of View") für weitere Partien</German>
-		<Italian>Quando è selezionato, il valore assegnato al Campo visuale viene conservato.</Italian>
-		<Spanish>Si se activa, el valor de Campo de Visión es recordado entre distintas partidas.</Spanish>
-	</TEXT>
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_TEXT</Tag> -->
+		<!-- <English>Field of View</English> -->
+		<!-- <French>Field of View</French> -->
+		<!-- <German>Field of View (FOV)</German> -->
+		<!-- <Italian>Campo visuale</Italian> -->
+		<!-- <Spanish>Campo de Visión</Spanish> -->
+	<!-- </TEXT> -->
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_HOVER</Tag> -->
+		<!-- <English>When checked, displays a slide bar which can be used to change the field of view.</English> -->
+		<!-- <French>When checked, displays a slide bar which can be used to change the field of view.</French> -->
+		<!-- <German>Zeigt im Hauptbildschirm einen Schieberegler an, mit dem das Sichtfeld (engl. "Field of View") eingestellt werden kann</German> -->
+		<!-- <Italian>Quando è selezionato, visualizza un cursore che può essere utilizzato per regolare il campo visuale.</Italian> -->
+		<!-- <Spanish>Muestra una barra deslizante que permite modificar el campo de visión.</Spanish> -->
+	<!-- </TEXT> -->
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__PROGRESSBARSTICKMARKS_TEXT</Tag> -->
+		<!-- <English>Tick Marks</English> -->
+		<!-- <French>Tick Marks</French> -->
+		<!-- <German>Teilstriche</German> -->
+		<!-- <Italian>Trattini di avanzamento</Italian> -->
+		<!-- <Spanish>Progreso Estimado</Spanish> -->
+	<!-- </TEXT> -->
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__PROGRESSBARSTICKMARKS_HOVER</Tag> -->
+		<!-- <English>When checked, displays tick marks on selected progress bars that illustrate estimated future turn progress.</English> -->
+		<!-- <French>When checked, displays tick marks on selected progress bars that illustrate estimated future turn progress.</French> -->
+		<!-- <German>Zeigt Teilstriche auf ausgewählten Fortschrittsbalken an, die deren voraussichtlichen Verlauf in zukünftigen Runden darstellen</German> -->
+		<!-- <Italian>Visualizza sulle barre di avanzamento selezionate dei trattini che mostrano il progresso stimato per i turni successivi.</Italian> -->
+		<!-- <Spanish>Muestra líneas en las barras de progreso seleccionadas que muestran el progreso estimado en turnos futuros.</Spanish> -->
+	<!-- </TEXT> -->
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_REMEMBER_TEXT</Tag> -->
+		<!-- <English>Remember Field of View</English> -->
+		<!-- <French>Remember Field of View</French> -->
+		<!-- <German>FOV-Einstellung merken</German> -->
+		<!-- <Italian>Conseva il Campo visuale</Italian> -->
+		<!-- <Spanish>Recordar Campo de Visión</Spanish> -->
+	<!-- </TEXT> -->
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_REMEMBER_HOVER</Tag> -->
+		<!-- <English>When checked, the Field of View value is remembered from game to game.</English> -->
+		<!-- <French>When checked, the Field of View value is remembered from game to game.</French> -->
+		<!-- <German>Merkt sich die letzte gewählte Einstellung für das Sichtfeld (engl. "Field of View") für weitere Partien</German> -->
+		<!-- <Italian>Quando è selezionato, il valore assegnato al Campo visuale viene conservato.</Italian> -->
+		<!-- <Spanish>Si se activa, el valor de Campo de Visión es recordado entre distintas partidas.</Spanish> -->
+	<!-- </TEXT> -->
 	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_VALUE_TEXT</Tag>
 		<English>Field of View - Value</English>
@@ -199,14 +199,14 @@
 		<Italian>Valore del Campo visuale</Italian>
 		<Spanish>Valor de Campo de Visión</Spanish>
 	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_VALUE_HOVER</Tag>
-		<English>Stores the Field of View value</English>
-		<French>Stores the Field of View value</French>
-		<German>Eingabemöglichkeit für die Einstellung des Sichtfeldes (engl. "Field of View")</German>
-		<Italian>Riporta il valore assegnato al Campo visuale</Italian>
-		<Spanish>Almacena el valor de Campo de Visión.</Spanish>
-	</TEXT>
+	<!-- <TEXT> -->
+		<!-- <Tag>TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_VALUE_HOVER</Tag> -->
+		<!-- <English>Stores the Field of View value</English> -->
+		<!-- <French>Stores the Field of View value</French> -->
+		<!-- <German>Eingabemöglichkeit für die Einstellung des Sichtfeldes (engl. "Field of View")</German> -->
+		<!-- <Italian>Riporta il valore assegnato al Campo visuale</Italian> -->
+		<!-- <Spanish>Almacena el valor de Campo de Visión.</Spanish> -->
+	<!-- </TEXT> -->
 	
 	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_MAININTERFACE__UNITMOVEMENTPOINTSFRACTION_TEXT</Tag>

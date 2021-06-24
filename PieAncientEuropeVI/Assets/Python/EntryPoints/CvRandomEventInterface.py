@@ -11,7 +11,7 @@
 #
 import CvUtil
 from CvPythonExtensions import *
-from EventSigns import placeLandmark # K-Mod
+# from EventSigns import placeLandmark # K-Mod
 from operator import itemgetter # K-Mod (used to avoid OOS when sorting)
 import CvEventInterface
 import PAE_City

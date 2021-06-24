@@ -51,21 +51,21 @@
 					get="isShowGGProgressBar" dirtyBit="GameData"/>
 			
 			<!-- Min/Max Commerce Buttons by codewarrior -->
-			<option id="MinMax_Commerce" key="MinMax Commerce" 
-					type="boolean" default="False" 
-					get="isShowMinMaxCommerceButtons" dirtyBit="PercentButtons, GameData">
-				<change module="CvCustomizableDomesticAdvisor" function="forcePositionCalc"/>
-			</option>
+			<!-- <option id="MinMax_Commerce" key="MinMax Commerce"  -->
+					<!-- type="boolean" default="False"  -->
+					<!-- get="isShowMinMaxCommerceButtons" dirtyBit="PercentButtons, GameData"> -->
+				<!-- <change module="CvCustomizableDomesticAdvisor" function="forcePositionCalc"/> -->
+			<!-- </option> -->
 			
 			<!-- City Cycle Arrows by SimCutie -->
-			<option id="CityArrows" key="City Cycle Arrows" 
-					type="boolean" default="True" 
-					get="isShowCityCycleArrows" dirtyBit="MiscButtons"/>
+			<!-- <option id="CityArrows" key="City Cycle Arrows"  -->
+					<!-- type="boolean" default="True"  -->
+					<!-- get="isShowCityCycleArrows" dirtyBit="MiscButtons"/> -->
 
 			<!-- Progress Bar Tick Marks -->
-			<option id="ProgressBarsTickMarks" key="Tick Marks" 
-					type="boolean" default="True" 
-					get="isShowpBarTickMarks" dirtyBit="GameData"/>
+			<!-- <option id="ProgressBarsTickMarks" key="Tick Marks"  -->
+					<!-- type="boolean" default="True"  -->
+					<!-- get="isShowpBarTickMarks" dirtyBit="GameData"/> -->
 
 			<!-- Field of View -->
 			<option id="FieldOfView" key="Field of View" 

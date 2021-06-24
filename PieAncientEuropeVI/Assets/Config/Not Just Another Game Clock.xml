@@ -19,16 +19,16 @@
 					get="isEnabled" set="setEnabled" dirtyBit="GameData" 
 					label="Enable NJAGC" 
 					help="When checked, the game clock is displayed using TheLopez's NJAGC mod."/>
-			<option id="ShowEra" key="Show Era" 
-					type="boolean" default="False" 
-					get="isShowEra" set="setShowEra" dirtyBit="GameData" 
-					label="Display Era" 
-					help="When checked, the current era is displayed to the left of the research bar."/>
-			<option id="ShowEraColor" key="Show Reflect Era In Turn Color" 
-					type="boolean" default="False" 
-					get="isUseEraColor" set="setUseEraColor" dirtyBit="GameData" 
-					label="Use Era-Related Colors" 
-					help="When checked, the game date and era are displayed using a color for each era."/>
+			<!-- <option id="ShowEra" key="Show Era"  -->
+					<!-- type="boolean" default="True"  -->
+					<!-- get="isShowEra" set="setShowEra" dirtyBit="GameData"  -->
+					<!-- label="Display Era"  -->
+					<!-- help="When checked, the current era is displayed to the left of the research bar."/> -->
+			<!-- <option id="ShowEraColor" key="Show Reflect Era In Turn Color"  -->
+					<!-- type="boolean" default="False"  -->
+					<!-- get="isUseEraColor" set="setUseEraColor" dirtyBit="GameData"  -->
+					<!-- label="Use Era-Related Colors"  -->
+					<!-- help="When checked, the game date and era are displayed using a color for each era."/> -->
 			<list   id="Color_ERA_ANCIENT" key="ERA_ANCIENT" 
 					type="color" default="COLOR_ERA_ANCIENT_GREY" 
 					get="getAncientEraColor" set="setAncientEraColor" dirtyBit="GameData" 
@@ -54,26 +54,26 @@
 					get="getLateAntiquityEraColor" set="setLateAntiquityEraColor" dirtyBit="GameData" 
 					label="Late Antiquity" 
 					help="Color to use for the Late Antiquity."/>
-			<list   id="Color_ERA_RENAISSANCE" key="ERA_RENAISSANCE" 
-					type="color" default="COLOR_CYAN" 
-					get="getRenaissanceEraColor" set="setRenaissanceEraColor" dirtyBit="GameData" 
-					label="Renaissance Era" 
-					help="Color to use for the Renaissance era."/>
-			<list   id="Color_ERA_INDUSTRIAL" key="ERA_INDUSTRIAL" 
-					type="color" default="COLOR_BLUE" 
-					get="getIndustrialEraColor" set="setIndustrialEraColor" dirtyBit="GameData" 
-					label="Industrial Era" 
-					help="Color to use for the Industrial era."/>
-			<list   id="Color_ERA_MODERN" key="ERA_MODERN" 
-					type="color" default="COLOR_MAGENTA" 
-					get="getModernEraColor" set="setModernEraColor" dirtyBit="GameData" 
-					label="Modern Era" 
-					help="Color to use for the Modern era."/>
-			<list   id="Color_ERA_FUTURE" key="ERA_FUTURE" 
-					type="color" default="COLOR_WHITE" 
-					get="getFutureEraColor" set="getFutureEraColor" dirtyBit="GameData" 
-					label="Future Era" 
-					help="Color to use for the Future era."/>
+			<!-- <list   id="Color_ERA_RENAISSANCE" key="ERA_RENAISSANCE"  -->
+					<!-- type="color" default="COLOR_CYAN"  -->
+					<!-- get="getRenaissanceEraColor" set="setRenaissanceEraColor" dirtyBit="GameData"  -->
+					<!-- label="Renaissance Era"  -->
+					<!-- help="Color to use for the Renaissance era."/> -->
+			<!-- <list   id="Color_ERA_INDUSTRIAL" key="ERA_INDUSTRIAL"  -->
+					<!-- type="color" default="COLOR_BLUE"  -->
+					<!-- get="getIndustrialEraColor" set="setIndustrialEraColor" dirtyBit="GameData"  -->
+					<!-- label="Industrial Era"  -->
+					<!-- help="Color to use for the Industrial era."/> -->
+			<!-- <list   id="Color_ERA_MODERN" key="ERA_MODERN"  -->
+					<!-- type="color" default="COLOR_MAGENTA"  -->
+					<!-- get="getModernEraColor" set="setModernEraColor" dirtyBit="GameData"  -->
+					<!-- label="Modern Era"  -->
+					<!-- help="Color to use for the Modern era."/> -->
+			<!-- <list   id="Color_ERA_FUTURE" key="ERA_FUTURE"  -->
+					<!-- type="color" default="COLOR_WHITE"  -->
+					<!-- get="getFutureEraColor" set="getFutureEraColor" dirtyBit="GameData"  -->
+					<!-- label="Future Era"  -->
+					<!-- help="Color to use for the Future era."/> -->
 			<accessor get="getEraColor" set="setEraColor" args="era" id="Color_%s"/>
 			
 			<option id="ShowTime" key="Show Game Clock" 

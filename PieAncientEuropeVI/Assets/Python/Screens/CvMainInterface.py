@@ -443,16 +443,16 @@ class CvMainInterface:
         iBtnY = 27
         self.iX_FoVSlider = self.xResolution - 120
         self.iY_FoVSlider = iBtnY + 30
-        self.sFieldOfView_Text = localText.getText("TXT_KEY_BUG_OPT_MAININTERFACE__FIELDOFVIEW_TEXT", ())
+        self.sFieldOfView_Text = localText.getText("TXT_KEY_MAININTERFACE_FIELDOFVIEW_TEXT", ())
         self.DEFAULT_FIELD_OF_VIEW = max(40, min(80, self.xResolution / 30)) # K-Mod (bigger FoW for bigger monitors. They'll appreciate it. Trust me.)
-        if MainOpt.isRememberFieldOfView():
-            self.iField_View = int(MainOpt.getFieldOfView())
-            # K-Mod
-            if self.iField_View < 0:
-                self.iField_View = self.DEFAULT_FIELD_OF_VIEW
-            # K-Mod end
-        else:
+        # if MainOpt.isRememberFieldOfView():
+        self.iField_View = int(MainOpt.getFieldOfView())
+        # K-Mod
+        if self.iField_View < 0:
             self.iField_View = self.DEFAULT_FIELD_OF_VIEW
+        # K-Mod end
+        # else:
+            # self.iField_View = self.DEFAULT_FIELD_OF_VIEW
 # BUG - field of view slider - end
 
 # BUG - Progress Bar - Tick Marks - start
@@ -1359,12 +1359,12 @@ class CvMainInterface:
 # BUG - NJAGC - start
         global g_bShowTimeTextAlt
         if CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_HIDE_ALL and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_MINIMAP_ONLY  and CyInterface().getShowInterface() != InterfaceVisibility.INTERFACE_ADVANCED_START:
-
+            screen.show("EraText")
             if ClockOpt.isEnabled():
-                if ClockOpt.isShowEra():
-                    screen.show("EraText")
-                else:
-                    screen.hide("EraText")
+                # if ClockOpt.isShowEra():
+                    # screen.show("EraText")
+                # else:
+                    # screen.hide("EraText")
 
                 if ClockOpt.isAlternateTimeText():
                     #global g_iTimeTextCounter (already done above)
@@ -1387,7 +1387,7 @@ class CvMainInterface:
                 screen.setLabel("TimeText", "Background", g_szTimeText, CvUtil.FONT_RIGHT_JUSTIFY, xResolution - 56, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
                 screen.show("TimeText")
             else:
-                screen.hide("EraText")
+                # screen.hide("EraText")
                 self.updateTimeText()
                 screen.setLabel("TimeText", "Background", g_szTimeText, CvUtil.FONT_RIGHT_JUSTIFY, xResolution - 56, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
                 screen.show("TimeText")
@@ -1551,7 +1551,7 @@ class CvMainInterface:
                     if self.showCommercePercent(eCommerce, gc.getGame().getActivePlayer()): # K-Mod
 # BUG - Min/Max Sliders - start
                         bEnable = gc.getActivePlayer().isCommerceFlexible(eCommerce)
-                        if MainOpt.isShowMinMaxCommerceButtons() and not CyInterface().isCityScreenUp():
+                        if not CyInterface().isCityScreenUp(): # MainOpt.isShowMinMaxCommerceButtons() and 
                             iMinMaxAdjustX = 20
                             szString = "MaxPercent" + str(eCommerce)
                             screen.setButtonGFC(szString, u"", "", 70, 50 + (19 * iCount), 20, 20, *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 50, WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, 50, ButtonStyles.BUTTON_STYLE_CITY_PLUS))
@@ -4962,10 +4962,9 @@ class CvMainInterface:
                             szOutText = u"<font=2>" + localText.getText("TXT_KEY_MISC_POS_GOLD_PER_TURN", (gc.getPlayer(ePlayer).getCommerceRate(CommerceTypes(eCommerce)), )) + u"</font>"
                             szString = "RateText" + str(iI)
 # BUG - Min/Max Sliders - start - Alt: 112 Neu: 152
-                            if MainOpt.isShowMinMaxCommerceButtons():
-                                iMinMaxAdjustX = 40
-                            else:
-                                iMinMaxAdjustX = 0
+                            # iMinMaxAdjustX = 0
+                            # if MainOpt.isShowMinMaxCommerceButtons():
+                            iMinMaxAdjustX = 40
                             screen.setLabel(szString, "Background", szOutText, CvUtil.FONT_LEFT_JUSTIFY, 112 + iMinMaxAdjustX, 52 + (iCount * 19), -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 # BUG - Min/Max Sliders - end
                             screen.show(szString)
@@ -5023,15 +5022,21 @@ class CvMainInterface:
                     screen.show("GoldText")
 
 # BUG - NJAGC - start
-                if (ClockOpt.isEnabled()
-                and ClockOpt.isShowEra()):
-                    szText = localText.getText("TXT_KEY_BUG_ERA", (gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getDescription(), ))
-                    if(ClockOpt.isUseEraColor()):
-                        iEraColor = ClockOpt.getEraColor(gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getType())
-                        if (iEraColor >= 0):
-                            szText = localText.changeTextColor(szText, iEraColor)
-                    screen.setLabel( "EraText", "Background", szText, CvUtil.FONT_RIGHT_JUSTIFY, 250, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-                    screen.show( "EraText" )
+                szText = localText.getText("TXT_KEY_BUG_ERA", (gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getDescription(),))
+                iEraColor = ClockOpt.getEraColor(gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getType())
+                if iEraColor >= 0:
+                    szText = localText.changeTextColor(szText, iEraColor)
+                screen.setLabel("EraText", "Background", szText, CvUtil.FONT_RIGHT_JUSTIFY, 250, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+                screen.show("EraText")
+                
+                # if ClockOpt.isEnabled() and ClockOpt.isShowEra():
+                    # szText = localText.getText("TXT_KEY_BUG_ERA", (gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getDescription(),))
+                    # if ClockOpt.isUseEraColor():
+                        # iEraColor = ClockOpt.getEraColor(gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getType())
+                        # if iEraColor >= 0:
+                            # szText = localText.changeTextColor(szText, iEraColor)
+                    # screen.setLabel("EraText", "Background", szText, CvUtil.FONT_RIGHT_JUSTIFY, 250, 6, -0.3, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+                    # screen.show("EraText")
 # BUG - NJAGC - end
 
                 if gc.getPlayer(ePlayer).isAnarchy():
@@ -5094,11 +5099,11 @@ class CvMainInterface:
                     screen.show(szResearchBar)
 
 # BUG - Progress Bar - Tick Marks - start
-                    if MainOpt.isShowpBarTickMarks():
-                        if szResearchBar == "ResearchBar":
-                            self.pBarResearchBar_n.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
-                        else:
-                            self.pBarResearchBar_w.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
+                    # if MainOpt.isShowpBarTickMarks():
+                    if szResearchBar == "ResearchBar":
+                        self.pBarResearchBar_n.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
+                    else:
+                        self.pBarResearchBar_w.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
 # BUG - Progress Bar - Tick Marks - end
 
 
@@ -5274,7 +5279,7 @@ class CvMainInterface:
                     g_szTimeText += u"/%d" %(gc.getGame().getMaxTurns())
 
             if bShowPercentComplete:
-                if (bFirst):
+                if bFirst:
                     bFirst = False
                 else:
                     if not bShowGameTurn:
@@ -5289,10 +5294,10 @@ class CvMainInterface:
                 else:
                     g_szTimeText += u" - "
                 szDateGA = unicode(CyGameTextMgr().getInterfaceTimeStr(ePlayer))
-                if ClockOpt.isUseEraColor():
-                    iEraColor = ClockOpt.getEraColor(gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getType())
-                    if iEraColor >= 0:
-                        szDateGA = localText.changeTextColor(szDateGA, iEraColor)
+                # if ClockOpt.isUseEraColor():
+                iEraColor = ClockOpt.getEraColor(gc.getEraInfo(gc.getPlayer(ePlayer).getCurrentEra()).getType())
+                if iEraColor >= 0:
+                    szDateGA = localText.changeTextColor(szDateGA, iEraColor)
                 g_szTimeText += szDateGA
         else:
             """
@@ -5617,8 +5622,8 @@ class CvMainInterface:
                 screen.show("PopulationBar")
 
 # BUG - Progress Bar - Tick Marks - start
-                if MainOpt.isShowpBarTickMarks():
-                    self.pBarPopulationBar.drawTickMarks(screen, pHeadSelectedCity.getFood(), pHeadSelectedCity.growthThreshold(), iFoodDifference, iFoodDifference, False)
+                # if MainOpt.isShowpBarTickMarks():
+                self.pBarPopulationBar.drawTickMarks(screen, pHeadSelectedCity.getFood(), pHeadSelectedCity.growthThreshold(), iFoodDifference, iFoodDifference, False)
 # BUG - Progress Bar - Tick Marks - end
 
                 if pHeadSelectedCity.getOrderQueueLength() > 0:
@@ -5729,22 +5734,22 @@ class CvMainInterface:
                     screen.show("ProductionBar")
 
 # BUG - Progress Bar - Tick Marks - start
-                    if MainOpt.isShowpBarTickMarks():
-                        if pHeadSelectedCity.isProductionProcess():
-                            iFirst = 0
-                            iRate = 0
-                        elif pHeadSelectedCity.isFoodProduction() and iProductionDiffJustFood > 0:
-                            iFirst = pHeadSelectedCity.getCurrentProductionDifference(False, True)
-                            iRate = pHeadSelectedCity.getCurrentProductionDifference(False, False)
-                        else:
-                            iFirst = pHeadSelectedCity.getCurrentProductionDifference(True, True)
-                            iRate = pHeadSelectedCity.getCurrentProductionDifference(True, False)
-                        self.pBarProductionBar.drawTickMarks(screen, pHeadSelectedCity.getProduction(), pHeadSelectedCity.getProductionNeeded(), iFirst, iRate, False)
+                    # if MainOpt.isShowpBarTickMarks():
+                    if pHeadSelectedCity.isProductionProcess():
+                        iFirst = 0
+                        iRate = 0
+                    elif pHeadSelectedCity.isFoodProduction() and iProductionDiffJustFood > 0:
+                        iFirst = pHeadSelectedCity.getCurrentProductionDifference(False, True)
+                        iRate = pHeadSelectedCity.getCurrentProductionDifference(False, False)
+                    else:
+                        iFirst = pHeadSelectedCity.getCurrentProductionDifference(True, True)
+                        iRate = pHeadSelectedCity.getCurrentProductionDifference(True, False)
+                    self.pBarProductionBar.drawTickMarks(screen, pHeadSelectedCity.getProduction(), pHeadSelectedCity.getProductionNeeded(), iFirst, iRate, False)
 
-                        HURRY_WHIP = gc.getInfoTypeForString("HURRY_POPULATION")
-                        if pHeadSelectedCity.canHurry(HURRY_WHIP, True): # K-Mod, changed from False to True
-                            iRate = pHeadSelectedCity.hurryProduction(HURRY_WHIP) / pHeadSelectedCity.hurryPopulation(HURRY_WHIP)
-                            self.pBarProductionBar_Whip.drawTickMarks(screen, pHeadSelectedCity.getProduction(), pHeadSelectedCity.getProductionNeeded(), iFirst, iRate, True)
+                    HURRY_WHIP = gc.getInfoTypeForString("HURRY_POPULATION")
+                    if pHeadSelectedCity.canHurry(HURRY_WHIP, True): # K-Mod, changed from False to True
+                        iRate = pHeadSelectedCity.hurryProduction(HURRY_WHIP) / pHeadSelectedCity.hurryPopulation(HURRY_WHIP)
+                        self.pBarProductionBar_Whip.drawTickMarks(screen, pHeadSelectedCity.getProduction(), pHeadSelectedCity.getProductionNeeded(), iFirst, iRate, True)
 # BUG - Progress Bar - Tick Marks - end
 
                 iCount = 0
@@ -8912,7 +8917,7 @@ class CvMainInterface:
 
 # BUG - field of view slider - start
     def setFieldofView(self, screen, bDefault):
-        if bDefault or (not MainOpt.isShowFieldOfView() and not MainOpt.isRememberFieldOfView()): # K-Mod
+        if bDefault: # K-Mod ##(not MainOpt.isShowFieldOfView() and not MainOpt.isRememberFieldOfView())
             self._setFieldofView(screen, self.DEFAULT_FIELD_OF_VIEW)
         else:
             self._setFieldofView(screen, self.iField_View)

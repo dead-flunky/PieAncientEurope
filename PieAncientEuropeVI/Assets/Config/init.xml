@@ -149,7 +149,7 @@
 	<load mod="MoreCiv4lerts"/>
 	<load mod="Unit Naming"/>
 	<load mod="FavoriteCivicDetector"/>
-	<load mod="EventSigns"/>
+	<!-- <load mod="EventSigns"/> -->
 	<load mod="Strategy Overlay"/>
 	<load mod="StatusDump"/>
 	
@@ -175,7 +175,7 @@
 	
 	<screen id="BUGFull">
 		<tab module="BugGeneralOptionsTab"/>
-		<tab module="BugMapOptionsTab"/>
+		<!-- <tab module="BugMapOptionsTab"/> -->
 		<tab module="BugCityScreenOptionsTab"/>
 		
 		<tab module="BugAdvisorOptionsTab"/>

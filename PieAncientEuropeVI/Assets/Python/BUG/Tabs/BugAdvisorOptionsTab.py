@@ -47,8 +47,8 @@ class BugAdvisorOptionsTab(BugOptionsTab.BugOptionsTab):
 		self.addLabel(screen, center, "Technology_Advisor", "Technology [F6]:")
 		self.addCheckbox(screen, center, "Advisors__GPTechPrefs")
 		#self.addCheckbox(screen, center, "MiscHover__SpedUpTechs")
-		self.addCheckbox(screen, center, "Advisors__WideTechScreen")
-		self.addCheckbox(screen, center, "Advisors__ShowTechEra")
+		# self.addCheckbox(screen, center, "Advisors__WideTechScreen")
+		# self.addCheckbox(screen, center, "Advisors__ShowTechEra")
 
 		self.addLabel(screen, center, "Religious_Advisor", "Religion [F7]:")
 		self.addCheckbox(screen, center, "Advisors__BugReligiousTab")

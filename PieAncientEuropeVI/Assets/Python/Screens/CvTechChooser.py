@@ -369,11 +369,11 @@ class CvTechChooser:
                 self.aiCurrentState.append(CIV_IS_RESEARCHING)
             elif gc.getPlayer(self.iCivSelected).canEverResearch(i):
                 # Flunky - start - replaced colour scheme by BUG NJAGC era color
-                if BugOpt.isShowTechEra():
-                    iEra = gc.getTechInfo(i).getEra()
-                    self.setTechPanelShadowColor(screen, szTechRecord, iEra)
-                else:
-                    screen.setPanelColor(szTechRecord, 100, 104, 160)
+                # if BugOpt.isShowTechEra():
+                iEra = gc.getTechInfo(i).getEra()
+                self.setTechPanelShadowColor(screen, szTechRecord, iEra)
+                # else:
+                    # screen.setPanelColor(szTechRecord, 100, 104, 160)
                 # Dieses Farbschema ist 2x in dieser Datei enthalten !!!
                 # This file contains two copies of this colour scheme
                 # iEra = gc.getTechInfo(i).getEra()
@@ -1195,11 +1195,11 @@ class CvTechChooser:
                     screen.setPanelColor(szTechRecord, 104, 158, 165)
                 elif gc.getPlayer(self.iCivSelected).canEverResearch(i):
                     # Flunky - start - replaced colour scheme by BUG NJAGC era color
-                    if BugOpt.isShowTechEra():
-                        iEra = gc.getTechInfo(i).getEra()
-                        self.setTechPanelShadowColor(screen, szTechRecord, iEra)
-                    else:
-                        screen.setPanelColor(szTechRecord, 100, 104, 160)
+                    # if BugOpt.isShowTechEra():
+                    iEra = gc.getTechInfo(i).getEra()
+                    self.setTechPanelShadowColor(screen, szTechRecord, iEra)
+                    # else:
+                        # screen.setPanelColor(szTechRecord, 100, 104, 160)
                     # Dieses Farbschema ist 2x in dieser Datei enthalten !!!
                     # This file contains two copies of this colour scheme
                     # 

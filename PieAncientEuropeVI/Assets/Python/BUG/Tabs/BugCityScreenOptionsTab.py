@@ -117,7 +117,7 @@ class BugCityScreenOptionsTab(BugOptionsTab.BugOptionsTab):
 		self.addCheckbox(screen, panel, "CityScreen__FoodAssist")
 		self.addCheckbox(screen, panel, "CityScreen__Anger_Counter")
 		self.addCheckbox(screen, panel, "CityScreen__CultureTurns")
-		self.addCheckbox(screen, panel, "MainInterface__ProgressBarsTickMarks")
+		# self.addCheckbox(screen, panel, "MainInterface__ProgressBarsTickMarks")
 		self.addCheckbox(screen, panel, "CityScreen__OnlyPresentReligions")
 		self.addCheckbox(screen, panel, "CityScreen__OnlyPresentCorporations")
 		self.addTextDropdown(screen, panel, panel, "CityScreen__Specialists", True)
