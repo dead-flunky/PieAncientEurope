@@ -364,7 +364,7 @@ class CvMainInterface:
 # BUG - field of view slider - end
 
         # Ramk - City Widgets
-        self.buildWidges = [
+        self.buildWidgets = [
             WidgetTypes.WIDGET_TRAIN,
             WidgetTypes.WIDGET_CONSTRUCT,
             WidgetTypes.WIDGET_CREATE,
@@ -1551,7 +1551,7 @@ class CvMainInterface:
                     if self.showCommercePercent(eCommerce, gc.getGame().getActivePlayer()): # K-Mod
 # BUG - Min/Max Sliders - start
                         bEnable = gc.getActivePlayer().isCommerceFlexible(eCommerce)
-                        if not CyInterface().isCityScreenUp(): # MainOpt.isShowMinMaxCommerceButtons() and 
+                        if MainOpt.isShowMinMaxCommerceButtons() and not CyInterface().isCityScreenUp():
                             iMinMaxAdjustX = 20
                             szString = "MaxPercent" + str(eCommerce)
                             screen.setButtonGFC(szString, u"", "", 70, 50 + (19 * iCount), 20, 20, *BugDll.widget("WIDGET_SET_PERCENT", eCommerce, 50, WidgetTypes.WIDGET_CHANGE_PERCENT, eCommerce, 50, ButtonStyles.BUTTON_STYLE_CITY_PLUS))
@@ -2748,7 +2748,8 @@ class CvMainInterface:
 
                 if numIcons > 15:
                     self.sortButtons(self.iconsLeft, numIconsLeft)
-                    [numIconsLeft, numIconsRight] = self.optimalPartition(numIconsLeft, numIconsRight, self.iconsLeft, self.iconsRight)
+                    # Flunky: keep the partition at 50/50
+                    # [numIconsLeft, numIconsRight] = self.optimalPartition(numIconsLeft, numIconsRight, self.iconsLeft, self.iconsRight)
                     self.sortButtons(self.iconsRight, numIconsRight)
                     self.insertButtons(self.iconsLeft, self.iconsRight, numIconsLeft+1, numIcons+1)
                     self.cityTabsJumpmarks = [0, 0, self.findCityTabRow(self.iconsRight, 2)]
@@ -4962,9 +4963,9 @@ class CvMainInterface:
                             szOutText = u"<font=2>" + localText.getText("TXT_KEY_MISC_POS_GOLD_PER_TURN", (gc.getPlayer(ePlayer).getCommerceRate(CommerceTypes(eCommerce)), )) + u"</font>"
                             szString = "RateText" + str(iI)
 # BUG - Min/Max Sliders - start - Alt: 112 Neu: 152
-                            # iMinMaxAdjustX = 0
-                            # if MainOpt.isShowMinMaxCommerceButtons():
-                            iMinMaxAdjustX = 40
+                            iMinMaxAdjustX = 0
+                            if MainOpt.isShowMinMaxCommerceButtons():
+                                iMinMaxAdjustX = 40
                             screen.setLabel(szString, "Background", szOutText, CvUtil.FONT_LEFT_JUSTIFY, 112 + iMinMaxAdjustX, 52 + (iCount * 19), -0.1, FontTypes.SMALL_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 # BUG - Min/Max Sliders - end
                             screen.show(szString)
@@ -5099,11 +5100,11 @@ class CvMainInterface:
                     screen.show(szResearchBar)
 
 # BUG - Progress Bar - Tick Marks - start
-                    # if MainOpt.isShowpBarTickMarks():
-                    if szResearchBar == "ResearchBar":
-                        self.pBarResearchBar_n.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
-                    else:
-                        self.pBarResearchBar_w.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
+                    if MainOpt.isShowpBarTickMarks():
+                        if szResearchBar == "ResearchBar":
+                            self.pBarResearchBar_n.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
+                        else:
+                            self.pBarResearchBar_w.drawTickMarks(screen, researchProgress + overflowResearch, researchCost, researchRate, researchRate, False)
 # BUG - Progress Bar - Tick Marks - end
 
 
@@ -5622,8 +5623,8 @@ class CvMainInterface:
                 screen.show("PopulationBar")
 
 # BUG - Progress Bar - Tick Marks - start
-                # if MainOpt.isShowpBarTickMarks():
-                self.pBarPopulationBar.drawTickMarks(screen, pHeadSelectedCity.getFood(), pHeadSelectedCity.growthThreshold(), iFoodDifference, iFoodDifference, False)
+                if MainOpt.isShowpBarTickMarks():
+                    self.pBarPopulationBar.drawTickMarks(screen, pHeadSelectedCity.getFood(), pHeadSelectedCity.growthThreshold(), iFoodDifference, iFoodDifference, False)
 # BUG - Progress Bar - Tick Marks - end
 
                 if pHeadSelectedCity.getOrderQueueLength() > 0:
@@ -5734,17 +5735,17 @@ class CvMainInterface:
                     screen.show("ProductionBar")
 
 # BUG - Progress Bar - Tick Marks - start
-                    # if MainOpt.isShowpBarTickMarks():
-                    if pHeadSelectedCity.isProductionProcess():
-                        iFirst = 0
-                        iRate = 0
-                    elif pHeadSelectedCity.isFoodProduction() and iProductionDiffJustFood > 0:
-                        iFirst = pHeadSelectedCity.getCurrentProductionDifference(False, True)
-                        iRate = pHeadSelectedCity.getCurrentProductionDifference(False, False)
-                    else:
-                        iFirst = pHeadSelectedCity.getCurrentProductionDifference(True, True)
-                        iRate = pHeadSelectedCity.getCurrentProductionDifference(True, False)
-                    self.pBarProductionBar.drawTickMarks(screen, pHeadSelectedCity.getProduction(), pHeadSelectedCity.getProductionNeeded(), iFirst, iRate, False)
+                    if MainOpt.isShowpBarTickMarks():
+                        if pHeadSelectedCity.isProductionProcess():
+                            iFirst = 0
+                            iRate = 0
+                        elif pHeadSelectedCity.isFoodProduction() and iProductionDiffJustFood > 0:
+                            iFirst = pHeadSelectedCity.getCurrentProductionDifference(False, True)
+                            iRate = pHeadSelectedCity.getCurrentProductionDifference(False, False)
+                        else:
+                            iFirst = pHeadSelectedCity.getCurrentProductionDifference(True, True)
+                            iRate = pHeadSelectedCity.getCurrentProductionDifference(True, False)
+                        self.pBarProductionBar.drawTickMarks(screen, pHeadSelectedCity.getProduction(), pHeadSelectedCity.getProductionNeeded(), iFirst, iRate, False)
 
                     HURRY_WHIP = gc.getInfoTypeForString("HURRY_POPULATION")
                     if pHeadSelectedCity.canHurry(HURRY_WHIP, True): # K-Mod, changed from False to True
@@ -6137,10 +6138,10 @@ class CvMainInterface:
 
 # BUG - Limit/Extra Religions - start
                 lReligions = []
-                if CityScreenOpt.isShowOnlyPresentReligions():
-                    lReligions = ReligionUtil.getCityReligions(pHeadSelectedCity)
-                else:
-                    lReligions = range(gc.getNumReligionInfos())
+                # if CityScreenOpt.isShowOnlyPresentReligions():
+                lReligions = ReligionUtil.getCityReligions(pHeadSelectedCity)
+                # else:
+                    # lReligions = range(gc.getNumReligionInfos())
 
                 iMaxWidth, iMaxButtons, iButtonSize, iButtonSpace = self.getButtonSize(len(lReligions))
                 for ii, i in enumerate(lReligions):
@@ -6209,13 +6210,12 @@ class CvMainInterface:
 
 # BUG - Limit/Extra Corporations - start
                 lCorporations = []
-                if CityScreenOpt.isShowOnlyPresentCorporations():
-                    lCorporations = []
-                    for i in range(gc.getNumCorporationInfos()):
-                        if pHeadSelectedCity.isHasCorporation(i):
-                            lCorporations += [i]
-                else:
-                    lCorporations = range(gc.getNumCorporationInfos())
+                # if CityScreenOpt.isShowOnlyPresentCorporations():
+                for i in range(gc.getNumCorporationInfos()):
+                    if pHeadSelectedCity.isHasCorporation(i):
+                        lCorporations += [i]
+                # else:
+                    # lCorporations = range(gc.getNumCorporationInfos())
 
                 iMaxWidth, iMaxButtons, iButtonSize, iButtonSpace = self.getButtonSize(len(lCorporations))
                 for ii, i in enumerate(lCorporations):
@@ -8844,7 +8844,7 @@ class CvMainInterface:
 
 
 # PAE, Ramk - Fix jumping in build menu
-        if inputClass.getButtonType() in self.buildWidges:
+        if inputClass.getButtonType() in self.buildWidgets:
             if inputClass.getFunctionName() == "BottomButtonContainer":
                 screen = CyGInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE)
                 # This just work in fullscreen mode

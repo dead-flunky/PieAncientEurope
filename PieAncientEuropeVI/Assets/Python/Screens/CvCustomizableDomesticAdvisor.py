@@ -714,9 +714,9 @@ class CvCustomizableDomesticAdvisor:
         nBorderTop = [0, 23, 52, 105][AdvisorOpt.getSpaceTop()]
         nBorderBottom = 177
         # If the min/max commerce buttons are shown, we need more space on the left
-        # nBorderLeft = 110
-        # if (MainOpt.isShowMinMaxCommerceButtons()):
-        nBorderLeft = 150
+        nBorderLeft = 110
+        if MainOpt.isShowMinMaxCommerceButtons():
+            nBorderLeft = 150
         nBorderLeft = [0, 20, 40, nBorderLeft, nBorderLeft][AdvisorOpt.getSpaceSides()]
         nBorderRight = [0, 20, 40, nBorderLeft, 20][AdvisorOpt.getSpaceSides()]
 

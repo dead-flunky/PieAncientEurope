@@ -35,14 +35,14 @@
 	<symbol id="wait" name="ORDER_WAIT"/>
 	<symbol id="upgrade"/>
 	<symbol id="cancel"/>
-	<symbol id="ss casing" from="HAPPY" offset="-25"/>
-	<symbol id="ss cockpit"/>
-	<symbol id="ss docking bay"/>
-	<symbol id="ss engine"/>
-	<symbol id="ss life support"/>
-	<symbol id="ss stasis chamber"/>
-	<symbol id="ss thruster"/>
-	<symbol id="citizen" from="POWER" offset="1"/>
+	<!-- <symbol id="ss casing" from="HAPPY" offset="-25"/> -->
+	<!-- <symbol id="ss cockpit"/> -->
+	<!-- <symbol id="ss docking bay"/> -->
+	<!-- <symbol id="ss engine"/> -->
+	<!-- <symbol id="ss life support"/> -->
+	<!-- <symbol id="ss stasis chamber"/> -->
+	<!-- <symbol id="ss thruster"/> -->
+	<symbol id="citizen" from="COMMERCE_GOLD" offset="4"/>
 	<symbol id="greatgeneral" name="GREAT_GENERAL"/>
 	
 	<init module="AttitudeUtil">

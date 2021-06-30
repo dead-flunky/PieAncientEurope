@@ -904,13 +904,29 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 			
 			if (pDefendPlot->isCity(true, getTeam()))
 			{
-				iValue *= 100 + pLoopUnit->cityDefenseModifier();
+				// Flunky PAE negative modifiers
+				if (pLoopUnit->cityDefenseModifier() > 0)
+				{
+					iValue *= 100 + pLoopUnit->cityDefenseModifier();
+					iValue /= 100;
+				}
+				else
+				{
+					iValue *= 100;
+					iValue /= (100 - pLoopUnit->cityDefenseModifier());
+				}
+			}
+			// Flunky PAE negative modifiers
+			if (pLoopUnit->cityAttackModifier() + pLoopUnit->getExtraCityAttackPercent() > 0)
+			{
+				iValue *= 100;
+				iValue /= (100 + pLoopUnit->cityAttackModifier() + pLoopUnit->getExtraCityAttackPercent());
+			}
+			else
+			{
+				iValue *= (100 - (pLoopUnit->cityAttackModifier() + pLoopUnit->getExtraCityAttackPercent()));
 				iValue /= 100;
 			}
-
-			iValue *= 100;
-			iValue /= (100 + pLoopUnit->cityAttackModifier() + pLoopUnit->getExtraCityAttackPercent());
-			
 			iValue /= 2 + pLoopUnit->getLevel();
 			
 			if (iValue > iBestUnitValue)

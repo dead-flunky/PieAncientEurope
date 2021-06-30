@@ -2466,6 +2466,8 @@ void CvGame::cityPushOrder(CvCity* pCity, OrderTypes eOrder, int iData, bool bAl
 	}
 }
 
+// Flunky PAE switch between original and kmod style unit selection
+#define ORIG_SEL
 
 void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) const
 {
@@ -2474,7 +2476,8 @@ void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) c
 	bool bSelectGroup;
 	bool bGroup;
 
-	/* original bts code
+	/* original bts code */
+#ifdef ORIG_SEL
 	if (gDLL->getInterfaceIFace()->getHeadSelectedUnit() == NULL)
 	{
 		bSelectGroup = true;
@@ -2490,7 +2493,8 @@ void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) c
 	else
 	{
 		bSelectGroup = false;
-	} */
+	}
+#else
 	// K-Mod. Redesigned to make selection more sensible and predictable
 	// In 'simple mode', shift always groups and always targets a only a single unit.
 	// f1rpo (bugfix): was MainInterface__SimpleSelectionMode
@@ -2519,6 +2523,7 @@ void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) c
 			: pUnit->IsSelected();
 	}
 	// K-Mod end
+#endif
 
 	gDLL->getInterfaceIFace()->clearSelectedCities();
 
@@ -2529,7 +2534,10 @@ void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) c
 	}
 	else
 	{
-		//bGroup = gDLL->getInterfaceIFace()->mirrorsSelectionGroup();
+		/* original bts code */
+#ifdef ORIG_SEL
+		bGroup = gDLL->getInterfaceIFace()->mirrorsSelectionGroup();
+#else
 
 		// K-Mod. If there is only one unit selected, and it is it to be toggled, just degroup it rather than unselecting it.
 		if (bExplicitDeselect && gDLL->getInterfaceIFace()->getLengthSelectionList() == 1)
@@ -2555,6 +2563,7 @@ void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) c
 				CvMessageControl::getInstance().sendJoinGroup(pUnit->getID(), pSelectionHead->getID());
 		}
 		// K-Mod end
+#endif
 	}
 
 	if (bSelectGroup)
@@ -2577,11 +2586,13 @@ void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) c
 	else
 	{
 		gDLL->getInterfaceIFace()->insertIntoSelectionList(pUnit, false, bToggle, bGroup, bSound);
+#ifndef ORIG_SEL
 		// K-Mod. Unfortunately, removing units from the group is not correctly handled by the interface functions.
 		// so we need to do it explicitly.
 		if (bExplicitDeselect && bGroup)
 			CvMessageControl::getInstance().sendJoinGroup(pUnit->getID(), FFreeList::INVALID_INDEX);
 		// K-Mod end
+#endif
 	}
 
 	gDLL->getInterfaceIFace()->makeSelectionListDirty();

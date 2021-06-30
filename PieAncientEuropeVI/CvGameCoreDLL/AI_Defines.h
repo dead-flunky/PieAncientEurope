@@ -8,7 +8,7 @@
 /* 																			    */
 /* 																			    */
 /********************************************************************************/
-// Could increase this value now that player closness is fixed
+// Could increase this value now that player closeness is fixed
 #define DEFAULT_PLAYER_CLOSENESS 7
 
 #define AI_DAGGER_THRESHOLD			100  //higher is a lower chance

@@ -161,7 +161,7 @@
 		<Tag>TXT_KEY_BUG_OPT_MISCHOVER__BUILDINGACTUALEFFECTS_HOVER</Tag>
 		<English>When checked, the actual yield of [ICON_COMMERCE], [ICON_HAPPY], [ICON_HEALTHY], [ICON_GREATPEOPLE], and [ICON_DEFENSE] the building will produce for the city are displayed in the building hover text.</English>
 		<French>When checked, the actual yield of [ICON_COMMERCE], [ICON_HAPPY], [ICON_HEALTHY], [ICON_GREATPEOPLE], and [ICON_DEFENSE] the building will produce for the city are displayed in the building hover text.</French>
-		<German>Zeigt die tatsächlichen Erträge von [ICON_COMMERCE], [ICON_HAPPY], [ICON_HEALTHY], ICON_GREATPEOPLE] und [ICON_DEFENSE] an, die ein Gebäude für eine Stadt erzeugt, wenn der Mauszeiger über ein Gebäudesymbol bewegt wird</German>
+		<German>Zeigt die tatsächlichen Erträge von [ICON_COMMERCE], [ICON_HAPPY], [ICON_HEALTHY], [ICON_GREATPEOPLE] und [ICON_DEFENSE] an, die ein Gebäude für eine Stadt erzeugt, wenn der Mauszeiger über ein Gebäudesymbol bewegt wird</German>
 		<Italian>Quando è selezionato, nel testo a comparsa degli Edifici della Città viene mostrata la resa effettiva in [ICON_COMMERCE], [ICON_HAPPY], [ICON_HEALTHY], [ICON_GREATPEOPLE] e [ICON_DEFENSE] prodotta dagli edifici stessi.</Italian>
 		<Spanish>Si se activa, se muestran los beneficios reales de [ICON_COMMERCE], [ICON_HAPPY], [ICON_HEALTHY], [ICON_GREATPEOPLE], y [ICON_DEFENSE] que el edificio produce en su texto flotante.</Spanish>
 	</TEXT>

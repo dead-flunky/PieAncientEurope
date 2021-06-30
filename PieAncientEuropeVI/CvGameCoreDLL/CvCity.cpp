@@ -4462,13 +4462,14 @@ int CvCity::unhappyLevel(int iExtra) const
 		iAngerPercent += getConscriptPercentAnger(iExtra);
 		iAngerPercent += getDefyResolutionPercentAnger(iExtra);
 		iAngerPercent += getWarWearinessPercentAnger();
+// Flunky PAE no global warming anger in antiquity
 /*
 ** K-Mod, 5/jan/11, karadoc
 ** global warming anger _percent_; as part per 100.
 ** Unfortunately, people who made the rest of the game used anger percent to mean part per 1000
 ** so I have to multiply my GwPercentAnger by 10 to make it fit in.
 */
-		iAngerPercent += std::max(0, GET_PLAYER(getOwnerINLINE()).getGwPercentAnger()*10);
+//		iAngerPercent += std::max(0, GET_PLAYER(getOwnerINLINE()).getGwPercentAnger()*10);
 // K-Mod end
 
 		for (iI = 0; iI < GC.getNumCivicInfos(); iI++)
@@ -6013,7 +6014,7 @@ int CvCity::calculateNumCitiesMaintenanceTimes100() const
 	iNumVassalCities /= std::max(1, GET_TEAM(getTeam()).getNumMembers());
 /*
 ** K-Mod, 04/sep/10, karadoc
-** Reduced vassal maintenace and removed maintenace cap
+** Reduced vassal maintenance and removed maintenance cap
 */
 	/* original BTS code
 	int iNumCitiesMaintenance = (GET_PLAYER(getOwnerINLINE()).getNumCities() + iNumVassalCities) * iNumCitiesPercent;
@@ -9165,6 +9166,8 @@ void CvCity::updateCommerce(CommerceTypes eIndex)
 	{
 		iNewCommerce = (getBaseCommerceRateTimes100(eIndex) * getTotalCommerceRateModifier(eIndex)) / 100;
 		iNewCommerce += getYieldRate(YIELD_PRODUCTION) * getProductionToCommerceModifier(eIndex);
+		// Flunky PAE hotfix. Do not write negative values. 
+		iNewCommerce = std::max(0, iNewCommerce); 
 	}
 
 	if (iOldCommerce != iNewCommerce)
@@ -14787,7 +14790,8 @@ void CvCity::applyEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredD
 		{
 			for (int iCommerce = 0; iCommerce < NUM_COMMERCE_TYPES; ++iCommerce)
 			{
-				setBuildingCommerceChange((BuildingClassTypes)iBuildingClass, (CommerceTypes)iCommerce, getBuildingCommerceChange((BuildingClassTypes)iBuildingClass, (CommerceTypes)iCommerce) + kEvent.getBuildingCommerceChange(iBuildingClass, iCommerce));
+				// Flunky simplify
+				changeBuildingCommerceChange((BuildingClassTypes)iBuildingClass, (CommerceTypes)iCommerce, kEvent.getBuildingCommerceChange(iBuildingClass, iCommerce));
 			}
 		}
 	}

@@ -50,18 +50,18 @@ class BugGeneralOptionsTab(BugOptionsTab.BugOptionsTab):
         #self.addTextDropdown(screen, panel, panel, "MainInterface__GPBar_Types", True)
         # self.addCheckbox(screen, panel, "MainInterface__Combat_Counter")
 
-    def createLeaderheadPanel(self, screen, panel):
-        self.addLabel(screen, panel, "Leaderheads", "Leaderheads:")
-        self.addCheckbox(screen, panel, "MiscHover__LeaderheadHiddenAttitude")
-        self.addCheckbox(screen, panel, "MiscHover__LeaderheadWorstEnemy")
-        self.addCheckbox(screen, panel, "MiscHover__LeaderheadDefensivePacts")
+    # def createLeaderheadPanel(self, screen, panel):
+        # self.addLabel(screen, panel, "Leaderheads", "Leaderheads:")
+        # self.addCheckbox(screen, panel, "MiscHover__LeaderheadHiddenAttitude")
+        # self.addCheckbox(screen, panel, "MiscHover__LeaderheadWorstEnemy")
+        # self.addCheckbox(screen, panel, "MiscHover__LeaderheadDefensivePacts")
 
-    def createAutoSavePanel(self, screen, panel):
-        self.addLabel(screen, panel, "AutoSave", "AutoSave:")
-        self.addCheckbox(screen, panel, "AutoSave__CreateStartSave")
-        self.addCheckbox(screen, panel, "AutoSave__CreateEndSave")
-        self.addCheckbox(screen, panel, "AutoSave__CreateExitSave")
-        self.addCheckbox(screen, panel, "AutoSave__UsePlayerName")
+    # def createAutoSavePanel(self, screen, panel):
+        # self.addLabel(screen, panel, "AutoSave", "AutoSave:")
+        # self.addCheckbox(screen, panel, "AutoSave__CreateStartSave")
+        # self.addCheckbox(screen, panel, "AutoSave__CreateEndSave")
+        # self.addCheckbox(screen, panel, "AutoSave__CreateExitSave")
+        # self.addCheckbox(screen, panel, "AutoSave__UsePlayerName")
 
     def createActionsPanel(self, screen, panel):
         self.addLabel(screen, panel, "Actions", "Actions:")
@@ -98,9 +98,9 @@ class BugGeneralOptionsTab(BugOptionsTab.BugOptionsTab):
     def createMiscellaneousPanel(self, screen, panel):
         self.addLabel(screen, panel, "Misc", "Misc:")
         self.addCheckbox(screen, panel, "MainInterface__GoldRateWarning")
-        # self.addCheckbox(screen, panel, "MainInterface__MinMax_Commerce")
-        # self.addCheckbox(screen, panel, "MainInterface__ProgressBarsTickMarks")
+        self.addCheckbox(screen, panel, "MainInterface__MinMax_Commerce")
+        self.addCheckbox(screen, panel, "MainInterface__ProgressBarsTickMarks")
         # self.addTextDropdown(screen, panel, panel, "MainInterface__BuildIconSize", True)
         # self.addCheckbox(screen, panel, "MainInterface__CityArrows")
-        self.addCheckbox(screen, panel, "MainInterface__RapidUnitCycling")
-        self.addCheckbox(screen, panel, "MainInterface__SimpleSelection")
+        # self.addCheckbox(screen, panel, "MainInterface__RapidUnitCycling")
+        # self.addCheckbox(screen, panel, "MainInterface__SimpleSelection")
