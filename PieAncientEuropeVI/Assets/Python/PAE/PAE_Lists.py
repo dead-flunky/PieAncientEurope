@@ -111,6 +111,9 @@ LMonoReligions = []
 LForests = []
 LFireUnits = []
 
+# Naturkatas und das andere schreckliche Zeugs ;)
+LNaturkatas = []
+
 def init():
     global LGuerilla
     global LWoodsman
@@ -207,6 +210,7 @@ def init():
     global LMonoReligions
     global LForests
     global LFireUnits
+    global LNaturkatas
 
     if gc.getInfoTypeForString("COLOR_EMPTY") == -1:
         raise Exception("Called init() to early. getInfoTypeForString() returns -1.")
@@ -1317,7 +1321,23 @@ def init():
         gc.getInfoTypeForString("UNIT_FIRE_CATAPULT")
     ]
     
-    
+    LNaturkatas = [
+        gc.getInfoTypeForString("FEATURE_FOREST_BURNT"),
+        gc.getInfoTypeForString("FEATURE_FALLOUT"),
+        gc.getInfoTypeForString("FEATURE_GRASSHOPPER"),
+        gc.getInfoTypeForString("FEATURE_SMOKE"),
+        gc.getInfoTypeForString("FEATURE_SEUCHE"),
+        gc.getInfoTypeForString("FEATURE_COMET"),
+        gc.getInfoTypeForString("FEATURE_METEORS"),
+        gc.getInfoTypeForString("FEATURE_NEBEL"),
+        gc.getInfoTypeForString("FEATURE_SEESTURM"),
+        gc.getInfoTypeForString("FEATURE_STURM"),
+        gc.getInfoTypeForString("FEATURE_TSUNAMI"),
+        gc.getInfoTypeForString("FEATURE_VOLCANO"),
+        gc.getInfoTypeForString("FEATURE_TORNADO"),
+        gc.getInfoTypeForString("FEATURE_SAURER_REGEN"),
+        gc.getInfoTypeForString("FEATURE_ERDBEBEN")
+    ]
     # # Transfer local defined variables into module ones.
     # lnames = [l for l in locals().keys() if l[0] != "_" and l != "gc"]
     # for l in lnames:

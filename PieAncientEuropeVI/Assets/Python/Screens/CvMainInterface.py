@@ -8875,11 +8875,11 @@ class CvMainInterface:
 # BUG - Raw Yields - start
     def handleRawYieldsButtons(self, inputClass):
         iButton = inputClass.getID()
-        if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CURSOR_MOVE_ON):
+        if inputClass.getNotifyCode() == NotifyCode.NOTIFY_CURSOR_MOVE_ON:
             self.PLE.displayHelpHover(RAW_YIELD_HELP[iButton])
-        elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CURSOR_MOVE_OFF):
+        elif inputClass.getNotifyCode() == NotifyCode.NOTIFY_CURSOR_MOVE_OFF:
             self.PLE.hideInfoPane()
-        elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED):
+        elif inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED:
             global g_bYieldView
             global g_iYieldType
             global g_iYieldTiles

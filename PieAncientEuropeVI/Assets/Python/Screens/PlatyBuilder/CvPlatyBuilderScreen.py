@@ -1300,292 +1300,240 @@ class CvWorldBuilderScreen:
     TableStyle = TableStyles.TABLE_STYLE_STANDARD
     #PAE: Added -3 into menue = extra alphabetische Sortierung
 
+    CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "setSelectionTable - %d %d %s" %(iCivilization, self.iSelection, self.iPlayerAddMode), None, 2, None, ColorTypes(10), 0, 0, False, False)
+
+    lItems = []
     if self.iPlayerAddMode == "Units":
-      iY = 25
-      screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), -2, -2, -2 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_PEDIA_NON_COMBAT",()), -1, -1, -1 == self.iSelectClass)
-      for iCombatClass in xrange(gc.getNumUnitCombatInfos()):
-        screen.addPullDownString("WBSelectClass", gc.getUnitCombatInfo(iCombatClass).getDescription(), iCombatClass, iCombatClass, iCombatClass == self.iSelectClass)
+        iY = 25
+        screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+        screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), -2, -2, -2 == self.iSelectClass)
+        screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_PEDIA_NON_COMBAT",()), -1, -1, -1 == self.iSelectClass)
+        for iCombatClass in xrange(gc.getNumUnitCombatInfos()):
+            screen.addPullDownString("WBSelectClass", gc.getUnitCombatInfo(iCombatClass).getDescription(), iCombatClass, iCombatClass, iCombatClass == self.iSelectClass)
 
-      # PAE
-      iY += 30
-      # Era
-      screen.addDropDownBoxGFC("TechEra", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-      screen.addPullDownString("TechEra", CyTranslator().getText("TXT_KEY_WB_CITY_ALL", ()), -1, -1, True)
-      for i in xrange(gc.getNumEraInfos()):
-        screen.addPullDownString("TechEra", gc.getEraInfo(i).getDescription(), i, i, i == self.iSelectClass3)
+        # PAE
+        iY += 30
+        # Era
+        screen.addDropDownBoxGFC("TechEra", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+        screen.addPullDownString("TechEra", CyTranslator().getText("TXT_KEY_WB_CITY_ALL", ()), -1, -1, True)
+        for i in xrange(gc.getNumEraInfos()):
+            screen.addPullDownString("TechEra", gc.getEraInfo(i).getDescription(), i, i, i == self.iSelectClass3)
 
-      lItems = []
-      for i in xrange(gc.getNumUnitInfos()):
-        ItemInfo = gc.getUnitInfo(i)
-        if bHideInactive:
-          iClass = ItemInfo.getUnitClassType()
-          # PAE - List every unit! (UUs of other CIVs)
-          #if gc.getCivilizationInfo(iCivilization).getCivilizationUnits(iClass) != i: continue
-        if self.iSelectClass > -2 and ItemInfo.getUnitCombatType() != self.iSelectClass: continue
-        if self.iSelectClass3 > -1 and ItemInfo.getPrereqAndTech() not in lTech: continue
-        lItems.append([ItemInfo.getDescription(), i])
-      # PAE extra sort
-      if self.bSortItems: lItems.sort()
+        for i in xrange(gc.getNumUnitInfos()):
+            ItemInfo = gc.getUnitInfo(i)
+            if bHideInactive:
+                iClass = ItemInfo.getUnitClassType()
+                # PAE - List every unit! (UUs of other CIVs)
+                #if gc.getCivilizationInfo(iCivilization).getCivilizationUnits(iClass) != i: continue
+            if self.iSelectClass > -2 and ItemInfo.getUnitCombatType() != self.iSelectClass:
+                continue
+            if self.iSelectClass3 > -1 and ItemInfo.getPrereqAndTech() not in lTech:
+                continue
+            lItems.append([ItemInfo.getDescription(), i])
+        # PAE extra sort
+        if self.bSortItems:
+            lItems.sort()
 
-      iY += 30
-      iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
+        iY += 30
+        iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
 
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
+        # PAE
+        screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
 
-      screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
+        screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
+        screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
 
-      bValid = False
-      for item in lItems:
-        iRow = screen.appendTableRow("WBSelectItem")
-        if self.iSelection == item[1]: bValid = True
+        bValid = False
+        for item in lItems:
+            iRow = screen.appendTableRow("WBSelectItem")
+            if self.iSelection == item[1]:
+                bValid = True
 
-        text = item[0]
-        if not gc.getPlayer(self.m_iCurrentPlayer).canTrain(item[1],0,0): text = CyTranslator().getText("[COLOR_WARNING_TEXT]", ()) + item[0] + "</color>"
+            text = item[0]
+            if not gc.getPlayer(self.m_iCurrentPlayer).canTrain(item[1],0,0):
+                text = CyTranslator().getText("[COLOR_WARNING_TEXT]", ()) + item[0] + "</color>"
+            CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "List every unit! - %s %d %d" %(gc.getUnitInfo(item[1]).getDescription(), 8202, item[1]), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-        screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + text + "</font>", gc.getUnitInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 8202, item[1], CvUtil.FONT_LEFT_JUSTIFY)
-      if not bValid:
-        self.iSelection = -1
-        if len(lItems) > 0:
-          self.iSelection = lItems[0][1]
+            screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + text + "</font>", gc.getUnitInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 8202, item[1], CvUtil.FONT_LEFT_JUSTIFY)
+        if not bValid:
+            self.iSelection = -1
+            if lItems:
+                self.iSelection = lItems[0][1]
 
 
     elif self.iPlayerAddMode == "Buildings":
-      iY = 25
-      sWonder = CyTranslator().getText("TXT_KEY_CONCEPT_WONDERS", ())
-      screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), 0, 0, 0 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_CATEGORY_BUILDING",()), 1, 1, 1 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_NATIONAL_WONDER", ()), 2, 2, 2 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_TEAM_WONDER", ()), 3, 3, 3 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_WORLD_WONDER", ()), 4, 4, 4 == self.iSelectClass)
+        iY = 25
+        sWonder = CyTranslator().getText("TXT_KEY_CONCEPT_WONDERS", ())
+        screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+        screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), 0, 0, 0 == self.iSelectClass)
+        screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_CATEGORY_BUILDING",()), 1, 1, 1 == self.iSelectClass)
+        screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_NATIONAL_WONDER", ()), 2, 2, 2 == self.iSelectClass)
+        screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_TEAM_WONDER", ()), 3, 3, 3 == self.iSelectClass)
+        screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_WORLD_WONDER", ()), 4, 4, 4 == self.iSelectClass)
 
-      lItems = []
-      for i in xrange(gc.getNumBuildingInfos()):
-        ItemInfo = gc.getBuildingInfo(i)
-        iClass = ItemInfo.getBuildingClassType()
-        if bHideInactive:
-          # show only CIV building:
-          if gc.getCivilizationInfo(iCivilization).getCivilizationBuildings(iClass) != i: continue
-        if self.iSelectClass == 1:
-          if isLimitedWonderClass(iClass): continue
-        elif self.iSelectClass == 2:
-          if not isNationalWonderClass(iClass): continue
-        elif self.iSelectClass == 3:
-          if not isTeamWonderClass(iClass): continue
-        elif self.iSelectClass == 4:
-          if not isWorldWonderClass(iClass): continue
-        lItems.append([ItemInfo.getDescription(), i])
-      # PAE extra sort
-      if self.bSortItems: lItems.sort()
+        for i in xrange(gc.getNumBuildingInfos()):
+            ItemInfo = gc.getBuildingInfo(i)
+            iClass = ItemInfo.getBuildingClassType()
+            # show only CIV building:
+            if bHideInactive and gc.getCivilizationInfo(iCivilization).getCivilizationBuildings(iClass) != i:
+                continue
+            if self.iSelectClass == 1 and isLimitedWonderClass(iClass):
+                continue
+            elif self.iSelectClass == 2 and not isNationalWonderClass(iClass):
+                continue
+            elif self.iSelectClass == 3 and not isTeamWonderClass(iClass):
+                continue
+            elif self.iSelectClass == 4 and not isWorldWonderClass(iClass):
+                continue
+            lItems.append([ItemInfo.getDescription(), i])
+        # PAE extra sort
+        if self.bSortItems:
+            lItems.sort()
 
-      iY += 30
-      iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
+        iY += 30
+        iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
 
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
+        # PAE
+        screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
 
-      screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-      bValid = False
-      for item in lItems:
-        iRow = screen.appendTableRow("WBSelectItem")
-        if self.iSelection == item[1]: bValid = True
-        screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getBuildingInfo(item[1]).getButton(), WidgetTypes.WIDGET_HELP_BUILDING, item[1], item[1], CvUtil.FONT_LEFT_JUSTIFY)
-      if not bValid:
-        self.iSelection = -1
-        if len(lItems) > 0:
-          self.iSelection = lItems[0][1]
-
-    elif self.iPlayerAddMode == "Features":
-
-      # Naturkatas und das andere schreckliche Zeugs ;)
-      lNaturkatas = []
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_FALLOUT"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_GRASSHOPPER"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_SMOKE"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_SEUCHE"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_COMET"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_METEORS"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_NEBEL"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_SEESTURM"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_STURM"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_TSUNAMI"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_VOLCANO"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_TORNADO"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_SAURER_REGEN"))
-      lNaturkatas.append(gc.getInfoTypeForString("FEATURE_ERDBEBEN"))
-
-      iY = 55
-      # WBSelectClass2: Sorte: 0,1,2
-      screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_CATEGORY_FEATURE",()), -2, -2, -2 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_WB_WIND",()), -3, -3, -3 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_CONCEPT_NATURAL_DISASTERS", ()), -4, -4, -4 == self.iSelectClass)
-      lItems = []
-      for i in xrange(gc.getNumFeatureInfos()):
-        ItemInfo = gc.getFeatureInfo(i)
-        if self.iSelectClass == -3:
-          if "WIND" not in ItemInfo.getType(): continue
-        elif self.iSelectClass == -4:
-          if i not in lNaturkatas: continue
-        else:
-          if "WIND" in ItemInfo.getType() or i in lNaturkatas: continue
-        lItems.append([ItemInfo.getDescription(), i])
-      # PAE extra sort
-      if self.bSortItems: lItems.sort()
-
-      iY += 30
-      iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
-
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
-
-      screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-      for item in lItems:
-        iRow = screen.appendTableRow("WBSelectItem")
-        # PAE: Init Wald
-        if self.iSelection == -1:
-          self.iSelection = 5 # = Wald , Orig: item[1]
-        screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getFeatureInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 7874, item[1], CvUtil.FONT_LEFT_JUSTIFY)
-
-    elif self.iPlayerAddMode == "Improvements":
-      iY = 25
-      screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), 0, 0, 0 == self.iSelectClass)
-      lItems = []
-      for i in xrange(gc.getNumImprovementInfos()):
-        ItemInfo = gc.getImprovementInfo(i)
-        if ItemInfo.isGraphicalOnly(): continue
-        lItems.append([ItemInfo.getDescription(), i])
-      # PAE extra sort
-      if self.bSortItems: lItems.sort()
-
-      iY += 30
-      iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
-
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
-
-      screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-      for item in lItems:
-        iRow = screen.appendTableRow("WBSelectItem")
-        if self.iSelection == -1:
-          self.iSelection = item[1]
-        screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getImprovementInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 7877, item[1], CvUtil.FONT_LEFT_JUSTIFY)
-
-    elif self.iPlayerAddMode == "Bonus":
-      iY = 25
-      screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), -1, -1, -1 == self.iSelectClass)
-      screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_GLOBELAYER_RESOURCES_GENERAL",()), 0, 0, 0 == self.iSelectClass)
-      iBonusClass = 1
-      while not gc.getBonusClassInfo(iBonusClass) is None:
-        sText = gc.getBonusClassInfo(iBonusClass).getType()
-        sText = sText[sText.find("_") +1:]
-        sText = sText.lower()
-        sText = sText.capitalize()
-        screen.addPullDownString("WBSelectClass", sText, iBonusClass, iBonusClass, iBonusClass == self.iSelectClass)
-        iBonusClass += 1
-
-      lItems = []
-      for i in xrange(gc.getNumBonusInfos()):
-        ItemInfo = gc.getBonusInfo(i)
-        if ItemInfo.getBonusClassType() != self.iSelectClass and self.iSelectClass > -1: continue
-        lItems.append([ItemInfo.getDescription(), i])
-      # PAE extra sort
-      if self.bSortItems: lItems.sort()
-
-      iY += 30
-      iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
-
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
-
-      screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-      for item in lItems:
-        iRow = screen.appendTableRow("WBSelectItem")
-        if self.iSelection == -1:
-          self.iSelection = item[1]
-        screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getBonusInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 7878, item[1], CvUtil.FONT_LEFT_JUSTIFY)
-
-    elif self.iPlayerAddMode == "Routes":
-      iY = 25
-      lItems = []
-      for i in xrange(gc.getNumRouteInfos()):
-        ItemInfo = gc.getRouteInfo(i)
-        lItems.append([ItemInfo.getDescription(), i])
-      # PAE sort
-      if self.bSortItems: lItems.sort()
-
-      iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
-
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
-
-      screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-      for item in lItems:
-        iRow = screen.appendTableRow("WBSelectItem")
-        if self.iSelection == -1:
-          self.iSelection = item[1] # Standard: road
-        screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getRouteInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 6788, item[1], CvUtil.FONT_LEFT_JUSTIFY)
-
-    elif self.iPlayerAddMode == "Terrain":
-      iY = 25
-      lItems = []
-      for i in xrange(gc.getNumTerrainInfos()):
-        ItemInfo = gc.getTerrainInfo(i)
-        if ItemInfo.isGraphicalOnly(): continue
-        lItems.append([ItemInfo.getDescription(), i])
-      # PAE sort
-      if self.bSortItems: lItems.sort()
-
-      iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
-
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
-
-      screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-      for item in lItems:
-        iRow = screen.appendTableRow("WBSelectItem")
-        if self.iSelection == -1:
-          self.iSelection = item[1]
-        screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getTerrainInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item[1], CvUtil.FONT_LEFT_JUSTIFY)
+        screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
+        screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
+        bValid = False
+        for item in lItems:
+            iRow = screen.appendTableRow("WBSelectItem")
+            if self.iSelection == item[1]:
+                bValid = True
+            screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getBuildingInfo(item[1]).getButton(), WidgetTypes.WIDGET_HELP_BUILDING, item[1], item[1], CvUtil.FONT_LEFT_JUSTIFY)
+        if not bValid:
+            self.iSelection = -1
+            if lItems:
+                self.iSelection = lItems[0][1]
 
     elif self.iPlayerAddMode == "PlotType":
-      iY = 25
-      iHeight = 4 * 24 + 2
+        iY = 25
+        iHeight = 4 * 24 + 2
 
-      # PAE
-      screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
+        # PAE
+        screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
 
-      screen.addTableControlGFC("WBSelectItem", 1, 0, 25, iWidth, iHeight, False, False, 24, 24, TableStyle)
-      screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-      for i in xrange(PlotTypes.NUM_PLOT_TYPES):
-        screen.appendTableRow("WBSelectItem")
-      item = gc.getInfoTypeForString("TERRAIN_PEAK")
-      if self.iSelection == -1:
-        self.iSelection = item
-      screen.setTableText("WBSelectItem", 0, 0, "<font=3>" + gc.getTerrainInfo(item).getDescription() + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
-      item = gc.getInfoTypeForString("TERRAIN_HILL")
-      screen.setTableText("WBSelectItem", 0, 1, "<font=3>" + gc.getTerrainInfo(item).getDescription() + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
-      item = gc.getInfoTypeForString("TERRAIN_GRASS")
-      screen.setTableText("WBSelectItem", 0, 2, "<font=3>" + CyTranslator().getText("TXT_KEY_WB_FLACHLAND",()) + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
-      item = gc.getInfoTypeForString("TERRAIN_OCEAN")
-      screen.setTableText("WBSelectItem", 0, 3, "<font=3>" + gc.getTerrainInfo(item).getDescription() + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
+        screen.addTableControlGFC("WBSelectItem", 1, 0, 25, iWidth, iHeight, False, False, 24, 24, TableStyle)
+        screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
+        for i in xrange(PlotTypes.NUM_PLOT_TYPES):
+            screen.appendTableRow("WBSelectItem")
+        item = gc.getInfoTypeForString("TERRAIN_PEAK")
+        if self.iSelection == -1:
+            self.iSelection = item
+        screen.setTableText("WBSelectItem", 0, 0, "<font=3>" + gc.getTerrainInfo(item).getDescription() + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
+        item = gc.getInfoTypeForString("TERRAIN_HILL")
+        screen.setTableText("WBSelectItem", 0, 1, "<font=3>" + gc.getTerrainInfo(item).getDescription() + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
+        item = gc.getInfoTypeForString("TERRAIN_GRASS")
+        screen.setTableText("WBSelectItem", 0, 2, "<font=3>" + CyTranslator().getText("TXT_KEY_WB_FLACHLAND",()) + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
+        item = gc.getInfoTypeForString("TERRAIN_OCEAN")
+        screen.setTableText("WBSelectItem", 0, 3, "<font=3>" + gc.getTerrainInfo(item).getDescription() + "</font>", gc.getTerrainInfo(item).getButton(), WidgetTypes.WIDGET_PYTHON, 7875, item, CvUtil.FONT_LEFT_JUSTIFY)
+
+    else:
+        if self.iPlayerAddMode == "Features":
+            import PAE_Lists as L
+
+            iY = 55
+            # WBSelectClass2: Sorte: 0,1,2
+            screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+            screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_CATEGORY_FEATURE",()), -2, -2, -2 == self.iSelectClass)
+            screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_WB_WIND",()), -3, -3, -3 == self.iSelectClass)
+            screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_CONCEPT_NATURAL_DISASTERS", ()), -4, -4, -4 == self.iSelectClass)
+
+            for i in xrange(gc.getNumFeatureInfos()):
+                ItemInfo = gc.getFeatureInfo(i)
+                if self.iSelectClass == -3:
+                    if "WIND" not in ItemInfo.getType():
+                        continue
+                elif self.iSelectClass == -4:
+                    if i not in L.LNaturkatas:
+                        continue
+                elif "WIND" in ItemInfo.getType() or i in L.LNaturkatas:
+                    continue
+                lItems.append([ItemInfo.getDescription(), i])
+
+            # PAE: Init Wald
+            if self.iSelection == -1:
+                self.iSelection = 5 # = Wald , Orig: item[1]
+            widgetNum = 7874
+            iY += 30
+        elif self.iPlayerAddMode == "Improvements":
+            iY = 25
+            screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+            screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), 0, 0, 0 == self.iSelectClass)
+            lItems = []
+            for i in xrange(gc.getNumImprovementInfos()):
+                ItemInfo = gc.getImprovementInfo(i)
+                if ItemInfo.isGraphicalOnly():
+                    continue
+                lItems.append([ItemInfo.getDescription(), i])
+            widgetNum = 7877
+            iY += 30
+        elif self.iPlayerAddMode == "Bonus":
+            iY = 25
+            screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+            screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), -1, -1, -1 == self.iSelectClass)
+            screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_GLOBELAYER_RESOURCES_GENERAL",()), 0, 0, 0 == self.iSelectClass)
+            iBonusClass = 1
+            while gc.getBonusClassInfo(iBonusClass):
+                sText = gc.getBonusClassInfo(iBonusClass).getType()
+                sText = sText[sText.find("_") +1:]
+                sText = sText.lower()
+                sText = sText.capitalize()
+                screen.addPullDownString("WBSelectClass", sText, iBonusClass, iBonusClass, iBonusClass == self.iSelectClass)
+                iBonusClass += 1
+
+            lItems = []
+            for i in xrange(gc.getNumBonusInfos()):
+                ItemInfo = gc.getBonusInfo(i)
+                if ItemInfo.getBonusClassType() != self.iSelectClass and self.iSelectClass > -1:
+                    continue
+                lItems.append([ItemInfo.getDescription(), i])
+            widgetNum = 7878
+            iY += 30
+
+        elif self.iPlayerAddMode == "Routes":
+            iY = 25
+            lItems = []
+            for i in xrange(gc.getNumRouteInfos()):
+                ItemInfo = gc.getRouteInfo(i)
+                lItems.append([ItemInfo.getDescription(), i])
+            widgetNum = 6788
+
+        elif self.iPlayerAddMode == "Terrain":
+            iY = 25
+            lItems = []
+            for i in xrange(gc.getNumTerrainInfos()):
+                ItemInfo = gc.getTerrainInfo(i)
+                if ItemInfo.isGraphicalOnly():
+                    continue
+                lItems.append([ItemInfo.getDescription(), i])
+            widgetNum = 7875
+
+        # PAE sort
+        if self.bSortItems:
+            lItems.sort()
+
+        iHeight = min(len(lItems) * 24 + 2, screen.getYResolution() - iY)
+
+        # PAE
+        screen.addPanel ("WBSelectItemBG", "", "", True, False, 0, iY, iWidth, iHeight, PanelStyles.PANEL_STYLE_BLUE50)
+
+        screen.addTableControlGFC("WBSelectItem", 1, 0, iY, iWidth, iHeight, False, False, 24, 24, TableStyle)
+        screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
+        for item in lItems:
+            iRow = screen.appendTableRow("WBSelectItem")
+            if self.iSelection == -1:
+                self.iSelection = item[1]
+            screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + item[0] + "</font>", gc.getTerrainInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, widgetNum, item[1], CvUtil.FONT_LEFT_JUSTIFY)
+
     self.refreshSelection()
 
   def refreshSelection(self):
-    if self.iSelection == -1: return
+    if self.iSelection == -1:
+        return
     screen = CyGInterfaceScreen( "WorldBuilderScreen", CvScreenEnums.WORLDBUILDER_SCREEN)
     iWidth = 200
     screen.addTableControlGFC("WBCurrentItem", 1, 0, 0, iWidth, 25, False, True, 24, 24, TableStyles.TABLE_STYLE_EMPTY)
@@ -1593,82 +1541,89 @@ class CvWorldBuilderScreen:
     screen.appendTableRow("WBCurrentItem")
 
     if self.iPlayerAddMode == "Units":
-      ItemInfo = gc.getUnitInfo(self.iSelection)
-      sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
-      if ItemInfo: screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 8202, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
+        ItemInfo = gc.getUnitInfo(self.iSelection)
+        sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
+        if ItemInfo:
+            screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 8202, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
     elif self.iPlayerAddMode == "Buildings":
-      ItemInfo = gc.getBuildingInfo(self.iSelection)
-      sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
-      screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_HELP_BUILDING, self.iSelection, 1, CvUtil.FONT_LEFT_JUSTIFY)
+        ItemInfo = gc.getBuildingInfo(self.iSelection)
+        sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
+        screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_HELP_BUILDING, self.iSelection, 1, CvUtil.FONT_LEFT_JUSTIFY)
     elif self.iPlayerAddMode == "Features":
-      ItemInfo = gc.getFeatureInfo(self.iSelection)
+        ItemInfo = gc.getFeatureInfo(self.iSelection)
 
-      # PAE Show Variety Buttons
-      if ItemInfo.getNumVarieties() > 1 and self.iSelection == gc.getInfoTypeForString("FEATURE_FOREST"):
-        if self.iSelectClass2 == 1: sButton = "Art/Interface/Buttons/TerrainFeatures/ForestEvergreen.dds"
-        elif self.iSelectClass2 == 2: sButton = "Art/Interface/Buttons/TerrainFeatures/ForestSnowyEvergreen.dds"
-        else: sButton = "Art/Interface/Buttons/TerrainFeatures/Forest.dds"
-      else: sButton = ItemInfo.getButton()
+        # PAE Show Variety Buttons
+        if ItemInfo.getNumVarieties() > 1 and self.iSelection == gc.getInfoTypeForString("FEATURE_FOREST"):
+            if self.iSelectClass2 == 1:
+                sButton = "Art/Interface/Buttons/TerrainFeatures/ForestEvergreen.dds"
+            elif self.iSelectClass2 == 2:
+                sButton = "Art/Interface/Buttons/TerrainFeatures/ForestSnowyEvergreen.dds"
+            else:
+                sButton = "Art/Interface/Buttons/TerrainFeatures/Forest.dds"
+        else:
+            sButton = ItemInfo.getButton()
 
-      sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
-      screen.setTableText("WBCurrentItem", 0, 0 , sText, sButton, WidgetTypes.WIDGET_PYTHON, 7874, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
-      if ItemInfo.getNumVarieties() > 1:
-        screen.addDropDownBoxGFC("WBSelectClass2", 0, 25, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-        for i in xrange(ItemInfo.getNumVarieties()):
-          screen.addPullDownString("WBSelectClass2", CyTranslator().getText("TXT_KEY_WB_FEATURE_VARIETY", (i,)), i, i, i == self.iSelectClass2)
-      else:
-        self.iSelectClass2 = 0
-        screen.hide("WBSelectClass2")
+        sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
+        screen.setTableText("WBCurrentItem", 0, 0 , sText, sButton, WidgetTypes.WIDGET_PYTHON, 7874, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
+        if ItemInfo.getNumVarieties() > 1:
+            screen.addDropDownBoxGFC("WBSelectClass2", 0, 25, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
+            for i in xrange(ItemInfo.getNumVarieties()):
+                screen.addPullDownString("WBSelectClass2", CyTranslator().getText("TXT_KEY_WB_FEATURE_VARIETY", (i,)), i, i, i == self.iSelectClass2)
+        else:
+            self.iSelectClass2 = 0
+            screen.hide("WBSelectClass2")
     elif self.iPlayerAddMode == "Improvements":
-      ItemInfo = gc.getImprovementInfo(self.iSelection)
-      sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
-      screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 7877, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
+        ItemInfo = gc.getImprovementInfo(self.iSelection)
+        sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
+        screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 7877, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
     elif self.iPlayerAddMode == "Bonus":
-      ItemInfo = gc.getBonusInfo(self.iSelection)
-      sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
-      screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 7878, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
+        ItemInfo = gc.getBonusInfo(self.iSelection)
+        sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
+        screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 7878, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
     elif self.iPlayerAddMode == "Routes":
-      ItemInfo = gc.getRouteInfo(self.iSelection)
-      sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
-      screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 6788, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
+        ItemInfo = gc.getRouteInfo(self.iSelection)
+        sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
+        screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 6788, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
     elif self.iPlayerAddMode == "Terrain" or self.iPlayerAddMode == "PlotType":
-      ItemInfo = gc.getTerrainInfo(self.iSelection)
-      sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
-      screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 7875, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
+        ItemInfo = gc.getTerrainInfo(self.iSelection)
+        sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
+        screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 7875, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
     else:
-      screen.hide("WBCurrentItem")
+        screen.hide("WBCurrentItem")
 
 ## Platy Reveal Mode Start ##
   def revealAll(self, bReveal):
     for i in xrange(CyMap().numPlots()):
-      pPlot = CyMap().plotByIndex(i)
-      if pPlot.isNone(): continue
-      self.RevealCurrentPlot(bReveal, pPlot)
+        pPlot = CyMap().plotByIndex(i)
+        if pPlot.isNone():
+            continue
+        self.RevealCurrentPlot(bReveal, pPlot)
     self.refreshReveal()
     return
 
   def RevealCurrentPlot(self, bReveal, pPlot):
     iType = gc.getInfoTypeForString(self.iPlayerAddMode)
     if iType == -1:
-      if bReveal or (not pPlot.isVisible(self.m_iCurrentTeam, False)):
-        pPlot.setRevealed(self.m_iCurrentTeam, bReveal, False, -1);
+        if bReveal or not pPlot.isVisible(self.m_iCurrentTeam, False):
+            pPlot.setRevealed(self.m_iCurrentTeam, bReveal, False, -1);
     elif bReveal:
-      if pPlot.isInvisibleVisible(self.m_iCurrentTeam, iType): return
-      pPlot.changeInvisibleVisibilityCount(self.m_iCurrentTeam, iType, 1)
+        if pPlot.isInvisibleVisible(self.m_iCurrentTeam, iType):
+            return
+        pPlot.changeInvisibleVisibilityCount(self.m_iCurrentTeam, iType, 1)
     else:
-      pPlot.changeInvisibleVisibilityCount(self.m_iCurrentTeam, iType, - pPlot.getInvisibleVisibilityCount(self.m_iCurrentTeam, iType))
+        pPlot.changeInvisibleVisibilityCount(self.m_iCurrentTeam, iType, - pPlot.getInvisibleVisibilityCount(self.m_iCurrentTeam, iType))
     return
 
   def showRevealed(self, pPlot):
     if self.iPlayerAddMode == "RevealPlot":
-      if not pPlot.isRevealed(self.m_iCurrentTeam, False):
-        CyEngine().fillAreaBorderPlotAlt(pPlot.getX(), pPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS, "COLOR_BLACK", 1.0)
+        if not pPlot.isRevealed(self.m_iCurrentTeam, False):
+            CyEngine().fillAreaBorderPlotAlt(pPlot.getX(), pPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS, "COLOR_BLACK", 1.0)
     elif self.iPlayerAddMode == "INVISIBLE_SUBMARINE":
-      if pPlot.getInvisibleVisibilityCount(self.m_iCurrentTeam, gc.getInfoTypeForString(self.iPlayerAddMode)) == 0:
-        CyEngine().fillAreaBorderPlotAlt(pPlot.getX(), pPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS, "COLOR_RED", 1.0)
+        if pPlot.getInvisibleVisibilityCount(self.m_iCurrentTeam, gc.getInfoTypeForString(self.iPlayerAddMode)) == 0:
+            CyEngine().fillAreaBorderPlotAlt(pPlot.getX(), pPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS, "COLOR_RED", 1.0)
     elif self.iPlayerAddMode == "INVISIBLE_STEALTH":
-      if pPlot.getInvisibleVisibilityCount(self.m_iCurrentTeam, gc.getInfoTypeForString(self.iPlayerAddMode)) == 0:
-        CyEngine().fillAreaBorderPlotAlt(pPlot.getX(), pPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS, "COLOR_BLUE", 1.0)
+        if pPlot.getInvisibleVisibilityCount(self.m_iCurrentTeam, gc.getInfoTypeForString(self.iPlayerAddMode)) == 0:
+            CyEngine().fillAreaBorderPlotAlt(pPlot.getX(), pPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS, "COLOR_BLUE", 1.0)
     return
 ## Platy Reveal Mode End ##
 
@@ -1678,62 +1633,62 @@ class CvWorldBuilderScreen:
 
   def refreshAdvancedStartTabCtrl(self, bReuse):
     if CyInterface().isInAdvancedStart():
-      iActiveTab = 0
-      iActiveList = 0
-      iActiveIndex = 0
+        iActiveTab = 0
+        iActiveList = 0
+        iActiveIndex = 0
 
-      if self.m_advancedStartTabCtrl and bReuse:
-        iActiveTab = self.m_advancedStartTabCtrl.getActiveTab()
-        iActiveList = self.m_iAdvancedStartCurrentList[iActiveTab]
-        iActiveIndex = self.m_iAdvancedStartCurrentIndexes[iActiveTab]
+        if self.m_advancedStartTabCtrl and bReuse:
+            iActiveTab = self.m_advancedStartTabCtrl.getActiveTab()
+            iActiveList = self.m_iAdvancedStartCurrentList[iActiveTab]
+            iActiveIndex = self.m_iAdvancedStartCurrentIndexes[iActiveTab]
 
-      self.m_iCurrentPlayer = CyGame().getActivePlayer()
-      self.m_iCurrentTeam = CyGame().getActiveTeam()
-      self.m_iAdvancedStartCurrentIndexes = []
-      self.m_iAdvancedStartCurrentList = []
+        self.m_iCurrentPlayer = CyGame().getActivePlayer()
+        self.m_iCurrentTeam = CyGame().getActiveTeam()
+        self.m_iAdvancedStartCurrentIndexes = []
+        self.m_iAdvancedStartCurrentList = []
 
-      initWBToolAdvancedStartControl()
+        initWBToolAdvancedStartControl()
 
-      self.m_advancedStartTabCtrl = getWBToolAdvancedStartTabCtrl()
+        self.m_advancedStartTabCtrl = getWBToolAdvancedStartTabCtrl()
 
-      self.m_advancedStartTabCtrl.setNumColumns((gc.getNumBuildingInfos()/10)+2);
-      self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_CITIES",()));
-      self.m_iAdvancedStartCurrentIndexes.append(0)
+        self.m_advancedStartTabCtrl.setNumColumns((gc.getNumBuildingInfos()/10)+2);
+        self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_CITIES",()));
+        self.m_iAdvancedStartCurrentIndexes.append(0)
 
-      self.m_iAdvancedStartCurrentList.append(self.m_iASCityListID)
+        self.m_iAdvancedStartCurrentList.append(self.m_iASCityListID)
 
-      self.m_advancedStartTabCtrl.setNumColumns((gc.getNumUnitInfos()/10)+2);
-      self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_UNITS",()));
-      self.m_iAdvancedStartCurrentIndexes.append(0)
+        self.m_advancedStartTabCtrl.setNumColumns((gc.getNumUnitInfos()/10)+2);
+        self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_UNITS",()));
+        self.m_iAdvancedStartCurrentIndexes.append(0)
 
-      self.m_iAdvancedStartCurrentList.append(0)
+        self.m_iAdvancedStartCurrentList.append(0)
 
-      self.m_advancedStartTabCtrl.setNumColumns((gc.getNumImprovementInfos()/10)+2);
-      self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_IMPROVEMENTS",()));
-      self.m_iAdvancedStartCurrentIndexes.append(0)
+        self.m_advancedStartTabCtrl.setNumColumns((gc.getNumImprovementInfos()/10)+2);
+        self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_IMPROVEMENTS",()));
+        self.m_iAdvancedStartCurrentIndexes.append(0)
 
-      self.m_iAdvancedStartCurrentList.append(self.m_iASRoutesListID)
+        self.m_iAdvancedStartCurrentList.append(self.m_iASRoutesListID)
 
-      self.m_advancedStartTabCtrl.setNumColumns(1);
-      self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_VISIBILITY",()));
-      self.m_iAdvancedStartCurrentIndexes.append(0)
+        self.m_advancedStartTabCtrl.setNumColumns(1);
+        self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_VISIBILITY",()));
+        self.m_iAdvancedStartCurrentIndexes.append(0)
 
-      self.m_iAdvancedStartCurrentList.append(0)
+        self.m_iAdvancedStartCurrentList.append(0)
 
-      self.m_advancedStartTabCtrl.setNumColumns(1);
-      self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_TECH",()));
-      self.m_iAdvancedStartCurrentIndexes.append(0)
+        self.m_advancedStartTabCtrl.setNumColumns(1);
+        self.m_advancedStartTabCtrl.addTabSection(CyTranslator().getText("TXT_KEY_WB_AS_TECH",()));
+        self.m_iAdvancedStartCurrentIndexes.append(0)
 
-      self.m_iAdvancedStartCurrentList.append(0)
+        self.m_iAdvancedStartCurrentList.append(0)
 
-      addWBAdvancedStartControlTabs()
+        addWBAdvancedStartControlTabs()
 
-      self.m_advancedStartTabCtrl.setActiveTab(iActiveTab)
-      self.setCurrentAdvancedStartIndex(iActiveIndex)
-      self.setCurrentAdvancedStartList(iActiveList)
+        self.m_advancedStartTabCtrl.setActiveTab(iActiveTab)
+        self.setCurrentAdvancedStartIndex(iActiveIndex)
+        self.setCurrentAdvancedStartList(iActiveList)
     else:
-      self.m_advancedStartTabCtrl = getWBToolAdvancedStartTabCtrl()
-      self.m_advancedStartTabCtrl.enable(False)
+        self.m_advancedStartTabCtrl = getWBToolAdvancedStartTabCtrl()
+        self.m_advancedStartTabCtrl.enable(False)
     return
 
   def setRiverHighlights(self):
@@ -1741,80 +1696,83 @@ class CvWorldBuilderScreen:
     CyEngine().addColoredPlotAlt(self.m_pRiverStartPlot.getX(), self.m_pRiverStartPlot.getY(), PlotStyles.PLOT_STYLE_RIVER_SOUTH, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS, "COLOR_GREEN", 1)
 
     for x in xrange(self.m_pRiverStartPlot.getX() - 1, self.m_pRiverStartPlot.getX() + 2):
-      for y in xrange(self.m_pRiverStartPlot.getY() - 1, self.m_pRiverStartPlot.getY() + 2):
-        if x == self.m_pRiverStartPlot.getX() and y == self.m_pRiverStartPlot.getY(): continue
-        CyEngine().addColoredPlotAlt(x, y, PlotStyles.PLOT_STYLE_BOX_FILL, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS, "COLOR_WHITE", .2)
+        for y in xrange(self.m_pRiverStartPlot.getY() - 1, self.m_pRiverStartPlot.getY() + 2):
+            if x == self.m_pRiverStartPlot.getX() and y == self.m_pRiverStartPlot.getY():
+                continue
+            CyEngine().addColoredPlotAlt(x, y, PlotStyles.PLOT_STYLE_BOX_FILL, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS, "COLOR_WHITE", .2)
     return
 
   def leftMouseDown (self, argsList):
     bShift, bCtrl, bAlt = argsList
     if CyInterface().isInAdvancedStart():
-      self.placeObject()
+        self.placeObject()
     elif bAlt or self.iPlayerAddMode == "EditUnit":
-      if self.m_pCurrentPlot.getNumUnits():
-        WBUnitScreen.WBUnitScreen(self).interfaceScreen(self.m_pCurrentPlot.getUnit(0))
+        if self.m_pCurrentPlot.getNumUnits():
+            WBUnitScreen.WBUnitScreen(self).interfaceScreen(self.m_pCurrentPlot.getUnit(0))
     elif self.iPlayerAddMode == "Promotions":
-      if self.m_pCurrentPlot.getNumUnits():
-        WBPromotionScreen.WBPromotionScreen().interfaceScreen(self.m_pCurrentPlot.getUnit(0))
+        if self.m_pCurrentPlot.getNumUnits():
+            WBPromotionScreen.WBPromotionScreen().interfaceScreen(self.m_pCurrentPlot.getUnit(0))
     elif bCtrl or self.iPlayerAddMode == "CityDataI":
-      if self.m_pCurrentPlot.isCity():
-        WBCityEditScreen.WBCityEditScreen().interfaceScreen(self.m_pCurrentPlot.getPlotCity())
+        if self.m_pCurrentPlot.isCity():
+            WBCityEditScreen.WBCityEditScreen().interfaceScreen(self.m_pCurrentPlot.getPlotCity())
     elif self.iPlayerAddMode == "CityDataII":
-      if self.m_pCurrentPlot.isCity():
-        WBCityDataScreen.WBCityDataScreen().interfaceScreen(self.m_pCurrentPlot.getPlotCity())
+        if self.m_pCurrentPlot.isCity():
+            WBCityDataScreen.WBCityDataScreen().interfaceScreen(self.m_pCurrentPlot.getPlotCity())
     elif self.iPlayerAddMode == "CityBuildings":
-      if self.m_pCurrentPlot.isCity():
-        WBBuildingScreen.WBBuildingScreen().interfaceScreen(self.m_pCurrentPlot.getPlotCity())
+        if self.m_pCurrentPlot.isCity():
+            WBBuildingScreen.WBBuildingScreen().interfaceScreen(self.m_pCurrentPlot.getPlotCity())
     elif self.iPlayerAddMode in self.RevealMode:
-      if self.m_pCurrentPlot:
-        self.setMultipleReveal(True)
+        if self.m_pCurrentPlot:
+            self.setMultipleReveal(True)
     elif self.iPlayerAddMode == "PlotData":
-      WBPlotScreen.WBPlotScreen().interfaceScreen(self.m_pCurrentPlot)
+        WBPlotScreen.WBPlotScreen().interfaceScreen(self.m_pCurrentPlot)
     elif self.iPlayerAddMode == "RiverData":
-      WBRiverScreen.WBRiverScreen().interfaceScreen(self.m_pCurrentPlot)
+        WBRiverScreen.WBRiverScreen().interfaceScreen(self.m_pCurrentPlot)
     elif self.iPlayerAddMode == "Events":
-      WBEventScreen.WBEventScreen().interfaceScreen(self.m_pCurrentPlot)
+        WBEventScreen.WBEventScreen().interfaceScreen(self.m_pCurrentPlot)
     elif self.iPlayerAddMode == "StartingPlot":
-      gc.getPlayer(self.m_iCurrentPlayer).setStartingPlot(self.m_pCurrentPlot, True)
-      self.refreshStartingPlots()
+        gc.getPlayer(self.m_iCurrentPlayer).setStartingPlot(self.m_pCurrentPlot, True)
+        self.refreshStartingPlots()
     elif self.iPlayerAddMode == "MoveUnit":
-      for i in self.m_lMoveUnit:
-        pUnit = gc.getPlayer(self.m_iCurrentPlayer).getUnit(i)
-        if pUnit.isNone(): continue
-        pUnit.setXY(self.m_pCurrentPlot.getX(), self.m_pCurrentPlot.getY(), True, True, False)
-      self.iPlayerAddMode = "EditUnit"
-      self.m_lMoveUnit = []
+        for i in self.m_lMoveUnit:
+            pUnit = gc.getPlayer(self.m_iCurrentPlayer).getUnit(i)
+            if pUnit.isNone():
+                continue
+            pUnit.setXY(self.m_pCurrentPlot.getX(), self.m_pCurrentPlot.getY(), True, True, False)
+        self.iPlayerAddMode = "EditUnit"
+        self.m_lMoveUnit = []
     elif self.useLargeBrush():
-      self.placeMultipleObjects()
+        self.placeMultipleObjects()
     else:
-      self.placeObject()
+        self.placeObject()
     return 1
 
   def rightMouseDown (self, argsList):
     if CyInterface().isInAdvancedStart():
-      self.removeObject()
+        self.removeObject()
     elif self.iPlayerAddMode in self.RevealMode:
-      if self.m_pCurrentPlot:
-        self.setMultipleReveal(False)
+        if self.m_pCurrentPlot:
+            self.setMultipleReveal(False)
     elif self.useLargeBrush():
-      self.removeMultipleObjects()
+        self.removeMultipleObjects()
     else:
-      self.removeObject()
+        self.removeObject()
     return 1
 
 ## Add "," ##
   def addComma(self, iValue):
     sTemp = str(iValue)
     sStart = ""
-    while len(sTemp) > 0:
-      if sTemp[0].isdigit(): break
-      sStart += sTemp[0]
-      sTemp = sTemp[1:]
+    while sTemp:
+        if sTemp[0].isdigit():
+            break
+        sStart += sTemp[0]
+        sTemp = sTemp[1:]
     sEnd = sTemp[-3:]
     while len(sTemp) > 3:
-      sTemp = sTemp[:-3]
-      sEnd = sTemp[-3:] + "," + sEnd
-    return (sStart + sEnd)
+        sTemp = sTemp[:-3]
+        sEnd = sTemp[-3:] + "," + sEnd
+    return sStart + sEnd
 ## Add "," ##
 
   def handleInput (self, inputClass):
@@ -1822,182 +1780,183 @@ class CvWorldBuilderScreen:
     global iChange
     global bPython
     global bHideInactive
+    CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "handleInput - %s, prev: %d, new: %d" %(inputClass.getFunctionName(), self.iSelection, inputClass.getData2()), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
     if inputClass.getFunctionName() == "TechEra":
-      self.iSelectClass3 = inputClass.getData() - 1
-      self.createTechList()
-      self.refreshSideMenu()
+        self.iSelectClass3 = inputClass.getData() - 1
+        self.createTechList()
+        self.refreshSideMenu()
 
     if inputClass.getFunctionName() == "WorldBuilderEraseAll":
-      for i in xrange(CyMap().numPlots()):
-        self.m_pCurrentPlot = CyMap().plotByIndex(i)
-        self.placeObject()
+        for i in xrange(CyMap().numPlots()):
+            self.m_pCurrentPlot = CyMap().plotByIndex(i)
+            self.placeObject()
 
     elif inputClass.getFunctionName() == "TradeScreen":
-      WBTradeScreen.WBTradeScreen().interfaceScreen()
+        WBTradeScreen.WBTradeScreen().interfaceScreen()
 
     elif inputClass.getFunctionName() == "InfoScreen":
-      WBInfoScreen.WBInfoScreen().interfaceScreen(self.m_iCurrentPlayer)
+        WBInfoScreen.WBInfoScreen().interfaceScreen(self.m_iCurrentPlayer)
 
     elif inputClass.getFunctionName() == "EditGameOptions":
-      WBGameDataScreen.WBGameDataScreen(self).interfaceScreen()
+        WBGameDataScreen.WBGameDataScreen(self).interfaceScreen()
 
     elif inputClass.getFunctionName() == "EditReligions":
-      WBReligionScreen.WBReligionScreen().interfaceScreen(self.m_iCurrentPlayer)
+        WBReligionScreen.WBReligionScreen().interfaceScreen(self.m_iCurrentPlayer)
 
     elif inputClass.getFunctionName() == "EditCorporations":
-      WBCorporationScreen.WBCorporationScreen().interfaceScreen(self.m_iCurrentPlayer)
+        WBCorporationScreen.WBCorporationScreen().interfaceScreen(self.m_iCurrentPlayer)
 
     elif inputClass.getFunctionName() == "EditEspionage":
-      WBDiplomacyScreen.WBDiplomacyScreen().interfaceScreen(self.m_iCurrentPlayer, True)
+        WBDiplomacyScreen.WBDiplomacyScreen().interfaceScreen(self.m_iCurrentPlayer, True)
 
     elif inputClass.getFunctionName() == "EditPlayerData":
-      WBPlayerScreen.WBPlayerScreen().interfaceScreen(self.m_iCurrentPlayer)
+        WBPlayerScreen.WBPlayerScreen().interfaceScreen(self.m_iCurrentPlayer)
 
     elif inputClass.getFunctionName() == "EditTeamData":
-      WBTeamScreen.WBTeamScreen().interfaceScreen(self.m_iCurrentTeam)
+        WBTeamScreen.WBTeamScreen().interfaceScreen(self.m_iCurrentTeam)
 
     elif inputClass.getFunctionName() == "EditTechnologies":
-      WBTechScreen.WBTechScreen().interfaceScreen(self.m_iCurrentTeam)
+        WBTechScreen.WBTechScreen().interfaceScreen(self.m_iCurrentTeam)
 
     elif inputClass.getFunctionName() == "EditProjects":
-      WBProjectScreen.WBProjectScreen().interfaceScreen(self.m_iCurrentTeam)
+        WBProjectScreen.WBProjectScreen().interfaceScreen(self.m_iCurrentTeam)
 
     elif inputClass.getFunctionName() == "EditUnitsCities":
-      WBPlayerUnits.WBPlayerUnits().interfaceScreen(self.m_iCurrentPlayer)
+        WBPlayerUnits.WBPlayerUnits().interfaceScreen(self.m_iCurrentPlayer)
 
     elif inputClass.getFunctionName() == "WorldBuilderPlayerChoice":
-      self.m_iCurrentPlayer = screen.getPullDownData("WorldBuilderPlayerChoice", screen.getSelectedPullDownID("WorldBuilderPlayerChoice"))
-      self.m_iCurrentTeam = gc.getPlayer(self.m_iCurrentPlayer).getTeam()
-      self.refreshSideMenu()
-      if self.iPlayerAddMode in self.RevealMode:
-        self.refreshReveal()
+        self.m_iCurrentPlayer = screen.getPullDownData("WorldBuilderPlayerChoice", screen.getSelectedPullDownID("WorldBuilderPlayerChoice"))
+        self.m_iCurrentTeam = gc.getPlayer(self.m_iCurrentPlayer).getTeam()
+        self.refreshSideMenu()
+        if self.iPlayerAddMode in self.RevealMode:
+            self.refreshReveal()
 
     elif inputClass.getFunctionName() == "ChangeBy":
-      iChange = screen.getPullDownData("ChangeBy", screen.getSelectedPullDownID("ChangeBy"))
+        iChange = screen.getPullDownData("ChangeBy", screen.getSelectedPullDownID("ChangeBy"))
 
     elif inputClass.getFunctionName() == "AddOwnershipButton":
-      self.iPlayerAddMode = "Ownership"
-      self.refreshSideMenu()
+        self.iPlayerAddMode = "Ownership"
+        self.refreshSideMenu()
 
     elif inputClass.getFunctionName() == "AddUnitsButton":
-      self.iPlayerAddMode = "Units"
-      self.iSelectClass = -2
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddBuildingsButton":
-      self.iPlayerAddMode = "Buildings"
-      self.iSelectClass = 0
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "EditStartingPlot":
-      self.iPlayerAddMode = "StartingPlot"
-      self.refreshSideMenu()
-      self.refreshStartingPlots()
-
-    elif inputClass.getFunctionName() == "EditPromotions":
-      self.iPlayerAddMode = "Promotions"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddCityButton":
-      self.iPlayerAddMode = "City"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "EditCityDataII":
-      self.iPlayerAddMode = "CityDataII"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "EditCityBuildings":
-      self.iPlayerAddMode = "CityBuildings"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "EditPlotData":
-      self.iPlayerAddMode = "PlotData"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "EditRiverData":
-      self.iPlayerAddMode = "RiverData"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "EditEvents":
-      self.iPlayerAddMode = "Events"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddImprovementButton":
-      self.iPlayerAddMode = "Improvements"
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddBonusButton":
-      self.iPlayerAddMode = "Bonus"
-      self.iSelectClass = -1
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddPlotTypeButton":
-      self.iPlayerAddMode = "PlotType"
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddTerrainButton":
-      self.iPlayerAddMode = "Terrain"
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddRouteButton":
-      self.iPlayerAddMode = "Routes"
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddFeatureButton":
-      self.iPlayerAddMode = "Features"
-      self.iSelection = -1
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "AddRiverButton":
-      self.iPlayerAddMode = "River"
-      self.refreshSideMenu()
-
-    elif inputClass.getFunctionName() == "WBSelectClass":
-      self.iSelectClass = screen.getPullDownData("WBSelectClass", screen.getSelectedPullDownID("WBSelectClass"))
-      if self.iPlayerAddMode != "Features":
+        self.iPlayerAddMode = "Units"
+        self.iSelectClass = -2
         self.iSelection = -1
         self.refreshSideMenu()
-      else:
-        self.iSelectClass2 = screen.getPullDownData("WBSelectClass2", screen.getSelectedPullDownID("WBSelectClass2"))
+
+    elif inputClass.getFunctionName() == "AddBuildingsButton":
+        self.iPlayerAddMode = "Buildings"
+        self.iSelectClass = 0
+        self.iSelection = -1
         self.refreshSideMenu()
 
+    elif inputClass.getFunctionName() == "EditStartingPlot":
+        self.iPlayerAddMode = "StartingPlot"
+        self.refreshSideMenu()
+        self.refreshStartingPlots()
+
+    elif inputClass.getFunctionName() == "EditPromotions":
+        self.iPlayerAddMode = "Promotions"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddCityButton":
+        self.iPlayerAddMode = "City"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "EditCityDataII":
+        self.iPlayerAddMode = "CityDataII"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "EditCityBuildings":
+        self.iPlayerAddMode = "CityBuildings"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "EditPlotData":
+        self.iPlayerAddMode = "PlotData"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "EditRiverData":
+        self.iPlayerAddMode = "RiverData"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "EditEvents":
+        self.iPlayerAddMode = "Events"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddImprovementButton":
+        self.iPlayerAddMode = "Improvements"
+        self.iSelection = -1
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddBonusButton":
+        self.iPlayerAddMode = "Bonus"
+        self.iSelectClass = -1
+        self.iSelection = -1
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddPlotTypeButton":
+        self.iPlayerAddMode = "PlotType"
+        self.iSelection = -1
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddTerrainButton":
+        self.iPlayerAddMode = "Terrain"
+        self.iSelection = -1
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddRouteButton":
+        self.iPlayerAddMode = "Routes"
+        self.iSelection = -1
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddFeatureButton":
+        self.iPlayerAddMode = "Features"
+        self.iSelection = -1
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "AddRiverButton":
+        self.iPlayerAddMode = "River"
+        self.refreshSideMenu()
+
+    elif inputClass.getFunctionName() == "WBSelectClass":
+        self.iSelectClass = screen.getPullDownData("WBSelectClass", screen.getSelectedPullDownID("WBSelectClass"))
+        if self.iPlayerAddMode != "Features":
+            self.iSelection = -1
+            self.refreshSideMenu()
+        else:
+            self.iSelectClass2 = screen.getPullDownData("WBSelectClass2", screen.getSelectedPullDownID("WBSelectClass2"))
+            self.refreshSideMenu()
+
     elif inputClass.getFunctionName() == "WBSelectItem":
-      self.iSelection = inputClass.getData2()
-      self.refreshSelection()
+        self.iSelection = inputClass.getData2()
+        self.refreshSelection()
 
     elif inputClass.getFunctionName() == "RevealMode":
-      self.iPlayerAddMode = self.RevealMode[screen.getPullDownData("RevealMode", screen.getSelectedPullDownID("RevealMode"))]
-      self.refreshReveal()
+        self.iPlayerAddMode = self.RevealMode[screen.getPullDownData("RevealMode", screen.getSelectedPullDownID("RevealMode"))]
+        self.refreshReveal()
 
     elif inputClass.getFunctionName() == "BrushWidth":
-      self.iBrushWidth = screen.getPullDownData("BrushWidth", screen.getSelectedPullDownID("BrushWidth"))
+        self.iBrushWidth = screen.getPullDownData("BrushWidth", screen.getSelectedPullDownID("BrushWidth"))
 
     elif inputClass.getFunctionName() == "BrushHeight":
-      self.iBrushHeight = screen.getPullDownData("BrushHeight", screen.getSelectedPullDownID("BrushHeight"))
+        self.iBrushHeight = screen.getPullDownData("BrushHeight", screen.getSelectedPullDownID("BrushHeight"))
 
     elif inputClass.getFunctionName() == "HideInactive":
-      bHideInactive = not bHideInactive
-      self.refreshSideMenu()
+        bHideInactive = not bHideInactive
+        self.refreshSideMenu()
 
     elif inputClass.getFunctionName() == "PythonEffectButton":
-      bPython = not bPython
-      self.setCurrentModeCheckbox()
+        bPython = not bPython
+        self.setCurrentModeCheckbox()
 
     elif inputClass.getFunctionName() == "SensibilityCheck":
-      self.bSensibility = not self.bSensibility
-      self.setCurrentModeCheckbox()
+        self.bSensibility = not self.bSensibility
+        self.setCurrentModeCheckbox()
 
     elif inputClass.getFunctionName() == "SortItems" or  inputClass.getFunctionName() == "SortItemsText":
-      self.bSortItems = not self.bSortItems
-      self.setCurrentModeCheckbox()
-      self.refreshSideMenu()
+        self.bSortItems = not self.bSortItems
+        self.setCurrentModeCheckbox()
+        self.refreshSideMenu()
 
     return 1

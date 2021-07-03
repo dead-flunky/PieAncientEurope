@@ -4093,31 +4093,31 @@ class CvEventManager:
         player = PyPlayer(iFounder)
 
         if gc.getGame().isFinalInitialized() and not gc.getGame().GetWorldBuilderMode():
-            # PAE
-            LRelisRemapCapital = [
-                gc.getInfoTypeForString("RELIGION_CELTIC"),
-                gc.getInfoTypeForString("RELIGION_NORDIC"),
-                gc.getInfoTypeForString("RELIGION_PHOEN"),
-                gc.getInfoTypeForString("RELIGION_GREEK"),
-                gc.getInfoTypeForString("RELIGION_ROME")
-            ]
+            # Flunky PAE moved to dll
+            # LRelisRemapCapital = [
+                # gc.getInfoTypeForString("RELIGION_CELTIC"),
+                # gc.getInfoTypeForString("RELIGION_NORDIC"),
+                # gc.getInfoTypeForString("RELIGION_PHOEN"),
+                # gc.getInfoTypeForString("RELIGION_GREEK"),
+                # gc.getInfoTypeForString("RELIGION_ROME")
+            # ]
             pCity = gc.getGame().getHolyCity(iReligion)
             iCityId = pCity.getID()
 
-            # PAE - capital gets Holy City for certain religions
-            if iReligion in LRelisRemapCapital:
-                pCapitalCity = gc.getPlayer(iFounder).getCapitalCity()
-                if iFounder > -1 and pCapitalCity is not None:
-                    if iCityId != pCapitalCity.getID():
-                        pCity = gc.getGame().getHolyCity(iReligion)
-                        pCity.setHasReligion(iReligion, 0, 0, 0)
-                        #keldath fix - before setting a new holy city - make sure it get the designated religion
-                        pCity.changeReligionInfluence(iReligion,1)
-                        gc.getGame().setHolyCity(iReligion, pCapitalCity, 0)
-                        pCity.setHasReligion(iReligion, 1, 0, 0)
-                        iCityId = pCapitalCity.getID()
-                        if gc.getPlayer(iFounder).isHuman():
-                            CyInterface().addMessage(iFounder, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_RELIGION_INTO_CAPITAL", ("",)), None, 2, gc.getReligionInfo(iReligion).getButton(), ColorTypes(13), pCapitalCity.getX(), pCapitalCity.getY(), True, True)
+            # # PAE - capital gets Holy City for certain religions
+            # if iReligion in LRelisRemapCapital:
+                # pCapitalCity = gc.getPlayer(iFounder).getCapitalCity()
+                # if iFounder > -1 and pCapitalCity:
+                    # if iCityId != pCapitalCity.getID():
+                        # pCity = gc.getGame().getHolyCity(iReligion)
+                        # pCity.setHasReligion(iReligion, 0, 0, 0)
+                        # #keldath fix - before setting a new holy city - make sure it get the designated religion
+                        # # pCity.changeReligionInfluence(iReligion,1)
+                        # gc.getGame().setHolyCity(iReligion, pCapitalCity, 0)
+                        # pCity.setHasReligion(iReligion, 1, 0, 0)
+                        # iCityId = pCapitalCity.getID()
+                        # if gc.getPlayer(iFounder).isHuman():
+                            # CyInterface().addMessage(iFounder, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_RELIGION_INTO_CAPITAL", ("",)), None, 2, gc.getReligionInfo(iReligion).getButton(), ColorTypes(13), pCapitalCity.getX(), pCapitalCity.getY(), True, True)
 
             # BTS
             # kmod:

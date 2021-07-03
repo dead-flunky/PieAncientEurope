@@ -490,41 +490,41 @@ class WBCityEditScreen:
       popup.setUserData((pCity.getOwner(), pCity.getID()))
       popup.createEditBox(pCity.getScriptData())
       popup.launch()
-      return
+      return 0
 
     return 1
 
   def handlePlatyChooseProduction(self, inputClass):
     if inputClass.getButtonType() == WidgetTypes.WIDGET_HELP_BUILDING:
-      for j in xrange(pCity.getOrderQueueLength()):
-        iOrderData = pCity.getOrderFromQueue(j)
-        if iOrderData.eOrderType == OrderTypes.ORDER_CONSTRUCT and iOrderData.iData1 == inputClass.getData1():
-          pCity.popOrder(j, False, False)
-          break
-      pCity.pushOrder(OrderTypes.ORDER_CONSTRUCT, inputClass.getData1() , -1, False, False, False, True)
+        for j in xrange(pCity.getOrderQueueLength()):
+            iOrderData = pCity.getOrderFromQueue(j)
+            if iOrderData.eOrderType == OrderTypes.ORDER_CONSTRUCT and iOrderData.iData1 == inputClass.getData1():
+                pCity.popOrder(j, False, False)
+                break
+        pCity.pushOrder(OrderTypes.ORDER_CONSTRUCT, inputClass.getData1() , -1, False, False, False, True)
     elif inputClass.getData1() == 8202:
-      for j in xrange(pCity.getOrderQueueLength()):
-        iOrderData = pCity.getOrderFromQueue(j)
-        if iOrderData.eOrderType == OrderTypes.ORDER_TRAIN and iOrderData.iData1 == inputClass.getData2():
-          pCity.popOrder(j, False, False)
-          break
-      pCity.pushOrder(OrderTypes.ORDER_TRAIN, inputClass.getData2() , -1, False, False, False, True)
+        for j in xrange(pCity.getOrderQueueLength()):
+            iOrderData = pCity.getOrderFromQueue(j)
+            if iOrderData.eOrderType == OrderTypes.ORDER_TRAIN and iOrderData.iData1 == inputClass.getData2():
+                pCity.popOrder(j, False, False)
+                break
+        pCity.pushOrder(OrderTypes.ORDER_TRAIN, inputClass.getData2() , -1, False, False, False, True)
     elif inputClass.getData1() == 6785:
-      for j in xrange(pCity.getOrderQueueLength()):
-        iOrderData = pCity.getOrderFromQueue(j)
-        if iOrderData.eOrderType == OrderTypes.ORDER_CREATE and iOrderData.iData1 == inputClass.getData2():
-          pCity.popOrder(j, False, False)
-          break
-      pCity.pushOrder(OrderTypes.ORDER_CREATE, inputClass.getData2() , -1, False, False, False, True)
+        for j in xrange(pCity.getOrderQueueLength()):
+            iOrderData = pCity.getOrderFromQueue(j)
+            if iOrderData.eOrderType == OrderTypes.ORDER_CREATE and iOrderData.iData1 == inputClass.getData2():
+                pCity.popOrder(j, False, False)
+                break
+        pCity.pushOrder(OrderTypes.ORDER_CREATE, inputClass.getData2() , -1, False, False, False, True)
     elif inputClass.getData1() == 6787:
-      for j in xrange(pCity.getOrderQueueLength()):
-        iOrderData = pCity.getOrderFromQueue(j)
-        if iOrderData.eOrderType == OrderTypes.ORDER_MAINTAIN and iOrderData.iData1 == inputClass.getData2():
-          pCity.popOrder(j, False, False)
-          break
-      pCity.pushOrder(OrderTypes.ORDER_MAINTAIN, inputClass.getData2() , -1, False, False, False, True)
+        for j in xrange(pCity.getOrderQueueLength()):
+            iOrderData = pCity.getOrderFromQueue(j)
+            if iOrderData.eOrderType == OrderTypes.ORDER_MAINTAIN and iOrderData.iData1 == inputClass.getData2():
+                  pCity.popOrder(j, False, False)
+                  break
+        pCity.pushOrder(OrderTypes.ORDER_MAINTAIN, inputClass.getData2() , -1, False, False, False, True)
     else:
-      pCity.clearOrderQueue()
+        pCity.clearOrderQueue()
 
   def update(self, fDelta):
     self.placeMap()
