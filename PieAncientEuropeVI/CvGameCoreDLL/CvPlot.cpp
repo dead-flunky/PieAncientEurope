@@ -423,7 +423,7 @@ void CvPlot::doTurn()
 	PROFILE_FUNC();
 // Super Forts begin	
 	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
-// Super Forts begin
+// Super Forts end
 	if (getForceUnownedTimer() > 0)
 	{
 		changeForceUnownedTimer(-1);
@@ -1182,7 +1182,7 @@ bool CvPlot::isConnectedTo(const CvCity* pCity) const
 	//FAssert(isOwned());
 	if(isOwned())
 	{
-	return ((getPlotGroup(getOwnerINLINE()) == pCity->plotGroup(getOwnerINLINE())) || (getPlotGroup(pCity->getOwnerINLINE()) == pCity->plotGroup(pCity->getOwnerINLINE())));
+		return ((getPlotGroup(getOwnerINLINE()) == pCity->plotGroup(getOwnerINLINE())) || (getPlotGroup(pCity->getOwnerINLINE()) == pCity->plotGroup(pCity->getOwnerINLINE())));
 	}
 	else
 	{

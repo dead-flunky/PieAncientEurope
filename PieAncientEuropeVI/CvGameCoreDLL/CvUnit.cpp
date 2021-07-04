@@ -2880,14 +2880,15 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		//super forts improvement check - prefer animals cant enter / attack forts owned.
 		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pPlot->getImprovementType() != NO_IMPROVEMENT)
 		{
-			if (/*GC.getImprovementInfo(pPlot->getImprovementType()).isActsAsCity() &&*/ GC.getImprovementInfo(pPlot->getImprovementType()).getDefenseModifier() >= iMinDefenseForAnimals && pPlot->isOwned())
+			if (GC.getImprovementInfo(pPlot->getImprovementType()).isActsAsCity() && GC.getImprovementInfo(pPlot->getImprovementType()).getDefenseModifier() >= iMinDefenseForAnimals && pPlot->isOwned())
 			{
 				return false;
 			}
 		}
 		//keldath for PAE - animals can get into owned tiles - end		
 		// Flunky for PAE - animals can get onto BONUS and IMPROVEMENT tiles 
-		if (!bAttack)
+		// Flunky PAE allow stacking
+		/*if (!bAttack)
 		{
 			//if (pPlot->getBonusType() != NO_BONUS)
 			//{
@@ -2898,12 +2899,12 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 			//{
 				//return false;
 			//}
-			// TODO: maybe allow stacking with other animals of the same unitType?
+			
 			if (pPlot->getNumUnits() > 0)
 			{
 				return false;
 			}
-		}
+		}*/
 	}
 
 	if (isNoCapture())
@@ -2917,9 +2918,7 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		} */
 		// K-Mod. Don't let noCapture units attack defenceless cities. (eg. cities with a worker in them)
 		/*super forts keldath adjustment so attacks wont stop on forts -isEnemycity also checks for improvements so i added a specific imp check*/
-		if (pPlot->isEnemyCity(*this)
-		|| (!pPlot->isFortImprovement() && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-			)
+		if (pPlot->isEnemyCity(*this) || (!pPlot->isFortImprovement() && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS)))
 		{
 			if (!bAttack || !pPlot->isVisibleEnemyDefender(this))
 				return false;
@@ -5134,7 +5133,7 @@ but thats not needed there now.
 		else
 		return false;
 	}
-// Super Forts doto start	
+// Super Forts doto end	
 	return true;
 }
 

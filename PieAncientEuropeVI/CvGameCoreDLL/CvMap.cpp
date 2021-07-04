@@ -1292,13 +1292,12 @@ int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvali
 	{
 		return -1;
 	}
-	// Super Forts begin *canal* *choke*
+	int iInvalidPlot = 0;
+// Super Forts begin *canal* *choke*
 	// 1 must be added because 0 is already being used as the default value for iInfo in GeneratePath()
-	int iInvalidPlot = (pInvalidPlot == NULL) ? 0 : GC.getMapINLINE().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
-	//doto addition - revoke the forts change - original value was 0
-	if(!GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
 	{
-		iInvalidPlot = 0;
+		iInvalidPlot =  (pInvalidPlot == NULL) ? 0 : GC.getMapINLINE().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
 	}
 // Super Forts end
 	if (gDLL->getFAStarIFace()->GeneratePath(&GC.getStepFinder(), pSource->getX_INLINE(), 

@@ -8436,9 +8436,31 @@ void CvPlayer::foundReligion(ReligionTypes eReligion, ReligionTypes eSlotReligio
 	iBestValue = 0;
 	pBestCity = NULL;
 
+	bool bFoundInCapital = false;
+
+	// Flunky PAE found certain religions in capital
+	int aReliCapital[] = {GC.getInfoTypeForString("RELIGION_CELTIC"),
+						 GC.getInfoTypeForString("RELIGION_NORDIC"),
+						 GC.getInfoTypeForString("RELIGION_PHOEN"),
+						 GC.getInfoTypeForString("RELIGION_GREEK"),
+						 GC.getInfoTypeForString("RELIGION_ROME")};
+	for (int ii = 0; ii < 5; ii++){
+		if (eReligion == (ReligionTypes)aReliCapital[ii])
+		{
+			bFoundInCapital = true;
+			break;
+		}
+	}
+	// Flunky PAE end
 	for (pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
 	{
-		if (!bStarting || !(pLoopCity->isHolyCity()))
+		// Flunky PAE found certain religions in capital
+		if (bFoundInCapital && pLoopCity->isCapital()){
+			pBestCity = pLoopCity;
+			break;
+		}
+		// Flunky PAE end
+		else if (!bStarting || !(pLoopCity->isHolyCity()))
 		{
 			iValue = 10;
 			iValue += pLoopCity->getPopulation();
