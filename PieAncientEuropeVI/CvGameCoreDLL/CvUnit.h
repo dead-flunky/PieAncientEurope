@@ -624,8 +624,11 @@ public:
 	void rotateFacingDirectionCounterClockwise();
 
 	DllExport bool isSuicide() const;																											// Exposed to Python
-	int getDropRange() const;
+	// Flunky PAE suicide not 0/100
+	int CvUnit::getSuicideChance() const;
 
+	int getDropRange() const;
+	
 	bool isMadeAttack() const;																																// Exposed to Python
 	void setMadeAttack(bool bNewValue);																							// Exposed to Python
 
@@ -743,6 +746,19 @@ public:
 	bool isAlwaysHostile(const CvPlot* pPlot) const;
 
 	bool verifyStackValid();
+
+	// Flunky PAE - Flight
+	int flightMaxHealth();																	// Exposed to Python
+	int flightProbability(int iWinnerDamage);												// Exposed to Python
+	
+	int getExtraFlight() const;																// Exposed to Python
+	void changeExtraFlight(int iChange);													// Exposed to Python
+
+	int getExtraFlightDamageProtection() const;												// Exposed to Python
+	void changeExtraFlightDamageProtection(int iChange);									// Exposed to Python
+
+	bool isFlight();																		// Exposed to Python
+	void setFlight(bool bFlight);															// Exposed to Python
 
 	DllExport const CvArtInfoUnit* getArtInfo(int i, EraTypes eEra) const;										// Exposed to Python
 	DllExport const TCHAR* getButton() const;										// Exposed to Python
@@ -932,19 +948,6 @@ public:
 	int LFGgetDefensiveValueAdjustment() const; // K-Mod
 	bool LFBisBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttacker, int* pBestDefenderRank) const;
 	int LFBgetDefenderCombatOdds(const CvUnit* pAttacker) const;
-
-	// Flunky PAE - Flight
-	int flightMaxHealth();
-	int flightProbability(int iWinnerDamage);
-	
-	int getExtraFlight() const;
-	void changeExtraFlight(int iChange);
-
-	int getExtraFlightDamageProtection() const;
-	void changeExtraFlightDamageProtection(int iChange);
-
-	bool isFlight();
-	void setFlight(bool bFlight);
 };
 
 #endif

@@ -879,6 +879,8 @@ public:
 	int getUnitClassType() const;							// Exposed to Python
 	int getSpecialUnitType() const;						// Exposed to Python
 	int getUnitCaptureClassType() const;			// Exposed to Python
+	// Flunky PAE Domestication
+	int getPrereqCaptureTech() const;
 	int getUnitCombatType() const;						// Exposed to Python
 	int getDomainType() const;								// Exposed to Python
 	int getDefaultUnitAIType() const;					// Exposed to Python
@@ -937,6 +939,8 @@ public:
 	bool isRenderBelowWater() const;			// Exposed to Python
 	bool isRenderAlways() const;			// Exposed to Python
 	bool isSuicide() const;			// Exposed to Python
+	// Flunky PAE suicide not 0/100
+	int getSuicideChance() const;
 	bool isLineOfSight() const;			// Exposed to Python
 	bool isHiddenNationality() const;			// Exposed to Python
 	bool isAlwaysHostile() const;			// Exposed to Python
@@ -1062,7 +1066,9 @@ protected:
 	int m_iPowerValue;						
 	int m_iUnitClassType;
 	int m_iSpecialUnitType;				
-	int m_iUnitCaptureClassType;		
+	int m_iUnitCaptureClassType;	
+	// Flunky PAE Domestication
+	int m_iPrereqCaptureTech;
 	int m_iUnitCombatType;				
 	int m_iDomainType;
 	int m_iDefaultUnitAIType;
@@ -1117,7 +1123,8 @@ protected:
 	bool m_bMechanized;
 	bool m_bRenderBelowWater;
 	bool m_bRenderAlways;
-	bool m_bSuicide;
+	// Flunky PAE suicide not 0/100
+	int m_iSuicide;
 	bool m_bLineOfSight;
 	bool m_bHiddenNationality;
 	bool m_bAlwaysHostile;
