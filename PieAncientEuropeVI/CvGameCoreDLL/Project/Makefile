@@ -62,7 +62,7 @@
 #
 ## Optional:
 # To have newly compiled dlls copied to your mod's Assets directory
-YOURMOD=C:\Users\vale_\Desktop\PieAncientEurope\PieAncientEuropeVI\Assets\
+#YOURMOD=..
 # When the same DLL is used for a second mod
 #YOURMOD2=$(PROGRAMFILES)\Sid Meier's Civilization 4\Beyond the Sword\Mods\ModName
 # To have logs deleted after compilation
