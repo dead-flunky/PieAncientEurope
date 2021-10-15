@@ -2776,7 +2776,7 @@ class CvEventManager:
                       # None, 2, pWinner.getButton(), ColorTypes(7), pWinner.getX(), pWinner.getY(), True, True)
 
         # Einheiten, die Wälder niederbrennen können
-        
+
         # Brandchance 20%
         if pWinner.getUnitType() in L.LFireUnits:
             if pLoserPlot.getFeatureType() in L.LForests:
@@ -2789,7 +2789,7 @@ class CvEventManager:
                 if CvUtil.myRandom(5, "LoserUnitBurnsForest") == 1:
                     pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
                     pWinner.getGroup().setActivityType(-1) # to reload the map!
-            
+
         # Flunky PAE fixed bSuicide to iSuicide in dll, also including kamikaze from promotions
         # # Angreifende brennende Schweine killen
         # if pWinner.getUnitType() == gc.getInfoTypeForString("UNIT_BURNING_PIGS"):
@@ -2809,10 +2809,10 @@ class CvEventManager:
             # ------- Unit gets certain promotion PAE V Beta 2 Patch 7
             if not bDone and pLoser.getUnitCombatType() != -1 and not bNavalUnit and not bWinnerAnimal and not (bLoserAnimal and pLoser.isOnlyDefensive()):
                 if pWinner.isMadeAttack() and pWinnerPlayer.isTurnActive():
-                    # bUnitDone = 
+                    # bUnitDone =
                     PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pLoserPlot, True, bLoserAnimal)
                 else:
-                    # bUnitDone = 
+                    # bUnitDone =
                     PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pWinnerPlot, False, bLoserAnimal)
             # damit es unten wieder weiter geht
             # bUnitDone = False
@@ -2888,8 +2888,8 @@ class CvEventManager:
                             # CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_UNIT_EROBERT", (unitY.getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
         # ----- Ende Loser Unit (not captured)
 
-        # bUnitFlucht = False
-        # pLoserFlucht = None
+        #bUnitFlucht = False
+        #pLoserFlucht = None
 
         if not bUnitDone:
 
