@@ -22,6 +22,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -127,7 +129,7 @@
       <FeatureImpassables/>
       <TerrainPassableTechs/>
       <FeaturePassableTechs/>
-      <iCombat>6</iCombat>
+      <iCombat>5</iCombat>
       <iCombatLimit>100</iCombatLimit>
       <iAirCombat>0</iAirCombat>
       <iAirCombatLimit>0</iAirCombatLimit>
@@ -239,6 +241,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -456,6 +460,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -659,6 +665,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -747,7 +755,7 @@
       <FeatureImpassables/>
       <TerrainPassableTechs/>
       <FeaturePassableTechs/>
-      <iCombat>9</iCombat>
+      <iCombat>8</iCombat>
       <iCombatLimit>100</iCombatLimit>
       <iAirCombat>0</iAirCombat>
       <iAirCombatLimit>0</iAirCombatLimit>
@@ -850,6 +858,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -938,7 +948,7 @@
       <FeatureImpassables/>
       <TerrainPassableTechs/>
       <FeaturePassableTechs/>
-      <iCombat>5</iCombat>
+      <iCombat>4</iCombat>
       <iCombatLimit>100</iCombatLimit>
       <iAirCombat>0</iAirCombat>
       <iAirCombatLimit>0</iAirCombatLimit>
@@ -1041,6 +1051,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -1129,7 +1141,7 @@
       <FeatureImpassables/>
       <TerrainPassableTechs/>
       <FeaturePassableTechs/>
-      <iCombat>5</iCombat>
+      <iCombat>4</iCombat>
       <iCombatLimit>100</iCombatLimit>
       <iAirCombat>0</iAirCombat>
       <iAirCombatLimit>0</iAirCombatLimit>
@@ -1229,6 +1241,212 @@
       <iLeaderExperience>0</iLeaderExperience>
     </UnitInfo>
     <UnitInfo>
+      <Class>UNITCLASS_WOLF2</Class>
+      <Type>UNIT_WOLF2</Type>
+      <UniqueNames/>
+      <Special>NONE</Special>
+      <Capture>NONE</Capture>
+      <Combat>NONE</Combat>
+      <Domain>DOMAIN_LAND</Domain>
+      <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
+      <Invisible>NONE</Invisible>
+      <SeeInvisible>NONE</SeeInvisible>
+      <Description>TXT_KEY_UNIT_WOLF2</Description>
+      <Civilopedia>TXT_KEY_CONCEPT_ANIMALS_PEDIA</Civilopedia>
+      <Strategy>TXT_KEY_UNIT_ANIMAL_STRATEGY</Strategy>
+      <Advisor>NONE</Advisor>
+      <bAnimal>1</bAnimal>
+      <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
+      <bNoBadGoodies>0</bNoBadGoodies>
+      <bOnlyDefensive>0</bOnlyDefensive>
+      <bNoCapture>1</bNoCapture>
+      <bQuickCombat>0</bQuickCombat>
+      <bRivalTerritory>0</bRivalTerritory>
+      <bMilitaryHappiness>0</bMilitaryHappiness>
+      <bMilitarySupport>0</bMilitarySupport>
+      <bMilitaryProduction>0</bMilitaryProduction>
+      <bPillage>0</bPillage>
+      <bSpy>0</bSpy>
+      <bSabotage>0</bSabotage>
+      <bDestroy>0</bDestroy>
+      <bStealPlans>0</bStealPlans>
+      <bInvestigate>0</bInvestigate>
+      <bCounterSpy>0</bCounterSpy>
+      <bFound>0</bFound>
+      <bGoldenAge>0</bGoldenAge>
+      <bInvisible>0</bInvisible>
+      <bFirstStrikeImmune>0</bFirstStrikeImmune>
+      <bNoDefensiveBonus>0</bNoDefensiveBonus>
+      <bIgnoreBuildingDefense>0</bIgnoreBuildingDefense>
+      <bCanMoveImpassable>0</bCanMoveImpassable>
+      <bCanMoveAllTerrain>0</bCanMoveAllTerrain>
+      <bFlatMovementCost>0</bFlatMovementCost>
+      <bIgnoreTerrainCost>1</bIgnoreTerrainCost>
+      <bNukeImmune>0</bNukeImmune>
+      <bPrereqBonuses>0</bPrereqBonuses>
+      <bPrereqReligion>0</bPrereqReligion>
+      <bMechanized>0</bMechanized>
+      <bSuicide>0</bSuicide>
+      <bHiddenNationality>0</bHiddenNationality>
+      <bAlwaysHostile>0</bAlwaysHostile>
+      <UnitClassUpgrades/>
+      <UnitClassTargets/>
+      <UnitCombatTargets/>
+      <UnitClassDefenders/>
+      <UnitCombatDefenders/>
+      <FlankingStrikes/>
+      <UnitAIs>
+        <UnitAI>
+          <UnitAIType>UNITAI_ANIMAL</UnitAIType>
+          <bUnitAI>1</bUnitAI>
+        </UnitAI>
+      </UnitAIs>
+      <NotUnitAIs/>
+      <Builds/>
+      <ReligionSpreads/>
+      <CorporationSpreads/>
+      <GreatPeoples/>
+      <Buildings/>
+      <ForceBuildings/>
+      <HolyCity>NONE</HolyCity>
+      <ReligionType>NONE</ReligionType>
+      <StateReligion>NONE</StateReligion>
+      <PrereqReligion>NONE</PrereqReligion>
+      <PrereqCorporation>NONE</PrereqCorporation>
+      <PrereqBuilding>NONE</PrereqBuilding>
+      <PrereqTech>NONE</PrereqTech>
+      <TechTypes/>
+      <BonusType>NONE</BonusType>
+      <PrereqBonuses/>
+      <ProductionTraits/>
+      <Flavors/>
+      <iAIWeight>0</iAIWeight>
+      <iCost>-1</iCost>
+      <iHurryCostModifier>0</iHurryCostModifier>
+      <iAdvancedStartCost>-1</iAdvancedStartCost>
+      <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
+      <iMinAreaSize>-1</iMinAreaSize>
+      <iMoves>2</iMoves>
+      <bNoRevealMap>0</bNoRevealMap>
+      <iAirRange>0</iAirRange>
+      <iAirUnitCap>0</iAirUnitCap>
+      <iDropRange>0</iDropRange>
+      <iNukeRange>-1</iNukeRange>
+      <iWorkRate>0</iWorkRate>
+      <iBaseDiscover>0</iBaseDiscover>
+      <iDiscoverMultiplier>0</iDiscoverMultiplier>
+      <iBaseHurry>0</iBaseHurry>
+      <iHurryMultiplier>0</iHurryMultiplier>
+      <iBaseTrade>0</iBaseTrade>
+      <iTradeMultiplier>0</iTradeMultiplier>
+      <iGreatWorkCulture>0</iGreatWorkCulture>
+      <iEspionagePoints>0</iEspionagePoints>
+      <TerrainImpassables/>
+      <FeatureImpassables/>
+      <TerrainPassableTechs/>
+      <FeaturePassableTechs/>
+      <iCombat>3</iCombat>
+      <iCombatLimit>100</iCombatLimit>
+      <iAirCombat>0</iAirCombat>
+      <iAirCombatLimit>0</iAirCombatLimit>
+      <iXPValueAttack>2</iXPValueAttack>
+      <iXPValueDefense>1</iXPValueDefense>
+      <iFirstStrikes>0</iFirstStrikes>
+      <iChanceFirstStrikes>0</iChanceFirstStrikes>
+      <iInterceptionProbability>0</iInterceptionProbability>
+      <iEvasionProbability>0</iEvasionProbability>
+      <iWithdrawalProb>20</iWithdrawalProb>
+      <iCollateralDamage>0</iCollateralDamage>
+      <iCollateralDamageLimit>0</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
+      <iCityAttack>0</iCityAttack>
+      <iCityDefense>0</iCityDefense>
+      <iAnimalCombat>0</iAnimalCombat>
+      <iHillsAttack>20</iHillsAttack>
+      <iHillsDefense>20</iHillsDefense>
+      <TerrainNatives>
+        <TerrainNative>
+          <TerrainType>TERRAIN_TUNDRA</TerrainType>
+          <bTerrainNative>1</bTerrainNative>
+        </TerrainNative>
+      </TerrainNatives>
+      <FeatureNatives>
+        <FeatureNative>
+          <FeatureType>FEATURE_FOREST</FeatureType>
+          <bFeatureNative>1</bFeatureNative>
+        </FeatureNative>
+        <FeatureNative>
+          <FeatureType>FEATURE_DICHTERWALD</FeatureType>
+          <bFeatureNative>1</bFeatureNative>
+        </FeatureNative>
+      </FeatureNatives>
+      <TerrainAttacks/>
+      <TerrainDefenses/>
+      <FeatureAttacks>
+        <FeatureAttack>
+          <FeatureType>FEATURE_FOREST</FeatureType>
+          <iFeatureAttack>50</iFeatureAttack>
+        </FeatureAttack>
+        <FeatureAttack>
+          <FeatureType>FEATURE_DICHTERWALD</FeatureType>
+          <iFeatureAttack>50</iFeatureAttack>
+        </FeatureAttack>
+      </FeatureAttacks>
+      <FeatureDefenses/>
+      <UnitClassAttackMods/>
+      <UnitClassDefenseMods/>
+      <UnitCombatMods>
+        <UnitCombatMod>
+          <UnitCombatType>UNITCOMBAT_SPEARMAN</UnitCombatType>
+          <iUnitCombatMod>-20</iUnitCombatMod>
+        </UnitCombatMod>
+        <UnitCombatMod>
+          <UnitCombatType>UNITCOMBAT_SKIRMISHER</UnitCombatType>
+          <iUnitCombatMod>-20</iUnitCombatMod>
+        </UnitCombatMod>
+      </UnitCombatMods>
+      <UnitCombatCollateralImmunes/>
+      <DomainMods/>
+      <BonusProductionModifiers/>
+      <iBombRate>0</iBombRate>
+      <iBombardRate>0</iBombardRate>
+      <SpecialCargo>NONE</SpecialCargo>
+      <DomainCargo>NONE</DomainCargo>
+      <iCargo>0</iCargo>
+      <iConscription>0</iConscription>
+      <iCultureGarrison>0</iCultureGarrison>
+      <iExtraCost>0</iExtraCost>
+      <iAsset>1</iAsset>
+      <iPower>2</iPower>
+      <UnitMeshGroups>
+        <iGroupSize>5</iGroupSize>
+        <fMaxSpeed>1.75</fMaxSpeed>
+        <fPadTime>1</fPadTime>
+        <iMeleeWaveSize>3</iMeleeWaveSize>
+        <iRangedWaveSize>0</iRangedWaveSize>
+        <UnitMeshGroup>
+          <iRequired>1</iRequired>
+          <EarlyArtDefineTag>ART_DEF_UNIT_WOLF</EarlyArtDefineTag>
+        </UnitMeshGroup>
+      </UnitMeshGroups>
+      <FormationType>FORMATION_TYPE_ANIMAL</FormationType>
+      <HotKey/>
+      <bAltDown>0</bAltDown>
+      <bShiftDown>0</bShiftDown>
+      <bCtrlDown>0</bCtrlDown>
+      <iHotKeyPriority>0</iHotKeyPriority>
+      <FreePromotions>
+        <FreePromotion>
+          <PromotionType>PROMOTION_WILDLIFE</PromotionType>
+          <bFreePromotion>1</bFreePromotion>
+        </FreePromotion>
+      </FreePromotions>
+      <LeaderPromotion>NONE</LeaderPromotion>
+      <iLeaderExperience>0</iLeaderExperience>
+    </UnitInfo>
+    <UnitInfo>
       <Class>UNITCLASS_BOAR</Class>
       <Type>UNIT_BOAR</Type>
       <UniqueNames/>
@@ -1245,6 +1463,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -1435,6 +1655,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -1616,6 +1838,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -1704,7 +1928,7 @@
       <FeatureImpassables/>
       <TerrainPassableTechs/>
       <FeaturePassableTechs/>
-      <iCombat>5</iCombat>
+      <iCombat>4</iCombat>
       <iCombatLimit>100</iCombatLimit>
       <iAirCombat>0</iAirCombat>
       <iAirCombatLimit>0</iAirCombatLimit>
@@ -1812,6 +2036,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -1900,7 +2126,7 @@
       <FeatureImpassables/>
       <TerrainPassableTechs/>
       <FeaturePassableTechs/>
-      <iCombat>6</iCombat>
+      <iCombat>4</iCombat>
       <iCombatLimit>100</iCombatLimit>
       <iAirCombat>0</iAirCombat>
       <iAirCombatLimit>0</iAirCombatLimit>
@@ -2003,6 +2229,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -2091,7 +2319,7 @@
       <FeatureImpassables/>
       <TerrainPassableTechs/>
       <FeaturePassableTechs/>
-      <iCombat>5</iCombat>
+      <iCombat>4</iCombat>
       <iCombatLimit>100</iCombatLimit>
       <iAirCombat>0</iAirCombat>
       <iAirCombatLimit>0</iAirCombatLimit>
@@ -2199,6 +2427,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>1</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>100</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>100</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -2394,6 +2624,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -2575,6 +2807,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -2590,7 +2824,7 @@
       <bStealPlans>0</bStealPlans>
       <bInvestigate>0</bInvestigate>
       <bCounterSpy>0</bCounterSpy>
-      <bFound>1</bFound>
+      <bFound>0</bFound>
       <bGoldenAge>0</bGoldenAge>
       <bInvisible>0</bInvisible>
       <bFirstStrikeImmune>0</bFirstStrikeImmune>
@@ -2755,6 +2989,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -2927,6 +3163,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -3085,7 +3323,7 @@
       </ProductionTraits>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>40</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -3189,6 +3427,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -3346,7 +3586,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -3468,6 +3708,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -3532,7 +3774,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>40</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -3640,6 +3882,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -3817,6 +4061,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -3990,6 +4236,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -4049,7 +4297,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>40</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -4152,6 +4400,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -4319,6 +4569,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -4486,6 +4738,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -4654,6 +4908,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -4846,6 +5102,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -5025,6 +5283,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -5110,7 +5370,7 @@
         </Flavor>
       </Flavors>
       <iAIWeight>1</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>40</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -5228,6 +5488,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -5307,7 +5569,7 @@
         </Flavor>
       </Flavors>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>80</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -5415,6 +5677,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -5495,7 +5759,7 @@
         </Flavor>
       </Flavors>
       <iAIWeight>1</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -5613,6 +5877,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>1</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -5795,6 +6061,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>1</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -5977,6 +6245,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>1</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -6046,7 +6316,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>70</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -6154,6 +6424,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -6223,7 +6495,7 @@
         </Flavor>
       </Flavors>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -6331,6 +6603,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -6529,6 +6803,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -6731,6 +7007,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -6928,6 +7206,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -7141,6 +7421,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -7365,6 +7647,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -7577,6 +7861,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -7790,6 +8076,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -7992,6 +8280,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -8222,6 +8512,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -8435,6 +8727,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -8663,6 +8957,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -8900,6 +9196,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -9097,6 +9395,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -9284,6 +9584,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -9480,6 +9782,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -9677,6 +9981,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -9881,6 +10187,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -10110,6 +10418,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -10332,6 +10642,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -10571,6 +10883,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -10791,6 +11105,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -10983,6 +11299,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -11179,6 +11497,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -11367,6 +11687,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -11560,6 +11882,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -11749,6 +12073,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -11937,6 +12263,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -12121,6 +12449,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -12318,6 +12648,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -12514,6 +12846,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -12727,6 +13061,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -12946,6 +13282,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -13027,7 +13365,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>20</iCost>
+      <iCost>14</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -13130,6 +13468,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>1</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -13216,7 +13556,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>20</iCost>
+      <iCost>18</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -13329,6 +13669,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -13410,7 +13752,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>40</iCost>
+      <iCost>30</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -13536,6 +13878,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -13754,6 +14098,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -13959,6 +14305,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -14168,6 +14516,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -14379,6 +14729,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -14602,6 +14954,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -14815,6 +15169,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -15028,6 +15384,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -15117,7 +15475,7 @@
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
       <iMinAreaSize>-1</iMinAreaSize>
-      <iMoves>1</iMoves>
+      <iMoves>2</iMoves>
       <bNoRevealMap>0</bNoRevealMap>
       <iAirRange>0</iAirRange>
       <iAirUnitCap>0</iAirUnitCap>
@@ -15237,6 +15595,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -15450,6 +15810,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -15663,6 +16025,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -15855,6 +16219,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -16047,6 +16413,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -16256,6 +16624,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -16461,6 +16831,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -16645,6 +17017,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -16856,6 +17230,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -17063,6 +17439,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -17251,6 +17629,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -17443,6 +17823,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -17635,6 +18017,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -17827,6 +18211,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -18019,6 +18405,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -18207,6 +18595,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -18404,6 +18794,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -18589,6 +18981,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -18767,6 +19161,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -18942,6 +19338,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -19122,6 +19520,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -19308,6 +19708,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -19629,6 +20031,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -19949,6 +20353,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -20137,6 +20543,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -20419,6 +20827,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -20688,6 +21098,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -20890,6 +21302,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -21088,6 +21502,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -21354,6 +21770,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -21551,6 +21969,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -21744,6 +22164,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -21933,6 +22355,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -22118,6 +22542,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -22307,6 +22733,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -22375,7 +22803,7 @@
       <StateReligion>NONE</StateReligion>
       <PrereqReligion>NONE</PrereqReligion>
       <PrereqCorporation>NONE</PrereqCorporation>
-      <PrereqBuilding>BUILDING_PROVINZPALAST</PrereqBuilding>
+      <PrereqBuilding>BUILDING_PROVINZ</PrereqBuilding>
       <PrereqTech>TECH_FOEDERATI</PrereqTech>
       <TechTypes/>
       <BonusType>NONE</BonusType>
@@ -22491,6 +22919,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -22675,6 +23105,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -22867,6 +23299,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -23067,6 +23501,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -23279,6 +23715,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -23481,6 +23919,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -23670,6 +24110,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -23859,6 +24301,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -24044,6 +24488,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -24327,6 +24773,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -24510,6 +24958,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -24696,6 +25146,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -24906,6 +25358,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -25136,6 +25590,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -25316,6 +25772,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -25509,6 +25967,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -25702,6 +26162,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -25882,6 +26344,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -25959,7 +26423,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>40</iCost>
+      <iCost>30</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -26083,6 +26547,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -26158,7 +26624,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -26278,6 +26744,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -26353,7 +26821,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -26473,6 +26941,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -26548,7 +27018,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -26668,6 +27138,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -26752,7 +27224,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -26877,6 +27349,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -26957,7 +27431,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>60</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -27077,6 +27551,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -27163,7 +27639,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>80</iCost>
+      <iCost>70</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -27284,6 +27760,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -27407,7 +27885,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>90</iCost>
+      <iCost>80</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>100</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -27523,6 +28001,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -27718,6 +28198,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -27903,6 +28385,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -28205,6 +28689,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -28390,6 +28876,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -28578,6 +29066,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -28766,6 +29256,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -28949,6 +29441,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -29137,6 +29631,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -29328,6 +29824,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -29405,7 +29903,7 @@
       <TechTypes/>
       <BonusType>NONE</BonusType>
       <PrereqBonuses>
-        <BonusType>BONUS_COPPER</BonusType>
+        <BonusType>BONUS_BRONZE</BonusType>
         <BonusType>BONUS_IRON</BonusType>
       </PrereqBonuses>
       <ProductionTraits/>
@@ -29514,6 +30012,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -29593,7 +30093,7 @@
       </TechTypes>
       <BonusType>NONE</BonusType>
       <PrereqBonuses>
-        <BonusType>BONUS_COPPER</BonusType>
+        <BonusType>BONUS_BRONZE</BonusType>
         <BonusType>BONUS_IRON</BonusType>
       </PrereqBonuses>
       <ProductionTraits/>
@@ -29702,6 +30202,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -29888,6 +30390,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -29965,7 +30469,7 @@
       <TechTypes/>
       <BonusType>NONE</BonusType>
       <PrereqBonuses>
-        <BonusType>BONUS_COPPER</BonusType>
+        <BonusType>BONUS_BRONZE</BonusType>
         <BonusType>BONUS_IRON</BonusType>
       </PrereqBonuses>
       <ProductionTraits/>
@@ -30074,6 +30578,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -30262,6 +30768,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -30451,6 +30959,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -30618,6 +31128,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -30819,6 +31331,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -31028,6 +31542,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -31238,6 +31754,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -31436,6 +31954,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -31653,6 +32173,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -31857,6 +32379,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -32060,6 +32584,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -32263,6 +32789,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -32471,6 +32999,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -32669,6 +33199,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -32871,6 +33403,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -33101,6 +33635,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -33351,6 +33887,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -33622,6 +34160,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -33892,6 +34432,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -34166,6 +34708,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -34451,6 +34995,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -34721,6 +35267,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -34991,6 +35539,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -35268,6 +35818,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -35533,6 +36085,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -35798,6 +36352,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -36071,6 +36627,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -36334,6 +36892,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -36592,6 +37152,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -36850,6 +37412,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -37113,6 +37677,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -37376,6 +37942,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -37639,6 +38207,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -37909,6 +38479,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -38174,6 +38746,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -38451,6 +39025,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -38756,6 +39332,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -39028,6 +39606,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -39265,6 +39845,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -39541,6 +40123,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -39803,6 +40387,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -40067,6 +40653,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -40326,6 +40914,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -40589,6 +41179,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -40855,6 +41447,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -41118,6 +41712,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -41386,6 +41982,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -41654,6 +42252,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -41912,6 +42512,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -42170,6 +42772,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -42438,6 +43042,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -42706,6 +43312,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -42966,6 +43574,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -43233,6 +43843,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -43520,6 +44132,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -43835,6 +44449,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -44095,6 +44711,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -44388,6 +45006,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -44648,6 +45268,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -44912,6 +45534,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -45176,6 +45800,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -45436,6 +46062,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -45705,6 +46333,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -45967,6 +46597,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -46234,6 +46866,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -46492,6 +47126,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -46750,6 +47386,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -47044,6 +47682,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -47329,6 +47969,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -47615,6 +48257,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -47827,6 +48471,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -48004,6 +48650,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -48186,6 +48834,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -48368,6 +49018,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -48545,6 +49197,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -48713,6 +49367,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -48893,6 +49549,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -49078,6 +49736,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -49262,6 +49922,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -49466,6 +50128,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -49670,6 +50334,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -49891,6 +50557,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -50072,6 +50740,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -50289,6 +50959,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -50505,6 +51177,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -50721,6 +51395,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -50937,6 +51613,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -51153,6 +51831,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -51555,6 +52235,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -51751,6 +52433,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -51947,6 +52631,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -52152,6 +52838,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -52350,6 +53038,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -52543,6 +53233,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -52744,6 +53436,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -52940,6 +53634,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -53133,6 +53829,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -53317,6 +54015,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -53508,6 +54208,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -53693,6 +54395,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -53886,6 +54590,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -54154,6 +54860,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -54451,6 +55159,8 @@
       <Advisor>ADVISOR_CULTURE</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -54715,6 +55425,8 @@
       <Advisor>ADVISOR_SCIENCE</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -54978,6 +55690,8 @@
       <Advisor>ADVISOR_GROWTH</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -55262,6 +55976,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -55444,6 +56160,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -55717,6 +56435,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>1</bNoCapture>
@@ -55899,6 +56619,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -56075,6 +56797,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -56251,6 +56975,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -56427,6 +57153,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -56603,6 +57331,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -56779,6 +57509,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -56955,6 +57687,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -57131,6 +57865,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -57307,6 +58043,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -57483,6 +58221,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -57659,6 +58399,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -57835,6 +58577,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -58011,6 +58755,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -58187,6 +58933,8 @@
       <Advisor>ADVISOR_RELIGION</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -58595,7 +59343,7 @@
         <ProductionTraits/>
         <Flavors/>
         <iAIWeight>0</iAIWeight>
-        <iCost>100</iCost>
+        <iCost>50</iCost>
         <iHurryCostModifier>0</iHurryCostModifier>
         <iAdvancedStartCost>-1</iAdvancedStartCost>
         <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -58699,6 +59447,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -58763,7 +59513,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -58867,6 +59617,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -58931,7 +59683,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -59035,6 +59787,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -59099,7 +59853,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -59203,6 +59957,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -59267,7 +60023,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -59371,6 +60127,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -59435,7 +60193,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -59539,6 +60297,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -59603,7 +60363,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -59707,6 +60467,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -59771,7 +60533,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -59875,6 +60637,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -59939,7 +60703,7 @@
       <ProductionTraits/>
       <Flavors/>
       <iAIWeight>0</iAIWeight>
-      <iCost>100</iCost>
+      <iCost>50</iCost>
       <iHurryCostModifier>0</iHurryCostModifier>
       <iAdvancedStartCost>-1</iAdvancedStartCost>
       <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -60043,6 +60807,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -60317,6 +61083,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -60490,6 +61258,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -60653,6 +61423,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -60842,6 +61614,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -61031,6 +61805,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -61220,6 +61996,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -61438,6 +62216,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -61601,6 +62381,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -61764,6 +62546,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -61927,6 +62711,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -62090,6 +62876,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>1</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -62253,6 +63041,8 @@
       <Advisor>ADVISOR_ECONOMY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -62433,8 +63223,10 @@
       <Strategy>TXT_KEY_UNIT_CAMEL_STRATEGY</Strategy>
       <Help>TXT_KEY_UNIT_CAMEL_HELP</Help>
       <Advisor>ADVISOR_ECONOMY</Advisor>
-      <bAnimal>1</bAnimal>
+      <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -62635,6 +63427,8 @@
       <Advisor>NONE</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -62835,6 +63629,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -63029,6 +63825,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -63234,6 +64032,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -63498,6 +64298,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -63679,6 +64481,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -63841,6 +64645,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -64003,6 +64809,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -64165,6 +64973,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -64327,6 +65137,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -64489,6 +65301,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -64651,6 +65465,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -64813,6 +65629,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -64990,6 +65808,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -65196,6 +66016,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -65394,6 +66216,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -65592,6 +66416,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
@@ -65760,6 +66586,8 @@
       <Advisor>ADVISOR_MILITARY</Advisor>
       <bAnimal>0</bAnimal>
       <bFood>0</bFood>
+      <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
+      <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
       <bOnlyDefensive>0</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>

@@ -350,7 +350,7 @@ class HintedWorld(FractalWorld):
                     else:
                         return True
 
-        print("\tcould not expand continent:")
+        CvUtil.pyPrint("\tcould not expand continent:")
         printMap(self.data, self.w, self.h, cont.centerx, cont.centery)
         cont.done = True
         return False
@@ -401,7 +401,7 @@ class HintedWorld(FractalWorld):
         return best_split
 
     def shiftHintsBy(self, splitx, splity):
-        print("shifting hints by ", splitx, splity)
+        CvUtil.pyPrint("shifting hints by ", splitx, splity)
         if splitx != 0 or splity != 0:
             buf = self.data[:]
             # shift the values in self.data left by best_split
@@ -501,7 +501,7 @@ class HintedWorld(FractalWorld):
 
 
 def printMap(data, w, h, markerx=-1, markery=-1):
-    print("-"*(w+2))
+    CvUtil.pyPrint("-"*(w+2))
     hrange = range(h)
     hrange.reverse()
     for y in hrange:
@@ -515,8 +515,8 @@ def printMap(data, w, h, markerx=-1, markery=-1):
             else:
                 str += " "
         str += "|"
-        print(str)
-    print("-"*(w+2))
+        CvUtil.pyPrint(str)
+    CvUtil.pyPrint("-"*(w+2))
 
 '''
 SIRIAN's "MULTILAYERED FRACTAL" INSTRUCTIONS
@@ -1341,7 +1341,7 @@ def findStartingPlot(playerID, validFn = None):
         if pBestPlot:
             return map.plotNum(pBestPlot.getX(), pBestPlot.getY())
 
-        print("player", playerID, "pass", iPass, "failed")
+        CvUtil.pyPrint("player", playerID, "pass", iPass, "failed")
 
         iPass += 1
 
@@ -1351,7 +1351,7 @@ def argmin(list):
     best = None
     best_index = None
     for i, val in enumerate(list):
-        if not best or val < best:
+        if best is None or val < best:
             best_index = i
             best = val
     return (best_index, best)

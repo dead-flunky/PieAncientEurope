@@ -19,6 +19,7 @@ import BugErrorOptionsTab
 import BugHelp
 import BugOptions
 import BugUtil
+import CvScreenEnums
 
 
 ## Globals
@@ -134,7 +135,11 @@ class BugOptionsScreen:
         title = BugUtil.getPlainText("TXT_KEY_BUG_OPT_TITLE", "BUG Mod Options")
         self.pTabControl = CyGTabCtrl(title, False, False)
         self.pTabControl.setModal(1)
-        self.pTabControl.setSize(1000, 750)
+        screen = CyGInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE)
+        resolutionWidth = screen.getXResolution()
+        resolutionHeigth = screen.getYResolution()
+        self.pTabControl.setSize(resolutionWidth-60, 750)
+        # self.pTabControl.setSize(1000, 750)
         self.pTabControl.setControlsExpanding(False)
         self.pTabControl.setColumnLength(self.iScreenHeight)
 

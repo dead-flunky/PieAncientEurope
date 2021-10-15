@@ -208,14 +208,6 @@
 		<Italian>%s1: %s2 (%d3)</Italian>
 		<Spanish>%s1: %s2 (%d3)</Spanish>
 	</TEXT>
-	<TEXT>
-		<Tag>INTERFACE_NEXT_GREAT_GENERAL_XP</Tag>
-		<English>%s1 (%d2)</English>
-		<French>%s1 (%d2)</French>
-		<German>%s1 (%d2)</German>
-		<Italian>%s1 (%d2)</Italian>
-		<Spanish>%s1 (%d2)</Spanish>
-	</TEXT>
 	
 	<!-- Dead Civs Scoreboard -->
 	

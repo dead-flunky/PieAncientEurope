@@ -1269,7 +1269,6 @@
                         <fBlue>0.45</fBlue>
                         <fAlpha>1.0</fAlpha>
                 </ColorVal>
-                
 <!-- Flunky - Start - added color keys for PAE tech chooser -->
                 <ColorVal>
                         <Type>COLOR_ERA_ANCIENT_GREY</Type>

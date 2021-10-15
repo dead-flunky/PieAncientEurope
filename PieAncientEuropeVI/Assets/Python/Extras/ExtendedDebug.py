@@ -14,6 +14,7 @@ import inspect
 from remote_pdb import RemotePdb
 
 from CvUtil import SHOWEXCEPTIONS
+import CvUtil
 # SHOWEXCEPTIONS = 1  # 0: Print into PythonDbg.log, 1: Ingame popup window
 CONFIG_REMOTE = {"port": 4444, "host": "127.0.0.1"}
 
@@ -25,7 +26,7 @@ Depth = 0      # Stack depth ( != len(Locs) after return-event )
 
 # ====== Trace stuff to save frame stack
 def traceit(frame, event, arg):
-    print("\t" + event + "\t" + str(frame.f_code.co_name))
+    CvUtil.pyPrint("\t" + event + "\t" + str(frame.f_code.co_name))
     if event == "call":
         if frame.f_code.co_name == "extendedExceptHook":
             # Abort trace in case of exception handling

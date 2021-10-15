@@ -89,7 +89,6 @@ class CvOverlayScreenUtils:
     def rightMouseDown (self, argsList):
         # return 1 to consume the input
         screenEnum = argsList[0]
-
         return 0
 
     def mouseOverPlot(self, argsList):
@@ -97,7 +96,7 @@ class CvOverlayScreenUtils:
         # CyInterface().addImmediateMessage("Mouse Over Plot called", "")
         screenEnum = argsList[0]
         # consuming the input would probably prevent the engine from highlighting the square
-        if (screenEnum == STRATEGY_OVERLAY_SCREEN):
+        if screenEnum == STRATEGY_OVERLAY_SCREEN:
             overlayScreen.onMouseOverPlot(argsList)
         return 0
 
@@ -120,6 +119,8 @@ class CvOverlayScreenUtils:
         """
         screenEnum, inputClass = argsList
         if self.HandleInputMap and inputClass and self.HandleInputMap.has_key(screenEnum):
+            # Flunky Debug
+            # BugUtil.debug("CvOverlayScreenUtils - handleInput: %r", argsList)
             # get the screen that is active from the HandleInputMap Dictionary
             screen = self.HandleInputMap.get(inputClass.getPythonFile())
 

@@ -24,7 +24,7 @@ class CvWorldBuilderScreen:
   "World Builder Screen"
 
   def __init__ (self) :
-    print("init-ing world builder screen")
+    CvUtil.pyPrint("init-ing world builder screen")
     self.m_advancedStartTabCtrl = None
     self.m_normalPlayerTabCtrl = 0
     self.m_normalMapTabCtrl = 0
@@ -1292,7 +1292,7 @@ class CvWorldBuilderScreen:
     initWBToolEditCtrlTab(True)
 
     if (not self.m_tabCtrlEdit.isNone()):
-      print("Enabling map control 4")
+      CvUtil.pyPrint("Enabling map control 4")
       self.m_normalPlayerTabCtrl.enable(False)
       self.m_normalMapTabCtrl.enable(False)
       self.m_bCtrlEditUp = True
@@ -1362,7 +1362,7 @@ class CvWorldBuilderScreen:
     initWBToolEditCtrlTab(False)
 
     if (not self.m_tabCtrlEdit.isNone()):
-      print("Enabling map control 5")
+      CvUtil.pyPrint("Enabling map control 5")
       self.m_normalPlayerTabCtrl.enable(False)
       self.m_normalMapTabCtrl.enable(False)
       self.m_bCtrlEditUp = True
@@ -1383,8 +1383,8 @@ class CvWorldBuilderScreen:
     self.m_bEraseAll = False
     CvScreensInterface.hideWorldBuilderDiplomacyScreen()
 
-    if (self.m_tabCtrlEdit != 0):
-      print("Enabling map control 6")
+    if self.m_tabCtrlEdit != 0:
+      CvUtil.pyPrint("Enabling map control 6")
       self.m_tabCtrlEdit.enable(False)
 
     CyEngine().clearColoredPlots(PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS)
@@ -1393,7 +1393,7 @@ class CvWorldBuilderScreen:
 
     self.refreshSideMenu()
     self.setCurrentModeCheckbox(self.m_iUnitEditCheckboxID)
-    print("Enabling map control 7")
+    CvUtil.pyPrint("Enabling map control 7")
     self.m_normalPlayerTabCtrl.enable(False)
     self.m_normalMapTabCtrl.enable(False)
     if (self.m_tabCtrlEdit != 0):
@@ -1412,7 +1412,7 @@ class CvWorldBuilderScreen:
     CvScreensInterface.hideWorldBuilderDiplomacyScreen()
 
     if (self.m_tabCtrlEdit != 0):
-      print("Enabling map control 8")
+      CvUtil.pyPrint("Enabling map control 8")
       self.m_tabCtrlEdit.enable(False)
 
     CyEngine().clearColoredPlots(PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS)
@@ -1421,7 +1421,7 @@ class CvWorldBuilderScreen:
 
     self.refreshSideMenu()
     self.setCurrentModeCheckbox(self.m_iCityEditCheckboxID)
-    print("Enabling map control 9")
+    CvUtil.pyPrint("Enabling map control 9")
     self.m_normalPlayerTabCtrl.enable(False)
     self.m_normalMapTabCtrl.enable(False)
     if (self.m_tabCtrlEdit != 0):
@@ -1446,10 +1446,10 @@ class CvWorldBuilderScreen:
     self.refreshSideMenu()
     self.setCurrentModeCheckbox(self.m_iNormalPlayerCheckboxID)
     if (self.m_normalMapTabCtrl):
-      print("Disabling Map Tab")
+      CvUtil.pyPrint("Disabling Map Tab")
       self.m_normalMapTabCtrl.enable(False)
     if (not self.m_normalPlayerTabCtrl.isEnabled() and not CyInterface().isInAdvancedStart()):
-      print("Enabling Player Tab")
+      CvUtil.pyPrint("Enabling Player Tab")
       self.m_normalPlayerTabCtrl.enable(True)
       if (self.m_tabCtrlEdit):
         self.m_tabCtrlEdit.enable(False)
@@ -1474,10 +1474,10 @@ class CvWorldBuilderScreen:
     self.refreshSideMenu()
     self.setCurrentModeCheckbox(self.m_iNormalMapCheckboxID)
     if (self.m_normalPlayerTabCtrl):
-      print("Disabling Player Tab")
+      CvUtil.pyPrint("Disabling Player Tab")
       self.m_normalPlayerTabCtrl.enable(False)
     if (not self.m_normalMapTabCtrl.isEnabled() and not CyInterface().isInAdvancedStart()):
-      print("Enabling Map Tab")
+      CvUtil.pyPrint("Enabling Map Tab")
       self.m_normalMapTabCtrl.enable(True)
       if (self.m_tabCtrlEdit):
         self.m_tabCtrlEdit.enable(False)
@@ -1918,12 +1918,12 @@ class CvWorldBuilderScreen:
     return
 
   def showMultipleReveal(self):
-    print "showMultipleReveal"
+    CvUtil.pyPrint("showMultipleReveal")
     self.refreshReveal()
     return
 
   def setMultipleReveal(self, bReveal):
-    print "setMultipleReveal"
+    CvUtil.pyPrint("setMultipleReveal")
     bInsideForLoop = False
     permCurrentPlot = self.m_pCurrentPlot
     for i in range( (self.m_iBrushWidth-1) ):
@@ -2553,14 +2553,14 @@ class CvWorldBuilderScreen:
 
   def setCurrentModeCheckbox(self, iButton):
     screen = CyGInterfaceScreen( "WorldBuilderScreen", CvScreenEnums.WORLDBUILDER_SCREEN )
-    #print("iButton: %s" %(str(iButton)))
+    #CvUtil.pyPrint("iButton: %s" %(str(iButton)))
 
-    #print("m_iUnitEditCheckboxID: %s" %(str(self.m_iUnitEditCheckboxID)))
-    #print("m_iCityEditCheckboxID: %s" %(str(self.m_iCityEditCheckboxID)))
-    #print("m_iNormalPlayerCheckboxID: %s" %(str(self.m_iNormalPlayerCheckboxID)))
-    #print("m_iNormalMapCheckboxID: %s" %(str(self.m_iNormalMapCheckboxID)))
-    #print("m_iRevealTileCheckboxID: %s" %(str(self.m_iRevealTileCheckboxID)))
-    #print("m_iDiplomacyCheckboxID: %s" %(str(self.m_iDiplomacyCheckboxID)))
+    #CvUtil.pyPrint("m_iUnitEditCheckboxID: %s" %(str(self.m_iUnitEditCheckboxID)))
+    #CvUtil.pyPrint("m_iCityEditCheckboxID: %s" %(str(self.m_iCityEditCheckboxID)))
+    #CvUtil.pyPrint("m_iNormalPlayerCheckboxID: %s" %(str(self.m_iNormalPlayerCheckboxID)))
+    #CvUtil.pyPrint("m_iNormalMapCheckboxID: %s" %(str(self.m_iNormalMapCheckboxID)))
+    #CvUtil.pyPrint("m_iRevealTileCheckboxID: %s" %(str(self.m_iRevealTileCheckboxID)))
+    #CvUtil.pyPrint("m_iDiplomacyCheckboxID: %s" %(str(self.m_iDiplomacyCheckboxID)))
 
     if (iButton == self.m_iUnitEditCheckboxID):
       screen.setState("WorldBuilderUnitEditModeButton", True)

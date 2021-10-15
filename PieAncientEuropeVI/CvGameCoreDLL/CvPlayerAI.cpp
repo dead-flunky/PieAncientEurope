@@ -24422,8 +24422,10 @@ int CvPlayerAI::AI_getPlotAirbaseValue(CvPlot* pPlot) const
 //			return 0;
 //		}
 //	}
+	
+// Flunky PAE disabled *choke* *canal* for bug search
 // Super Forts begin *canal* *choke*
-	if (superForts)
+	/*if (superForts)
 	{
 		if (iMinOtherCityPlot != NULL)
 		{
@@ -24436,8 +24438,9 @@ int CvPlayerAI::AI_getPlotAirbaseValue(CvPlot* pPlot) const
 				}
 			}
 		}
-	}		
+	}	*/	
 // Super Forts end
+
 //	if (iMinOtherCityPlot != NULL)
 //	{
 //		CvCity* pNearestCity = GC.getMapINLINE().findCity(iMinOtherCityPlot->getX_INLINE(), iMinOtherCityPlot->getY_INLINE(), NO_PLAYER, getTeam(), false);
@@ -24464,7 +24467,7 @@ int CvPlayerAI::AI_getPlotAirbaseValue(CvPlot* pPlot) const
 	{
 //mountaind mod back to service - doto update
 		iValue *= 100 + (2 * (iDefenseModifier + (((pPlot->isHills() || pPlot->isPeak()) ? 25 : 0))));
-	iValue /= 100;
+		iValue /= 100;
 	}
 	
 // // super forts - doto
@@ -24480,59 +24483,62 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 	FAssert(pPlot != NULL);
 // Super Forts begin *canal*
 	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
-	int iCanalValue = superForts ? pPlot->getCanalValue() : 1;
+	
+// Flunky PAE disabled *choke* *canal* for bug search
+	int iCanalValue = /*superForts ? pPlot->getCanalValue() :*/ 1;
 						/*Doto - the value 1 is for the check below to be true - 
-						so roginal code will kick in */ 
+						so original code will kick in */ 
 	
 	if (iCanalValue > 0)
 	{
-	if (pPlot->isOwned())
-	{
-		if (pPlot->getTeam() != getTeam())
+		if (pPlot->isOwned())
 		{
-			return 0;
-		}
-		if (pPlot->isCityRadius())
-		{
-			CvCity* pWorkingCity = pPlot->getWorkingCity();
-			if (pWorkingCity != NULL)
+			if (pPlot->getTeam() != getTeam())
 			{
-				/* original bts code
-				if (pWorkingCity->AI_getBestBuild(pWorkingCity->getCityPlotIndex(pPlot)) != NO_BUILD)
+				return 0;
+			}
+			if (pPlot->isCityRadius())
+			{
+				CvCity* pWorkingCity = pPlot->getWorkingCity();
+				if (pWorkingCity != NULL)
 				{
-					return 0;
-				}
-				if (pPlot->getImprovementType() != NO_IMPROVEMENT)
-				{
-					CvImprovementInfo &kImprovementInfo = GC.getImprovementInfo(pPlot->getImprovementType());
-					if (!kImprovementInfo.isActsAsCity())
+					/* original bts code
+					if (pWorkingCity->AI_getBestBuild(pWorkingCity->getCityPlotIndex(pPlot)) != NO_BUILD)
 					{
 						return 0;
 					}
-				} */
-				// K-Mod
-				ImprovementTypes eBestImprovement = pPlot->getImprovementType();
-				BuildTypes eBestBuild = pWorkingCity->AI_getBestBuild(pWorkingCity->getCityPlotIndex(pPlot));
-				if (eBestBuild != NO_BUILD)
-				{
-					if (GC.getBuildInfo(eBestBuild).getImprovement() != NO_IMPROVEMENT)
-						eBestImprovement = (ImprovementTypes)GC.getBuildInfo(eBestBuild).getImprovement();
-				}
-				if (eBestImprovement != NO_IMPROVEMENT)
-				{
-					CvImprovementInfo &kImprovementInfo = GC.getImprovementInfo(eBestImprovement);
-					if (!kImprovementInfo.isActsAsCity())
+					if (pPlot->getImprovementType() != NO_IMPROVEMENT)
 					{
-						return 0;
+						CvImprovementInfo &kImprovementInfo = GC.getImprovementInfo(pPlot->getImprovementType());
+						if (!kImprovementInfo.isActsAsCity())
+						{
+							return 0;
+						}
+					} */
+					// K-Mod
+					ImprovementTypes eBestImprovement = pPlot->getImprovementType();
+					BuildTypes eBestBuild = pWorkingCity->AI_getBestBuild(pWorkingCity->getCityPlotIndex(pPlot));
+					if (eBestBuild != NO_BUILD)
+					{
+						if (GC.getBuildInfo(eBestBuild).getImprovement() != NO_IMPROVEMENT)
+							eBestImprovement = (ImprovementTypes)GC.getBuildInfo(eBestBuild).getImprovement();
 					}
-				}
-				// K-Mod end
+					if (eBestImprovement != NO_IMPROVEMENT)
+					{
+						CvImprovementInfo &kImprovementInfo = GC.getImprovementInfo(eBestImprovement);
+						if (!kImprovementInfo.isActsAsCity())
+						{
+							return 0;
+						}
+					}
+					// K-Mod end
 					// Decrease value when within radius of a city
 // Super Forts begin *canal*
-					if (superForts)
+// Flunky PAE disabled *choke* *canal* for bug search
+					/*if (superForts)
 					{
 						iCanalValue -= 5;
-					}
+					}*/
 					
 				}
 			}
@@ -24546,25 +24552,28 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 			if (pLoopPlot->isCity(true))
 			{
 // Super Forts begin 
-				if 	(pLoopPlot->getCanalValue() > 0 && superForts)
-				{
-				// Decrease value when adjacent to a city or fort with a canal value
-					iCanalValue -= 10;
-				}
-				else
-				{
-					return 0;//original part
-			}
+// Flunky PAE disabled *choke* *canal* for bug search
+				//if 	(pLoopPlot->getCanalValue() > 0 && superForts)
+				//{
+				//// Decrease value when adjacent to a city or fort with a canal value
+				//	iCanalValue -= 10;
+				//}
+				//else
+				//{
+				return 0;//original part
+			//}
 // Super Forts begin 
 			}
 		}
-		if (superForts)
-		{
-			iCanalValue *= 10;
-			// Favor plots with higher defense
-			int iDefenseModifier = pPlot->defenseModifier(getTeam(), false);
-			iCanalValue += iDefenseModifier;
-		}
+		
+// Flunky PAE disabled *choke* *canal* for bug search
+		//if (superForts)
+		//{
+		//	iCanalValue *= 10;
+		//	// Favor plots with higher defense
+		//	int iDefenseModifier = pPlot->defenseModifier(getTeam(), false);
+		//	iCanalValue += iDefenseModifier;
+		//}
 	}
 	
 	CvArea* pSecondWaterArea = pPlot->secondWaterArea();
@@ -24574,8 +24583,8 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 	}
 	else if (!superForts)
 	{
-	//return 10 * std::min(0, pSecondWaterArea->getNumTiles() - 2);
-	return 10 * std::max(0, pSecondWaterArea->getNumTiles() - 2);
+		//return 10 * std::min(0, pSecondWaterArea->getNumTiles() - 2);
+		return 10 * std::max(0, pSecondWaterArea->getNumTiles() - 2);
 	}
 	else
 	{

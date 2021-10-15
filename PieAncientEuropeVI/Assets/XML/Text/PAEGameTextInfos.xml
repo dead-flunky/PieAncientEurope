@@ -77,7 +77,7 @@
     <English>Use slaves as [COLOR_HIGHLIGHT_TEXT]field slaves[COLOR_REVERT].[NEWLINE][ICON_BULLET]+2 [ICON_FOOD]</English>
     <French>Affecter l'esclave aux [COLOR_HIGHLIGHT_TEXT]champs[COLOR_REVERT].[NEWLINE][ICON_BULLET]+2 [ICON_FOOD]</French>
     <German>Sklaven als [COLOR_HIGHLIGHT_TEXT]Feldsklaven[COLOR_REVERT] nutzen.[NEWLINE][ICON_BULLET]+2 [ICON_FOOD]</German>
-    <Italian>Use slaves as [COLOR_HIGHLIGHT_TEXT]field slaves[COLOR_REVERT].[NEWLINE][ICON_BULLET]+2 [ICON_FOOD]</Italian>
+    <Italian>Usa gli schiavi come schiavi [COLOR_HIGHLIGHT_TEXT] nel campo [COLOR_REVERT].[NEWLINE][ICON_BULLET] +2 [ICON_FOOD]</Italian>
     <Spanish>Usar los esclavos como [COLOR_HIGHLIGHT_TEXT]esclavos del campo[COLOR_REVERT].[NEWLINE][ICON_BULLET]+2 [ICON_FOOD]</Spanish>
   </TEXT>
   <TEXT>
@@ -117,7 +117,7 @@
     <English>[ICON_TRADE] %s1_name (%s2_civ) has sold [COLOR_HIGHLIGHT_TEXT]%s4[COLOR_REVERT] in %s3_city (+%d5 [ICON_RESEARCH]).</English>
     <French>[ICON_TRADE] %s1_name (%s2_civ) a vendu [COLOR_HIGHLIGHT_TEXT]%s4[COLOR_REVERT] &#224; %s3_city (+%d5 [ICON_RESEARCH]).</French>
     <German>[ICON_TRADE] %s1_name (%s2_civ) hat in %s3_city [COLOR_HIGHLIGHT_TEXT]%s4[COLOR_REVERT] verkauft (+%d5 [ICON_RESEARCH]).</German>
-    <Italian>[ICON_TRADE] %s1_name (%s2_civ) has sold [COLOR_HIGHLIGHT_TEXT]%s4[COLOR_REVERT] in %s3_city (+%d5 [ICON_RESEARCH]).</Italian>
+    <Italian>[ICON_TRADE] %s1_name (%s2_civ) ha venduto [COLOR_HIGHLIGHT_TEXT]%s4[COLOR_REVERT] a %s3_city (+%d5 [ICON_RESEARCH]).</Italian>
     <Spanish>[ICON_TRADE] %s1_name (%s2_civ) ha vendido [COLOR_HIGHLIGHT_TEXT]%s4[COLOR_REVERT] en %s3_city (+%d5 [ICON_RESEARCH]).</Spanish>
   </TEXT>
   <TEXT>
@@ -155,17 +155,17 @@
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_MERCHANT_ROBBERY_5</Tag>
     <English>Bandits have tried to rob your merchants! Lucky that you had requested escort! Your goods have remained intact, but unfortunately your escort was badly damaged.</English>
-    <French>Des bandits ont essay&#233; de voler vos marchands ! Heureusement que vous aviez demand&#233; une escorte ! Vos marchandises sont intactes, mais malheureusement, l'escorte a &#233;t&#233; lamin&#233;e.</French>
+    <French>Des bandits ont essay&#233; de voler vos marchands ! Heureusement que vous aviez demand&#233; une escorte ! Vos marchandises sont intactes, mais malheureusement, votre escorte a &#233;t&#233; lamin&#233;e.</French>
     <German>Banditen haben versucht eure H&#228;ndler zu berauben! Ein Gl&#252;ck, dass ihr Begleitschutz angefordert hattet! Eure Handelswaren sind heil geblieben, doch leider ist euer Begleitschutz dabei draufgegangen.</German>
-    <Italian>I banditi hanno cercato di rapinare i tuoi mercanti! Fortunato che tu avessi richiesto una scorta! I tuoi beni sono rimasti intatti, ma sfortunatamente la tua scorta &#232; andata in questo modo.</Italian>
+    <Italian>I banditi hanno cercato di rapinare i tuoi mercanti! Per fortuna gli avevi assegnato una scorta! I tuoi beni sono rimasti intatti, ma purtroppo la tua scorta &#232; stata seriamente danneggiata e va ripristinata.</Italian>
     <Spanish>&#161;Los bandidos han tratado de robar a tus mercaderes! Suerte que hab&#237;as solicitado acompa&#241;amiento! Sus productos han permanecido intactos, pero desafortunadamente su escolta ha sido seriamente da&#241;ada.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_MERCHANT_ROBBERY_7</Tag>
     <English>An ambush! Your escort ran after the bandits and disappeared. At least you still have all your goods! Quick, move on!</English>
-    <French>Une embuscade ! Votre escorte a poursuivi les bandits et a disparu. Au moins vous avez encore toutes vos marchandises ! Vite, passons notre chemin !</French>
+    <French>Embuscade ! Votre escorte a poursuivi les bandits et a disparu. Au moins vous avez encore toutes vos marchandises ! Vite, poursuivons votre chemin !</French>
     <German>Ein Hinterhalt! Euer Begleitschutz rannte den Banditen nach und verschwand. Wenigstens habt Ihr noch all Eure G&#252;ter! Schnell, f&#228;hrt weiter!</German>
-    <Italian>Un'imboscata! La tua scorta ha inseguito i banditi e &#232; scomparsa. Almeno hai ancora tutti i tuoi beni! Veloce, vai avanti!</Italian>
+    <Italian>Un'imboscata! La tua scorta ha inseguito i banditi ed &#232; scomparsa. Almeno hai ancora tutti i tuoi beni! Veloce, via di qua!</Italian>
     <Spanish>&#161;Una emboscada! Su acompa&#241;ante corri&#243; tras los bandidos y desapareci&#243;. &#161;Al menos todav&#237;a tienes todos tus bienes! &#161;R&#225;pido, sigue adelante!</Spanish>
   </TEXT>
   <TEXT>
@@ -654,7 +654,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>These beatniks get nothing from our treasury!</English>
     <French>Ces b&#226;tards n'auront rien !</French>
     <German>Nichts bekommen diese Halbstarken aus unserer Staatskasse!</German>
-    <Italian>These beatniks get nothing from our treasury!</Italian>
+    <Italian>Questi giovani non ottengono nulla dalla nostra tesoreria!</Italian>
     <Spanish>&#161;Estos beatniks no se llevar&#225;n nada de nuestro tesoro!</Spanish>
   </TEXT>
   <TEXT>
@@ -686,7 +686,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Forget it! The conquest continues!</English>
     <French>Oubliez &#231;a ! La conqu&#234;te continue !</French>
     <German>Vergesst es! Der Eroberungsfeldzug geht weiter!</German>
-    <Italian>Forget it! The conquest continues!</Italian>
+    <Italian>Dimenticalo! La campagna di conquista continua!</Italian>
     <Spanish>&#161;Olv&#237;dalo! &#161;La conquista contin&#250;a!</Spanish>
   </TEXT>
   <TEXT>
@@ -742,7 +742,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>This is quite out of the question!</English>
     <French>Il n'en est pas question !</French>
     <German>Das kommt gar nicht in Frage!</German>
-    <Italian>This is quite out of the question!</Italian>
+    <Italian>Questo &#232; del tutto fuori questione!</Italian>
     <Spanish>&#161;Esto est&#225; bastante fuera de lugar!</Spanish>
   </TEXT>
   <TEXT>
@@ -758,7 +758,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Yes, let's try again!</English>
     <French>Oui, r&#233;essayons !</French>
     <German>Ja, versuchen wir es erneut!</German>
-    <Italian>Yes, let's try again!</Italian>
+    <Italian>S&#236;, riproviamo!</Italian>
     <Spanish>&#161;S&#237;, vamos a intentarlo otra vez!</Spanish>
   </TEXT>
   <TEXT>
@@ -766,7 +766,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>No, forget it!</English>
     <French>Non, oubliez &#231;a !</French>
     <German>Nein, dann eben nicht!</German>
-    <Italian>No, forget it!</Italian>
+    <Italian>No, allora no!</Italian>
     <Spanish>&#161;No, olv&#237;dalo!</Spanish>
   </TEXT>
   <TEXT>
@@ -846,7 +846,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[H1]An offer of an enemy vassal![\H1][NEWLINE]%s1_civ_shortdesc, vassal of %s2_leader, offers you to take up against his hegemon for %d3 gold to support you with your war! Do you accept this offer?[NEWLINE](enemy vassal gets independent again and declares war against his hegemon)[NEWLINE]</English>
     <French>[H1]Une proposition d'un vassal ennemi ![\H1][NEWLINE]Les %s1_civ_shortdesc, vassaux de %s2_leader, vous proposent de se rebeller contre leur suzerain moyennant une compensation de %d3 [ICON_GOLD] pour soutenir leur effort de guerre ! Allez-vous accepter ?[NEWLINE](Le vassal ennemi redevient ind&#233;pendant et d&#233;clare la guerre &#224; son suzerain)[NEWLINE]</French>
     <German>[H1]Ein Angebot eines gegnerischen Vasallen![\H1][NEWLINE]%s1_civ_shortdesc, Vasall von %s2_leader, bietet Euch an, sich f&#252;r %d3 Gold gegen seinen Hegemon zu stellen und Euch im Krieg zu unterst&#252;tzen! Nehmt ihr dieses Angebot an?[NEWLINE](Gegnerischer Vasall wird wieder ein freies Reich und erkl&#228;rt Krieg gegen seinen Hegemon)[NEWLINE]</German>
-    <Italian>[H1]An offer of an enemy vassal![\H1][NEWLINE]%s1_civ_shortdesc, vassal of %s2_leader, offers you to take up against his hegemon for %d3 gold to support you with your war! Do you accept this offer?[NEWLINE](enemy vassal gets independent again and declares war against his hegemon)[NEWLINE]</Italian>
+    <Italian>[H1]Un'offerta di un vassallo nemico![\H1][NEWLINE]%s1_civ_shortdesc, vassallo di %s2_leader, ti offre di affrontare il suo signore per %d3 d'oro per aiutarti nella tua guerra! Accetti questa offerta?[NEWLINE](il vassallo nemico diventa di nuovo indipendente e dichiara guerra al suo signore)[NEWLINE]</Italian>
     <Spanish>[H1]&#161;Una oferta de un vasallo enemigo![\H1][NEWLINE]%s1_civ_shortdesc, vasallo de %s2_leader, &#161;te ofrece la oportunidad de levantarse contra su se&#241;or por %d3 de oro para ayudarte con tu guerra! &#191;Aceptas su oferta?[NEWLINE](el vasallo enemigo obtiene la independencia otra vez y declara la guerra contra su se&#241;or)[NEWLINE]</Spanish>
   </TEXT>
   <TEXT>
@@ -1142,7 +1142,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_BULLET]%D1%F2 from cults</English>
     <French>[ICON_BULLET]%D1%F2 gr&#226;ce aux cultes</French>
     <German>[ICON_BULLET]%D1%F2 durch Kulte</German>
-    <Italian>[ICON_BULLET]%D1%F2 dalle cultos</Italian>
+    <Italian>[ICON_BULLET]%D1%F2 dai culti</Italian>
     <Spanish>[ICON_BULLET]%D1 %F2 por cultos</Spanish>
   </TEXT>
   <TEXT>
@@ -1168,30 +1168,6 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <German>[ICON_BULLET]Fremde Kulte haben keine Auswirkung</German>
     <Italian>[ICON_BULLET]I culti stranieri non hanno effetto</Italian>
     <Spanish>[ICON_BULLET]Los cultos extranjeros no tienen efecto</Spanish>
-  </TEXT>
-  <TEXT>
-    <Tag>TXT_KEY_MISSION_INQUISITION</Tag>
-    <English>Drive out religion</English>
-    <French>D&#233;velopper un culte</French>
-    <German>Religion austreiben</German>
-    <Italian>Espandi culto</Italian>
-    <Spanish>Expandir culto</Spanish>
-  </TEXT>
-  <TEXT>
-    <Tag>TXT_KEY_MISSION_INQUISITION_HELP</Tag>
-    <English>This order will consume the [COLOR_UNIT_TEXT]Missionary[COLOR_REVERT] unit and drive out the selected religion from the city.</English>
-    <French>Cet ordre d&#233;truira le [COLOR_UNIT_TEXT]Cultiste[COLOR_REVERT] mais d&#233;veloppera son culte dans la ville.</French>
-    <German>Der [COLOR_UNIT_TEXT]Missionar[COLOR_REVERT] wird geopfert, um eine gewählte andere Religion aus Stadt zu vertreiben.</German>
-    <Italian>Con questo ordine, si sacrifica un [COLOR_UNIT_TEXT]Funzionario[COLOR_REVERT], ma il culto si espande nella citt&#224;.</Italian>
-    <Spanish>Esta orden consumir&#225; a la unidad de [COLOR_UNIT_TEXT]Ejecutivo[COLOR_REVERT] pero expandir&#225; su culto en la ciudad.</Spanish>
-  </TEXT>
-  <TEXT>
-    <Tag>TXT_KEY_ACTION_CANNOT_DRIVE_OUT_STATE_RELIGION</Tag>
-    <English>[COLOR_WARNING_TEXT]Cannot drive out state [ICON_RELIGION].[COLOR_REVERT]</English>
-    <French>[COLOR_WARNING_TEXT]Impossible d'expulser la [ICON_RELIGION] qui est la religion d'&#233;tat dans cette ville.[COLOR_REVERT]</French>
-    <German>[COLOR_WARNING_TEXT]Kann die Staatsreligion [ICON_RELIGION] in dieser Stadt nicht vertreiben.[COLOR_REVERT]</German>
-    <Italian>[COLOR_WARNING_TEXT]Non si pu&#242; sfrattare la religione ufficiale[ICON_RELIGION] in questa citt&#224;.[COLOR_REVERT]</Italian>
-    <Spanish>[COLOR_WARNING_TEXT]En esta ciudad no se puede desalojar la [ICON_RELIGION] que sea la oficial.[COLOR_REVERT]</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MISSION_SPREAD_CORPORATION</Tag>
@@ -1238,7 +1214,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_BULLET]%D1_Mod%% Maintenance Costs from Cults</English>
     <French>[ICON_BULLET]%D1_Mod%% Co&#251;ts d'entretien des Cultes</French>
     <German>[ICON_BULLET]%D1_Mod%% Unterhaltskosten von Kulten</German>
-    <Italian>[ICON_BULLET]%D1_Mod%% costi di manutenzione de Cultos</Italian>
+    <Italian>[ICON_BULLET]%D1_Mod%% costi di manutenzione dei Culti</Italian>
     <Spanish>[ICON_BULLET]%D1_Mod%% a los costes de mantenimiento de los cultos</Spanish>
   </TEXT>
   <TEXT>
@@ -1246,7 +1222,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_BULLET]No Maintenance Costs from Cults</English>
     <French>[ICON_BULLET]Pas de co&#251;t d'entretien des Cultes</French>
     <German>[ICON_BULLET]Keine Unterhaltskosten von Kulten</German>
-    <Italian>[ICON_BULLET]Nessun costo di manutenzione di cultos</Italian>
+    <Italian>[ICON_BULLET]Nessun costo di manutenzione dei culti</Italian>
     <Spanish>[ICON_BULLET]Sin costes de mantenimiento de los cultos</Spanish>
   </TEXT>
   <TEXT>
@@ -1350,7 +1326,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>An enemy %s1 has panicked, tearing through your enemy's soldiers before it died!</English>
     <French>Une unit&#233; ennemie (%s1) prise de panique et hors de contr&#244;le a d&#233;vast&#233; ses propres rangs avant de mourir !</French>
     <German>Eine gegnerische Einheit %s1 raste panisch durch die eigenen Soldaten, bevor sie zu erliegen kam.</German>
-    <Italian>An enemy %s1 has panicked, tearing through your enemy's soldiers before it died!</Italian>
+    <Italian>Un'unit&#224; nemica in preda al panico e fuori controllo (% s1) ha devastato i propri ranghi prima di morire!</Italian>
     <Spanish>&#161;Una unidad enemiga %s1 corri&#243; sin control alimentado por el p&#225;nico a trav&#233;s de sus propios soldados antes de morir!</Spanish>
   </TEXT>
   <TEXT>
@@ -1358,7 +1334,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Our %s1 has panicked, tearing through our own soldiers before it died!</English>
     <French>Notre unit&#233; (%s1) prise de panique et hors de contr&#244;le a d&#233;vast&#233; nos propres rangs avant de mourrir !</French>
     <German>Unsere Einheit %s1 raste panisch durch die eigenen Soldaten, bevor sie zu erliegen kam.</German>
-    <Italian>Our %s1 has panicked, tearing through our own soldiers before it died!</Italian>
+    <Italian>Il nostro %s1 &#232; andato nel panico, facendo a pezzi i nostri stessi soldati prima di morire!</Italian>
     <Spanish>&#161;Nuestra unidad %s1 corri&#243; sin control alimentado por el p&#225;nico a trav&#233;s de nuestros propios soldados antes de morir!</Spanish>
   </TEXT>
   <TEXT>
@@ -1373,7 +1349,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <Tag>TXT_KEY_MESSAGE_UNIT_ESCAPE_2</Tag>
     <English>The enemy %s1 barely escaped!</English>
     <French>L'unit&#233; ennemie (%s1) a pu s'&#233;chapper de justesse !</French>
-    <German>Die gegnerische Einheit %s1 konnte sich gerade noch in die Flucht schlagen!</German>
+    <German>Die gegnerische Einheit %s1 konnte gerade noch fl&#252;chten!</German>
     <Italian>L'unit&#224; nemica %s1 &#232; riuscita a scappare per un soffio!</Italian>
     <Spanish>&#161;La unidad enemiga %s1 escap&#243; por poco!</Spanish>
   </TEXT>
@@ -1819,11 +1795,11 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_SLAVES_MINE_15</Tag>
-    <English>A mining slave in %s1 fell into a deep hole and died.</English>
-    <French>Un mineur esclave dans la ville de %s1 est tomb&#233; dans une crevasse et est mort.</French>
-    <German>Ein Bergwerkssklave in %s1 fiel in ein tiefes Loch und starb.</German>
-    <Italian>Uno schiavo minerario in %s1 &#232; caduto in un buco profondo ed &#232; morto.</Italian>
-    <Spanish>Un esclavo minero en %s1 cay&#243; en un hoyo profundo y muri&#243;.</Spanish>
+    <English>A mining slave in %s1_city fell into a deep hole and died.</English>
+    <French>Un esclave dans la ville de %s1_city est mort suite &#224; une chute dans un puits de mine.</French>
+    <German>Ein Bergwerkssklave in %s1_city fiel in ein tiefes Loch und starb.</German>
+    <Italian>Uno schiavo minerario in %s1_city &#232; caduto in un buco profondo ed &#232; morto.</Italian>
+    <Spanish>Un esclavo minero en %s1_city cay&#243; en un hoyo profundo y muri&#243;.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_SLAVES_MINE_16</Tag>
@@ -2294,7 +2270,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Caution! %s1 is already unhappy!</English>
     <French>Attention ! La population de %s1 est malheureuse !</French>
     <German>Vorsicht! %s1 ist bereits ungl&#252;cklich!</German>
-    <Italian>Caution! %s1 is already unhappy!</Italian>
+    <Italian>Attenzione! %s1 &#232; gi&#224; infelice!</Italian>
     <Spanish>&#161;Cuidado! &#161;%s1 se ha vuelto infeliz!</Spanish>
   </TEXT>
   <TEXT>
@@ -2302,7 +2278,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Caution! %s1 becomes unhealthy next turn!</English>
     <French>Attention ! %s1 deviendra insalubre au prochain tour !</French>
     <German>Vorsicht! Die Bev&#246;lkerung von %s1 wird n&#228;chste Runde auch ungesund!</German>
-    <Italian>Caution! %s1 becomes unhealthy next turn!</Italian>
+    <Italian>Attenzione! %s1 diventa malsano il prossimo turno!</Italian>
     <Spanish>&#161;Cuidado! &#161;La poblaci&#243;n de %s1 se volver&#225; insalubre el pr&#243;ximo turno!</Spanish>
   </TEXT>
   <TEXT>
@@ -2310,7 +2286,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Caution! %s1 is already unhealthy!</English>
     <French>Attention ! %s1 est insalubre !</French>
     <German>Vorsicht! %s1 ist bereits ungesund!</German>
-    <Italian>Caution! %s1 is already unhealthy!</Italian>
+    <Italian>Attenzione! %s1 &#232; gi&#224; malsano!</Italian>
     <Spanish>&#161;Cuidado! &#161;%s1 se ha vuelto insalubre!</Spanish>
   </TEXT>
   <TEXT>
@@ -2318,7 +2294,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The discontent in %s1 forced some citizens to leave your city which dropped to the size %d2 (of %d3).</English>
     <French>Le m&#233;contentement &#224; %s1 poussent des citoyens &#224; quitter la ville dont la taille passe &#224; %d2 (sur %d3).</French>
     <German>Die Unzufriedenheit in %s1 zwang einige B&#252;rger Eure Stadt zu verlassen, die auf die Gr&#246;&#223;e %d2 (von %d3) sank.</German>
-    <Italian>The discontent in %s1 forced some citizens to leave your city which dropped to the size %d2 (of %d3).</Italian>
+    <Italian>Il malcontento in %s1 ha costretto alcuni cittadini a lasciare la tua citt&#224; che &#232; scesa alla dimensione %d2 (di %d3).</Italian>
     <Spanish>El descontento en %s1 forz&#243; a algunos ciudadanos a salir de tu ciudad que disminuy&#243; al tama&#241;o %d2 (de %d3).</Spanish>
   </TEXT>
   <TEXT>
@@ -2518,7 +2494,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>You have liberated enslaved people of another nation!</English>
     <French>Vous avez lib&#233;r&#233; un esclave !</French>
     <German>Ihr konntet einen versklavten B&#252;rger eines anderen Volkes befreien!</German>
-    <Italian>You have liberated enslaved people of another nation!</Italian>
+    <Italian>Hai liberato gli schiavi di un'altra nazione!</Italian>
     <Spanish>&#161;Liberaste gente esclavizada de otra naci&#243;n!</Spanish>
   </TEXT>
   <TEXT>
@@ -2702,7 +2678,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A gladiator in the amphitheatre in %s1 was beheaded!</English>
     <French>Un gladiateur dans l'amphith&#233;&#226;tre de %s1 a &#233;t&#233; d&#233;capit&#233; !</French>
     <German>Einem Gladiator in %s1 wurde im Amphitheater der Kopf abgeschlagen!</German>
-    <Italian>A gladiator in the amphitheatre in %s1 was beheaded!</Italian>
+    <Italian>Un gladiatore nell'anfiteatro in %s1 &#232; stato decapitato!</Italian>
     <Spanish>&#161;A un gladiador en el anfiteatro de %s1, le cortaron la cabeza!</Spanish>
   </TEXT>
   <TEXT>
@@ -2734,7 +2710,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>In the circus of %s1, a gladiator was run over by a chariot!</English>
     <French>Un gladiateur est pass&#233; sous les roues d'un char dans le cirque de %s1 !</French>
     <German>Im Circus von %s1 wurde ein Gladiator von einem Streitwagen &#252;berrollt!</German>
-    <Italian>In the circus of %s1, a gladiator was run over by a chariot!</Italian>
+    <Italian>Un gladiatore &#232; stato investito da un carro nel circo di %s1!</Italian>
     <Spanish>&#161;En el circo de %s1, un gladiador fue atropellado por un carro!</Spanish>
   </TEXT>
   <TEXT>
@@ -2742,7 +2718,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The life of a glorious gladiator in %s1 ended abruptly in the circus!</English>
     <French>La vie d'un c&#233;l&#232;bre gladiateur s'est achev&#233; brutalement dans le cirque de %s1 !</French>
     <German>Das Leben eines glorreichen Gladiators in %s1 endete abrupt im Circus!</German>
-    <Italian>The life of a glorious gladiator in %s1 ended abruptly in the circus!</Italian>
+    <Italian>La vita di un famoso gladiatore &#232; finita bruscamente nel circo di% s1!</Italian>
     <Spanish>&#161;La vida de un glorioso gladiador en %s1 acab&#243; de repente en el circo!</Spanish>
   </TEXT>
   <TEXT>
@@ -2750,7 +2726,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>During a struggle in the circus in %s1, a gladiator came between his spoked wheels and had to die painfully!</English>
     <French>Durant une course dans le cirque de %s1, un gladiateur est tomb&#233; de son char !</French>
     <German>W&#228;hrend eines Kampfes im Circus in %s1, kam ein Gladiator zwischen seine Speichenr&#228;der und musste qualvoll sterben!</German>
-    <Italian>During a struggle in the circus in %s1, a gladiator came between his spoked wheels and had to die painfully!</Italian>
+    <Italian>Durante una gara nel circo di% s1, un gladiatore &#232; caduto dal suo carro ed &#232; morto!</Italian>
     <Spanish>Durante una contienda en el circo de %s1, &#161;un gladiador se interpuso entre sus ruedas de radios y tuvo que morir dolorosamente!</Spanish>
   </TEXT>
   <TEXT>
@@ -2758,7 +2734,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>In the circus of %s1, a horse race ended up in a deadly disaster for an experienced gladiator!</English>
     <French>Un course s'est achev&#233;e par la mort d'un gladiateur dans le cirque de %s1 !</French>
     <German>Im Circus von %s1 wurde das Pferderennen einem kampferfahrenen Gladiator zum Verh&#228;ngnis!</German>
-    <Italian>In the circus of %s1, a horse race ended up in a deadly disaster for an experienced gladiator!</Italian>
+    <Italian>Una gara si &#232; conclusa con la morte di un gladiatore nel circo di% s1!</Italian>
     <Spanish>En el circo de %s1, &#161;una carrera de caballos termin&#243; en un desastre mortal para un gladiador experimentado!</Spanish>
   </TEXT>
   <TEXT>
@@ -2766,7 +2742,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A battle-hardened gladiator was disgusting dismembered in the circus of %s1!</English>
     <French>Un gladiateur v&#233;t&#233;ran a &#233;t&#233; horriblement d&#233;membr&#233; dans le cirque de %s1 !</French>
     <German>Ein kampferprobter Gladiator wurde im Circus von %s1 widerlich zerst&#252;ckelt!</German>
-    <Italian>A battle-hardened gladiator was disgusting dismembered in the circus of %s1!</Italian>
+    <Italian>Un gladiatore veterano &#232; stato orribilmente smembrato nel circo% s1!</Italian>
     <Spanish>&#161;Un gladiador aguerrido fue vergonzosamente desmembrado en el circo de %s1!</Spanish>
   </TEXT>
   <TEXT>
@@ -2782,7 +2758,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A slave was whipped to death during the construction!</English>
     <French>Un esclave meurt sous les coups de fouet pendant la construction !</French>
     <German>Ein Sklave wurde w&#228;hrend den Bauarbeiten zu Tode gepeitscht!</German>
-    <Italian>A slave was whipped to death during the construction!</Italian>
+    <Italian>Uno schiavo &#232; stato frustato a morte durante la costruzione!</Italian>
     <Spanish>&#161;Un esclavo fustigado hasta la muerte durante la construcci&#243;n!</Spanish>
   </TEXT>
   <TEXT>
@@ -2894,7 +2870,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Due to the lack of hygiene in %s1, some people are suffering from leprosy! Through your leper colony, the danger could be contained and its population only dropped by 1.</English>
     <French>L'insalubrit&#233; a entrain&#233; l'apparition de la l&#232;pre &#224; %s1 ! Gr&#226;ce &#224; votre l&#233;proserie, l'&#233;pid&#233;mie a pu &#234;tre contenue. Vous perdez seulement un citoyen.</French>
     <German>Aus Mangel an Hygiene sind etliche B&#252;rger in %s1 an Lepra erkrankt! Durch Eure Leprakolonie konnte die Gefahr einged&#228;mmt werden und die Stadtbev&#246;lkerung sank nur um 1.</German>
-    <Italian>Due to the lack of hygiene in %s1, some people are suffering from leprosy! Through your leper colony, the danger could be contained and its population only dropped by 1.</Italian>
+    <Italian>A causa della mancanza di igiene in %s1, alcune persone soffrono di lebbra! Attraverso il tuo lebbrosario, il pericolo potrebbe essere contenuto e la sua popolazione diminuir&#224; solo di 1.</Italian>
     <Spanish>&#161;Debido a la falta de higiene en %s1, algunas persona est&#225;n sufriendo de lepra! Gracias a tu leproser&#237;a, el peligro fue contenido y su poblaci&#243;n solo se redujo en 1.</Spanish>
   </TEXT>
   <TEXT>
@@ -2902,7 +2878,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Due to the lack of hygiene in %s1, many people are suffering from leprosy! Its population dropped to %d2 (from %d3)!</English>
     <French>L'insalubrit&#233; a entrain&#233; l'apparition de la l&#232;pre &#224; %s1 ! Sa population passe &#224; %d2 (sur %d3) !</French>
     <German>Aus Mangel an Hygiene sind etliche B&#252;rger in %s1 an Lepra erkrankt! Die Bev&#246;lkerung sank auf die Gr&#246;&#223;e %d2 (von %d3)!</German>
-    <Italian>Due to the lack of hygiene in %s1, many people are suffering from leprosy! Its population dropped to %d2 (from %d3)!</Italian>
+    <Italian>A causa della mancanza di igiene in %s1, molte persone soffrono di lebbra! La sua popolazione &#232; scesa a %d2 (da %d3)!</Italian>
     <Spanish>&#161;Debido a la falta de higiene en %s1, muchas personas est&#225;n sufriendo de lepra! &#161;Su poblaci&#243;n se reduce a %d2 (de %d3)!</Spanish>
   </TEXT>
   <TEXT>
@@ -2910,7 +2886,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Due to the lack of hygiene and the large population, the deadly plague broke out in the city of %s1!</English>
     <French>L'insalubrit&#233; et la surpopulation ont d&#233;clench&#233; une &#233;pid&#233;mie de peste &#224; %s1 !</French>
     <German>Auf Grund der mangelnden Hygiene und starker Bev&#246;lkerungszahl, ist in %s1 eine todbringende Seuche (Pest) ausgebrochen!</German>
-    <Italian>Due to the lack of hygiene and the large population, the deadly plague broke out in the city of %s1!</Italian>
+    <Italian>A causa della mancanza di igiene e della numerosa popolazione, &#232; scoppiata la peste mortale nella citt&#224; di %s1!</Italian>
     <Spanish>Debido a la falta de higiene y a la gran poblaci&#243;n, &#161;la mortal peste estall&#243; en la ciudad de %s1!</Spanish>
   </TEXT>
   <TEXT>
@@ -2918,7 +2894,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A lethal plague has spread from %s1 to %s2!</English>
     <French>L'&#233;pid&#233;mie de peste de %s1 a touch&#233; %s2 !</French>
     <German>Eine todbringende Seuche (Pest) wurde von %s1 in die Stadt %s2 geschleppt!</German>
-    <Italian>A lethal plague has spread from %s1 to %s2!</Italian>
+    <Italian>na piaga letale si &#232; diffusa da %s1 a %s2!</Italian>
     <Spanish>&#161;Una peste mortal se expandi&#243; de %s1 a %s2!</Spanish>
   </TEXT>
   <TEXT>
@@ -2926,7 +2902,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Due to the lack of hygiene and the large population, the plague broke out in the city of %s1! Its population dropped to %d2 (from %d3)!</English>
     <French>L'insalubrit&#233; et la surpopulation ont d&#233;clench&#233; une &#233;pid&#233;mie de peste &#224; %s1! Sa population baisse &#224; %d2 (sur %d3)!</French>
     <German>Die Bev&#246;lkerung von %s1 sank auf die Gr&#246;&#223;e %d2 (von %d3)!</German>
-    <Italian>Due to the lack of hygiene and the large population, the plague broke out in the city of %s1! Its population dropped to %d2 (from %d3)!</Italian>
+    <Italian>A causa della mancanza di igiene e della grande popolazione, &#232; scoppiata la peste nella citt&#224; di %s1! La sua popolazione &#232; scesa a %d2 (da %d3)!</Italian>
     <Spanish>Debido a la falta de higiene y a la gran poblaci&#243;n, &#161;la peste estall&#243; en la ciudad de %s1! &#161;Su poblaci&#243;n se redujo a %d2 (de %d3)!</Spanish>
   </TEXT>
   <TEXT>
@@ -2934,7 +2910,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_EATENFOOD] The surrounding villages and units near the city of %s1 have been affected by the lethal plague!</English>
     <French>[ICON_EATENFOOD] Les unit&#233;s aux alentours de %s1 ont contract&#233; la peste !</French>
     <German>[ICON_EATENFOOD] Die D&#246;rfer und Einheiten in der Umgebung von %s1 wurden von der todbringenden Pest in Mitleidenschaft gezogen!</German>
-    <Italian>[ICON_EATENFOOD] The surrounding villages and units near the city of %s1 have been affected by the lethal plague!</Italian>
+    <Italian>[ICON_EATENFOOD] I villaggi e le unit&#224; circostanti vicino alla citt&#224; di %s1 sono stati colpiti dalla peste letale!</Italian>
     <Spanish>[ICON_EATENFOOD] &#161;Los pueblos circundantes y unidades cercanas a la ciudad de %s1 han sido afectadas por una peste letal!</Spanish>
   </TEXT>
   <TEXT>
@@ -2942,7 +2918,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A %s1 near %s2 fell victim to the deadly plague!</English>
     <French>Une unit&#233; (%s1) pr&#232;s de %s2 meurt, victime de la peste !</French>
     <German>Eine Einheit %s1 bei %s2 ist der t&#246;dlichen Pest zum Opfer gefallen!</German>
-    <Italian>A %s1 near %s2 fell victim to the deadly plague!</Italian>
+    <Italian>Un'unit&#224;% s1 vicino a% s2 &#232; stata vittima di una piaga mortale!</Italian>
     <Spanish>&#161;Una unidad %s1 cerca de %s2 ha ca&#237;do v&#237;ctima de una peste mortal!</Spanish>
   </TEXT>
   <TEXT>
@@ -3166,7 +3142,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Congratulations! You have won over a Great Philosopher!</English>
     <French>F&#233;licitations ! Vous avez gagn&#233; un philosophe renomm&#233; &#224; votre cause !</French>
     <German>Gratulation! Ihr konntet einen gro&#223;artigen Philosophen f&#252;r Euch gewinnen!</German>
-    <Italian>Congratulations! You have won over a Great Philosopher!</Italian>
+    <Italian>Congratulazioni! Sei riuscito a portare un grande filosofo dalla tua parte!</Italian>
     <Spanish>&#161;Felicitaciones! &#161;Ganaste un gran ingeniero para ti!</Spanish>
   </TEXT>
   <TEXT>
@@ -3174,15 +3150,15 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>An important philosopher has joined your nation!</English>
     <French>Un philosophe renomm&#233; a rejoint votre nation !</French>
     <German>Ein wichtiger Philosoph ist bereit sich Eurer Nation anzuschlie&#223;en!</German>
-    <Italian>An important philosopher has joined your nation!</Italian>
+    <Italian>Un importante filosofo si &#232; unito alla tua nazione!</Italian>
     <Spanish>&#161;Un importante cient&#237;fico est&#225; dispuesto a unirse a tu naci&#243;n!</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_CATCH_GP3_3</Tag>
-    <English>A local philosopher was easily captivated by your adept soldiers!</English>
+    <English>A local philosopher was easily captured by your adept soldiers!</English>
     <French>Un savant local a &#233;t&#233; facilement captur&#233; par vos soldats !</French>
     <German>Ein ans&#228;ssiger Philosoph lie&#223; sich m&#252;helos von Euren gewandten Soldaten gefangen nehmen.</German>
-    <Italian>A local philosopher was easily captivated by your adept soldiers!</Italian>
+    <Italian>Un filosofo locale &#232; stato facilmente catturato dai tuoi abili soldati!</Italian>
     <Spanish>&#161;Un cient&#237;fico local fue f&#225;cilmente capturado por tus habilidosos soldados!</Spanish>
   </TEXT>
   <TEXT>
@@ -3190,7 +3166,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A great philosopher could get to safety in time!</English>
     <French>Un grand savant a pu se r&#233;fugier en lieu s&#251;r &#224; temps !</French>
     <German>Ein gro&#223;er Philosoph konnte sich noch rechtzeitig in Sicherheit bringen!</German>
-    <Italian>A great philosopher could get to safety in time!</Italian>
+    <Italian>Un grande filosofo &#232; riuscito a mettersi in salvo in tempo!</Italian>
     <Spanish>&#161;Un gran cient&#237;fico se salv&#243; a tiempo!</Spanish>
   </TEXT>
   <TEXT>
@@ -3198,7 +3174,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A philosopher could go into hiding in the nick of time!</English>
     <French>Un savant a r&#233;ussi &#224; se cacher juste &#224; temps !</French>
     <German>Ein Philosoph konnte noch rechtzeitig untertauchen!</German>
-    <Italian>A philosopher could go into hiding in the nick of time!</Italian>
+    <Italian>Uno filosofo &#232; riuscito a nascondersi appena in tempo!</Italian>
     <Spanish>&#161;Un cient&#237;fico se escondi&#243; en el momento preciso!</Spanish>
   </TEXT>
   <TEXT>
@@ -3206,7 +3182,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A local philosopher could just escape from the city in time!</English>
     <French>Un savant a r&#233;ussi &#224; s'&#233;chapper de la ville &#224; temps !</French>
     <German>Ein ans&#228;ssiger Philosoph konnte noch rechtzeitig aus der Stadt fliehen!</German>
-    <Italian>A local philosopher could just escape from the city in time!</Italian>
+    <Italian>Un filosofo locale &#232; riuscito a fuggire dalla citt&#224; in tempo!</Italian>
     <Spanish>&#161;Un cient&#237;fico escap&#243; de la ciudad justo a tiempo!</Spanish>
   </TEXT>
   <TEXT>
@@ -3222,7 +3198,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>When the resident philosopher refused to follow the soldier, he was beaten by him to death.</English>
     <French>Un savant a &#233;t&#233; battu &#224; mort par les soldats qu'il refusait de suivre.</French>
     <German>Als sich der ans&#228;ssige Philosoph weigerte dem Soldaten zu folgen, wurde er von diesem erschlagen.</German>
-    <Italian>When the resident philosopher refused to follow the soldier, he was beaten by him to death.</Italian>
+    <Italian>Un filosofo &#232; stato picchiato a morte dai soldati che si &#232; rifiutato di seguire.</Italian>
     <Spanish>Cuando un cient&#237;fico residente rehus&#243; seguir al soldado, fue golpeado hasta la muerte por &#233;l.</Spanish>
   </TEXT>
   <TEXT>
@@ -3230,7 +3206,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Because of a faulty construction, a great philosopher was died during the siege.</English>
     <French>Un savant est mort durant le si&#232;ge, victime d'un projectile perdu.</French>
     <German>Wegen einer fehlerhaften Konstruktion, kam ein gro&#223;artiger Philosoph w&#228;hrend der Belagerung ums Leben.</German>
-    <Italian>Because of a faulty construction, a great philosopher was died during the siege.</Italian>
+    <Italian>A causa di una costruzione danneggiata, un grande filosofo &#232; morto durante l'assedio.</Italian>
     <Spanish>A causa de una construcci&#243;n defectuosa, un gran cient&#237;fico muri&#243; durante el asedio.</Spanish>
   </TEXT>
   <TEXT>
@@ -3254,7 +3230,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A local merchant was easily captivated by your soldiers!</English>
     <French>Un marchand a &#233;t&#233; facilement captur&#233; par vos soldats !</French>
     <German>Ein reicher H&#228;ndler lie&#223; sich m&#252;helos von Euren Soldaten gefangen nehmen.</German>
-    <Italian>A local merchant was easily captivated by your soldiers!</Italian>
+    <Italian>Un mercante locale &#232; stato facilmente catturato dai tuoi soldati!</Italian>
     <Spanish>&#161;Un mercader local se captur&#243; f&#225;cilmente por tus soldados!</Spanish>
   </TEXT>
   <TEXT>
@@ -3342,7 +3318,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>An engineer went into hiding in the nick of time!</English>
     <French>Un ing&#233;nieur a r&#233;ussi &#224; se cacher juste &#224; temps !</French>
     <German>Ein Ingenieur konnte noch rechtzeitig untertauchen!</German>
-    <Italian>An engineer went into hiding in the nick of time!</Italian>
+    <Italian>Un ingegnere si &#232; nascosto appena in tempo!</Italian>
     <Spanish>&#161;Un ingeniero se escondi&#243; en el momento preciso!</Spanish>
   </TEXT>
   <TEXT>
@@ -3350,7 +3326,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A local engineer was able to escape from the city in time!</English>
     <French>Un ing&#233;nieur local s'est &#233;chapp&#233; de la ville &#224; temps !</French>
     <German>Ein ans&#228;ssiger Ingenieur konnte noch rechtzeitig aus der Stadt fliehen!</German>
-    <Italian>A local engineer was able to escape from the city in time!</Italian>
+    <Italian>Un ingegnere locale &#232; riuscito a fuggire dalla citt&#224; in tempo!</Italian>
     <Spanish>Un ingeniero local escap&#243; de la ciudad justo a tiempo!</Spanish>
   </TEXT>
   <TEXT>
@@ -3670,7 +3646,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>You have learned from a traitor that there is a %d2% chance to take the city of %s1 without a fight!</English>
     <French>Vous avez appris par un tra&#238;tre qu'il y a une chance de %d2% que vous puissiez prendre la ville de %s1 sans combattre !</French>
     <German>Ihr habt von einem verr&#228;terischen B&#252;rger herausgefunden, dass eine Chance von %d2% besteht, die Stadt %s1 kampflos zu &#252;bernehmen!</German>
-    <Italian>You have learned from a traitor that there is a %d2% chance to take the city of %s1 without a fight!</Italian>
+    <Italian>Hai appreso da un traditore che c'&#232; una probabilit&#224; del %d2% di conquistare la citt&#224; di %s1 senza combattere!</Italian>
     <Spanish>&#161;Aprendiste de un ciudadano traidor que hay una oportunidad de %d2% de tomar la ciudad %s1 sin luchar!</Spanish>
   </TEXT>
   <TEXT>
@@ -3678,7 +3654,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The inhabitants of %s1 see their lack of opportunities and leave you the city!</English>
     <French>Les habitants de %s1 voyant leur situation sans issue pr&#233;f&#232;rent quitter la ville !</French>
     <German>Die Einwohner von %s1 sehen ihre Chancenlosigkeit ein und &#252;berlassen Euch die Stadt!</German>
-    <Italian>The inhabitants of %s1 see their lack of opportunities and leave you the city!</Italian>
+    <Italian>Gli abitanti di %s1 vedono la loro mancanza di opportunit&#224; e ti lasciano la citt&#224;!</Italian>
     <Spanish>&#161;Los habitantes de %s1 ven la falta de oportunidades y te dejan la cuidad!</Spanish>
   </TEXT>
   <TEXT>
@@ -3686,7 +3662,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The residents of %s1 capitulate, because in their eyes a defense against your forces appears pointless!</English>
     <French>Les habitants de %s1 pr&#233;f&#232;rent capituler plut&#244;t que livrer un combat perdu d'avance !</French>
     <German>Die Bewohner von %s1 kapitulieren, da in ihren Augen eine Verteidigung gegen Eure Streitmacht zwecklos erscheint!</German>
-    <Italian>The residents of %s1 capitulate, because in their eyes a defense against your forces appears pointless!</Italian>
+    <Italian>Gli abitanti di %s1 capitolano, perch&#233; ai loro occhi una difesa contro le tue forze sembra inutile!</Italian>
     <Spanish>Los residentes de %s1 capitulan, &#161;porque a sus ojos una defensa contra tus fuerzas parece un sin sentido!</Spanish>
   </TEXT>
   <TEXT>
@@ -3694,7 +3670,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The defenders of %s1 leave you the city, after hours of debate on a defense and finally chanceless city defense! They will now fight on your side!</English>
     <French>Les d&#233;fenseurs de %s1 vous abandonnent la ville, apr&#232;s des heures de d&#233;bat sur l'utilit&#233; de sacrifier leurs vies dans un combat sans issue !</French>
     <German>Die Verteidiger von %s1 &#252;berlassen Euch die Stadt nach stundenlanger Diskussion &#252;ber eine schlie&#223;lich chancenlose Stadtverteidigung und k&#228;mpfen nun auf Eurer Seite!</German>
-    <Italian>The defenders of %s1 leave you the city, after hours of debate on a defense and finally chanceless city defense! They will now fight on your side!</Italian>
+    <Italian>I difensori di %s1 ti lasciano la citt&#224;, dopo ore di dibattito su una difesa e infine sulla difesa della citt&#224; senza possibilit&#224;! Ora combatteranno dalla tua parte!</Italian>
     <Spanish>Los defensores de %s1 te dejan la ciudad, &#161;despu&#233;s de horas de debate sobre la defensa y finalmente sin oportunidad de defender la ciudad! &#161;Luchar&#225;n de nuestro lado a partir de ahora!</Spanish>
   </TEXT>
   <TEXT>
@@ -3702,7 +3678,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Your army has put the citizen of %s1 in such a fear, that they voluntarily surrended the city!</English>
     <French>Votre arm&#233;e a tellement impressionn&#233; les citoyens de %s1 qu'ils ont pr&#233;f&#233;r&#233; se rendre sans combattre !</French>
     <German>Eure Streitmacht hat die B&#252;rger von %s1 derart in Angst versetzt, dass sie freiwillig die Stadt &#252;bergaben!</German>
-    <Italian>Your army has put the citizen of %s1 in such a fear, that they voluntarily surrended the city!</Italian>
+    <Italian>Il tuo esercito ha messo il cittadino di %s1 in una tale paura che si &#232; arreso volontariamente alla citt&#224;!</Italian>
     <Spanish>&#161;Tu ej&#233;rcito ha puesto a los ciudadanos de %s1 en tal miedo, que voluntariamente han rendido la ciudad!</Spanish>
   </TEXT>
   <TEXT>
@@ -3710,7 +3686,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The citizens of %s1 submit to your power and are now under your dominion!</English>
     <French>Les citoyens de %s1 se soumettent &#224; votre autorit&#233; !</French>
     <German>Die B&#252;rger von %s1 unterwerfen sich Eurer Macht und unterstehen nun Eurer Herrschaft!</German>
-    <Italian>The citizens of %s1 submit to your power and are now under your dominion!</Italian>
+    <Italian>I cittadini di %s1 si sottomettono al tuo potere e sono ora sotto il tuo dominio!</Italian>
     <Spanish>&#161;Los ciudadanos de %s1 se someten a tu poder y ahora est&#225;n bajo tu dominio!</Spanish>
   </TEXT>
   <TEXT>
@@ -3718,7 +3694,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The inhabitants of %s1 see no chance to withstand the attack! They leave the enemy occupying the city!</English>
     <French>Les habitants de %s1 ne voient aucun moyen de contrer votre assaut ! Ils laissent l'ennemi occuper la ville sans r&#233;sistance !</French>
     <German>Die Einwohner von %s1 sehen keine Chance dem Angriff Stand zu halten! Sie &#252;berlassen den feindlichen Besatzern die Stadt!</German>
-    <Italian>The inhabitants of %s1 see no chance to withstand the attack! They leave the enemy occupying the city!</Italian>
+    <Italian>Gli abitanti di %s1 non vedono alcuna possibilit&#224; di resistere all'attacco! Lasciano che il nemico occupi la citt&#224;!</Italian>
     <Spanish>&#161;Los habitantes de %s1 no ven oportunidad de resitir el ataque! &#161;Dejan que el enemigo ocupe la ciudad!</Spanish>
   </TEXT>
   <TEXT>
@@ -3726,7 +3702,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The residents of %s1 cannot and will no longer defend against the enemy force and surrend!</English>
     <French>Les habitants de %s1 ne peuvent plus r&#233;sister plus longtemps et se rendent !</French>
     <German>Die Bewohner von %s1 k&#246;nnen und wollen sich nicht mehr gegen die feindliche Streitmacht zur Wehr setzen und kapitulieren!</German>
-    <Italian>The residents of %s1 cannot and will no longer defend against the enemy force and surrend!</Italian>
+    <Italian>I residenti di %s1 non possono e non vogliono pi&#249; difendersi dalle forze nemiche e si arrendono!</Italian>
     <Spanish>&#161;Los residentes de %s1 no pueden y no se defender&#225;n mas contra las fuerzas enemigas y se rinden!</Spanish>
   </TEXT>
   <TEXT>
@@ -3734,7 +3710,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Through an intrigue during the siege, the city %s1 falls into enemy hands!</English>
     <French>Un complot pendant le si&#232;ge &#224; permis de livrer la ville de %s1 &#224; l'ennemi !</French>
     <German>Durch eine Intrige w&#228;hrend der Belagerung f&#228;llt die Stadt %s1 in feindliche H&#228;nde!</German>
-    <Italian>Through an intrigue during the siege, the city %s1 falls into enemy hands!</Italian>
+    <Italian>A causa di un intrigo durante l'assedio, la citt&#224; %s1 cade nelle mani del nemico!</Italian>
     <Spanish>A trav&#233;s de una confusi&#243;n durante el asedio, &#161;la ciudad %s1 cae en manos enemigas!</Spanish>
   </TEXT>
   <TEXT>
@@ -3742,7 +3718,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Due to the huge army at the borders and the awareness of the hopelessness, the citizens of %s1 have handed over their city to the enemy!</English>
     <French>La taille de l'arm&#233;e &#224; leurs portes et le sentiment d'impuissance ont conduit les citoyens de %s1 &#224; livrer leur ville &#224; l'ennemi !</French>
     <German>Durch die riesige Streitmacht an den Grenzen und die Bewu&#223;twerdung der Ausweglosigkeit, haben die B&#252;rger von %s1, dem Feind die Stadt &#252;bergeben!</German>
-    <Italian>Due to the huge army at the borders and the awareness of the hopelessness, the citizens of %s1 have handed over their city to the enemy!</Italian>
+    <Italian>A causa dell'enorme esercito ai confini e della consapevolezza della disperazione, i cittadini di %s1 hanno consegnato la loro citt&#224; al nemico!</Italian>
     <Spanish>Debido al enorme ej&#233;rcito en las fronteras y el conocimiento de desesperanza, &#161;los ciudadanos de %s1 han entregado su ciudad al enemigo!</Spanish>
   </TEXT>
   <TEXT>
@@ -3750,7 +3726,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The citizens of %s1 submit to the enemy power and are now under their dominion!</English>
     <French>Les citoyens de %s1 se soumettent devant la puissance de l'ennemi !</French>
     <German>Die B&#252;rger von %s1 unterwerfen sich der feindlichen Macht und unterstehen nun ihrer Herrschaft!</German>
-    <Italian>The citizens of %s1 submit to the enemy power and are now under their dominion!</Italian>
+    <Italian>I cittadini di %s1 si sottomettono al potere ostile e ora sono sotto il loro dominio!</Italian>
     <Spanish>&#161;Los ciudadanos de %s1 se sometieron al poder enemigo y est&#225;n ahora bajo su dominio!</Spanish>
   </TEXT>
   <TEXT>
@@ -3758,15 +3734,15 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>For fear of being the next city of your conquering expedition, the inhabitants of %s1 break out in panic!</English>
     <French>De peur d'&#234;tre la prochaine cible de vos conqu&#234;tes, les habitants de %s1 c&#232;dent &#224; la panique !</French>
     <German>Aus Angst, die n&#228;chste Stadt Eures Eroberungsfeldzuges zu sein, brechen die Einwohner von %s1 in Panik aus!</German>
-    <Italian>For fear of being the next city of your conquering expedition, the inhabitants of %s1 break out in panic!</Italian>
+    <Italian>Per paura di essere la prossima citt&#224; della tua spedizione di conquista, gli abitanti di %s1 scoppiano nel panico!</Italian>
     <Spanish>Por miedo de ser la siguiente ciudad de tu expedici&#243;n de conquista, &#161;los habitantes de %s1 han estallado en p&#225;nico!</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_CITY_REVOLTS_1_2</Tag>
-    <English>You victory has thrilled the people of %s1 into fear and terror!</English>
+    <English>Your victory has thrilled the people of %s1 into fear and terror!</English>
     <French>Vos victoires ont plong&#233; le peuple de %s1 dans la terreur !</French>
     <German>Euer Sieg hat die Einwohner von %s1 in Angst und Schrecken versetzt!</German>
-    <Italian>You victory has thrilled the people of %s1 into fear and terror!</Italian>
+    <Italian>La tua vittoria ha elettrizzato la gente di %s1 nella paura e nel terrore!</Italian>
     <Spanish>&#161;Tu victoria ha sumido a la gente de %s1 en el miedo y en el terror!</Spanish>
   </TEXT>
   <TEXT>
@@ -3774,7 +3750,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The inhabitants of %s1 revolt against the incompetence of their emperor after they received news that you have taken a nearby city!</English>
     <French>Les habitants de %s1 se r&#233;voltent contre l'incomp&#233;tence de leur empereur quand ils apprennent la chute de la ville voisine !</French>
     <German>Die Bewohner von %s1 revoltieren gegen die Unf&#228;higkeit ihres Herrschers, als sie die Nachricht erhielten, dass Ihr ihre Nachbarstadt eingenommen habt!</German>
-    <Italian>The inhabitants of %s1 revolt against the incompetence of their emperor after they received news that you have taken a nearby city!</Italian>
+    <Italian>Gli abitanti di %s1 si ribellano contro l'incompetenza del loro imperatore dopo aver ricevuto la notizia che hai preso una citt&#224; vicina!</Italian>
     <Spanish>&#161;Los habitantes de %s1 se rebelan contra la incompetencia de su emperador, cuando ellos reciben las noticias que has conquistado su ciudad vecina!</Spanish>
   </TEXT>
   <TEXT>
@@ -3782,7 +3758,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Fear is spreading in %s1! The residents are afraid to be the next! The city is sinking into chaos!</English>
     <French>La peur se r&#233;pand &#224; %s1 ! Les habitants ont peur d'&#234;tre les prochains assi&#233;g&#233;s ! La ville sombre dans le chaos !</French>
     <German>Furcht breitet sich in %s1 aus! Die Bewohner haben Angst die n&#228;chsten zu sein! Die Stadt versinkt im Chaos!</German>
-    <Italian>Fear is spreading in %s1! The residents are afraid to be the next! The city is sinking into chaos!</Italian>
+    <Italian>La paura si sta diffondendo in %s1! I residenti hanno paura di essere i prossimi! La citt&#224; sta sprofondando nel caos!</Italian>
     <Spanish>&#161;El miedo se esparce en %s1! &#161;Los residentes tienen miedo de ser los siguientes! &#161;La ciudad se sume en el caos!</Spanish>
   </TEXT>
   <TEXT>
@@ -3790,7 +3766,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Your glorious victory of the neighbour city has frightened the citizens of %s1!</English>
     <French>Votre glorieuse victoire sur la ville voisine a effray&#233; les citoyens de %s1 !</French>
     <German>Eurer glorreicher Sieg der Nachbarstadt von %s1 hat die B&#252;rger der Stadt in Angst und Schrecken versetzt!</German>
-    <Italian>Your glorious victory of the neighbour city has frightened the citizens of %s1!</Italian>
+    <Italian>La tua gloriosa vittoria della citt&#224; vicina ha spaventato i cittadini di %s1!</Italian>
     <Spanish>&#161;Tu victoria gloriosa de la ciudad vecina ha asustado a los ciudadanos de %s1!</Spanish>
   </TEXT>
   <TEXT>
@@ -3798,7 +3774,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The citizens of %s1 are rushing frantically through the streets! Your army and the sphere of influence of your nation has moved very close!</English>
     <French>Votre arm&#233;e s'approchant, les citoyens de %s1 c&#232;dent &#224; la panique !</French>
     <German>Die B&#252;rger von %s1 hetzen panisch durch die Stra&#223;en! Eure Armee und der Einflussbereich Eurer Nation ist nun sehr nahe ger&#252;ckt!</German>
-    <Italian>The citizens of %s1 are rushing frantically through the streets! Your army and the sphere of influence of your nation has moved very close!</Italian>
+    <Italian>I cittadini di %s1 stanno correndo freneticamente per le strade! Il tuo esercito e la sfera di influenza della tua nazione si sono avvicinati molto!</Italian>
     <Spanish>&#161;Los ciudadanos de %s1 est&#225;n corriendo fren&#233;ticamente por las calles! &#161;Tu ej&#233;rcito y la esfera de influencia de tu naci&#243;n se ha movido muy cerca!</Spanish>
   </TEXT>
   <TEXT>
@@ -3806,7 +3782,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>For fear of being the next city of the enemy conquering expedition, the inhabitants of %s1 break out in panic!</English>
     <French>De peur d'&#234;tre la prochaine cible de l'ennemi, les habitants de %s1 c&#232;dent &#224; la panique !</French>
     <German>Aus Angst, die n&#228;chste Stadt des feindlichen Eroberungsfeldzuges zu sein, brechen die Einwohner von %s1 in Panik aus!</German>
-    <Italian>For fear of being the next city of the enemy conquering expedition, the inhabitants of %s1 break out in panic!</Italian>
+    <Italian>Per paura di essere la prossima citt&#224; della spedizione di conquista del nemico, gli abitanti di %s1 scoppiano nel panico!</Italian>
     <Spanish>&#161;Por miedo a ser la siguiente ciudad de la expedici&#243;n de conquista enemiga, los habitantes de %s1 han estallado en p&#225;nico!</Spanish>
   </TEXT>
   <TEXT>
@@ -3814,7 +3790,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The enemy power has thrilled the people of %s1 into fear and terror!</English>
     <French>La puissance de l'ennemi a plong&#233; le peuple de %s1 dans la terreur !</French>
     <German>Die gegnerische Streitmacht hat die Einwohner von %s1 in Angst und Schrecken versetzt!</German>
-    <Italian>The enemy power has thrilled the people of %s1 into fear and terror!</Italian>
+    <Italian>Il potere del nemico ha eccitato la gente di %s1 nella paura e nel terrore!</Italian>
     <Spanish>&#161;El poder enemigo ha sumido a la gente de %s1 en el miedo y en el terror!</Spanish>
   </TEXT>
   <TEXT>
@@ -3822,7 +3798,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The inhabitants of %s1 revolt against the incompetence of their emperor, when they received the news that an armed enemy force are approaching!</English>
     <French>Les habitants de %s1 se r&#233;voltent contre votre incomp&#233;tence quand ils apprennent la chute de la cit&#233; voisine !</French>
     <German>Die Bewohner von %s1 revoltieren gegen die Unf&#228;higkeit ihrer Regierung, als sie die Nachricht erhielten, dass eine gegnerische Streitmacht n&#228;her r&#252;ckt!</German>
-    <Italian>The inhabitants of %s1 revolt against the incompetence of their emperor, when they received the news that an armed enemy force are approaching!</Italian>
+    <Italian>Gli abitanti di %s1 si ribellano contro l'incompetenza del loro imperatore, quando hanno ricevuto la notizia che una forza armata nemica si sta avvicinando!</Italian>
     <Spanish>Los habitantes de %s1 se rebelan contra la incompetencia de su emperador, &#161;cuando reciben las noticias de que un fuerza enemiga armada se est&#225; aproximando!</Spanish>
   </TEXT>
   <TEXT>
@@ -3830,7 +3806,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Fear is spreading in %s1! The residents are afraid to be the next! The city is sinking into chaos!</English>
     <French>La peur se r&#233;pand &#224; %s1 ! Les habitants ont peur d'&#234;tre la prochaine cible ! La ville sombre dans le chaos !</French>
     <German>Furcht breitet sich in %s1 aus! Die Bewohner haben Angst die n&#228;chsten zu sein! Die Stadt versinkt im Chaos!</German>
-    <Italian>Fear is spreading in %s1! The residents are afraid to be the next! The city is sinking into chaos!</Italian>
+    <Italian>La paura si sta diffondendo in %s1! I residenti hanno paura di essere i prossimi! La citt&#224; sta sprofondando nel caos!</Italian>
     <Spanish>&#161;El miedo se esparce en %s1! &#161;Los residentes tienen miedo de ser los siguientes! &#161;La ciudad se sume en el caos!</Spanish>
   </TEXT>
   <TEXT>
@@ -3838,7 +3814,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The terrible decay of the neighbour territories has frightened the citizens of %s1!</English>
     <French>La chute de la ville voisine a effray&#233; les citoyens de %s1 !</French>
     <German>Der schreckliche Verfall der Nachbargebiete bei %s1 hat die B&#252;rger der Stadt in Angst und Schrecken versetzt!</German>
-    <Italian>The terrible decay of the neighbour territories has frightened the citizens of %s1!</Italian>
+    <Italian>Il terribile decadimento dei territori vicini ha spaventato i cittadini di %s1!</Italian>
     <Spanish>&#161;El terrible declive de los territorios vecinos ha asustado a los ciudadanos de %s1!</Spanish>
   </TEXT>
   <TEXT>
@@ -3846,7 +3822,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The citizens of %s1 are rushing frantically through the streets! The enemy nation and its sphere of influence has moved very close!</English>
     <French>Les citoyens c&#232;dent &#224; la panique dans les rues de %s1 ! L'arm&#233;e ennemie se rapproche !</French>
     <German>Die B&#252;rger von %s1 hetzen panisch durch die Stra&#223;en! Die feindliche Nation und ihr Einflussbereich ist nun sehr nahe ger&#252;ckt!</German>
-    <Italian>The citizens of %s1 are rushing frantically through the streets! The enemy nation and its sphere of influence has moved very close!</Italian>
+    <Italian>I cittadini di %s1 stanno correndo freneticamente per le strade! La nazione nemica e la sua sfera di influenza si sono avvicinate molto!</Italian>
     <Spanish>&#161;Los ciudadanos de %s1 est&#225;n corriendo fren&#233;ticamente por las calles! La naci&#243;n enemiga y su esfera de influencia se ha movido muy cerca!</Spanish>
   </TEXT>
   <TEXT>
@@ -3910,7 +3886,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>You have conquered %d2 gold pieces!</English>
     <French>Vous avez pill&#233; %d2 [ICON_GOLD] !</French>
     <German>Ihr habt %d2 Goldst&#252;cke erobert!</German>
-    <Italian>You have conquered %d2 gold pieces!</Italian>
+    <Italian>Hai conquistato %d2 monete d'oro!</Italian>
     <Spanish>&#161;Has conquistado %d2 piezas de oro!</Spanish>
   </TEXT>
   <TEXT>
@@ -3918,7 +3894,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>You have lost %d2 gold pieces to the enemies!</English>
     <French>Les pillards ennemis vous ont vol&#233; %d2 [ICON_GOLD] !</French>
     <German>Ihr habt %d2 Goldst&#252;cke an die Feinde verloren!</German>
-    <Italian>You have lost %d2 gold pieces to the enemies!</Italian>
+    <Italian>Hai perso %d2 monete d'oro a favore dei nemici!</Italian>
     <Spanish>&#161;Has perdido %d2 piezas de oro de los enemigos!</Spanish>
   </TEXT>
   <TEXT>
@@ -3926,7 +3902,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A CITY REBELS! The governor and the citizens of %s1 encapsulate from your nation and proclaim their independence! Retake %s2 at all costs!</English>
     <French>R&#201;BELLION ! Le gouverneur et les citoyens de %s1 ont proclam&#233; leur ind&#233;pendance ! Reprenez %s2 &#224; tout prix !</French>
     <German>EINE STADT REBELLIERT! Der Statthalter und die B&#252;rger von %s1 kapseln sich von Eurem Reich ab und rufen ihre Unabh&#228;ngigkeit aus! Greift zu allen Mitteln und holt %s2 zur&#252;ck!</German>
-    <Italian>A CITY REBELS! The governor and the citizens of %s1 encapsulate from your nation and proclaim their independence! Retake %s2 at all costs!</Italian>
+    <Italian>UNA CITT&#192; RIBELLE! Il governatore e i cittadini di %s1 incapsulano la tua nazione e proclamano la loro indipendenza! Riprendere %s2 a tutti i costi!</Italian>
     <Spanish>&#161;UNA CIUDAD SE REBELA! &#161;El gobernador y los ciudadanos %s2:3 de %s1 recogidos de tu naci&#243;n y proclaman su independencia! &#161;Retoma %s2 a toda costa!</Spanish>
   </TEXT>
   <TEXT>
@@ -3934,7 +3910,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A CITY REBELS! The governor and the %s2 citizens of %s1 encapsulate from your nation and receive protection from their original homeland! Only a war can reclaim you the city!</English>
     <French>REB&#201;LLION ! Le gouverneur et les citoyens %s2:3 de %s1 se sont ralli&#233;s &#224; leur patrie ! Seule une guerre pourra vous permettre de r&#233;cup&#233;rer la ville !</French>
     <German>EINE STADT REBELLIERT! Der Statthalter und die %s2 B&#252;rger von %s1 kapseln sich von Eurem Reich ab und bekommen Schutz von ihrem urspr&#252;nglichen Vaterland! Nur ein Krieg kann Euch die Stadt zur&#252;ckholen!</German>
-    <Italian>A CITY REBELS! The governor and the %s2 citizens of %s1 encapsulate from your nation and receive protection from their original homeland! Only a war can reclaim you the city!</Italian>
+    <Italian>UNA CITT&#192; RIBELLE! Il governatore e i %s2 cittadini di %s1 fanno parte della tua nazione e ricevono protezione dalla loro patria originale! Solo una guerra pu&#242; reclamarti la citt&#224;!</Italian>
     <Spanish>&#161;UNA CIUDAD SE REBELA! &#161;El gobernador y los ciudadanos %s2:3 de %s1 recogidos de tu naci&#243;n y reciben protecci&#243;n de su patria original! &#161;Solo una guerra puede reclamarte la ciudad!</Spanish>
   </TEXT>
   <TEXT>
@@ -3942,7 +3918,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The governor of %s1 tries to provoke the %s2 citizens to incite a rebellion! Your loyal units could just prevent a parting of the city from your kingdom! It's such a bloody street battles!</English>
     <French>Le gouverneur de %s1 essaie d'inciter les citoyens %s2:3 &#224; la r&#233;bellion ! Vos unit&#233;s loyales ont pu &#233;viter la s&#233;cession de justesse ! Les rues portent encore les stigmates de violents combats !</French>
     <German>Der Statthalter von %s1 versucht die %s2 B&#252;rger zu einer Rebellion anzustiften! Eure Euch loyalen Einheiten konnten gerade noch eine Losl&#246;sung der Stadt von Eurem Reich verhindern! Es herrschen blutige Strassenschlachten!</German>
-    <Italian>The governor of %s1 tries to provoke the %s2 citizens to incite a rebellion! Your loyal units could just prevent a parting of the city from your kingdom! It's such a bloody street battles!</Italian>
+    <Italian>Il governatore di %s1 cerca di provocare i cittadini di %s2 per incitare alla ribellione! Le tue unit&#224; fedeli potrebbero semplicemente impedire una separazione della citt&#224; dal tuo regno! &#200; una battaglia di strada cos&#236; sanguinosa!</Italian>
     <Spanish>&#161;El gobernador de %s1 intenta provocar a los ciudadanos %s2:3 para incitar una rebeli&#243;n! &#161;Tus leales unidades solo consiguen prevenir una parte de la ciudad a tu reino! &#161;Es como una sangrienta batalla callejera!</Spanish>
   </TEXT>
   <TEXT>
@@ -3958,7 +3934,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Street riots rattle %s1! The citizens yearn for their old homeland!</English>
     <French>Les &#233;meutes embrasent %s1 ! Ses citoyens aspirent &#224; retrouver leur patrie !</French>
     <German>Stra&#223;enschlachten ersch&#252;ttern %s1! Die B&#252;rger sehnen sich nach ihrer alten Heimat!</German>
-    <Italian>Street riots rattle %s1! The citizens yearn for their old homeland!</Italian>
+    <Italian>Rivolte di strada fanno tremare %s1! I cittadini bramano la loro vecchia patria!</Italian>
     <Spanish>&#161;Disturbios callejeros sacuden %s1! &#161;Los ciudadanos anhelan su antigua patria!</Spanish>
   </TEXT>
   <TEXT>
@@ -3974,7 +3950,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A day of wrath is declared in %s1! The various religious views by the lack of the state religion lead to brutal street fighting!</English>
     <French>Un jour de col&#232;re est d&#233;cr&#233;t&#233; &#224; %s1 ! L'absence de religion d'&#233;tat a permis l'apparition de nombreux mouvements religieux qui cohabitent ... difficilement !</French>
     <German>Ein Tag des Zorns wird in %s1 ausgerufen! Die verschiedenen religi&#246;sen Ansichten durch die fehlende Staatsreligion f&#252;hren zu brutalen Stra&#223;engefechten!</German>
-    <Italian>A day of wrath is declared in %s1! The various religious views by the lack of the state religion lead to brutal street fighting!</Italian>
+    <Italian>Un giorno di ira &#232; dichiarato in %s1! Le varie visioni religiose dalla mancanza della religione di stato portano a brutali combattimenti di strada!</Italian>
     <Spanish>&#161;El d&#237;a de la ira es declarado en %s1! &#161;Las diferentes opiniones religiosas por la falta de una religi&#243;n oficial conducen a una brutal lucha callejera!</Spanish>
   </TEXT>
   <TEXT>
@@ -3982,7 +3958,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The citizens of %s1 protest against your high taxes! The city is sinking into chaos!</English>
     <French>Les citoyens de %s1 protestent contre les taxes exorbitantes ! La ville sombre dans le chaos !</French>
     <German>Die B&#252;rger in %s1 protestieren gegen Eure hohen Steuern! Die Stadt versinkt im Chaos!</German>
-    <Italian>The citizens of %s1 protest against your high taxes! The city is sinking into chaos!</Italian>
+    <Italian>I cittadini di %s1 protestano contro le tue tasse elevate! La citt&#224; sta sprofondando nel caos!</Italian>
     <Spanish>&#161;Los ciudadanos de %s1 protestan contra tus altos impuestos! &#161;La ciudad se sume en el caos!</Spanish>
   </TEXT>
   <TEXT>
@@ -3990,7 +3966,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The strong dissatisfaction in %s1 triggers bloody street riots! After the governor was made involuntarily quiet, lynching rules!</English>
     <French>Le fort m&#233;contentement &#224; %s1 a d&#233;clench&#233; de sanglantes &#233;meutes !</French>
     <German>Die starke Unzufriedenheit in %s1 l&#246;st blutige Stra&#223;enschlachten aus! Nachdem der Statthalter unfreiwillig ruhig gestellt wurde, herrscht Lynchjustiz!</German>
-    <Italian>The strong dissatisfaction in %s1 triggers bloody street riots! After the governor was made involuntarily quiet, lynching rules!</Italian>
+    <Italian>La forte insoddisfazione in %s1 scatena sanguinose rivolte di strada! Dopo che il governatore &#232; stato involontariamente messo a tacere, le regole del linciaggio!</Italian>
     <Spanish>&#161;La fuerte insatisfacc&#243;n en %s1 desencadena sangrientos disturbios callejeros! &#161;Despu&#233;s de que el gobernador hiciera involuntariamente tranquilo, normas de linchamiento!</Spanish>
   </TEXT>
   <TEXT>
@@ -4044,9 +4020,9 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_MERCHANT_ROBBERY_1</Tag>
     <English>Robbery! Your merchants were robbed by bandits. There are no survivors and except of a few broken jars, everything's gone.</English>
-    <French>Aux voleurs ! Vos marchand se sont fait d&#233;pouill&#233;s par des brigands. Il n'y a pas de survivant et, &#224; part quelques vases bris&#233;s, tout a disparu.</French>
+    <French>Au voleur ! Vos marchand se sont fait d&#233;pouill&#233;s par des brigands. Il n'y a pas de survivant et, &#224; part quelques vases bris&#233;s, tout a disparu.</French>
     <German>&#220;berfall! Eure H&#228;ndler wurden von Banditen &#252;berfallen. Es gibt keine &#252;berlebenden und bis auf ein paar zerbrochene Tonkr&#252;ge ist alles weg.</German>
-    <Italian>Robbery! Your merchants were robbed by bandits. There are no survivors and except of a few broken jars, everything's gone.</Italian>
+    <Italian>Ci hanno rapinati! I tuoi mercanti sono stati derubati dai banditi. Non ci sono sopravvissuti e ad eccezione di alcuni barattoli rotti, tutto &#232; sparito.</Italian>
     <Spanish>&#161;Atraco! Tus mercaderes fueron atracados por bandidos. No hay supervivientes y excepto algunas jarras rotas, se llevaron todo.</Spanish>
   </TEXT>
   <TEXT>
@@ -4070,7 +4046,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Without a Trace! Your merchants have been seen here recently for the last time!</English>
     <French>Disparu sans laisser de traces ! Vos marchands n'ont plus donn&#233; signe de vie depuis un moment d&#233;j&#224; !</French>
     <German>Spurlos verschwunden! Eure H&#228;ndler sind zuletzt hier gesehen worden!</German>
-    <Italian>Without a Trace! Your merchants have been seen here recently for the last time!</Italian>
+    <Italian>Nessuna traccia! I tuoi mercanti sono stati visti qui l'ultima volta!</Italian>
     <Spanish>&#161;Sin pistas! &#161;Tus mercaderes han sido vistos aqu&#237; recientemente la &#250;ltima vez!</Spanish>
   </TEXT>
   <TEXT>
@@ -4548,9 +4524,9 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   <TEXT>
     <Tag>TXT_KEY_POPUP_PROJECT_SEIDENSTRASSE</Tag>
     <English>The Silk Road brings caravans to your city, fully loaded with the finest goods the East has to offer. The caravans are now available for new trade routes.</English>
-    <French>La Route de la Soie am&#232;ne des caravanes dans votre ville, enti&#232;rement charg&#233;es des meilleurs produits que l'Orient a &#224; offrir. Les caravanes sont d&#233;sormais disponibles pour de nouvelles routes commerciales.</French>
+    <French>La Route de la Soie am&#232;ne des caravanes dans votre ville, lourdement charg&#233;es des meilleurs produits que l'Orient a &#224; offrir. Les caravanes sont d&#233;sormais disponibles pour de nouvelles routes commerciales.</French>
     <German>Die Seidenstra&#223;e bringt Karawanen in Eure Stadt, voll beladen mit den feinsten G&#252;tern, die der Osten zu bieten hat. Die Karawanen stehen ab jetzt f&#252;r neue Handelswege zur Verf&#252;gung.</German>
-    <Italian>La Via della Seta porta roulotte nella tua citt&#224;, a pieno carico delle migliori merci che l'Oriente ha da offrire. Le roulotte sono ora disponibili per nuove rotte commerciali.</Italian>
+    <Italian>La Via della Seta porta carri commerciali nella tua citt&#224;, caricati con le migliori merci che l'Oriente ha da offrire. I carri sono ora disponibili per nuove rotte commerciali.</Italian>
     <Spanish>La Ruta de la Seda trae caravanas a su ciudad, totalmente cargadas con los mejores productos que Oriente tiene para ofrecer. Las caravanas ahora est&#225;n disponibles para nuevas rutas comerciales.</Spanish>
   </TEXT>
   <TEXT>
@@ -4630,7 +4606,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A giant sea storm has broken out on the deep sea!</English>
     <French>Une terrible temp&#234;te fait rage en mer !</French>
     <German>Ein gewaltiger Seesturm ist auf Hoher See losgebrochen!</German>
-    <Italian>A giant sea storm has broken out on the deep sea!</Italian>
+    <Italian>Una gigantesca tempesta marina &#232; scoppiata nel mare profondo!</Italian>
     <Spanish>&#161;Una gigantesca tormenta marina se ha desatado en alta mar!</Spanish>
   </TEXT>
   <TEXT>
@@ -4830,7 +4806,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Active</English>
     <French>Active</French>
     <German>Aktiv</German>
-    <Italian>Active</Italian>
+    <Italian>Attiva</Italian>
     <Spanish>Activo</Spanish>
   </TEXT>
   <TEXT>
@@ -4948,9 +4924,9 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_CITY_NOBONUSNOBUILDING_3</Tag>
     <English>The granary in %s1 has been mined as none of the five cereals are delivered to the city.</English>
-    <French>Le grenier de %s1 a &#233;t&#233; d&#233;sert&#233;, aucune des cinq c&#233;r&#233;ales n'ayant &#233;t&#233; livr&#233;e &#224; la ville.</French>
+    <French>Sans approvisionnement c&#233;r&#233;alier, le Grenier devenu inutile a &#233;t&#233; d&#233;mantel&#233; &#224; %s1_city.</French>
     <German>Der Kornspeicher in %s1 wurde abgebaut, da keine der f&#252;nf Getreidesorten mehr in die Stadt geliefert wird.</German>
-    <Italian>Il granaio in %s1 &#232; stato estratto poich&#233; nessuno dei cinque cereali viene consegnato alla citt&#224;.</Italian>
+    <Italian>Il granaio in %s1 &#232; stato smantellato poich&#233; nessuno dei cinque cereali viene consegnato alla citt&#224;.</Italian>
     <Spanish>El granero en %s1 se ha extra&#237;do ya que ninguno de los cinco cereales se entregan a la ciudad.</Spanish>
   </TEXT>
   <TEXT>
@@ -4974,7 +4950,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>%s1 are on turn.</English>
     <French>%s1 jouent.</French>
     <German>%s1 sind am Zug.</German>
-    <Italian>%s1 are on turn.</Italian>
+    <Italian>%s1 sono di turno.</Italian>
     <Spanish>%s1 son en el turno.</Spanish>
   </TEXT>
   <TEXT>
@@ -5014,7 +4990,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>3200 BC. Due to the union of Upper and Lower Egypt, major gods get introduced and worshiped in elaborate temples.</English>
     <French>3200 av JC. Suite &#224; l'unification de la Haute et Basse &#201;gypte, les principaux dieux sont introduits et v&#233;n&#233;r&#233;s dans des temples ouvrag&#233;s.</French>
     <German>3200 v. Chr.: Durch die Vereinigung von Ober- und Unter&#228;gypten werden Hauptg&#246;tter eingef&#252;hrt und in kunstvollen Tempeln verehrt.</German>
-    <Italian>3200 BC. Due to the union of Upper and Lower Egypt, major gods get introduced and worshiped in elaborate temples.</Italian>
+    <Italian>3200 aC. A causa dell'unione dell'Alto e del Basso Egitto, le divinit&#224; principali vengono introdotte e adorate in templi elaborati.</Italian>
     <Spanish>3200 a.C. Debido a la uni&#243;n del Alto y Bajo Egipto, los principales dioses fueron introducidos y adorados en templos detallados.</Spanish>
   </TEXT>
   <TEXT>
@@ -5126,7 +5102,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>About 2000 BC. In Greece begins the first Indo-European immigration.</English>
     <French>Environ 2000 av JC. D&#233;but de la premi&#232;re vague d'immigration indo-europ&#233;enne en Gr&#232;ce.</French>
     <German>Um 2000 v. Chr.: In Griechenland findet die erste indogermanische Einwanderung statt.</German>
-    <Italian>About 2000 BC. In Greece begins the first Indo-European immigration.</Italian>
+    <Italian>Circa 2000 aC. In Grecia inizia la prima immigrazione indoeuropea.</Italian>
     <Spanish>Sobre el 2000 a.C. En Grecia comienza la primera inmigraci&#243;n indoeuropea.</Spanish>
   </TEXT>
   <TEXT>
@@ -5270,7 +5246,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>1220 BC. The Israelites move from Egypt.</English>
     <French>1220 av JC. Exode des isra&#233;lites hors d'Egypte.</French>
     <German>1220 v. Chr.: Die Israeliten ziehen aus &#196;gypten aus.</German>
-    <Italian>1220 BC. The Israelites move from Egypt.</Italian>
+    <Italian>1220 aC. Gli Israeliti si spostano dall'Egitto.</Italian>
     <Spanish>1220 a.C. Los israelitas se trasladan de Egipto.</Spanish>
   </TEXT>
   <TEXT>
@@ -5342,7 +5318,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>1000 BC. 21. Dynasty. Egypt under Smendes becomes a theocracy.</English>
     <French>1000 avant JC, 21&#232; dynastie. L'Egypte devient une th&#233;ocratie sous le r&#232;gne de Smendes.</French>
     <German>1000 v. Chr.: 21. Dynastie, &#196;gypten wird unter Smendes zum Gottesstaat.</German>
-    <Italian>1000 BC. 21. Dynasty. Egypt under Smendes becomes a theocracy.</Italian>
+    <Italian>1000 aC. 21. Dinastia. L'Egitto sotto Smendes diventa una teocrazia.</Italian>
     <Spanish>1000 a.C. 21&#170; Dinast&#237;a. Egipto bajo Esmendes se convierte en una teocracia.</Spanish>
   </TEXT>
   <TEXT>
@@ -5358,7 +5334,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>995 BC. The Israelite king David enlarges Jerusalem to a fortified capital.</English>
     <French>995 av JC. Le roi isra&#233;lite David transforme J&#233;rusalem en capitale fortifi&#233;e.</French>
     <German>995 v. Chr.: Der israelitische K&#246;nig David baut Jerusalem zur befestigten Hauptstadt aus.</German>
-    <Italian>995 BC. The Israelite king David enlarges Jerusalem to a fortified capital.</Italian>
+    <Italian>995 aC. Il re israelita Davide ingrandisce Gerusalemme a capitale fortificata.</Italian>
     <Spanish>995 a.C. El rey israelita David ampl&#237;a Jerusalem en una capital fortificada.</Spanish>
   </TEXT>
   <TEXT>
@@ -5438,7 +5414,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>740-720 BC. Sparta's first Messenian War takes place.</English>
     <French>740-720 avant JC : premi&#232;re guerre entre Sparte et la Mess&#233;nie.</French>
     <German>740-720 v. Chr.: Erster messenischer Krieg Spartas findet statt.</German>
-    <Italian>740-720 BC. Sparta's first Messenian War takes place.</Italian>
+    <Italian>740-720 a.C. Ha luogo la prima guerra messenica di Sparta.</Italian>
     <Spanish>740-720 a.C. Tuvo lugar la primera Guerra Mesenia de Esparta.</Spanish>
   </TEXT>
   <TEXT>
@@ -5446,7 +5422,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Around 700 BC. Getting money economy in the Ionians.</English>
     <French>Autour de 700 avant JC : premi&#232;res pi&#232;ces de monnaie en Ionie.</French>
     <German>Um 700 v. Chr.: Erste Geldwirtschaft bei den Ioniern.</German>
-    <Italian>Around 700 BC. Getting money economy in the Ionians.</Italian>
+    <Italian>Intorno al 700 a.C. Ottenere l'economia monetaria negli Ioni.</Italian>
     <Spanish>Alrededor del 700 a.C. Se obtiene la econom&#237;a del dinero en los Jonios.</Spanish>
   </TEXT>
   <TEXT>
@@ -5462,7 +5438,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>660-640 BC. Sparta's seconde Messenian War takes place. The phalanx formation appears for the first time.</English>
     <French>660-640 avant JC : seconde guerre entre Sparte et la Mess&#233;nie. La formation en phalange appara&#238;t.</French>
     <German>660-640 v. Chr. Zweiter messenischer Krieg Spartas findet statt, erstmals taucht die Phalanx-Formation auf.</German>
-    <Italian>660-640 BC. Sparta's seconde Messenian War takes place. The phalanx formation appears for the first time.</Italian>
+    <Italian>660-640 aC. Ha luogo la seconda guerra messenica di Sparta. La formazione della falange appare per la prima volta.</Italian>
     <Spanish>660-640 a.C. Tuvo lugar la segunda Guerra Mesenia. Aparece la formaci&#243;n falange por primera vez.</Spanish>
   </TEXT>
   <TEXT>
@@ -5486,7 +5462,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>663 BC. Assyrians destroy the ancient Egyptian capital of Thebes.</English>
     <French>663 av JC. Les assyriens d&#233;truisent Th&#232;bes, la capitale &#233;gyptienne.</French>
     <German>663 v. Chr.: Die Assyrer zerst&#246;ren die damalige &#228;gyptische Hauptstadt Theben.</German>
-    <Italian>663 BC. Assyrians destroy the ancient Egyptian capital of Thebes.</Italian>
+    <Italian>663 a.C. Gli assiri distruggono l'antica capitale egiziana di Tebe.</Italian>
     <Spanish>663 a.C. Asirios destruyen la antigua capital egipcia de Tebas.</Spanish>
   </TEXT>
   <TEXT>
@@ -5523,11 +5499,11 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_HISTORY_615BC_5</Tag>
-    <English>690 BC. Sanherib, not Nebuchadnezzar II of Bablyon, constructs the Hanging Gardens in Ninive.</English>
-    <French>690 av JC. Sennach&#233;rib, et pas de Nabuchodonosor II de Babylone, a construit les Jardins suspendus &#224; Ninive.</French>
-    <German>690 v. Chr.: Sanherib, nicht Nebukadnezar II von Babylon, l&#228;sst die H&#228;ngenden G&#228;rten in Ninive anlegen.</German>
-    <Italian>690 aC. Sanherib, non Nabucodonosor II di Babilonia, costru&#236; i giardini pensili di Ninive.</Italian>
-    <Spanish>690 a.C. Sanherib, no Nebuchadnezzar II de Babilonia, construy&#243; los Jardines Colgantes en Ninive.</Spanish>
+    <English>690 BC. Sanherib, not Nebuchadnezzar II of Bablyon, constructs the Hanging Gardens in Babylon (or Niniveh).</English>
+    <French>690 av JC. Sennach&#233;rib, et pas de Nabuchodonosor II de Babylone, a construit les Jardins suspendus &#224; Babylon (ou Ninive).</French>
+    <German>690 v. Chr.: Sanherib, nicht Nebukadnezar II von Babylon, l&#228;sst die H&#228;ngenden G&#228;rten in Babylon (oder Ninive) anlegen.</German>
+    <Italian>690 aC. Sennacherib, non Nabucodonosor II di Babilonia, costru&#236; i giardini pensili di Babylon (o Ninive).</Italian>
+    <Spanish>690 a.C. Sanherib, no Nebuchadnezzar II de Babilonia, construy&#243; los Jardines Colgantes en Babylon (o N&#237;nive).</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_HISTORY_580BC_1</Tag>
@@ -5758,7 +5734,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>350 BC. The Persian provincial governor King Mausolos II builds a huge monument: the Mausoleum of Halicarnassus.</English>
     <French>350 avant JC. La femme de mausole, satrape de Carie, fait construire un &#233;norme monument apr&#232;s sa mort : le mausol&#233;e d'Halicarnasse.</French>
     <German>350 v. Chr. l&#228;sst der persische Provinzstatthalter K&#246;nig Mausolos II ein riesiges Grabmal errichten: Das Mausoleum von Halikarnassos.</German>
-    <Italian>350 BC. The Persian provincial governor King Mausolos II builds a huge monument: the Mausoleum of Halicarnassus.</Italian>
+    <Italian>350 aC. Il governatore provinciale persiano re Mausolo II costruisce un enorme monumento: il Mausoleo di Alicarnasso.</Italian>
     <Spanish>350 a.C. El Rey gobernador provincial persa Mausolo II construy&#243; un gran monumento: el Mausoleo de Halicarnaso.</Spanish>
   </TEXT>
   <TEXT>
@@ -6062,7 +6038,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>58-51 BC. Veni. Vidi. Vici. Caesar conquers Gaul.</English>
     <French>58-51 av JC. Veni. Vidi. Vici. C&#233;sar conquiert la Gaule.</French>
     <German>58-51 v. Chr.: Veni. Vidi. Vici. Caesar erobert Gallien.</German>
-    <Italian>58-51 BC. Veni. Vidi. Vici. Caesar conquers Gaul.</Italian>
+    <Italian>58-51 a.C. Veni. Vidi. Vici. Cesare conquista la Gallia.</Italian>
     <Spanish>58-51 a.C. Veni. Vidi. Vici. C&#233;sar conquista la Galia.</Spanish>
   </TEXT>
   <TEXT>
@@ -6150,7 +6126,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>About 30 AD. Jesus gets crucified.</English>
     <French>Environ 30 ap JC. J&#233;sus est crucifi&#233;.</French>
     <German>Um 30 n. Chr.: Jesus wird gekreuzigt.</German>
-    <Italian>About 30 AD. Jesus gets crucified.</Italian>
+    <Italian>Circa 30 d.C. Ges&#249; viene crocifisso.</Italian>
     <Spanish>Sobre el 30 d.C. Jes&#250;s fue crucificado.</Spanish>
   </TEXT>
   <TEXT>
@@ -6158,7 +6134,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>43 AD. Britain is attacked by the Roman army.</English>
     <French>43 apr&#232;s JC. La Bretagne est envahie par l'arm&#233;e romaine.</French>
     <German>43 n. Chr. wird Britannien von der r&#246;mischen Armee &#252;berfallen.</German>
-    <Italian>43 AD. Britain is attacked by the Roman army.</Italian>
+    <Italian>43 d.C. La Gran Bretagna viene attaccata dall'esercito romano.</Italian>
     <Spanish>43 d.C. Breta&#241;a es atacado por el ej&#233;rcito romano.</Spanish>
   </TEXT>
   <TEXT>
@@ -6174,7 +6150,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>70 AD. Rome destroyed Jerusalem after a city revolt.</English>
     <French>70 ap JC. Rome d&#233;truit J&#233;rusalem apr&#232;s un soul&#232;vement dans la ville.</French>
     <German>70 n. Chr.: Rom zerst&#246;rt Jerusalem nach einem Aufstand.</German>
-    <Italian>70 AD. Rome destroyed Jerusalem after a city revolt.</Italian>
+    <Italian>70 d.C. Roma distrusse Gerusalemme dopo una rivolta cittadina.</Italian>
     <Spanish>70 d.C. Roma destruye Jerusal&#233;n despu&#233;s de una revuelta de la ciudad.</Spanish>
   </TEXT>
   <TEXT>
@@ -6182,7 +6158,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>79 AD. Vesuvius erupts. Pompeii gets destroyed.</English>
     <French>79 ap JC. Eruption du V&#233;suve. Pomp&#233;i est d&#233;truite.</French>
     <German>79 n. Chr.: Der Vesuv bricht aus. Pompeji wird zerst&#246;rt.</German>
-    <Italian>79 AD. Vesuvius erupts. Pompeii gets destroyed.</Italian>
+    <Italian>79 d.C. Erutta il Vesuvio. Pompei viene distrutta.</Italian>
     <Spanish>79 d.C. El Vesubio entra en erupci&#243;n. Pompeya es destru&#237;da.</Spanish>
   </TEXT>
   <TEXT>
@@ -6214,7 +6190,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>122 AD. Emperor Hadrian builds the Hadrian's Wall in northern Britain.</English>
     <French>122 ap JC. L'empereur Hadrien fait construire le mur d'Hadrien au nord de la Bretagne.</French>
     <German>122 n. Chr. errichtet Kaiser Hadrian im Norden Britanniens den Hadrianswall.</German>
-    <Italian>122 AD. Emperor Hadrian builds the Hadrian's Wall in northern Britain.</Italian>
+    <Italian>122 d.C. L'imperatore Adriano costruisce il Vallo di Adriano nel nord della Gran Bretagna.</Italian>
     <Spanish>122 d.C. El emperador Adriano construyen las Murallas de Adriano en el norte de Breta&#241;a.</Spanish>
   </TEXT>
   <TEXT>
@@ -6230,7 +6206,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>132-135 AD. Uprising of the Jews. Jerusalem is destroyed.</English>
     <French>132-135 ap JC. R&#233;volte des juifs. J&#233;rusalem est d&#233;truite.</French>
     <German>132-135 n. Chr.: Aufstand der Juden. Jerusalem wird zerst&#246;rt.</German>
-    <Italian>132-135 AD. Uprising of the Jews. Jerusalem is destroyed.</Italian>
+    <Italian>132-135 d.C. Rivolta degli ebrei. Gerusalemme &#232; distrutta.</Italian>
     <Spanish>132-135 d.C. Levantamiento de los jud&#237;os. Jerusal&#233;n es destru&#237;da</Spanish>
   </TEXT>
   <TEXT>
@@ -6238,7 +6214,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>135 AD. The Romans distribute the Jews out of Palestine after a rebellion.</English>
     <French>135 ap JC. Les romains d&#233;portent les juifs hors de Palestine apr&#232;s la r&#233;bellion.</French>
     <German>135 n. Chr.: Die R&#246;mer vertreiben nach einem Aufstand die Juden aus Pal&#228;stina.</German>
-    <Italian>135 AD. The Romans distribute the Jews out of Palestine after a rebellion.</Italian>
+    <Italian>135 d.C. I romani distribuiscono gli ebrei dalla Palestina dopo una ribellione.</Italian>
     <Spanish>135 d.C. Los romanos distribuyen a los jud&#237;os fuera de Palestina despu&#233;s de una rebeli&#243;n.</Spanish>
   </TEXT>
   <TEXT>
@@ -6246,7 +6222,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>212 AD. All Roman residents receive citizenship.</English>
     <French>212 ap JC. Tous les r&#233;sidents romains recoivent la citoyennet&#233;.</French>
     <German>212 n. Chr.: Alle r&#246;mischen Reichsbewohner erhalten das B&#252;rgerrecht.</German>
-    <Italian>212 AD. All Roman residents receive citizenship.</Italian>
+    <Italian>212 d.C. Tutti i residenti romani ricevono la cittadinanza.</Italian>
     <Spanish>212 d.C. Todos los ciudadanos romanos residentes reciben la ciudadan&#237;a.</Spanish>
   </TEXT>
   <TEXT>
@@ -6254,7 +6230,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>232 AD. Germanic invasions into the Roman Empire.</English>
     <French>232 ap JC. Invasions germaniques dans l'empire romain.</French>
     <German>232 n. Chr.: Germanische Einf&#228;lle in das r&#246;mische Reichsgebiet.</German>
-    <Italian>232 AD. Germanic invasions into the Roman Empire.</Italian>
+    <Italian>232 d.C. Invasioni germaniche nell'impero romano.</Italian>
     <Spanish>232 d.C. Invasiones germanas hacia el Imperio Romano.</Spanish>
   </TEXT>
   <TEXT>
@@ -6310,7 +6286,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>About 370 AD. The Huns come to Central Europe. The Goths and Vandals flee westward.</English>
     <French>Environ 370 ap JC. Les Huns arrivent en Europe centrale. Les Goths et les Vandales fuient vers l'ouest.</French>
     <German>Um 370 n. Chr.: Die Hunnen kommen nach Mitteleuropa. Die Goten und Vandalen fliehen westw&#228;rts.</German>
-    <Italian>About 370 AD. The Huns come to Central Europe. The Goths and Vandals flee westward.</Italian>
+    <Italian>Circa 370 d.C. Gli Unni vengono in Europa centrale. I Goti e i Vandali fuggono verso occidente.</Italian>
     <Spanish>Sobre el 370 d.C. Los Hunos llegan a Europa Central. Los Godos y V&#225;ndalos huyen hacia el oeste.</Spanish>
   </TEXT>
   <TEXT>
@@ -6318,7 +6294,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>410 AD. Alaric capturs Rome.</English>
     <French>410 ap JC. Alaric capture Rome.</French>
     <German>410 n. Chr.: Alarich erobert Rom.</German>
-    <Italian>410 AD. Alaric capturs Rome.</Italian>
+    <Italian>410 d.C. Alarico conquista Roma.</Italian>
     <Spanish>410 d.C. Alarico captura Roma.</Spanish>
   </TEXT>
   <TEXT>
@@ -6334,7 +6310,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>445 AD. The Huns under Attila attack Constantinople.</English>
     <French>445 ap JC. Attila et sa horde attaquent Constantinople.</French>
     <German>445 n. Chr.: Die Hunnen greifen unter Attila Konstantinopel an.</German>
-    <Italian>445 AD. The Huns under Attila attack Constantinople.</Italian>
+    <Italian>445 d.C. Gli Unni sotto Attila attaccano Costantinopoli.</Italian>
     <Spanish>445 d.C. Los Hunos bajo Atila atacan Constantinopla.</Spanish>
   </TEXT>
   <TEXT>
@@ -6342,7 +6318,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>455 AD. The Vandals conquer Rome.</English>
     <French>455 ap JC. Les Vandales conqui&#232;rent Rome.</French>
     <German>455 n. Chr.: Die Wandalen erobern Rom.</German>
-    <Italian>455 AD. The Vandals conquer Rome.</Italian>
+    <Italian>455 d.C. I Vandali conquistano Roma.</Italian>
     <Spanish>455 d.C. Los V&#225;ndalos conquistan Roma.</Spanish>
   </TEXT>
   <TEXT>
@@ -6350,7 +6326,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>476 AD. Dismissal of the last Western Roman Emperor, after the barbarian tribes of France have overrun Spain and Italy.</English>
     <French>476 ap JC. Dismissal of the last Western Roman Emperor, after the barbarian tribes of France have overrun Spain and Italy.</French>
     <German>476 n. Chr.: Absetzung des letzten westr&#246;mischen Kaisers, nachdem die Barbarenv&#246;lker Frankreich, Spanien und Italien &#252;berannt haben.</German>
-    <Italian>476 AD. Dismissal of the last Western Roman Emperor, after the barbarian tribes of France have overrun Spain and Italy.</Italian>
+    <Italian>476 d.C. Licenziamento dell'ultimo imperatore romano d'Occidente, dopo che le trib&#249; barbare della Francia hanno invaso la Spagna e l'Italia.</Italian>
     <Spanish>476 d.C. Destituci&#243;n del &#250;ltimo Emperador Romano de Occidente, despu&#233;s de que tribus b&#225;rbaras de Francia invadieran Espa&#241;a e Italia.</Spanish>
   </TEXT>
   <TEXT>
@@ -7238,7 +7214,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>VICTORY!</English>
     <French>VICTOIRE !</French>
     <German>SIEG!</German>
-    <Italian>VICTORY!</Italian>
+    <Italian>VITTORIA!</Italian>
     <Spanish>&#161;VICTORIA!</Spanish>
   </TEXT>
   <TEXT>
@@ -7246,7 +7222,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A general has fallen!</English>
     <French>Un g&#233;n&#233;ral est tomb&#233; !</French>
     <German>Ein General ist gefallen!</German>
-    <Italian>A general has fallen!</Italian>
+    <Italian>&#200; caduto un generale!</Italian>
     <Spanish>&#161;Un general ha ca&#237;do!</Spanish>
   </TEXT>
   <TEXT>
@@ -7606,7 +7582,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Slaves can not be used as field slaves (no farm, pasture or Latifundium available)</English>
     <French>L'esclave ne peut &#234;tre affect&#233; aux champs (pas de ferme, p&#226;turage ou latifundium disponible)</French>
     <German>Sklaven k&#246;nnen nicht als Feldsklaven angesiedelt werden (keine Farm, Weide oder Latifundium vorhanden)</German>
-    <Italian>Slaves can not be used as field slaves (no farm, pasture or Latifundium available)</Italian>
+    <Italian>Gli schiavi non possono essere usati come schiavi da campo (nessuna fattoria, pascolo o latifondo disponibili)</Italian>
     <Spanish>Los esclavos no pueden ser usados como esclavos del campo (sin granjas, pastizales o latifundios disponibles)</Spanish>
   </TEXT>
   <TEXT>
@@ -7662,7 +7638,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_TRADE] Due to the profitable trade with %s1 (%s2), a surfaced trade road originated between the cities %s3 and %s4 (+1[ICON_COMMERCE])!</English>
     <French>[ICON_TRADE] Gr&#226;ce aux &#233;changes fructueux avec %s1 (%s2), une route commerciale carrossable est &#233;tablie entre les villes de %s3 et de %s4 !(+1[ICON_COMMERCE])</French>
     <German>[ICON_TRADE] Durch den ertragreichen Handel mit %s1 (%s2) entstand zwischen den St&#228;dten %s3 und %s4 eine befestigte Handelsstra&#223;e (+1[ICON_COMMERCE])!</German>
-    <Italian>[ICON_TRADE] Due to the profitable trade with %s1 (%s2), a surfaced trade road originated between the cities %s3 and %s4 (+1[ICON_COMMERCE])!</Italian>
+    <Italian>[ICON_TRADE] A causa del proficuo commercio con %s1 (%s2), una strada commerciale asfaltata &#232; stata costruita tra le citt&#224; di %s3 e di %s4 (+1[ICON_COMMERCE])!</Italian>
     <Spanish>[ICON_TRADE] Debido al rentable comercio con %s1 (%s2), &#161;una ruta comercial se ha originado entre las ciudades %s3 y %s4 (+1[ICON_COMMERCE])!</Spanish>
   </TEXT>
   <TEXT>
@@ -7678,7 +7654,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A herd of wild elephants was sighted in your land. Explore the technology of Elephant Husbandry to capture and use them.</English>
     <French>Un troupeau d'&#233;l&#233;phants sauvages a &#233;t&#233; aper&#231;u sur vos terres. Recherchez la technologie Dressage d'&#233;l&#233;phants afin de les capturer pour votre service.</French>
     <German>Eine Herde von Wildelefanten wurde in Eurem Land gesichtet. Erforscht die Technologie Elefantendomestizierung um sie einfangen und nutzen zu k&#246;nnen.</German>
-    <Italian>A herd of wild elephants was sighted in your land. Explore the technology of Elephant Husbandry to capture and use them.</Italian>
+    <Italian>Un branco di elefanti selvatici &#232; stato avvistato nel tuo territorio. Esplora la tecnologia di Addomesticamento di Elefanti per catturarli e utilizzarli.</Italian>
     <Spanish>Una manada de elefantes salvajes ha sido vista dentro de tus tierras. Investiga la tecnolog&#237;a de la domesticaci&#243;n del elefante para capturarlos y usarlos.</Spanish>
   </TEXT>
   <TEXT>
@@ -7782,7 +7758,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_TRADE] You have sold [COLOR_HIGHLIGHT_TEXT]%s3_bonus[COLOR_REVERT] (+%d4 [ICON_GOLD], +%d5 [ICON_RESEARCH]) in %s1_city (%s2_civ).</English>
     <French>[ICON_TRADE] Vous avez vendu [COLOR_HIGHLIGHT_TEXT]%s3_bonus[COLOR_REVERT] (+%d4 [ICON_GOLD], +%d5 [ICON_RESEARCH]) &#224; %s1_city (%s2_civ).</French>
     <German>[ICON_TRADE] Ihr habt in %s1_city (%s2_civ) [COLOR_HIGHLIGHT_TEXT]%s3_bonus[COLOR_REVERT] verkauft (+%d4 [ICON_GOLD], +%d5 [ICON_RESEARCH]).</German>
-    <Italian>[ICON_TRADE] You have sold [COLOR_HIGHLIGHT_TEXT]%s3_bonus[COLOR_REVERT] (+%d4 [ICON_GOLD], +%d5 [ICON_RESEARCH]) in %s1_city (%s2_civ).</Italian>
+    <Italian>[ICON_TRADE] Hai venduto [COLOR_HIGHLIGHT_TEXT]%s3_bonus[COLOR_REVERT] (+%d4 [ICON_GOLD], +%d5 [ICON_RESEARCH]) a %s1_city (%s2_civ).</Italian>
     <Spanish>[ICON_TRADE] Has vendido [COLOR_HIGHLIGHT_TEXT]%s3_bonus[COLOR_REVERT] (+%d4 [ICON_GOLD], +%d5 [ICON_RESEARCH]) en %s1_city (%s2_civ).</Spanish>
   </TEXT>
   <TEXT>
@@ -7798,7 +7774,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_TRADE] The city of %s1_city no longer requires %s2_resource and has withdrawn its order.</English>
     <French>[ICON_TRADE] La ville de %s1_city n'a plus besoin de %s2_resource et a r&#233;tract&#233; sa commande.</French>
     <German>[ICON_TRADE] Die Stadt %s1_city verlangt nicht mehr nach %s2_resource und hat ihren Auftrag zur&#252;ckgezogen.</German>
-    <Italian>[ICON_TRADE] The city of %s1_city no longer requires %s2_resource and has withdrawn its order.</Italian>
+    <Italian>[ICON_TRADE] La citt&#224; di %s1_city non richiede pi&#249; %s2_resource e ha ritirato la sua richiesta.</Italian>
     <Spanish>[ICON_TRADE] La ciudad de %s1_city ya no requiere %s2_resource y ha retirado su pedido.</Spanish>
   </TEXT>
   <TEXT>
@@ -7846,7 +7822,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_TRADE] The goods %s1_resource are being charged (%d2 [ICON_GOLD]).</English>
     <French>[ICON_TRADE] Le chargement (%s1_resource) est embarqu&#233; (%d2 [ICON_GOLD]).</French>
     <German>[ICON_TRADE] Die G&#252;ter %s1_resource werden aufgeladen (%d2 [ICON_GOLD]).</German>
-    <Italian>[ICON_TRADE] The goods %s1_resource are being charged (%d2 [ICON_GOLD]).</Italian>
+    <Italian>[ICON_TRADE] Il carico di (% s1_resource) &#232; stato addebitato (% d2 [ICON_GOLD]).</Italian>
     <Spanish>[ICON_TRADE] Las mercanc&#237;as %s1_resource est&#225;n siendo cargadas (%d2 [ICON_GOLD]).</Spanish>
   </TEXT>
   <TEXT>
@@ -7902,7 +7878,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Important trade routes cross your city %s1, so it has now become to a recognized trading center!</English>
     <French>Des voies commerciales majeures passent par votre ville de %s1, qui est d&#233;sormais un centre de n&#233;goce reconnu!</French>
     <German>Wichtige Handelsrouten kreuzen Eure Stadt %s1, darum wurde sie nun zu einem anerkannten Handelszentrum!</German>
-    <Italian>Important trade routes cross your city %s1, so it has now become to a recognized trading center!</Italian>
+    <Italian>Importanti rotte commerciali attraversano la tua citt&#224; %s1, quindi ora &#232; diventata un centro commerciale riconosciuto!</Italian>
     <Spanish>Importantes rutas comerciales cruzan tu ciudad de %s1, &#161;as&#237; que ahora ha sido reconocida como un centro comercial!</Spanish>
   </TEXT>
   <TEXT>
@@ -7947,18 +7923,18 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_CITY_EMIGRANTS_3</Tag>
-    <English>The anarchy forced some citizens to leave your city %s1 which dropped to the size of %d2 (from %d3).</English>
-    <French>L'anarchie a forc&#233; certains citoyens &#224; quitter votre ville %s1, qui est maintenant descendue &#224; %d2 (&#224; partir de %d3).</French>
-    <German>Die Anarchie zwang einige B&#252;rger Eure Stadt %s1 zu verlassen, die nun auf die Gr&#246;&#223;e %d2 (von %d3) sank.</German>
-    <Italian>L'anarchia ha costretto alcuni cittadini a lasciare la tua citt&#224; %s1, che ora &#232; affondata a %d2 (da %d3).</Italian>
-    <Spanish>La anarqu&#237;a forz&#243; a algunos ciudadanos a dejar tu ciudad %s1 la cual ha ca&#237;do al tama&#241;o %d2 (de %d3).</Spanish>
+    <English>The anarchy forced some citizens to leave your city %s1_city which dropped to the size of %d2 (from %d3).</English>
+    <French>L'anarchie a pouss&#233; certains citoyens &#224; quitter %s1_city, dont la population n'est maintenant plus que de %d2 (pr&#233;c&#233;demment %d3).</French>
+    <German>Die Anarchie zwang einige B&#252;rger Eure Stadt %s1_city zu verlassen, die nun auf die Gr&#246;&#223;e %d2 (von %d3) sank.</German>
+    <Italian>L'anarchia ha costretto alcuni cittadini a lasciare la tua citt&#224; %s1_city, che ora &#232; scesa alla dimensione di %d2 (da %d3).</Italian>
+    <Spanish>La anarqu&#237;a forz&#243; a algunos ciudadanos a dejar tu ciudad %s1_city la cual ha ca&#237;do al tama&#241;o %d2 (de %d3).</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_CITY_EMIGRANTS_4</Tag>
     <English>The absence of your state religion in %s1 forced some citizens to leave your city which dropped to the size %d2 (of %d3).</English>
     <French>L'isolement religieux de %s1 contraint quelques citoyens &#224; quitter la ville, qui passe &#224; une taille de %d2 (pr&#233;cedemment %d3).</French>
     <German>Die fehlende Staatsreligion in %s1 zwang einige B&#252;rger Eure Stadt zu verlassen, die auf die Gr&#246;&#223;e %d2 (von %d3) sank.</German>
-    <Italian>The absence of your state religion in %s1 forced some citizens to leave your city which dropped to the size %d2 (of %d3).</Italian>
+    <Italian>L'assenza della tua religione di stato in %s1 ha costretto alcuni cittadini a lasciare la tua citt&#224; che &#232; scesa alla dimensione %d2 (di %d3).</Italian>
     <Spanish>La ausencia de tu religi&#243;n estatal en %s1 forz&#243; a algunos a ciudadanos a abandonar tu ciudad la cual ha ca&#237;do al tama&#241;o %d2 (de %d3)</Spanish>
   </TEXT>
   <TEXT>
@@ -7966,7 +7942,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The high taxes forced some citizens to leave your city %s1 which dropped to the size %d2 (of %d3).</English>
     <French>Le taux de taxes trop &#233;lev&#233; a contraint certains habitants &#224; quitter votre ville, dont la taille se r&#233;duit &#224; %d2 (de %d3).</French>
     <German>Die hohen Steuern zwangen einige B&#252;rger Eure Stadt %s1 zu verlassen, die auf die Gr&#246;&#223;e %d2 (von %d3) sank.</German>
-    <Italian>The high taxes forced some citizens to leave your city %s1 which dropped to the size %d2 (of %d3).</Italian>
+    <Italian>Le tasse elevate hanno costretto alcuni cittadini a lasciare la tua citt&#224; %s1 che &#232; scesa alla dimensione %d2 (di %d3).</Italian>
     <Spanish>Los altos impuestos forzaron a algunos ciudadanos a abandonar tu ciudad %s1 la cual cay&#243; al tama&#241;o %d2 (de %d3)</Spanish>
   </TEXT>
   <TEXT>
@@ -7982,7 +7958,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>As a result of the long combat experience, the unit %s1 loses the status: Fight on his own.</English>
     <French>En raison d'une longue exp&#233;rience du combat, l'unit&#233; %s1 perd le statut: Chacun pour soi.</French>
     <German>Aufgrund der langen Kampferfahrung verliert die Einheit %s1 nun den Status: K&#228;mpft auf eigenen F&#252;&#223;en.</German>
-    <Italian>As a result of the long combat experience, the unit %s1 loses the status: Fight on his own.</Italian>
+    <Italian>A causa della lunga esperienza di combattimento, l'unit&#224;% s1 ha rinunciato allo stato: Combatte da solo.</Italian>
     <Spanish>Como resultado de una gran cantidad de experiencia de combate, la unidad %s1 pierde el status: lucha por su propia cuenta.</Spanish>
   </TEXT>
   <TEXT>
@@ -8052,18 +8028,18 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   <TEXT>
     <Tag>TXT_KEY_PROMOTION_CORVUS_HELP</Tag>
     <English>Increases the chance to hijack ships:[NEWLINE][ICON_BULLET]Level I: 30%[NEWLINE][ICON_BULLET]Level II: 50%[NEWLINE][ICON_BULLET]Level III: 75%</English>
-    <French>Augmente les chances de d&#233;tourner des navires:[NEWLINE][ICON_BULLET]Niveau I: 30%[NEWLINE][ICON_BULLET]Niveau II: 50%[NEWLINE][ICON_BULLET]Niveau III: 75%</French>
+    <French>Augmente les chances de capturer des navires :[NEWLINE][ICON_BULLET]Niveau I : 30%[NEWLINE][ICON_BULLET]Niveau II : 50%[NEWLINE][ICON_BULLET]Niveau III : 75%</French>
     <German>Erh&#246;ht die Chance Schiffe zu kapern:[NEWLINE][ICON_BULLET]Stufe I: 30%[NEWLINE][ICON_BULLET]Stufe II: 50%[NEWLINE][ICON_BULLET]Stufe III: 75%</German>
     <Italian>Aumenta la possibilit&#224; di dirottare le navi:[NEWLINE][ICON_BULLET]Fase I: 30%[NEWLINE][ICON_BULLET]Fase II: 50%[NEWLINE][ICON_BULLET]Fase III: 75%</Italian>
     <Spanish>Aumenta la posibilidad de secuestrar barcos:[NEWLINE][ICON_BULLET]Etapa I: 30%[NEWLINE][ICON_BULLET]Etapa II: 50%[NEWLINE][ICON_BULLET]Etapa III: 75%</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_INFO_CIVIL_WAR_2</Tag>
-    <English>Several citizens were slaughtered in %s1.</English>
+    <English>Several citizens were slaughtered in %s1_city.</English>
     <French>De nombreux citoyens ont &#233;t&#233; massacr&#233;s &#224; %s1_city.</French>
-    <German>Es wurden etliche B&#252;rger in %s1 niedergemetzelt.</German>
-    <Italian>Diversi cittadini sono stati massacrati in %s1.</Italian>
-    <Spanish>Varios ciudadanos fueron asesinados en %s1.</Spanish>
+    <German>Es wurden etliche B&#252;rger in %s1_city niedergemetzelt.</German>
+    <Italian>Diversi cittadini sono stati massacrati in %s1_city.</Italian>
+    <Spanish>Varios ciudadanos fueron asesinados en %s1_city.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_BONUS_SOLD3</Tag>
@@ -8115,16 +8091,16 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_ELEFANT_HELP</Tag>
-    <English>[ICON_BULLET]Can speed production in cities[NEWLINE][ICON_BULLET]Can be sold in foreign cities[NEWLINE][ICON_BULLET]Can not be distributed</English>
-    <French>[ICON_BULLET]Peut acc&#233;l&#233;rer la production en ville[NEWLINE][ICON_BULLET]Peut &#234;tre vendu dans des villes &#233;trang&#232;res[NEWLINE][ICON_BULLET]Ne peut pas &#234;tre implant&#233;</French>
-    <German>[ICON_BULLET]Kann in St&#228;dten die Produktion beschleunigen[NEWLINE][ICON_BULLET]Kann in fremden St&#228;dten verkauft werden[NEWLINE][ICON_BULLET]Kann nicht verbreitet werden</German>
-    <Italian>[ICON_BULLET]Pu&#242; velocizzare la produzione nelle citt&#224;[NEWLINE][ICON_BULLET]Pu&#242; essere venduto in citt&#224; straniere[NEWLINE][ICON_BULLET]Non pu&#242; essere distribuito</Italian>
-    <Spanish>[ICON_BULLET]Puede acelerar la producci&#243;n en ciudades[NEWLINE][ICON_BULLET]Se puede vender en ciudades extranjeras[NEWLINE][ICON_BULLET]No se puede distribuir</Spanish>
+    <English>[ICON_BULLET]Can speed production in cities[NEWLINE][ICON_BULLET]Can be sold in foreign cities[NEWLINE][ICON_BULLET]Can not be distributed[NEWLINE][ICON_BULLET]Defensive only [ICON_STRENGTH]</English>
+    <French>[ICON_BULLET]Peut acc&#233;l&#233;rer la production en ville[NEWLINE][ICON_BULLET]Peut &#234;tre vendu dans des villes &#233;trang&#232;res[NEWLINE][ICON_BULLET]Ne peut pas &#234;tre implant&#233;[NEWLINE][ICON_BULLET]Ne peut que d&#233;fendre [ICON_STRENGTH]</French>
+    <German>[ICON_BULLET]Kann in St&#228;dten die Produktion beschleunigen[NEWLINE][ICON_BULLET]Kann in fremden St&#228;dten verkauft werden[NEWLINE][ICON_BULLET]Kann nicht verbreitet werden[NEWLINE][ICON_BULLET]Kann nur verteidigen [ICON_STRENGTH]</German>
+    <Italian>[ICON_BULLET]Pu&#242; velocizzare la produzione nelle citt&#224;[NEWLINE][ICON_BULLET]Pu&#242; essere venduto in citt&#224; straniere[NEWLINE][ICON_BULLET]Non pu&#242; essere distribuito[NEWLINE][ICON_BULLET]Pu&#242; solo difendere [ICON_STRENGTH]</Italian>
+    <Spanish>[ICON_BULLET]Puede acelerar la producci&#243;n en ciudades[NEWLINE][ICON_BULLET]Se puede vender en ciudades extranjeras[NEWLINE][ICON_BULLET]No se puede distribuir[NEWLINE][ICON_BULLET]Solo puedo defender [ICON_STRENGTH]</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_CAMEL_HELP</Tag>
     <English>[ICON_BULLET]Can speed production in cities[NEWLINE][ICON_BULLET]Can be sold in foreign cities[NEWLINE][ICON_BULLET]Can be distributed in cities with dry deserts (except oases and flood plains)</English>
-    <French>[ICON_BULLET]Peut acc&#233;l&#233;rer la production en ville[NEWLINE][ICON_BULLET]Peut &#234;tre vendu dans des villes &#233;trang&#232;res[NEWLINE][ICON_BULLET]Peut &#234;tre implant&#233; un d&#233;sert (sauf oasis et plaines inondables) pr&#232;s d'une ville</French>
+    <French>[ICON_BULLET]Peut acc&#233;l&#233;rer la production en ville[NEWLINE][ICON_BULLET]Peut &#234;tre vendu dans des villes &#233;trang&#232;res[NEWLINE][ICON_BULLET]Peut &#234;tre implant&#233; dans un d&#233;sert (sauf oasis et plaines inondables) pr&#232;s d'une ville</French>
     <German>[ICON_BULLET]Kann in St&#228;dten die Produktion beschleunigen[NEWLINE][ICON_BULLET]Kann in fremden St&#228;dten verkauft werden[NEWLINE][ICON_BULLET]Kann in St&#228;dten mit W&#252;ste verbreitet werden (ausgenommen Oasen und Schwemmland)</German>
     <Italian>[ICON_BULLET]Pu&#242; velocizzare la produzione nelle citt&#224;[NEWLINE][ICON_BULLET]Pu&#242; essere venduto in citt&#224; straniere[NEWLINE][ICON_BULLET]Pu&#242; essere distribuito in citt&#224; con il deserto (eccetto le oasi e le pianure alluvionali)</Italian>
     <Spanish>[ICON_BULLET]Puede acelerar la producci&#243;n en ciudades[NEWLINE][ICON_BULLET]Se puede vender en ciudades extranjeras[NEWLINE][ICON_BULLET]Se puede distribuir en ciudades con el desierto (excepto los oasis y llanuras aluviales)</Spanish>
@@ -8171,11 +8147,11 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_INFO_UNIT_FOOD</Tag>
-    <English>The unit %s1_unit in %s2_city needed %d3% of the [ICON_PRODUCTION]-cost: %d4 [ICON_FOOD]</English>
+    <English>The unit %s1_unit in %s2_city needed %d4 [ICON_FOOD] (%d3% of [ICON_PRODUCTION] costs).</English>
     <French>R&#233;quisition de %d4 [ICON_FOOD] (%d3% du co&#251;t en [ICON_PRODUCTION]) &#224; %s2_city pour la nouvelle unit&#233; (%s1_unit).</French>
-    <German>Die Einheit %s1_unit in %s2_city verbrauchte %d3% der [ICON_PRODUCTION]-Kosten: %d4 [ICON_FOOD]</German>
-    <Italian>L'unit&#224; %s1_unit in %s2_city necessitava %d3% del costo [ICON_PRODUCTION]: %d4 [ICON_FOOD]</Italian>
-    <Spanish>La unidad %s1_unit en %s2_city necesitaba %d3% de costes [ICON_PRODUCTION]: %d4 [ICON_FOOD]</Spanish>
+    <German>Die Einheit %s1_unit in %s2_city verbrauchte %d4 [ICON_FOOD] (%d3% der [ICON_PRODUCTION]-Kosten).</German>
+    <Italian>L'unit&#224; %s1_unit in %s2_city necessitava %d4 [ICON_FOOD] (%d3% del costo [ICON_PRODUCTION]).</Italian>
+    <Spanish>La unidad %s1_unit en %s2_city necesitaba %d4 [ICON_FOOD] (%d3% de costes [ICON_PRODUCTION]).</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_HELP_ELITE_MERCENARIES</Tag>
@@ -8204,7 +8180,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   <TEXT>
     <Tag>TXT_KEY_BUILDING_AUSBILDUNGSLAGER_HELP</Tag>
     <English>[ICON_BULLET]Can only be constructed and used with the civic [COLOR_HIGHLIGHT_TEXT]Professional Army[COLOR_REVERT]</English>
-    <French>[ICON_BULLET]Ne peut &#234;tre construit et utilis&#233; qu'avec la doctrine de gouvernement [COLOR_HIGHLIGHT_TEXT]Professionnalisme[COLOR_REVERT]</French>
+    <French>[ICON_BULLET]Ne peut &#234;tre construit et utilis&#233; qu'avec la doctrine [COLOR_HIGHLIGHT_TEXT]Professionnalisme[COLOR_REVERT]</French>
     <German>[ICON_BULLET]Kann nur mit der Staatsform [COLOR_HIGHLIGHT_TEXT]Berufsarmee[COLOR_REVERT] errichtet und genutzt werden</German>
     <Italian>[ICON_BULLET]Pu&#242; essere costruito e utilizzato solo con i [COLOR_HIGHLIGHT_TEXT]Esercito Professionista[COLOR_REVERT] civico</Italian>
     <Spanish>[ICON_BULLET]Solo se puede construir y usar con los [COLOR_HIGHLIGHT_TEXT]Ej&#233;rcito Profesional[COLOR_REVERT] c&#237;vicos</Spanish>
@@ -8334,7 +8310,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>Ile basilike</English>
     <French>Ile basilike</French>
     <German>Ile basilike</German>
-    <Italian>Ile basilike</Italian>
+    <Italian>Basilik&#232; il&#232; (squadrone reale)</Italian>
     <Spanish>Ile basilike</Spanish>
   </TEXT>
   <TEXT>
@@ -8374,7 +8350,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>A unit %s1 was captured.</English>
     <French>Une unit&#233; %s1 a &#233;t&#233; captur&#233;.</French>
     <German>Eine Einheit %s1 wurde erobert.</German>
-    <Italian>Una unit&#224; %s1 &#232; stato catturato.</Italian>
+    <Italian>Una unit&#224; %s1 &#232; stata catturata.</Italian>
     <Spanish>Una unidad %s1 fue capturado.</Spanish>
   </TEXT>
   <TEXT>
@@ -8454,7 +8430,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_BULLET]Military Units prod. with [ICON_PRODUCTION]+[ICON_FOOD] (slows down city growth)</English>
     <French>[ICON_BULLET]Unit&#233;s militaires prod. avec : [ICON_PRODUCTION]+[ICON_FOOD] (ralentit croissance urbaine)</French>
     <German>[ICON_BULLET]Mit [ICON_PRODUCTION]+[ICON_FOOD] prod. Milit&#228;reinheiten (bremst Stadtwachstum)</German>
-    <Italian>[ICON_BULLET]Unit&#224; militari prod. con [ICON_PRODUCTION]+[ICON_FOOD] (rallenta crescita urbana)</Italian>
+    <Italian>[ICON_BULLET]Unit&#224; militari prod. con [ICON_PRODUCTION]+[ICON_FOOD] (rallenta crescita cittadina)</Italian>
     <Spanish>[ICON_BULLET]Las unidades militares se prod. con [ICON_PRODUCTION]+[ICON_FOOD] (retarda crecimiento urbano)</Spanish>
   </TEXT>
   <TEXT>
@@ -8582,7 +8558,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_BULLET]City needs [COLOR_HIGHLIGHT_TEXT]Christianity[COLOR_REVERT][NEWLINE][ICON_BULLET]Pilgrims can be blessed in this city (+25%[ICON_STRENGTH])</English>
     <French>[ICON_BULLET]La ville a besoin du [COLOR_HIGHLIGHT_TEXT]Christianisme[COLOR_REVERT][NEWLINE][ICON_BULLET]Les p&#232;lerins peuvent &#234;tre b&#233;nis dans cette ville (+25%[ICON_STRENGTH])</French>
     <German>[ICON_BULLET]Stadt ben&#246;tigt das [COLOR_HIGHLIGHT_TEXT]Christentum[COLOR_REVERT][NEWLINE][ICON_BULLET]Pilger k&#246;nnen sich in dieser Stadt segnen lassen (+25%[ICON_STRENGTH])</German>
-    <Italian>[ICON_BULLET]La citt&#224; ha bisogno degli [COLOR_HIGHLIGHT_TEXT]Cristianesimo[COLOR_REVERT][NEWLINE][ICON_BULLET]I pellegrini possono essere benedetti in questa citt&#224; (+25%[ICON_STRENGTH])</Italian>
+    <Italian>[ICON_BULLET]La citt&#224; ha bisogno del [COLOR_HIGHLIGHT_TEXT]Cristianesimo[COLOR_REVERT][NEWLINE][ICON_BULLET]I pellegrini possono essere benedetti in questa citt&#224; (+25%[ICON_STRENGTH])</Italian>
     <Spanish>[ICON_BULLET]La ciudad necesita [COLOR_HIGHLIGHT_TEXT]Cristianismo[COLOR_REVERT][NEWLINE][ICON_BULLET]Los peregrinos pueden ser bendecidos en esta ciudad (+25%[ICON_STRENGTH])</Spanish>
   </TEXT>
   <TEXT>
@@ -8590,7 +8566,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>[ICON_BULLET]City needs [COLOR_HIGHLIGHT_TEXT]Greek gods[COLOR_REVERT][NEWLINE][ICON_BULLET]Pilgrims can improve their morale in this city (+15%[ICON_STRENGTH])</English>
     <French>[ICON_BULLET]La ville a besoin du [COLOR_HIGHLIGHT_TEXT]Panth&#233;on olympien[COLOR_REVERT][NEWLINE][ICON_BULLET]Les p&#232;lerins peuvent am&#233;liorer leur moral dans cette ville (+15%[ICON_STRENGTH])</French>
     <German>[ICON_BULLET]Stadt ben&#246;tigt [COLOR_HIGHLIGHT_TEXT]Griechische G&#246;tter[COLOR_REVERT][NEWLINE][ICON_BULLET]Pilger k&#246;nnen in dieser Stadt ihre Kampfmoral verbessern (+15%[ICON_STRENGTH])</German>
-    <Italian>[ICON_BULLET]La citt&#224; ha bisogno degli [COLOR_HIGHLIGHT_TEXT]dei greci[COLOR_REVERT][NEWLINE][ICON_BULLET]I pellegrini possono migliorare il loro morale in questa citt&#224; (+15%[ICON_STRENGTH])</Italian>
+    <Italian>[ICON_BULLET]La citt&#224; ha bisogno degli [COLOR_HIGHLIGHT_TEXT]d&#232;i greci[COLOR_REVERT][NEWLINE][ICON_BULLET]I pellegrini possono migliorare il loro morale in questa citt&#224; (+15%[ICON_STRENGTH])</Italian>
     <Spanish>[ICON_BULLET]La ciudad necesita [COLOR_HIGHLIGHT_TEXT]dioses griegos[COLOR_REVERT][NEWLINE][ICON_BULLET]Los peregrinos pueden mejorar su moral en esta ciudad (+15%[ICON_STRENGTH])</Spanish>
   </TEXT>
 </Civ4GameText>

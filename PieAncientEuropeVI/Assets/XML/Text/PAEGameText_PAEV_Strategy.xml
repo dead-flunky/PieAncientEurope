@@ -114,11 +114,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_TRIARII_STRATEGY</Tag>
-    <English>Veteran Principes, Hastati or Pilumni can be promoted to Triarii.</English>
-    <French>Principes, Hastati ou Pilumni v&#233;t&#233;rans peuvent &#234;tre promus en Triarii.</French>
-    <German>Veteran Principes, Hastati oder Pilumni k&#246;nnen zu den Triarii belobigt werden.</German>
-    <Italian>I Principi, Hastati o Pilumni veterani possono essere lodati ai Triarii.</Italian>
-    <Spanish>Principes, Hastati o Pilumni veteranos pueden ser promocionados a Triarii.</Spanish>
+    <English>Veteran Principes, Hastati or Pilumni can be promoted to [LINK=UNIT_TRIARII]Triarii[\LINK].</English>
+    <French>Principes, Hastati ou Pilumni v&#233;t&#233;rans peuvent &#234;tre promus en [LINK=UNIT_TRIARII]Triarii[\LINK].</French>
+    <German>Veteran Principes, Hastati oder Pilumni k&#246;nnen zu den [LINK=UNIT_TRIARII]Triarii[\LINK] belobigt werden.</German>
+    <Italian>I Principi, Hastati o Pilumni veterani possono essere lodati ai [LINK=UNIT_TRIARII]Triarii[\LINK].</Italian>
+    <Spanish>Principes, Hastati o Pilumni veteranos pueden ser promocionados a [LINK=UNIT_TRIARII]Triarii[\LINK].</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_ROME_PRAETORIAN_RIDER_STRATEGY</Tag>
@@ -237,7 +237,7 @@
     <English>[COLOR_BUILDING_TEXT]Rice Barn[COLOR_REVERT] stores food to help increase a city's growth rate. It can be built if your city has access to [COLOR_HIGHLIGHT_TEXT]Rice[COLOR_REVERT].</English>
     <French>Les [COLOR_BUILDING_TEXT]Greniers &#224; riz[COLOR_REVERT] engrangent des provisions pour favoriser la croissance de la ville. Ils sont constructibles si la ville &#224; acc&#232;s &#224; du [COLOR_HIGHLIGHT_TEXT]Riz[COLOR_REVERT].</French>
     <German>[COLOR_BUILDING_TEXT]Reisspeicher[COLOR_REVERT] speichern Reisk&#246;rner und beschleunigen so das Bev&#246;lkerungswachstum. Sie k&#246;nnen in St&#228;dten erbaut werden, die &#252;ber [COLOR_HIGHLIGHT_TEXT]Reis[COLOR_REVERT] verf&#252;gt.</German>
-    <Italian>[COLOR_BUILDING_TEXT]Rice storages[COLOR_REVERT] store food to help increase a city's growth rate. They can be built if your city has access to [COLOR_HIGHLIGHT_TEXT]Rice[COLOR_REVERT].</Italian>
+    <Italian>[COLOR_BUILDING_TEXT]I depositi di riso[COLOR_REVERT] contengono cibo per aumentare il tasso di crescita di una citt&#224;. Possono essere costruiti se la tua citt&#224; ha accesso a [COLOR_HIGHLIGHT_TEXT]Riso[COLOR_REVERT].</Italian>
     <Spanish>Los [COLOR_BUILDING_TEXT]almacenes de arroz[COLOR_REVERT] almacenan arroz, lo que ayuda a aumentar el ritmo de crecimiento de la ciudad. Pueden ser constru&#237;dos si la ciudad tiene acceso al [COLOR_HIGHLIGHT_TEXT]arroz[COLOR_REVERT].</Spanish>
   </TEXT>
   <TEXT>
@@ -347,7 +347,7 @@
   <TEXT>
     <Tag>TXT_KEY_SPECIALIST_RESERVIST_STRATEGY</Tag>
     <English>[COLOR_HIGHLIGHT_TEXT]Veteran units[COLOR_REVERT] can join a city as [COLOR_HIGHLIGHT_TEXT]reservists[COLOR_REVERT] (+1[ICON_FOOD], +1 [ICON_PRODUCTION] and +1[ICON_COMMERCE]).</English>
-    <French>[COLOR_HIGHLIGHT_TEXT]Les unit&#233;s de v&#233;t&#233;rans[COLOR_REVERT] peuvent &#234;tre affect&#233;s comme [COLOR_HIGHLIGHT_TEXT]r&#233;servistes[COLOR_REVERT] dans une ville (+1[ICON_FOOD], +1[ICON_PRODUCTION] et +1[ICON_COMMERCE]).</French>
+    <French>Les [COLOR_HIGHLIGHT_TEXT]unit&#233;s de v&#233;t&#233;rans[COLOR_REVERT] peuvent &#234;tre affect&#233;s comme [COLOR_HIGHLIGHT_TEXT]r&#233;servistes[COLOR_REVERT] dans une ville (+1[ICON_FOOD], +1[ICON_PRODUCTION] et +1[ICON_COMMERCE]).</French>
     <German>[COLOR_HIGHLIGHT_TEXT]Veteraneinheiten[COLOR_REVERT] k&#246;nnen sich als [COLOR_HIGHLIGHT_TEXT]Reservist[COLOR_REVERT] einer Stadt anschlie&#223;en (+1[ICON_FOOD], +1 [ICON_PRODUCTION] und +1[ICON_COMMERCE]).</German>
     <Italian>[COLOR_HIGHLIGHT_TEXT]Unit&#224; veterane[COLOR_REVERT] possono aderire come [COLOR_HIGHLIGHT_TEXT]riservista[COLOR_REVERT] una citt&#224; (+1 [ICON_FOOD], +1 [ICON_PRODUCTION] e +1 [ICON_COMMERCE]).</Italian>
     <Spanish>[COLOR_HIGHLIGHT_TEXT]Las unidades veteranas[COLOR_REVERT] pueden unirse a una ciudad como [COLOR_HIGHLIGHT_TEXT]reservistas[COLOR_REVERT] (+1[ICON_FOOD], +1 [ICON_PRODUCTION] y +1[ICON_COMMERCE]).</Spanish>
@@ -395,7 +395,7 @@
   <TEXT>
     <Tag>TXT_KEY_UNIT_STRANDGUT_STRATEGY</Tag>
     <English>Jetsam occures when flotsam is washed up on the coast. Jetsam is immobile and will become to a gold cart.</English>
-    <French>Les d&#233;bris &#233;chou&#233;s sur la c&#244;te forment une &#233;pave r&#233;cup&#233;rable. L'&#233;pave est immobile et deviendra un charrette d'or.</French>
+    <French>Les &#233;paves sont cr&#233;&#233;es quand du Bris s'&#233;chouent sur la c&#244;te. Ils sont immobiles et peuvent &#234;tre r&#233;cup&#233;r&#233;s sous la forme d'un chariot de butin.</French>
     <German>Strandgut entsteht wenn Treibgut an die K&#252;ste geschwemmt wird. Treibgut ist unbeweglich und wird bei Eroberung zu einem Goldkarren.</German>
     <Italian>Gettito si verifica quando il relitti viene lavato sulla costa. Gettito &#232; immobile e diventer&#224; un carrello d'oro.</Italian>
     <Spanish>Los cargamentos varados ocurren cuando los pecios terminan varados en la costa. Los cargamentos varados son inmobiles y se volver&#225;n en un cargamento de oro.</Spanish>
@@ -571,33 +571,33 @@
   <TEXT>
     <Tag>TXT_KEY_UNIT_ROME_SCHOLAE_STRATEGY</Tag>
     <English>This unit can be commended from Roman elite Palatini, Cataphracti or Clibanari.</English>
-    <French>Cette unit&#233; peut &#234;tre recommand&#233;e &#224; l'&#233;lite romaine Palatini, Cataphracti ou Clibanari.</French>
+    <French>Cette unit&#233; peut &#234;tre recommand&#233;e par Palatini, Cataphracti ou Clibanari d'&#233;lite romaine.</French>
     <German>Diese Einheit kann aus r&#246;mischen Elite Palatini, Cataphracti oder Clibanari belobigt werden.</German>
-    <Italian>Questa unit&#224; pu&#242; essere lodata da elite romana Palatini, Cataphracti o Clibanari.</Italian>
+    <Italian>Questa unit&#224; pu&#242; essere promossa dall'&#233;lite romana Palatini, Cataphracti o Clibanari.</Italian>
     <Spanish>Esta unidad se puede elogiar de la &#233;lite romana Palatini, Cataphracti o Clibanari.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_ROME_LIMITANEI_STRATEGY</Tag>
     <English>The Imperial Guard can be commended from Elite Limitanei.</English>
-    <French>La garde imp&#233;riale peut &#234;tre recommand&#233;e &#224; Elite Limitanei.</French>
+    <French>La garde imp&#233;riale peut &#234;tre recommand&#233;e par Limitanei d'&#233;lite.</French>
     <German>Die Kaiserliche Garde kann aus Elite Limitanei belobigt werden.</German>
-    <Italian>La Guardia Imperiale pu&#242; essere lodata da Elite Limitanei.</Italian>
+    <Italian>La Guardia Imperiale pu&#242; essere promossa da Elite Limitanei.</Italian>
     <Spanish>La Guardia Imperial puede ser elogiada de Elite Limitanei.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_ROME_PALATINI_STRATEGY</Tag>
-    <English>Palatinos can be commended from Elite Comitatenses and appointed as elite to the Imperial Guard.</English>
-    <French>Les Palatinos peuvent &#234;tre f&#233;licit&#233;s d'Elite Comitatenses et nomm&#233;s &#233;lites &#224; la Garde Imp&#233;riale.</French>
+    <English>Palatins can be commended from Elite Comitatenses and appointed as elite to the Imperial Guard.</English>
+    <French>Les Palatins peuvent &#234;tre f&#233;licit&#233;s par Comitatenses d'&#233;lites et nomm&#233;s comme d'&#233;lites &#224; la Garde Imp&#233;riale.</French>
     <German>Palatini k&#246;nnen aus Elite Comitatenses belobigt werden und als Elite zur Kaiserlichen Garde ernannt werden.</German>
-    <Italian>I Palatini possono essere lodati da Elite Comitatenses e nominati elite alla Guardia Imperiale.</Italian>
+    <Italian>I Palatini possono essere promossi dai Comitatensi e come Elite possono essere promossi a Guardia Imperiale.</Italian>
     <Spanish>Los Palatinos pueden ser elogiados por los Elite Comitatenses y designados como elite de la Guardia Imperial.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_ROME_COMITATENSES_STRATEGY</Tag>
     <English>Comitatenses can be appointed as elite to Palatins.</English>
-    <French>Comitatenses peut &#234;tre nomm&#233; &#233;lite &#224; Palatins.</French>
+    <French>Comitatenses peut &#234;tre nomm&#233; comme &#233;lite &#224; Palatins.</French>
     <German>Comitatenses k&#246;nnen als Elite zu Palatins ernannt werden.</German>
-    <Italian>I Comitatenses possono essere nominati elite a Palatini.</Italian>
+    <Italian>I Comitatensi possono essere promossi come Elite a Palatini.</Italian>
     <Spanish>Comitatenses pueden ser nombrados como elite a Palatines.</Spanish>
   </TEXT>
   <TEXT>
@@ -605,7 +605,7 @@
     <English>Veteran Hasta Spearmen can be appointed to [LINK=UNIT_CELERES]Celeres[\LINK].</English>
     <French>Les Lanciers Hasta v&#233;t&#233;rans peuvent &#234;tre promus en [LINK=UNIT_CELERES]Celeres[\LINK].</French>
     <German>Veteran Hasta-K&#228;mpfer k&#246;nnen zu [LINK=UNIT_CELERES]Celeres[\LINK] ernannt werden.</German>
-    <Italian>I combattenti veterani Hasta possono essere nominati a [LINK=UNIT_CELERES]Celeres[\LINK].</Italian>
+    <Italian>Gli Astati possono essere promossi a [LINK=UNIT_CELERES]Celeres[\LINK].</Italian>
     <Spanish>Veterano Hasta combatientes pueden ser nombrados a [LINK=UNIT_CELERES]Celeres[\LINK].</Spanish>
   </TEXT>
 </Civ4GameText>

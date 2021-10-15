@@ -900,7 +900,8 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 		//if (!pLoopUnit->noDefensiveBonus())
 		// commented out by K-Mod. The noDefBonus thing is already taken into account.
 		{
-			int iValue = pLoopUnit->currEffectiveStr(pDefendPlot, NULL) * 100;
+			// Flunky for PAE avoid 0
+			int iValue = 1 + pLoopUnit->currEffectiveStr(pDefendPlot, NULL) * 100;
 			
 			if (pDefendPlot->isCity(true, getTeam()))
 			{

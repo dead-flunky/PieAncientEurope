@@ -3168,6 +3168,10 @@ m_iCommandType(NO_COMMAND),
 m_iLeaderExperience(0),
 m_bAnimal(false),
 m_bFoodProduction(false),
+// < JAnimals Mod Start > Flunky for PAE
+m_iAnimalPatrolWeight(0),
+m_iAnimalAttackWeight(0),
+// < JAnimals Mod End >
 m_bNoBadGoodies(false),
 m_bOnlyDefensive(false),
 m_bNoCapture(false),
@@ -3677,7 +3681,16 @@ bool CvUnitInfo::isFoodProduction() const
 {
 	return m_bFoodProduction;
 }
-
+// < JAnimals Mod Start > Flunky for PAE
+int CvUnitInfo::getAnimalPatrolWeight() const
+{
+	return m_iAnimalPatrolWeight;
+}
+int CvUnitInfo::getAnimalAttackWeight() const
+{
+	return m_iAnimalAttackWeight;
+}
+// < JAnimals Mod End >
 bool CvUnitInfo::isNoBadGoodies() const	
 {
 	return m_bNoBadGoodies;
@@ -4363,6 +4376,10 @@ void CvUnitInfo::read(FDataStreamBase* stream)
 
 	stream->Read(&m_bAnimal);
 	stream->Read(&m_bFoodProduction);
+	// < JAnimals Mod Start > Flunky for PAE
+	stream->Read(&m_iAnimalPatrolWeight);
+	stream->Read(&m_iAnimalAttackWeight);
+	// < JAnimals Mod End >
 	stream->Read(&m_bNoBadGoodies);
 	stream->Read(&m_bOnlyDefensive);
 	stream->Read(&m_bNoCapture);
@@ -4659,6 +4676,10 @@ void CvUnitInfo::write(FDataStreamBase* stream)
 
 	stream->Write(m_bAnimal);
 	stream->Write(m_bFoodProduction);
+	// < JAnimals Mod Start > Flunky for PAE
+	stream->Write(m_iAnimalPatrolWeight);
+	stream->Write(m_iAnimalAttackWeight);
+	// < JAnimals Mod End >
 	stream->Write(m_bNoBadGoodies);
 	stream->Write(m_bOnlyDefensive);
 	stream->Write(m_bNoCapture);
@@ -4801,6 +4822,10 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->GetChildXmlValByName(&m_bAnimal, "bAnimal");
 	pXML->GetChildXmlValByName(&m_bFoodProduction, "bFood");
+	// < JAnimals Mod Start > Flunky for PAE
+	pXML->GetChildXmlValByName(&m_iAnimalPatrolWeight, "iAnimalPatrolWeight", -1);
+	pXML->GetChildXmlValByName(&m_iAnimalAttackWeight, "iAnimalAttackWeight", -1);
+	// < JAnimals Mod End >
 	pXML->GetChildXmlValByName(&m_bNoBadGoodies, "bNoBadGoodies");
 	pXML->GetChildXmlValByName(&m_bOnlyDefensive, "bOnlyDefensive");
 	pXML->GetChildXmlValByName(&m_bNoCapture, "bNoCapture");
@@ -11633,8 +11658,9 @@ m_iSeeFrom(0),
 m_iUniqueRange(0),
 m_bBombardable(false),
 m_bUpgradeRequiresFortify(false),
+m_bFort(true), // R&R, ray, Monasteries and Forts, Flunky for PAE
 // Super Forts end
-m_bActsAsCity(true),				
+m_bActsAsCity(true),
 m_bHillsMakesValid(false),				
 m_bFreshWaterMakesValid(false),	
 m_bRiverSideMakesValid(false),	
@@ -11814,6 +11840,11 @@ bool CvImprovementInfo::isBombardable() const
 bool CvImprovementInfo::isUpgradeRequiresFortify() const
 {
 	return m_bUpgradeRequiresFortify;
+}
+// Flunky for PAE
+bool CvImprovementInfo::isFort() const
+{
+	return m_bFort; 
 }
 // Super Forts end
 bool CvImprovementInfo::isActsAsCity() const
@@ -12084,6 +12115,7 @@ void CvImprovementInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iUniqueRange);
 	stream->Read(&m_bBombardable);
 	stream->Read(&m_bUpgradeRequiresFortify);
+	stream->Read(&m_bFort); // Flunky for PAE
 	// Super Forts end
 	stream->Read(&m_bActsAsCity);				
 	stream->Read(&m_bHillsMakesValid);				
@@ -12204,6 +12236,7 @@ void CvImprovementInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iUniqueRange);
 	stream->Write(m_bBombardable);
 	stream->Write(m_bUpgradeRequiresFortify);
+	stream->Write(m_bFort); // Flunky for PAE
 	// Super Forts end
 	stream->Write(m_bActsAsCity);				
 	stream->Write(m_bHillsMakesValid);				
@@ -12321,6 +12354,7 @@ bool CvImprovementInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iAdvancedStartCost, "iAdvancedStartCost");
 	pXML->GetChildXmlValByName(&m_iAdvancedStartCostIncrease, "iAdvancedStartCostIncrease");
 	pXML->GetChildXmlValByName(&m_bActsAsCity, "bActsAsCity");
+	pXML->GetChildXmlValByName(&m_bFort, "bFort"); // Flunky for PAE
 	pXML->GetChildXmlValByName(&m_bHillsMakesValid, "bHillsMakesValid");
 	pXML->GetChildXmlValByName(&m_bFreshWaterMakesValid, "bFreshWaterMakesValid");
 	pXML->GetChildXmlValByName(&m_bRiverSideMakesValid, "bRiverSideMakesValid");

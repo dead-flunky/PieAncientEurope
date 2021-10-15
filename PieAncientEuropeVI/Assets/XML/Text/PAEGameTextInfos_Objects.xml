@@ -53,7 +53,7 @@
     <English>Sea Salt Extraction</English>
     <French>Extraction du sel marin</French>
     <German>Meersalzgewinnung</German>
-    <Italian>L'estrazione del Sale del Mare</Italian>
+    <Italian>Estrazione del Sale Marino</Italian>
     <Spanish>La Extracci&#243;n de Sal Marina</Spanish>
   </TEXT>
   <TEXT>
@@ -1603,7 +1603,7 @@
     <English>Prohibition &#38; persecution</English>
     <French>Interdiction &#38; pers&#233;cution</French>
     <German>Verbot &#38; Verfolgung</German>
-    <Italian>Divieto &#38; persecuzione</Italian>
+    <Italian>Proibizione e persecuzione</Italian>
     <Spanish><Text>Prohibici&#243;n y persecuci&#243;n</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -1611,7 +1611,7 @@
     <English>Mathematical Proof</English>
     <French>Preuves math&#233;matiques</French>
     <German>Beweismathematik</German>
-    <Italian>Prova Matematica</Italian>
+    <Italian>Dimostrazioni Matematiche</Italian>
     <Spanish>Demostraci&#243;n Matem&#225;tica</Spanish>
   </TEXT>
   <TEXT>
@@ -1691,7 +1691,7 @@
     <English>Absolute Rule</English>
     <French>Tyrannie</French>
     <German>Alleinherrschaft</German>
-    <Italian>Potere Assoluto</Italian>
+    <Italian>Tirann&#236;a</Italian>
     <Spanish>Gobierno Absolutista</Spanish>
   </TEXT>
   <TEXT>
@@ -1867,7 +1867,7 @@
     <English>Elementary Science</English>
     <French>Science &#233;l&#233;mentaire</French>
     <German><Text>Elementarlehre</Text><Gender>Female</Gender><Plural>0</Plural></German>
-    <Italian>Scienza di Base</Italian>
+    <Italian>Insegnamento Rudimentale</Italian>
     <Spanish><Text>Ciencia Elemental</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -1875,7 +1875,7 @@
     <English>Manufactures</English>
     <French>Manufactures</French>
     <German>Manufakturen</German>
-    <Italian>Manifatturi</Italian>
+    <Italian>Manifatture</Italian>
     <Spanish>Manufacturas</Spanish>
   </TEXT>
   <TEXT>
@@ -1915,7 +1915,7 @@
     <English>Cryptography</English>
     <French>Cryptographie</French>
     <German><Text>Kryptografie</Text><Gender>Female</Gender><Plural>0</Plural></German>
-    <Italian>Criptografia</Italian>
+    <Italian>Crittografia</Italian>
     <Spanish><Text>Criptograf&#237;a</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -1947,7 +1947,7 @@
     <English>Elephant Husbandry</English>
     <French>Dressage d'&#233;l&#233;phants</French>
     <German><Text>Elefantendomestizierung</Text><Gender>Female</Gender><Plural>0</Plural></German>
-    <Italian>Allevamento d'Elefanti</Italian>
+    <Italian>Addomesticamento degli Elefanti</Italian>
     <Spanish><Text>Domesticaci&#243;n del Elefante</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2003,7 +2003,7 @@
     <English>Wooden Defences</English>
     <French>D&#233;fenses en bois</French>
     <German>Holzwehranlagen</German>
-    <Italian>Difese di Legno</Italian>
+    <Italian>Fortificazioni in Legno</Italian>
     <Spanish><Text>Defensas de Madera</Text><Gender>Female</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2059,7 +2059,7 @@
     <English>Disc Chariots</English>
     <French>Chars &#224; roues pleines</French>
     <German>Scheibenradwagen</German>
-    <Italian>Carri Leggeri</Italian>
+    <Italian>Carri a Ruota Piena</Italian>
     <Spanish><Text>Carros de Disco</Text><Gender>Male</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2067,7 +2067,7 @@
     <English>Levee Construction</English>
     <French>Construction de digue</French>
     <German>Deichbau</German>
-    <Italian>Costruzione degli Argini</Italian>
+    <Italian>Costruzione delle Dighe</Italian>
     <Spanish><Text>Construcci&#243;n de Dique</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2195,7 +2195,7 @@
     <English>Concrete</English>
     <French>B&#233;ton</French>
     <German>Beton</German>
-    <Italian>Cemento</Italian>
+    <Italian>Calcestruzzo</Italian>
     <Spanish>Hormig&#243;n</Spanish>
   </TEXT>
   <TEXT>
@@ -2291,7 +2291,7 @@
     <English>Improved Shipbuilding</English>
     <French>Construction navale avanc&#233;e</French>
     <German>Verbesserter Schiffsbau</German>
-    <Italian>Constuzione Navale II</Italian>
+    <Italian>Costruzione Navale Avanzata</Italian>
     <Spanish><Text>Construcci&#243;n Naval Mejorada</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2299,7 +2299,7 @@
     <English>Veterinary Medicine</English>
     <French>M&#233;decine v&#233;t&#233;rinaire</French>
     <German>Veterin&#228;rmedizin</German>
-    <Italian>Medicina Veterinaia</Italian>
+    <Italian>Medicina Veterinaria</Italian>
     <Spanish><Text>Medicina Veterinaria</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2307,7 +2307,7 @@
     <English>Humoral Pathology</English>
     <French>Th&#233;orie des humeurs</French>
     <German>Humoralpathologie</German>
-    <Italian>Patologia Umorale</Italian>
+    <Italian>Teoria Umorale</Italian>
     <Spanish><Text>Patolog&#237;a Humoral</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2331,7 +2331,7 @@
     <English>Poleaxe</English>
     <French>Hache d'arme</French>
     <German>Streitaxt</German>
-    <Italian>Azza</Italian>
+    <Italian>Ascia da Battaglia</Italian>
     <Spanish>Hacha Larga</Spanish>
   </TEXT>
   <TEXT>
@@ -2347,7 +2347,7 @@
     <English>The Broadsword</English>
     <French>&#201;p&#233;e large</French>
     <German>Das Breitschwert</German>
-    <Italian>Il Spada Larga</Italian>
+    <Italian>Spada Larga</Italian>
     <Spanish>L'Espada Ancha</Spanish>
   </TEXT>
   <TEXT>
@@ -2371,7 +2371,7 @@
     <English>Mounted Archery</English>
     <French>Archerie mont&#233;e</French>
     <German>Berittenes Bogenschie&#223;en</German>
-    <Italian>Tiro con Arco a Cavallo</Italian>
+    <Italian>Arcieria a Cavallo</Italian>
     <Spanish>Tiro con Arco Montado</Spanish>
   </TEXT>
   <TEXT>
@@ -2387,7 +2387,7 @@
     <English>Hieroglyphics</English>
     <French>Hi&#233;roglyphes</French>
     <German><Text>Hieroglyphen</Text><Gender>Female</Gender><Plural>1</Plural></German>
-    <Italian><Text>Geroglifi</Text><Gender>Female</Gender><Plural>1</Plural></Italian>
+    <Italian><Text>Geroglifici</Text><Gender>Female</Gender><Plural>1</Plural></Italian>
     <Spanish><Text>Jerogl&#237;ficos</Text><Gender>Male</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2467,7 +2467,7 @@
     <English>Defences</English>
     <French>D&#233;fenses</French>
     <German>Befestigungsanlagen</German>
-    <Italian>Difese</Italian>
+    <Italian>Fortificazioni</Italian>
     <Spanish><Text>Defensas</Text><Gender>Female</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -2539,7 +2539,7 @@
     <English>Spoked Wheels</English>
     <French>Roue &#224; rayons</French>
     <German>Speichenr&#228;der</German>
-    <Italian>Ruote con Raggi</Italian>
+    <Italian>Ruote a Raggi</Italian>
     <Spanish><Text>Ruedas con Radio</Text><Gender>Female</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3027,7 +3027,7 @@
     <English>Mausoleum</English>
     <French>Mausol&#233;e</French>
     <German>Mausoleum</German>
-    <Italian>Mausoleum</Italian>
+    <Italian>Mausoleo</Italian>
     <Spanish>Mausoleo</Spanish>
   </TEXT>
   <TEXT>
@@ -3043,7 +3043,7 @@
     <English>Serapeion</English>
     <French>S&#233;rap&#233;um</French>
     <German>Serapeion</German>
-    <Italian>Serapeion</Italian>
+    <Italian>Serapeo</Italian>
     <Spanish>Serapei&#243;n</Spanish>
   </TEXT>
   <TEXT>
@@ -3283,7 +3283,7 @@
     <English>Hall of 100 Columns</English>
     <French>Palais des Cent-Colonnes</French>
     <German>Halle der 100 S&#228;ulen</German>
-    <Italian>Hall of 100 Columns</Italian>
+    <Italian>Sala delle 100 Colonne</Italian>
     <Spanish><Text>Sala de las 100 Columnas</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3299,7 +3299,7 @@
     <English>Elephant farm</English>
     <French>Elevage des &#233;l&#233;phants</French>
     <German>Elefantenfarm</German>
-    <Italian>Stalla degli Elefanti</Italian>
+    <Italian>Allevamento di Elefanti</Italian>
     <Spanish>Establo de Elefantes</Spanish>
   </TEXT>
   <TEXT>
@@ -3347,7 +3347,7 @@
     <English>Stele of Victory</English>
     <French>St&#232;le de victoire</French>
     <German>Siegesstele</German>
-    <Italian>Stele della vittoria</Italian>
+    <Italian>Stele della Vittoria</Italian>
     <Spanish>Estela de la victoria</Spanish>
   </TEXT>
   <TEXT>
@@ -3395,7 +3395,7 @@
     <English>Spartan Agoge</English>
     <French>Agog&#233; spartiate</French>
     <German>Agoge</German>
-    <Italian>Agoghe</Italian>
+    <Italian>Agogh&#233;</Italian>
     <Spanish>Agog&#233; espartana</Spanish>
   </TEXT>
   <TEXT>
@@ -3403,7 +3403,7 @@
     <English>Guest and Gambling House</English>
     <French>Maison de jeux</French>
     <German>Gast- und Gl&#252;cksspielhaus</German>
-    <Italian>Casa di Scommesse</Italian>
+    <Italian>Casa da Gioco e Scommesse</Italian>
     <Spanish><Text>Casa de Apuetas e Invitados</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3443,7 +3443,7 @@
     <English>Peripatos of Aristotle</English>
     <French>Lyc&#233;e d'Aristote</French>
     <German>Peripatos des Aristoteles</German>
-    <Italian>Peripeto di Aristotele</Italian>
+    <Italian>Liceo di Aristotele</Italian>
     <Spanish><Text>Peripat&#233;ticos de Arist&#243;teles</Text><Gender>Male</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3451,7 +3451,7 @@
     <English>Stoa of Zeno</English>
     <French>Stoa Poikil&#232;</French>
     <German>Stoa des Zenon</German>
-    <Italian>Stoa di Zeno</Italian>
+    <Italian>Sto&#224; di Zenone</Italian>
     <Spanish><Text>Estoa de Zen&#243;n</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3467,7 +3467,7 @@
     <English>Dwelling Hill</English>
     <French>Terp</French>
     <German>Warft</German>
-    <Italian>Abitazione collinare</Italian>
+    <Italian>Warft collinare</Italian>
     <Spanish><Text>Vivienda Colina</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3619,7 +3619,7 @@
     <English>Provincial City</English>
     <French>Grande ville</French>
     <German>Provinzstadt</German>
-    <Italian>Citt&#224; di Provincia</Italian>
+    <Italian>Citt&#224; Provinciale</Italian>
     <Spanish><Text>Ciudad Provincial</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3699,7 +3699,7 @@
     <English>Ishtar Walls</English>
     <French>Remparts d'Ishtar</French>
     <German>Ishtar-Mauer</German>
-    <Italian>Le Mura di Ishtar</Italian>
+    <Italian>Mura di Ishtar</Italian>
     <Spanish><Text>Murallas de Ishtar</Text><Gender>Female</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3771,7 +3771,7 @@
     <English>Altar of Pergamon</English>
     <French>Grand Autel de Pergame</French>
     <German>Pergamonaltar</German>
-    <Italian>Altar di Pergamon</Italian>
+    <Italian>Altare di Pergamo</Italian>
     <Spanish>Altar de P&#233;rgamo</Spanish>
   </TEXT>
   <TEXT>
@@ -3827,7 +3827,7 @@
     <English>Elephant Monument</English>
     <French>Monument de l'&#233;lephant</French>
     <German>Elefantenmonument</German>
-    <Italian>Monumento</Italian>
+    <Italian>Monumento all'Elefante</Italian>
     <Spanish>Monumento al Elefante</Spanish>
   </TEXT>
   <TEXT>
@@ -3851,7 +3851,7 @@
     <English>Egyptian Stele</English>
     <French>St&#232;le &#233;gytienne</French>
     <German>Tehen-Pfeiler</German>
-    <Italian>Stele</Italian>
+    <Italian>Stele Egizia</Italian>
     <Spanish><Text>Estela Egipcia</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -3899,7 +3899,7 @@
     <English>Sphinx of Gizeh</English>
     <French>Sphinx de Gizeh</French>
     <German>Sphinx von Gizeh</German>
-    <Italian>Sfinge di Gizeh</Italian>
+    <Italian>Grande Sfinge di Giza</Italian>
     <Spanish>Esfinge de Gizeh</Spanish>
   </TEXT>
   <TEXT>
@@ -3971,7 +3971,7 @@
     <English>Siege Workshop</English>
     <French>Atelier d'engins de si&#232;ge</French>
     <German>Belagerungswerkstatt</German>
-    <Italian>Laboratorio da Assedio</Italian>
+    <Italian>Officina delle Macchine d'Assedio</Italian>
     <Spanish>Taller de Armas de Asedio</Spanish>
   </TEXT>
   <TEXT>
@@ -3979,7 +3979,7 @@
     <English>Triumphal Arch</English>
     <French>Arc de triomphe</French>
     <German>Triumphbogen</German>
-    <Italian>Arco Trionfale</Italian>
+    <Italian>Arco di Trionfo</Italian>
     <Spanish>Arco del Triunfo</Spanish>
   </TEXT>
   <TEXT>
@@ -4011,7 +4011,7 @@
     <English>Urban Mint</English>
     <French>H&#244;tel de la monnaie</French>
     <German>St&#228;dtische M&#252;nzpr&#228;ge</German>
-    <Italian>Menta urbano</Italian>
+    <Italian>Zecca Cittadina</Italian>
     <Spanish><Text>Ceca urbana</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -4073,9 +4073,9 @@
   <TEXT>
     <Tag>TXT_KEY_BUILDING_SANITATION</Tag>
     <English>Sewers</English>
-    <French>&#201;gouts</French>
+    <French>Egouts</French>
     <German>Kanalisation</German>
-    <Italian>Sistema Fognario</Italian>
+    <Italian>Sistema fognario</Italian>
     <Spanish><Text>Alcantarillas</Text><Gender>Female</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -4115,7 +4115,7 @@
     <English>High Walls</English>
     <French>Haut mur</French>
     <German><Text>Hohe Mauern</Text><Gender>Female</Gender><Plural>0</Plural></German>
-    <Italian><Text>Lunghe Mura</Text><Gender>Female</Gender><Plural>1</Plural></Italian>
+    <Italian><Text>Mura Alte</Text><Gender>Female</Gender><Plural>1</Plural></Italian>
     <Spanish><Text>Muralla Alta:Murallas Altas</Text><Gender>Female</Gender><Plural>0:1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -4179,7 +4179,7 @@
     <English>Fire Temple</English>
     <French>Temple du feu</French>
     <German>Feuertempel</German>
-    <Italian>Tempio del Fuoc</Italian>
+    <Italian>Tempio del Fuoco</Italian>
     <Spanish>Templo de Fuego</Spanish>
   </TEXT>
   <TEXT>
@@ -4193,7 +4193,7 @@
   <TEXT>
     <Tag>TXT_KEY_BUILDING_PHOEN_TEMPLE</Tag>
     <English>Phoenician Altar</English>
-    <French>Autel ph&#233;nicien</French>
+    <French>Autel m&#233;sopotamien</French>
     <German>Ph&#246;nizischer Altar</German>
     <Italian>Altare Fenicio</Italian>
     <Spanish>Altar Fenicio</Spanish>
@@ -4323,7 +4323,7 @@
     <English>Bactrian Horsemen</English>
     <French>Cavaliers bactriens</French>
     <German>Baktrische Reiter</German>
-    <Italian>Cavallieri Battriani</Italian>
+    <Italian>Cavalieri Battriani</Italian>
     <Spanish>Jinetes Bactrianos</Spanish>
   </TEXT>
   <TEXT>
@@ -4387,7 +4387,7 @@
     <English>Germanic Mercenaries</English>
     <French>Mercenaires germains</French>
     <German>Germanische S&#246;ldner</German>
-    <Italian>Mercenari Germani</Italian>
+    <Italian>Mercenari Germanici</Italian>
     <Spanish>Mercenarios Germ&#225;nicos</Spanish>
   </TEXT>
   <TEXT>
@@ -4419,7 +4419,7 @@
     <English>Glassware</English>
     <French>Objets en verre</French>
     <German>Glaswaren</German>
-    <Italian>Oggetti di Vetro</Italian>
+    <Italian>Oggetti in Vetro</Italian>
     <Spanish>Vidrio</Spanish>
   </TEXT>
   <TEXT>
@@ -4435,7 +4435,7 @@
     <English>Cyperus Papyrus</English>
     <French>Cyperus Papyrus</French>
     <German>Cyperus Papyrus</German>
-    <Italian>Cyperus Papyrus</Italian>
+    <Italian>Papiro Egiziano</Italian>
     <Spanish>Cyperus Papyrus</Spanish>
   </TEXT>
   <TEXT>
@@ -4467,7 +4467,7 @@
     <English>Songs</English>
     <French>Lieds</French>
     <German>Kunstlieder</German>
-    <Italian>Canti</Italian>
+    <Italian>Canzoni</Italian>
     <Spanish>Canto</Spanish>
   </TEXT>
   <TEXT>
@@ -4883,7 +4883,7 @@
     <English>Carvel</English>
     <French>K&#233;pen</French>
     <German>Karweele</German>
-    <Italian>Carvella</Italian>
+    <Italian>Nave a scafo latino (carvel)</Italian>
     <Spanish>Carvel</Spanish>
   </TEXT>
   <TEXT>
@@ -4915,7 +4915,7 @@
     <English>Marduk Priest</English>
     <French>Pr&#234;tre de Marduk</French>
     <German>Marduk-Priester</German>
-    <Italian>Sacerdote Marduk</Italian>
+    <Italian>Sacerdote di Marduk</Italian>
     <Spanish>Sacerdote de Marduk:Sacerdotes de Marduk</Spanish>
   </TEXT>
   <TEXT>
@@ -5001,9 +5001,9 @@
   <TEXT>
     <Tag>TXT_KEY_UNIT_GOLDKARREN</Tag>
     <English>Gold cart</English>
-    <French><Text>Charrette d'or</Text><Gender>Female</Gender><Plural>0</Plural></French>
+    <French>Chariot de butin</French>
     <German>Goldkarren</German>
-    <Italian>Carrello d'oro</Italian>
+    <Italian>Carretto d'oro</Italian>
     <Spanish>Cargamento de oro</Spanish>
   </TEXT>
   <TEXT>
@@ -5043,7 +5043,7 @@
     <English>Falxman</English>
     <French>Faucheur</French>
     <German>Falx-K&#228;mpfer</German>
-    <Italian>Soldato con Falce</Italian>
+    <Italian>Soldato con Falce dacica</Italian>
     <Spanish>Soldado con falx:Soldados con falx</Spanish>
   </TEXT>
   <TEXT>
@@ -5083,7 +5083,7 @@
     <English>Gau ruler</English>
     <French>Souverain du Gau</French>
     <German>Gauf&#252;rst</German>
-    <Italian>Righello del Gau</Italian>
+    <Italian>Signore del Gau</Italian>
     <Spanish>Soberano de Gau</Spanish>
   </TEXT>
   <TEXT>
@@ -5235,7 +5235,7 @@
     <English>Hoplit</English>
     <French>Hoplite</French>
     <German>Hoplit</German>
-    <Italian>Hoplita</Italian>
+    <Italian>Oplita</Italian>
     <Spanish>Hoplita:Hoplitas</Spanish>
   </TEXT>
   <TEXT>
@@ -5275,7 +5275,7 @@
     <English>Praetorian Guard</English>
     <French>Garde pr&#233;torien</French>
     <German>Pr&#228;torianergarde</German>
-    <Italian>Guardia Praetoriano</Italian>
+    <Italian>Guardia Pretoriana</Italian>
     <Spanish>Guardia Praetoriana</Spanish>
   </TEXT>
   <TEXT>
@@ -5283,7 +5283,7 @@
     <English>Emigrant</English>
     <French>Emigrant</French>
     <German>Auswanderer</German>
-    <Italian>Emigrante</Italian>
+    <Italian>Emigranti</Italian>
     <Spanish>Emigrante:Emigrantes</Spanish>
   </TEXT>
   <TEXT>
@@ -5323,7 +5323,7 @@
     <English>Berserk</English>
     <French>Berserker</French>
     <German>Berserker</German>
-    <Italian>Energumeno</Italian>
+    <Italian>Berserker</Italian>
     <Spanish>Fiera</Spanish>
   </TEXT>
   <TEXT>
@@ -5363,7 +5363,7 @@
     <English>Gladiator</English>
     <French>Gladiateur</French>
     <German>Gladiator</German>
-    <Italian>Gladiador</Italian>
+    <Italian>Gladiatore</Italian>
     <Spanish>Gladiador:Gladiadores</Spanish>
   </TEXT>
   <TEXT>
@@ -5371,7 +5371,7 @@
     <English>Insurgent</English>
     <French>Rebelle</French>
     <German>Rebell</German>
-    <Italian>Ribelle</Italian>
+    <Italian>Rivoltosi</Italian>
     <Spanish>Rebelde:Rebeldes</Spanish>
   </TEXT>
   <TEXT>
@@ -5403,7 +5403,7 @@
     <English>Mine slaves</English>
     <French>Mineur esclave</French>
     <German>Bergwerkssklaven</German>
-    <Italian>Schiavo di miniera</Italian>
+    <Italian>Schiavo minatore:Schiavi minatori</Italian>
     <Spanish>Esclavo de la mina:Esclavos de la mina</Spanish>
   </TEXT>
   <TEXT>
@@ -5515,7 +5515,7 @@
     <English>Merchantman</English>
     <French>Navire marchand</French>
     <German>Handelsschiff</German>
-    <Italian>Mercante</Italian>
+    <Italian>Bastimento</Italian>
     <Spanish>Mercante:Mercantes</Spanish>
   </TEXT>
   <TEXT>
@@ -5563,7 +5563,7 @@
     <English>Quadrireme</English>
     <French><Text>Quadrir&#232;me</Text><Gender>Female</Gender><Plural>0</Plural></French>
     <German>Quadrireme</German>
-    <Italian>Quatrirreme</Italian>
+    <Italian>Quadrireme</Italian>
     <Spanish>Quatrirreme:Quatrirremes</Spanish>
   </TEXT>
   <TEXT>
@@ -5659,7 +5659,7 @@
     <English>Mounted federates</English>
     <French>F&#233;d&#233;r&#233;s mont&#233;s</French>
     <German>Berittene Foederaten</German>
-    <Italian>Federati montati</Italian>
+    <Italian>Foederati a cavallo</Italian>
     <Spanish><Text>Federados montados</Text><Gender>Male</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -5675,7 +5675,7 @@
     <English>Numidian Horseman</English>
     <French>Cavalier numide</French>
     <German>Numidischer Reiter</German>
-    <Italian>Cavalliere Numida</Italian>
+    <Italian>Cavaliere Numida</Italian>
     <Spanish>Jinete N&#250;mido:Jinetes N&#250;midos</Spanish>
   </TEXT>
   <TEXT>
@@ -5763,7 +5763,7 @@
     <English>Druid</English>
     <French>Druide</French>
     <German>Druide</German>
-    <Italian>Druida</Italian>
+    <Italian>Druido</Italian>
     <Spanish>Dru&#237;da:Dru&#237;das</Spanish>
   </TEXT>
   <TEXT>
@@ -5779,7 +5779,7 @@
     <English>Unique Unit I</English>
     <French>Unit&#233; unique I</French>
     <German>Spezialeinheit I</German>
-    <Italian>Unit&#224; Unica I</Italian>
+    <Italian>Unit&#224; Speciale I</Italian>
     <Spanish>Unidad &#250;nica I</Spanish>
   </TEXT>
   <TEXT>
@@ -5787,7 +5787,7 @@
     <English>Unique Unit II</English>
     <French>Unit&#233; unique II</French>
     <German>Spezialeinheit II</German>
-    <Italian>Unit&#224; Unica II</Italian>
+    <Italian>Unit&#224; Speciale II</Italian>
     <Spanish>Unidad &#250;nica II</Spanish>
   </TEXT>
   <TEXT>
@@ -5795,7 +5795,7 @@
     <English>Unique Unit III</English>
     <French>Unit&#233; unique III</French>
     <German>Spezialeinheit III</German>
-    <Italian>Unit&#224; Unica III</Italian>
+    <Italian>Unit&#224; Speciale III</Italian>
     <Spanish>Unidad &#250;nica III</Spanish>
   </TEXT>
   <TEXT>
@@ -5803,7 +5803,7 @@
     <English>Unique Unit IV</English>
     <French>Unit&#233; unique IV</French>
     <German>Spezialeinheit IV</German>
-    <Italian>Unit&#224; Unica IV</Italian>
+    <Italian>Unit&#224; Speciale IV</Italian>
     <Spanish>Unidad &#250;nica IV</Spanish>
   </TEXT>
   <TEXT>
@@ -5811,7 +5811,7 @@
     <English>Unique Unit V</English>
     <French>Unit&#233; unique V</French>
     <German>Spezialeinheit V</German>
-    <Italian>Unit&#224; Unica V</Italian>
+    <Italian>Unit&#224; Speciale V</Italian>
     <Spanish>Unidad &#250;nica V</Spanish>
   </TEXT>
   <TEXT>
@@ -5849,7 +5849,7 @@
   <TEXT>
     <Tag>TXT_KEY_UNIT_PHOEN_MISSIONARY</Tag>
     <English>Phoenician Missionary</English>
-    <French>Missionnaire ph&#233;nicien</French>
+    <French>Missionnaire m&#233;sopotamien</French>
     <German><Text>Ph&#246;nizischer Missionar</Text><Gender>Male</Gender><Plural>0</Plural></German>
     <Italian>Missionario Fenicio</Italian>
     <Spanish>Misionero Fenicio:Misioneros Fenicios</Spanish>
@@ -6017,9 +6017,9 @@
   <TEXT>
     <Tag>TXT_KEY_BUILD_BRUNNEN</Tag>
     <English>Sink a [LINK=IMPROVEMENT_BRUNNEN]desert well[\LINK]</English>
-    <French>Creuser un [LINK=IMPROVEMENT_BRUNNEN]puits de d&#233;sert[\LINK]</French>
+    <French>Creuser un [LINK=IMPROVEMENT_BRUNNEN]puits du d&#233;sert[\LINK]</French>
     <German>[LINK=IMPROVEMENT_BRUNNEN]W&#252;stenbrunnen[\LINK] ausheben</German>
-    <Italian>Scava un [LINK=IMPROVEMENT_BRUNNEN]pozzo del deserto[\LINK]</Italian>
+    <Italian>Scava un [LINK=IMPROVEMENT_BRUNNEN]pozzo nel deserto[\LINK]</Italian>
     <Spanish>Excavar un [LINK=IMPROVEMENT_BRUNNEN]pozo del desierto[\LINK]</Spanish>
   </TEXT>
   <TEXT>
@@ -6051,7 +6051,7 @@
     <English>Sovereign</English>
     <French>Souverain</French>
     <German>Souver&#228;n</German>
-    <Italian>Sovranit&#224;</Italian>
+    <Italian>Sovrano</Italian>
     <Spanish><Text>Soberan&#237;a</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -6067,7 +6067,7 @@
     <English>Dynasty</English>
     <French>Dynastie</French>
     <German>Dynastie</German>
-    <Italian><Text>Dinasta</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
+    <Italian><Text>Dinastia</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Dinast&#237;a</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -6075,7 +6075,7 @@
     <English>Tyranny</English>
     <French>Tyrannie</French>
     <German>Tyrannis</German>
-    <Italian><Text>Tirannia</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
+    <Italian><Text>Tirann&#236;a</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Tiran&#237;a</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -6147,7 +6147,7 @@
     <English>Blood Law</English>
     <French>Droit du sang</French>
     <German>Blutrecht</German>
-    <Italian><Text>Legge di Sangue</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
+    <Italian><Text>Legge del Sangue</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Ley de Sangre</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -6155,7 +6155,7 @@
     <English>High Priests</English>
     <French>Grands pr&#234;tres</French>
     <German>Hohepriester</German>
-    <Italian><Text>Sommo Sacerdoti</Text><Gender>Male</Gender><Plural>1</Plural></Italian>
+    <Italian><Text>Sommi Sacerdoti</Text><Gender>Male</Gender><Plural>1</Plural></Italian>
     <Spanish><Text>Sumo Sacerdotes</Text><Gender>Male</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -6187,7 +6187,7 @@
     <English>International Law</English>
     <French>Loi internationale</French>
     <German>V&#246;lkerrecht</German>
-    <Italian><Text>Legge Internazionale</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
+    <Italian><Text>Diritto Internazionale</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Ley Internacional</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -6275,7 +6275,7 @@
     <English>Ruler Cult</English>
     <French>Culte du dirigeant</French>
     <German>Herrscherkult</German>
-    <Italian><Text>Culto del Regnante</Text><Gender>Male</Gender><Plural>0</Plural></Italian>
+    <Italian><Text>Culto del Sovrano</Text><Gender>Male</Gender><Plural>0</Plural></Italian>
     <Spanish>Culto al Gobernante</Spanish>
   </TEXT>
   <TEXT>
@@ -6307,7 +6307,7 @@
     <English>Military</English>
     <French>Militaire</French>
     <German>Milit&#228;r</German>
-    <Italian><Text>Militare</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
+    <Italian>Militare</Italian>
     <Spanish>Militar</Spanish>
   </TEXT>
   <TEXT>
@@ -6339,7 +6339,7 @@
     <English>Recruiting duty</English>
     <French>Recrutement obligatoire</French>
     <German>Rekrutierungspflicht</German>
-    <Italian>Dovere di reclutamento</Italian>
+    <Italian>Leva obbligatoria</Italian>
     <Spanish>Deber de reclutamiento</Spanish>
   </TEXT>
   <TEXT>
@@ -6691,7 +6691,7 @@
     <English>Osiris</English>
     <French>Osiris</French>
     <German>Osiris</German>
-    <Italian>Osiris</Italian>
+    <Italian>Osiride</Italian>
     <Spanish>Osiris</Spanish>
   </TEXT>
   <TEXT>
@@ -6723,7 +6723,7 @@
     <English>Persephone</English>
     <French>Pers&#233;phone</French>
     <German>Persephone</German>
-    <Italian>Persephone</Italian>
+    <Italian>Persefone</Italian>
     <Spanish>Pers&#233;fone</Spanish>
   </TEXT>
   <TEXT>
@@ -6811,7 +6811,7 @@
     <English>Aeneas</English>
     <French>En&#233;e</French>
     <German>Aeneas</German>
-    <Italian>Aeneas</Italian>
+    <Italian>Enea</Italian>
     <Spanish>Eneas</Spanish>
   </TEXT>
   <TEXT>
@@ -6819,7 +6819,7 @@
     <English>Heracles</English>
     <French>H&#233;racl&#232;s</French>
     <German>Herakles</German>
-    <Italian>Heracles</Italian>
+    <Italian>Ercole</Italian>
     <Spanish>Heracles</Spanish>
   </TEXT>
   <TEXT>
@@ -6827,7 +6827,7 @@
     <English>Cadmus</English>
     <French>Cadmos</French>
     <German>Kadmos</German>
-    <Italian>Cadmos</Italian>
+    <Italian>Cadmo</Italian>
     <Spanish>Cadmo</Spanish>
   </TEXT>
   <TEXT>
@@ -7635,7 +7635,7 @@
     <English>Supply Units</English>
     <French>Unit&#233;s d'assistance</French>
     <German><Text>Versorgungseinheit:Versorgungseinheiten</Text><Gender>Male</Gender><Plural>0:1</Plural></German>
-    <Italian><Text>Unit&#224; di Alimentazione:Unit&#224; di Alimentazione</Text><Gender>Female</Gender><Plural>0:1</Plural></Italian>
+    <Italian><Text>Unit&#224; di Approviggionamento:Unit&#224; di Approviggionamento</Text><Gender>Female</Gender><Plural>0:1</Plural></Italian>
     <Spanish><Text>Unidad de Aprovisionamiento:Unidades de Aprovisionamiento</Text><Gender>Female</Gender><Plural>0:1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -7819,7 +7819,7 @@
     <English>Battering Rams</English>
     <French>B&#233;liers renforc&#233;s</French>
     <German>Rammb&#246;cke</German>
-    <Italian>Arieti</Italian>
+    <Italian>Batteria di Arieti</Italian>
     <Spanish>Bater&#237;as de Arietes</Spanish>
   </TEXT>
   <TEXT>
@@ -7827,7 +7827,7 @@
     <English>Heavy Battering Rams</English>
     <French>B&#233;liers lourds</French>
     <German>Sturmb&#246;cke</German>
-    <Italian>Ariti Pesanti</Italian>
+    <Italian>Batteria di Arieti Pesanti</Italian>
     <Spanish>Bater&#237;as de Arietes Pesadas</Spanish>
   </TEXT>
   <TEXT>
@@ -7851,15 +7851,15 @@
     <English>Elite Unit III</English>
     <French>Unit&#233; d'&#233;lite III</French>
     <German>Eliteeinheit III</German>
-    <Italian>Unidad de &#233;lite III</Italian>
-    <Spanish> Unidad de &#233;lite III</Spanish>
+    <Italian>Unit&#224; d'&#233;lite III</Italian>
+    <Spanish>Unidad de &#233;lite III</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_BUILDING_PROMO_JUNGLE</Tag>
     <English>Training Center for Jungle Fighting</English>
     <French>Camp d'entra&#238;nement (Jungle)</French>
     <German>Ausbildungsst&#228;tte f&#252;r Dschungelkampf</German>
-    <Italian>Centro di Formazione per la Foresta Lotta</Italian>
+    <Italian>Centro di Addestramento per il Combattimento nella Giungla</Italian>
     <Spanish>Centro de Entrenamiento para la Lucha en Selva</Spanish>
   </TEXT>
   <TEXT>
@@ -7867,7 +7867,7 @@
     <English>Training Center for City Defense</English>
     <French>Camp d'entra&#238;nement (D&#233;fense Ville)</French>
     <German>Ausbildungsst&#228;tte f&#252;r Stadtverteidigung</German>
-    <Italian>Centro di Formazione per la Difesa della Citt&#224;</Italian>
+    <Italian>Centro di Addestramento per la Difesa Cittadina</Italian>
     <Spanish>Centro de Entrenamiento para la Defensa de Ciudades</Spanish>
   </TEXT>
   <TEXT>
@@ -7875,7 +7875,7 @@
     <English>Training Center for City Attacks</English>
     <French>Camp d'entra&#238;nement (Attaque Ville)</French>
     <German>Ausbildungsst&#228;tte f&#252;r Stadtangriffe</German>
-    <Italian>Centro di Formazione per gli Attacchi in Citt&#224;</Italian>
+    <Italian>Centro di Addestramento per gli Attacchi alle Citt&#224;</Italian>
     <Spanish>Centro de Entrenamiento para el Ataque de Ciudades</Spanish>
   </TEXT>
   <TEXT>
@@ -7883,7 +7883,7 @@
     <English>Training Center for Hill Fighting</English>
     <French>Camp d'entra&#238;nement (Collines)</French>
     <German>Ausbildungsst&#228;tte f&#252;r H&#252;gelkampf</German>
-    <Italian>Centro di Formazione per la Collina Battaglia</Italian>
+    <Italian>Centro di Addestramento per il Combattimento Collinare</Italian>
     <Spanish>Centro de Entrenamiento para la Lucha en Colinas</Spanish>
   </TEXT>
   <TEXT>
@@ -7891,7 +7891,7 @@
     <English>Training Center for Marauders</English>
     <French>Camp d'entra&#238;nement (Pillage)</French>
     <German>Ausbildungsst&#228;tte f&#252;r Marodeure</German>
-    <Italian>Centro di Formazione per i Marauders</Italian>
+    <Italian>Centro di Addestramento per i Saccheggiatori</Italian>
     <Spanish>Centro de Entrenamiento para Saqueadores</Spanish>
   </TEXT>
   <TEXT>
@@ -7899,7 +7899,7 @@
     <English>Training Center for Swamp Fighting</English>
     <French>Camp d'entra&#238;nement (Mar&#233;cage)</French>
     <German>Ausbildungsst&#228;tte f&#252;r Sumpfkampf</German>
-    <Italian>Centro di Formazione per la Palude Lotta</Italian>
+    <Italian>Centro di Addestramento per il Combattimento Palustre</Italian>
     <Spanish>Centro de Entrenamiento para la Lucha en los Pantanos</Spanish>
   </TEXT>
   <TEXT>
@@ -7907,7 +7907,7 @@
     <English>Training Center for Forest Fighting</English>
     <French>Camp d'entra&#238;nement (For&#234;t)</French>
     <German>Ausbildungsst&#228;tte f&#252;r Waldkampf</German>
-    <Italian>Centro di Formazione per la Foresta Lotta</Italian>
+    <Italian>Centro di Addestramento per il Combattimento Silvestre</Italian>
     <Spanish>Centro de Entrenamiento para la Lucha en Bosques</Spanish>
   </TEXT>
   <TEXT>
@@ -7915,7 +7915,7 @@
     <English>Training Center for Desert Fighting</English>
     <French>Camp d'entra&#238;nement (D&#233;sert)</French>
     <German>Ausbildungsst&#228;tte f&#252;r W&#252;stenkampf</German>
-    <Italian>Centro di Formazione per il Combattimento nel Deserto</Italian>
+    <Italian>Centro di Addestramento per il Combattimento nel Deserto</Italian>
     <Spanish>Centro de Entrenamiento para la Lucha en Desierto</Spanish>
   </TEXT>
   <TEXT>
@@ -7923,7 +7923,7 @@
     <English>Training Center for Seafarers</English>
     <French>Camp d'entra&#238;nement de marins</French>
     <German>Ausbildungsst&#228;tte f&#252;r Seeleute</German>
-    <Italian>Centro di Formazione per la Gente di Mare</Italian>
+    <Italian>Centro di Addestramento per Marinai</Italian>
     <Spanish>Centro de formaci&#243;n para la gente de mar</Spanish>
   </TEXT>
   <TEXT>
@@ -8115,7 +8115,7 @@
     <English>Work Elephant</English>
     <French>El&#233;phant de somme</French>
     <German>Arbeitselefant</German>
-    <Italian>Lavoro elefante</Italian>
+    <Italian>Elefante da lavoro</Italian>
     <Spanish>Elefante de trabajo</Spanish>
   </TEXT>
   <TEXT>
@@ -8139,7 +8139,7 @@
     <English>Pyramids of Giza</English>
     <French><Text>Pyramides de Gizeh</Text><Gender>Female</Gender><Plural>1</Plural></French>
     <German><Text>Pyramiden von Gizeh</Text><Gender>Female</Gender><Plural>1</Plural></German>
-    <Italian><Text>Piramide a Giza</Text><Gender>Female</Gender><Plural>1</Plural></Italian>
+    <Italian><Text>Piramidi di Giza</Text><Gender>Female</Gender><Plural>1</Plural></Italian>
     <Spanish><Text>Pir&#225;mides en Guiza</Text><Gender>Female</Gender><Plural>1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -8331,7 +8331,7 @@
     <English>Illyrian Hoplite</English>
     <French>Hoplite illyrien</French>
     <German>Illyrischer Hoplit</German>
-    <Italian>Oplita illirica</Italian>
+    <Italian>Oplita illirico</Italian>
     <Spanish>Hoplita ilirio</Spanish>
   </TEXT>
   <TEXT>
@@ -8395,7 +8395,7 @@
     <English>Baal Temple of Palmyra</English>
     <French>Temple palmyr&#232;ne de B&#234;l</French>
     <German>Baaltempel von Palmyra</German>
-    <Italian>Tempio Baal di Palmira</Italian>
+    <Italian>Tempio di Baalshamin di Palmira</Italian>
     <Spanish>Templo Baal de Palmira</Spanish>
   </TEXT>
   <TEXT>

@@ -229,7 +229,7 @@
     <English>Created by Thorgal and based on the Imperium Romanum map by Inex![NEWLINE][NEWLINE]A really big map with space for the whole PAE universe from Britannia to India.</English>
     <French>Cr&#233;&#233; par Thorgal &#224; partir de l'Imperium Romanum &#233;labor&#233; par Inex![NEWLINE][NEWLINE]Une carte monumentale assez grande pour tout le contenu de PAE, de la Bretagne &#224; l'Inde.</French>
     <German>Erstellt von Thorgal auf Basis der Imperium Romanum Karte von Inex![NEWLINE][NEWLINE]Eine sehr gro&#223;e Karte mit Platz f&#252;r das ganze PAE-Universum von Britannien bis Indien.</German>
-    <Italian>Created by Thorgal and based on the Imperium Romanum map by Inex![NEWLINE][NEWLINE]A really big map with space for the whole PAE universe from Britannia to India.</Italian>
+    <Italian>Creato da Thorgal e basato sulla mappa Imperium Romanum di Inex![NEWLINE][NEWLINE]Una mappa davvero grande con spazio per l'intero universo PAE dalla Britannia all'India.</Italian>
     <Spanish>&#161;Creado por Thorgal y basado en el mapa Imperium Romanum de Inex![NEWLINE][NEWLINE]Un mapa verdaderamente grande con espacio para todo el universo PAE, desde Britania hasta la India.</Spanish>
   </TEXT>
   <TEXT>
@@ -237,7 +237,7 @@
     <English>Created by JohnDay! [NEWLINE][NEWLINE]A scenario about the Limes Germanicus on a small map (60x40). The Burgundians are playable as OCC.</English>
     <French>Cr&#233;&#233; par JohnDay![NEWLINE][NEWLINE]Petite carte (60x40) consacr&#233;e au limes Germanicus. La civilsation des Burgondes est jouables en OCC.</French>
     <German>Erstellt von JohnDay![NEWLINE][NEWLINE]Szenario &#252;ber den Limes Germanicus auf einer kleinen Karte (60x40). Die Zivilisation der Burgunder ist OCC f&#228;hig.</German>
-    <Italian>Created by JohnDay! [NEWLINE][NEWLINE]A scenario about the Limes Germanicus on a small map (60x40). The Burgundians are playable as OCC.</Italian>
+    <Italian>Creato da JohnDay![NEWLINE][NEWLINE]Uno scenario sul Limes Germanicus su una piccola mappa (60x40). I Burgundi sono giocabili come OCC.</Italian>
     <Spanish>&#161;Creado por JohnDay![NEWLINE][NEWLINE]Un escenario sobre las Limes Germanicus en un mapa peque&#241;o (60x40). Los Burgundios son jugables como OCC (reto de &#250;nica ciudad).</Spanish>
   </TEXT>
   <TEXT>
@@ -285,7 +285,7 @@
     <English>Pausanias of Sparta</English>
     <French>Pausanias de Sparte</French>
     <German>Pausanias von Sparta</German>
-    <Italian>Pausanias di Sparta</Italian>
+    <Italian>Pausania di Sparta</Italian>
     <Spanish>Pausanias de Esparta</Spanish>
   </TEXT>
   <TEXT>
@@ -381,7 +381,7 @@
     <English>A game-cut and advanced scenario for a multiplayer game.</English>
     <French>Un sc&#233;nario complexe taill&#233; pour une partie multijoueur.</French>
     <German>Ein f&#252;r ein Multiplayer-Spiel zurechtgeschnittenes und fortgeschrittenes Szenario.</German>
-    <Italian>Uno scenario avanzato e avanzato per una partita multiplayer.</Italian>
+    <Italian>Uno scenario avanzato adatto per una partita multiplayer.</Italian>
     <Spanish>Un escenario avanzado y avanzado para un juego multijugador.</Spanish>
   </TEXT>
   <TEXT>
@@ -465,6 +465,30 @@
     <Spanish>El mapa m&#225;s grande posible en PAE (205x120 mosaicos) - por brettschmitt[NEWLINE]&#161;Toma la competencia contra 52 naciones para gobernar el mundo antiguo![NEWLINE]_____________________[NEWLINE]&#161;Los recursos son raros! Algunas personas tienen ventajas significativas por su posici&#243;n inicial y un acceso m&#225;s f&#225;cil a los recursos. Por lo general, estas son las naciones poderosas de la antig&#252;edad, como Roma, el Bajo Egipto, Cartago o Persia. Otras naciones antiguas no tan conocidas tienen mucho m&#225;s que luchar al principio. &#161;Utilice la distribuci&#243;n de recursos mediante vagones de suministros para desarrollar su pa&#237;s![NEWLINE]Algunas naciones son Citystates. &#161;No pueden fundar sus propias ciudades y no pueden fundar una religi&#243;n! Los Citystates tienen su palacio desde el principio (aunque no el liderazgo tecnol&#243;gico) y una peque&#241;a ventaja en la cultura. Las ciudades-estado jugables son Erstrucans, Sparta y Babylon. Entonces Roma y Grecia tienen vecinos directos ... que, por cierto, no son amistosos.[NEWLINE]_____________________[NEWLINE]El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferido poder absoluto, &#161;esperando en que la noble gracia de los dioses nunca te abandone![NEWLINE]1) Intenta fundar una religi&#243;n o captura una.[NEWLINE]2) Construye un palacio tan pronto como puedas (Tec: Liderazgo). Despu&#233;s de eso, ser&#225;s capaz de afrontar los costes de mantenimiento de otras ciudades.[NEWLINE]3) Produce cultura para expandir tu influencia (Religi&#243;n, Palacio, Culto, etc.)[NEWLINE]4) &#161;Atenci&#243;n: Las mejoras cuestan dinero![NEWLINE]5) Es recomendado leer texto del concepto [LINK=CONCEPT_IMPORTANT_FACTS]Datos importantes[\LINK] antes de jugar.[NEWLINE][H2]Todas las caracter&#237;sticas pueden ser encontradas en la civilopedia sobre los conceptos del PAE.[\H2]</Spanish>
   </TEXT>
   <TEXT>
+    <Tag>TXT_KEY_DAWN_OF_MAN_SCREEN_TITLE_WESTERN_MED</Tag>
+    <English>Western Mediterranean 5000 BC</English>
+    <French>M&#233;diterran&#233;e occidentale 5000 av.</French>
+    <German>Westliches Mittelmeer 5000 v.Chr.</German>
+    <Italian>Mediterraneo occidentale 5000 aC</Italian>
+    <Spanish>Mediterr&#225;neo occidental 5000 a.C.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_SCENARIO_WESTERN_MED</Tag>
+    <English>A map (100x72) based on Keinpferd's scenario "First Punic War" with 24 tribes about 5000 BC. Fixed starting points. Created by Barcas.</English>
+    <French>Une carte (100x72) bas&#233;e sur le sc&#233;nario de Keinpferd "Premi&#232;re guerre punique" avec 24 tribus vers 5000 av. Points de d&#233;part fixes. Cr&#233;&#233; par Barcas.</French>
+    <German>Eine Karte (100x72) auf Basis von Keinpferds Szenario "First Punic War" mit 24 V&#246;lkern im Jahr 5000 v. Chr. beginnend, mit festen Startpunkten. Erstellt von Barcas.</German>
+    <Italian>Una mappa (100x72) basata sullo scenario di Keinpferd "Prima guerra punica" con 24 trib&#249; intorno al 5000 aC. Punti di partenza fissi. Creato da Barcas.</Italian>
+    <Spanish>Un mapa (100x72) basado en el escenario de Keinpferd "Primera Guerra P&#250;nica" con 24 tribus alrededor del 5000 AC. Puntos de partida fijos. Creado por Barcas.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_DAWN_OF_MAN_WESTERN_MED</Tag>
+    <English>The first civilizations develop in the western Mediterranean. Which of them can prevail and become a great power?[NEWLINE][NEWLINE][ICON_BULLET] Will Rome or the Etruscans dominate the Italian peninsula?[NEWLINE][ICON_BULLET] Can Carthage rise against the native tribes in Africa?[NEWLINE][ICON_BULLET] Who will be the master of Sicily and sardines?[NEWLINE][NEWLINE]You decide and lead your people into the future.</English>
+    <French>Les premi&#232;res civilisations se d&#233;veloppent en M&#233;diterran&#233;e occidentale. Lequel d'entre eux peut pr&#233;valoir et devenir une grande puissance?[NEWLINE][NEWLINE][ICON_BULLET] Est-ce que Rome ou les Etrusques domineront-ils la p&#233;ninsule italienne ?[NEWLINE][ICON_BULLET] Est-ce que Carthage peut-elle se soulever contre les tribus indig&#232;nes d'Afrique ?[NEWLINE][ICON_BULLET] Qui sera le ma&#238;tre de la Sicile et des sardines ?[NEWLINE][NEWLINE]Vous d&#233;cidez et dirigez votre peuple vers l'avenir.</French>
+    <German>Im westlichen Mittelmeer entwickeln sich die ersten Zivilisationen. Welche kann sich durchsetzen und zur Gro&#223;macht aufsteigen?[NEWLINE][NEWLINE][ICON_BULLET] Werden Rom oder die Etrusker die italienische Halbinsel dominieren?[NEWLINE][ICON_BULLET] Kann sich Karthago gegen die einheimischen St&#228;mme in Afrika durchsetzen?[NEWLINE][ICON_BULLET] Wer wird Herr &#252;ber Sizilien und Sardinen?[NEWLINE][NEWLINE]Entscheide du und f&#252;hre dein Volk in die Zukunft.</German>
+    <Italian>Le prime civilt&#224; si sviluppano nel Mediterraneo occidentale. Quale di loro pu&#242; prevalere e diventare una grande potenza?[NEWLINE][NEWLINE][ICON_BULLET] Roma o gli Etruschi domineranno la penisola italiana? [NEWLINE][ICON_BULLET] Pu&#242; Cartagine insorgere contro le trib&#249; native dell'Africa?[NEWLINE][ICON_BULLET] Chi sar&#224; il padrone della Sicilia e delle sardine?[NEWLINE][NEWLINE]Decidi tu e guidi la tua gente nel futuro.</Italian>
+    <Spanish>Las primeras civilizaciones se desarrollan en el Mediterr&#225;neo occidental. &#191;Cu&#225;l de ellos puede prevalecer y convertirse en una gran potencia?[NEWLINE][NEWLINE][ICON_BULLET] &#191;Dominar&#225;n Roma o los etruscos la pen&#237;nsula italiana?[NEWLINE][ICON_BULLET] &#191;Puede Cartago levantarse contra las tribus nativas de &#193;frica?[NEWLINE][ICON_BULLET] &#191;Qui&#233;n ser&#225; el amo de Sicilia y las sardinas?[NEWLINE][NEWLINE]T&#250; decides y guias a tu gente hacia el futuro.</Spanish>
+  </TEXT>
+  <TEXT>
     <Tag>TXT_KEY_CIV_SYRACUSAE_LEADER</Tag>
     <English>Dionysios II of Syracuse</English>
     <French>Dionysios II de Syracuse</French>
@@ -525,7 +549,7 @@
     <English>Abyssinian</English>
     <French>abyssinien</French>
     <German>Abyssinische</German>
-    <Italian>abyssinio</Italian>
+    <Italian>abbissino</Italian>
     <Spanish>abyssinio</Spanish>
   </TEXT>
   <TEXT>
@@ -789,7 +813,7 @@
     <English>Histiaeus the Ionian</English>
     <French>Histi&#233;e l'Ionien</French>
     <German>Histiaios der Ionier</German>
-    <Italian>Istieo il Ionio</Italian>
+    <Italian>Istieo lo Ionico</Italian>
     <Spanish>Histieo el j&#243;nio</Spanish>
   </TEXT>
   <TEXT>
@@ -821,7 +845,7 @@
     <English>Perdiccas the Macedon</English>
     <French>Perdiccas le Mac&#233;donien</French>
     <German>Perdikkas der Makedone</German>
-    <Italian>Perdicca il macedone</Italian>
+    <Italian>Perdicca il Macedone</Italian>
     <Spanish>P&#233;rdicas el macedonio</Spanish>
   </TEXT>
   <TEXT>
@@ -916,7 +940,7 @@
     <Tag>TXT_KEY_CIV_PERGAMON_ADJECTIVE</Tag>
     <English>Pergamonian</English>
     <French>Pergam&#233;nien</French>
-    <German><Text>Pergamonisch:pergamonischen:pergamonische</Text><Gender>Neuter:Neuter:Neuter</Gender><Plural>0:0:0</Plural></German>
+    <German>Pergamenische</German>
     <Italian>pergamena</Italian>
     <Spanish><Text>pergameno:pergamena:pergamenos:pergamenas</Text><Gender>Male:Female:Male:Female</Gender><Plural>0:0:1:1</Plural></Spanish>
   </TEXT>
@@ -1445,7 +1469,7 @@
     <English>Italic</English>
     <French><Text>italicien:italicienne:italiciens:italiciennes</Text><Gender>Male:Female:Male:Female</Gender><Plural>0:0:1:1</Plural></French>
     <German><Text>italisch:italischen:italische:italischer</Text><Gender>Neuter:Neuter:Neuter:Male</Gender><Plural>0:0:0:0</Plural></German>
-    <Italian><Text>italico:italica:italici:italice</Text><Gender>Male:Female:Male:Female</Gender><Plural>0:0:1:1</Plural></Italian>
+    <Italian><Text>italico:italica:italici:italiche</Text><Gender>Male:Female:Male:Female</Gender><Plural>0:0:1:1</Plural></Italian>
     <Spanish><Text>italico:italica:italicos:italicas</Text><Gender>Male:Female:Male:Female</Gender><Plural>0:0:1:1</Plural></Spanish>
   </TEXT>
   <TEXT>
@@ -1541,7 +1565,7 @@
     <English>Senate and People of Rome</English>
     <French>Le s&#233;nat et le peuple romain</French>
     <German>Senat und Volk von Rom</German>
-    <Italian>Il Senato e il popolo romano</Italian>
+    <Italian>Il Senato e il Popolo Romano</Italian>
     <Spanish>El Senado y el Pueblo Romano</Spanish>
   </TEXT>
   <TEXT>
@@ -1997,7 +2021,7 @@
     <English>Ptolemaeus IV the Diadoch</English>
     <French>Ptol&#233;m&#233;e IV le Diadoque</French>
     <German>Ptolemaios IV der Diadoche</German>
-    <Italian>Tolomeo IV il diadoco</Italian>
+    <Italian>Tolomeo IV il Diadoco</Italian>
     <Spanish>Ptolomeo IV el di&#225;doco</Spanish>
   </TEXT>
   <TEXT>
@@ -2005,7 +2029,7 @@
     <English>Philippus V the Macedon</English>
     <French>Philippe V le Mac&#233;donien</French>
     <German>Philippos V der Makedone</German>
-    <Italian>Philippos V il macedone</Italian>
+    <Italian>Filippo V il Macedone</Italian>
     <Spanish>Philippus V el macedonio</Spanish>
   </TEXT>
   <TEXT>
@@ -2069,7 +2093,7 @@
     <English>David the Hebrew</English>
     <French>David l'H&#233;breu</French>
     <German>David der Hebr&#228;er</German>
-    <Italian>David il ebreo</Italian>
+    <Italian>Davide il Giudeo</Italian>
     <Spanish>David el hebreo</Spanish>
   </TEXT>
   <TEXT>
@@ -2253,7 +2277,7 @@
     <English>Creon of Epirus</English>
     <French>Cr&#233;on d'&#201;pire</French>
     <German>Kreon von Epirus</German>
-    <Italian>Creonte d'Epiros</Italian>
+    <Italian>Creonte dell'Epiro</Italian>
     <Spanish>Creonte de Epiros</Spanish>
   </TEXT>
   <TEXT>
@@ -2261,7 +2285,7 @@
     <English>Dionysius the Achaean</English>
     <French>Denys l'Ach&#233;en</French>
     <German>Dionysios der Achaier</German>
-    <Italian>Dionisio d'Epiros</Italian>
+    <Italian>Dionisio dell'Epiro</Italian>
     <Spanish>Dionisio de Epiros</Spanish>
   </TEXT>
   <TEXT>
@@ -2325,7 +2349,7 @@
     <English>Divico the Helvetian</English>
     <French>Divico des Helv&#232;tes</French>
     <German>Divico der Helvetier</German>
-    <Italian>Divico l'elvetico</Italian>
+    <Italian>Divico l'Elvetico</Italian>
     <Spanish>Divico el Helv&#233;tico</Spanish>
   </TEXT>
   <TEXT>
@@ -2341,7 +2365,7 @@
     <English>Viridomarus the Silurian</English>
     <French>Viridiomaros le Silure</French>
     <German>Viridomarus der Silurer</German>
-    <Italian>Viridomarus il Siluriano</Italian>
+    <Italian>Viridomaro dei Gesati</Italian>
     <Spanish>Viridomarus el Siluriano</Spanish>
   </TEXT>
   <TEXT>
@@ -2365,7 +2389,7 @@
     <English>Catuvolcus the Treverian</English>
     <French>Catuvolcos le Tr&#233;vire</French>
     <German>Catuvolcus der Treverer</German>
-    <Italian>Catuvolcus il Treverian</Italian>
+    <Italian>Catuvolco il Treveriano</Italian>
     <Spanish>Catuvolcus el Treveriano</Spanish>
   </TEXT>
   <TEXT>
@@ -2541,7 +2565,7 @@
     <English>Clearchus of Heraclea</English>
     <French>Clearchus d'H&#233;racl&#233;e</French>
     <German>Klearchos von Herakleia</German>
-    <Italian>Klearchos di Heraclea</Italian>
+    <Italian>Clearco di Heraclea</Italian>
     <Spanish>Klearchos de Heraclea</Spanish>
   </TEXT>
   <TEXT>
@@ -2557,7 +2581,7 @@
     <English>Widukind the Frisian</English>
     <French>Widukind le frison</French>
     <German>Widukind der Friese</German>
-    <Italian>Widukind il Frisio</Italian>
+    <Italian>Widukind il Frisone</Italian>
     <Spanish>Widukind el Frisio</Spanish>
   </TEXT>
   <TEXT>
@@ -2565,7 +2589,7 @@
     <English>Offa of the Angles</English>
     <French>Offa des Angles</French>
     <German>Offa von den Angeln</German>
-    <Italian>Offa di Angli</Italian>
+    <Italian>Offa degli Angli</Italian>
     <Spanish>Offa de los Anglos</Spanish>
   </TEXT>
   <TEXT>
@@ -2573,7 +2597,7 @@
     <English>Agilulf the Semnone</English>
     <French>Agilulf le Semnone</French>
     <German>Agilulf der Semnone</German>
-    <Italian>Agilulf il Semnon</Italian>
+    <Italian>Agilulfo il Semnone</Italian>
     <Spanish>Agilulf el Semnon</Spanish>
   </TEXT>
   <TEXT>
@@ -2581,7 +2605,7 @@
     <English>Ermanarich the Gotone</English>
     <French>Ermanarich le Gotone</French>
     <German>Ermanarich der Gotone</German>
-    <Italian>Ermanarich il Gotone</Italian>
+    <Italian>Ermanarico il Grutungio</Italian>
     <Spanish>Ermanarich el Goton</Spanish>
   </TEXT>
   <TEXT>
@@ -2629,7 +2653,7 @@
     <English>Ambiorix of Insubria</English>
     <French>Ambiorix d'Insubria</French>
     <German>Ambiorix von Insubrien</German>
-    <Italian>Ambiorix di Insubria</Italian>
+    <Italian>Ambiorige dell'Insubria</Italian>
     <Spanish>Ambiorix de Insubria</Spanish>
   </TEXT>
   <TEXT>
@@ -2687,6 +2711,30 @@
     <German>turdetanische</German>
     <Italian>turdetano</Italian>
     <Spanish>turdetano</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_LEADER_CITYSTATE</Tag>
+    <English>The Lord</English>
+    <French><Text>Le Seigneur</Text><Gender>Male</Gender><Plural>0</Plural></French>
+    <German><Text>Der F&#252;rst</Text><Gender>Male</Gender><Plural>0</Plural></German>
+    <Italian><Text>Il Signore</Text><Gender>Male</Gender><Plural>0</Plural></Italian>
+    <Spanish><Text>El Se&#241;or</Text><Gender>Male</Gender><Plural>0</Plural></Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CIV_CITYSTATE_ADJECTIVE</Tag>
+    <English>city state</English>
+    <French>&#233;tat de la ville</French>
+    <German>stadtstaatliche</German>
+    <Italian>stato della citt&#224;</Italian>
+    <Spanish>estado de la ciudad</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CIV_NUMIDIA_WEST_ADJECTIVE</Tag>
+    <English>West Numidian</English>
+    <French>Numide occidental</French>
+    <German>westnumidische</German>
+    <Italian>Numidia occidentale</Italian>
+    <Spanish>Numidiano occidental</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_CIV_LEADER_GELON</Tag>
@@ -3047,5 +3095,45 @@
     <German>Pie's Ancient Europe - Eurasia XXXL</German>
     <Italian>Pie's Ancient Europe - Eurasia XXXL</Italian>
     <Spanish>Pie's Ancient Europe - Eurasia XXXL</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_LEADER_SARDINIEN</Tag>
+    <English>Viriathus the Sarde</English>
+    <French>Viriathe le Sarde</French>
+    <German>Viriathus der Sarde</German>
+    <Italian>Viriato il Sardo</Italian>
+    <Spanish>Viriathus el sardo</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_ADJ_SARDINIEN</Tag>
+    <English>sardian</English>
+    <French>sarde</French>
+    <German>sardische</German>
+    <Italian>sardo</Italian>
+    <Spanish>sardo</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CIV_NUMIDIA_WEST</Tag>
+    <English>West Numidia</English>
+    <French>Numidie occidentale</French>
+    <German><Text>Westnumidien</Text><Gender>Neuter</Gender><Plural>0</Plural></German>
+    <Italian><Text>Numidia occidentale</Text><Gender>Male</Gender><Plural>0</Plural></Italian>
+    <Spanish><Text>Numidia occidental</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CIV_NUMIDIA_OST</Tag>
+    <English>East Numidia</English>
+    <French>Numidie orientale</French>
+    <German><Text>Ostnumidien</Text><Gender>Neuter</Gender><Plural>0</Plural></German>
+    <Italian><Text>Numidia orientale</Text><Gender>Male</Gender><Plural>0</Plural></Italian>
+    <Spanish><Text>Numidia oriental</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CIV_NUMIDIA_OST_ADJECTIVE</Tag>
+    <English>East Numidian</English>
+    <French>Numide oriental</French>
+    <German>ostnumidische</German>
+    <Italian>Numidia orientale</Italian>
+    <Spanish>Numidiano oriental</Spanish>
   </TEXT>
 </Civ4GameText>

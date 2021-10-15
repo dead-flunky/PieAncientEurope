@@ -4,6 +4,7 @@
 import socket
 
 import sys
+import CvUtil
 from StringIO import StringIO
 from threading import Thread, Timer
 from time import sleep
@@ -52,7 +53,7 @@ class Server:
         while self.run:
             data = self.conn.recv(BUFFER_SIZE)
             if not data:
-                print "(Civ4Shell) Client disconnects"
+                CvUtil.pyPrint("(Civ4Shell) Client disconnects")
                 self.conn, self.addr = self.s.accept()
                 continue
 
@@ -241,7 +242,7 @@ if __name__ == "__main__":
     while civ4Console.run:
         sleep(1)
 
-    print("Quit server first time. Try restart")
+    CvUtil.pyPrint("Quit server first time. Try restart")
 
     # Wait until port get free again.
     sleep(1)
@@ -253,5 +254,5 @@ if __name__ == "__main__":
 
     while civ4Console.run:
         sleep(1)
-    print("Quit server second time.")
+    CvUtil.pyPrint("Quit server second time.")
 # '''

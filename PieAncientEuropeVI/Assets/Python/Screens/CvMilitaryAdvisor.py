@@ -128,7 +128,7 @@ class CvMilitaryAdvisor:
 
         # Minimap initialization
         self.H_MAP = (self.W_MAP * CyMap().getGridHeight()) / CyMap().getGridWidth()
-        if (self.H_MAP > self.H_MAP_MAX):
+        if self.H_MAP > self.H_MAP_MAX:
             self.W_MAP = (self.H_MAP_MAX * CyMap().getGridWidth()) / CyMap().getGridHeight()
             self.H_MAP = self.H_MAP_MAX
         screen.addPanel("", u"", "", False, False, self.X_MAP, self.Y_MAP, self.W_MAP, self.H_MAP, PanelStyles.PANEL_STYLE_MAIN)
@@ -156,7 +156,7 @@ class CvMilitaryAdvisor:
 
     def drawCombatExperience(self):
 
-        if (gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true) > 0):
+        if gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true) > 0:
 
             iExperience = gc.getPlayer(self.iActivePlayer).getCombatExperience()
 
@@ -184,11 +184,11 @@ class CvMilitaryAdvisor:
 
     # handle the input for this screen...
     def handleInput (self, inputClass):
-        if ( inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED and inputClass.getFunctionName() == self.UNIT_BUTTON_ID) :
+        if inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED and inputClass.getFunctionName() == self.UNIT_BUTTON_ID:
             self.bUnitDetails = not self.bUnitDetails
             self.refreshUnitSelection(True)
-        elif (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER):
-            if (inputClass.getData() == int(InputTypes.KB_LSHIFT) or inputClass.getData() == int(InputTypes.KB_RSHIFT)):
+        elif inputClass.getNotifyCode() == NotifyCode.NOTIFY_CHARACTER:
+            if inputClass.getData() == int(InputTypes.KB_LSHIFT) or inputClass.getData() == int(InputTypes.KB_RSHIFT):
                 self.iShiftKeyDown = inputClass.getID()
 
         return 0
@@ -201,23 +201,23 @@ class CvMilitaryAdvisor:
         self.hideScreen()
 
     def isSelectedGroup(self, iGroup, bIndirect):
-        if (bIndirect):
+        if bIndirect:
             if -1 in self.selectedGroupList:
                 return True
             if iGroup == -1:
                 return False
-        return ((iGroup + gc.getNumUnitInfos()) in self.selectedGroupList)
+        return (iGroup + gc.getNumUnitInfos()) in self.selectedGroupList
 
     def isSelectedUnitType(self, iUnit, bIndirect):
-        if (bIndirect):
+        if bIndirect:
             if -1 in self.selectedGroupList:
                 return True
             if self.isSelectedGroup(gc.getUnitInfo(iUnit).getUnitCombatType(), True):
                 return True
-        return (iUnit in self.selectedGroupList)
+        return iUnit in self.selectedGroupList
 
     def isSelectedUnit(self, iPlayer, iUnitId, bIndirect):
-        if (bIndirect):
+        if bIndirect:
             if -1 in self.selectedGroupList:
                 return True
             unit = gc.getPlayer(iPlayer).getUnit(iUnitId)
@@ -225,11 +225,11 @@ class CvMilitaryAdvisor:
                 return True
             if self.isSelectedUnitType(unit.getUnitType(), True):
                 return True
-        return ((iPlayer, iUnitId) in self.selectedUnitList)
+        return (iPlayer, iUnitId) in self.selectedUnitList
 
     def refreshSelectedLeader(self, iPlayer):
         if self.iShiftKeyDown == 1:
-            if (iPlayer in self.selectedPlayerList):
+            if iPlayer in self.selectedPlayerList:
                 self.selectedPlayerList.remove(iPlayer)
             else:
                 self.selectedPlayerList.append(iPlayer)
@@ -244,7 +244,7 @@ class CvMilitaryAdvisor:
         return szName
 
     def refreshSelectedGroup(self, iSelected):
-        if (iSelected in self.selectedGroupList):
+        if iSelected in self.selectedGroupList:
             self.selectedGroupList.remove(iSelected)
         else:
             self.selectedGroupList.append(iSelected)
@@ -252,7 +252,7 @@ class CvMilitaryAdvisor:
 
     def refreshSelectedUnit(self, iPlayer, iUnitId):
         selectedUnit = (iPlayer, iUnitId)
-        if (selectedUnit in self.selectedUnitList):
+        if selectedUnit in self.selectedUnitList:
             self.selectedUnitList.remove(selectedUnit)
         else:
             self.selectedUnitList.append(selectedUnit)
@@ -284,7 +284,7 @@ class CvMilitaryAdvisor:
 
             for iPlayer in range(gc.getMAX_PLAYERS()):
                 player = PyPlayer(iPlayer)
-                if (player.isAlive()):
+                if player.isAlive():
                     unitList = player.getUnitList()
                     for loopUnit in unitList:
                         unitType = loopUnit.getUnitType()
@@ -297,7 +297,7 @@ class CvMilitaryAdvisor:
 
                         if unitType >= 0 and unitType < gc.getNumUnitInfos() and bVisible:
                             iNumUnits = self.unitsList[unitType][3]
-                            if (iPlayer == self.iActivePlayer):
+                            if iPlayer == self.iActivePlayer:
                                 iNumUnits += 1
                             if loopUnit.getVisualOwner() in self.selectedPlayerList:
                                 self.unitsList[unitType][2].append(loopUnit)
@@ -314,9 +314,9 @@ class CvMilitaryAdvisor:
         # PAE - Sum of Units
         szText = szText + u" (" + unicode(self.iPAESum) + u")"
 
-        if (-1 in self.selectedGroupList):
+        if -1 in self.selectedGroupList:
             szText = localText.changeTextColor(u"<u>" + szText + u"</u>", gc.getInfoTypeForString("COLOR_YELLOW"))
-        if (bReload):
+        if bReload:
             screen.addListBoxGFC(self.UNIT_LIST_ID, "", self.X_TEXT+self.MAP_MARGIN, self.Y_TEXT+self.MAP_MARGIN+15, self.W_TEXT-2*self.MAP_MARGIN, self.H_TEXT-2*self.MAP_MARGIN-15, TableStyles.TABLE_STYLE_STANDARD)
             screen.enableSelect(self.UNIT_LIST_ID, False)
             screen.setStyle(self.UNIT_LIST_ID, "Table_StandardCiv_Style")
@@ -328,38 +328,38 @@ class CvMilitaryAdvisor:
         iItem = 1
         for iUnit in range(gc.getNumUnitInfos()):
             if self.unitsList[iUnit][2]:
-                if (iPrevUnitCombat != self.unitsList[iUnit][0] and self.unitsList[iUnit][0] != -1):
+                if iPrevUnitCombat != self.unitsList[iUnit][0] and self.unitsList[iUnit][0] != -1:
                     iPrevUnitCombat = self.unitsList[iUnit][0]
 
                     # PAE - Sum of Units of this type (locality suffices)
                     iPAESumTypes = 0
                     for n in range(gc.getNumUnitInfos()):
-                        if len(self.unitsList[n][2]) > 0:
+                        if self.unitsList[n][2]:
                             if iPrevUnitCombat == self.unitsList[n][0]:
                                 #iPAESum += self.unitsList[n][3]
                                 iPAESumTypes += len(self.unitsList[n][2])
                     szDescription = gc.getUnitCombatInfo(self.unitsList[iUnit][0]).getDescription().upper()  + u" (" + unicode(iPAESumTypes) + u")"
 
-                    if (self.isSelectedGroup(self.unitsList[iUnit][0], False)):
+                    if self.isSelectedGroup(self.unitsList[iUnit][0], False):
                         szDescription = u"   <u>" + szDescription + u"</u>"
                     else:
                         szDescription = u"   " + szDescription
-                    if (self.isSelectedGroup(self.unitsList[iUnit][0], True)):
+                    if self.isSelectedGroup(self.unitsList[iUnit][0], True):
                         szDescription = localText.changeTextColor(szDescription, gc.getInfoTypeForString("COLOR_YELLOW"))
-                    if (bReload):
+                    if bReload:
                         screen.appendListBoxString(self.UNIT_LIST_ID, szDescription, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, 1, self.unitsList[iUnit][0] + gc.getNumUnitInfos(), CvUtil.FONT_LEFT_JUSTIFY)
                     else:
                         screen.setListBoxStringGFC(self.UNIT_LIST_ID, iItem, szDescription, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, 1, self.unitsList[iUnit][0] + gc.getNumUnitInfos(), CvUtil.FONT_LEFT_JUSTIFY)
                     iItem += 1
 
                 szDescription = gc.getUnitInfo(self.unitsList[iUnit][1]).getDescription() + u" (" + unicode(len(self.unitsList[iUnit][2])) + u")"
-                if (self.isSelectedUnitType(self.unitsList[iUnit][1], False)):
+                if self.isSelectedUnitType(self.unitsList[iUnit][1], False):
                     szDescription = u"      <u>" + szDescription + u"</u>"
                 else:
                     szDescription = u"      " + szDescription
-                if (self.isSelectedUnitType(self.unitsList[iUnit][1], True)):
+                if self.isSelectedUnitType(self.unitsList[iUnit][1], True):
                     szDescription = localText.changeTextColor(szDescription, gc.getInfoTypeForString("COLOR_YELLOW"))
-                if (bReload):
+                if bReload:
                     screen.appendListBoxString(self.UNIT_LIST_ID, szDescription, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, 1, self.unitsList[iUnit][1], CvUtil.FONT_LEFT_JUSTIFY)
                 else:
                     screen.setListBoxStringGFC(self.UNIT_LIST_ID, iItem, szDescription, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, 1, self.unitsList[iUnit][1], CvUtil.FONT_LEFT_JUSTIFY)
@@ -367,25 +367,25 @@ class CvMilitaryAdvisor:
 
                 for loopUnit in self.unitsList[iUnit][2]:
 
-                    if (self.bUnitDetails):
+                    if self.bUnitDetails:
                         szDescription = CyGameTextMgr().getSpecificUnitHelp(loopUnit, true, false)
 
                         listMatches = re.findall("<.*?color.*?>", szDescription)
                         for szMatch in listMatches:
                             szDescription = szDescription.replace(szMatch, u"")
 
-                        if (loopUnit.isWaiting()):
+                        if loopUnit.isWaiting():
                             szDescription = '*' + szDescription
 
-                        if (self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), False)):
+                        if self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), False):
                             szDescription = u"         <u>" + szDescription + u"</u>"
                         else:
                             szDescription = u"         " + szDescription
 
-                        if (self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), True)):
+                        if self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), True):
                             szDescription = localText.changeTextColor(szDescription, gc.getInfoTypeForString("COLOR_YELLOW"))
 
-                        if (bReload):
+                        if bReload:
                             screen.appendListBoxString(self.UNIT_LIST_ID, szDescription, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, -loopUnit.getOwner(), loopUnit.getID(), CvUtil.FONT_LEFT_JUSTIFY)
                         else:
                             screen.setListBoxStringGFC(self.UNIT_LIST_ID, iItem, szDescription, WidgetTypes.WIDGET_MINIMAP_HIGHLIGHT, -loopUnit.getOwner(), loopUnit.getID(), CvUtil.FONT_LEFT_JUSTIFY)
@@ -395,11 +395,11 @@ class CvMilitaryAdvisor:
                     player = PyPlayer(iPlayer)
                     iColor = gc.getPlayerColorInfo(gc.getPlayer(iPlayer).getPlayerColor()).getColorTypePrimary()
                     screen.setMinimapColor(MinimapModeTypes.MINIMAPMODE_MILITARY, loopUnit.getX(), loopUnit.getY(), iColor, 0.6)
-                    if (self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), True) and (iPlayer in self.selectedPlayerList)):
+                    if self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID(), True) and iPlayer in self.selectedPlayerList:
 
-                        if (player.getTeam().isAtWar(gc.getPlayer(self.iActivePlayer).getTeam())):
+                        if player.getTeam().isAtWar(gc.getPlayer(self.iActivePlayer).getTeam()):
                             iColor = gc.getInfoTypeForString("COLOR_RED")
-                        elif (gc.getPlayer(iPlayer).getTeam() != gc.getPlayer(self.iActivePlayer).getTeam()):
+                        elif gc.getPlayer(iPlayer).getTeam() != gc.getPlayer(self.iActivePlayer).getTeam():
                             iColor = gc.getInfoTypeForString("COLOR_YELLOW")
                         else:
                             iColor = gc.getInfoTypeForString("COLOR_WHITE")
@@ -409,12 +409,12 @@ class CvMilitaryAdvisor:
 
     def refresh(self, bReload):
 
-        if (self.iActivePlayer < 0):
+        if self.iActivePlayer < 0:
             return
 
         screen = self.getScreen()
 
-        if (bReload):
+        if bReload:
             # Set scrollable area for unit buttons
             screen.addPanel(self.UNIT_PANEL_ID, "", "", True, True, self.X_TEXT, self.Y_TEXT, self.W_TEXT, self.H_TEXT, PanelStyles.PANEL_STYLE_MAIN)
 
@@ -443,7 +443,7 @@ class CvMilitaryAdvisor:
             x = self.X_LEADERS + self.LEADER_MARGIN + (iIndex % iColumns) * (iButtonSize + self.LEADER_MARGIN)
             y = self.Y_LEADERS + self.LEADER_MARGIN + (iIndex // iColumns) * (iButtonSize + self.LEADER_MARGIN)
 
-            if (bReload):
+            if bReload:
                 if player.isBarbarian():
                     szButton = "Art/Interface/Buttons/Civilizations/Barbarian.dds"
                 else:

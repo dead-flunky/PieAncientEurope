@@ -16,7 +16,7 @@ class CvDiplomacy:
     def __init__(self):
         "constructor - set up class vars, AI and User strings"
         if DebugLogging:
-            print "Launching Diplomacy"
+            CvUtil.pyPrint("Launching Diplomacy")
 
         self.iLastResponseID = -1
 
@@ -29,7 +29,7 @@ class CvDiplomacy:
     def determineResponses (self, eComment):
         "Will determine the user responses given an AI comment"
         if DebugLogging:
-            print "CvDiplomacy.determineResponses: %s" %(eComment,)
+            CvUtil.pyPrint("CvDiplomacy.determineResponses: %s" %(eComment,))
 
         # Eliminate previous comments
         self.diploScreen.clearUserComments()
@@ -246,22 +246,22 @@ class CvDiplomacy:
             if (gc.getGame().getActiveTeam() == gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() or gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam())):
                 self.addUserComment("USER_DIPLOCOMMENT_RESEARCH", -1, -1)
 
-            #if (gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
+            #if gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()):
             # K-Mod. The AI should not just accept target requests from anyone...
             # Flunky make sure to not check on ourselves
             if gc.getGame().getActivePlayer() != self.diploScreen.getWhoTradingWith():
-                if (gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()) and
-                    (gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(gc.getGame().getActivePlayer()) >= AttitudeTypes.ATTITUDE_PLEASED or
-                    gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() == gc.getGame().getActiveTeam() or
-                    gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()))):
+                if gc.getTeam(gc.getGame().getActiveTeam()).AI_shareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()) and \
+                    (gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(gc.getGame().getActivePlayer()) >= AttitudeTypes.ATTITUDE_PLEASED or \
+                    gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() == gc.getGame().getActiveTeam() or \
+                    gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam())):
                 # K-Mod end
                     self.addUserComment("USER_DIPLOCOMMENT_TARGET", -1, -1)
 
             # K-Mod. Allow masters to tell their vassals to prepare for war
-            if (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAtWarCount(true) == 0 and
-                (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()) or
-                 gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() == gc.getGame().getActiveTeam())):
-                if (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAnyWarPlanCount(true) > 0):
+            if gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAtWarCount(true) == 0 and \
+                (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()) or \
+                 gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() == gc.getGame().getActiveTeam()):
+                if gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAnyWarPlanCount(true) > 0:
                     self.addUserComment("USER_DIPLOCOMMENT_WARPLAN_CANCEL", -1, -1)
                 else:
                     self.addUserComment("USER_DIPLOCOMMENT_WARPLAN", -1, -1)
@@ -296,7 +296,6 @@ class CvDiplomacy:
         elif (self.isComment(eComment, "AI_DIPLOCOMMENT_TARGET")):
             for i in range(gc.getMAX_CIV_PLAYERS()):
                 if (gc.getPlayer(i).isAlive()):
-                    #if (gc.getTeam(gc.getGame().getActiveTeam()).isAtWar(gc.getPlayer(i).getTeam())):
                     if gc.getTeam(gc.getGame().getActiveTeam()).isAtWar(gc.getPlayer(i).getTeam()) and gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isAtWar(gc.getPlayer(i).getTeam()): # K-Mod
                         player = PyPlayer(i)
                         cityList = player.getCityList()
@@ -355,9 +354,9 @@ class CvDiplomacy:
         AIString = self.getDiplomacyComment(eComment)
 
         if DebugLogging:
-            print "CvDiplomacy.setAIComment: %s" %(eComment,)
-            if (len(args)):
-                print "args", args
+            CvUtil.pyPrint( "CvDiplomacy.setAIComment: %s" %(eComment,))
+            if args:
+                CvUtil.pyPrint("args", args)
             AIString = "(%d) - %s" %(self.getLastResponseID(), AIString)
 
         self.diploScreen.setAIString(AIString, args)
@@ -423,15 +422,15 @@ class CvDiplomacy:
         debugString = "CvDiplomacy.getDiplomacyComment: %s" %(eComment,)
         eComment = int(eComment)
         if DebugLogging:
-            print debugString, eComment
+            CvUtil.pyPrint(debugString, eComment)
 
         szString = ""
         szFailString = "Error***: No string found for eComment: %s"
 
-        if ( gc.getDiplomacyInfo(eComment) ):
+        if gc.getDiplomacyInfo(eComment):
             DiplomacyTextInfo = gc.getDiplomacyInfo(eComment)
-            if ( not DiplomacyTextInfo ):
-                print "%s IS AN INVALID DIPLOCOMMENT" %(eComment,)
+            if not DiplomacyTextInfo:
+                CvUtil.pyPrint("%s IS AN INVALID DIPLOCOMMENT" %(eComment,))
                 CvUtil.pyAssert(True, "CvDiplomacy.getDiplomacyComment: %s does not have a DiplomacyTextInfo" %(eComment,))
                 return szFailString %(eComment,)
 
@@ -467,10 +466,10 @@ class CvDiplomacy:
         for i in range(diploInfo.getNumResponses()):
 
             # check attitude of other player towards me
-            if (self.isUsed(diploInfo.getAttitudeTypes, i, AttitudeTypes.NUM_ATTITUDE_TYPES)):
+            if self.isUsed(diploInfo.getAttitudeTypes, i, AttitudeTypes.NUM_ATTITUDE_TYPES):
                 if theirPlayer != CyGame().getActivePlayer():
                     att = theirPlayer.AI_getAttitude(CyGame().getActivePlayer())
-                    if (not diploInfo.getAttitudeTypes(i, att)):
+                    if not diploInfo.getAttitudeTypes(i, att):
                         continue
 
             # check civ type
@@ -515,16 +514,16 @@ class CvDiplomacy:
 
     def handleUserResponse(self, eComment, iData1, iData2):
         if DebugLogging:
-            print "CvDiplomacy.handleUserResponse: %s" %(eComment,)
+            CvUtil.pyPrint("CvDiplomacy.handleUserResponse: %s" %(eComment,))
 
         diploScreen = CyDiplomacy()
 
         # If we accept peace
-        if (self.isComment(eComment, "USER_DIPLOCOMMENT_PEACE")):
+        if self.isComment(eComment, "USER_DIPLOCOMMENT_PEACE"):
             self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_PEACE"))
 
         # If we choose war
-        elif (self.isComment(eComment, "USER_DIPLOCOMMENT_WAR")):
+        elif self.isComment(eComment, "USER_DIPLOCOMMENT_WAR"):
             diploScreen.declareWar()
             #diploScreen.closeScreen()
 
@@ -535,8 +534,8 @@ class CvDiplomacy:
             diploScreen.showAllTrade(True)
 
         # If we want to propose a trade
-        elif(self.isComment(eComment, "USER_DIPLOCOMMENT_PROPOSE")):
-            if (diploScreen.offerDeal() == 1):
+        elif self.isComment(eComment, "USER_DIPLOCOMMENT_PROPOSE"):
+            if diploScreen.offerDeal() == 1:
                 self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ACCEPT"))
             else:
                 self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_REJECT"))
@@ -545,7 +544,7 @@ class CvDiplomacy:
 # K-Mod
         elif self.isComment(eComment, "USER_DIPLOCOMMENT_SUGGEST_PEACE"):
             diploScreen.startTrade(eComment, False)
-            if (diploScreen.counterPropose() == 1):
+            if diploScreen.counterPropose() == 1:
                 self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_TRY_THIS_DEAL"))
             else:
                 self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_NO_PEACE"))
@@ -712,21 +711,21 @@ class CvDiplomacy:
             self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_RESEARCH_TECH"))
 
         # If we want to ask them to what their attitude is
-        elif (self.isComment(eComment, "USER_DIPLOCOMMENT_ATTITUDE")):
+        elif self.isComment(eComment, "USER_DIPLOCOMMENT_ATTITUDE"):
             self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE"))
 
         # If we want to ask them to what their attitude is on a specific player
-        elif (self.isComment(eComment, "USER_DIPLOCOMMENT_ATTITUDE_PLAYER")):
+        elif self.isComment(eComment, "USER_DIPLOCOMMENT_ATTITUDE_PLAYER"):
             if iData1 != self.diploScreen.getWhoTradingWith():
                 eAttitude = gc.getPlayer(self.diploScreen.getWhoTradingWith()).AI_getAttitude(iData1)
 
-                if (eAttitude == AttitudeTypes.ATTITUDE_FURIOUS):
+                if eAttitude == AttitudeTypes.ATTITUDE_FURIOUS:
                     self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_FURIOUS"), gc.getPlayer(iData1).getNameKey())
-                elif (eAttitude == AttitudeTypes.ATTITUDE_ANNOYED):
+                elif eAttitude == AttitudeTypes.ATTITUDE_ANNOYED:
                     self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_ANNOYED"), gc.getPlayer(iData1).getNameKey())
-                elif (eAttitude == AttitudeTypes.ATTITUDE_CAUTIOUS):
+                elif eAttitude == AttitudeTypes.ATTITUDE_CAUTIOUS:
                     self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_CAUTIOUS"), gc.getPlayer(iData1).getNameKey())
-                elif (eAttitude == AttitudeTypes.ATTITUDE_PLEASED):
+                elif eAttitude == AttitudeTypes.ATTITUDE_PLEASED:
                     self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_PLEASED"), gc.getPlayer(iData1).getNameKey())
                 else:
                     self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_ATTITUDE_PLAYER_FRIENDLY"), gc.getPlayer(iData1).getNameKey())
@@ -741,14 +740,14 @@ class CvDiplomacy:
             self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_TARGET_CITY"))
 
         # K-Mod
-        elif (self.isComment(eComment, "USER_DIPLOCOMMENT_WARPLAN")):
+        elif self.isComment(eComment, "USER_DIPLOCOMMENT_WARPLAN"):
             self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_WARPLAN"))
 
-        elif (self.isComment(eComment, "USER_DIPLOCOMMENT_WARPLAN_TARGET")):
+        elif self.isComment(eComment, "USER_DIPLOCOMMENT_WARPLAN_TARGET"):
             diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_SET_WARPLAN, iData1, iData2)
             self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_WARPLAN_ACKNOWLEDGE"))
 
-        elif (self.isComment(eComment, "USER_DIPLOCOMMENT_WARPLAN_CANCEL")):
+        elif self.isComment(eComment, "USER_DIPLOCOMMENT_WARPLAN_CANCEL"):
             diploScreen.diploEvent(DiploEventTypes.DIPLOEVENT_SET_WARPLAN, TeamTypes.NO_TEAM, WarPlanTypes.NO_WARPLAN)
             self.setAIComment(self.getCommentID("AI_DIPLOCOMMENT_WARPLAN_CANCEL"))
         # K-Mod end

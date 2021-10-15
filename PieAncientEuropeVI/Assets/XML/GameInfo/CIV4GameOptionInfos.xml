@@ -180,6 +180,13 @@
       <Help>Allows Forts to have a ranged culture around them and bombard + more</Help>
       <bDefault>1</bDefault>
       <bVisible>1</bVisible>
+    </GameOptionInfo>   
+    <GameOptionInfo>
+      <Type>GAMEOPTION_CATASTROPHY</Type>
+      <Description>Catastrophy</Description>
+      <Help>Katastrophen einschalten</Help>
+      <bDefault>1</bDefault>
+      <bVisible>1</bVisible>
     </GameOptionInfo>   	
   </GameOptionInfos>
 </Civ4GameOptionInfos>

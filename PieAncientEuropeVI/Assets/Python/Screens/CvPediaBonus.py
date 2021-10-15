@@ -84,7 +84,7 @@ class CvPediaBonus:
 
         screen = self.top.getScreen()
 
-        bNotActive = (not screen.isActive())
+        bNotActive = not screen.isActive()
         if bNotActive:
             self.top.setPediaCommonWidgets()
 
@@ -142,8 +142,6 @@ class CvPediaBonus:
 
         self.placeHistory()
 
-        return
-
     def placeStats(self):
 
         screen = self.top.getScreen()
@@ -163,7 +161,7 @@ class CvPediaBonus:
 
                 #szYield = (u"%s: %s%i " % (gc.getYieldInfo(k).getDescription(), sign, iYieldChange))
                 # PAE:
-                if szYield != "": 
+                if szYield != "":
                     szYield += u", "
                 szYield += u"%s%i %c" % (sign, iYieldChange, gc.getYieldInfo(k).getChar())
         if szYield != "":
@@ -217,7 +215,6 @@ class CvPediaBonus:
             screen.addDDSGFC(self.top.getNextWidgetName(), gc.getTerrainInfo(iI).getButton(),
             self.X_STATS_PANE + x, self.Y_STATS_PANE + y, 48, 48, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TERRAIN, iI, -1 )
 
-
     def placeYield(self):
 
         screen = self.top.getScreen()
@@ -256,8 +253,7 @@ class CvPediaBonus:
 
                 screen.attachLabel(childPanelName, "", "  ")
                 screen.attachImageButton(childPanelName, "", gc.getImprovementInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, j, 1, False )
-                #screen.attachLabel(childPanelName, "", szYield)
-                screen.attachLabel(childPanelName, "", u"<font=4>" + szYield + u"</font>") # K-Mod
+                screen.attachLabel(childPanelName, "", u"<font=4>" + szYield + u"</font>") # K-Mod added font
 
     def placeSpecial(self):
 
@@ -272,11 +268,11 @@ class CvPediaBonus:
         screen.enableSelect(listName, False)
 
         # original code
-        #szSpecialText = CyGameTextMgr().getBonusHelp(self.iBonus, True)
-        #splitText = string.split( szSpecialText, "\n" )
-        #for special in splitText:
-        #   if len( special ) != 0:
-        #       screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
+        # szSpecialText = CyGameTextMgr().getBonusHelp(self.iBonus, True)
+        # splitText = string.split(szSpecialText, "\n")
+        # for special in splitText:
+        #     if special:
+        #         screen.appendListBoxString(listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
         # K-Mod
         szSpecialText = CyGameTextMgr().getBonusHelp(self.iBonus, True)[1:]
         screen.addMultilineText(listName, szSpecialText, self.X_EFFECTS_PANE+5, self.Y_EFFECTS_PANE+30, self.W_EFFECTS_PANE-10, self.H_EFFECTS_PANE-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
@@ -353,29 +349,29 @@ class CvPediaBonus:
         # add unit buttons
         for eLoopUnit in range(gc.getNumUnitInfos()):
             bFound = False
-            if (eLoopUnit >= 0):
-                if (gc.getUnitInfo(eLoopUnit).getPrereqAndBonus() == self.iBonus):
+            if eLoopUnit >= 0:
+                if gc.getUnitInfo(eLoopUnit).getPrereqAndBonus() == self.iBonus:
                     bFound = True
                 else:
                     j = 0
-                    while (not bFound and j < gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
-                        if (gc.getUnitInfo(eLoopUnit).getPrereqOrBonuses(j) == self.iBonus):
+                    while not bFound and j < gc.getNUM_UNIT_PREREQ_OR_BONUSES():
+                        if gc.getUnitInfo(eLoopUnit).getPrereqOrBonuses(j) == self.iBonus:
                             bFound = True
                         j += 1
             if bFound:
                 szButton = gc.getUnitInfo(eLoopUnit).getButton()
                 if self.top.iActivePlayer != -1:
                     szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
-                screen.attachImageButton( panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
+                screen.attachImageButton(panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False)
 
         for eLoopBuilding in range(gc.getNumBuildingInfos()):
             bFound = False
-            if (gc.getBuildingInfo(eLoopBuilding).getPrereqAndBonus() == self.iBonus):
+            if gc.getBuildingInfo(eLoopBuilding).getPrereqAndBonus() == self.iBonus:
                 bFound = True
             else:
                 j = 0
-                while (not bFound and j < gc.getNUM_BUILDING_PREREQ_OR_BONUSES()):
-                    if (gc.getBuildingInfo(eLoopBuilding).getPrereqOrBonuses(j) == self.iBonus):
+                while not bFound and j < gc.getNUM_BUILDING_PREREQ_OR_BONUSES():
+                    if gc.getBuildingInfo(eLoopBuilding).getPrereqOrBonuses(j) == self.iBonus:
                         bFound = True
                     j += 1
             if bFound:
@@ -385,8 +381,8 @@ class CvPediaBonus:
         for eLoopBuilding in range(gc.getNumCorporationInfos()):
             bFound = False
             j = 0
-            while (not bFound and j < gc. getNUM_CORPORATION_PREREQ_BONUSES()):
-                if (gc.getCorporationInfo(eLoopBuilding).getPrereqBonus(j) == self.iBonus):
+            while not bFound and j < gc. getNUM_CORPORATION_PREREQ_BONUSES():
+                if gc.getCorporationInfo(eLoopBuilding).getPrereqBonus(j) == self.iBonus:
                     bFound = True
                 j += 1
             if bFound:

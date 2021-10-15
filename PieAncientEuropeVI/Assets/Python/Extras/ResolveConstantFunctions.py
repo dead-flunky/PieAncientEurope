@@ -7,7 +7,7 @@ import sys
 import os
 import glob
 import re
-
+import CvUtil
 Mod = "PieAncientEuropeVI"
 ModOut = "PAE_Opt"
 
@@ -38,7 +38,7 @@ localText = CyTranslator()
 def undefined_warner(handler, *lArgs):
     s = str(handler(*lArgs))
     if(s) == "-1":
-        print("Warning: %s(%s) returns %s" % (
+        CvUtil.pyPrint("Warning: %s(%s) returns %s" % (
             handler.__name__, ", ".join(lArgs), s))
 
     return s
@@ -60,7 +60,7 @@ def getSymbolID_for_enum_str(s):
     if s in FontSymbols.__dict__:
         return str(CyGame().getSymbolID(FontSymbols.__dict__[s]))
 
-    print("Warning: Can not eval symbol id.")
+    CvUtil.pyPrint("Warning: Can not eval symbol id.")
     return -1
 
 Replace_descriptors = {
@@ -1635,7 +1635,7 @@ def main(forceUpdate=False, basedir=PyModPath, outdir=PyOutPath):
     for tF in files:
         # Check if target file is newer as source file
         if(tF[3] is not None and tF[3] > tF[1] and not forceUpdate):
-            print("Skip", tF[0])
+            CvUtil.pyPrint("Skip", tF[0])
             continue
 
         s = tF[0]
@@ -1649,7 +1649,7 @@ def main(forceUpdate=False, basedir=PyModPath, outdir=PyOutPath):
         if not os.path.isdir(targetDir):
             os.makedirs(targetDir)
 
-        print("Update '%s' -> '%s'" % (s, t))
+        CvUtil.pyPrint("Update '%s' -> '%s'" % (s, t))
         replace_key_functions(s, t)
 
 

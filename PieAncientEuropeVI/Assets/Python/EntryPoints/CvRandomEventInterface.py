@@ -639,7 +639,7 @@ def applyInfluenza2(argsList):
 
     #listCities.sort()
     #k-mod
-	listCities.sort(key=itemgetter(0)) # K-Mod. Sorting by pointers can cause OOS.
+    listCities.sort(key=itemgetter(0)) # K-Mod. Sorting by pointers can cause OOS.
 
     if iNumCities > len(listCities):
         iNumCities = len(listCities)
@@ -813,17 +813,17 @@ def canTriggerHeroicGesture(argsList):
         return False
 
     # K-Mod. an ugly hack to prevent the AI from signing a peace deal when it really doesn't want to.
-	tradeData = TradeData()
-	tradeData.ItemType = TradeableItems.TRADE_PEACE_TREATY
+    tradeData = TradeData()
+    tradeData.ItemType = TradeableItems.TRADE_PEACE_TREATY
 
-	if player.getTradeDenial(kTriggeredData.eOtherPlayer, tradeData) != DenialTypes.NO_DENIAL:
-		return False
+    if player.getTradeDenial(kTriggeredData.eOtherPlayer, tradeData) != DenialTypes.NO_DENIAL:
+        return False
 
-	if destPlayer.getTradeDenial(kTriggeredData.ePlayer, tradeData) != DenialTypes.NO_DENIAL:
-		return False
-	# K-Mod end
+    if destPlayer.getTradeDenial(kTriggeredData.ePlayer, tradeData) != DenialTypes.NO_DENIAL:
+        return False
+    # K-Mod end
 
-	return True
+    return True
 
 def doHeroicGesture2(argsList):
     iEvent = argsList[0]
@@ -894,17 +894,17 @@ def canTriggerGreatMediator(argsList):
         return False
 
     # K-Mod. an ugly hack to prevent the AI from signing a peace deal when it really doesn't want to.
-	tradeData = TradeData()
-	tradeData.ItemType = TradeableItems.TRADE_PEACE_TREATY
+    tradeData = TradeData()
+    tradeData.ItemType = TradeableItems.TRADE_PEACE_TREATY
 
-	if player.getTradeDenial(kTriggeredData.eOtherPlayer, tradeData) != DenialTypes.NO_DENIAL:
-		return False
+    if player.getTradeDenial(kTriggeredData.eOtherPlayer, tradeData) != DenialTypes.NO_DENIAL:
+        return False
 
-	if destPlayer.getTradeDenial(kTriggeredData.ePlayer, tradeData) != DenialTypes.NO_DENIAL:
-		return False
-	# K-Mod end
+    if destPlayer.getTradeDenial(kTriggeredData.ePlayer, tradeData) != DenialTypes.NO_DENIAL:
+        return False
+    # K-Mod end
 
-	return True
+    return True
 
 def doGreatMediator2(argsList):
     iEvent = argsList[0]
@@ -3182,13 +3182,49 @@ def canTriggerMeuterei(argsList):
 
     return True
 
-def applyMeuterei(argsList):
+def applyMeuterei1(argsList):
     iEvent = argsList[0]
     kTriggeredData = argsList[1]
 
     player = gc.getPlayer(kTriggeredData.ePlayer)
 
-    iUnitType = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), 'UNIT_KONTERE')
+    iUnitType = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), 'UNIT_TRIREME')
+    plot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
+
+    barbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
+    barbPlayer.initUnit(iUnitType, plot.getX(), plot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
+
+def applyMeuterei2(argsList):
+    iEvent = argsList[0]
+    kTriggeredData = argsList[1]
+
+    player = gc.getPlayer(kTriggeredData.ePlayer)
+
+    iUnitType = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), 'UNIT_QUADRIREME')
+    plot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
+
+    barbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
+    barbPlayer.initUnit(iUnitType, plot.getX(), plot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
+
+def applyMeuterei3(argsList):
+    iEvent = argsList[0]
+    kTriggeredData = argsList[1]
+
+    player = gc.getPlayer(kTriggeredData.ePlayer)
+
+    iUnitType = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), 'UNIT_QUINQUEREME')
+    plot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
+
+    barbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
+    barbPlayer.initUnit(iUnitType, plot.getX(), plot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
+
+def applyMeuterei4(argsList):
+    iEvent = argsList[0]
+    kTriggeredData = argsList[1]
+
+    player = gc.getPlayer(kTriggeredData.ePlayer)
+
+    iUnitType = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), 'UNIT_LIBURNE')
     plot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
 
     barbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
@@ -3580,3 +3616,32 @@ def canTriggerKeineOliven(argsList):
         return False
 
     return True
+
+######## KEINE_BRONZE ###########
+    
+def canTriggerBlei(argsList):
+
+    kTriggeredData = argsList[0]
+    player = gc.getPlayer(kTriggeredData.ePlayer)
+
+    if player.getNumAvailableBonuses(CvUtil.findInfoTypeNum(gc.getBonusInfo,gc.getNumBonusInfos(),'BONUS_COPPER')) > 0:
+        if player.getNumAvailableBonuses(CvUtil.findInfoTypeNum(gc.getBonusInfo,gc.getNumBonusInfos(),'BONUS_COAL')) == 0 and \
+           player.getNumAvailableBonuses(CvUtil.findInfoTypeNum(gc.getBonusInfo,gc.getNumBonusInfos(),'BONUS_ZINN')) == 0:
+            return True
+
+    return False
+
+def canTriggerKupfer(argsList):
+
+    kTriggeredData = argsList[0]
+    player = gc.getPlayer(kTriggeredData.ePlayer)
+
+    if player.getNumAvailableBonuses(CvUtil.findInfoTypeNum(gc.getBonusInfo,gc.getNumBonusInfos(),'BONUS_COPPER')) == 0:
+        if player.getNumAvailableBonuses(CvUtil.findInfoTypeNum(gc.getBonusInfo,gc.getNumBonusInfos(),'BONUS_COAL')) > 0 or \
+           player.getNumAvailableBonuses(CvUtil.findInfoTypeNum(gc.getBonusInfo,gc.getNumBonusInfos(),'BONUS_ZINN')) > 0:
+            return True
+
+    return False
+
+#############################
+

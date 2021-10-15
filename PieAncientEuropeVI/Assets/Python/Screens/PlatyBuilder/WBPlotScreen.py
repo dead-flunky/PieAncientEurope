@@ -107,7 +107,7 @@ class WBPlotScreen:
         screen.addPullDownString("BonusClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), -1, -1, True)
         screen.addPullDownString("BonusClass", CyTranslator().getText("TXT_KEY_GLOBELAYER_RESOURCES_GENERAL",()), 0, 0, 0 == iSelectedClass)
         iBonusClass = 1
-        while not gc.getBonusClassInfo(iBonusClass) is None:
+        while gc.getBonusClassInfo(iBonusClass):
             sText = gc.getBonusClassInfo(iBonusClass).getType()
             sText = sText[sText.find("_") +1:]
             sText = sText.lower()

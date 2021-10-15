@@ -9957,7 +9957,7 @@
     <English>Tribe of Parisians</English>
     <French>Tribu des Parisii</French>
     <German>Stamm der Parisier</German>
-    <Italian>Tribe of Parisiani</Italian>
+    <Italian>Trib&#249; dei Parisi</Italian>
     <Spanish>Tribu de los Parisios</Spanish>
   </TEXT>
   <TEXT>
@@ -9989,7 +9989,7 @@
     <English>Tribe of Uzbeks</English>
     <French>Tribu d'Ouzbeks</French>
     <German>Stamm der Usbeken</German>
-    <Italian>Tribu di Uzbeki</Italian>
+    <Italian>Tribu degli Uzbeki</Italian>
     <Spanish>Tribu de los Uzbekos</Spanish>
   </TEXT>
   <TEXT>
@@ -9997,7 +9997,31 @@
     <English>Tribe of Pakistans</English>
     <French>Tribu de Pakistan</French>
     <German>Stamm der Pakistani</German>
-    <Italian>Tribu di Pakistani</Italian>
+    <Italian>Tribu dei Pakistani</Italian>
     <Spanish>Tribu de los Pakistanos</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CITY_NAME_SABINER</Tag>
+    <English>Tribe of Sabines</English>
+    <French>Tribu des Sabins</French>
+    <German>Stamm der Sabiner</German>
+    <Italian>Tribu di Sabini</Italian>
+    <Spanish>Tribu de los Sabinos</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CITY_NAME_B139</Tag>
+    <English>Gaetuli</English>
+    <French>G&#233;tules</French>
+    <German>Gaetuler</German>
+    <Italian>Getuli</Italian>
+    <Spanish>Getulos</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_CITY_NAME_B140</Tag>
+    <English>Messapians</English>
+    <French>Messapiens</French>
+    <German>Messapier</German>
+    <Italian>Messapi</Italian>
+    <Spanish>Mesapios</Spanish>
   </TEXT>
 </Civ4GameText>

@@ -6,9 +6,21 @@
 
 import CvUtil
 # import CvEventManager
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, PlotStyles, OrderTypes,
+                                PlotLandscapeLayers, CyTranslator, plotXY,
+                                DomainTypes, ColorTypes, CyMap,
+                                UnitAITypes, CommandTypes, CyInterface,
+                                DirectionTypes, CyCity,
+                                CyGame, CyEngine, MissionTypes, YieldTypes,
+                                TechTypes, CommerceTypes, BuildingTypes,
+                                CyGameTextMgr, WidgetTypes,
+                                UnitTypes, isLimitedWonderClass,
+                                plotDirection, MissionAITypes)
 # import CvEventInterface
 # import Popup as PyPopup
+
+import CvTechChooser # Flunky PAE
+
 import PyHelpers
 import CvRiverUtil
 import PAE_Trade
@@ -61,15 +73,15 @@ class CvGameUtils:
         return gc.getGame().getElapsedGameTurns() > 10
 
     def isVictory(self, argsList):
-        eVictory = argsList[0]
+        # eVictory = argsList[0]
         return True
 
     def isPlayerResearch(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return True
 
     def getExtraCost(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return 0
 
     def createBarbarianCities(self):
@@ -79,20 +91,20 @@ class CvGameUtils:
         return False
 
     def skipResearchPopup(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return False
 
     def showTechChooserButton(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return True
 
     def getFirstRecommendedTech(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return TechTypes.NO_TECH
 
     def getSecondRecommendedTech(self, argsList):
-        ePlayer = argsList[0]
-        eFirstTech = argsList[1]
+        # ePlayer = argsList[0]
+        # eFirstTech = argsList[1]
         return TechTypes.NO_TECH
 
     def canRazeCity(self, argsList):
@@ -104,25 +116,22 @@ class CvGameUtils:
         return True
 
     def skipProductionPopup(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return False
 
     def showExamineCityButton(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return True
 
     def getRecommendedUnit(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return UnitTypes.NO_UNIT
 
     def getRecommendedBuilding(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return BuildingTypes.NO_BUILDING
 
     def updateColoredPlots(self):
-        # ***Flunky TEST***
-        # print "updateColoredPlots"
-        # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("updateColoredPlots", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         pHeadSelectedUnit = CyInterface().getHeadSelectedUnit()
         if not pHeadSelectedUnit or pHeadSelectedUnit.isNone():
             return False
@@ -138,38 +147,36 @@ class CvGameUtils:
         # Worker, Arbeitstrupp oder Sklave, Slave
         if iUnitType == gc.getInfoTypeForString("UNIT_WORKER") or iUnitType == gc.getInfoTypeForString("UNIT_SLAVE") or iUnitType == gc.getInfoTypeForString("UNIT_WORK_ELEPHANT"):
             iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
-            for iI in range(gc.getMap().numPlots()):
-                loopPlot = gc.getMap().plotByIndex(iI)
-            # for x in range(gc.getMap().getGridWidth()):
-                # for y in range(gc.getMap().getGridHeight()):
-                    # loopPlot = gc.getMap().plot(x, y)
-                if loopPlot and not loopPlot.isNone():
-                    if loopPlot.getFeatureType() == iDarkIce:
-                        continue
-                    if loopPlot.isWater() or loopPlot.isPeak() or loopPlot.isCity():
-                        continue
-                    if loopPlot.getOwner() == iPlayer:
-                        eBonus = loopPlot.getBonusType(iPlayer)
-                        if eBonus != -1:
-                            iImprovement = loopPlot.getImprovementType()
-                            if iImprovement == -1 or not loopPlot.isConnectedToCapital(iPlayer) or not gc.getImprovementInfo(iImprovement).isImprovementBonusTrade(eBonus) and not gc.getImprovementInfo(iImprovement).isActsAsCity():
-                                CyEngine().addColoredPlotAlt(loopPlot.getX(), loopPlot.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_HIGHLIGHT_TEXT", 1)
-                        # Latifundium oder Village/Dorf
-                        if iUnitType == gc.getInfoTypeForString("UNIT_SLAVE"):
-                            iImprovement = loopPlot.getImprovementType()
-                            if iImprovement != -1 and (iImprovement in L.LLatifundien or iImprovement in L.LVillages):
-                                CyEngine().addColoredPlotAlt(loopPlot.getX(), loopPlot.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_TECH_GREEN", 1)
+            for x in range(gc.getMap().getGridWidth()):
+                for y in range(gc.getMap().getGridHeight()):
+                    loopPlot = gc.getMap().plot(x, y)
+                    if loopPlot and not loopPlot.isNone():
+                        if loopPlot.getFeatureType() == iDarkIce:
+                            continue
+                        if loopPlot.isWater() or loopPlot.isPeak() or loopPlot.isCity():
+                            continue
+                        if loopPlot.getOwner() == iPlayer:
+                            eBonus = loopPlot.getBonusType(iPlayer)
+                            if eBonus != -1:
+                                iImprovement = loopPlot.getImprovementType()
+                                if iImprovement == -1 or not loopPlot.isConnectedToCapital(iPlayer) or not gc.getImprovementInfo(iImprovement).isImprovementBonusTrade(eBonus) and not gc.getImprovementInfo(iImprovement).isActsAsCity():
+                                    CyEngine().addColoredPlotAlt(loopPlot.getX(), loopPlot.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_HIGHLIGHT_TEXT", 1)
+                            # Latifundium oder Village/Dorf
+                            if iUnitType == gc.getInfoTypeForString("UNIT_SLAVE"):
+                                iImprovement = loopPlot.getImprovementType()
+                                if iImprovement != -1 and (iImprovement in L.LLatifundien or iImprovement in L.LVillages):
+                                    CyEngine().addColoredPlotAlt(loopPlot.getX(), loopPlot.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_TECH_GREEN", 1)
 
             # Sklavenmarkt
             if iUnitType == gc.getInfoTypeForString("UNIT_SLAVE"):
                 (loopCity, pIter) = pPlayer.firstCity(False)
                 while loopCity:
                     if not loopCity.isNone():
-                        if loopCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_STADT")) and not loopCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_SKLAVENMARKT")):
-                            CyEngine().addColoredPlotAlt(loopCity.getX(), loopCity.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_WHITE", 1)
+                        if loopCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_STADT")):
+                            if not loopCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_SKLAVENMARKT")):
+                                CyEngine().addColoredPlotAlt(loopCity.getX(), loopCity.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_WHITE", 1)
                     (loopCity, pIter) = pPlayer.nextCity(pIter, False)
-
-            return False
+                return False
 
         # Workboat, Arbeitsboot
         if iUnitType == gc.getInfoTypeForString("UNIT_WORKBOAT"):
@@ -243,11 +250,9 @@ class CvGameUtils:
 
         # Handelskarren, Karawanen
         if iUnitType in L.LTradeUnits and pHeadSelectedUnit.getDomainType() == DomainTypes.DOMAIN_LAND:
-            iMapW = gc.getMap().getGridWidth()
-            iMapH = gc.getMap().getGridHeight()
             iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
-            for x in range(iMapW):
-                for y in range(iMapH):
+            for x in range(gc.getMap().getGridWidth()):
+                for y in range(gc.getMap().getGridHeight()):
                     loopPlot = gc.getMap().plot(x, y)
                     if loopPlot and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce:
@@ -268,8 +273,9 @@ class CvGameUtils:
                 iBuilding2 = gc.getInfoTypeForString("BUILDING_MILITARY_ACADEMY")
                 (loopCity, pIter) = pPlayer.firstCity(False)
                 while loopCity:
-                    if not loopCity.isNone() and loopCity.isHasBuilding(iBuilding1) and not loopCity.isHasBuilding(iBuilding2):
-                        CyEngine().addColoredPlotAlt(loopCity.getX(), loopCity.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_WHITE", 1)
+                    if not loopCity.isNone() and loopCity.isHasBuilding(iBuilding1):
+                        if not loopCity.isHasBuilding(iBuilding2):
+                            CyEngine().addColoredPlotAlt(loopCity.getX(), loopCity.getY(), PlotStyles.PLOT_STYLE_CIRCLE, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS, "COLOR_WHITE", 1)
                     (loopCity, pIter) = pPlayer.nextCity(pIter, False)
             return False
 
@@ -309,8 +315,6 @@ class CvGameUtils:
 
         # Hunter
         if iUnitType == gc.getInfoTypeForString("UNIT_HUNTER"):
-            # ***Flunky TEST***
-            # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Hunter", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
             (loopCity, pIter) = pPlayer.firstCity(False)
             while loopCity:
                 loopPlot = loopCity.plot()
@@ -382,7 +386,8 @@ class CvGameUtils:
             return False
 
         # Governor | Statthalter
-        if pHeadSelectedUnit.getUnitClassType() == gc.getInfoTypeForString("UNITCLASS_STATTHALTER") or pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_HERO")):
+        if pHeadSelectedUnit.getUnitClassType() == gc.getInfoTypeForString("UNITCLASS_STATTHALTER") or \
+           pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_HERO")):
 
             iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
 
@@ -397,9 +402,11 @@ class CvGameUtils:
             return False
 
         # Legionaries koennen in Kastellen oder MilAks ausgebildet werden (Auxiliari nicht)
-        if pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_1")) or pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_LATE_1")):
+        if pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_1")) or \
+           pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_LATE_1")):
 
-            if not pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_11")) and not pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_LATE_10")):
+            if not pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_11")) and \
+               not pHeadSelectedUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_LATE_10")):
 
                 if pHeadSelectedUnit.getUnitType() not in L.LUnitAuxiliar:
                     iBuilding1 = gc.getInfoTypeForString("BUILDING_MILITARY_ACADEMY")
@@ -449,8 +456,8 @@ class CvGameUtils:
         #elif eBonus == gc.getInfoTypeForString("BONUS_HUNDE"):
             # eBuilding = gc.getInfoTypeForString("BUILDING_HUNDEZUCHT")
 
-        iUnitX = pHeadSelectedUnit.plot().getX()
-        iUnitY = pHeadSelectedUnit.plot().getY()
+        # iUnitX = pHeadSelectedUnit.plot().getX()
+        # iUnitY = pHeadSelectedUnit.plot().getY()
 
         (loopCity, pIter) = pPlayer.firstCity(False)
         while loopCity:
@@ -513,15 +520,15 @@ class CvGameUtils:
 
         # Aussenhandelsposten nicht im eigenen Land
         #if iBuild == gc.getInfoTypeForString("BUILD_HANDELSPOSTEN"):
-        #  if gc.getMap().plot(iX, iY).getOwner() != -1:
+        #  if CyMap().plot(iX, iY).getOwner() != -1:
         #    return 0
 
         if iBuild == gc.getInfoTypeForString("BUILD_LATIFUNDIUM"):
-            if not gc.getMap().plot(iX, iY).isFlatlands():
+            if not CyMap().plot(iX, iY).isFlatlands():
                 return 0
 
         elif iBuild == gc.getInfoTypeForString("BUILD_KASTELL") or iBuild in L.LBuildLimes:
-            pPlot = gc.getMap().plot(iX, iY)
+            pPlot = CyMap().plot(iX, iY)
             if pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_DARK_ICE"):
                 return 0
             if pPlot.isWater() or pPlot.isPeak() or pPlot.isCity():
@@ -539,36 +546,45 @@ class CvGameUtils:
         return False
 
     def cannotSelectionListMove(self, argsList):
-        pPlot = argsList[0]
-        bAlt = argsList[1]
-        bShift = argsList[2]
-        bCtrl = argsList[3]
+        # pPlot = argsList[0]
+        # bAlt = argsList[1]
+        # bShift = argsList[2]
+        # bCtrl = argsList[3]
         return False
 
     def cannotSelectionListGameNetMessage(self, argsList):
-        eMessage = argsList[0]
-        iData2 = argsList[1]
-        iData3 = argsList[2]
-        iData4 = argsList[3]
-        iFlags = argsList[4]
-        bAlt = argsList[5]
-        bShift = argsList[6]
+        # eMessage = argsList[0]
+        # iData2 = argsList[1]
+        # iData3 = argsList[2]
+        # iData4 = argsList[3]
+        # iFlags = argsList[4]
+        # bAlt = argsList[5]
+        # bShift = argsList[6]
         return False
 
     def cannotDoControl(self, argsList):
-        eControl = argsList[0]
+        # eControl = argsList[0]
         return False
 
     def canResearch(self, argsList):
-        ePlayer = argsList[0]
-        eTech = argsList[1]
-        bTrade = argsList[2]
+        # ePlayer = argsList[0]
+        # eTech = argsList[1]
+        # bTrade = argsList[2]
         return False
 
+    # PAE 6.10: activated for city states
     def cannotResearch(self, argsList):
         ePlayer = argsList[0]
         eTech = argsList[1]
         bTrade = argsList[2]
+
+        # city states / Stadtstaaten
+        if eTech == gc.getInfoTypeForString("TECH_COLONIZATION"):
+            #if gc.getPlayer(ePlayer).countNumBuildings(gc.getInfoTypeForString("BUILDING_CITY_STATE")) > 0:
+            return PAE_City.isCityState(ePlayer)
+            # if gc.getTeam(gc.getPlayer(ePlayer).getTeam()).isHasTech(gc.getInfoTypeForString("TECH_CITY_STATE")):
+                # return True
+
         return False
 
     def canDoCivic(self, argsList):
@@ -585,10 +601,10 @@ class CvGameUtils:
 
     def cannotDoCivic(self, argsList):
         ePlayer = argsList[0]
-        eCivic = argsList[1]
+        # eCivic = argsList[1]
 
         # Szenarien: Wechsel erst ab einer bestimmten Runde moeglich
-        sScenarioName = CvUtil.getScriptData(gc.getMap().plot(0, 0), ["S", "t"])
+        sScenarioName = CvUtil.getScriptData(CyMap().plot(0, 0), ["S", "t"])
         iRound = gc.getGame().getGameTurn() - gc.getGame().getStartTurn()
         if sScenarioName == "PeloponnesianWarKeinpferd" or sScenarioName == "FirstPunicWar" or sScenarioName == "WarOfDiadochi":
             if not gc.getPlayer(ePlayer).isHuman() and iRound <= 50:
@@ -599,12 +615,12 @@ class CvGameUtils:
         return False
 
     def canTrain(self, argsList):
-        pCity = argsList[0]
-        eUnit = argsList[1]
-        bContinue = argsList[2]
-        bTestVisible = argsList[3]
-        bIgnoreCost = argsList[4]
-        bIgnoreUpgrades = argsList[5]
+        # pCity = argsList[0]
+        # eUnit = argsList[1]
+        # bContinue = argsList[2]
+        # bTestVisible = argsList[3]
+        # bIgnoreCost = argsList[4]
+        # bIgnoreUpgrades = argsList[5]
 
         return False
 
@@ -612,10 +628,10 @@ class CvGameUtils:
     def cannotTrain(self, argsList):
         pCity = argsList[0]
         eUnit = argsList[1]
-        bContinue = argsList[2]
-        bTestVisible = argsList[3]
-        bIgnoreCost = argsList[4]
-        bIgnoreUpgrades = argsList[5]
+        # bContinue = argsList[2]
+        # bTestVisible = argsList[3]
+        # bIgnoreCost = argsList[4]
+        # bIgnoreUpgrades = argsList[5]
 
         #pUnit = gc.getUnitInfo(eUnit)
 
@@ -648,19 +664,19 @@ class CvGameUtils:
         return False
 
     def canConstruct(self, argsList):
-        pCity = argsList[0]
-        eBuilding = argsList[1]
-        bContinue = argsList[2]
-        bTestVisible = argsList[3]
-        bIgnoreCost = argsList[4]
+        # pCity = argsList[0]
+        # eBuilding = argsList[1]
+        # bContinue = argsList[2]
+        # bTestVisible = argsList[3]
+        # bIgnoreCost = argsList[4]
         return False
 
     def cannotConstruct(self, argsList):
         pCity = argsList[0]
         eBuilding = argsList[1]
-        bContinue = argsList[2]
-        bTestVisible = argsList[3]
-        bIgnoreCost = argsList[4]
+        # bContinue = argsList[2]
+        # bTestVisible = argsList[3]
+        # bIgnoreCost = argsList[4]
 
         # Stallungen: Pferd, Kamel, Ele / Stables: horse, camel, ele
         lStrategicBonusBuildings = [
@@ -670,7 +686,7 @@ class CvGameUtils:
         ]
         if eBuilding in lStrategicBonusBuildings:
             eBonus = gc.getBuildingInfo(eBuilding).getPrereqAndBonus()
-            lPlots = PAE_Cultivation.getCityCultivatedPlots(pCity, eBonus)
+            # lPlots = PAE_Cultivation.getCityCultivatedPlots(pCity, eBonus)
 
             for i in range(gc.getNUM_CITY_PLOTS()):
                 pPlot = pCity.getCityIndexPlot(i)
@@ -700,9 +716,11 @@ class CvGameUtils:
 
             # Erweiterter Radius
             iRange = 3
+            iX = pCity.getX()
+            iY = pCity.getY()
             for i in range(-iRange, iRange+1):
                 for j in range(-iRange, iRange+1):
-                    loopPlot = plotXY(pCity.getX(), pCity.getY(), i, j)
+                    loopPlot = plotXY(iX, iY, i, j)
                     if loopPlot and not loopPlot.isNone():
                         if eBonus1 == loopPlot.getBonusType(-1) or eBonus2 == loopPlot.getBonusType(-1):
                             return False
@@ -716,9 +734,12 @@ class CvGameUtils:
         elif eBuilding == gc.getInfoTypeForString("BUILDING_ACROPOLIS"):
             # Um die Stadt bzw unter der Stadt muss ein Hill sein
             iRange = 1
+
+            iX = pCity.getX()
+            iY = pCity.getY()
             for i in range(-iRange, iRange+1):
                 for j in range(-iRange, iRange+1):
-                    loopPlot = plotXY(pCity.getX(), pCity.getY(), i, j)
+                    loopPlot = plotXY(iX, iY, i, j)
                     if loopPlot and not loopPlot.isNone():
                         if loopPlot.isHills():
                             return False
@@ -749,17 +770,17 @@ class CvGameUtils:
         return False
 
     def canCreate(self, argsList):
-        pCity = argsList[0]
-        eProject = argsList[1]
-        bContinue = argsList[2]
-        bTestVisible = argsList[3]
+        # pCity = argsList[0]
+        # eProject = argsList[1]
+        # bContinue = argsList[2]
+        # bTestVisible = argsList[3]
         return False
 
     def cannotCreate(self, argsList):
         pCity = argsList[0]
         eProject = argsList[1]
-        bContinue = argsList[2]
-        bTestVisible = argsList[3]
+        # bContinue = argsList[2]
+        # bTestVisible = argsList[3]
 
         if eProject == gc.getInfoTypeForString("PROJECT_OLYMPIC_GAMES"):
             if not pCity.isHasReligion(gc.getInfoTypeForString("RELIGION_GREEK")):
@@ -768,20 +789,20 @@ class CvGameUtils:
         return False
 
     def canMaintain(self, argsList):
-        pCity = argsList[0]
-        eProcess = argsList[1]
-        bContinue = argsList[2]
+        # pCity = argsList[0]
+        # eProcess = argsList[1]
+        # bContinue = argsList[2]
         return False
 
     def cannotMaintain(self, argsList):
-        pCity = argsList[0]
-        eProcess = argsList[1]
-        bContinue = argsList[2]
+        # pCity = argsList[0]
+        # eProcess = argsList[1]
+        # bContinue = argsList[2]
         return False
 
     def AI_chooseTech(self, argsList):
         ePlayer = argsList[0]
-        bFree = argsList[1]
+        # bFree = argsList[1]
         pPlayer = gc.getPlayer(ePlayer)
         iCiv = pPlayer.getCivilizationType()
         eTeam = gc.getTeam(pPlayer.getTeam())
@@ -1464,7 +1485,7 @@ class CvGameUtils:
         iOwner = pUnit.getOwner()
         pOwner = gc.getPlayer(iOwner)
         pTeam = gc.getTeam(pOwner.getTeam())
-        eCiv = gc.getCivilizationInfo(pOwner.getCivilizationType())
+        # eCiv = gc.getCivilizationInfo(pOwner.getCivilizationType())
         iBarbarianPlayer = gc.getBARBARIAN_PLAYER()
         pPlot = pUnit.plot()
 
@@ -1649,25 +1670,29 @@ class CvGameUtils:
                         elif iUnitType == gc.getInfoTypeForString("UNIT_ROME_COMITATENSES") or iUnitType == gc.getInfoTypeForString("UNIT_ROME_COMITATENSES2"):
                             PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_ROME_PALATINI"), True)
                             return True
-                        # Elite Praetorians or Cohorte praetoriae -> Praetorian Garde
+                    # Elite Praetorians or Cohorte praetoriae -> Praetorian Garde
                         elif iUnitType == gc.getInfoTypeForString("UNIT_PRAETORIAN") or iUnitType == gc.getInfoTypeForString("UNIT_LEGION_EVOCAT") or iUnitType == gc.getInfoTypeForString("UNIT_PRAETORIAN2") or iUnitType == gc.getInfoTypeForString("UNIT_ROME_COHORTES_URBANAE"):
                             PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_PRAETORIAN3"), True)
                             return True
                         # Elite Assyrer und Babylon: Quradu
                         elif iCivType == gc.getInfoTypeForString("CIVILIZATION_ASSYRIA") or iCivType == gc.getInfoTypeForString("CIVILIZATION_BABYLON"):
-                            if iUnitType not in L.LNoRankUnits:
-                                PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_ELITE_ASSUR"), True)
-                                return True
+                            if pTeam.isHasTech(gc.getInfoTypeForString("TECH_BUERGERSOLDATEN")):
+                                if iUnitType not in L.LNoRankUnits:
+                                    PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_ELITE_ASSUR"), True)
+                                    return True
                         # Elite Sumerer: Gardu
                         elif iCivType == gc.getInfoTypeForString("CIVILIZATION_SUMERIA"):
-                            if iUnitType not in L.LNoRankUnits:
-                                PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_ELITE_SUMER"), True)
-                                return True
+                            if pTeam.isHasTech(gc.getInfoTypeForString("TECH_BUERGERSOLDATEN")):
+                                if iUnitType not in L.LNoRankUnits:
+                                    PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_ELITE_SUMER"), True)
+                                    return True
                         # Stammesfuerst
                         elif iCivType in L.LNorthern:
                             if pTeam.isHasTech(gc.getInfoTypeForString("TECH_KETTENPANZER")):
-                                PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_STAMMESFUERST"), True)
-                                return True
+                                # nur Nahkaempfer
+                                if pUnit.getUnitCombatType() in L.LMeleeCombats:
+                                    PAE_Unit.doUpgradeVeteran(pUnit, gc.getInfoTypeForString("UNIT_STAMMESFUERST"), True)
+                                    return True
 
                     # Elite Palatini or Clibanari or Cataphracti -> Scholae
                     if iUnitType == gc.getInfoTypeForString("UNIT_ROME_PALATINI") \
@@ -2153,8 +2178,8 @@ class CvGameUtils:
                             break
 
                 if LImpUpgrade:
-                    for i in xrange(gc.getMap().numPlots()):
-                        pLoopPlot = gc.getMap().sPlotByIndex(i)
+                    for i in xrange(CyMap().numPlots()):
+                        pLoopPlot = CyMap().sPlotByIndex(i)
                         if pLoopPlot.getOwner() == iOwner:
                             iImp = pLoopPlot.getImprovementType()
                             if iImp in LImpUpgrade:
@@ -2231,7 +2256,7 @@ class CvGameUtils:
                                 if not bAccess:
                                     # 1:20, dass das Gold auch ohne Hauptstadt/Provinzhauptstadt in die Kassa kommt
                                     if CvUtil.myRandom(20, "do_ai_beutegold") == 1:
-                                        iGold = 50 + CvUtil.myRandom(30, "ai_beutegold")  # AI bonus, in turn less then above
+                                        iGold = 50 + CvUtil.myRandom(30, "ai_beutegold")  # KI Bonus dafür weniger als oben
                                         pOwner.changeGold(iGold)
                                         # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
                                         pUnit.kill(True, -1)  # RAMK_CTD
@@ -2428,11 +2453,11 @@ class CvGameUtils:
         return False
 
     def AI_doWar(self, argsList):
-        eTeam = argsList[0]
+        # eTeam = argsList[0]
         return False
 
     def AI_doDiplo(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return False
 
     def calculateScore(self, argsList):
@@ -2462,47 +2487,47 @@ class CvGameUtils:
         return False
 
     def doHolyCityTech(self, argsList):
-        eTeam = argsList[0]
-        ePlayer = argsList[1]
-        eTech = argsList[2]
-        bFirst = argsList[3]
+        # eTeam = argsList[0]
+        # ePlayer = argsList[1]
+        # eTech = argsList[2]
+        # bFirst = argsList[3]
         return False
 
     def doGold(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return False
 
     def doResearch(self, argsList):
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
         return False
 
     def doGoody(self, argsList):
-        ePlayer = argsList[0]
-        pPlot = argsList[1]
-        pUnit = argsList[2]
+        # ePlayer = argsList[0]
+        # pPlot = argsList[1]
+        # pUnit = argsList[2]
         return False
 
     def doGrowth(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return False
 
     def doProduction(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return False
 
     def doCulture(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return False
 
     def doPlotCulture(self, argsList):
-        pCity = argsList[0]
-        bUpdate = argsList[1]
-        ePlayer = argsList[2]
-        iCultureRate = argsList[3]
+        # pCity = argsList[0]
+        # bUpdate = argsList[1]
+        # ePlayer = argsList[2]
+        # iCultureRate = argsList[3]
         return False
 
     def doReligion(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return False
 
     def cannotSpreadReligion(self, argsList):
@@ -2510,16 +2535,16 @@ class CvGameUtils:
         return False
 
     def doGreatPeople(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return False
 
     def doMeltdown(self, argsList):
-        pCity = argsList[0]
+        # pCity = argsList[0]
         return False
 
     def doReviveActivePlayer(self, argsList):
         "allows you to perform an action after an AIAutoPlay"
-        iPlayer = argsList[0]
+        # iPlayer = argsList[0]
         return False
 
     def doPillageGold(self, argsList):
@@ -2566,7 +2591,7 @@ class CvGameUtils:
         return False
 
     def getConscriptUnitType(self, argsList):
-        iPlayer = argsList[0]
+        # iPlayer = argsList[0]
         iConscriptUnitType = -1  # return this with the value of the UNIT TYPE you want to be conscripted, -1 uses default system
 
         return iConscriptUnitType
@@ -2578,7 +2603,7 @@ class CvGameUtils:
         return iFoundValue
 
     def canPickPlot(self, argsList):
-        pPlot = argsList[0]
+        # pPlot = argsList[0]
         return True
 
     def getUnitCostMod(self, argsList):
@@ -2758,7 +2783,7 @@ class CvGameUtils:
                 iPlayer = iData1 - 7200
                 pPlayer = gc.getPlayer(iPlayer)
                 pCity = pPlayer.getCity(iData2)
-                if gc.getGame().GetWorldBuilderMode():
+                if CyGame().GetWorldBuilderMode():
                     sText = "<font=3>"
                     if pCity.isCapital():
                         sText += CyTranslator().getText("[ICON_STAR]", ())
@@ -2910,7 +2935,7 @@ class CvGameUtils:
                 iPlayer = iData1 - 8300
                 pUnit = gc.getPlayer(iPlayer).getUnit(iData2)
                 sText = CyGameTextMgr().getSpecificUnitHelp(pUnit, True, False)
-                if gc.getGame().GetWorldBuilderMode():
+                if CyGame().GetWorldBuilderMode():
                     sText += "\n" + CyTranslator().getText("TXT_KEY_WB_UNIT", ()) + " ID: " + str(iData2)
                     sText += "\n" + CyTranslator().getText("TXT_KEY_WB_GROUP", ()) + " ID: " + str(pUnit.getGroupID())
                     sText += "\n" + "X: " + str(pUnit.getX()) + ", Y: " + str(pUnit.getY())
@@ -3361,6 +3386,24 @@ class CvGameUtils:
             elif iData1 == 765:
                 return CyTranslator().getText("TXT_KEY_ACTION_BURN_FOREST", ())
 
+            # TOP_CITIES_SCREEN_WORLD_WONDERS
+            elif iData1 == 766:
+                if iData2 == 1:
+                    return CyTranslator().getText("TXT_KEY_TOP_CITIES_SCREEN_WORLD_WONDERS", ())
+                if iData2 == 2:
+                    return CyTranslator().getText("TXT_KEY_TOP_CITIES_SCREEN_NATIONAL_WONDERS", ())
+                if iData2 == 3:
+                    return CyTranslator().getText("TXT_KEY_PEDIA_CATEGORY_PROJECT", ())
+
+            elif iData1 == 767:
+                CvTechChooser.getAllTechPrefsHover(iData2)
+            elif iData1 == 768:
+                CvTechChooser.getCurrentTechPrefsHover(iData2)
+            elif iData1 == 769:
+                CvTechChooser.getFutureTechPrefsHover(iData2)
+	# <widget name="WIDGET_TECH_PREFS_ALL" module="CvTechChooser" function="getAllTechPrefsHover"/>
+	# <widget name="WIDGET_TECH_PREFS_CURRENT" module="CvTechChooser" function="getCurrentTechPrefsHover"/>
+	# <widget name="WIDGET_TECH_PREFS_FUTURE" module="CvTechChooser" function="getFutureTechPrefsHover"/>
             # CITY_TAB replacements
             elif iData1 == 88000:
                 return gc.getCityTabInfo(iData2).getDescription()

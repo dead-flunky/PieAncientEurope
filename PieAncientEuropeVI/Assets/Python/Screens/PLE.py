@@ -645,7 +645,7 @@ class PLE:
 
     # hides the info pane
     def hideInfoPane(self):
-        screen = CyGInterfaceScreen( "MainInterface", CvScreenEnums.MAIN_INTERFACE )
+        screen = CyGInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE)
         screen.hide(self.UNIT_INFO_TEXT)
         screen.hide(self.UNIT_INFO_TEXT_SHADOW)
         screen.hide(self.UNIT_INFO_PANE)
@@ -2047,9 +2047,9 @@ class PLE:
     # base function to display a self sizing info pane
     def displayInfoPane(self, szText):
 
-        self.bInfoPaneActive    = True
-        self.iInfoPaneCnt       += 1
-        self.tLastMousePos      = (CyInterface().getMousePos().x, CyInterface().getMousePos().y)
+        self.bInfoPaneActive = True
+        self.iInfoPaneCnt += 1
+        self.tLastMousePos = (CyInterface().getMousePos().x, CyInterface().getMousePos().y)
 
         screen = CyGInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE)
 

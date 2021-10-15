@@ -1519,7 +1519,8 @@ int CvCity::findPopulationRank() const
 
 		// shenanigans are to get around the const check
 		m_bPopulationRankValid = true;
-		m_iPopulationRank = iRank; */
+		m_iPopulationRank = iRank;
+		*/
 		// K-Mod. Set all ranks at the same time.
 		const CvPlayer& kPlayer = GET_PLAYER(getOwnerINLINE());
 
@@ -1568,7 +1569,8 @@ int CvCity::findBaseYieldRateRank(YieldTypes eYield) const
 		}
 
 		m_abBaseYieldRankValid[eYield] = true;
-		m_aiBaseYieldRank[eYield] = iRank; */
+		m_aiBaseYieldRank[eYield] = iRank;
+		*/
 		// K-Mod. Set all ranks at the same time.
 		const CvPlayer& kPlayer = GET_PLAYER(getOwnerINLINE());
 
@@ -1617,7 +1619,8 @@ int CvCity::findYieldRateRank(YieldTypes eYield) const
 		}
 
 		m_abYieldRankValid[eYield] = true;
-		m_aiYieldRank[eYield] = iRank; */
+		m_aiYieldRank[eYield] = iRank;
+		*/
 		// K-Mod. Set all ranks at the same time.
 		const CvPlayer& kPlayer = GET_PLAYER(getOwnerINLINE());
 
@@ -1666,7 +1669,8 @@ int CvCity::findCommerceRateRank(CommerceTypes eCommerce) const
 		}
 
 		m_abCommerceRankValid[eCommerce] = true;
-		m_aiCommerceRank[eCommerce] = iRank; */
+		m_aiCommerceRank[eCommerce] = iRank;
+		*/
 		// K-Mod. Set all ranks at the same time.
 		const CvPlayer& kPlayer = GET_PLAYER(getOwnerINLINE());
 
@@ -3279,7 +3283,7 @@ int CvCity::getProductionDifference(int iProductionNeeded, int iProduction, int 
 	}
 
 	int iFoodProduction = bFoodProduction ?
-			std::max(0, getYieldRate(YIELD_FOOD) - foodConsumption(/* f1rpo (bugfix): bNoAngry=*/true)) : 0;
+			std::max(0, getYieldRate(YIELD_FOOD) - foodConsumption(true)) : 0;
 
 	int iOverflow = ((bOverflow) ? (getOverflowProduction() + getFeatureProduction()) : 0);
 
@@ -7447,9 +7451,7 @@ void CvCity::changeUnhealthyPopulationModifier(int iChange)
 {
 	m_iUnhealthyPopulationModifier += iChange;
 }
-/*
-** K-Mod end
-*/
+// K-Mod end
 
 
 int CvCity::getBuildingOnlyHealthyCount() const																	
@@ -9241,10 +9243,12 @@ int CvCity::getBuildingCommerceByBuilding(CommerceTypes eIndex, BuildingTypes eB
 	// K-Mod. I've rearranged some stuff so that bonus commerce does not get doubled at the end.
 	// (eg. the bonus culture that the Sistine Chapel gives to religious buildings should not be doubled.)
 
-	if (getNumBuilding(eBuilding) > 0)
+	int iTotal = getNumBuilding(eBuilding);
+	if (iTotal > 0)
 	{
 		const CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
-
+		int iActive = getNumActiveBuilding(eBuilding);
+		
 		int iTimeFactor =
 			kBuilding.getCommerceChangeDoubleTime(eIndex) != 0 &&
 			getBuildingOriginalTime(eBuilding) != MIN_INT &&
@@ -9255,29 +9259,29 @@ int CvCity::getBuildingCommerceByBuilding(CommerceTypes eIndex, BuildingTypes eB
 
 		if (!kBuilding.isCommerceChangeOriginalOwner(eIndex) || getBuildingOriginalOwner(eBuilding) == getOwnerINLINE())
 		{
-			iCommerce += kBuilding.getObsoleteSafeCommerceChange(eIndex) * getNumBuilding(eBuilding) * iTimeFactor; // 1
+			iCommerce += kBuilding.getObsoleteSafeCommerceChange(eIndex) * iTotal * iTimeFactor; // 1
 
-			if (getNumActiveBuilding(eBuilding) > 0)
+			if (iActive > 0)
 			{
-				iCommerce += GC.getBuildingInfo(eBuilding).getCommerceChange(eIndex) * getNumActiveBuilding(eBuilding) * iTimeFactor; // 2
-				iCommerce += getBuildingCommerceChange((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType(), eIndex) * getNumActiveBuilding(eBuilding);
+				iCommerce += kBuilding.getCommerceChange(eIndex) * iActive * iTimeFactor; // 2
+				iCommerce += getBuildingCommerceChange((BuildingClassTypes)kBuilding.getBuildingClassType(), eIndex) * iActive;
 
-				if (GC.getBuildingInfo(eBuilding).getReligionType() != NO_RELIGION)
+				if (kBuilding.getReligionType() != NO_RELIGION)
 				{
-					if (GC.getBuildingInfo(eBuilding).getReligionType() == GET_PLAYER(getOwnerINLINE()).getStateReligion())
+					if (kBuilding.getReligionType() == GET_PLAYER(getOwnerINLINE()).getStateReligion())
 					{
-						iCommerce += GET_PLAYER(getOwnerINLINE()).getStateReligionBuildingCommerce(eIndex) * getNumActiveBuilding(eBuilding);
+						iCommerce += GET_PLAYER(getOwnerINLINE()).getStateReligionBuildingCommerce(eIndex) * iActive;
 					}
 				}
 
-				if (GC.getBuildingInfo(eBuilding).getGlobalReligionCommerce() != NO_RELIGION)
+				if (kBuilding.getGlobalReligionCommerce() != NO_RELIGION)
 				{
-					iCommerce += (GC.getReligionInfo((ReligionTypes)(GC.getBuildingInfo(eBuilding).getGlobalReligionCommerce())).getGlobalReligionCommerce(eIndex) * GC.getGameINLINE().countReligionLevels((ReligionTypes)(GC.getBuildingInfo(eBuilding).getGlobalReligionCommerce()))) * getNumActiveBuilding(eBuilding);
+					iCommerce += (GC.getReligionInfo((ReligionTypes)(kBuilding.getGlobalReligionCommerce())).getGlobalReligionCommerce(eIndex) * GC.getGameINLINE().countReligionLevels((ReligionTypes)(kBuilding.getGlobalReligionCommerce()))) * iActive;
 				}
 
-				if (GC.getBuildingInfo(eBuilding).getGlobalCorporationCommerce() != NO_CORPORATION)
+				if (kBuilding.getGlobalCorporationCommerce() != NO_CORPORATION)
 				{
-					iCommerce += (GC.getCorporationInfo((CorporationTypes)(GC.getBuildingInfo(eBuilding).getGlobalCorporationCommerce())).getHeadquarterCommerce(eIndex) * GC.getGameINLINE().countCorporationLevels((CorporationTypes)(GC.getBuildingInfo(eBuilding).getGlobalCorporationCommerce()))) * getNumActiveBuilding(eBuilding);
+					iCommerce += (GC.getCorporationInfo((CorporationTypes)(kBuilding.getGlobalCorporationCommerce())).getHeadquarterCommerce(eIndex) * GC.getGameINLINE().countCorporationLevels((CorporationTypes)(kBuilding.getGlobalCorporationCommerce()))) * iActive;
 				}
 			}
 
@@ -11852,7 +11856,8 @@ void CvCity::setHasCorporation(CorporationTypes eIndex, bool bNewValue, bool bAn
 					{
 						/* original bts code
 						CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_CORPORATION_SPREAD", GC.getCorporationInfo(eIndex).getTextKeyWide(), getNameKey());
-						gDLL->getInterfaceIFace()->addHumanMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getCorporationInfo(eIndex).getSound(), MESSAGE_TYPE_MAJOR_EVENT, GC.getCorporationInfo(eIndex).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), bArrows, bArrows); */
+						gDLL->getInterfaceIFace()->addHumanMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getCorporationInfo(eIndex).getSound(), MESSAGE_TYPE_MAJOR_EVENT, GC.getCorporationInfo(eIndex).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), bArrows, bArrows);
+						*/
 
 						if (getOwnerINLINE() == iI)
 						{
@@ -12100,7 +12105,7 @@ void CvCity::pushOrder(OrderTypes eOrder, int iData1, int iData2, bool bSave, bo
 			bValid = true;
 			bBuildingUnit = true;
 			CvEventReporter::getInstance().cityBuildingUnit(this, (UnitTypes)iData1);
-			if( gCityLogLevel >= 1 )
+			if (gCityLogLevel >= 1)
 			{
 				CvWString szString;
 				getUnitAIString(szString, (UnitAITypes)iData2);
@@ -12179,7 +12184,8 @@ void CvCity::pushOrder(OrderTypes eOrder, int iData1, int iData2, bool bSave, bo
 	if (!bAppend || (getOrderQueueLength() == 1))
 	{
 		startHeadOrder();
-	} */
+	}
+	*/
 	// K-Mod
 	if (iPosition == 0 || getOrderQueueLength() == 0)
 	{
@@ -12317,7 +12323,8 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 			if (iProductionGold > 0)
 			{
 				GET_PLAYER(getOwnerINLINE()).changeGold(iProductionGold);
-			} */
+			}
+			*/
 
 			// K-Mod. use excess production to build more of the same unit
 			int iToBuild = 1 + iLostProduction / iProductionNeeded;

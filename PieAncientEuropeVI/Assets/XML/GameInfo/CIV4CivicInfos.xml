@@ -21,8 +21,8 @@
       <iCorporationMaintenanceModifier>0</iCorporationMaintenanceModifier>
       <iExtraHealth>0</iExtraHealth>
 <!--kmod addition
-      <iExtraHappiness>0</iExtraHappiness>
--->	  <iFreeExperience>0</iFreeExperience>
+      <iExtraHappiness>0</iExtraHappiness>-->
+      <iFreeExperience>0</iFreeExperience>
       <iWorkerSpeedModifier>0</iWorkerSpeedModifier>
       <iImprovementUpgradeRateModifier>0</iImprovementUpgradeRateModifier>
       <iMilitaryProductionModifier>0</iMilitaryProductionModifier>
@@ -1306,7 +1306,7 @@
       <Civilopedia>TXT_KEY_CIVIC_ZENTRALISIERUNG_PEDIA</Civilopedia>
       <Strategy/>
       <Button>Art/Interface/Buttons/Civics/civic_rep.dds</Button>
-      <TechPrereq>TECH_COLONIZATION</TechPrereq>
+      <TechPrereq>TECH_STAATENBILDUNG</TechPrereq>
       <iAnarchyLength>1</iAnarchyLength>
       <Upkeep>UPKEEP_MEDIUM</Upkeep>
       <iAIWeight>2</iAIWeight>

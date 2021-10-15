@@ -17,7 +17,7 @@
       <PromotionPrereqOr2>NONE</PromotionPrereqOr2>
 <!--kmod addition -->      
       <PromotionPrereqOr3>NONE</PromotionPrereqOr3>
-	  <TechPrereq>TECH_LEADERSHIP</TechPrereq>
+      <TechPrereq>TECH_LEADERSHIP</TechPrereq>
       <StateReligionPrereq>NONE</StateReligionPrereq>
       <bLeader>0</bLeader>
       <bBlitz>0</bBlitz>

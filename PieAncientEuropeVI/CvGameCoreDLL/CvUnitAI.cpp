@@ -1325,33 +1325,148 @@ bool CvUnitAI::AI_considerPathDOW(CvPlot* pPlot, int iFlags)
 }
 // K-Mod end
 
-void CvUnitAI::AI_animalMove()
+
+// Returns true if a mission was pushed...
+bool CvUnitAI::AI_animalAttack()
 {
 	PROFILE_FUNC();
 
-	if (GC.getGameINLINE().getSorenRandNum(100, "Animal Attack") < GC.getHandicapInfo(GC.getGameINLINE().getHandicapType()).getAnimalAttackProb())
+	int iRand;
+	iRand = getUnitInfo().getAnimalAttackWeight();
+	if (iRand < 1)
 	{
-		if (AI_anyAttack(1, 0))
+		return false;
+	}
+	//iRand = GC.getDefineINT("WILD_ANIMAL_ATTACK_WEIGHT");
+	iRand = GC.getGameINLINE().getSorenRandNum(iRand, "Wild Animal Attack");
+
+	if (iRand < 90)
+	{
+		if (AI_anyAttack(1, 50))
+		//if (AI_smartAttack(1, 0, 10, NULL))
 		{
-			return;
-		}
-//pae keldath - make animals search wider area, in a scale
-		if (AI_anyAttack(2, 0))
-		{
-			return;
-		}
-		if (AI_anyAttack(3, 0))
-		{
-			return;
+			return true;
 		}
 	}
 
-	if (AI_heal())
+	if (iRand < 50)
+	{
+		if (AI_anyAttack(1, 40))
+		{
+			return true;
+		}
+	}
+
+	if (iRand < 30)
+	{
+		if (AI_anyAttack(1, 20))
+		{
+			return true;
+		}
+	}
+
+	if (iRand < 15)
+	{
+		if (AI_anyAttack(1, 10))
+		{
+			return true;
+		}
+	}
+
+	if (iRand < 5)
+	{
+		if (AI_anyAttack(1, 0))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+
+// Returns true if a mission was pushed...
+bool CvUnitAI::AI_animalLandPatrol()
+{
+	PROFILE_FUNC();
+
+	CvPlot* pAdjacentPlot;
+	CvPlot* pBestPlot;
+	int iValue, iRand;
+	int iBestValue;
+	int iI;
+
+	iBestValue = 0;
+	pBestPlot = NULL;
+
+	for (iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
+	{
+		pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
+
+		if (pAdjacentPlot != NULL)
+		{
+			if (AI_plotValid(pAdjacentPlot))
+			{
+				//if (!pAdjacentPlot->isVisibleEnemyUnit(this))
+				if (!pAdjacentPlot->isCity() && pAdjacentPlot->getNumUnits() == 0)
+				{
+					if (generatePath(pAdjacentPlot, 0, true))
+					{
+						iValue = 0;
+						iRand = getUnitInfo().getAnimalPatrolWeight();
+
+						if (iRand > 0)
+						{
+							iValue += (1 + GC.getGameINLINE().getSorenRandNum(iRand, "Wild Land Animal Patrol - Base Weight"));
+
+							if (pAdjacentPlot->getTerrainType() != NO_TERRAIN)
+							{
+								if (getUnitInfo().getTerrainNative(pAdjacentPlot->getTerrainType()))
+								{
+									iRand = 100; //RaR: GC.getWILD_ANIMAL_LAND_TERRAIN_NATIVE_WEIGHT();
+									iValue += (1 + GC.getGameINLINE().getSorenRandNum(iRand, "Wild Land Animal Patrol - Terrain Weight"));
+								}
+							}
+
+							if (iValue > iBestValue)
+							{
+									iBestValue = iValue;
+									pBestPlot = getPathEndTurnPlot();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (pBestPlot != NULL)
+	{
+		FAssert(!atPlot(pBestPlot));
+		getGroup()->pushMission(MISSION_MOVE_TO, pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE());
+		return true;
+	}
+
+	return false;
+}
+
+void CvUnitAI::AI_animalMove()
+{
+	PROFILE_FUNC();
+	
+	if (AI_animalAttack())
 	{
 		return;
 	}
 
-	if (AI_patrol())
+	if (isHurt())
+	{
+		if (AI_heal())
+		{
+			return;
+		}
+	}
+	
+	if (AI_animalLandPatrol())
 	{
 		return;
 	}
@@ -1826,20 +1941,22 @@ void CvUnitAI::AI_workerMove()
 /// Super Forts begin *canal* *choke* - doto adjustment		
 		//bool const bCanal = false; //doto - cant const it - reassigning below
 		bool bCanal = false;
-		if (superForts)
+		
+// Flunky PAE disabled *choke* *canal* for bug search
+		/*if (superForts)
 		{
 			bCanal = kOwner.countNumCoastalCities() > 0; 
-		}		
+		}		*/
 		bool bAirbase = false;
 		bAirbase = (kOwner.AI_totalUnitAIs(UNITAI_PARADROP) || kOwner.AI_totalUnitAIs(UNITAI_ATTACK_AIR) || kOwner.AI_totalUnitAIs(UNITAI_MISSILE_AIR));
 		
-		if (superForts)
+		/*if (superForts)
 		{
 			if (AI_fortTerritory(bCanal, bAirbase))
 				return;
-		}	
-		//sf - doto original if statement	
-		else if (bCanal || bAirbase)
+		}	*/
+		//sf - doto original else if statement	
+		if (bCanal || bAirbase)
 		{
 			if (AI_fortTerritory(bCanal, bAirbase))
 			{
@@ -1847,10 +1964,10 @@ void CvUnitAI::AI_workerMove()
 			}
 		}
 		//bBuildFort = true;
-		if (!superForts)
-			bBuildFort = true;//original
-		else if (superForts)	
-			bBuildFort = bCanal && bAirbase;
+		//if (!superForts)
+		bBuildFort = true;//original
+		/*else if (superForts)	
+			bBuildFort = bCanal && bAirbase;*/
 // Super Forts begin *canal* *choke* -doto	
 	}
 
@@ -1938,15 +2055,15 @@ void CvUnitAI::AI_workerMove()
 	}
 
 	// Super Forts begin *canal* *choke* -doto adjustment
-	if (!bBuildFort && superForts)
-	{
-		if (AI_fortTerritory(true, true /*bCanal, bAirbase*/))
-		{
-			return;
-		}
-	}
-	//original if statement - doto comment
-	else if (!bBuildFort && !superForts)
+	//if (!bBuildFort && superForts)
+	//{
+	//	if (AI_fortTerritory(true, true /*bCanal, bAirbase*/))
+	//	{
+	//		return;
+	//	}
+	//}
+	//original else if statement - doto comment
+	if (!bBuildFort)
 	{
 		//bool bCanal = ((100 * area()->getNumCities()) / std::max(1, GC.getGame().getNumCities()) < 85);
 		bool bCanal = false; // K-Mod. The current AI for canals doesn't work anyway; so lets skip it to save time.
@@ -2891,7 +3008,7 @@ void CvUnitAI::AI_attackCityMove()
 		bInCity = bInCity || plot()->isFortImprovement();
 	}
 // Super Forts end
-	if( bInCity && plot()->getOwnerINLINE() == getOwnerINLINE() )
+	if (bInCity && plot()->getOwnerINLINE() == getOwnerINLINE())
 	{
 		// force heal if we in our own city and damaged
 		// can we remove this or call AI_heal here?
@@ -12044,7 +12161,7 @@ int CvUnitAI::AI_getPlotDefendersNeeded(CvPlot* pPlot, int iExtra)
 		{
 			++iNeeded;
 			if ((kPlayer.AI_getPlotCanalValue(pPlot) > 0)
-				|| (kPlayer.AI_getPlotChokeValue(pPlot) > 0)
+				/*|| (kPlayer.AI_getPlotChokeValue(pPlot) > 0)*/
 				|| (kPlayer.AI_getPlotAirbaseValue(pPlot) > 0))
 			{
 				++iNeeded;
@@ -16074,15 +16191,11 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iFlags, int iMin
 			if (!bAllowCities && pLoopPlot->isCity())
 				continue;
 // Super Forts begin *AI_offense* - modified if statement so forts will be attacked too
-			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && !isAnimal())
 			{	
-				bool checkCity = bDeclareWar
+				if (bDeclareWar
 					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isEnemyCity(*this);
-				bool checkPlot = bDeclareWar
-					? !pLoopPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()) && !(pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getPlotCity()->getTeam(), pLoopPlot))
-					: !pLoopPlot->isVisibleEnemyUnit(this) && !pLoopPlot->isFortImprovement();
-				if (checkCity || checkPlot)
+					: !pLoopPlot->isVisibleEnemyUnit(this) && (!pLoopPlot->isEnemyCity(*this) || !pLoopPlot->isFortImprovement()))
 				{
 					continue;
 				}
@@ -19964,15 +20077,16 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 		if (AI_plotValid(pLoopPlot))
 		{
 			if (pLoopPlot->getOwnerINLINE() == getOwnerINLINE()
+				// Flunky PAE disable *canal* *choke* for debug
 // Super Forts *canal* *choke* begin
-				|| 
-				(superForts && (pLoopPlot->getOwnerINLINE() == NO_PLAYER && pLoopPlot->isRevealed(getTeam(), false))) 
+				/*|| 
+				(superForts && (pLoopPlot->getOwnerINLINE() == NO_PLAYER && pLoopPlot->isRevealed(getTeam(), false))) */
 // Super Forts end
 			) // XXX team???
 			{
 				if (pLoopPlot->getImprovementType() == NO_IMPROVEMENT
 					// Super Forts *canal* *choke* begin
-					|| (superForts && pLoopPlot->getImprovementType() == NO_IMPROVEMENT && pLoopPlot->isCityRadius())
+					/*|| (superForts && pLoopPlot->getImprovementType() == NO_IMPROVEMENT && pLoopPlot->isCityRadius())*/
 			//changed from (superForts && !kPlot.isCityRadius()))
 			//im thinking if a plot is improved and its withing city borders, dont build fort
 // Super Forts end) 
@@ -19982,10 +20096,10 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 					iValue += bCanal ? kOwner.AI_getPlotCanalValue(pLoopPlot) : 0;
 					iValue += bAirbase ? kOwner.AI_getPlotAirbaseValue(pLoopPlot) : 0;
 					// Super Forts *choke* begin doto
-					if (superForts)
+					/*if (superForts)
 					{
 						iValue += kOwner.AI_getPlotChokeValue(pLoopPlot);
-					}	
+					}	*/
 /*	doto - super forts - this code is from mnai - probably add value for bonus on tile	
 					if ((superForts)
 					{
@@ -20017,10 +20131,10 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 */		
 // Super Fort
 					int iMinAcceptableValue = 0;
-					if(superForts && pLoopPlot->getOwnerINLINE() == NO_PLAYER)
-					{	// Don't go outside borders for low values
-						iMinAcceptableValue += 150;
-					}
+					//if(superForts && pLoopPlot->getOwnerINLINE() == NO_PLAYER)
+					//{	// Don't go outside borders for low values
+					//	iMinAcceptableValue += 150;
+					//}
 					//if(iValue <= 0)
 					if(iValue <= iMinAcceptableValue /*org value 0*/)
 					{
@@ -20028,11 +20142,11 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 						BuildTypes eBestTempBuild = NO_BUILD;
 // Super Forts *canal* *choke* begin
 						int iPlotValue = iValue;
-						if (superForts)
+						/*if (superForts)
 						{	
 							iPlotValue += bCanal ? 0 : kOwner.AI_getPlotCanalValue(pLoopPlot) / 4;
 							iPlotValue += bAirbase ? 0 : kOwner.AI_getPlotAirbaseValue(pLoopPlot) / 4;
-						}	
+						}	*/
 // Super Forts end
 
 		/*  K-Mod note: the following code may choose the improvement poorly if there are

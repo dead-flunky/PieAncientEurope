@@ -1,7 +1,7 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 import CvMainInterface
-#import CvDomesticAdvisor
+import CvDomesticAdvisor
 import CvTechChooser
 #import CvForeignAdvisor
 import CvExoticForeignAdvisor
@@ -32,10 +32,10 @@ import CvWonderMovieScreen
 import CvEraMovieScreen
 import CvSpaceShipScreen
 
+# BUG - Sevopedia - start
 # import CvPediaMain
 # import CvPediaHistory
 
-# BUG - Sevopedia - start
 import SevoScreenEnums
 # BUG - Sevopedia - end
 
@@ -57,7 +57,6 @@ from CvPythonExtensions import *
 # BUG - Options - end
 import BugCore
 AdvisorOpt = BugCore.game.Advisors
-CustDomAdvOpt = BugCore.game.CustDomAdv
 TechWindowOpt = BugCore.game.TechWindow
 
 # K-Mod
@@ -100,12 +99,12 @@ import WBTradeScreen
 
 def toggleSetNoScreens():
     global g_bIsScreenActive
-    print "SCREEN OFF"
+    CvUtil.pyPrint("SCREEN OFF")
     g_bIsScreenActive = -1
 
 def toggleSetScreenOn(argsList):
     global g_bIsScreenActive
-    print "%s SCREEN TURNED ON" %(argsList[0],)
+    CvUtil.pyPrint("%s SCREEN TURNED ON" %(argsList[0],))
     g_bIsScreenActive = argsList[0]
 
 #diplomacyScreen = CvDiplomacy.CvDiplomacy()
@@ -160,45 +159,18 @@ def showForeignAdvisorScreen(argsList):
 # I've disabled this option. We always use the 'economics advisor' now.
 # (but the way I've done it is a kludge)
 ##
+import EconomicsAdvisor
+financeAdvisor = EconomicsAdvisor.EconomicsAdvisor()
 # PAE was
 # financeAdvisor = CvFinanceAdvisor.CvFinanceAdvisor()
-financeAdvisor = None
-def createFinanceAdvisor():
-    """Creates the correct Finance Advisor based on an option."""
-    global financeAdvisor
-    if financeAdvisor is None:
-        import EconomicsAdvisor
-        financeAdvisor = EconomicsAdvisor.EconomicsAdvisor()
-#       if (AdvisorOpt.isBugFinanceAdvisor()):
-#           import BugFinanceAdvisor
-#           financeAdvisor = BugFinanceAdvisor.BugFinanceAdvisor()
-#       else:
-#           import CvFinanceAdvisor
-#           financeAdvisor = CvFinanceAdvisor.CvFinanceAdvisor()
-        HandleInputMap[FINANCE_ADVISOR] = financeAdvisor
 # BUG - Finance Advisor - end
 
 def showFinanceAdvisor():
     if CyGame().getActivePlayer() != -1:
         financeAdvisor.interfaceScreen()
 
-# BUG - CustDomAdv - start
 # PAE
-# domesticAdvisor = CvDomesticAdvisor.CvDomesticAdvisor()
-domesticAdvisor = None
-
-def createDomesticAdvisor():
-    """Creates the correct Domestic Advisor based on an option."""
-    global domesticAdvisor
-    if domesticAdvisor is None:
-        if CustDomAdvOpt.isEnabled():
-            import CvCustomizableDomesticAdvisor
-            domesticAdvisor = CvCustomizableDomesticAdvisor.CvCustomizableDomesticAdvisor()
-        else:
-            import CvDomesticAdvisor
-            domesticAdvisor = CvDomesticAdvisor.CvDomesticAdvisor()
-        HandleInputMap[DOMESTIC_ADVISOR] = domesticAdvisor
-# BUG - CustDomAdv - end
+domesticAdvisor = CvDomesticAdvisor.CvDomesticAdvisor()
 
 def showDomesticAdvisor(argsList):
     if CyGame().getActivePlayer() != -1:
@@ -213,6 +185,7 @@ traderouteAdvisor2 = CvTradeRouteAdvisor2.CvTradeRouteAdvisor2()
 def showTradeRouteAdvisor2(argsList):
         if CyGame().getActivePlayer() > -1:
                 traderouteAdvisor2.interfaceScreen()
+
 # BUG - Military Advisor - start
 # PAE
 # militaryAdvisor = CvMilitaryAdvisor.CvMilitaryAdvisor(MILITARY_ADVISOR)
@@ -221,7 +194,7 @@ def createMilitaryAdvisor():
     """Creates the correct Military Advisor based on an option."""
     global militaryAdvisor
     if militaryAdvisor is None:
-        if (AdvisorOpt.isBUG_MA()):
+        if AdvisorOpt.isBUG_MA():
             import CvBUGMilitaryAdvisor
             militaryAdvisor = CvBUGMilitaryAdvisor.CvMilitaryAdvisor(MILITARY_ADVISOR)
         else:
@@ -231,9 +204,6 @@ def createMilitaryAdvisor():
 
 def showMilitaryAdvisor():
     if CyGame().getActivePlayer() != -1:
-        # if (AdvisorOpt.isBUG_MA()):
-            # TODO: move to CvBUGMilitaryAdvisor.interfaceScreen()
-            # militaryAdvisor.IconGridActive = False
         militaryAdvisor.interfaceScreen()
 # BUG - Military Advisor - end
 
@@ -302,10 +272,10 @@ def createTechSplash():
     """Creates the correct Tech Splash Screen based on an option."""
     global techSplashScreen
     if techSplashScreen is None:
-        if (TechWindowOpt.isDetailedView()):
+        if TechWindowOpt.isDetailedView():
             import TechWindow
             techSplashScreen = TechWindow.CvTechSplashScreen(TECH_SPLASH)
-        elif (TechWindowOpt.isWideView()):
+        elif TechWindowOpt.isWideView():
             import TechWindowWide
             techSplashScreen = TechWindowWide.CvTechSplashScreen(TECH_SPLASH)
         else:
@@ -344,7 +314,7 @@ def createCivilopedia():
     global bUsingSevopedia
     if pediaMainScreen is None:
         import SevoPediaUtil
-        if (AdvisorOpt.Sevopedia()):
+        if AdvisorOpt.Sevopedia():
             import SevoPediaMain
             import SevoPediaHistory
             bUsingSevopedia = True
@@ -354,107 +324,103 @@ def createCivilopedia():
             import CvPediaHistory
             bUsingSevopedia = False
             pediaMainScreen = CvPediaMain.CvPediaMain()
-        HandleInputMap.update(
-                            {
-                                PEDIA_MAIN : pediaMainScreen,
-                                PEDIA_TECH : pediaMainScreen,
-                                PEDIA_UNIT : pediaMainScreen,
-                                PEDIA_BUILDING : pediaMainScreen,
-                                PEDIA_PROMOTION : pediaMainScreen,
-                                PEDIA_PROJECT : pediaMainScreen,
-                                PEDIA_UNIT_CHART : pediaMainScreen,
-                                PEDIA_BONUS : pediaMainScreen,
-                                PEDIA_IMPROVEMENT : pediaMainScreen,
-                                PEDIA_TERRAIN : pediaMainScreen,
-                                PEDIA_FEATURE : pediaMainScreen,
-                                PEDIA_CIVIC : pediaMainScreen,
-                                PEDIA_CIVILIZATION : pediaMainScreen,
-                                PEDIA_LEADER : pediaMainScreen,
-                                PEDIA_RELIGION : pediaMainScreen,
-                                PEDIA_CORPORATION : pediaMainScreen,
-                                PEDIA_HISTORY : pediaMainScreen,
-
-                                SevoScreenEnums.PEDIA_MAIN      : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_TECHS     : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_UNITS     : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_UNIT_UPGRADES : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_UNIT_CATEGORIES   : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_PROMOTIONS    : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_PROMOTION_TREE    : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_BUILDINGS     : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_NATIONAL_WONDERS  : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_GREAT_WONDERS : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_PROJECTS      : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_SPECIALISTS   : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_TERRAINS      : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_FEATURES      : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_BONUSES       : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_IMPROVEMENTS  : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_CIVS      : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_LEADERS       : pediaMainScreen,
-                                # SevoScreenEnums.PEDIA_TRAITS      : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_CIVICS        : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_RELIGIONS     : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_CORPORATIONS  : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_CONCEPTS      : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_BTS_CONCEPTS  : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_HINTS     : pediaMainScreen,
-                                SevoScreenEnums.PEDIA_SHORTCUTS     : pediaMainScreen,
+        HandleInputMap.update({PEDIA_MAIN : pediaMainScreen,
+                               PEDIA_TECH : pediaMainScreen,
+                               PEDIA_UNIT : pediaMainScreen,
+                               PEDIA_BUILDING : pediaMainScreen,
+                               PEDIA_PROMOTION : pediaMainScreen,
+                               PEDIA_PROJECT : pediaMainScreen,
+                               PEDIA_UNIT_CHART : pediaMainScreen,
+                               PEDIA_BONUS : pediaMainScreen,
+                               PEDIA_IMPROVEMENT : pediaMainScreen,
+                               PEDIA_TERRAIN : pediaMainScreen,
+                               PEDIA_FEATURE : pediaMainScreen,
+                               PEDIA_CIVIC : pediaMainScreen,
+                               PEDIA_CIVILIZATION : pediaMainScreen,
+                               PEDIA_LEADER : pediaMainScreen,
+                               PEDIA_RELIGION : pediaMainScreen,
+                               PEDIA_CORPORATION : pediaMainScreen,
+                               PEDIA_HISTORY : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_MAIN      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_TECHS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_UNITS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_UNIT_UPGRADES : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_UNIT_CATEGORIES   : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_PROMOTIONS    : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_PROMOTION_TREE    : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_BUILDINGS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_NATIONAL_WONDERS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_GREAT_WONDERS : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_PROJECTS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_SPECIALISTS   : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_TERRAINS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_FEATURES      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_BONUSES       : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_IMPROVEMENTS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CIVS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_LEADERS       : pediaMainScreen,
+                               # SevoScreenEnums.PEDIA_TRAITS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CIVICS        : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_RELIGIONS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CORPORATIONS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CONCEPTS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_BTS_CONCEPTS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_HINTS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_SHORTCUTS     : pediaMainScreen,
                             })
         global HandleNavigationMap
-        HandleNavigationMap = {
-                            MAIN_INTERFACE : mainInterface,
-                            PEDIA_MAIN : pediaMainScreen,
-                            PEDIA_TECH : pediaMainScreen,
-                            PEDIA_UNIT : pediaMainScreen,
-                            PEDIA_BUILDING : pediaMainScreen,
-                            PEDIA_PROMOTION : pediaMainScreen,
-                            PEDIA_PROJECT : pediaMainScreen,
-                            PEDIA_UNIT_CHART : pediaMainScreen,
-                            PEDIA_BONUS : pediaMainScreen,
-                            PEDIA_IMPROVEMENT : pediaMainScreen,
-                            PEDIA_TERRAIN : pediaMainScreen,
-                            PEDIA_FEATURE : pediaMainScreen,
-                            PEDIA_CIVIC : pediaMainScreen,
-                            PEDIA_CIVILIZATION : pediaMainScreen,
-                            PEDIA_LEADER : pediaMainScreen,
-                            PEDIA_HISTORY : pediaMainScreen,
-                            PEDIA_RELIGION : pediaMainScreen,
-                            PEDIA_CORPORATION : pediaMainScreen,
-
-                            SevoScreenEnums.PEDIA_MAIN      : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_TECHS     : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_UNITS     : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_UNIT_UPGRADES : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_UNIT_CATEGORIES   : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_PROMOTIONS    : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_PROMOTION_TREE    : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_BUILDINGS     : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_NATIONAL_WONDERS  : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_GREAT_WONDERS : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_PROJECTS      : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_SPECIALISTS   : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_TERRAINS      : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_FEATURES      : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_BONUSES       : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_IMPROVEMENTS  : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_CIVS          : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_LEADERS       : pediaMainScreen,
-                            # SevoScreenEnums.PEDIA_TRAITS      : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_CIVICS        : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_RELIGIONS     : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_CORPORATIONS  : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_CONCEPTS      : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_BTS_CONCEPTS  : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_HINTS         : pediaMainScreen,
-                            SevoScreenEnums.PEDIA_SHORTCUTS     : pediaMainScreen,
+        HandleNavigationMap = {MAIN_INTERFACE : mainInterface,
+                               PEDIA_MAIN : pediaMainScreen,
+                               PEDIA_TECH : pediaMainScreen,
+                               PEDIA_UNIT : pediaMainScreen,
+                               PEDIA_BUILDING : pediaMainScreen,
+                               PEDIA_PROMOTION : pediaMainScreen,
+                               PEDIA_PROJECT : pediaMainScreen,
+                               PEDIA_UNIT_CHART : pediaMainScreen,
+                               PEDIA_BONUS : pediaMainScreen,
+                               PEDIA_IMPROVEMENT : pediaMainScreen,
+                               PEDIA_TERRAIN : pediaMainScreen,
+                               PEDIA_FEATURE : pediaMainScreen,
+                               PEDIA_CIVIC : pediaMainScreen,
+                               PEDIA_CIVILIZATION : pediaMainScreen,
+                               PEDIA_LEADER : pediaMainScreen,
+                               PEDIA_HISTORY : pediaMainScreen,
+                               PEDIA_RELIGION : pediaMainScreen,
+                               PEDIA_CORPORATION : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_MAIN      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_TECHS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_UNITS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_UNIT_UPGRADES : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_UNIT_CATEGORIES   : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_PROMOTIONS    : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_PROMOTION_TREE    : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_BUILDINGS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_NATIONAL_WONDERS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_GREAT_WONDERS : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_PROJECTS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_SPECIALISTS   : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_TERRAINS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_FEATURES      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_BONUSES       : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_IMPROVEMENTS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CIVS          : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_LEADERS       : pediaMainScreen,
+                               # SevoScreenEnums.PEDIA_TRAITS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CIVICS        : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_RELIGIONS     : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CORPORATIONS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_CONCEPTS      : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_BTS_CONCEPTS  : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_HINTS         : pediaMainScreen,
+                               SevoScreenEnums.PEDIA_SHORTCUTS     : pediaMainScreen,
                         }
 
 def linkToPedia(argsList):
     pediaMainScreen.link(argsList[0])
 
 def pediaShow():
-    createCivilopedia()
+    if pediaMainScreen is None:
+        createCivilopedia()
     return pediaMainScreen.pediaShow()
 
 def pediaBack():
@@ -629,14 +595,14 @@ def WorldBuilderGetHighlightPlot(argsList):
 
 def WorldBuilderOnAdvancedStartBrushSelected(argsList):
   iList,iIndex,iTab = argsList;
-  print("WB Advanced Start brush selected, iList=%d, iIndex=%d, type=%d" %(iList,iIndex,iTab))
-  if (iTab == worldBuilderScreen.m_iASTechTabID):
+  CvUtil.pyPrint("WB Advanced Start brush selected, iList=%d, iIndex=%d, type=%d" %(iList,iIndex,iTab))
+  if iTab == worldBuilderScreen.m_iASTechTabID:
     showTechChooser()
-  elif (iTab == worldBuilderScreen.m_iASCityTabID and iList == worldBuilderScreen.m_iASAutomateListID):
+  elif iTab == worldBuilderScreen.m_iASCityTabID and iList == worldBuilderScreen.m_iASAutomateListID:
     CyMessageControl().sendAdvancedStartAction(AdvancedStartActionTypes.ADVANCEDSTARTACTION_AUTOMATE, worldBuilderScreen.m_iCurrentPlayer, -1, -1, -1, True)
 
-  if (worldBuilderScreen.setCurrentAdvancedStartIndex(iIndex)):
-    if (worldBuilderScreen.setCurrentAdvancedStartList(iList)):
+  if worldBuilderScreen.setCurrentAdvancedStartIndex(iIndex):
+    if worldBuilderScreen.setCurrentAdvancedStartList(iList):
       return 1
   return 0
 
@@ -680,23 +646,23 @@ def movieDone(argsList):
         if CvScreenUtilsInterface.getScreenUtils().movieDone(argsList):
             return
 
-    if (argsList[0] == INTRO_MOVIE_SCREEN):
+    if argsList[0] == INTRO_MOVIE_SCREEN:
         introMovie.hideScreen()
 
-    if (argsList[0] == VICTORY_MOVIE_SCREEN):
+    if argsList[0] == VICTORY_MOVIE_SCREEN:
         victoryMovie.hideScreen()
 
-def leftMouseDown (argsList):
+def leftMouseDown(argsList):
     # allows overides for mods
-    if (CvScreenUtilsInterface.getScreenUtils().leftMouseDown(argsList)):
+    if CvScreenUtilsInterface.getScreenUtils().leftMouseDown(argsList):
         return
 
-    if ( argsList[0] == WORLDBUILDER_SCREEN ):
+    if argsList[0] == WORLDBUILDER_SCREEN:
         worldBuilderScreen.leftMouseDown(argsList[1:])
         return 1
     return 0
 
-def rightMouseDown (argsList):
+def rightMouseDown(argsList):
     # allows overides for mods
     if CvScreenUtilsInterface.getScreenUtils().rightMouseDown(argsList):
         return
@@ -706,7 +672,7 @@ def rightMouseDown (argsList):
         return 1
     return 0
 
-def mouseOverPlot (argsList):
+def mouseOverPlot(argsList):
     # allows overides for mods
     if CvScreenUtilsInterface.getScreenUtils().mouseOverPlot(argsList):
         return
@@ -714,13 +680,17 @@ def mouseOverPlot (argsList):
     if WORLDBUILDER_SCREEN == argsList[0]:
         worldBuilderScreen.mouseOverPlot(argsList)
 
-def handleInput (argsList):
+def handleInput(argsList):
     'handle input is called when a screen is up'
     inputClass = PyScreenInput.ScreenInput(argsList)
 
+    # Flunky Debug
+    # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "CvScreensInterface handleInput - %s, %s, %s, %s" %(inputClass.getPythonFile(), inputClass.getData(), inputClass.getData1(), inputClass.getData2()), None, 2, None, ColorTypes(10), 0, 0, False, False)
     # allows overides for mods
     ret = CvScreenUtilsInterface.getScreenUtils().handleInput((inputClass.getPythonFile(),inputClass))
 
+    # Flunky Debug WorldBuilder
+    # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "CvScreensInterface getScreenUtils - %s" %(ret), None, 2, None, ColorTypes(10), 0, 0, False, False)
     # get the screen that is active from the HandleInputMap Dictionary
     screen = HandleInputMap.get(inputClass.getPythonFile())
 
@@ -729,7 +699,7 @@ def handleInput (argsList):
         return screen.handleInput(inputClass)
     return 0
 
-def update (argsList):
+def update(argsList):
     # allows overides for mods
     if CvScreenUtilsInterface.getScreenUtils().update(argsList):
         return
@@ -738,7 +708,7 @@ def update (argsList):
         screen = HandleInputMap.get(argsList[0])
         screen.update(argsList[1])
 
-def onClose (argsList):
+def onClose(argsList):
     # allows overides for mods
     if CvScreenUtilsInterface.getScreenUtils().onClose(argsList):
         return
@@ -748,7 +718,7 @@ def onClose (argsList):
         screen.onClose()
 
 # Forced screen update
-def forceScreenUpdate (argsList):
+def forceScreenUpdate(argsList):
     # allows overides for mods
     if CvScreenUtilsInterface.getScreenUtils().forceScreenUpdate(argsList):
         return
@@ -786,13 +756,14 @@ def forceScreenRedraw (argsList):
         techChooser.updateTechRecords(True)
 
 
-def minimapClicked (argsList):
+def minimapClicked(argsList):
     # allows overides for mods
     if CvScreenUtilsInterface.getScreenUtils().minimapClicked(argsList):
         return
 
     if MILITARY_ADVISOR == argsList[0]:
         militaryAdvisor.minimapClicked()
+        return
 
 ############################################################################
 ## Misc Functions
@@ -803,7 +774,7 @@ def handleBack(screens):
         if iScreen in HandleNavigationMap:
             screen = HandleNavigationMap.get(iScreen)
             screen.back()
-    print "Mouse BACK"
+    CvUtil.pyPrint("Mouse BACK")
     return 0
 
 def handleForward(screens):
@@ -811,7 +782,7 @@ def handleForward(screens):
         if iScreen in HandleNavigationMap:
             screen = HandleNavigationMap.get(iScreen)
             screen.forward()
-    print "Mouse FWD"
+    CvUtil.pyPrint("Mouse FWD")
     return 0
 
 def refreshMilitaryAdvisor (argsList):
@@ -840,7 +811,7 @@ def cityWarningOnClickedCallback(argsList):
     szText = argsList[5]
     bOption1 = argsList[6]
     bOption2 = argsList[7]
-    city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
+    city = gc.getPlayer(gc.getGame().getActivePlayer()).getCity(iData1)
     if city and not city.isNone():
         if iButtonId == 0:
             if city.isProductionProcess():
@@ -864,11 +835,12 @@ def liberateOnClickedCallback(argsList):
     szText = argsList[5]
     bOption1 = argsList[6]
     bOption2 = argsList[7]
-    city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
-    if (not city.isNone()):
-        if (iButtonId == 0):
+    iPlayer = gc.getGame().getActivePlayer()
+    city = gc.getPlayer(iPlayer).getCity(iData1)
+    if city and not city.isNone():
+        if iButtonId == 0:
             CyMessageControl().sendDoTask(iData1, TaskTypes.TASK_LIBERATE, 0, -1, False, False, False, False)
-        elif (iButtonId == 2):
+        elif iButtonId == 2:
             CyInterface().selectCity(city, False)
 
 def colonyOnClickedCallback(argsList):
@@ -880,10 +852,11 @@ def colonyOnClickedCallback(argsList):
     szText = argsList[5]
     bOption1 = argsList[6]
     bOption2 = argsList[7]
-    city = CyGlobalContext().getPlayer(CyGlobalContext().getGame().getActivePlayer()).getCity(iData1)
+    iPlayer = gc.getGame().getActivePlayer()
+    city = gc.getPlayer(iPlayer).getCity(iData1)
     if city and not city.isNone():
         if iButtonId == 0:
-            CyMessageControl().sendEmpireSplit(CyGlobalContext().getGame().getActivePlayer(), city.area().getID())
+            CyMessageControl().sendEmpireSplit(iPlayer, city.area().getID())
         elif iButtonId == 2:
             CyInterface().selectCity(city, False)
 
@@ -900,14 +873,14 @@ def featAccomplishedOnClickedCallback(argsList):
     if iButtonId == 1:
         if iData1 == FeatTypes.FEAT_TRADE_ROUTE:
             showDomesticAdvisor(())
-        elif (iData1 >= FeatTypes.FEAT_UNITCOMBAT_ARCHER) and (iData1 <= FeatTypes.FEAT_UNIT_SPY):
+        elif iData1 >= FeatTypes.FEAT_UNITCOMBAT_ARCHER and iData1 <= FeatTypes.FEAT_UNIT_SPY:
             showMilitaryAdvisor()
-        elif (iData1 >= FeatTypes.FEAT_COPPER_CONNECTED) and (iData1 <= FeatTypes.FEAT_FOOD_CONNECTED):
+        elif iData1 >= FeatTypes.FEAT_COPPER_CONNECTED and iData1 <= FeatTypes.FEAT_FOOD_CONNECTED:
             showForeignAdvisorScreen([0])
-        elif (iData1 == FeatTypes.FEAT_NATIONAL_WONDER):
+        elif iData1 == FeatTypes.FEAT_NATIONAL_WONDER:
             # 2 is for the wonder tab...
             showInfoScreen([2, 0])
-        elif (iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION) and (iData1 <= FeatTypes.FEAT_POPULATION_2_BILLION):
+        elif iData1 >= FeatTypes.FEAT_POPULATION_HALF_MILLION and iData1 <= FeatTypes.FEAT_POPULATION_2_BILLION:
             # 1 is for the demographics tab...
             showInfoScreen([1, 0])
         elif iData1 == FeatTypes.FEAT_CORPORATION_ENABLED:
@@ -939,19 +912,19 @@ def popupHunsPayment(argsList):
     bOption2 = argsList[7]
 
     if iButtonId == 1: # = YES - NetID , iPlayer , unitID
-      CyMessageControl().sendModNetMessage( 674, iData1, iData2, 0, 0 )
+      CyMessageControl().sendModNetMessage(674, iData1, iData2, 0, 0)
 
 def popupRevoltPayment(argsList):
-    iButtonId = argsList[0]
-    iData1 = argsList[1]
-    iData2 = argsList[2]
-    iData3 = argsList[3]
-    iData4 = argsList[4]
-    szText = argsList[5]
-    bOption1 = argsList[6]
-    bOption2 = argsList[7]
-    #  NetID , iPlayer , City ID , RevoltTurns , 0 | 1 | 2
-    CyMessageControl().sendModNetMessage( 675, iData1, iData2, iData3, iButtonId )
+        iButtonId = argsList[0]
+        iData1 = argsList[1]
+        iData2 = argsList[2]
+        iData3 = argsList[3]
+        iData4 = argsList[4]
+        szText = argsList[5]
+        bOption1 = argsList[6]
+        bOption2 = argsList[7]
+        #  NetID , iPlayer , City ID , RevoltTurns , 0 | 1 | 2
+        CyMessageControl().sendModNetMessage( 675, iData1, iData2, iData3, iButtonId )
 
 def popupProvinzPayment(argsList):
     iButtonId = argsList[0]
@@ -964,7 +937,7 @@ def popupProvinzPayment(argsList):
     bOption2 = argsList[7]
 
     # NetID , iPlayer, CityID , ButtonID
-    CyMessageControl().sendModNetMessage( 678, iData1, iData2, iButtonId, iData3 )
+    CyMessageControl().sendModNetMessage(678, iData1, iData2, iButtonId, iData3)
 
 # Sell unit (Mercenary post)
 # iOwner, iUnitID
@@ -980,7 +953,7 @@ def popupSellUnit(argsList):
 
     # NetID , confirm = 1, nix , iPlayer, iUnitID
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 695, 1, 0, iData1, iData2 )
+        CyMessageControl().sendModNetMessage(695, 1, 0, iData1, iData2)
 
 # Vasallen - Feature +++++++++++++++++++++++++
 def popupVassal01(argsList):
@@ -995,10 +968,10 @@ def popupVassal01(argsList):
 
     # = YES - NetID , iWinner , iLoser, iGold
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 671, iData1, iData2, iData3, 0 )
+        CyMessageControl().sendModNetMessage(671, iData1, iData2, iData3, 0)
     # Kill Botschafter 0 to Loser / 1 to Winner
     elif iButtonId == 2:
-        CyMessageControl().sendModNetMessage( 671, iData1, iData2, -1, iData4 )
+        CyMessageControl().sendModNetMessage(671, iData1, iData2, -1, iData4)
 
 def popupVassal03(argsList):
     iButtonId = argsList[0]
@@ -1012,11 +985,11 @@ def popupVassal03(argsList):
 
     # = YES - NetID , iWinner , iLoser, iGold1, iGold2
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 682, iData1, iData2, iData3, 0 )
+        CyMessageControl().sendModNetMessage(682, iData1, iData2, iData3, 0)
     elif iButtonId == 1:
-        CyMessageControl().sendModNetMessage( 682, iData1, iData2, iData4, 0 )
+        CyMessageControl().sendModNetMessage(682, iData1, iData2, iData4, 0)
     else:
-        CyMessageControl().sendModNetMessage( 682, iData1, iData2, -1, 0 )
+        CyMessageControl().sendModNetMessage(682, iData1, iData2, -1, 0)
 
 def popupVassal04(argsList):
     iButtonId = argsList[0]
@@ -1030,9 +1003,9 @@ def popupVassal04(argsList):
 
     # = YES - NetID , iWinner , iLoser, iGold1, iGold2
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 683, iData1, iData2, iData3, 0 )
+        CyMessageControl().sendModNetMessage(683, iData1, iData2, iData3, 0)
     elif iButtonId == 1:
-        CyMessageControl().sendModNetMessage( 683, iData1, iData2, iData4, 0 )
+        CyMessageControl().sendModNetMessage(683, iData1, iData2, iData4, 0)
 
 def popupVassal05(argsList):
     iButtonId = argsList[0]
@@ -1046,11 +1019,11 @@ def popupVassal05(argsList):
 
     # = YES - NetID , iWinner , iLoser, iGold1
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 684, iData1, iData2, iData3, 0 ) # YES
+        CyMessageControl().sendModNetMessage(684, iData1, iData2, iData3, 0) # YES
     if iButtonId == 1:
-        CyMessageControl().sendModNetMessage( 684, iData1, iData2, 0, 0 ) # NO
+        CyMessageControl().sendModNetMessage(684, iData1, iData2, 0, 0) # NO
     else:
-        CyMessageControl().sendModNetMessage( 684, iData1, iData2, -1, 0 ) # KILL
+        CyMessageControl().sendModNetMessage(684, iData1, iData2, -1, 0) # KILL
 
 def popupVassal06(argsList):
     iButtonId = argsList[0]
@@ -1064,11 +1037,11 @@ def popupVassal06(argsList):
 
     # = YES - NetID , iWinner , iLoser, iGold1
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 685, iData1, iData2, iData3, 0 ) # YES
+        CyMessageControl().sendModNetMessage(685, iData1, iData2, iData3, 0) # YES
     if iButtonId == 1:
-        CyMessageControl().sendModNetMessage( 685, iData1, iData2, 0, 0 ) # NO
+        CyMessageControl().sendModNetMessage(685, iData1, iData2, 0, 0) # NO
     else:
-        CyMessageControl().sendModNetMessage( 685, iData1, iData2, -1, 0 ) # KILL
+        CyMessageControl().sendModNetMessage(685, iData1, iData2, -1, 0) # KILL
 
 def popupVassal07(argsList):
     iButtonId = argsList[0]
@@ -1082,7 +1055,7 @@ def popupVassal07(argsList):
 
     # = YES - NetID , iWinner , iLoser, 0 , 0/1 (Loser/Winnerauswahl)
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 686, iData1, iData2, iData3, iData4 ) # YES
+        CyMessageControl().sendModNetMessage(686, iData1, iData2, iData3, iData4) # YES
 
 def popupVassal08(argsList):
     iButtonId = argsList[0]
@@ -1096,7 +1069,7 @@ def popupVassal08(argsList):
 
     # = YES - NetID , iWinner , iLoser (Hegemon), iVassal , iGold
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 687, iData1, iData2, iData3, iData4 ) # YES
+        CyMessageControl().sendModNetMessage(687, iData1, iData2, iData3, iData4) # YES
 
 def popupVassal09(argsList):
     iButtonId = argsList[0]
@@ -1109,7 +1082,7 @@ def popupVassal09(argsList):
     bOption2 = argsList[7]
 
     # iWinner , iLoser (Hegemon), iVassal , 0=Yes,1=No
-    CyMessageControl().sendModNetMessage( 688, iData1, iData2, iData3, iButtonId ) # Yes or No
+    CyMessageControl().sendModNetMessage(688, iData1, iData2, iData3, iButtonId) # Yes or No
 
 def popupVassal10(argsList):
     iButtonId = argsList[0]
@@ -1125,7 +1098,7 @@ def popupVassal10(argsList):
     # NO: Kein Interesse: Gold=0
     if iButtonId == 1:
         iData4 = 0
-    CyMessageControl().sendModNetMessage( 689, iData1, iData2, iData3, iData4 ) # Yes or No
+    CyMessageControl().sendModNetMessage(689, iData1, iData2, iData3, iData4) # Yes or No
 
 def popupVassal11(argsList):
     iButtonId = argsList[0]
@@ -1145,7 +1118,7 @@ def popupVassal11(argsList):
     if iButtonId != 1:
         if iButtonId == 2:
             iData4 = -1 # KILL
-        CyMessageControl().sendModNetMessage( 690, iData1, iData2, iData3, iData4 ) # Yes or Kill
+        CyMessageControl().sendModNetMessage(690, iData1, iData2, iData3, iData4) # Yes or Kill
 
 def popupVassal12(argsList):
     iButtonId = argsList[0]
@@ -1158,7 +1131,7 @@ def popupVassal12(argsList):
     bOption2 = argsList[7]
 
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 691, iData1, iData2, iData3, iData4 ) # Yes
+        CyMessageControl().sendModNetMessage(691, iData1, iData2, iData3, iData4) # Yes
 
 def popupVassalTech(argsList):
     iButtonId = argsList[0]
@@ -1182,7 +1155,7 @@ def popupVassalTech(argsList):
         iData4 = int(iData4 / 2)
     elif iButtonId == 3:
         iData3 = -1
-    CyMessageControl().sendModNetMessage( 702, iData1, iData2, iData3, iData4 )
+    CyMessageControl().sendModNetMessage(702, iData1, iData2, iData3, iData4)
 
 def popupVassalTech2(argsList):
     iButtonId = argsList[0]
@@ -1200,7 +1173,7 @@ def popupVassalTech2(argsList):
     # NO  1: Tech nicht kaufen
     if iButtonId == 1:
         iData4 = -1
-    CyMessageControl().sendModNetMessage( 703, iData1, iData2, iData3, iData4 )
+    CyMessageControl().sendModNetMessage(703, iData1, iData2, iData3, iData4)
 
 def popupReliaustreibung(argsList):
     iButtonId = argsList[0]
@@ -1213,7 +1186,7 @@ def popupReliaustreibung(argsList):
     bOption2 = argsList[7]
     # iPlayer, iCity, iUnit , iCancelButton
     if iButtonId != iData4:
-         CyMessageControl().sendModNetMessage( 704, iData1, iData2, iButtonId, iData3 )
+         CyMessageControl().sendModNetMessage(704, iData1, iData2, iButtonId, iData3)
 
 def popupRenegadeCity(argsList):
     iButtonId = argsList[0]
@@ -1224,7 +1197,7 @@ def popupRenegadeCity(argsList):
 
     # iWinner , pCity.getID , iLoser
     # iButtonId: Keep | Enslave | Raze
-    CyMessageControl().sendModNetMessage( 706, iData1, iData2, iData3, iButtonId )
+    CyMessageControl().sendModNetMessage(706, iData1, iData2, iData3, iButtonId)
 
 # Mercenaries -----------
 def popupMercenariesMain(argsList):
@@ -1256,7 +1229,7 @@ def popupMercenariesHire(argsList):
 
     # Archers (0), Spearmen (1), Melee (2), Eles (3), Ships (4)
     if iButtonId != iButtonCancel:
-        CyMessageControl().sendModNetMessage( 708, iCity, iButtonId, -1, iPlayer )
+        CyMessageControl().sendModNetMessage(708, iCity, iButtonId, -1, iPlayer)
 
 def popupMercenariesHireUnits(argsList):
     # iData1 (cityID), iData2 = iUnitClassTyp, iData3 = iPlayer
@@ -1274,7 +1247,7 @@ def popupMercenariesHireUnits(argsList):
     # iData2 = Archers (0), Melee (1), Mounted (2), Eles (3), Ships (4)
     # iButtonID = Unit
     if iButtonId != iButtonCancel:
-        CyMessageControl().sendModNetMessage( 708, iCity, iTypeButton, iButtonId, iPlayer )
+        CyMessageControl().sendModNetMessage(708, iCity, iTypeButton, iButtonId, iPlayer)
 
 # Assign mercenaries ------
 
@@ -1288,7 +1261,7 @@ def popupMercenariesAssign1(argsList):
 
     # iButtonId = CIV
     if iButtonId != iData4:
-        CyMessageControl().sendModNetMessage( 709, iButtonId, -1, -1, iData3 )
+        CyMessageControl().sendModNetMessage(709, iButtonId, -1, -1, iData3)
         # von 709 geht es direkt weiter zu 710
 
 def popupMercenariesAssign2(argsList):
@@ -1302,7 +1275,7 @@ def popupMercenariesAssign2(argsList):
     # iButtonId = Inter/nationality
     if iButtonId != iData4:
         iFaktor = iButtonId + 1
-        CyMessageControl().sendModNetMessage( 711, iData1, iFaktor, -1, iData3 )
+        CyMessageControl().sendModNetMessage(711, iData1, iFaktor, -1, iData3)
 
 def popupMercenariesAssign3(argsList):
     # iData1 = iTargetCIV, iData2 = iFaktor, iData3 = iPlayer, iData4 = Cancel
@@ -1315,7 +1288,7 @@ def popupMercenariesAssign3(argsList):
     # iButtonId = mercenary groups size
     if iButtonId != iData4:
         iFaktor = iData2 + (iButtonId + 1) * 10
-        CyMessageControl().sendModNetMessage( 712, iData1, iFaktor, -1, iData3 )
+        CyMessageControl().sendModNetMessage(712, iData1, iFaktor, -1, iData3)
 
 def popupMercenariesAssign4(argsList):
     # iData1 = iTargetCIV, iData2 = iFaktor, iData3 = iPlayer, iData4 = Cancel
@@ -1331,7 +1304,7 @@ def popupMercenariesAssign4(argsList):
         # Naval units (ignore next window: siege units)
         if iButtonId == 4:
             iFaktor += 1000
-            CyMessageControl().sendModNetMessage( 714, iData1, iFaktor, -1, iData3 )
+            CyMessageControl().sendModNetMessage(714, iData1, iFaktor, -1, iData3)
         # Land units
         else:
             CyMessageControl().sendModNetMessage( 713, iData1, iFaktor, -1, iData3 )
@@ -1347,7 +1320,7 @@ def popupMercenariesAssign5(argsList):
     # iButtonId = siege units
     if iButtonId != iData4:
         iFaktor = iData2 + (iButtonId + 1) * 1000
-        CyMessageControl().sendModNetMessage( 714, iData1, iFaktor, -1, iData3 )
+        CyMessageControl().sendModNetMessage(714, iData1, iFaktor, -1, iData3)
 
 def popupMercenariesAssign6(argsList):
     # iData1 = iTargetCIV, iData2 = iFaktor, iData3 = iPlayer, iData4 = Cancel
@@ -1359,7 +1332,7 @@ def popupMercenariesAssign6(argsList):
 
     # iButtonId = confirmation
     if iButtonId == 0:
-        CyMessageControl().sendModNetMessage( 715, iData1, iData2, -1, iData3 )
+        CyMessageControl().sendModNetMessage(715, iData1, iData2, -1, iData3)
 
 def popupMercenaryTorture(argsList):
     # iData1 (iMercenaryCiv), iData2 (iPlayer)
@@ -1480,6 +1453,7 @@ def popupTradeRouteChooseCiv(argsList):
           else:
             iNewType = 2
         else:
+          # Eigene Nation oder zurück zu Schritt 1
           # Own nation or back to step 1
           if iButtonId == 0:
             #iX = int(CvUtil.getScriptData(pUnit, ["autX1"], -1))
@@ -1674,92 +1648,87 @@ HandleCloseMap = {DAWN_OF_MAN : dawnOfMan,
 #######################################################################################
 ## Handle Input Map
 #######################################################################################
-HandleInputMap = {  MAIN_INTERFACE : mainInterface,
-                    # DOMESTIC_ADVISOR : domesticAdvisor,
-                    RELIGION_SCREEN : religionScreen,
-                    CORPORATION_SCREEN : corporationScreen,
-                    CIVICS_SCREEN : civicScreen,
-                    TECH_CHOOSER : techChooser,
-                    FOREIGN_ADVISOR : foreignAdvisor,
-                    # FINANCE_ADVISOR : financeAdvisor,
-                    # MILITARY_ADVISOR : militaryAdvisor,
-                    DAWN_OF_MAN : dawnOfMan,
-                    WONDER_MOVIE_SCREEN : wonderMovie,
-                    ERA_MOVIE_SCREEN : eraMovie,
-                    SPACE_SHIP_SCREEN : spaceShip,
-                    INTRO_MOVIE_SCREEN : introMovie,
-                    OPTIONS_SCREEN : optionsScreen,
-                    INFO_SCREEN : infoScreen,
-                    # PAE
-                    # TECH_SPLASH : techSplashScreen,
-                    REPLAY_SCREEN : replayScreen,
-                    VICTORY_SCREEN : victoryScreen,
-                    TOP_CIVS : topCivs,
-                    HALL_OF_FAME : hallOfFameScreen,
-                    VICTORY_MOVIE_SCREEN : victoryMovie,
-                    ESPIONAGE_ADVISOR : espionageAdvisor,
-                    DAN_QUAYLE_SCREEN : danQuayleScreen,
-                    # PAE
-                    PEDIA_MAIN : pediaMainScreen,
-                    PEDIA_TECH : pediaMainScreen,
-                    PEDIA_UNIT : pediaMainScreen,
-                    PEDIA_BUILDING : pediaMainScreen,
-                    PEDIA_PROMOTION : pediaMainScreen,
-                    PEDIA_PROJECT : pediaMainScreen,
-                    PEDIA_UNIT_CHART : pediaMainScreen,
-                    PEDIA_BONUS : pediaMainScreen,
-                    PEDIA_IMPROVEMENT : pediaMainScreen,
-                    PEDIA_TERRAIN : pediaMainScreen,
-                    PEDIA_FEATURE : pediaMainScreen,
-                    PEDIA_CIVIC : pediaMainScreen,
-                    PEDIA_CIVILIZATION : pediaMainScreen,
-                    PEDIA_LEADER : pediaMainScreen,
-                    PEDIA_RELIGION : pediaMainScreen,
-                    PEDIA_CORPORATION : pediaMainScreen,
-                    PEDIA_HISTORY : pediaMainScreen,
-
-                    WORLDBUILDER_SCREEN : worldBuilderScreen,
-                    # Platy
-                    # WORLDBUILDER_DIPLOMACY_SCREEN : worldBuilderDiplomacyScreen,
-
-                    DEBUG_INFO_SCREEN : debugInfoScreen,
-
-                    ## Platy World Builder ##
-                    WB_PLOT : WBPlotScreen.WBPlotScreen(),
-                    WB_PLOT_RIVER : WBRiverScreen.WBRiverScreen(),
-                    WB_EVENT: WBEventScreen.WBEventScreen(),
-                    WB_BUILDING : WBBuildingScreen.WBBuildingScreen(),
-                    WB_CITYDATA : WBCityDataScreen.WBCityDataScreen(),
-                    WB_CITYEDIT : WBCityEditScreen.WBCityEditScreen(),
-                    WB_TECH : WBTechScreen.WBTechScreen(),
-                    WB_PROJECT : WBProjectScreen.WBProjectScreen(),
-                    WB_TEAM : WBTeamScreen.WBTeamScreen(),
-                    WB_PLAYER : WBPlayerScreen.WBPlayerScreen(),
-                    WB_UNIT : WBUnitScreen.WBUnitScreen(worldBuilderScreen),
-                    WB_PROMOTION : WBPromotionScreen.WBPromotionScreen(),
-                    WB_DIPLOMACY : WBDiplomacyScreen.WBDiplomacyScreen(),
-                    WB_GAMEDATA : WBGameDataScreen.WBGameDataScreen(worldBuilderScreen),
-                    WB_UNITLIST : WBPlayerUnits.WBPlayerUnits(),
-                    WB_RELIGION : WBReligionScreen.WBReligionScreen(),
-                    WB_CORPORATION : WBCorporationScreen.WBCorporationScreen(),
-                    WB_INFO : WBInfoScreen.WBInfoScreen(),
-                    WB_TRADE : WBTradeScreen.WBTradeScreen(),
-                    # PAE Trade routes
-                    TRADEROUTE_ADVISOR : traderouteAdvisor,
-                    TRADEROUTE_ADVISOR2 : traderouteAdvisor2,
-
-                                }
+HandleInputMap = {MAIN_INTERFACE : mainInterface,
+                  DOMESTIC_ADVISOR : domesticAdvisor,
+                  RELIGION_SCREEN : religionScreen,
+                  CORPORATION_SCREEN : corporationScreen,
+                  CIVICS_SCREEN : civicScreen,
+                  TECH_CHOOSER : techChooser,
+                  FOREIGN_ADVISOR : foreignAdvisor,
+                  FINANCE_ADVISOR : financeAdvisor,
+                  # MILITARY_ADVISOR : militaryAdvisor,
+                  DAWN_OF_MAN : dawnOfMan,
+                  WONDER_MOVIE_SCREEN : wonderMovie,
+                  ERA_MOVIE_SCREEN : eraMovie,
+                  SPACE_SHIP_SCREEN : spaceShip,
+                  INTRO_MOVIE_SCREEN : introMovie,
+                  OPTIONS_SCREEN : optionsScreen,
+                  INFO_SCREEN : infoScreen,
+                  # TECH_SPLASH : techSplashScreen,
+                  REPLAY_SCREEN : replayScreen,
+                  VICTORY_SCREEN : victoryScreen,
+                  TOP_CIVS : topCivs,
+                  HALL_OF_FAME : hallOfFameScreen,
+                  VICTORY_MOVIE_SCREEN : victoryMovie,
+                  ESPIONAGE_ADVISOR : espionageAdvisor,
+                  DAN_QUAYLE_SCREEN : danQuayleScreen,
+                  # PAE
+                  # PEDIA_MAIN : pediaMainScreen,
+                  # PEDIA_TECH : pediaMainScreen,
+                  # PEDIA_UNIT : pediaMainScreen,
+                  # PEDIA_BUILDING : pediaMainScreen,
+                  # PEDIA_PROMOTION : pediaMainScreen,
+                  # PEDIA_PROJECT : pediaMainScreen,
+                  # PEDIA_UNIT_CHART : pediaMainScreen,
+                  # PEDIA_BONUS : pediaMainScreen,
+                  # PEDIA_IMPROVEMENT : pediaMainScreen,
+                  # PEDIA_TERRAIN : pediaMainScreen,
+                  # PEDIA_FEATURE : pediaMainScreen,
+                  # PEDIA_CIVIC : pediaMainScreen,
+                  # PEDIA_CIVILIZATION : pediaMainScreen,
+                  # PEDIA_LEADER : pediaMainScreen,
+                  # PEDIA_RELIGION : pediaMainScreen,
+                  # PEDIA_CORPORATION : pediaMainScreen,
+                  # PEDIA_HISTORY : pediaMainScreen,
+                  WORLDBUILDER_SCREEN : worldBuilderScreen,
+                  # Platy
+                  # WORLDBUILDER_DIPLOMACY_SCREEN : worldBuilderDiplomacyScreen,
+                  DEBUG_INFO_SCREEN : debugInfoScreen,
+                  ## Platy World Builder ##
+                  WB_PLOT : WBPlotScreen.WBPlotScreen(),
+                  WB_PLOT_RIVER : WBRiverScreen.WBRiverScreen(),
+                  WB_EVENT: WBEventScreen.WBEventScreen(),
+                  WB_BUILDING : WBBuildingScreen.WBBuildingScreen(),
+                  WB_CITYDATA : WBCityDataScreen.WBCityDataScreen(),
+                  WB_CITYEDIT : WBCityEditScreen.WBCityEditScreen(),
+                  WB_TECH : WBTechScreen.WBTechScreen(),
+                  WB_PROJECT : WBProjectScreen.WBProjectScreen(),
+                  WB_TEAM : WBTeamScreen.WBTeamScreen(),
+                  WB_PLAYER : WBPlayerScreen.WBPlayerScreen(),
+                  WB_UNIT : WBUnitScreen.WBUnitScreen(worldBuilderScreen),
+                  WB_PROMOTION : WBPromotionScreen.WBPromotionScreen(),
+                  WB_DIPLOMACY : WBDiplomacyScreen.WBDiplomacyScreen(),
+                  WB_GAMEDATA : WBGameDataScreen.WBGameDataScreen(worldBuilderScreen),
+                  WB_UNITLIST : WBPlayerUnits.WBPlayerUnits(),
+                  WB_RELIGION : WBReligionScreen.WBReligionScreen(),
+                  WB_CORPORATION : WBCorporationScreen.WBCorporationScreen(),
+                  WB_INFO : WBInfoScreen.WBInfoScreen(),
+                  WB_TRADE : WBTradeScreen.WBTradeScreen(),
+                  # PAE Trade routes
+                  TRADEROUTE_ADVISOR : traderouteAdvisor,
+                  TRADEROUTE_ADVISOR2 : traderouteAdvisor2,
+                 }
 
 #######################################################################################
 ## Handle Navigation Map
 #######################################################################################
 
-# HandleNavigationMap = {}
+HandleNavigationMap = {}
 
 # BUG - Options - start
 def init():
-    createDomesticAdvisor()
-    createFinanceAdvisor()
+    # createDomesticAdvisor()
+    # createFinanceAdvisor()
     createMilitaryAdvisor()
     createCivilopedia()
     createTechSplash()

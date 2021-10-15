@@ -904,6 +904,10 @@ public:
 
 	bool isAnimal() const;				// Exposed to Python
 	bool isFoodProduction() const;				// Exposed to Python
+// < JAnimals Mod Start > Flunky for PAE
+	int getAnimalPatrolWeight() const;// Exposed to Python
+	int getAnimalAttackWeight() const;// Exposed to Python
+// < JAnimals Mod End >
 	bool isNoBadGoodies() const;				// Exposed to Python
 	bool isOnlyDefensive() const;				// Exposed to Python
 	bool isNoCapture() const;				// Exposed to Python
@@ -1086,6 +1090,10 @@ protected:
 
 	bool m_bAnimal;
 	bool m_bFoodProduction;
+// < JAnimals Mod Start > Flunky for PAE
+	int m_iAnimalPatrolWeight;
+	int m_iAnimalAttackWeight;
+// < JAnimals Mod End >
 	bool m_bNoBadGoodies;
 	bool m_bOnlyDefensive;
 	bool m_bNoCapture;
@@ -2882,6 +2890,7 @@ public:
 	int getUniqueRange() const;
 	bool isBombardable() const;
 	bool isUpgradeRequiresFortify() const;
+	bool isFort() const; // Flunky for PAE
 	// Super Forts end
 	bool isActsAsCity() const;				// Exposed to Python
 	bool isHillsMakesValid() const;				// Exposed to Python
@@ -2969,6 +2978,7 @@ protected:
 	int m_iUniqueRange;
 	bool m_bBombardable;
 	bool m_bUpgradeRequiresFortify;
+	bool m_bFort; // Flunky for PAE
 	// Super Forts end
 	bool m_bActsAsCity;				
 	bool m_bHillsMakesValid;				

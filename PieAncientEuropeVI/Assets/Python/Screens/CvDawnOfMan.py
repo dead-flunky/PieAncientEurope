@@ -199,6 +199,9 @@ class CvDawnOfMan:
                 elif sScenarioName == "EurasiaXXXLCivs":
                   szDawnText1 = "TXT_KEY_DAWN_OF_MAN_SCREEN_TITLE_EURASIA_XXXL"
                   szDawnText2 = "TXT_KEY_DAWN_OF_MAN_EURASIA_XXXL"
+                elif sScenarioName == "Western_Mediterranean":
+                  szDawnText1 = "TXT_KEY_DAWN_OF_MAN_SCREEN_TITLE_WESTERN_MED"
+                  szDawnText2 = "TXT_KEY_DAWN_OF_MAN_WESTERN_MED"
                 else:
                   szDawnText1 = "TXT_KEY_DAWN_OF_MAN_SCREEN_TITLE"
                   szDawnText2 = "TXT_KEY_DAWN_OF_MAN_TEXT"

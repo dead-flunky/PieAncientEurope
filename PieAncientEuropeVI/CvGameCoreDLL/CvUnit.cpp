@@ -1124,7 +1124,8 @@ void CvUnit::updateAirCombat(bool bQuick)
 // Flunky PAE - Flight
 int CvUnit::flightMaxHealth(){
     //# Tiere
-    if (AI_getUnitAIType() == UNITAI_ANIMAL){
+    if (isAnimal()) //was: (AI_getUnitAIType() == UNITAI_ANIMAL)
+	{
         if (getUnitType() == GC.getInfoTypeForString("UNIT_UR") || getLevel() > 2)
             return 50;
         else if (getLevel() > 1)
@@ -1170,7 +1171,7 @@ int CvUnit::flightProbability(int iWinnerDamage){
 		return 0;
 	}
     //# Tiere
-    if (AI_getUnitAIType() == UNITAI_ANIMAL)
+    if (isAnimal()) //was: (AI_getUnitAIType() == UNITAI_ANIMAL)
 	{
         if (getUnitType() == GC.getInfoTypeForString("UNIT_UR") || getLevel() > 2)
             return 80;
@@ -1286,7 +1287,8 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		pyArgsCD.add(getCombatOdds(this, pDefender));
 		CvEventReporter::getInstance().genericEvent("combatLogCalc", pyArgsCD.makeFunctionArgs());
 	}
-
+	
+	// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives.
 	collateralCombat(pPlot, pDefender);
 
 	while (true)
@@ -1295,37 +1297,54 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		{
 			if (getCombatFirstStrikes() == 0)
 			{
-				if (getDamage() + iAttackerDamage >= maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "Withdrawal") < withdrawalProbability())
+				if (getDamage() + iAttackerDamage >= maxHitPoints())
 				{
-					flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
+					if (GC.getGameINLINE().getSorenRandNum(100, "Withdrawal") < withdrawalProbability())
+					{
+						flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
 
-					changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
-					combat_log.push_back(0); // K-Mod
-					break;
-				}
-				
-                // Flunky: attacker flies from battle
-                if (getDamage() + iAttackerDamage >= maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "AttackerFlight") < flightProbability(pDefender->getDamage()))
-                {
-                    pDefender->changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !isBarbarian());
-					int iMaxHealth = std::max(maxHitPoints()-getDamage(), flightMaxHealth());
-					int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "AttackerFlightDamage"));
-					int iAttackerFlightDamage = maxHitPoints()-iHealth;
-                    combat_log.push_back(-(iAttackerFlightDamage - getDamage()));
-					setDamage(iAttackerFlightDamage, pDefender->getOwnerINLINE());
-					setFlight(true);
-					break;
-                } 
-                else
+						changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
+						combat_log.push_back(0); // K-Mod
+						break;
+					}
+					// Flunky: attacker flees from battle
+					if (GC.getGameINLINE().getSorenRandNum(100, "AttackerFlight") < flightProbability(pDefender->getDamage()))
+					{
+						pDefender->changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !isBarbarian());
+						// after flight, be at least as hurt as before --> new health at most as high as before, or less if the circumstances of your flight demand that. 
+						int iMaxHealth = std::min(maxHitPoints()-getDamage(), flightMaxHealth());
+						// remaining health uniformly distributed between 1 and max
+						int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "AttackerFlightDamage"));
+						// damage to be set is full minus remaining health
+						int iAttackerFlightDamage = maxHitPoints()-iHealth;
+						setDamage(iAttackerFlightDamage, pDefender->getOwnerINLINE());
+						setFlight(true);
+						combat_log.push_back(-(iAttackerFlightDamage - getDamage()));
+						
+						cdAttackerDetails.iCurrHitPoints = currHitPoints();
+						if (isHuman() || pDefender->isHuman())
+						{
+							CyArgsList pyArgs;
+							pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdAttackerDetails));
+							pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdDefenderDetails));
+							pyArgs.add(1);
+							pyArgs.add(iAttackerFlightDamage - getDamage());
+							CvEventReporter::getInstance().genericEvent("combatLogHit", pyArgs.makeFunctionArgs());
+						}
+						break;
+					}
+                }
+				else
                 {
 					changeDamage(iAttackerDamage, pDefender->getOwnerINLINE());
 					combat_log.push_back(-iAttackerDamage); // K-Mod
 				}
-				/* if (pDefender->getCombatFirstStrikes() > 0 && pDefender->isRanged())
+
+				/*if (pDefender->getCombatFirstStrikes() > 0 && pDefender->isRanged())
 				{
 					kBattle.addFirstStrikes(BATTLE_UNIT_DEFENDER, 1);
 					kBattle.addDamage(BATTLE_UNIT_ATTACKER, BATTLE_TIME_RANGED, iAttackerDamage);
-				} */
+				}*/
 				// K-Mod. (I don't think this stuff is actually used, but I want to do it my way, just in case.)
 				if (pDefender->getCombatFirstStrikes() > 0)
 					kBattle.addFirstStrikes(BATTLE_UNIT_DEFENDER, 1);
@@ -1359,18 +1378,17 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 					pDefender->setDamage(combatLimit(), getOwnerINLINE());
 					break;
 				}
-                // Flunky: defender flies from battle
+                // Flunky: defender flees from battle
                 if (pDefender->getDamage() + iDefenderDamage >= pDefender->maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "DefenderFlight") < pDefender->flightProbability(getDamage()))
-                {
-                    
+                {   
 					bool bFlightValid = false;
 					ImprovementTypes eImprovement = pDefender->plot()->getImprovementType();
-					//# Fluchtplot
+					// Fluchtplot
 					if (pDefender->plot()->isCity() ||
 						eImprovement == GC.getInfoTypeForString("IMPROVEMENT_TOWN") ||
 						eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE") || 
 						eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL")
-						/* or rather pDefender->plot()->isCity(true) to include forts and so on?*/)
+						/* TODO or rather pDefender->plot()->isCity(true) to include forts and so on?*/)
 					{
 						bFlightValid = true;
 					}
@@ -1379,13 +1397,14 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 						CvPlot* pAdjacentPlot;
 
 						for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
-							pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
+							pAdjacentPlot = plotDirection(pDefender->getX_INLINE(), pDefender->getY_INLINE(), ((DirectionTypes)iI));
 
 							if (pAdjacentPlot != NULL)
 							{
 								if (pDefender->canMoveInto(pAdjacentPlot , false, false, true))
 								{
 									bFlightValid = true;
+									break;
 								}
 							}
 						}
@@ -1400,25 +1419,35 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 						combat_log.push_back(iDefenderFlightDamage - pDefender->getDamage());
 						pDefender->setDamage(iDefenderFlightDamage, getOwnerINLINE());
 						pDefender->setFlight(true);
+
+						cdDefenderDetails.iCurrHitPoints=pDefender->currHitPoints();
+
+						if (isHuman() || pDefender->isHuman())
+						{
+							CyArgsList pyArgs;
+							pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdAttackerDetails));
+							pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdDefenderDetails));
+							pyArgs.add(0);
+							pyArgs.add(iDefenderFlightDamage - pDefender->getDamage());
+							CvEventReporter::getInstance().genericEvent("combatLogHit", pyArgs.makeFunctionArgs());
+						}
+
 						break;
-					}
-					else
-					{
-						pDefender->changeDamage(iDefenderDamage, getOwnerINLINE());
-						combat_log.push_back(iDefenderDamage); // K-Mod
 					}
 
                 } 
-                else
-                {
+				// Flunky - no else because of break above. 
+                //else
+                //{
                     pDefender->changeDamage(iDefenderDamage, getOwnerINLINE());
                     combat_log.push_back(iDefenderDamage); // K-Mod
-                }
-				/* if (getCombatFirstStrikes() > 0 && isRanged())
+                //}
+
+				/*if (getCombatFirstStrikes() > 0 && isRanged())
 				{
 					kBattle.addFirstStrikes(BATTLE_UNIT_ATTACKER, 1);
 					kBattle.addDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_RANGED, iDefenderDamage);
-				} */
+				}*/
 				// K-Mod
 				if (getCombatFirstStrikes() > 0)
 					kBattle.addFirstStrikes(BATTLE_UNIT_ATTACKER, 1);
@@ -1848,20 +1877,27 @@ void CvUnit::updateCombat(bool bQuick)
 			{
 				
 				// TODO: requires !isFighting. How can we move the defender from the battle without breaking stuff?
-				// for now, stay on your plot
-				/*CvPlot* pAdjacentPlot;
+				// should always be true
+				if (!pDefender->isFighting())
+				{
+					CvPlot* pAdjacentPlot;
+					for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
+						pAdjacentPlot = plotDirection(pDefender->getX_INLINE(), pDefender->getY_INLINE(), ((DirectionTypes)iI));
 
-				for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
-					pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
-
-					if (pAdjacentPlot != NULL)
-					{
-						if (pDefender->canMoveInto(pAdjacentPlot , false, false, true))
+						if (pAdjacentPlot != NULL)
 						{
-							pDefender->setXY(pAdjacentPlot->getX_INLINE(), pAdjacentPlot->getY_INLINE(), false, true, true);
+							if (pDefender->canMoveInto(pAdjacentPlot , false, false, true))
+							{
+								// TODO: select randomly one possible
+								pDefender->setXY(pAdjacentPlot->getX_INLINE(), pAdjacentPlot->getY_INLINE(), false, true, true);
+							}
 						}
 					}
-				}*/
+					
+				}
+				else {
+					FAssertMsg(false, "Is pDefender->setCombatUnit(NULL); not enough for !pDefender->isFighting?");
+				}
 				
 				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey());
 				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
@@ -4366,15 +4402,15 @@ bool CvUnit::airlift(int iX, int iY)
 	// Super Forts begin *airlift* - added if statement to allow airlifts to plots that aren't cities
 	if (pTargetPlot->isCity())
 	{
-	pTargetCity = pTargetPlot->getPlotCity();
-	FAssert(pTargetCity != NULL);
-	FAssert(pCity != pTargetCity);
+		pTargetCity = pTargetPlot->getPlotCity();
+		FAssert(pTargetCity != NULL);
+		FAssert(pCity != pTargetCity);
 
 		//org pCity->changeCurrAirlift(1);
-	if (pTargetCity->getMaxAirlift() == 0)
-	{
-		pTargetCity->setAirliftTargeted(true);
-	}
+		if (pTargetCity->getMaxAirlift() == 0)
+		{
+			pTargetCity->setAirliftTargeted(true);
+		}
 	}
 	pCity->changeCurrAirlift(1);
 	// Super Forts end

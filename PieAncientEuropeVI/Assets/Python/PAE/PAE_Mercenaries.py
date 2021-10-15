@@ -640,10 +640,8 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
     lNeighbors = []
     if iTargetPlayer == -1:
         for iLoopPlayer in range(gc.getMAX_PLAYERS()):
-            #keldath fix
             if iLoopPlayer == iPlayer or iLoopPlayer == gc.getBARBARIAN_PLAYER():
                 continue
-            #keldath fix
             pLoopPlayer = gc.getPlayer(iLoopPlayer)
             if pLoopPlayer.isAlive():
                 if gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):

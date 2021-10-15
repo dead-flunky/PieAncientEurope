@@ -60,7 +60,7 @@ def getCityCultivatedBonuses(pCity, iTyp):
             if iLoopBonus in List: # and pCity.canWork(pLoopPlot => Nicht, weil sonst viel mehr verbreitet werden kann
                 iAnz += 1
     return iAnz
-    
+
 def getCityCultivatedPlots(pCity, eBonus):
     iTyp = getBonusCultivationType(eBonus)
     if iTyp == 1: List = L.LBonusStratCultivatable
@@ -70,7 +70,7 @@ def getCityCultivatedPlots(pCity, eBonus):
         pLoopPlot = pCity.getCityIndexPlot(i)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             bonus = pLoopPlot.getBonusType(-1)
-            if bonus in List: 
+            if bonus in List:
                 plots.append(pLoopPlot)
     return plots
 
@@ -103,7 +103,7 @@ def isBonusCultivationChance(iPlayer, pPlot, eBonus, bVisibleOnly=True, pCity=No
     iTyp = getBonusCultivationType(eBonus)
     if iTyp == 1: List = L.LBonusStratCultivatable
     else: List = L.LBonusCultivatable
-    
+
     # Variety of invalid situations
     if (eBonus not in List
             or pPlot is None or pPlot.isNone()
@@ -112,7 +112,7 @@ def isBonusCultivationChance(iPlayer, pPlot, eBonus, bVisibleOnly=True, pCity=No
             or pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_DARK_ICE") or pPlot.isPeak() or pPlot.isWater()):
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "peak/water/black ice", None, 2, None, ColorTypes(10), 0, 0, False, False)
         return False
-        
+
     # Stadt auf ner Insel
     if pCity != None:
       if pPlot.getArea() != pCity.plot().getArea():
@@ -134,7 +134,7 @@ def isBonusCultivationChance(iPlayer, pPlot, eBonus, bVisibleOnly=True, pCity=No
     # Auf Plots mit gleichem Typ darf immer gesetzt werden (City Limit muss hier nicht gecheckt werden)
     if ePlotBonus in L.LBonusCorn and eBonus in L.LBonusCorn or ePlotBonus in L.LBonusLivestock and eBonus in L.LBonusLivestock:
       return True
-    
+
     # Regel: Resourcen pro Stadt und dessen Status
     lCities = _getCitiesInRange(pPlot, iPlayer)
     for pCity in lCities:
@@ -160,7 +160,7 @@ def canHaveBonus(pPlot, eBonus, bIgnoreLatitude):
     ## Gipfel
     if pPlot.isPeak():
         return False
-    
+
     ## wenn die Ressource auf Huegeln vorkommen muss
     if pPlot.isHills():
         if not gc.getBonusInfo(eBonus).isHills():
@@ -194,24 +194,24 @@ def canHaveBonus(pPlot, eBonus, bIgnoreLatitude):
     # or (eBonus == gc.getInfoTypeForString("BONUS_GRAPES") and not pPlot.isFreshWater())
     if eBonus == gc.getInfoTypeForString("BONUS_OLIVES") and not pPlot.isCoastalLand():
       return False
-    
+
     # Bei Eles muss ein Dschungel auf dem Terrain sein
     if eBonus == gc.getInfoTypeForString("BONUS_IVORY") and pPlot.getFeatureType() != gc.getInfoTypeForString("FEATURE_JUNGLE"):
       return False
-      
+
     # Kamele nicht auf Oasen oder Schwemmland
     if eBonus == gc.getInfoTypeForString("BONUS_CAMEL"):
       if pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_OASIS") or pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_FLOOD_PLAINS"):
         return False
-      
+
     # Pferde nicht auf bebauten Bauernhoefen zulassen
     if eBonus == gc.getInfoTypeForString("BONUS_HORSE") and pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_FARM"):
-      return False  
+      return False
 
     # wenn das Terrain passt
     if gc.getBonusInfo(eBonus).isTerrain(pPlot.getTerrainType()):
       return True
-        
+
     # wenn das Feature zum Terrain passt
     if pPlot.getFeatureType() != -1:
       if gc.getBonusInfo(eBonus).isFeature(pPlot.getFeatureType()):
@@ -267,7 +267,7 @@ def getCityCultivationPlot(pCity, eBonus):
     lPrio4 = [] # with quarries or mines
     lPrio4Imps = [gc.getInfoTypeForString("IMPROVEMENT_QUARRY"),gc.getInfoTypeForString("IMPROVEMENT_MINE")]
     lPrio5 = [] # gc.getImprovementInfo(iImprovement).getDefenseModifier(): villages, forts
-    
+
     for iI in range(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
@@ -354,7 +354,7 @@ def doCultivation_AI(pUnit):
 
     if not pUnit.getUnitType() in L.LCultivationUnits:
         return False
-        
+
     # do not check every turn
     if gc.getGame().getGameTurn() % 5 != 0:
         return False
@@ -367,7 +367,7 @@ def doCultivation_AI(pUnit):
     eBonusOnBoard = CvUtil.getScriptData(pUnit, ["b"], -1)
     #if eBonusOnBoard == -1: return False
     iTyp = getBonusCultivationType(eBonusOnBoard)
-    
+
     lCities = []
     # list of player's cities with distance (2-tuples (distance, city))
     # The nearest city which can still cultivate a bonus is chosen.
@@ -475,12 +475,12 @@ def doCollectBonus4Cultivation(pUnit):
 
     # Bonusgut in den Karren laden
     CvUtil.addScriptData(pUnit, "b", eBonus)
-    
+
     iPrice = 0
     # Bonusgut vom Plot entfernen, ausgenommen Handelsposten, um die Waren nicht "stehlen" zu können
     # PAE 6.4: vom Vasall: nix entfernen, Vasall bekommt Gold
     if pPlot.getOwner() != pUnit.getOwner():
-      
+
       iPrice = PAE_Trade.getBonusValue(eBonus)
       gc.getPlayer(pPlot.getOwner()).changeGold(iPrice)
       gc.getPlayer(pUnit.getOwner()).changeGold(-iPrice)
@@ -623,7 +623,7 @@ def doPopupChooseBonus4Cultivation(pUnit):
         iNumBonus = gc.getPlayer(iPlayer).countOwnedBonuses(eBonus)
         sText = CyTranslator().getText("TXT_KEY_BUY_BONUS", (sBonusDesc, iPrice, iNumBonus))
         if not _isBonusCultivableInRealm(iPlayer,eBonus):
-            sText += u" <color=255,0,0,0>" + CyTranslator().getText("TXT_KEY_BONUS_NOT_CULTIVABLE", ()) + u"</color>"
+            sText += u"\n<color=255,0,0,0><font=2>" + CyTranslator().getText("TXT_KEY_BONUS_NOT_CULTIVABLE", ()) + u"</font></color>"
         sBonusButton = gc.getBonusInfo(eBonus).getButton()
         popupInfo.addPythonButton(sText, sBonusButton)
 
@@ -679,7 +679,7 @@ def wine(pCity):
                 if loopPlot.getOwner() == pCity.getOwner():
                     # damit es nicht auf Inseln aufploppt
                     if loopPlot.getArea() == pCity.plot().getArea():
-                      if canHaveBonus(loopPlot, eBonus, True):  
+                      if canHaveBonus(loopPlot, eBonus, True):
                         if _canBuildingCultivate(loopPlot, iPlayer):
                             if loopPlot.getImprovementType() == -1:
                                 if loopPlot.isHills():
@@ -701,12 +701,12 @@ def wine(pCity):
 def horse(pCity, bPrioPlotOnly):
     iPlayer = pCity.getOwner()
     eBonus = gc.getInfoTypeForString("BONUS_HORSE")
-    
+
     bIsHuman = gc.getPlayer(iPlayer).isHuman()
-    
+
     # wenn es bereits ein Bonusgut im eigenen Territorium gibt
     #if seekBonusOnOwnedPlots(eBonus, iPlayer): return []
-    
+
     # sorted by priority
     lTerrains = [
         gc.getInfoTypeForString("TERRAIN_PLAINS"),
@@ -726,7 +726,7 @@ def horse(pCity, bPrioPlotOnly):
         gc.getInfoTypeForString("IMPROVEMENT_HAMLET")
     ]
     iSecondBlock = len(lImprovements)
-    
+
     # lPlotPrio = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     lPlotPrio = [[] for x in xrange(0, iFirstBlock + iSecondBlock + 1)]
     lAllPossiblePlots = []
@@ -735,12 +735,12 @@ def horse(pCity, bPrioPlotOnly):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
-            if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus: return []        
+            if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus: return []
             elif loopPlot.getTerrainType() in lTerrains:
                 if loopPlot.getOwner() == pCity.getOwner():
                     # damit es nicht auf Inseln aufploppt
                     if loopPlot.getArea() == pCity.plot().getArea():
-                      if canHaveBonus(loopPlot, eBonus, True):  
+                      if canHaveBonus(loopPlot, eBonus, True):
                         if _canBuildingCultivate(loopPlot, iPlayer):
                             lAllPossiblePlots.append(loopPlot)
                             if loopPlot.getImprovementType() == -1:
@@ -767,7 +767,7 @@ def camel(pCity, bPrioPlotOnly):
     iImpType1 = gc.getInfoTypeForString("IMPROVEMENT_CAMP")
     # sorted by priority
     lTerrains = [
-        gc.getInfoTypeForString("TERRAIN_DESERT")        
+        gc.getInfoTypeForString("TERRAIN_DESERT")
     ]
     lFeatures = [
         gc.getInfoTypeForString("FEATURE_OASIS"),
@@ -779,7 +779,7 @@ def camel(pCity, bPrioPlotOnly):
     # lPlotPrio = [[],[],[],[],[]]
     lPlotPrio = [[] for x in xrange(0, iFirstBlock + 3)]
     lAllPossiblePlots = []
-    
+
     for iI in range(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
@@ -790,7 +790,7 @@ def camel(pCity, bPrioPlotOnly):
                     if loopPlot.getOwner() == pCity.getOwner():
                       if loopPlot.getFeatureType() not in lFeatures:
                         if loopPlot.getArea() == pCity.plot().getArea():
-                          if canHaveBonus(loopPlot, eBonus, True):  
+                          if canHaveBonus(loopPlot, eBonus, True):
                             if _canBuildingCultivate(loopPlot, iPlayer):
                                 lAllPossiblePlots.append(loopPlot)
                                 # 1. nach Improvements selektieren
@@ -830,7 +830,7 @@ def elephant(pCity, bPrioPlotOnly):
     # lPlotPrio = [[],[],[],[],[],[],[]]
     lPlotPrio = [[] for x in xrange(0, iFirstBlock + iSecondBlock + 3)]
     lAllPossiblePlots = []
-    
+
     for iI in range(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
@@ -871,17 +871,17 @@ def elephant(pCity, bPrioPlotOnly):
 def dog(pCity, bPrioPlotOnly):
     iPlayer = pCity.getOwner()
     eBonus = gc.getInfoTypeForString("BONUS_HUNDE")
-    
+
     # wenn es bereits ein Bonusgut im eigenen Territorium gibt
     #if seekBonusOnOwnedPlots(eBonus, iPlayer): return []
-    
+
     lTerrains = [
         gc.getInfoTypeForString("TERRAIN_TUNDRA"),
         gc.getInfoTypeForString("TERRAIN_PLAINS"),
         gc.getInfoTypeForString("TERRAIN_GRASS"),
     ]
     iFirstBlock = len(lTerrains)
-    
+
     # Improvements fuer Prioritaet
     lImprovements = [
         gc.getInfoTypeForString("IMPROVEMENT_CITY_RUINS"),
@@ -893,20 +893,20 @@ def dog(pCity, bPrioPlotOnly):
         gc.getInfoTypeForString("IMPROVEMENT_COTTAGE")
     ]
     iSecondBlock = len(lImprovements)
-    
-    
+
+
     lPlotPrio = [[] for x in xrange(0, iFirstBlock + iSecondBlock + 1)]
     lAllPossiblePlots = []
-    
+
     for iI in range(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
-            #if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus: return []        
+            #if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus: return []
             if loopPlot.getTerrainType() in lTerrains:
                 if loopPlot.getOwner() == pCity.getOwner():
                     if loopPlot.getArea() == pCity.plot().getArea():
-                      if canHaveBonus(loopPlot, eBonus, True):                      
+                      if canHaveBonus(loopPlot, eBonus, True):
                         if _canBuildingCultivate(loopPlot, iPlayer):
                             lAllPossiblePlots.append(loopPlot)
                             # unworked
@@ -926,7 +926,7 @@ def dog(pCity, bPrioPlotOnly):
                                         lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
     if bPrioPlotOnly: return trimPlots(lPlotPrio)
     else: return lAllPossiblePlots
-    
+
 def trimPlots(lPlots):
     if len(lPlots):
       for k in lPlots:
@@ -988,14 +988,14 @@ def doBuildingCultivate(pCity, iBuildingType):
         if isCityHasBonus(pCity, eBonus): return
         lPlotPrio = dog(pCity, True)
         iImprovement = gc.getInfoTypeForString("IMPROVEMENT_CAMP")
-    
-    
+
+
     if lPlotPrio and len(lPlotPrio):
       p = []
       for k in lPlotPrio:
         if k:
           p.append(k)
-        
+
       iLen = len(p)
       if iLen:
         if iLen < 2:
@@ -1022,15 +1022,15 @@ def _canBuildingCultivate(pPlot, iPlayer):
                     gc.getInfoTypeForString("FEATURE_FLOOD_PLAINS"),
                     gc.getInfoTypeForString("FEATURE_DARK_ICE")
                   ]
-                  if pPlot.getFeatureType() not in lFeatures:                    
+                  if pPlot.getFeatureType() not in lFeatures:
                     return True
     return False
-    
+
 def seekBonusOnOwnedPlots(iBonus, iPlayer):
     iMapW = gc.getMap().getGridWidth()
     iMapH = gc.getMap().getGridHeight()
     iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
-    
+
     for x in range(iMapW):
       for y in range(iMapH):
         loopPlot = gc.getMap().plot(x, y)
@@ -1041,7 +1041,7 @@ def seekBonusOnOwnedPlots(iBonus, iPlayer):
             if loopPlot.getBonusType(-1) == iBonus:
               return True
     return False
-    
+
 def getBonusCultivationType(eBonus):
     if eBonus in L.LBonusStratCultivatable: return 1
     return 0

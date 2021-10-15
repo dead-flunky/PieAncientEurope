@@ -1820,6 +1820,15 @@
       <DefaultUnit>UNIT_WOLF</DefaultUnit>
     </UnitClassInfo>
     <UnitClassInfo>
+      <Type>UNITCLASS_WOLF2</Type>
+      <Description>TXT_KEY_UNIT_WOLF2</Description>
+      <iMaxGlobalInstances>-1</iMaxGlobalInstances>
+      <iMaxTeamInstances>-1</iMaxTeamInstances>
+      <iMaxPlayerInstances>-1</iMaxPlayerInstances>
+      <iInstanceCostModifier>0</iInstanceCostModifier>
+      <DefaultUnit>UNIT_WOLF2</DefaultUnit>
+    </UnitClassInfo>
+    <UnitClassInfo>
       <Type>UNITCLASS_BOAR</Type>
       <Description>TXT_KEY_UNIT_BOAR</Description>
       <iMaxGlobalInstances>-1</iMaxGlobalInstances>

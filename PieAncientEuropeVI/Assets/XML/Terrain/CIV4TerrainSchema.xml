@@ -383,6 +383,7 @@
 	<ElementType name="ImprovementPillage" content="textOnly"/>
 	<ElementType name="ImprovementUpgrade" content="textOnly"/>
 	<ElementType name="bActsAsCity" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bFort" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bHillsMakesValid" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bFreshWaterMakesValid" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bRiverSideMakesValid" content="textOnly" dt:type="boolean"/>
@@ -438,6 +439,7 @@
 		<element type="HillsYieldChange" minOccurs="0"/>
 		<element type="IrrigatedYieldChange" minOccurs="0"/>
 		<element type="bActsAsCity"/>
+		<element type="bFort" minOccurs="0"/>
 		<element type="bHillsMakesValid"/>
 		<element type="bFreshWaterMakesValid"/>
 		<element type="bRiverSideMakesValid"/>

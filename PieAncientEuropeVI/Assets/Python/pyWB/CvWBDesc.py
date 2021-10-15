@@ -36,7 +36,7 @@ bFirstWrite = True
 #############
 def getPlayer(idx):
     "helper function which wraps get player in case of bad index"
-    #if (gc.getPlayer(idx).isAlive()):
+    #if gc.getPlayer(idx).isAlive():
      #   return gc.getPlayer(idx)
     #return None
     # K-mod<f1rpo> Treat invalid civ ids as the Barbarians
@@ -394,6 +394,8 @@ class CvTeamDesc:
     ## Platy Builder ##
         # write warring teams
         for i in range(gc.getMAX_CIV_TEAMS()):
+            if gc.getTeam(i).isBarbarian():
+                continue
             if pTeam.isAtWar(i):
                 f.write("\tAtWar=%d\n" %(i))
 
@@ -689,7 +691,7 @@ class CvPlayerDesc:
         # write team
         f.write("\tTeam=%d\n" %(int(pPlayer.getTeam())))
 
-## Platy Builder ##
+    ## Platy Builder ##
         if pPlayer.getLeaderType() != LeaderHeadTypes.NO_LEADER:
             leaderheadInfo = gc.getLeaderHeadInfo(pPlayer.getLeaderType())
             f.write("\tLeaderType=%s\n" %(leaderheadInfo.getType()))
@@ -1146,7 +1148,7 @@ class CvUnitDesc:
 
             v = parser.findTokenValue(toks, "ScriptData")
             if v!=-1:
-                print("found script data: %s" %(v))
+                CvUtil.pyPrint("found script data: %s" %(v))
                 self.szScriptData = v
                 continue
         ## Platy Builder ##
@@ -1170,7 +1172,7 @@ class CvUnitDesc:
         "after reading, this will actually apply the data"
         pPlayer = getPlayer(self.owner)
         if pPlayer:
-            # print("unit apply %d %d" %(self.plotX, self.plotY))
+            # CvUtil.pyPrint("unit apply %d %d" %(self.plotX, self.plotY))
             CvUtil.pyAssert(self.plotX >= 0 and self.plotY >= 0, "invalid plot coords")
             unitTypeNum = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), self.unitType)
             if unitTypeNum < 0:
@@ -1183,10 +1185,10 @@ class CvUnitDesc:
 
                 unit = pPlayer.initUnit(unitTypeNum, self.plotX, self.plotY, UnitAITypes(eUnitAI), self.facingDirection)
             if unit:
-                if self.szName is not None:
+                if self.szName:
                     unit.setName(self.szName)
                 #leader unit type
-                if self.leaderUnitType is not None:
+                if self.leaderUnitType:
                     leaderUnitTypeNum = CvUtil.findInfoTypeNum(gc.getUnitInfo, gc.getNumUnitInfos(), self.leaderUnitType)
                     if leaderUnitTypeNum >= 0:
                         unit.setLeaderUnitType(leaderUnitTypeNum);
@@ -1215,7 +1217,7 @@ class CvUnitDesc:
 
             ## Platy Builder ##
                 if self.szScriptData != "":
-                    unit.setScriptData(self.szScriptData)
+                    unit.setScriptData(self.szScriptData)  # Usage of CvUtil.setScriptData would be wrong!
                 unit.setImmobileTimer(self.iImmobile)
                 if self.iBaseCombatStr > -1:
                     unit.setBaseCombatStr(self.iBaseCombatStr)
@@ -1579,7 +1581,7 @@ class CvCityDesc:
 
         if self.szScriptData and self.szScriptData != "NONE":
             self.city.setScriptData(self.szScriptData)  # Usage of CvUtil.setScriptData would be wrong!
-    ## Platy Builder ##
+        ## Platy Builder ##
         if self.iDamage > 0:
             self.city.changeDefenseDamage(self.iDamage)
         if self.iOccupation > 0:
@@ -1599,8 +1601,6 @@ class CvCityDesc:
             self.city.changeFreeBonus(item[0], item[1])
         for item in self.lNoBonus:
             self.city.changeNoBonusCount(item, 1)
-
-
 
 ###########
 class CvPlotDesc:
@@ -1722,7 +1722,7 @@ class CvPlotDesc:
             if (x!=-1 and y!=-1):
                 self.iX = int(x)
                 self.iY = int(y)
-                # print("plot read %d %d" %(self.iX, self.iY))
+                # CvUtil.pyPrint("plot read %d %d" %(self.iX, self.iY))
                 continue
 
             v = parser.findTokenValue(toks, "Landmark")
@@ -1839,7 +1839,7 @@ class CvPlotDesc:
         #self.abTeamPlotRevealed = filterPlayerIds(self.abTeamPlotRevealed, barb_idWB)
         #self.lCulture = filterPlayerIds2(self.lCulture, barb_idWB)
 
-        #print("apply plot %d %d" %(self.iX, self.iY))
+        #CvUtil.pyPrint("apply plot %d %d" %(self.iX, self.iY))
         plot = CyMap().plot(self.iX, self.iY)
         plot.setNOfRiver(self.isNOfRiver, self.riverWEDirection)
         plot.setWOfRiver(self.isWOfRiver, self.riverNSDirection)
@@ -1864,13 +1864,13 @@ class CvPlotDesc:
             plot.setScriptData(self.szScriptData)  # Usage of CvUtil.setScriptData would be wrong!
 
     def applyUnits(self):
-        #print("--apply units")
+        #CvUtil.pyPrint("--apply units")
         for u in self.unitDescs:
             u.apply()
 
     def applyCity(self):
         if self.cityDesc:
-            #print("--apply city")
+            #CvUtil.pyPrint("--apply city")
             self.cityDesc.apply()
 
 ################
@@ -1918,7 +1918,7 @@ class CvMapDesc:
         self.__init__()
         parser = CvWBParser()
         if not parser.findNextToken(f, "BeginMap"):
-            print("can't find map")
+            CvUtil.pyPrint("can't find map")
             return
         while True:
             nextLine = parser.getNextLine(f)
@@ -2019,7 +2019,7 @@ class CvSignDesc:
         self.__init__()
         parser = CvWBParser()
         if not parser.findNextToken(f, "BeginSign"):
-            print("can't find sign")
+            CvUtil.pyPrint("can't find sign")
             return
         while True:
             nextLine = parser.getNextLine(f)
@@ -2174,7 +2174,7 @@ class CvWBDesc:
         CvPlatyBuilderScreen.bPython = backup_bPython
         """ End, Restore buildings and techs """
 
-        print("WBSave done\n")
+        CvUtil.pyPrint("WBSave done\n")
         return 0  # success
 
     def applyMap(self):
@@ -2183,35 +2183,35 @@ class CvWBDesc:
         self.gameDesc.apply()
 
         # recreate map
-        print("map rebuild. gridw=%d, gridh=%d" %(self.mapDesc.iGridW, self.mapDesc.iGridH))
+        CvUtil.pyPrint("map rebuild. gridw=%d, gridh=%d" %(self.mapDesc.iGridW, self.mapDesc.iGridH))
         worldSizeType = CvUtil.findInfoTypeNum(gc.getWorldInfo, gc.getNumWorldInfos(), self.mapDesc.worldSize)
         climateType = CvUtil.findInfoTypeNum(gc.getClimateInfo, gc.getNumClimateInfos(), self.mapDesc.climate)
         seaLevelType = CvUtil.findInfoTypeNum(gc.getSeaLevelInfo, gc.getNumSeaLevelInfos(), self.mapDesc.seaLevel)
         CyMap().rebuild(self.mapDesc.iGridW, self.mapDesc.iGridH, self.mapDesc.iTopLatitude, self.mapDesc.iBottomLatitude, self.mapDesc.bWrapX, self.mapDesc.bWrapY, WorldSizeTypes(worldSizeType), ClimateTypes(climateType), SeaLevelTypes(seaLevelType), 0, None)
 
-        print("preapply plots")
+        CvUtil.pyPrint("preapply plots")
         for pDesc in self.plotDesc:
             pDesc.preApply()  # set plot type / terrain type
 
-        print("map apply - recalc areas/regions")
+        CvUtil.pyPrint("map apply - recalc areas/regions")
         CyMap().recalculateAreas()
 
-        print("apply plots")
+        CvUtil.pyPrint("apply plots")
         for pDesc in self.plotDesc:
             pDesc.apply()
 
-        print("apply signs")
+        CvUtil.pyPrint("apply signs")
         for pDesc in self.signDesc:
             pDesc.apply()
 
-        print("Randomize Resources")
-        if (self.mapDesc.bRandomizeResources != "false"):
+        CvUtil.pyPrint("Randomize Resources")
+        if self.mapDesc.bRandomizeResources != "false":
             for iPlotLoop in range(CyMap().numPlots()):
                 pPlot = CyMap().plotByIndex(iPlotLoop)
                 pPlot.setBonusType(BonusTypes.NO_BONUS)
             CyMapGenerator().addBonuses()
 
-        print("WB apply done\n")
+        CvUtil.pyPrint("WB apply done\n")
         return 0  # ok
 
 ## Platy Builder ##
@@ -2222,7 +2222,7 @@ class CvWBDesc:
         Debugging = True
 
         if Debugging:
-            print("getAssignedStartingPlots for %d players" %(len(self.playersDesc)))
+            CvUtil.pyPrint("getAssignedStartingPlots for %d players" %(len(self.playersDesc)))
 
         # PAE Maps
         mapNames = {"EuropeStandard": "StartingPoints_EuropeStandard.xml",
@@ -2240,7 +2240,7 @@ class CvWBDesc:
             if plot.iX == 0 and plot.iY == 0:
                 sScenarioName = CvUtil.getKeyData(plot.szScriptData, ["S", "t"])
                 if Debugging:
-                    print("Scenario %s" %(sScenarioName))
+                    CvUtil.pyPrint("Scenario %s" %(sScenarioName))
                 break
         SpawnCivList = dict()
         if sScenarioName in mapNames:
@@ -2270,7 +2270,7 @@ class CvWBDesc:
                     BarbCityList[-1].CityNumDefenders = int(sp.CutString(CurString))
             
             if Debugging:
-                print("StartingPoints file %s" %(mapNames[sScenarioName]))
+                CvUtil.pyPrint("StartingPoints file %s" %(mapNames[sScenarioName]))
             MyFile.close()
 
         iMaxValid = 0
@@ -2283,16 +2283,16 @@ class CvWBDesc:
                 UsedValidCivList.append(iCiv)
 
         if Debugging:
-            print("valid civs for this map: "+str(iMaxValid))
-            print("max civs: "+str(gc.getMAX_CIV_PLAYERS()))
+            CvUtil.pyPrint("valid civs for this map: "+str(iMaxValid))
+            CvUtil.pyPrint("max civs: "+str(gc.getMAX_CIV_PLAYERS()))
 
         aPosUsed = []
         # loop detects occupied spots
         for iLoopPlayer in range(gc.getMAX_CIV_PLAYERS()):
             pLoopPlayer = gc.getPlayer(iLoopPlayer)
-            if pLoopPlayer is not None:
+            if pLoopPlayer:
                 pLoopPlot = pLoopPlayer.getStartingPlot()
-                if pLoopPlot is not None: # pLoopPlayer.isAlive() and
+                if pLoopPlot: # pLoopPlayer.isAlive() and
                     aPosUsed.append((pLoopPlot.getX(),pLoopPlot.getY()))
 
         for iPlayerLoop in xrange(len(self.playersDesc)):
@@ -2302,12 +2302,12 @@ class CvWBDesc:
             # <f1rpo>
             if pWBPlayer.bNeverAlive:
                 if Debugging:
-                    print("bNeverAlive")
+                    CvUtil.pyPrint("bNeverAlive")
                 continue # </f1rpo>
             # Random Start Location
             if bStartingPoints: #"and pWBPlayer.bRandomStartLocation != "false":
                 if Debugging:
-                    print("findStartingPlot for player %d" %(iPlayerLoop))
+                    CvUtil.pyPrint("findStartingPlot for player %d" %(iPlayerLoop))
 
                 iPlayerCiv = pPlayer.getCivilizationType()
 
@@ -2318,15 +2318,15 @@ class CvWBDesc:
                     CyInterface().addMessage(iLoopPlayer, False, 15, "You will be assigned another civ", '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
 
                     if Debugging:
-                        print("Invalid Civ for map has been chosen")
+                        CvUtil.pyPrint("Invalid Civ for map has been chosen")
 
                 if not pPlayer.isAlive():
                     if Debugging:
-                        print("Player %d is not alive!" %(iPlayerLoop))
+                        CvUtil.pyPrint("Player %d is not alive!" %(iPlayerLoop))
                     return 0
 
                 if Debugging:
-                    print("Cycling loaded coordinates!")
+                    CvUtil.pyPrint("Cycling loaded coordinates!")
 
                 bReplace = False
                 bSpawn = False
@@ -2337,7 +2337,7 @@ class CvWBDesc:
                     if not possible_plot_idx:
                         bReplace = True
                         if Debugging:
-                            print("Encountered invalid civ %s" %(pCiv.CivString))
+                            CvUtil.pyPrint("Encountered invalid civ %s" %(pCiv.CivString))
                             CyInterface().addMessage(iHumanPlayer, False, 15, "Encountered invalid civ "+str(pCiv.CivString), '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
                     else:
                         bSpawn = True
@@ -2402,14 +2402,14 @@ class CvWBDesc:
                     pPlayer.killUnits()
             elif pPlayer.getLeaderType() != -1 and pWBPlayer.bRandomStartLocation != "false":
                 if Debugging:
-                    print("bRandomStartLocation")
+                    CvUtil.pyPrint("bRandomStartLocation")
                 pPlot = pPlayer.findStartingPlot(True)
                 aPosUsed.append((pPlot.getX(), pPlot.getY()))
                 pPlayer.setStartingPlot(pPlot, True)
             # Player's starting plot
             elif pWBPlayer.iStartingX != -1 and pWBPlayer.iStartingY != -1:
                 if Debugging:
-                    print("Player's starting plot")
+                    CvUtil.pyPrint("Player's starting plot")
                 aPosUsed.append((pWBPlayer.iStartingX, pWBPlayer.iStartingY))
                 pPlayer.setStartingPlot(CyMap().plot(pWBPlayer.iStartingX, pWBPlayer.iStartingY), True)
                 
@@ -2528,7 +2528,7 @@ class CvWBDesc:
             # Random Start Location
             if pWBPlayer.bRandomStartLocation != "false":
                 pPlayer.setStartingPlot(pPlayer.findStartingPlot(True), True)
-                print("Setting player %d starting location to (%d, %d)", pPlayer.getID(), pPlayer.getStartingPlot().getX(), pPlayer.getStartingPlot().getY())
+                CvUtil.pyPrint("Setting player %d starting location to (%d, %d)", pPlayer.getID(), pPlayer.getStartingPlot().getX(), pPlayer.getStartingPlot().getY())
 
             # Civics
             for item in pWBPlayer.aaiCivics:
@@ -2541,7 +2541,6 @@ class CvWBDesc:
             # City List
             for item in pWBPlayer.aszCityList:
                 pPlayer.addCityName(item)
-
 
         ## Platy Builder ##
             pPlayer.changeGoldenAgeTurns(pWBPlayer.iGoldenAge)
@@ -2632,14 +2631,14 @@ class CvWBDesc:
             CvUtil.pyPrint("Error: wrong WorldBuilder save version.  Expected %d, got %d" %(self.getVersion(), version))
             return -1 # failed
 
-        print "Reading game desc"
+        CvUtil.pyPrint("Reading game desc")
         self.gameDesc.read(f) # read game info
 
-        print "Reading teams desc"
+        CvUtil.pyPrint("Reading teams desc")
         filePos = f.tell() # f1rpo k-mod also in platy
         self.teamsDesc = []
         for i in range(iNumTeamsDLL):
-            print("reading team %d" %(i))
+            CvUtil.pyPrint("reading team %d" %(i))
             teamDesc = CvTeamDesc()
             if not teamDesc.read(f):  #k-mod   # read team info
                 f.seek(filePos)               # abort and backup
@@ -2652,7 +2651,7 @@ class CvWBDesc:
         # </f1rpo>
 
 
-        print "Reading players desc"
+        CvUtil.pyPrint("Reading players desc")
         self.playersDesc = []
         numPlayersWB = 0
         # <flunky> both loops in one
@@ -2673,13 +2672,13 @@ class CvWBDesc:
                 barbarianDesc = playerDesc
                 barb_idWB = numPlayersWB
             numPlayersWB += 1
-        print("Num players read %d of %d required" %(len(self.playersDesc), iNumPlayersDLL))
+        CvUtil.pyPrint("Num players read %d of %d required" %(len(self.playersDesc), iNumPlayersDLL))
         # </flunky>
 
         # PAE Expand to 52 entries if extended DLL is used
         if numPlayersWB < iNumPlayersDLL:
             for i in range(numPlayersWB, iNumPlayersDLL):
-                print("append extra player %d" %(i))
+                CvUtil.pyPrint("append extra player %d" %(i))
                 # <f1rpo, Flunky>
                 deadPlayer = CvPlayerDesc()
                 # (Not sure if it's necessary to assign a team)
@@ -2688,11 +2687,10 @@ class CvWBDesc:
                 deadPlayer.neverAlive = True
                 self.playersDesc.append(deadPlayer)
                 # </f1rpo, Flunky>
-                
             if len(self.playersDesc) >= numPlayersWB and self.playersDesc[numPlayersWB-1].leaderType == "LEADER_BARBARIAN":
                 # Clear AtWar and Contact fields of barbarian
                 # TODO: Stimmt der Index auch bei Verkleinerung?
-                # print("Shift barb player at index %d to %d" %(numPlayersWB-1, iNumPlayersDLL-1))
+                # CvUtil.pyPrint("Shift barb player at index %d to %d" %(numPlayersWB-1, iNumPlayersDLL-1))
                 barb_idWB = numPlayersWB - 1
                 """
                 iBarbTeamWB = self.playersDesc[numPlayersWB-1].team
@@ -2706,7 +2704,7 @@ class CvWBDesc:
 
         # PAE, Szenario with many players loaded without DLL.
         if barbarianDesc is not None:
-            print("Shift barbarian player to lower id...")
+            CvUtil.pyPrint("Shift barbarian player to lower id...")
             self.playersDesc[iNumPlayersDLL - 1] = barbarianDesc
             # iBarbTeamWB = barbarianDesc.team
             # self.teamsDesc[iBarbTeamWB] = CvTeamDesc()
@@ -2717,7 +2715,7 @@ class CvWBDesc:
             if numPlayersWB < iNumPlayersDLL and self.playersDesc[barb_idWB].leaderType == "LEADER_BARBARIAN":
                 if self.playersDesc[iNumPlayersDLL-1].leaderType == "LEADER_BARBARIAN" or True:
                     # Two barbarian entries, remove first
-                    print("Remove barbarian player at slot %d" %(barb_idWB))
+                    CvUtil.pyPrint("Remove barbarian player at slot %d" %(barb_idWB))
                     barbTeam = self.playersDesc[barb_idWB].team
                     self.teamsDesc[barbTeam] = CvTeamDesc()
                     newPlayerDesc = CvPlayerDesc()
@@ -2725,7 +2723,7 @@ class CvWBDesc:
                     self.playersDesc[barb_idWB] = newPlayerDesc
                 else:
                     # Swap barb to from position 18 to 52
-                    print("Shift barbarian player from slot %d to %d" %(barb_idWB, iNumPlayersDLL-1))
+                    CvUtil.pyPrint("Shift barbarian player from slot %d to %d" %(barb_idWB, iNumPlayersDLL-1))
                     barbTeam = self.playersDesc[barb_idWB].team
                     self.teamsDesc[barbTeam], self.teamsDesc[iNumTeamsDLL-1] = self.teamsDesc[iNumTeamsDLL-1], self.teamsDesc[barbTeam]
                     self.playersDesc[barb_idWB].team = iNumTeamsDLL-1
@@ -2735,15 +2733,15 @@ class CvWBDesc:
                 # Set barbarian slot manually ?!
                 pass
 
-        print("Debug status:")
-        print("   numPlayersWB: %d" %(numPlayersWB))
-        print("   iNumPlayersDLL: %d" %(iNumPlayersDLL))
-        print("   barb_idWB: %s" %(str(barb_idWB)))
+        CvUtil.pyPrint("Debug status:")
+        CvUtil.pyPrint("   numPlayersWB: %d" %(numPlayersWB))
+        CvUtil.pyPrint("   iNumPlayersDLL: %d" %(iNumPlayersDLL))
+        CvUtil.pyPrint("   barb_idWB: %s" %(str(barb_idWB)))
 
-        print("Reading map desc")
+        CvUtil.pyPrint("Reading map desc")
         self.mapDesc.read(f)  # read map info
 
-        print("Reading/creating %d plot descs" %(self.mapDesc.numPlotsWritten,))
+        CvUtil.pyPrint("Reading/creating %d plot descs" %(self.mapDesc.numPlotsWritten,))
         self.plotDesc = []
         for i in range(self.mapDesc.numPlotsWritten):
             pDesc = CvPlotDesc()
@@ -2752,7 +2750,7 @@ class CvWBDesc:
             else:
                 break
 
-        print("Reading/creating %d sign descs" %(self.mapDesc.numSignsWritten,))
+        CvUtil.pyPrint("Reading/creating %d sign descs" %(self.mapDesc.numSignsWritten,))
         self.signDesc = []
         for i in range(self.mapDesc.numSignsWritten):
             pDesc = CvSignDesc()
@@ -2762,5 +2760,5 @@ class CvWBDesc:
                 break
 
         f.close()
-        print("WB read done\n")
+        CvUtil.pyPrint("WB read done\n")
         return 0

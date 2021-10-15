@@ -131,7 +131,7 @@
   <TEXT>
     <Tag>TXT_KEY_BUILDING_ACROPOLIS_STRATEGY</Tag>
     <English>An [COLOR_BUILDING_TEXT]Acropolis[COLOR_REVERT] can only be built in cities on hills or right beside hills.</English>
-    <French>L'[COLOR_BUILDING_TEXT]Acropole[COLOR_REVERT] ne peut &#234;tre construit que dans les villes sur les collines ou juste &#224; c&#244;t&#233; de collines.</French>
+    <French>Une [COLOR_BUILDING_TEXT]Acropole[COLOR_REVERT] ne peut &#234;tre construit que dans les villes sur les collines ou juste &#224; c&#244;t&#233; de collines.</French>
     <German>Eine [COLOR_BUILDING_TEXT]Akropolis[COLOR_REVERT] kann nur in St&#228;dten auf oder neben einem Berg erbaut werden.</German>
     <Italian>Un'[COLOR_BUILDING_TEXT]Acropoli[COLOR_REVERT] pu&#242; essere costruita solo in citt&#224; sulle colline o proprio accanto alle colline.</Italian>
     <Spanish>Una [COLOR_BUILDING_TEXT]Acr&#243;polis[COLOR_REVERT] solo se puede construir en ciudades en colinas o justo al lado de las colinas.</Spanish>
@@ -331,7 +331,7 @@
   <TEXT>
     <Tag>TXT_KEY_TECH_GLADIATOR2_STRATEGY</Tag>
     <English>[ICON_BULLET][COLOR_HIGHLIGHT_TEXT]Exhibition Fighters[COLOR_REVERT] can now become [COLOR_UNIT_TEXT]Gladiators[COLOR_REVERT], who can build [COLOR_BUILDING_TEXT]Gladiator Schools[COLOR_REVERT] in your cities.</English>
-    <French>[ICON_BULLET]Les [COLOR_HIGHLIGHT_TEXT]Mun&#233;ristes[COLOR_REVERT] sont maintenant am&#233;liorables en [COLOR_UNIT_TEXT]Gladiateurs[COLOR_REVERT], lesquels peuvent installer des [COLOR_BUILDING_TEXT]Ecoles de gladiateurs[COLOR_REVERT] dans vos villes.</French>
+    <French>[ICON_BULLET]Les [COLOR_HIGHLIGHT_TEXT]Gladiateurs[COLOR_REVERT] (sp&#233;cialiste) sont maintenant am&#233;liorables en [COLOR_UNIT_TEXT]Gladiateurs[COLOR_REVERT] (unit&#233;), lesquels peuvent installer des [COLOR_BUILDING_TEXT]Ecoles de gladiateurs[COLOR_REVERT] dans vos villes.</French>
     <German>[ICON_BULLET][COLOR_HIGHLIGHT_TEXT]Schauk&#228;mpfer[COLOR_REVERT] k&#246;nnen sich nun zu [COLOR_UNIT_TEXT]Gladiatoren[COLOR_REVERT] entwickeln, welche in Euren St&#228;dten [COLOR_BUILDING_TEXT]Gladiatorenschulen[COLOR_REVERT] errichten k&#246;nnen.</German>
     <Italian>[ICON_BULLET]I [COLOR_HIGHLIGHT_TEXT]combattenti della mostra seduti[COLOR_REVERT] possono ora diventare [COLOR_UNIT_TEXT]Gladiatori[COLOR_REVERT], che possono costruire una [COLOR_BUILDING_TEXT]scuole gladiatori[COLOR_REVERT] nelle tue citt&#224;.</Italian>
     <Spanish>[ICON_BULLET]Los [COLOR_HIGHLIGHT_TEXT]luchadores de exhibici&#243;n[COLOR_REVERT] asentados pueden ahora volverse [COLOR_UNIT_TEXT]Gladiadores[COLOR_REVERT], los cuales pueden construir [COLOR_BUILDING_TEXT]Escuelas de gladiadores[COLOR_REVERT] en tus ciudades.</Spanish>
@@ -346,16 +346,16 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_KARTOGRAPHIE_STRATEGY</Tag>
-    <English>[COLOR_HIGHLIGHT_TEXT]Maps of rivers and coasts[COLOR_REVERT] will be made and preserved.</English>
-    <French>[COLOR_HIGHLIGHT_TEXT]Les cartes fluviales et c&#244;ti&#232;res[COLOR_REVERT] sont trac&#233;es et archiv&#233;es.</French>
-    <German>Es werden [COLOR_HIGHLIGHT_TEXT]Karten von Fl&#252;ssen und K&#252;sten[COLOR_REVERT] angefertigt und aufbewahrt.</German>
-    <Italian>[COLOR_HIGHLIGHT_TEXT]Le mappe dei fiumi e delle coste[COLOR_REVERT] verranno create e conservate.</Italian>
-    <Spanish>[COLOR_HIGHLIGHT_TEXT]Mapas de r&#237;os y costas[COLOR_REVERT] ser&#225;n hechos y preservados.</Spanish>
+    <English>[COLOR_HIGHLIGHT_TEXT]Maps of coasts[COLOR_REVERT] will be made and preserved.</English>
+    <French>Les [COLOR_HIGHLIGHT_TEXT]cartes c&#244;ti&#232;res[COLOR_REVERT] sont trac&#233;es et archiv&#233;es.</French>
+    <German>Es werden [COLOR_HIGHLIGHT_TEXT]Karten von K&#252;sten[COLOR_REVERT] angefertigt und aufbewahrt.</German>
+    <Italian>[COLOR_HIGHLIGHT_TEXT]Le mappe delle coste[COLOR_REVERT] verranno create e conservate.</Italian>
+    <Spanish>[COLOR_HIGHLIGHT_TEXT]Mapas de costas[COLOR_REVERT] ser&#225;n hechos y preservados.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_GLADIATOR_STRATEGY</Tag>
     <English>[ICON_BULLET][COLOR_UNIT_TEXT]Slaves[COLOR_REVERT] can now be settled into cities as exhibition fighters (experience bonus to new units).[NEWLINE][ICON_BULLET]Greek religious cities will take part at the Panhellenic Games as soon as the project is created.</English>
-    <French>[ICON_BULLET]Les [COLOR_UNIT_TEXT]Esclaves[COLOR_REVERT] peuvent d&#233;sormais &#234;tre affect&#233;s &#224; une ville en tant que Mun&#233;riste (bonus d'exp&#233;rience pour les nouvelles unit&#233;s).[NEWLINE][ICON_BULLET]Les villes religieuses grecques participeront aux Jeux panhell&#233;niques d&#232;s la cr&#233;ation du projet.</French>
+    <French>[ICON_BULLET]Les [COLOR_UNIT_TEXT]Esclaves[COLOR_REVERT] peuvent d&#233;sormais &#234;tre affect&#233;s &#224; une ville en tant que Gladiateur (bonus d'exp&#233;rience pour les nouvelles unit&#233;s).[NEWLINE][ICON_BULLET]Les villes religieuses grecques participeront aux Jeux panhell&#233;niques d&#232;s la cr&#233;ation du projet.</French>
     <German>[ICON_BULLET][COLOR_UNIT_TEXT]Sklaven[COLOR_REVERT] k&#246;nnen nun als Schauk&#228;mpfer einer Stadt angesiedelt werden (Erfahrungsbonus f&#252;r neue Einheiten).[NEWLINE][ICON_BULLET]Griechisch religi&#246;se St&#228;dte nehmen an den panhellenischen Spielen teil, sobald das Projekt erstellt wurde.</German>
     <Italian>[ICON_BULLET]Gli [COLOR_UNIT_TEXT]slave[COLOR_REVERT] possono essere stabiliti nelle citt&#224; (bonus esperienza per le nuove unit&#224;).[NEWLINE][ICON_BULLET]Le citt&#224; religiose greche prenderanno parte ai Giochi panellenici non appena il progetto sar&#224; creato.</Italian>
     <Spanish>[ICON_BULLET]Los [COLOR_UNIT_TEXT]esclavos[COLOR_REVERT] pueden ser establecidos en las ciudades (bonus de experiencia para nuevas unidades).[NEWLINE][ICON_BULLET]Las ciudades religiosas griegas participar&#225;n en los Juegos Panhel&#233;nicos tan pronto como se cree el proyecto.</Spanish>
@@ -474,11 +474,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_STAMMESFUERST_STRATEGY</Tag>
-    <English>The Tribal Chief can emerge from victorious units that have the status of a [COLOR_HIGHLIGHT_TEXT]Clan Leader[COLOR_REVERT].</English>
-    <French>Une unit&#233; avec le grade de [COLOR_HIGHLIGHT_TEXT]Chef de clan[COLOR_REVERT] peut devenir un Prince des tribus.</French>
-    <German>Der Stammesf&#252;rst kann aus siegreichen Einheiten hervorgehen, die den Status eines [COLOR_HIGHLIGHT_TEXT]Clanf&#252;hrers[COLOR_REVERT] haben.</German>
-    <Italian>Il capo tribale pu&#242; emergere da un'unit&#224; vittoriosa che ha lo status di [COLOR_HIGHLIGHT_TEXT]leader di un clan[COLOR_REVERT].</Italian>
-    <Spanish>El jefe tribal puede emerger desde una unidad victoriosa que tenga el status de un [COLOR_HIGHLIGHT_TEXT]l&#237;der de clan[COLOR_REVERT].</Spanish>
+    <English>The Tribal Chief can emerge from victorious melee unit that have the status of a [COLOR_HIGHLIGHT_TEXT]Clan Leader[COLOR_REVERT].</English>
+    <French>Un combattant de m&#234;l&#233;e avec le grade de [COLOR_HIGHLIGHT_TEXT]Chef de clan[COLOR_REVERT] peut devenir un Prince des tribus.</French>
+    <German>Der Stammesf&#252;rst kann aus siegreichen Nahk&#228;mpfern hervorgehen, die den Status eines [COLOR_HIGHLIGHT_TEXT]Clanf&#252;hrers[COLOR_REVERT] haben.</German>
+    <Italian>Il capo tribale pu&#242; emergere da un combattenti corpo a corpo vittoriosa che ha lo status di [COLOR_HIGHLIGHT_TEXT]leader di un clan[COLOR_REVERT].</Italian>
+    <Spanish>El jefe tribal puede emerger desde un luchadores cuerpo a cuerpo victoriosa que tenga el status de un [COLOR_HIGHLIGHT_TEXT]l&#237;der de clan[COLOR_REVERT].</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_SACRED_BAND_STRATEGY</Tag>
@@ -538,11 +538,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_EMIGRANT_STRATEGY</Tag>
-    <English>Emigrants should be used to spread own culture in annexed cities rapidly or to disband misplaced cities (Pop smaller 3). When built, the city population decreases by 1.</English>
-    <French>Les &#233;migrants doivent &#234;tre utilis&#233;s pour r&#233;pandre rapidement votre propre culture dans les villes annex&#233;es ou pour d&#233;truire des villes mal plac&#233;es (Pop plus petit 3). Lors de la construction, la population de la ville diminue de 1.</French>
-    <German>Auswanderer sollten dazu verwendet werden, um in annektierten St&#228;dten, rasch eigene Kultur zu verbreiten oder fehlplatzierte St&#228;dte aufzul&#246;sen (Pop kleiner 3). Beim Bau sinkt die Stadtbev&#246;lkerung um 1.</German>
-    <Italian>I migranti devono essere usati per propagare la propria cultura in citt&#224; rapidamente annesse o per lasciare citt&#224; mal situate (Pop minor 3). Quando viene costruito, la popolazione della citt&#224; diminuisce di 1.</Italian>
-    <Spanish>Los emigrantes deben ser usados para propagar tu propia cultura en ciudades anexadas r&#225;pidamente o para abandonar ciudades mal situadas (Pop menor 3). Cuando se construye, la poblaci&#243;n de la ciudad disminuye en 1.</Spanish>
+    <English>Emigrants should be used to spread own culture in annexed cities rapidly or to disband misplaced cities (Pop smaller 3). Emigrants can join a city, but cannot found their own cities.</English>
+    <French>Les &#233;migrants doivent &#234;tre utilis&#233;s pour r&#233;pandre rapidement votre propre culture dans les villes annex&#233;es ou pour d&#233;truire des villes mal plac&#233;es (Pop plus petit 3). Les &#233;migrants peuvent rejoindre une ville, mais ne peuvent pas fonder leurs propres villes.</French>
+    <German>Auswanderer sollten dazu verwendet werden, um in annektierten St&#228;dten, rasch eigene Kultur zu verbreiten oder fehlplatzierte St&#228;dte aufzul&#246;sen (Pop kleiner 3). Auswanderer k&#246;nnen sich einer Stadt anschlie&#223;en, aber keine eigenen St&#228;dte gr&#252;nden.</German>
+    <Italian>I migranti devono essere usati per propagare la propria cultura in citt&#224; rapidamente annesse o per lasciare citt&#224; mal situate (Pop minor 3). Gli emigranti possono unirsi a una citt&#224;, ma non possono fondare le proprie citt&#224;.</Italian>
+    <Spanish>Los emigrantes deben ser usados para propagar tu propia cultura en ciudades anexadas r&#225;pidamente o para abandonar ciudades mal situadas (Pop menor 3). Los emigrantes pueden unirse a una ciudad, pero no pueden fundar sus propias ciudades.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_WAR_ELEPHANT_STRATEGY</Tag>
@@ -675,7 +675,7 @@
   <TEXT>
     <Tag>TXT_KEY_UNIT_PHOEN_MISSIONARY_STRATEGY</Tag>
     <English>Use this missionary to actively spread [COLOR_HIGHLIGHT_TEXT]the phoenician religion[COLOR_REVERT] in friendly cities (or rival cities with whom you have [COLOR_HIGHLIGHT_TEXT]Open Borders[COLOR_REVERT]).</English>
-    <French>Utilisez le missionnaire pour propager la [COLOR_HIGHLIGHT_TEXT]religion ph&#233;nicienne[COLOR_REVERT] dans les villes alli&#233;es (ou les villes rivales avec lesquelles vous avez un accord de [COLOR_HIGHLIGHT_TEXT]libre passage[COLOR_REVERT]).</French>
+    <French>Utilisez le missionnaire pour propager la [COLOR_HIGHLIGHT_TEXT]religion m&#233;sopotamienne[COLOR_REVERT] dans les villes alli&#233;es (ou les villes rivales avec lesquelles vous avez un accord de [COLOR_HIGHLIGHT_TEXT]libre passage[COLOR_REVERT]).</French>
     <German>Setzen Sie diesen Missionar ein, um in verb&#252;ndeten oder feindlichen St&#228;dten (mit [COLOR_HIGHLIGHT_TEXT]offenen Grenzen[COLOR_REVERT]) die [COLOR_HIGHLIGHT_TEXT]ph&#246;nizische Religion[COLOR_REVERT] zu verbreiten.</German>
     <Italian>Usa questo missionario per diffondere l'[COLOR_HIGHLIGHT_TEXT]phoenician religion[COLOR_REVERT] nelle citt&#224; amiche (o nelle citt&#224; rivali con le quali si ha [COLOR_HIGHLIGHT_TEXT]diritto di passaggio[COLOR_REVERT]).</Italian>
     <Spanish>Este misionero sirve para propagar la [COLOR_HIGHLIGHT_TEXT]religi&#243;n fenicia[COLOR_REVERT] por ciudades amigas (o de civilizaciones rivales con las que se tenga una [COLOR_HIGHLIGHT_TEXT]Apertura de fronteras[COLOR_REVERT]).</Spanish>

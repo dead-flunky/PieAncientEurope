@@ -66,6 +66,8 @@ protected:
 	bool AI_considerDOW(CvPlot* pPlot); // K-Mod
 	bool AI_considerPathDOW(CvPlot* pPlot, int iFlags); // K-Mod
 
+	bool AI_animalAttack(); // Flunky PAE from RaR
+	bool AI_animalLandPatrol(); // Flunky PAE from RaR
 	void AI_animalMove();
 	void AI_settleMove();
 	void AI_workerMove();

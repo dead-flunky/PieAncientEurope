@@ -252,9 +252,11 @@ def init():
     ]
     LUnitWildAnimals = [
         gc.getInfoTypeForString("UNIT_LION"),
+        gc.getInfoTypeForString("UNIT_LIONESS"),
         gc.getInfoTypeForString("UNIT_BEAR"),
         gc.getInfoTypeForString("UNIT_PANTHER"),
         gc.getInfoTypeForString("UNIT_WOLF"),
+        gc.getInfoTypeForString("UNIT_WOLF2"),
         gc.getInfoTypeForString("UNIT_BOAR"),
         gc.getInfoTypeForString("UNIT_TIGER"),
         gc.getInfoTypeForString("UNIT_LEOPARD"),

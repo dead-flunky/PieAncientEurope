@@ -282,6 +282,42 @@ def getPlotTradingRoad(pSource, pDest):
             iTradeRoad2 = gc.getInfoTypeForString("ROUTE_RAILROAD") # Roman Road
             bSourceGerade = False
             bTradeRoute = False
+
+            # Wenn die Stadt noch keine Handelsstrasse hat
+            if pDest.getRouteType() != iTradeRoad and pDest.getRouteType() != iTradeRoad2:
+                return pDest
+
+            # Update 6.10 - Liegt eine Stadt im Vektorbereich, wird diese die temporäre Destination (sofern sie noch keine Handelsstraße hat)
+            iX = iSourceX
+            iY = iSourceY
+            if iDestX > iSourceX: i=1
+            else: i=-1
+            if iDestY > iSourceY: j=1
+            else: j=-1
+            bBreak = False
+            while iX != iDestX:
+                iY = iSourceY
+                bNoRoadOnYAxis = True
+                while iY != iDestY:
+                    loopPlot = gc.getMap().plot(iX, iY)
+                    if not loopPlot.isNone():
+                        if not loopPlot.isPeak() and not loopPlot.isWater():
+
+                            if loopPlot.isCity():
+                                # wenn die Stadt keine Handelsstrasse hat, is sie fix
+                                # oder wenn sie eine hat, aber noch keine von der Quelle hinführt
+                                if not (loopPlot.getRouteType() == iTradeRoad or loopPlot.getRouteType() == iTradeRoad2) or bNoRoadOnYAxis:
+                                    pDest = loopPlot
+                                    bBreak = True
+                                    break
+
+                            # gibt es bereits eine Strasse an der Y-Achse dieses Vektorbereichs?
+                            if loopPlot.getRouteType() == iTradeRoad or loopPlot.getRouteType() == iTradeRoad2: bNoRoadOnYAxis = False
+
+                    iY += j
+                if bBreak: break 
+                iX += i
+
             # Herausfinden, ob bei pSource eine GERADE Strasse gebaut wurde
             # um zu verhindern, dass 2 Routen erstellt werden:
             #-------#
@@ -307,9 +343,6 @@ def getPlotTradingRoad(pSource, pDest):
                                 elif iTmp < iBest:
                                     bSourceGerade = (i == 1 or j == 1)
 
-            # Wenn die Stadt noch keine Handelsstrasse hat
-            if pDest.getRouteType() != iTradeRoad and pDest.getRouteType() != iTradeRoad2: return pDest
-            
             # Den naechsten Plot fuer die Handelsstrasse herausfinden
             iBestX = iDestX
             iBestY = iDestY

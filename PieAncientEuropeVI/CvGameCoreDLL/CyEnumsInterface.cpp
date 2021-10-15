@@ -552,6 +552,8 @@ void CyEnumsPythonInterface()
 		.value("NUM_GAMEOPTION_TYPES", NUM_GAMEOPTION_TYPES)
 //super forts
 		.value("GAMEOPTION_SUPER_FORTS", GAMEOPTION_SUPER_FORTS)
+// Flunky for PAE catastrophy option
+		.value("GAMEOPTION_CATASTROPHY", GAMEOPTION_CATASTROPHY)
 		;
 
 	python::enum_<MultiplayerOptionTypes>("MultiplayerOptionTypes")

@@ -9,7 +9,7 @@
 import BugOptionsTab
 
 class BugAlertsOptionsTab(BugOptionsTab.BugOptionsTab):
-	"BUG NJAGC Options Screen Tab"
+	"BUG Alerts Options Screen Tab"
 	
 	def __init__(self, screen):
 		BugOptionsTab.BugOptionsTab.__init__(self, "Alerts", "Alerts")
@@ -71,7 +71,7 @@ class BugAlertsOptionsTab(BugOptionsTab.BugOptionsTab):
 		screen.attachHSeparator(column, column + "Sep")
 		
 		# Reminders
-		left, right = self.addTwoColumnLayout(screen, column, "Main")
-		self.addCheckbox(screen, left, "Reminder__Enabled")
-		self.addCheckbox(screen, left, "Reminder__Autolog")
-		self.addTextDropdown(screen, left, left, "Reminder__DisplayMethod")
+		# left, right = self.addTwoColumnLayout(screen, column, "Main")
+		# self.addCheckbox(screen, left, "Reminder__Enabled")
+		# self.addCheckbox(screen, left, "Reminder__Autolog")
+		# self.addTextDropdown(screen, left, left, "Reminder__DisplayMethod")

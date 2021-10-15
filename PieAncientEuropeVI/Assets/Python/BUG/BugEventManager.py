@@ -98,21 +98,22 @@
 ##
 ## Author: EmperorFool
 
-import types
-from CvPythonExtensions import *
-import CvCameraControls
+# import types
+# from CvPythonExtensions import *
+from CvPythonExtensions import (CyGame, CyGlobalContext, getChtLvl, CommerceTypes)
+# import CvCameraControls
 import CvEventManager
 import BugData
 import BugUtil
 # <f1rpo> (advc.007b)
-import CvUtil
-import CvScreensInterface
-import CvDebugTools
+# import CvUtil
+# import CvScreensInterface
+# import CvDebugTools
 # </f1rpo>
-import InputUtil
+# import InputUtil
 
 # OOS Logging Tool by Gerikes
-import OOSLogger
+# import OOSLogger
 # Flag to enable Civ4 shell (See Extras/Pyconsole).
 # Note that the flag will also be used to enable/disable
 # other debugging features of Ramkhamhaeng
@@ -128,7 +129,7 @@ import Tester
 BugUtil.fixSets(globals())
 # BUG - Mac Support - end
 
-DEFAULT_LOGGING = False
+DEFAULT_LOGGING = True
 DEFAULT_NOLOG_EVENTS = set((
     "gameUpdate",
 ))
@@ -186,10 +187,10 @@ class BugEventManager(CvEventManager.CvEventManager):
         self.bMultiPlayer = False
         self.bAllowCheats = False
 
-        self.bPAE_ShowMessagePlayerTurn = False
+        # self.bPAE_ShowMessagePlayerTurn = False
 
         # used to register shortcut handlers
-        self.shortcuts = {}
+        # self.shortcuts = {}
 
         # init fields for BeginActivePlayerTurn
         self.resetActiveTurn()
@@ -334,24 +335,24 @@ class BugEventManager(CvEventManager.CvEventManager):
         else:
             BugUtil.warn("BugEventManager - event %d has no popup handler", eventType)
 
-    def addShortcutHandler(self, keys, handler):
-        """Adds the given handler to be called when any of the keyboard shortcut(s) is hit.
+    # def addShortcutHandler(self, keys, handler):
+        # """Adds the given handler to be called when any of the keyboard shortcut(s) is hit.
 
-        The keys argument may be a single Keystroke, a collection of one or more Keystrokes, or
-        a string which will be converted to such.
-        If any keystrokes have existing handlers, new ones are ignored and a warning is displayed.
+        # The keys argument may be a single Keystroke, a collection of one or more Keystrokes, or
+        # a string which will be converted to such.
+        # If any keystrokes have existing handlers, new ones are ignored and a warning is displayed.
 
-        """
-        if isinstance(keys, InputUtil.Keystroke):
-            keys = (keys,)
-        elif isinstance(keys, types.StringTypes):
-            keys = InputUtil.stringToKeystrokes(keys)
-        for key in keys:
-            if key in self.shortcuts:
-                BugUtil.error("shortcut %s already assigned", key)
-            else:
-                BugUtil.debug("BugEventManager - setting shortcut handler for %s", key)
-                self.shortcuts[key] = handler
+        # """
+        # if isinstance(keys, InputUtil.Keystroke):
+            # keys = (keys,)
+        # elif isinstance(keys, types.StringTypes):
+            # keys = InputUtil.stringToKeystrokes(keys)
+        # for key in keys:
+            # if key in self.shortcuts:
+                # BugUtil.error("shortcut %s already assigned", key)
+            # else:
+                # BugUtil.debug("BugEventManager - setting shortcut handler for %s", key)
+                # self.shortcuts[key] = handler
 
 
     def fireEvent(self, eventType, *args):
@@ -435,178 +436,6 @@ class BugEventManager(CvEventManager.CvEventManager):
         self.eActivePlayer = -1
         self.bEndTurnFired = False
 
-    def checkActivePlayerTurnStart(self):
-        """Fires the BeginActivePlayerTurn event if either the active player or game turn
-        have changed since the last check. This signifies that the active player is about
-        to be able to move their units.
-
-        Called by onGameUpdate() when the End Turn Button is green.
-        """
-        iTurn = gc.getGame().getGameTurn()
-        ePlayer = gc.getGame().getActivePlayer()
-        if self.iActiveTurn != iTurn or self.eActivePlayer != ePlayer:
-            self.iActiveTurn = iTurn
-            self.eActivePlayer = ePlayer
-            self.bEndTurnFired = False
-            self.fireEvent("BeginActivePlayerTurn", ePlayer, iTurn)
-
-    def checkActivePlayerTurnEnd(self):
-        """Fires the endTurnReady event if it hasn't been fired since the active player's turn started.
-
-        Called by onGameUpdate() when the End Turn Button is red.
-        """
-        if not self.bEndTurnFired:
-            self.bEndTurnFired = True
-            self.fireEvent("endTurnReady", self.iActiveTurn)
-
-
-# Used Event Handlers
-
-    def onGameUpdate(self, argsList):
-        """
-        Checks for active player turn begin/end.
-        """
-        if CIV4_SHELL:
-            civ4Console.update(self.glob, self.loc)
-        # Added by Gerikes for OOS logging.
-        OOSLogger.doGameUpdate()
-        # End added by Gerikes for OOS logging.
-
-        eState = CyInterface().getEndTurnState()
-        if eState == EndTurnButtonStates.END_TURN_GO:
-            self.checkActivePlayerTurnStart()
-        else:
-            self.checkActivePlayerTurnEnd()
-
-    def onKbdEvent(self, argsList):
-        'keypress handler - return 1 if the event was consumed'
-        """
-        Handles onKbdEvent by firing the keystroke's handler if it has one registered.
-        """
-
-        eventType, key, mx, my, px, py = argsList
-        game = gc.getGame()
-
-        # if self.bAllowCheats:
-        if gc.getGame().isDebugMode():
-            # notify debug tools of input to allow it to override the control
-            argsList = (eventType, key, self.bCtrl, self.bShift, self.bAlt, mx, my, px, py, game.isNetworkMultiPlayer())
-            if CvDebugTools.g_CvDebugTools.notifyInput(argsList):
-                return 0
-
-        if eventType == self.EventKeyDown and not InputUtil.isModifier(key):
-            theKey = int(key)
-            # <f1rpo> (advc.007b)
-            # Added not bCtrl/bAlt/bShift checks so that each cheat is triggered by only one combination of modifier keys
-            if not self.bShift and self.bCtrl and self.bAlt and theKey == int(InputTypes.KB_R):
-                BugUtil.warn("Note (K-Mod): Reloading of Art Defines (Ctrl+Alt+R) is disabled")
-                return 1 # Don't use this key combination for anything else
-            # </f1rpo>
-
-            stroke = InputUtil.Keystroke(key, self.bAlt, self.bCtrl, self.bShift)
-            if stroke in self.shortcuts:
-                BugUtil.debug("BugEventManager - calling handler for shortcut %s", stroke)
-                self.shortcuts[stroke](argsList)
-                return 1
-
-            # From FfH-Mod: by Kael 07/05/2008
-            if theKey == int(InputTypes.KB_LEFT):
-                if self.bCtrl:
-                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() - 45.0)
-                    return 1
-                elif self.bShift:
-                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() - 10.0)
-                    return 1
-
-            if theKey == int(InputTypes.KB_RIGHT):
-                if self.bCtrl:
-                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() + 45.0)
-                    return 1
-                elif self.bShift:
-                    CyCamera().SetBaseTurn(CyCamera().GetBaseTurn() + 10.0)
-                    return 1
-            # From FfH: End
-
-            # PAE Spieler am Zug Message aktivieren/deaktvieren: STRG+P / CTRL+P --
-            if theKey == int(InputTypes.KB_P):
-                if self.bCtrl:
-                    if self.bPAE_ShowMessagePlayerTurn:
-                        self.bPAE_ShowMessagePlayerTurn = False
-                        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_PAE_CIV_TURN_DEACTIVATED", ("",)), None, 2, None, ColorTypes(14), 0, 0, False, False)
-                    else:
-                        self.bPAE_ShowMessagePlayerTurn = True
-                        self.iPAE_ShowMessagePlayerHumanID = gc.getGame().getActivePlayer()
-                        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_PAE_CIV_TURN_ACTIVATED", ("",)), None, 2, None, ColorTypes(14), 0, 0, False, False)
-                    return 1
-
-            CvCameraControls.g_CameraControls.handleInput(theKey)
-
-            ## AI AutoPlay ##
-            if CyGame().getAIAutoPlay():
-                if theKey == int(InputTypes.KB_SPACE) or theKey == int(InputTypes.KB_ESCAPE):
-                    CyGame().setAIAutoPlay(0)
-                    return 1
-            ## AI AutoPlay ##
-
-            # <f1rpo> (advc.007b) Cheats copied from CvEventManager
-            # if self.bAllowCheats:
-            if gc.getGame().isDebugMode():
-                # Shift - T (Debug - No MP)
-                if self.bShift and not self.bCtrl and not self.bAlt and theKey == int(InputTypes.KB_T):
-                    self.beginEvent(CvUtil.EventAwardTechsAndGold)
-                    return 1
-                if self.bShift and self.bCtrl and not self.bAlt and theKey == int(InputTypes.KB_W):
-                    self.beginEvent(CvUtil.EventShowWonder)
-                    return 1
-                # Shift - ] Debug - currently mouse-over'd unit, health += 10
-                elif theKey == int(InputTypes.KB_LBRACKET) and self.bShift and not self.bCtrl and not self.bAlt:
-                    unit = CyMap().plot(px, py).getUnit(0)
-                    if not unit.isNone():
-                        d = min(unit.maxHitPoints()-1, unit.getDamage() + 10)
-                        unit.setDamage(d, PlayerTypes.NO_PLAYER)
-                # Shift - [ Debug - currently mouse-over'd unit, health -= 10
-                elif theKey == int(InputTypes.KB_RBRACKET) and self.bShift and not self.bCtrl and not self.bAlt:
-                    unit = CyMap().plot(px, py).getUnit(0)
-                    if not unit.isNone():
-                        d = max(0, unit.getDamage() - 10)
-                        unit.setDamage(d, PlayerTypes.NO_PLAYER)
-                # <advc.gfd> Keep Nightinggale's key combination
-                elif theKey == int(InputTypes.KB_F1) and self.bShift and self.bCtrl and not self.bAlt:
-                    GameFontDisplay.GameFontDisplay().interfaceScreen()
-                    return 1 # </advc.gfd>
-                elif theKey == int(InputTypes.KB_F1):
-                    if self.bShift and self.bAlt:
-                        CyInterface().addImmediateMessage("BEGIN Python file optimization", "")
-                        import ResolveConstantFunctions
-                        ResolveConstantFunctions.main(True)
-                        CyInterface().addImmediateMessage("END Python file optimization", "")
-                        return 1
-                    elif self.bShift and not self.bCtrl and not self.bAlt:
-                        CvScreensInterface.replayScreen.showScreen(False)
-                        return 1
-                    # don't return 1 unless you want the input consumed
-
-                elif theKey == int(InputTypes.KB_F2):
-                    if self.bShift and not self.bCtrl and self.bAlt:
-                        import remote_pdb
-                        remote_pdb.RemotePdb("127.0.0.1", 4444).set_trace()
-                        return 1
-                    elif self.bShift and not self.bCtrl and not self.bAlt:
-                        import CvDebugInfoScreen
-                        CvScreensInterface.showDebugInfoScreen()
-                        return 1
-                elif theKey == int(InputTypes.KB_F3):
-                    if self.bShift and not self.bCtrl and not self.bAlt:
-                        CvScreensInterface.showDanQuayleScreen(())
-                        return 1
-                elif theKey == int(InputTypes.KB_F4):
-                    if self.bShift and not self.bCtrl and not self.bAlt:
-                        CvScreensInterface.showUnVictoryScreen(())
-                        return 1
-                # </f1rpo>
-        return 0
-
-
 # Sample Event Handlers
 
     def onPreGameStart(self, argsList):
@@ -617,21 +446,17 @@ class BugEventManager(CvEventManager.CvEventManager):
         """Called when the active player can start their turn."""
         ePlayer, iGameTurn = argsList
 
-    def onEndTurnReady(self, argsList):
-        """Called when the active player has moved their last waiting unit."""
-        ePlayer = argsList[0]
-
     def onSwitchHotSeatPlayer(self, argsList):
         """Called when a hot seat player's turn ends."""
-        ePlayer = argsList[0]
+        # ePlayer = argsList[0]
 
     def onLanguageChanged(self, argsList):
         """Called when the user changes their language selection."""
-        iLanguage = argsList[0]
+        # iLanguage = argsList[0]
 
     def onResolutionChanged(self, argsList):
         """Called when the user changes their graphics resolution."""
-        iResolution = argsList[0]
+        # iResolution = argsList[0]
 
 
     def onUnitUpgraded(self, argsList):
@@ -727,10 +552,10 @@ def configure(logging=None, noLogEvents=None):
         ChangePlayer.ChangePlayer(g_eventManager)
         Tester.Tester(g_eventManager)
 
-    g_eventManager.addEventHandler("kbdEvent", g_eventManager.onKbdEvent)
+    # g_eventManager.addEventHandler("kbdEvent", g_eventManager.onKbdEvent)
     g_eventManager.addEventHandler("OnLoad", g_eventManager.resetActiveTurn)
     g_eventManager.addEventHandler("GameStart", g_eventManager.resetActiveTurn)
-    g_eventManager.addEventHandler("gameUpdate", g_eventManager.onGameUpdate)
+    # g_eventManager.addEventHandler("gameUpdate", g_eventManager.onGameUpdate)
     # --
 
 def hookupPreGameStartEvent():

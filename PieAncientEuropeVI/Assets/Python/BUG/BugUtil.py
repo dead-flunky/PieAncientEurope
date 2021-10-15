@@ -133,7 +133,8 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (MouseFlags, CyGlobalContext, CyTranslator,
+                                CyInterface, NotifyCode, GameOptionTypes)
 import ColorUtil
 import CvEventInterface
 import sys
@@ -174,7 +175,7 @@ def getText(key, values=(), default=None, replaceFontTags=True):
         values = ()
     elif not isinstance(values, (tuple, list)):
         values = (values,)
-    if isinstance(key, unicode):
+    if isinstance(key, unicode): # noqa
         warn("getText - received Unicode key %s", key)
         key = str(key)
     text = localText.getText(key, values)
@@ -299,7 +300,7 @@ def logToFile(message):
     """
     if logTime:
         message = time.asctime()[11:20] + message
-    if isinstance(message, unicode):
+    if isinstance(message, unicode): # noqa
         message = message.encode("iso8859")
     sys.stdout.write(message + "\n")
 

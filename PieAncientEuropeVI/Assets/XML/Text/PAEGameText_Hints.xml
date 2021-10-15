@@ -5,7 +5,7 @@
     <English>If you are having trouble spreading a Cult, make sure the city you are spreading it to has the appropriate resources and that your treasury has enough gold to fund the expansion. Keep in mind it costs significantly more to spread a Cult to a foreign city than to your own.</English>
     <French>Si vous n'arrivez pas &#224; d&#233;velopper un culte, assurez-vous que la ville dans laquelle vous voulez l'implanter dispose des ressources n&#233;cessaires et que vous avez assez d'or dans votre tr&#233;sor pour financer son d&#233;veloppement. N'oubliez pas que cela co&#251;te bien plus cher d'implanter un culte dans une ville &#233;trang&#232;re que de l'implanter dans l'une des v&#244;tres.</French>
     <German>Wenn du einen Kult expandieren willst, stell sicher, dass die Stadt, in der er angesiedelt werden soll, die passenden Ressourcen besitzt und hinreichend Gold f&#252;r die Finanzierung der Expansion in der Schatzkammer bereitsteht. Beachte, dass die Etablierung eines Kultes in einer fremden Stadt deutlich teurer ist als die Ansiedelung in einer eigenen Stadt.</German>
-    <Italian>Se hai problemi a espandere le culto, assicurati che la citt&#224; verso la quale vuoi diffonderla sia dotata delle risorse appropriate e che tu possegga abbastanza oro per finanziare l'operazione. Tieni presente che diffondere le culto in una citt&#224; straniera, costa molto di pi&#249; che farlo in una citt&#224; propria.</Italian>
+    <Italian>Se hai problemi a espandere un culto, assicurati che la citt&#224; verso la quale vuoi diffonderlo sia dotata delle risorse appropriate e che tu possegga abbastanza oro per finanziare l'operazione. Tieni presente che diffondere un culto in una citt&#224; straniera, costa molto di pi&#249; che farlo in una propria citt&#224;.</Italian>
     <Spanish>Si tienes problemas para expandir un culto, aseg&#250;rate de que la ciudad a la que intentas expandirte tiene los recursos apropiados y que tu tesoro dispone de oro suficiente para financiar la expansi&#243;n. Ten presente que cuesta bastante m&#225;s extender un culto a una ciudad extranjera que a una de las tuyas.</Spanish>
   </TEXT>
   <TEXT>
@@ -61,7 +61,7 @@
     <English>As in the ancient world so too in PAE grapes only spread over the course of time. Only in Asia you'll found the grapes resource first, with which the winery building can be built. If you dont have grapes, you have to trade them in order to produce wine.</English>
     <French>Dans PAE comme durant l'antiquit&#233;, la culture de la vigne se r&#233;pand avec le temps. Seule l'Asie en poss&#232;de en d&#233;but de partie. Si vous n'avez pas de raisins, vous devez les &#233;changer pour produire du vin.</French>
     <German>Wie in der Antike wird auch in PAE der Wein erst im Laufe der Zeit verbreitet. Nur in Asien findet man die Ressource Trauben, mit der das Geb&#228;ude Weingut errichtet werden kann. Solltest du nicht im Besitz von Trauben sein, musst du diese erhandeln, um Wein selbst produzieren zu k&#246;nnen.</German>
-    <Italian>Come nel mondo antico cos&#236; anche nel vino PAE estende solo nel corso del tempo. Solo in Asia si trova la risorsa uve, con la quale l'edificio cantina pu&#242; essere costruito. Se non hai l'uva, devi scambiarli per produrre vino.</Italian>
+    <Italian>Cos&#236; come nel mondo antico, in PAE il vino si diffonde con il trascorrere del tempo. Solo in Asia si trova la risorsa uva, con la quale l'edificio cantina pu&#242; essere costruito. Se non hai l'uva, devi ottenerla in un altro modo per produrre vino.</Italian>
     <Spanish>Al igual que en el mundo antiguo, en PAE el vino solo se propaga en el transcurso del tiempo. Las uvas solo pueden ser encontradas en Asia, con las que se puede construir la lagar. Si no tiene uvas, debe intercambiarlas para producir vino.</Spanish>
   </TEXT>
   <TEXT>
@@ -83,7 +83,7 @@
   <TEXT>
     <Tag>TXT_KEY_HINT_107</Tag>
     <English>Merchant carts, merchant ships and caravans can trade goods from one city to another. International trade is more lucrative than regional trade, brings additional research points and can arise paved trade roads.</English>
-    <French>Les charrettes marchandes, les navires marchands et les caravanes peuvent &#233;changer des marchandises d'une ville &#224; l'autre. Le commerce international est plus lucratif que le commerce r&#233;gional, apporte des points de recherche suppl&#233;mentaires et peut d&#233;boucher sur des routes commerciales pav&#233;es.</French>
+    <French>Les convois commerciaux, les navires marchands et les caravanes peuvent &#233;changer des marchandises d'une ville &#224; l'autre. Le commerce international est plus lucratif que le commerce r&#233;gional, apporte des points de recherche suppl&#233;mentaires et peut d&#233;boucher sur des routes commerciales pav&#233;es.</French>
     <German>Mit Handelskarren, Handelsschiffen und Karawanen k&#246;nnen Waren von einer Stadt zur n&#228;chsten gehandelt werden. Internationaler Handel ist lukrativer als regionaler Handel, bringt zus&#228;tzlich Forschungspunkte und l&#228;sst befestigte Handelsstra&#223;en entstehen.</German>
     <Italian>I mercantili, le navi mercantili e le roulotte possono scambiare merci da una citt&#224; all'altra. Il commercio internazionale &#232; pi&#249; redditizio del commercio regionale, porta ulteriori punti di ricerca e pu&#242; sorgere strade commerciali asfaltate.</Italian>
     <Spanish>Los carros mercantes, los barcos mercantes y las caravanas pueden intercambiar bienes de una ciudad a otra. El comercio internacional es m&#225;s lucrativo que el comercio regional, trae puntos de investigaci&#243;n adicionales y puede surgir caminos comerciales pavimentados.</Spanish>
@@ -287,5 +287,13 @@
     <German>Unbrauchbare Einheiten k&#246;nnen im S&#246;ldnerposten verkauft werden.</German>
     <Italian>Le unit&#224; inutilizzabili possono essere vendute al mercenario.</Italian>
     <Spanish>Las unidades inutilizables se pueden vender en el puesto de mercenarios.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_HINT_133</Tag>
+    <English>Territorial mercenaries are strong and rare, so construction costs increase by 100% per unit.</English>
+    <French>Les mercenaires territoriaux sont forts et rares, de sorte que les co&#251;ts de construction augmentent de 100% par unit&#233;.</French>
+    <German>Territoriale S&#246;ldner sind stark und selten, deshalb steigen die Baukosten um 100% pro Einheit.</German>
+    <Italian>I mercenari territoriali sono forti e rari, quindi i costi di costruzione aumentano del 100% per unit&#224;.</Italian>
+    <Spanish>Los mercenarios territoriales son fuertes y raros, por lo que los costos de construcci&#243;n aumentan en un 100% por unidad.</Spanish>
   </TEXT>
 </Civ4GameText>

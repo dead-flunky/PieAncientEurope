@@ -395,7 +395,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_GER</Tag>
     <English>[ICON_BULLET]Ranks for combat-experienced Germans, Celts, Gauls, Dacians, Bretons and Vandals will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Germains, Celtes, Gaulois, Daces, Bretons et Vandales seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Germains, Celtes, Gaulois, Daces, Bretons et Vandales seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r kampferfahrene Germanen, Kelten, Gallier, Daker, Britonen und Vandalen werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]Saranno sbloccati i ranghi di tedeschi esperti di combattimento, Celti, Galli, Daci, Bretoni e Vandali.</Italian>
     <Spanish>[ICON_BULLET]Los rangos de alemanes, celtas, galos, dacios, bretones y v&#225;ndalos con experiencia en combate ahora ser&#225;n desbloqueados.</Spanish>
@@ -403,7 +403,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_EGYPT</Tag>
     <English>[ICON_BULLET]Ranks for Egyptians and Nubians will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des &#201;gyptiens et Nubiens seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des &#201;gyptiens et Nubiens seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r &#196;gypter und Nubier werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per egiziani e nubiani saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para egipcios y nubios ahora ser&#225;n desbloqueados.</Spanish>
@@ -411,7 +411,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_SUMER</Tag>
     <English>[ICON_BULLET]Ranks for Sumerians will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Sum&#233;riens seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Sum&#233;riens seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r Sumerer werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi dei Sumeri saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para los sumerios ahora ser&#225;n desbloqueados.</Spanish>
@@ -421,7 +421,7 @@
     <English>[ICON_BULLET]Every conquered city has at least 5 pop[NEWLINE][ICON_BULLET]Slaves and specialists stay in city and buildings[NEWLINE][ICON_BULLET]33% chance of tech conquering (not only with pop>2)[NEWLINE][ICON_BULLET]Temples are not destroyed[NEWLINE][ICON_BULLET]No beatgold[NEWLINE][ICON_BULLET]No partisans</English>
     <French>[ICON_BULLET]Chaque Ville conquise a au moins 5 de population[NEWLINE][ICON_BULLET]Esclaves et Sp&#233;cialistes restent assign&#233;s aux villes et b&#226;timents captur&#233;s[NEWLINE][ICON_BULLET]33% Chance d'acqu&#233;rir tech. &#224; la prise d'une ville (non limit&#233; &#224; pop.>2)[NEWLINE][ICON_BULLET]Temples restent intact[NEWLINE][ICON_BULLET]Pas de butin en or[NEWLINE][ICON_BULLET]Pas d'unit&#233; de Partisans</French>
     <German>[ICON_BULLET]Jede eroberte Stadt hat mind. 5 Pop[NEWLINE][ICON_BULLET]Sklaven und Spezialisten bleiben in Stadt und Geb&#228;uden angesiedelt[NEWLINE][ICON_BULLET]33% Chance einer Tech bei Stadteroberung (nicht mehr nur bei Pop>2)[NEWLINE][ICON_BULLET]Tempel werden nicht abgerissen[NEWLINE][ICON_BULLET]Kein Beutegold[NEWLINE][ICON_BULLET]Keine Partisanen</German>
-    <Italian>[ICON_BULLET]Every conquered city has at least 5 pop[NEWLINE][ICON_BULLET]Slaves and specialists stay in city and buildings[NEWLINE][ICON_BULLET]33% chance of tech conquering (not only with pop>2)[NEWLINE][ICON_BULLET]Temples are not destroyed[NEWLINE][ICON_BULLET]No beatgold[NEWLINE][ICON_BULLET]No partisans</Italian>
+    <Italian>[ICON_BULLET] Qualsiasi citt&#224; conquistata che abbia almeno una popolazione di 5[NEWLINE][ICON_BULLET] Schiavi e specialisti rimarranno nella citt&#224; e negli edifici[NEWLINE][ICON_BULLET] 33% di possibilit&#224; di conquistare una tecnologia (non solo con pop>2)[NEWLINE][ICON_BULLET] I templi non vengono distrutti[NEWLINE][ICON_BULLET] Nessun bottino di guerra[NEWLINE][ICON_BULLET] Nessun partigiano</Italian>
     <Spanish>[ICON_BULLET]Cualquier ciudad conquistada que tenga al menos un tama&#241;o de 5 de poblaci&#243;n[NEWLINE][ICON_BULLET]Esclavos y especialistas se mantendr&#225;n en la ciudad y edificios[NEWLINE][ICON_BULLET]33% de oportunidad de conquista tecnol&#243;gica (no solo con pob>2)[NEWLINE][ICON_BULLET]Los templos no son destruidos[NEWLINE][ICON_BULLET]Sin bot&#237;n de guerra[NEWLINE][ICON_BULLET]Sin partisanos</Spanish>
   </TEXT>
   <TEXT>
@@ -437,7 +437,7 @@
     <English>[ICON_BULLET] +1 XP for victorious units (per fight)[NEWLINE][ICON_BULLET] additional +1 XP for conquerors and aggressive leaderheads[NEWLINE][ICON_BULLET] German and Celt units get ranks now</English>
     <French>[ICON_BULLET]+1 XP pour unit&#233; victorieuse (par combat)[NEWLINE][ICON_BULLET]+1 XP suppl&#233;mentaire par trait de dirigeant Conqu&#233;rant et Agressif[NEWLINE][ICON_BULLET]Grades militaires pour les germains et les celtes</French>
     <German>[ICON_BULLET]+1 XP f&#252;r siegreiche Einheiten (pro Kampf)[NEWLINE][ICON_BULLET]zus&#228;tzliche +1 XP f&#252;r Eroberer und aggressive Staatsoberh&#228;upter[NEWLINE][ICON_BULLET]Einheiten der Germanen und Kelten erhalten nun R&#228;nge</German>
-    <Italian>[ICON_BULLET] +1 XP for victorious units (per fight)[NEWLINE][ICON_BULLET] additional +1 XP for conquerors and aggressive leaderheads[NEWLINE][ICON_BULLET] German and Celt units get ranks now</Italian>
+    <Italian>[ICON_BULLET] +1 XP per le unit&#224; vittoriose (per battaglia)[NEWLINE][ICON_BULLET] +1 XP aggiuntivi per i leader Conquistatori e Aggressivi[NEWLINE][ICON_BULLET] Ranghi militari per unit&#224; germaniche e celtiche</Italian>
     <Spanish>[ICON_BULLET] +1 XP para unidades victoriosas (por batalla)[NEWLINE][ICON_BULLET] +1 XP adicional por l&#237;deres conquistadores y agresivos[NEWLINE][ICON_BULLET] Unidades germanas y celtas tienen rangos ahora</Spanish>
   </TEXT>
   <TEXT>
@@ -459,7 +459,7 @@
   <TEXT>
     <Tag>TXT_KEY_PROMOTION_RANG_GER_2</Tag>
     <English>Battle Companion</English>
-    <French>Fraternit&#233; d'armes</French>
+    <French>Compagnon d'armes</French>
     <German>Kampfgef&#228;hrte</German>
     <Italian>Battaglia compagna</Italian>
     <Spanish>Compa&#241;ero de batalla</Spanish>
@@ -477,7 +477,7 @@
     <English>Congratulations, you have trained your first trade unit in %s2City_Name! [NEWLINE][NEWLINE]With this unit you can purchase and sell goods in owned or foreign cities. The farther away the city is and the more population a city has, the higher the profit. Those traded goods are available for the trading partner for a few turns. Trade routes are only possible with open borders. If a trade was carried out, a paved trade road can be established between both trading cities, which increases the movement of the units and the yield of the plot.</English>
     <French>Bravo, vous avez entra&#238;n&#233; votre premier marchand &#224; %s2City_Name! [NEWLINE][NEWLINE]Cette unit&#233; peut acheter ou vendre des biens dans les villes locales ou &#233;trang&#232;res. Le gain augmente avec la distance et la taille de la ville. Le partenaire d'&#233;change a acc&#232;s &#224; ces biens pour quelques tours. Les voies commerciales ne sont possibles que si le libre passage est autoris&#233;. Lorsque qu'un &#233;change est men&#233; &#224; son terme, une route pav&#233;e peut appara&#238;tre entre les villes commer&#231;antes, augmentant alors le mouvement des unit&#233;s et le b&#233;n&#233;fice de ces cases.</French>
     <German>Herzlichen Gl&#252;ckwunsch! Ihr habt Euren ersten H&#228;ndler in %s2City_Name errichtet! [NEWLINE][NEWLINE]Mit dieser Einheit k&#246;nnen G&#252;ter in eigenen oder fremden St&#228;dten eingekauft und verkauft werden. Je gr&#246;&#223;er und weiter weg die andere Handelsstadt ist, desto h&#246;her der Ertrag. Gehandelte G&#252;ter stehen dem Handelspartner einige Runden lang zur Verf&#252;gung. Handelsrouten sind nur mit Offenen Grenzen m&#246;glich. Wurde ein Handel durchgef&#252;hrt, so kann zwischen beiden Handelsst&#228;dten eine befestigte Handelsstra&#223;e entstehen, die die Fortbewegung der Einheiten und den Feldertrag erh&#246;ht.</German>
-    <Italian>Congratulations, you have trained your first trade unit in %s2City_Name! [NEWLINE][NEWLINE]With this unit you can purchase and sell goods in owned or foreign cities. The farther away the city is and the more population a city has, the higher the profit. Those traded goods are available for the trading partner for a few turns. Trade routes are only possible with open borders. If a trade was carried out, a paved trade road can be established between both trading cities, which increases the movement of the units and the yield of the plot.</Italian>
+    <Italian>Congratulazioni, hai addestrato la tua prima unit&#224; commerciale a %s2City_Name![NEWLINE][NEWLINE]Con questa unit&#224; puoi acquistare e vendere beni nelle tue citt&#224; o in quelle di altre nazioni. Pi&#249; lontana e popolosa &#232; la citt&#224;, maggiore sar&#224; il profitto. I beni scambiati saranno disponibili al partner commerciale per alcuni turni. Le rotte commerciali sono possibili solo se &#232; in vigore un accordo di diritto di passaggio. Una volta concluso uno scambio, sar&#224; possibile costruire una strada commerciale asfaltata tra entrambe le citt&#224; commerciali, il che consentir&#224; di aumentare il movimento delle unit&#224; e il rendimento delle rispettive caselle.</Italian>
     <Spanish>&#161;Enhorabuena, has entrenado tu primera unidad comercial en %s2City_Name![NEWLINE][NEWLINE]Con esta unidad, las mercanc&#237;as cultivables pueden ser compradas en las ciudades y vendidas en las ciudades vecinas. Cuanto m&#225;s valiosa sea la mercanc&#237;a, y m&#225;s grande sea la otra ciudad, m&#225;s rendimiento tendr&#225;. Las mercanc&#237;as comerciadas estar&#225;n disponibles para esa civilizaci&#243;n por unos pocos turnos. Las rutas comerciales solo pueden ser creadas con apertura de fronteras. Si comercias por bienes lujosos (&#225;mbar, seda, lat&#243;n, etc), hay una cierta probabilidad de que se construya un tramo de carretera comercial entre las dos ciudades, el cual mejora el movimiento de las unidades y el rendimiento de la casilla.</Spanish>
   </TEXT>
   <TEXT>
@@ -485,7 +485,7 @@
     <English>Congratulations, you have trained your first [COLOR_UNIT_TEXT]wagon[COLOR_REVERT] in %s2City_Name! This unit can be used to make neighbor cities grow faster (supplies food) or to spread cultivable resources (cereals, animals, olives, etc.) in your own country! To do this, the wagon must be loaded with the goods in a city. The map then shows where the resource can be cultivated. In the vicinity of villages only 1 resource can be used, in cities 2, in provincial cities 3 and in metropolises even up to 4.</English>
     <French>Bravo, vous avez entra&#238;n&#233; votre premier [COLOR_UNIT_TEXT]Chariot[COLOR_REVERT] &#224; %s2City_Name! Cette unit&#233; peut &#234;tre assign&#233;e &#224; l'approvisionnement en nourriture des villes voisines pour acc&#233;l&#233;rer leur croissance, ou &#224; la propagation des ressources cultivables (c&#233;r&#233;ales, b&#233;tail, olives...) sur vos terres. La ressource doit &#234;tre charg&#233;e sur le chariot dans une ville, puis d&#233;charg&#233;e dans une ville proche d'un des emplacements de culture possibles indiqu&#233;s sur la carte. Les villages ne peuvent accueillir qu'une seule ressource sur leur territoire, les villes 2, les grandes villes 3 et les m&#233;tropoles 4.</French>
     <German>Herzlichen Gl&#252;ckwunsch! Ihr habt Eurer erstes [COLOR_UNIT_TEXT]Fuhrwerk[COLOR_REVERT] in %s2City_Name errichtet! Diese Einheit kann dazu verwendet werden, benachbarte St&#228;dte schneller wachsen zu lassen (liefert Nahrungsmittel) oder um kultivierbare Resourcen (Getreide, Tiere, Oliven,..) im eigenen Land zu verbreiten! Dazu muss der Karren in einer Stadt mit dem Gut beladen werden. Auf der Karte wird nun angezeigt, wo die Resource kultivierbar ist. Im Umkreis von D&#246;rfern kann nur 1 Resource nutzbar gemacht werden, in St&#228;dten 2, in Provinzst&#228;dten 3 und in Metropolen sogar bis zu 4.</German>
-    <Italian>Congratulations, you have trained your first [COLOR_UNIT_TEXT]wagon[COLOR_REVERT] in %s2City_Name! This unit can be used to make neighbor cities grow faster (supplies food) or to spread cultivable resources (cereals, animals, olives, etc.) in your own country! To do this, the wagon must be loaded with the goods in a city. The map then shows where the resource can be cultivated. In the vicinity of villages only 1 resource can be used, in cities 2, in provincial cities 3 and in metropolises even up to 4.</Italian>
+    <Italian>Congratulazioni, hai addestrato il tuo primo [COLOR_UNIT_TEXT]carro[COLOR_REVERT] a %s2City_Name! Questa unit&#224; pu&#242; essere utilizzata per far crescere pi&#249; velocemente le citt&#224; vicine (fornisce cibo) o per diffondere risorse coltivabili (cereali, animali, olive, ecc.) nel tuo territorio! Per far ci&#242;, il carro deve essere caricato con le merci in una citt&#224;. La mappa mostra quindi dove la risorsa pu&#242; essere coltivata. In prossimit&#224; dei villaggi si pu&#242; utilizzare solo 1 risorsa, nelle citt&#224; 2, nelle citt&#224; di provincia 3 e nelle metropoli fino a 4.</Italian>
     <Spanish>&#161;Enhorabuena, has entrenado tu primera [COLOR_UNIT_TEXT]Carruaje[COLOR_REVERT] en %s2City_Name! &#161;Esta unidad puede ser usada para hacer que las ciudades vecinas crezcan m&#225;s r&#225;pido (aportando comida) o para propagar recursos cultivables (cereales, ganado, olivas, etc) en tu propio pa&#237;s! Para hacer esto, el carruaje debe ser cargada con las mercanc&#237;as en la ciudad. El mapa mostrar&#225; los lugares donde puede ser cultivado. En las cercan&#237;as de un municipio solo 1 recurso puede ser usado, en las ciudades 2, en las ciudades provinciales 3 y en las metr&#243;polis sube hasta 4.</Spanish>
   </TEXT>
   <TEXT>
@@ -525,7 +525,7 @@
     <English>In hilly areas, it is difficult to find warriors joining your cause. Better open your camp in flat regions!</English>
     <French>Vous trouverez peu de guerriers d&#233;sireux de se joindre &#224; vous dans les r&#233;gions vallonn&#233;es. Dressez de pr&#233;f&#233;rence votre camp en plaine!</French>
     <German>In h&#252;geligen Gegenden lassen sich kaum Krieger finden, die sich Eurer Sache anschlie&#223;en. Schlagt Euer Lager lieber in flachen Regionen auf!</German>
-    <Italian>In hilly areas, it is difficult to find warriors joining your cause. Better open your camp in flat regions!</Italian>
+    <Italian>Nelle zone collinari &#232; difficile trovare guerrieri che si uniscano alla tua causa. Meglio allestire il tuo campo in regioni pianeggianti!</Italian>
     <Spanish>En &#225;reas monta&#241;osas es complicado encontrar guerreros que se unan a tu causa. &#161;Mejor establece tu campamento en regiones llanas!</Spanish>
   </TEXT>
   <TEXT>
@@ -643,7 +643,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_ASSUR</Tag>
     <English>[ICON_BULLET]Ranks for Assyrians and Babylonians will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Assyriens et Babyloniens seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Assyriens et Babyloniens seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r Assyrer und Babylonier werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per assiri e babilonesi saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para asirios y babilonios ahora ser&#225;n desbloqueados.</Spanish>
@@ -651,7 +651,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_SPARTA</Tag>
     <English>[ICON_BULLET]Ranks for Sparta will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Spartiates seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Spartiates seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r Sparta werden jetzt freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per Sparta ora saranno sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos de Esparta ahora ser&#225;n desbloqueados.</Spanish>
@@ -659,7 +659,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_MACEDON</Tag>
     <English>[ICON_BULLET]Ranks for Macedonians will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Mac&#233;doniens seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Mac&#233;doniens seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r die Makedonen werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per i macedoni saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para macedonios ahora ser&#225;n desbloqueados.</Spanish>
@@ -955,7 +955,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_PERSIA</Tag>
     <English>[ICON_BULLET]Ranks for Persia will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Perses seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Perses seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r Persien werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per la Persia ora saranno sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos de Persia ahora ser&#225;n desbloqueados.</Spanish>
@@ -963,7 +963,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_GREEK</Tag>
     <English>[ICON_BULLET]Ranks for Greek Hoplites will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Hoplites grecs seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Hoplites grecs seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r griechische Hopliten werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I gradi per gli opliti greci saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para los hoplitas griegos ahora ser&#225;n desbloqueados.</Spanish>
@@ -971,7 +971,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_CARTH</Tag>
     <English>[ICON_BULLET]Ranks of the Sacred Band of Carthage will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs du Bataillon Sacr&#233; de Carthage seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades du Bataillon Sacr&#233; de Carthage seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge der Heiligen Schar Karthagos werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I gradi per il Battaglione Sacro di Carthage saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para el Batall&#243;n Sagrado de Cartago ahora ser&#225;n desbloqueados.</Spanish>
@@ -979,7 +979,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_ROM</Tag>
     <English>[ICON_BULLET]Ranks for Roman legionnaires will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des L&#233;gionnaires romains seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des L&#233;gionnaires romains seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r r&#246;mische Legion&#228;re werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per i legionari romani saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para los legionarios romanos ahora ser&#225;n desbloqueados.</Spanish>
@@ -1179,7 +1179,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_ROM_EQUES</Tag>
     <English>[ICON_BULLET]Ranks for Roman cavalry will now be unlocked.</English>
-    <French>[ICON_BULLET]Les grades pour la cavalerie romaine seront maintenant d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades pour la cavalerie romaine seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r r&#246;mische Kavallerie werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per la cavalleria romana saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para la caballer&#237;a romana ahora ser&#225;n desbloqueados.</Spanish>
@@ -1187,7 +1187,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_ROM_LATE</Tag>
     <English>[ICON_BULLET]Ranks of late Roman Comitatenses will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Comitatenses romains seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Comitatenses romains seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge der sp&#228;tr&#246;mischen Comitatenses werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I gradi dei Comitatenses romani saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos de los comitatenses romanos tard&#237;os ahora ser&#225;n desbloqueadas.</Spanish>
@@ -1195,7 +1195,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_HUN</Tag>
     <English>[ICON_BULLET]Ranks for Huns will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs des Huns seront d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades des Huns seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r Hunnen werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I gradi per gli Unni saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos de Hunos ahora ser&#225;n desbloqueados.</Spanish>
@@ -1203,7 +1203,7 @@
   <TEXT>
     <Tag>TXT_KEY_RANK_START_INFO_PERSIA2</Tag>
     <English>[ICON_BULLET]Ranks for the Persian Cavalry (Sassanids) will now be unlocked.</English>
-    <French>[ICON_BULLET]Les rangs de la cavalerie perse (Sassanides) vont maintenant &#234;tre d&#233;bloqu&#233;s.</French>
+    <French>[ICON_BULLET]Les grades de la cavalerie perse (Sassanides) seront d&#233;bloqu&#233;s.</French>
     <German>[ICON_BULLET]R&#228;nge f&#252;r die persische Kavallerie (Sassaniden) werden nun freigeschaltet.</German>
     <Italian>[ICON_BULLET]I ranghi per la Cavalleria Persiana (Sassanidi) saranno ora sbloccati.</Italian>
     <Spanish>[ICON_BULLET]Los rangos para la Caballer&#237;a Persa (sas&#225;nidas) ahora ser&#225;n desbloqueados.</Spanish>
@@ -1309,7 +1309,7 @@
     <English>This map is based on Larry Niven's Ring World.[NEWLINE]This map script constructs a long skinny map that is only 12 tiles high. Note that the map wraps left to right so Civ4 puts ice caps on the top and bottom. The width of the map depends upon the size selected by the user. The top and bottom 4 tiles of the map are water. The other 4 tiles form the land section and will be land or water based on a user selection.[NEWLINE][NEWLINE]The user has two options: land density and region strength:[NEWLINE][NEWLINE]Land Density:[NEWLINE]Solid: The land section is all land[NEWLINE]Semi-solid: The land section is land with some water[NEWLINE]Large Islands: The land section has some water so that large islands are formed[NEWLINE]Small Islands: The land section has more water so that small islands are formed[NEWLINE]Land/Water mix: The land section is a mixture of water and land[NEWLINE][NEWLINE]Region strength:[NEWLINE]There are 4 regions: underlying, plains, desert, hills[NEWLINE]The user can designate how strongly regional the map is.</English>
     <French>Cette carte est bas&#233;e sur la carte Ringworld de Larry Niven.[NEWLINE]Une unique masse de terre allong&#233;e est g&#233;n&#233;r&#233;e al&#233;atoirement sur toute la longueur de la carte, dont la hauteur n'est que de 12 cases. Les 4 cases centrales sont d&#233;di&#233;es aux cases de terre ou d'eau selon le choix du joueur, ceintur&#233;es par 4 cases d'oc&#233;an, avec les p&#244;les glaciaires, de part et d'autre. La largeur de la carte d&#233;pend du choix de sa taille.[NEWLINE][NEWLINE]Le joueur peut param&#233;trer 2 options: Masse de terre et Poids r&#233;gional[NEWLINE][NEWLINE]Masse de terre:[NEWLINE]Terrestre: La zone de jeu est uniquement terrestre[NEWLINE]Semi-terrestre: La zone de jeu est entrecoup&#233;e d'eau par endroits[NEWLINE]Grandes &#238;les: La zone de jeu comporte de grandes &#238;les[NEWLINE]Petites &#238;les: La zone de jeu est principalement aquatique avec quelques petites &#238;les[NEWLINE]Terre et Mer: La zone de jeu associe les deux &#224; son gr&#233;[NEWLINE][NEWLINE]Poids r&#233;gional:[NEWLINE]4 types de r&#233;gion: Oc&#233;an, Plaine, D&#233;sert, Colline[NEWLINE]Le joueur peut r&#233;gler l'homog&#233;n&#233;it&#233; de leur r&#233;partition sur la carte.</French>
     <German>Die Karte basiert auf Larry Nivens Ringwelt.[NEWLINE]Dieser Kartengenerator erstellt einen langgezogenen Landstrich &#252;ber die ganze Kartenbreite. Die Karte ist insgesamt nur 12 Plots hoch. Davon sind mittig 4 Felder f&#252;r Landplots sowie Wasserplots reserviert, oben und unten jeweils 4 Ozeanfelder. Die Breite der Karte h&#228;ngt von der ausgew&#228;hlten Kartengr&#246;&#223;e zusammen.[NEWLINE][NEWLINE]Der Spieler hat zwei Optionen: Landdichte und Regionsgr&#246;&#223;e[NEWLINE][NEWLINE]Landdichte:[NEWLINE]Solide: Der Landring besteht nur aus Land[NEWLINE]Halb-Solide: Der Landring enth&#228;lt einige Wasserfelder[NEWLINE]Gro&#223;e Inseln: Der Landring enth&#228;lt mehr Wasser, sodass gro&#223;e Inseln entstehen[NEWLINE]Kleine Inseln: Der Landring hat viel Wasser, sodass kleine Inseln entstehen[NEWLINE]Land/Wassermix: Der Landring enth&#228;lt Land und Wasser nach belieben[NEWLINE][NEWLINE]Regionsgr&#246;&#223;e:[NEWLINE]Es gibt 4 Regionen: Ozean, Ebenen, W&#252;ste, H&#252;gel[NEWLINE]Der Spieler kann einstellen, wie stark die Regionen auf der Karte vertreten sein sollen.</German>
-    <Italian>This map is based on Larry Niven's Ring World.[NEWLINE]This map script constructs a long skinny map that is only 12 tiles high. Note that the map wraps left to right so Civ4 puts ice caps on the top and bottom. The width of the map depends upon the size selected by the user. The top and bottom 4 tiles of the map are water. The other 4 tiles form the land section and will be land or water based on a user selection.[NEWLINE][NEWLINE]The user has two options: land density and region strength:[NEWLINE][NEWLINE]Land Density:[NEWLINE]Solid: The land section is all land[NEWLINE]Semi-solid: The land section is land with some water[NEWLINE]Large Islands: The land section has some water so that large islands are formed[NEWLINE]Small Islands: The land section has more water so that small islands are formed[NEWLINE]Land/Water mix: The land section is a mixture of water and land[NEWLINE][NEWLINE]Region strength:[NEWLINE]There are 4 regions: underlying, plains, desert, hills[NEWLINE]The user can designate how strongly regional the map is.</Italian>
+    <Italian>Questa mappa &#232; basata sul romanzo di fantascienza I burattinai (Ringworld) di Larry Niven.[NEWLINE]Si tratta di una mappa lunga e sottile alta solo 12 caselle. Tieni presente che la mappa si sposta da sinistra a destra in modo che Civ4 metta strati di ghiaccio in alto e in basso. La larghezza della mappa dipende dalla dimensione selezionata dall'utente. Le 4 caselle superiori e inferiori della mappa sono di acqua. Le altre 4 caselle formano la sezione del terreno e saranno di terra o di acqua a seconda della selezione dell'utente.[NEWLINE][NEWLINE]L'utente ha due opzioni: densit&#224; del terreno e forza della regione:[NEWLINE][NEWLINE]Densit&#224; del terreno:[NEWLINE]Solido: la sezione terrestre &#232; tutta di terraferma[NEWLINE]Semi-solido: la sezione terrestre &#232; terraferma con un po' di acqua[NEWLINE]Grandi isole: la sezione terrestre ha dell'acqua in modo che si formino grandi isole[NEWLINE]Piccole isole: la sezione terrestre ha pi&#249; acqua in modo che si formino piccole isole[NEWLINE]Miscela terra/acqua: la sezione terra &#232; una miscela di acqua e terra[NEWLINE][NEWLINE]Dimensione della regione:[NEWLINE]Ci sono 4 regioni: oceano, pianura, deserto, colline[NEWLINE]Il giocatore pu&#242; impostare la compattezza con cui le regioni devono essere rappresentate sulla mappa.</Italian>
     <Spanish>Este mapa se basa en el mundo anillo de Larry Niven.[NEWLINE]Este script de mapa construye un mapa largo y delgado que solo tiene 12 casillas de altura. Tenga en cuenta que el mapa se ajusta de izquierda a derecha para que Civ4 ponga capas de hielo en la parte superior e inferior. El ancho del mapa depende del tama&#241;o seleccionado por el usuario. Las 4 casillas superiores e inferiores del mapa son agua. Las otras 4 casillas forman la secci&#243;n de terreno y ser&#225;n tierra o agua seg&#250;n la selecci&#243;n del usuario.[NEWLINE][NEWLINE]El usuario tiene dos opciones: densidad de la tierra y fuerza de la regi&#243;n:[NEWLINE][NEWLINE]Densidad de la tierra:[NEWLINE]S&#243;lido: la secci&#243;n de tierra es toda la tierra.[NEWLINE]Semis&#243;lido: la secci&#243;n de tierra es tierra con algo de agua.[NEWLINE]Islas grandes: la secci&#243;n de tierra tiene algo de agua para que se formen islas grandes[NEWLINE]Islas peque&#241;as: la secci&#243;n de tierra tiene m&#225;s agua para que se formen islas peque&#241;as.[NEWLINE]Mezcla tierra / agua: la secci&#243;n tierra es una mezcla de agua y tierra[NEWLINE][NEWLINE]Fuerza de la regi&#243;n:[NEWLINE]Hay 4 regiones: subyacentes, llanuras, desiertos, colinas.[NEWLINE]El usuario puede designar cu&#225;n fuertemente regional es el mapa.</Spanish>
   </TEXT>
   <TEXT>
@@ -1397,7 +1397,7 @@
     <English>Leader traits</English>
     <French>Caract&#233;ristiques du Dirigeant</French>
     <German>Staatsoberhauptmerkmale</German>
-    <Italian>Caratteristiche Stato</Italian>
+    <Italian>Caratteristiche del Capo di Stato</Italian>
     <Spanish>Caracter&#237;sticas del estado</Spanish>
   </TEXT>
   <TEXT>
@@ -1597,7 +1597,7 @@
     <English>%s1 is extremely useful, [CT_NAME]. [CT_CIV_SHORT] would do well to adopt it.</English>
     <French>[CT_NAME], nous trouvons ceci extr&#234;mement utile : %s1. Les [CT_EMPIRE] feraient mieux de l'adopter.</French>
     <German>Die Staatsform %s1 ist extrem n&#252;tzlich, [CT_NAME]. [CT_CIV_SHORT] w&#228;re gut beraten, sie anzunehmen.</German>
-    <Italian>La forma di governo: %s1 &#232; estremamente utile, [CT_NAME]. [CT_CIV_SHORT:1] farebbe bene ad adottarla.</Italian>
+    <Italian>La forma di governo %s1 &#232; estremamente utile, [CT_NAME]. [CT_CIV_SHORT:1] farebbe bene se l'adottasse.</Italian>
     <Spanish>[NUM1:El:La:Los:Las] %s1 [NUM1:es muy &#250;til:es muy &#250;til:son muy &#250;tiles:son muy &#250;tiles], [CT_NAME]. [CT_CIV_SHORT] har&#237;a bien en [NUM1:adoptarlo:adoptarla:adoptarlos:adoptarlas].</Spanish>
   </TEXT>
   <TEXT>
@@ -1613,7 +1613,7 @@
     <English>You have come %d1[ICON_RESEARCH] closer to a breakthrough on [COLOR_TECH_TEXT]%s2_TechName[COLOR_REVERT]</English>
     <French>Vous avez progress&#233; de %d1[ICON_RESEARCH] dans la recherche de la technologie : [COLOR_TECH_TEXT]%s2_TechName[COLOR_REVERT]</French>
     <German>Ihr seid einem Durchbruch in der Technologie [COLOR_TECH_TEXT]%s2_TechName[COLOR_REVERT] %d1[ICON_RESEARCH] n&#228;hergekommen</German>
-    <Italian>Sei %d1[ICON_RESEARCH] pi&#249; vicino a una scoperta sulla tecnologia [COLOR_TECH_TEXT]%s2_TechName[COLOR_REVERT]</Italian>
+    <Italian>Sei %d1[ICON_RESEARCH] pi&#249; vicino alla scoperta della tecnologia [COLOR_TECH_TEXT]%s2_TechName[COLOR_REVERT]</Italian>
     <Spanish>Est&#225;is un %d1 [ICON_RESEARCH] m&#225;s cerca del adelanto [NUM2:del:de la:de los:de las] [COLOR_TECH_TEXT]%s2_TechName[COLOR_REVERT].</Spanish>
   </TEXT>
   <TEXT>
@@ -1757,7 +1757,7 @@
     <English>[ICON_BULLET]Can perform Espionage Missions in an opponent's territory. The longer the unit is stationary the lower the cost to perform a Mission</English>
     <French>[ICON_BULLET]Peut ex&#233;cuter des missions d'espionnage en territoire ennemi. Le co&#251;t d'ex&#233;cution des missions d&#233;cro&#238;t en fonction du temps de d&#233;ploiement de votre unit&#233;.</French>
     <German>[ICON_BULLET]Kann Spionagemissionen in feindlichem Territorium ausf&#252;hren. Je l&#228;nger sich die Einheit am selben Ort befindet, umso weniger kostet die Ausf&#252;hrung einer Mission</German>
-    <Italian>[ICON_BULLET]Pu&#242; effettuare missioni di spionaggio nei territori nemici. Pi&#249; l'unit&#224; &#232; stazionaria, minore &#232; il costo per portare a termine la missione.</Italian>
+    <Italian>[ICON_BULLET]Pu&#242; svolgere missioni di spionaggio nel territorio di un avversario. Pi&#249; a lungo l'unit&#224; &#232; ferma, minore &#232; il costo per eseguire una missione.</Italian>
     <Spanish>[ICON_BULLET]Puede llevar a cabo misiones de espionaje en el territorio de un oponente. Cuanto m&#225;s tiempo permanezca quieta la unidad, menor ser&#225; el coste de realizar la misi&#243;n.</Spanish>
   </TEXT>
   <TEXT>
@@ -2405,7 +2405,7 @@
     <English>[COLOR_HIGHLIGHT_TEXT]Preaching morality[COLOR_REVERT]Reduces war weariness and raises the morale of the troop</English>
     <French>[COLOR_HIGHLIGHT_TEXT]Pr&#234;cher la moralit&#233;[COLOR_REVERT]R&#233;duit la fatigue de la guerre et rehausse le moral de la troupe</French>
     <German>[COLOR_HIGHLIGHT_TEXT]Moral predigen[COLOR_REVERT]Vermindert Kriegsm&#252;digkeit und hebt die Moral der Truppe</German>
-    <Italian>[COLOR_HIGHLIGHT_TEXT]Moralit&#224; predica[COLOR_REVERT]Riduce la fatica della guerra e aumenta il morale della truppa</Italian>
+    <Italian>[COLOR_HIGHLIGHT_TEXT]Predicare la moralit&#224;[COLOR_REVERT]Riduce la fatica di guerra e aumenta il morale delle truppe</Italian>
     <Spanish>[COLOR_HIGHLIGHT_TEXT]Predicando la moral[COLOR_REVERT]Reduce la fatiga de guerra y eleva la moral de la tropa.</Spanish>
   </TEXT>
   <TEXT>
@@ -2421,7 +2421,7 @@
     <English>[ICON_BULLET]The death rate of mine slaves is now halved</English>
     <French>[ICON_BULLET]Le taux de mortalit&#233; des esclaves de mine est maintenant r&#233;duit de moiti&#233;</French>
     <German>[ICON_BULLET]Die Sterberate von Bergwerksklaven ist nun halbiert</German>
-    <Italian>[ICON_BULLET]Il tasso di mortalit&#224; degli miei schiavi &#232; ora dimezzato</Italian>
+    <Italian>[ICON_BULLET]Il tasso di mortalit&#224; degli schiavi minatori &#232; ora dimezzato</Italian>
     <Spanish>[ICON_BULLET]La tasa de mortalidad de los esclavos mineros ahora se reduce a la mitad</Spanish>
   </TEXT>
   <TEXT>

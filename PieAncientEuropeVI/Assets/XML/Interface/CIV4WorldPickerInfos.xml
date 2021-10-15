@@ -662,7 +662,47 @@
       <WaterLevelGloss><WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath></WaterLevelGloss>
     </WorldPickerInfo>
     <WorldPickerInfo>
+      <MapName>PAE Eurasia XXL 35 CIVs</MapName>
+      <ModelFile>Art/Interface/Screens/WorldPicker/GlobeFLAT.nif</ModelFile>
+      <Sizes><Size>1.0</Size></Sizes>
+      <Climates><ClimatePath>Art/Interface/Screens/WorldPicker/MapBlank.dds</ClimatePath></Climates>
+      <WaterLevelDecals><WaterLevelDecalPath>Art/Interface/Screens/WorldPicker/PAE_EurasiaXL.dds</WaterLevelDecalPath></WaterLevelDecals>
+      <WaterLevelGloss><WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath></WaterLevelGloss>
+    </WorldPickerInfo>
+    <WorldPickerInfo>
+      <MapName>PAE Eurasia XXXL</MapName>
+      <ModelFile>Art/Interface/Screens/WorldPicker/GlobeFLAT.nif</ModelFile>
+      <Sizes><Size>1.0</Size></Sizes>
+      <Climates><ClimatePath>Art/Interface/Screens/WorldPicker/MapBlank.dds</ClimatePath></Climates>
+      <WaterLevelDecals><WaterLevelDecalPath>Art/Interface/Screens/WorldPicker/PAE_EurasiaXL.dds</WaterLevelDecalPath></WaterLevelDecals>
+      <WaterLevelGloss><WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath></WaterLevelGloss>
+    </WorldPickerInfo>
+    <WorldPickerInfo>
+      <MapName>PAE Eurasia XXXL Random</MapName>
+      <ModelFile>Art/Interface/Screens/WorldPicker/GlobeFLAT.nif</ModelFile>
+      <Sizes><Size>1.0</Size></Sizes>
+      <Climates><ClimatePath>Art/Interface/Screens/WorldPicker/MapBlank.dds</ClimatePath></Climates>
+      <WaterLevelDecals><WaterLevelDecalPath>Art/Interface/Screens/WorldPicker/PAE_EurasiaXL.dds</WaterLevelDecalPath></WaterLevelDecals>
+      <WaterLevelGloss><WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath></WaterLevelGloss>
+    </WorldPickerInfo>
+    <WorldPickerInfo>
+      <MapName>PAE Eurasia XXXL 52 CIVs</MapName>
+      <ModelFile>Art/Interface/Screens/WorldPicker/GlobeFLAT.nif</ModelFile>
+      <Sizes><Size>1.0</Size></Sizes>
+      <Climates><ClimatePath>Art/Interface/Screens/WorldPicker/MapBlank.dds</ClimatePath></Climates>
+      <WaterLevelDecals><WaterLevelDecalPath>Art/Interface/Screens/WorldPicker/PAE_EurasiaXL.dds</WaterLevelDecalPath></WaterLevelDecals>
+      <WaterLevelGloss><WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath></WaterLevelGloss>
+    </WorldPickerInfo>
+    <WorldPickerInfo>
       <MapName>PAE_FirstPunicWar</MapName>
+      <ModelFile>Art/Interface/Screens/WorldPicker/GlobeFLAT.nif</ModelFile>
+      <Sizes><Size>1.0</Size></Sizes>
+      <Climates><ClimatePath>Art/Interface/Screens/WorldPicker/MapBlank.dds</ClimatePath></Climates>
+      <WaterLevelDecals><WaterLevelDecalPath>Art/Interface/Screens/WorldPicker/PAE_FirstPunicWar.dds</WaterLevelDecalPath></WaterLevelDecals>
+      <WaterLevelGloss><WaterLevelGlossPath>Art/Interface/Screens/WorldPicker/MapBlank.dds</WaterLevelGlossPath></WaterLevelGloss>
+    </WorldPickerInfo>
+    <WorldPickerInfo>
+      <MapName>PAE Western Mediterranean</MapName>
       <ModelFile>Art/Interface/Screens/WorldPicker/GlobeFLAT.nif</ModelFile>
       <Sizes><Size>1.0</Size></Sizes>
       <Climates><ClimatePath>Art/Interface/Screens/WorldPicker/MapBlank.dds</ClimatePath></Climates>

@@ -9886,194 +9886,6 @@
       <CivilizationActionSound>AS3D_VIKING_ORDER</CivilizationActionSound>
     </CivilizationInfo>
     <CivilizationInfo>
-      <Type>CIVILIZATION_CITYSTATE</Type>
-      <Description>TXT_KEY_CIV_CITYSTATE_DESC</Description>
-      <ShortDescription>TXT_KEY_CIV_CITYSTATE_SHORT_DESC</ShortDescription>
-      <Adjective>TXT_KEY_CIV_CITYSTATE_ADJECTIVE</Adjective>
-      <Civilopedia>TXT_KEY_CIV_CITYSTATE_PEDIA</Civilopedia>
-      <DefaultPlayerColor>PLAYERCOLOR_WHITE</DefaultPlayerColor>
-      <ArtDefineTag>ART_DEF_CIVILIZATION_CITYSTATE</ArtDefineTag>
-      <ArtStyleType>ARTSTYLE_GRECO_ROMAN</ArtStyleType>
-      <UnitArtStyleType>UNIT_ARTSTYLE_GREEK</UnitArtStyleType>
-      <bPlayable>1</bPlayable>
-      <bAIPlayable>0</bAIPlayable>
-      <Cities>
-        <City>TXT_KEY_CITY_NAME_MAGYAR</City>
-        <City>TXT_KEY_CITY_NAME_KHAZAK</City>
-        <City>TXT_KEY_CITY_NAME_BULGAR</City>
-         <City>TXT_KEY_CITY_NAME_ESTRUSCAN</City>
-        <City>TXT_KEY_CITY_NAME_PHRYGIAN</City>
-        <City>TXT_KEY_CITY_NAME_GAUL</City>
-        <City>TXT_KEY_CITY_NAME_MINOAN</City>
-        <City>TXT_KEY_CITY_NAME_MYCENIAN</City>
-        <City>TXT_KEY_CITY_NAME_CIMMERIAN</City>
-        <City>TXT_KEY_CITY_NAME_LIGURIAN</City>
-        <City>TXT_KEY_CITY_NAME_NUMIDIAN</City>
-        <City>TXT_KEY_CITY_NAME_SARMATIAN</City>
-        <City>TXT_KEY_CITY_NAME_SCYTHIAN</City>
-        <City>TXT_KEY_CITY_NAME_VISIGOTH</City>
-        <City>TXT_KEY_CITY_NAME_ASSYRIAN</City>
-        <City>TXT_KEY_CITY_NAME_HITTITE</City>
-        <City>TXT_KEY_CITY_NAME_HARAPPAN</City>
-        <City>TXT_KEY_CITY_NAME_MAURYAN</City>
-        <City>TXT_KEY_CITY_NAME_PARTHIAN</City>
-        <City>TXT_KEY_CITY_NAME_HARAPPAN</City>
-        <City>TXT_KEY_CITY_NAME_NUBIAN</City>
-        <City>TXT_KEY_CITY_NAME_BACTRIAN</City>
-        <City>TXT_KEY_CITY_NAME_CIRCASSIAN</City>
-        <City>TXT_KEY_CITY_NAME_CUMAN</City>
-        <City>TXT_KEY_CITY_NAME_HURRIAN</City>
-        <City>TXT_KEY_CITY_NAME_KASSITE</City>
-        <City>TXT_KEY_CITY_NAME_BANTU</City>
-        <City>TXT_KEY_CITY_NAME_KHOISAN</City>
-        <City>TXT_KEY_CITY_NAME_LIBYAN</City>
-        <City>TXT_KEY_CITY_NAME_TARTAR</City>
-      </Cities>
-      <Buildings>
-        <Building>
-          <BuildingClassType>BUILDINGCLASS_BUND</BuildingClassType>
-          <BuildingType>BUILDING_BUND_STAMM</BuildingType>
-        </Building>
-      </Buildings>
-      <Units>
-        <Unit>
-          <UnitClassType>UNITCLASS_SETTLER</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_EMIGRANT</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_SPECIAL1</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_SPECIAL2</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_SPECIAL3</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_SPECIAL4</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_ELITE1</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_ELITE2</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-        <Unit>
-          <UnitClassType>UNITCLASS_ELITE3</UnitClassType>
-          <UnitType>NONE</UnitType>
-        </Unit>
-      </Units>
-      <FreeUnitClasses>
-        <FreeUnitClass>
-          <UnitClassType>UNITCLASS_WARRIOR</UnitClassType>
-          <iFreeUnits>1</iFreeUnits>
-        </FreeUnitClass>
-      </FreeUnitClasses>
-      <FreeBuildingClasses/>
-      <FreeTechs/>
-      <DisableTechs>
-        <DisableTech>
-          <TechType>TECH_GREEK</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_ROMAN</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_NORDIC</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_CELTIC</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_EGYPT</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_GREEK</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_PHOEN</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_ROME</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_SUMER</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_RELIGION_HINDU</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_MEDITATION</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_GAERUNG</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_WRITING</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_WRITING2</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_WRITING3</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_DUALISMUS</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_SCHIFFSBAU</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
-          <TechType>TECH_PERSIAN_ROAD</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-      </DisableTechs>
-      <InitialCivics>
-        <CivicType>CIVIC_DESPOTISM</CivicType>
-        <CivicType>CIVIC_BARBARISM</CivicType>
-        <CivicType>CIVIC_BLUTRECHT</CivicType>
-        <CivicType>CIVIC_AUTARKIE</CivicType>
-        <CivicType>CIVIC_ANIMISM</CivicType>
-        <CivicType>CIVIC_STAMMESKRIEGER</CivicType>
-      </InitialCivics>
-      <Leaders>
-        <Leader>
-          <LeaderName>LEADER_CITYSTATE</LeaderName>
-          <bLeaderAvailability>1</bLeaderAvailability>
-        </Leader>
-      </Leaders>
-      <DerivativeCiv>NONE</DerivativeCiv>
-      <CivilizationSelectionSound/>
-      <CivilizationActionSound/>
-    </CivilizationInfo>
-    <CivilizationInfo>
       <Type>CIVILIZATION_MINOR</Type>
       <Description>TXT_KEY_CIV_MINOR_DESC</Description>
       <ShortDescription>TXT_KEY_CIV_MINOR_SHORT_DESC</ShortDescription>
@@ -10464,6 +10276,10 @@
         </DisableTech>
         <DisableTech>
           <TechType>TECH_DUALISMUS</TechType>
+          <bDisableTech>1</bDisableTech>
+        </DisableTech>
+        <DisableTech>
+          <TechType>TECH_MONOTHEISM</TechType>
           <bDisableTech>1</bDisableTech>
         </DisableTech>
         <DisableTech>
@@ -10988,6 +10804,10 @@
         </DisableTech>
         <DisableTech>
           <TechType>TECH_DUALISMUS</TechType>
+          <bDisableTech>1</bDisableTech>
+        </DisableTech>
+        <DisableTech>
+          <TechType>TECH_MONOTHEISM</TechType>
           <bDisableTech>1</bDisableTech>
         </DisableTech>
         <DisableTech>

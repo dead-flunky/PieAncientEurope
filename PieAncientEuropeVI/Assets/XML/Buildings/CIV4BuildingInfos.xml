@@ -67,7 +67,7 @@
             <bPrereqReligion>0</bPrereqReligion>
             <bCenterInCity>1</bCenterInCity>
             <iAIWeight>0</iAIWeight>
-            <iCost>150</iCost>
+            <iCost>120</iCost>
             <iHurryCostModifier>0</iHurryCostModifier>
             <iAdvancedStartCost>-1</iAdvancedStartCost>
             <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -256,7 +256,7 @@
             <bPrereqReligion>0</bPrereqReligion>
             <bCenterInCity>1</bCenterInCity>
             <iAIWeight>0</iAIWeight>
-            <iCost>300</iCost>
+            <iCost>240</iCost>
             <iHurryCostModifier>0</iHurryCostModifier>
             <iAdvancedStartCost>100</iAdvancedStartCost>
             <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -453,7 +453,7 @@
             <bPrereqReligion>0</bPrereqReligion>
             <bCenterInCity>1</bCenterInCity>
             <iAIWeight>0</iAIWeight>
-            <iCost>225</iCost>
+            <iCost>200</iCost>
             <iHurryCostModifier>0</iHurryCostModifier>
             <iAdvancedStartCost>100</iAdvancedStartCost>
             <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -634,7 +634,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>1</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>450</iCost>
+          <iCost>400</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -1016,7 +1016,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>1</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>450</iCost>
+          <iCost>400</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -2663,7 +2663,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>75</iCost>
+          <iCost>50</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -3741,7 +3741,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>150</iCost>
+          <iCost>100</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -5168,7 +5168,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>75</iCost>
+          <iCost>50</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -5506,7 +5506,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>80</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -6393,7 +6393,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>35</iCost>
+          <iCost>30</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -6578,7 +6578,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>60</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -6752,7 +6752,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>60</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -6924,7 +6924,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>150</iCost>
+          <iCost>120</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -7102,7 +7102,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>200</iCost>
+          <iCost>160</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -7283,7 +7283,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>200</iCost>
+          <iCost>160</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -7473,7 +7473,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -7661,7 +7661,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -7848,7 +7848,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -8036,7 +8036,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -8224,7 +8224,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -8412,7 +8412,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -8599,7 +8599,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -8786,7 +8786,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -8974,7 +8974,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>60</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -9162,7 +9162,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>60</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -10409,7 +10409,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>1</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>20</iCost>
+          <iCost>30</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>20</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -10571,7 +10571,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>180</iCost>
+          <iCost>120</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -11267,7 +11267,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>100</iCost>
+          <iCost>80</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -11445,7 +11445,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>150</iCost>
+          <iCost>120</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -11621,7 +11621,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>150</iCost>
+          <iCost>120</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -12174,7 +12174,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>300</iCost>
+          <iCost>220</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -12359,7 +12359,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>300</iCost>
+          <iCost>260</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -12543,7 +12543,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>60</iCost>
+          <iCost>30</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -12755,7 +12755,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>90</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -12987,7 +12987,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>120</iCost>
+          <iCost>90</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -13170,7 +13170,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>90</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -13370,7 +13370,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>100</iCost>
+          <iCost>70</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -13546,7 +13546,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>90</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -13956,7 +13956,7 @@
           <iForeignTradeRouteModifier>0</iForeignTradeRouteModifier>
           <iGlobalPopulationChange>0</iGlobalPopulationChange>
           <iFreeTechs>0</iFreeTechs>
-          <iDefense>0</iDefense>
+          <iDefense>25</iDefense>
           <iBombardDefense>0</iBombardDefense>
           <iAllCityDefense>0</iAllCityDefense>
           <iEspionageDefense>0</iEspionageDefense>
@@ -15114,7 +15114,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>1</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -15297,7 +15297,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>1</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>160</iCost>
+          <iCost>100</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -16165,7 +16165,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>60</iCost>
+          <iCost>40</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -16348,7 +16348,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>120</iCost>
+          <iCost>100</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -16522,7 +16522,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>100</iCost>
+          <iCost>50</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -19475,7 +19475,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>80</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -19644,7 +19644,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>100</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -19822,7 +19822,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>125</iCost>
+          <iCost>100</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>100</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -30741,7 +30741,7 @@
           <bPrereqReligion>0</bPrereqReligion>
           <bCenterInCity>0</bCenterInCity>
           <iAIWeight>0</iAIWeight>
-          <iCost>100</iCost>
+          <iCost>60</iCost>
           <iHurryCostModifier>0</iHurryCostModifier>
           <iAdvancedStartCost>-1</iAdvancedStartCost>
           <iAdvancedStartCostIncrease>0</iAdvancedStartCostIncrease>
@@ -39085,7 +39085,7 @@
           <iNumFreeBonuses>0</iNumFreeBonuses>
           <FreeBuilding/>
           <FreePromotion/>
-          <CivicOption>CIVICOPTION_RELIGION</CivicOption>
+          <CivicOption/>
           <GreatPeopleUnitClass/>
           <iGreatPeopleRateChange>0</iGreatPeopleRateChange>
           <iHurryAngerModifier>0</iHurryAngerModifier>
@@ -39103,7 +39103,7 @@
           <bGoldenAge>0</bGoldenAge>
           <bAllowsNukes>0</bAllowsNukes>
           <bMapCentering>0</bMapCentering>
-          <bNoUnhappiness>0</bNoUnhappiness>
+          <bNoUnhappiness>1</bNoUnhappiness>
           <iUnhealthyPopulationModifier>0</iUnhealthyPopulationModifier>
           <bBuildingOnlyHealthy>0</bBuildingOnlyHealthy>
           <bNeverCapture>0</bNeverCapture>
@@ -41807,7 +41807,7 @@
           <PrereqBuildingClasses/>
           <BuildingClassNeededs>
             <BuildingClassNeeded>
-              <BuildingClassType>BUILDINGCLASS_AQUEDUCT</BuildingClassType>
+              <BuildingClassType>BUILDINGCLASS_LEVEE</BuildingClassType>
               <bNeededInCity>1</bNeededInCity>
             </BuildingClassNeeded>
           </BuildingClassNeededs>

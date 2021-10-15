@@ -76,7 +76,7 @@ class CvForeignAdvisor:
         self.iDefaultScreen = FOREIGN_RELATIONS_SCREEN
 
     def killScreen(self):
-        if (self.iScreen >= 0):
+        if self.iScreen >= 0:
             screen = self.getScreen()
             screen.hideScreen()
             self.iScreen = -1
@@ -460,8 +460,7 @@ class CvForeignAdvisor:
             iLayer += int(tmp%4==0 and numLayers>1)
             iLayer += int(tmp%2==0 )
             return iLayer * iEvenRadiusModifier
-        else:
-            return 0
+        return 0
 
     def getActiveDealsMap(self, iPlayer):
         listPlayers = [(0,0)] * gc.getMAX_PLAYERS()
@@ -621,23 +620,32 @@ class CvForeignAdvisor:
 
         # Our leader head
     # K-mod (moved from below)
-    #keldath - why the or true? also - no need for  self.iSelectedLeader?
+    #keldath - why the or true? also - no need for self.iSelectedLeader?
         if bSingleLeaderSelected or True:
+            # attitudes shown are towards single selected leader
             #iBaseLeader = self.iSelectedLeader
             iBaseLeader = self.iSelectedLeader2
         else:
+            # attitudes shown are towards active leader
             iBaseLeader = self.iActiveLeader
         playerBase = gc.getPlayer(iBaseLeader)
         # K-Mod end
         szLeaderHead = self.getNextWidgetName()
-        #screen.addCheckBoxGFC(szLeaderHead, gc.getLeaderHeadInfo(gc.getPlayer(self.iActiveLeader).getLeaderType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), self.X_LEADER_CIRCLE_TOP - iLeaderWidth/2, int(fLeaderTop), iLeaderWidth, iLeaderHeight, WidgetTypes.WIDGET_LEADERHEAD, self.iActiveLeader, -1, ButtonStyles.BUTTON_STYLE_LABEL)
-        screen.addCheckBoxGFC(szLeaderHead, gc.getLeaderHeadInfo(gc.getPlayer(self.iActiveLeader).getLeaderType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), self.X_LEADER_CIRCLE_TOP - iLeaderWidth/2, int(fLeaderTop), iLeaderWidth, iLeaderHeight, WidgetTypes.WIDGET_LEADERHEAD, self.iActiveLeader, iBaseLeader, ButtonStyles.BUTTON_STYLE_LABEL) # K-Mod
+        # K-Mod iBaseLeader was -1
+        screen.addCheckBoxGFC(szLeaderHead,
+                              gc.getLeaderHeadInfo(gc.getPlayer(self.iActiveLeader).getLeaderType()).getButton(),
+                              ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(),
+                              self.X_LEADER_CIRCLE_TOP - iLeaderWidth/2,
+                              int(fLeaderTop), iLeaderWidth, iLeaderHeight,
+                              WidgetTypes.WIDGET_LEADERHEAD, self.iActiveLeader,
+                              iBaseLeader, ButtonStyles.BUTTON_STYLE_LABEL)
+
         if self.iSelectedLeader2 == self.iActiveLeader:
-          screen.addDDSGFC("SelectionCircle",
-                           # ArtFileMgr.getInterfaceArtInfo("WHITE_CIRCLE_40").getPath(),
-                           ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SMALLCIRCLE").getPath(),
-                           self.X_LEADER_CIRCLE_TOP + iLeaderWidth/2 - 0*16, int(fLeaderTop), #+ iLeaderHeight - 16
-                           16, 16, WidgetTypes.WIDGET_GENERAL, -1, -1)
+            screen.addDDSGFC("SelectionCircle",
+                             # ArtFileMgr.getInterfaceArtInfo("WHITE_CIRCLE_40").getPath(),
+                             ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SMALLCIRCLE").getPath(),
+                             self.X_LEADER_CIRCLE_TOP + iLeaderWidth/2 - 0*16, int(fLeaderTop), #+ iLeaderHeight - 16,
+                             16, 16, WidgetTypes.WIDGET_GENERAL, -1, -1)
         if self.iActiveLeader in self.listSelectedLeaders:
             screen.setState(szLeaderHead, True)
         else:
@@ -645,7 +653,7 @@ class CvForeignAdvisor:
         szName = self.getNextWidgetName()
         szLeaderName = u"<font=3>" + playerActive.getName() + u"</font>"
         screen.setLabel(szName, "", szLeaderName, CvUtil.FONT_CENTER_JUSTIFY, self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight + 5, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-
+        """ Flunky disabled vassal / master label for testing
         # K-Mod. vassal / master label
         szName = self.getNextWidgetName()
         szText = u""
@@ -663,7 +671,7 @@ class CvForeignAdvisor:
                 szText = " (" + szText + ")"
         screen.setLabel(szName, "", szText, CvUtil.FONT_CENTER_JUSTIFY, self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight + 25, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
         #k-mod end
-
+        """
         # angle increment in radians (180 degree range)
         if iCount < 2:
             deltaTheta = 0
@@ -673,11 +681,13 @@ class CvForeignAdvisor:
         # draw other leaderheads
         for iPlayer in leaderMap:
             # PB Mod
-            if self.bReduceOnSelectedLeaders and not iPlayer in self.listSelectedLeaders and not iPlayer == self.lastRemovedLeader:
+            if self.bReduceOnSelectedLeaders \
+               and not iPlayer in self.listSelectedLeaders \
+               and not iPlayer == self.lastRemovedLeader:
                 continue
 
             player = gc.getPlayer(iPlayer)
-            
+
             # (iBaseLeader code was here)
 
             iPlayerIndex = leaderMap[iPlayer]
@@ -718,17 +728,7 @@ class CvForeignAdvisor:
                 if szText != "":
                     szText = " (" + szText + ")"
             #k-mod end
-            #original code
-            # if (gc.getTeam(player.getTeam()).isHasMet(playerBase.getTeam()) and iBaseLeader != iPlayer):
-            #   szText = " (" + gc.getAttitudeInfo(gc.getPlayer(iPlayer).AI_getAttitude(iBaseLeader)).getDescription()
-            #   if (iBaseLeader != iPlayer):
-            #     if (gc.getTeam(player.getTeam()).isVassal(playerBase.getTeam())):
-            #       szText += ", " + localText.getText("TXT_KEY_MISC_VASSAL_SHORT", ())
-            #     elif (gc.getTeam(playerBase.getTeam()).isVassal(player.getTeam())):
-            #       szText += ", " + localText.getText("TXT_KEY_MISC_MASTER", ())
-            #   szText += ")"
-            # else:
-            #   szText = u""
+
             screen.setLabel(szName, "", szText, CvUtil.FONT_CENTER_JUSTIFY, fX + iLeaderWidth/2, fY + iLeaderHeight + 25, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
         # draw lines
@@ -752,7 +752,7 @@ class CvForeignAdvisor:
 
                 for iPlayer in leaderMap.keys():
                     # PB Mod, Omit double drawing of lines
-                    #if( iPlayer > iSelectedLeader and iSelectedLeader in self.listSelectedLeaders ):
+                    #if iPlayer > iSelectedLeader and iSelectedLeader in self.listSelectedLeaders:
                     # continue
                     if self.bReduceOnSelectedLeaders and not iPlayer in self.listSelectedLeaders:
                         continue
@@ -798,41 +798,6 @@ class CvForeignAdvisor:
                                 if bJustPeace and self.bShowRelationLines:
                                     szName = self.getNextLineName()
                                     screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), int(fX), int(fY), gc.getInfoTypeForString("COLOR_WHITE"))
-
-
-            # player = gc.getPlayer(self.iActiveLeader)
-            # if (player.getTeam() == gc.getPlayer(iSelectedLeader).getTeam()):
-              # szName = self.getNextLineName()
-              # screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight/2, gc.getInfoTypeForString("COLOR_YELLOW") )
-            # elif (gc.getTeam(player.getTeam()).isVassal(gc.getPlayer(iSelectedLeader).getTeam()) or gc.getTeam(gc.getPlayer(iSelectedLeader).getTeam()).isVassal(player.getTeam())):
-              # szName = self.getNextLineName()
-              # screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight/2, gc.getInfoTypeForString("COLOR_CYAN") )
-            # elif (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(iSelectedLeader).getTeam())):
-              # if (gc.getTeam(player.getTeam()).isAtWar(gc.getPlayer(iSelectedLeader).getTeam())):
-                # szName = self.getNextLineName()
-                # screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), self.X_LEADER_CIRCLE_TOP, fLeaderTop + iLeaderHeight/2, gc.getInfoTypeForString("COLOR_RED") )
-              # else:
-                # bJustPeace = True
-                # if (gc.getTeam(player.getTeam()).isOpenBorders(gc.getPlayer(iSelectedLeader).getTeam())):
-                  # fDy = fLeaderTop + iLeaderHeight/2 - fYSelected
-                  # fDx = self.X_LEADER_CIRCLE_TOP - fXSelected
-                  # fTheta = math.atan2(fDy, fDx)
-                  # if (fTheta > 0.5 * math.pi):
-                    # fTheta -= math.pi
-                  # elif (fTheta < -0.5 * math.pi):
-                    # fTheta += math.pi
-                  # fSecondLineOffsetY = self.LINE_WIDTH * math.cos(fTheta)
-                  # fSecondLineOffsetX = -self.LINE_WIDTH * math.sin(fTheta)
-                  # szName = self.getNextLineName()
-                  # screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected + fSecondLineOffsetX), int(fYSelected + fSecondLineOffsetY), int(self.X_LEADER_CIRCLE_TOP + fSecondLineOffsetX), int(fLeaderTop + iLeaderHeight/2 + fSecondLineOffsetY), gc.getInfoTypeForString("COLOR_CITY_GREEN") )
-                  # bJustPeace = False
-                # if (gc.getTeam(player.getTeam()).isDefensivePact(gc.getPlayer(iSelectedLeader).getTeam())):
-                  # szName = self.getNextLineName()
-                  # screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), int(self.X_LEADER_CIRCLE_TOP), int(fLeaderTop + iLeaderHeight/2), gc.getInfoTypeForString("COLOR_BLUE") )
-                  # bJustPeace = False
-                # if (bJustPeace and self.bShowRelationLines):
-                  # szName = self.getNextLineName()
-                  # screen.addLineGFC(self.BACKGROUND_ID, szName, int(fXSelected), int(fYSelected), int(self.X_LEADER_CIRCLE_TOP), int(fLeaderTop + iLeaderHeight/2), gc.getInfoTypeForString("COLOR_WHITE") )
 
         # PB Mod
         self.newSelection = False
@@ -897,29 +862,6 @@ class CvForeignAdvisor:
         y = self.Y_LEGEND + self.H_LEGEND - 4 * self.MARGIN_LEGEND
         justify = CvUtil.FONT_LEFT_JUSTIFY
 
-
-        # screen.setText( "DebugInfoText", "Background",
-            # u"<font=2>Selected2:" + str(self.iSelectedLeader2) + str(", Sel:") + str(self.iSelectedLeader) + u"</font>",
-            # justify,
-            # x,
-            # y - 2 * self.MARGIN_LEGEND,
-            # -0.1, FontTypes.TITLE_FONT,
-            # WidgetTypes.WIDGET_GENERAL, 301312, -1 )
-
-        # iButtonWidth = 32
-        # iButtonHeight = 32
-        # screen.addCheckBoxGFC(
-          # "ShowRelationCheckbox",
-          # ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(),
-          # ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(),
-          # x,
-          # y,
-          # iButtonWidth,
-          # iButtonHeight,
-          # WidgetTypes.WIDGET_GENERAL, 301312, 3, ButtonStyles.BUTTON_STYLE_LABEL) #ButtonStyles.BUTTON_STYLE_LABEL)
-        # screen = self.getScreen()
-        # screen.setState("ShowRelationCheckbox", self.bShowRelationLines)
-
         relationText = ""
         if self.bShowRelationLines:
             relationText = localText.getColorText("TXT_KEY_MOD_SHOW_RELATION_LINES", (), gc.getInfoTypeForString("COLOR_YELLOW"))
@@ -947,7 +889,6 @@ class CvForeignAdvisor:
                        -0.1, FontTypes.TITLE_FONT,
                        WidgetTypes.WIDGET_GENERAL, 301312, 4)
 
-
     # returns a unique ID for a widget in this screen
     def getNextWidgetName(self):
         szName = self.WIDGET_ID + str(self.nWidgetCount * NUM_FOREIGN_SCREENS + self.iScreen)
@@ -970,7 +911,6 @@ class CvForeignAdvisor:
         for _ in range(nLines):
             screen.removeLineGFC(self.BACKGROUND_ID, self.getNextLineName())
         self.nLineCount = 0
-
 
     def deleteAllWidgets(self):
         screen = self.getScreen()

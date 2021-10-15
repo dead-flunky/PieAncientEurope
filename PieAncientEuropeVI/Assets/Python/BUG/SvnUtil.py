@@ -12,6 +12,7 @@ import re
 import threading
 import time
 import urllib
+import CvUtil
 
 MINIMUM_ENTRIES_FORMAT = 7
 
@@ -22,9 +23,9 @@ done = False
 rev = None
 error = None
 def testL():
-	print getLocalRevision("C:/Coding/Civ/BUG/BUG New Core")
+	CvUtil.pyPrint(getLocalRevision("C:/Coding/Civ/BUG/BUG New Core"))
 def testR():
-	print getRemoteRevision("http://civ4bug.svn.sourceforge.net/svnroot/civ4bug/BUG Mod/")
+	CvUtil.pyPrint(getRemoteRevision("http://civ4bug.svn.sourceforge.net/svnroot/civ4bug/BUG Mod/"))
 def testW():
 	global done
 	done = False
@@ -42,7 +43,7 @@ def testW():
 	while not t.done() and count < 100:
 		time.sleep(0.05)
 		count += 1
-	print t.rev()
+	CvUtil.pyPrint(t.rev())
 
 def getLocalRevision(path):
 	"""

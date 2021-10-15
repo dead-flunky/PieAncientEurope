@@ -10,3 +10,5 @@
 *.pch
 *.pdb
 /PAK
+/PieAncientEuropeVI/CvGameCoreDLL/Project/Debug
+/PieAncientEuropeVI/CvGameCoreDLL/Project/temp_files/Debug

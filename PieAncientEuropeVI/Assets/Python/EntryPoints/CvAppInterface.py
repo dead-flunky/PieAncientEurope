@@ -15,7 +15,8 @@ import os
 import CvUtil
 #
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyGame,
+                                NiTextOut)
 
 # globals
 gc = CyGlobalContext()
@@ -28,7 +29,7 @@ def init():
     # dump Civ python module directory
     if PythonHelp:
         import CvPythonExtensions
-        helpFile=file("CvPythonExtensions.hlp.txt", "w")
+        helpFile=file("CvPythonExtensions.hlp.txt", "w") # noqa
         sys.stdout=helpFile
         import pydoc
         pydoc.help(CvPythonExtensions)
@@ -40,7 +41,7 @@ def init():
 
 def onSave():
     'Here is your chance to save data.  This function should return a string'
-    import CvWBDesc
+    # import CvWBDesc
     import pickle
     import CvEventInterface
     # if the tutorial is active, it will save out the Shown Messages list
@@ -74,7 +75,8 @@ def preGameStart():
     CvScreensInterface.showMainInterface()
 
 def onPbemSend(argsList):
-    import sys, smtplib, MimeWriter, base64, StringIO
+    # import sys
+    import smtplib, MimeWriter, base64, StringIO
 
     szToAddr = argsList[0]
     szFromAddr = argsList[1]
@@ -85,17 +87,17 @@ def onPbemSend(argsList):
     szUser = argsList[6]
     szPassword = argsList[7]
 
-    print 'sending e-mail'
-    print 'To:', szToAddr
-    print 'From:', szFromAddr
-    print 'Subject:', szSubject
-    print 'Path:', szPath
-    print 'File:', szFilename
-    print 'Server:', szHost
-    print 'User:', szUser
+    CvUtil.pyPrint('sending e-mail')
+    CvUtil.pyPrint('To:', szToAddr)
+    CvUtil.pyPrint('From:', szFromAddr)
+    CvUtil.pyPrint('Subject:', szSubject)
+    CvUtil.pyPrint('Path:', szPath)
+    CvUtil.pyPrint('File:', szFilename)
+    CvUtil.pyPrint('Server:', szHost)
+    CvUtil.pyPrint('User:', szUser)
 
     if len(szFromAddr) == 0 or len(szHost) == 0:
-        print 'host or address empty'
+        CvUtil.pyPrint('host or address empty')
         return 1
 
     message = StringIO.StringIO()
@@ -132,7 +134,7 @@ def onPbemSend(argsList):
             smtp.login(szUser, szPassword)
         smtp.sendmail(szFromAddr, szToAddr, message.getvalue())
         smtp.quit()
-    except smtplib.SMTPAuthenticationError, e:
+    except smtplib.SMTPAuthenticationError, e: # noqa
         CyInterface().addImmediateMessage("Authentication Error: The server didn't accept the username/password combination provided.", "")
         CyInterface().addImmediateMessage("Error %d: %s" % (e.smtp_code, e.smtp_error), "")
         return 1

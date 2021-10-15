@@ -598,37 +598,37 @@ Consecuencias :
  St&#228;dte mit Weltwunder blieben auch ohne Karte in den Ged&#228;chnissen der Menschen in Erinnerung und bleiben immer im Kriegsnebel sichtbar.
     </German>
     <Italian>
-[H1] Fog of War [\H1]
- Fino al Rinascimento non accurate mappe sono state elaborate . In questo mod , tutte le trame diventano neri e inesplorato di nuovo , a meno che non sono visibili e proprie citt&#224; ( citt&#224; influenza ) e unit&#224; . Until the late ancient technology of "Road Maps" keeps the map with the well known fog of war of CIV.
+[H1]Nebbia di Guerra[\H1]
+ Fino al Rinascimento non esistevano mappe accurate. In questo mod, tutte le caselle diventano nere e nuovamente inesplorate, a meno che non siano visibili o nel raggio delle proprie citt&#224; (influenza culturale) e unit&#224;. Questo cambia dalla scoperta della tecnologia tardo-antica delle "Mappe Stradali" che conserva la mappa con la ben nota nebbia di guerra di CIV.
 
- [H1] Cartogramia [\H1]
- At that time only significant points described a map. The maps were very, very inaccurate, but they showed important cities and coastal areas. Therefore, capitals and the coasts remain visible from this technology with the normal fog of war.
+ [H1]Cartogrammi[\H1]
+ A quel tempo solo i punti pi&#249; significativi descrivevano una mappa. Le mappe erano molto, molto imprecise, ma mostravano citt&#224; importanti e aree costiere. Pertanto, con la scoperta di questa tecnologia le capitali e le coste rimangono visibili, con la normale nebbia di guerra.
 
  [H1]Cartografia[\H1]
- From now on maps had been tentatively made. Therefore, you will see rivers and peaks in the fog of war and si &#232; anche in grado di Commissine mappe personalizzate cliccando su una unit&#224; di ricognizione , che viene ucciso quando viene utilizzato.
- I risultati della maggior parte delle seguenti commissioni spariranno dopo un po '( nebbia nera )
- [ICON_BULLET] Monti : tutte le montagne verranno mostrate
- [ICON_BULLET] Citt&#224; con meraviglie : tutte le citt&#224; con meraviglie del mondo saranno mostrati e le citt&#224; effettivamente colpite mantenere visibile
- [ICON_BULLET] citt&#224; costiere : tutto il litorale cita verranno mostrate
+ D'ora in poi le mappe saranno realizzate in maniera provvisoria. Pertanto, verranno mostrati fiumi e cime montuose nella nebbia di guerra. Inoltre, si potr&#224; anche commissionare mappe personalizzate selezionando una unit&#224; di ricognizione, che verr&#224; consumata nell'azione.
+ I risultati della maggior parte delle seguenti commissioni spariranno dopo un po' (nebbia nera):
+ [ICON_BULLET] Monti: tutte le montagne verranno mostrate
+ [ICON_BULLET] Citt&#224; con meraviglie: tutte le citt&#224; con meraviglie del mondo saranno mostrati e le citt&#224; colpite saranno visibili
+ [ICON_BULLET] Citt&#224; costiere: tutte le citt&#224; costiere verranno mostrate
  [ICON_BULLET] Grandi citt&#224; commerciali : citt&#224; con pi&#249; di 4 rotte commerciali verranno mostrate
- [ICON_BULLET] metropoli : citt&#224; con pi&#249; di 20 pop verranno mostrate
- [ICON_BULLET] citt&#224; provinciali : citt&#224; con pi&#249; di 12 pop verranno mostrate
+ [ICON_BULLET] Metropoli : citt&#224; con pi&#249; di 20 pop verranno mostrate
+ [ICON_BULLET] Citt&#224; provinciali : citt&#224; con pi&#249; di 12 pop verranno mostrate
  [ICON_BULLET] Tutte le citt&#224; da 6 pop verranno mostrate
 
- Per alcuni tratti classifiche ci sono prezzi remunerativi ( -25 % [ICON_GOLD] ) per alcune commissioni :
- [ICON_BULLET] Monti : organizzato o protettivo
- [ICON_BULLET] Citt&#224; con meraviglie : creativo o industrioso
- [ICON_BULLET] citt&#224; costiere marittime :
- [ICON_BULLET] Grandi citt&#224; commerciali : finanziari
- [ICON_BULLET] metropoli : espansive
- [ICON_BULLET] citt&#224; provinciali : imperialistiche
+Per alcuni tratti del leader ci sono prezzi ridotti (-25 % [ICON_GOLD]) a seconda della commissione:
+ [ICON_BULLET] Monti: organizzato o protettivo
+ [ICON_BULLET] Citt&#224; con meraviglie: creativo o industrioso
+ [ICON_BULLET] Citt&#224; costiere marittime: marittimo
+ [ICON_BULLET] Grandi citt&#224; commerciali: finanziario
+ [ICON_BULLET] Metropoli: espansivo
+ [ICON_BULLET] Citt&#224; provinciali : imperialistico
  [ICON_BULLET] Tutte le citt&#224; da 6 a comparsa : nessuno
 
- [H1]Road Maps[\H1]
- From this technology on, the map still keeps in the fog of war as we all know from CIV.
-
+ [H1]Mappe stradali[\H1]
+ Da questa tecnologia in poi, la mappa rimane ancora nella nebbia della guerra, come tutti sappiamo da CIV.
+ 
  [H1] Meraviglie del Mondo [\H1]
- Meraviglie del mondo conservati nelle menti umane senza l'uso di mappe , &#232; per questo che le citt&#224; con meraviglie sempre saranno visibili nella nebbia della guerra .
+ Le meraviglie del mondo sono impresse nella mente delle persone senza utilizzare le mappe, ecco perch&#233; le citt&#224; con le meraviglie saranno sempre visibili nella nebbia della guerra.
     </Italian>
     <Spanish>
 [H1]Niebla de Guerra[\H1]
@@ -3692,11 +3692,11 @@ Distribuci&#243;n: Si obtienes perros de guerra por intercambio, podr&#225;s con
 [ICON_BULLET] In W&#252;sten k&#246;nnen Sandst&#252;rme auftreten, die eine Einheit um 20% pro Runde schw&#228;cht
     </German>
     <Italian>
-[ICON_BULLET] Nei campi tundra e del deserto possono essere stabilite senza citt&#224;
-[ICON_BULLET] navi di passare su tutti i campi d'acqua. Barche di lavoro possono affondare in acque sconosciute.
-[ICON_BULLET] Swamps are at rivers and give a defense penalty of -20%, city health penalty of -35% and a unit damage of 5%. Attention: Hurt units can die in swamps during next turn!
-[ICON_BULLET] sono fiumi alluvionali a disertare e dare una penalit&#224; difensiva del -10%
-[ICON_BULLET] In tempeste di sabbia del deserto pu&#242; verificarsi che indebolisce l'unit&#224; del 20% per ogni turno
+[ICON_BULLET] Non &#232; possibile fondare citt&#224; nella tundra e nel deserto
+[ICON_BULLET] Le navi possono muoversi su qualsiasi terreno marino. Le barche da lavoro possono affondare in un terreno sconosciuto.
+[ICON_BULLET] Le paludi sono vicino ai fiumi e danno una penalit&#224; alla difesa del -20%, alla salute della citt&#224; del -35% e un danno dell'unit&#224; del 5%. Attenzione: le unit&#224; ferite possono morire nelle paludi durante il prossimo turno!
+[ICON_BULLET] Le pianure alluvionali si trovano su fiumi in un terreno desertico e danno una penalit&#224; di difesa del -10%
+[ICON_BULLET] Le tempeste di sabbia possono apparire sul terreno desertico e causare un danno all'unit&#224; del 20% per turno
     </Italian>
     <Spanish>
 [ICON_BULLET] En casillas de tundra y desierto no se puede fundar ciudades.
@@ -3804,7 +3804,7 @@ L'automatisation des &#233;changes est invalid&#233; d&#232;s lors que qu'une vi
 
 
 [H1]Commandes sp&#233;ciales[\H1]
-Acceptez les commandes sp&#233;ciales des villes &#233;trang&#232;res, rentables mais soumises &#224; un d&#233;lai. Si vous parvenez &#224; compl&#233;ter une commande sp&#233;ciale dans le temps imparti, vous obtenez principalement une technologie (conqu&#233;rable) de ce CIV, ou s'il n'y en a pas, 5 unit&#233;s (esclaves, chevaux, dromadaires, cavaliers, charrettes d'or et &#233;ventuellement une de ses unit&#233;s sp&#233;ciales). Ces commandes ne sont pas faites sur mesure pour vous. Il se peut donc qu'une ville &#233;loign&#233;e ait besoin d'un bien auquel vous n'avez pas eu acc&#232;s.
+Acceptez les commandes sp&#233;ciales des villes &#233;trang&#232;res, rentables mais soumises &#224; un d&#233;lai. Si vous parvenez &#224; compl&#233;ter une commande sp&#233;ciale dans le temps imparti, vous obtenez principalement une technologie (conqu&#233;rable) de ce CIV, ou s'il n'y en a pas, 5 unit&#233;s (esclaves, chevaux, dromadaires, cavaliers, chariots de butin et &#233;ventuellement une de ses unit&#233;s sp&#233;ciales). Ces commandes ne sont pas faites sur mesure pour vous. Il se peut donc qu'une ville &#233;loign&#233;e ait besoin d'un bien auquel vous n'avez pas eu acc&#232;s.
 
 
 [H1]Routes commerciales[\H1]
@@ -3875,58 +3875,56 @@ Handelsstra&#223;en bringen den Vorteil, dass sie die Bewegung um +1 erh&#246;he
 Eine Stadt gilt als Handelszentrum, wenn vom Stadtplot mehrere Handelsstra&#223;en wegf&#252;hren. Liegt die Stadt im Binnenland so ben&#246;tigt sie 3 wegf&#252;hrende Handelsstra&#223;en. Eine Stadt am Meer ben&#246;tigt nur 2 wegf&#252;hrende Handelsstra&#223;en. Das Handelszentrum selbst ist ein Geb&#228;ude, das automatisch in die Stadt gesetzt wird, wenn in der Stadt ein Handel vollzogen wird. Es erh&#246;ht den Goldgewinn bei passiven Handelsrouten um 100%.
     </German>
     <Italian>
-[H1]Slave trading[\H1]
-Slaves, like the Great Merchant in BTS, can conduct a trade mission in a foreign city (the unit gets disbanded/sold), gaining 10-60 [ICON_GOLD]. Furthermore, slaves can also speed up the production of a city.
+[H1]Commercio di schiavi[\H1]
+Gli schiavi, come il Grande Mercante in BTS, possono condurre una missione commerciale in una citt&#224; straniera (l'unit&#224; viene smantellata/venduta), guadagnando 10-60 [ICON_GOLD]. Inoltre, gli schiavi possono anche accelerare la produzione di una citt&#224;.
 
 
-[H1]Trading[\H1]
-In PAE goods can be bought and sold. These goods remain available 3 rounds in the trading network. The dealer is not dissolved. These trade routes can be automated.
+[H1]Commercio[\H1]
+In PAE le risorse possono essere comprate e vendute. Questi beni rimangono disponibili 3 turni nella rete commerciale. L'unit&#224; non viene consumata da questa azione. Queste rotte commerciali possono essere automatizzate.
 
-[ICON_BULLET] Merchant (Spoked Wheels)
-[ICON_BULLET] Caravan (Camel domestication)
-[ICON_BULLET] Keftion (Ship building)
-[ICON_BULLET] Gaulos (Colonization)
-[ICON_BULLET] Merchantman (Trade ships)
+[ICON_BULLET] Convoglio commerciale (ruote a raggi)
+[ICON_BULLET] Carovana (addomesticamento del cammello)
+[ICON_BULLET] Keftion (costruzione di navi)
+[ICON_BULLET] Gaulos (Colonizzazione)
+[ICON_BULLET] Mercantile (navi commerciali)
 
-Buy goods in one of your cities (only regional resources possible) and sell them in your neighbor's city. Maximize the proceeds by selling goods that your trading partner does not have. And vice versa. Buy foreign goods that you do not own, sell them in one of your cities and profit from a few rounds of this new resource.
+Acquista beni in una delle tue citt&#224; (sono possibili solo le risorse locali) e vendili nella citt&#224; del tuo vicino. Massimizza i proventi vendendo beni che il tuo partner commerciale non possiede, e viceversa. Acquista beni stranieri che non possiedi, vendili in una delle tue citt&#224; e approfitta per alcuni turni di questa nuova risorsa.
 
-[ICON_BULLET]Hint: with Bronze you can build appropriate units without having to create bronze yourself
-[ICON_BULLET]Hint: load cultivable items into a wagon right after a trade and distribute them in your own realm
+[ICON_BULLET]Suggerimento: con il Bronzo puoi costruire unit&#224; appropriate senza dover possedere la risorsa Bronzo sul tuo territorio
+[ICON_BULLET]Suggerimento: carica gli oggetti coltivabili in un carro subito dopo uno scambio e posizionali nel tuo regno
 
-Modifiers:
-[ICON_BULLET] +1% per population
-[ICON_BULLET] +5% per positive attitude to the civilization
-[ICON_BULLET] +5% per world wonder in the city
-[ICON_BULLET] +20% if the trading partner does not own the resource
+Modificatori:
+[ICON_BULLET] +1% per popolazione
+[ICON_BULLET] +5% per atteggiamento positivo nei confronti della civilt&#224;
+[ICON_BULLET] +5% per meraviglia del mondo nella citt&#224;
+[ICON_BULLET] +20% se il partner commerciale non possiede la risorsa
 
 Formula:
-Sum = Base value * (Modifier + 100) / 100 + Base value * Distance // (75-Base value)
-Corruption = maintenance costs of the city * 2
+Somma = Valore base * (Modificatore + 100) / 100 + Valore base * Distanza // (75-Valore base)
+Corruzione = costi di manutenzione della citt&#224; * 2
 
-Proceeds = Sum-Corruption
+Proventi = Somma-Corruzione
 
-[ICON_BULLET] The civilization of the trading city also receives a research and gold bonus, provided that the sold goods come from another civilization.
-[ICON_BULLET] For Bronze, Iron or Horse the attitude towards the trading partner can be improved by 1 (Chance 5%)
+[ICON_BULLET] La civilt&#224; della citt&#224; commerciale riceve anche un bonus in ricerca e oro, a condizione che le merci vendute provengano da un'altra civilt&#224;.
+[ICON_BULLET] Per Bronzo, Ferro o Cavallo l'atteggiamento nei confronti del partner commerciale pu&#242; essere migliorato di 1 (probabilit&#224; del 5%)
 
-[H1]Trade routes[\H1]
-Players can assign merchants automatic trade routes. These are listed at the advisor menu bar (top of the main screen) under Trading Routes.
-Caution: Merchants do not get activated if barbaric units are nearby! (Reason: because otherwise land units cannot move when enemy ships or pirates are nearby)
-Automatic trade routes gets automatically deactivated if a trading city no longer provides the traded bonus resource.
+[H1]Rotte commerciali[\H1]
+I giocatori possono assegnare rotte commerciali automatiche ai mercanti. Queste sono elencati nella barra del menu del consigliere (in alto nella schermata principale) in Rotte commerciali.
+Attenzione: i mercanti continuano il loro viaggio nonostante la presenza di unit&#224; barbariche! (Motivo: le unit&#224; di terra si fermerebbero quando navi nemiche o pirati sono nelle vicinanze)
+Le rotte commerciali automatiche vengono disattivate automaticamente quando una citt&#224; commerciale non possiede pi&#249; la risorsa bonus scambiata.
 
-
-[H1]Ordini speciali[\H1]
-
-Accetta ordini speciali redditizi ma sensibili al tempo da citt&#224; straniere. Se riesci a completare un ordine speciale in un dato momento, stai principalmente ottenendo una tecnologia (conquistabile) da questo CIV, o se non c'&#232; nessuno, 5 unit&#224; (schiavi, cavalli, cammelli, cavalieri, carretti d'oro e possibilmente una delle sue unit&#224; speciali). Questi ordini non sono fatti su misura per te. Quindi potrebbe essere che una citt&#224; lontana abbia bisogno di un bene a cui non hai avuto accesso.
+[H1] Ordini speciali [\H1]
+Accetta ordini speciali da citt&#224; d'oltremare, redditizi ma soggetti a una scadenza. Se riesci a completare un ordine speciale entro il tempo assegnato, ottieni una nuova tecnologia (acquisibile) dalla relativa CIV, o in caso non abbia tecnologie compatibili, 5 unit&#224; (schiavi, cavalli, dromedari, cavalieri, carretti d'oro ed eventualmente una delle sue unit&#224; speciali). Questi ordini non sono personalizzati per la tua civilit&#224;, quindi &#232; possibile che una citt&#224; lontana abbia bisogno di qualcosa a cui non hai accesso.
 
 [H1]Vie commerciali[\H1]
-Se si scambiano merci nella citt&#224; B (con merci dalla citt&#224; A), &#232; possibile creare una rotta commerciale dalla citt&#224; B alla citt&#224; A (solo 1 trama per commercio completato). Pi&#249; alto &#232; il valore delle merci, maggiore &#232; la possibilit&#224;. La rotta commerciale inizia direttamente nella trama della citt&#224;. Se commerci con una nave mercantile, puoi creare una rotta commerciale dalla citt&#224; portuale alla sua capitale (di nuovo solo una trama per mestiere), if the capital is nearby (max. distance: 8 + map size[0-5] * 2).
+Se scambi merci nella citt&#224; B (con merci dalla citt&#224; A), &#232; possibile creare una rotta commerciale dalla citt&#224; B alla citt&#224; A (solo 1 casella per rotta commerciale completata). Pi&#249; la merce &#232; preziosa, maggiori &#232; la possibilit&#224; di stabilire una via commerciale. La rotta commerciale inizia direttamente sulla casella della citt&#224;. Se commerci attraverso una nave mercantile, &#232; possibile creare una rotta commerciale dalla citt&#224; portuale alla sua capitale (di nuovo solo 1 casella per rotta commerciale), se la capitale &#232; vicina (distanza massima: 8+ dimensioni della carta [0-5] * 2).
 
-Le rotte commerciali sorgono solo quando viene completato un commercio tra due nazioni diverse.
+Le rotte commerciali vengono stabilite solo quando viene completato un commercio tra due nazioni diverse.
 
-Le rotte commerciali hanno il vantaggio di aumentare il movimento di +1 (come strade romane o strade reali) e di dare la trama +1 [ICON_COMMERCE].
+Le rotte commerciali hanno il vantaggio di aumentare il movimento di +1 (come strade romane o strade reali) e di dare alla casella il bonus di +1 [ICON_COMMERCE].
 
-[H1]Centri commerciali[\H1]
-Una citt&#224; &#232; considerata un centro commerciale se la trama della citt&#224; porta via diverse rotte commerciali attive. Se la citt&#224; si trova nell'entroterra, ha bisogno di 3 principali rotte commerciali. Una citt&#224; in riva al mare ha bisogno solo di 2 principali rotte commerciali. Il centro commerciale stesso &#232; un edificio che viene automaticamente inserito nella citt&#224;, quando un commercio &#232; fatto l&#236;. Aumenta del 100% il guadagno d'oro sulle rotte commerciali passive.
+[H1] Centri commerciali [\H1]
+Una citt&#224; &#232; considerata un centro commerciale se pi&#249; rotte commerciali attive iniziano dalle caselle della citt&#224;. Se la citt&#224; &#232; nell'entroterra, hai bisogno di 3 rotte commerciali principali. Una citt&#224; sul mare ha bisogno solo di 2 rotte commerciali principali. Il centro commerciale stesso &#232; un edificio che viene costruito automaticamente in citt&#224; quando vengono soddisfatti i requisiti. Aumenta del 100% il guadagno d'oro sulle rotte commerciali passive.
     </Italian>
     <Spanish>
 [H1]Slave trading[\H1]
@@ -4186,7 +4184,7 @@ Avantages des esclaves :
 [ICON_BULLET] Ils peuvent rejoindre un chalet (de montagne), un hameau (de montagne) ou un village et acc&#233;l&#233;rer sa mise &#224; niveau de 10 tours.
 [ICON_BULLET] Ils peuvent rejoindre un latifundium et acc&#233;l&#233;rer son temps de mise &#224; niveau de 10.
 [ICON_BULLET] Un nouvel esclave peut &#234;tre cr&#233;&#233; dans une ville dans laquelle se trouvent des esclaves employ&#233;s ou un march&#233; d'esclaves (probabilit&#233; de 1.5% par tour par ville, 3% avec Tyrannie), sauf si le christianisme est la religion d'&#233;tat
-[ICON_BULLET] Ils peuvent rejoindre une ville en tant que gladiateur (Technologie [LINK=TECH_GLADIATOR]Jeux du cirque[\LINK] n&#233;cessaire) : +1 [ICON_COMMERCE], +1 [ICON_CULTURE] et + 1 EXP aux nouvelles unit&#233;s. Taux de mortalit&#233; par mun&#233;riste 1%, max 5%. V&#233;rifiez tous les 3 tours.
+[ICON_BULLET] Ils peuvent rejoindre une ville en tant que gladiateur (Technologie [LINK=TECH_GLADIATOR]Jeux du cirque[\LINK] n&#233;cessaire) : +1 [ICON_COMMERCE], +1 [ICON_CULTURE] et + 1 EXP aux nouvelles unit&#233;s. Taux de mortalit&#233; par gladiateur 1%, max 5%. V&#233;rifiez tous les 3 tours.
 
 [ICON_BULLET] Ils peuvent &#234;tre affect&#233;s au Palais (+1 [ICON_CULTURE] (pas de limite), taux de mort. 10% / tirage tous les 3 tours)
 [ICON_BULLET] Ils peuvent &#234;tre affect&#233;s &#224; un Temple (+1 [ICON_CULTURE], chefs d'&#201;tat cr&#233;atifs +3 [ICON_CULTURE] (pas de limite), taux de mort. 8% / contr&#244;le tous les 3 tours)
@@ -4199,7 +4197,7 @@ Exception: Gymnasion/Gymnasium, cela rapporte quand m&#234;me +6 [ICON_RESEARCH]
 [ICON_BULLET] Ils peuvent &#234;tre affect&#233;s &#224; une Manufacture (+1 [ICON_FOOD] ou +1 [ICON_PRODUCTION] (max. chacune 5), taux de mort. 8% / contr&#244;le tous les 3 tours)
 [ICON_BULLET] Ils peuvent &#234;tre affect&#233;s &#224; une Caserne de pompiers (+1 [ICON_HAPPY] (max. 3), taux de mort. 6% / contr&#244;le tous les 3 tours)
 
-Le taux de mortalit&#233; baisse de 2% pour chacune des technologies suivantes: Th&#233;orie des humeurs, Anatomie (mun&#233;ristes / gladiateurs exclus)
+Le taux de mortalit&#233; baisse de 2% pour chacune des technologies suivantes: Th&#233;orie des humeurs, Anatomie (gladiateurs exclus)
 
 [ICON_BULLET] Les gladiateurs affect&#233;s dans une ville peuvent devenir des r&#233;servistes (+1 [ICON_FOOD], +1 [ICON_PRODUCTION], +1 [ICON_COMMERCE]) si la doctrine Droit civil est active (Probabilit&#233; : 2% par tour)
 [ICON_BULLET] Les gladiateurs affect&#233;s dans une ville peuvent devenir des r&#233;servistes (+1 [ICON_FOOD], +1 [ICON_PRODUCTION], +1 [ICON_COMMERCE]) si la doctrine Loi internationale est active (Probabilit&#233; : 3% par tour)
@@ -4418,126 +4416,127 @@ Diese "Befreiten Sklaven" k&#246;nnen sein:
     <Italian>
 [H1] schiavi e gli schiavi liberati [\H1]
 
-In primo luogo , la tecnologia [LINK=TECH_ENSLAVEMENT] asservimento [\LINK] deve essere esplorato , in modo che si pu&#242; schiavizzare i nemici .
+Nel momento in cui viene scoperta la tecnologia [LINK=TECH_ENSLAVEMENT] schiavit&#249; [\LINK], sar&#224; possibile rendere schiave le unit&#224; nemiche.
 
-Come arrivare schiavi :
-[ICON_BULLET] schiavi di conquistare in combattimenti vinti ( vedere [LINK=CONCEPT_LOYAL] lealt&#224; in battaglia [\LINK] )
-[ICON_BULLET] Da conquistando citt&#224; ( numero di schiavi : 1 per la dimensione della citt&#224; )
-[ICON_BULLET] neonati in citt&#224; con gli schiavi stabilite ( cristianesimo non deve essere la religione di stato )
+Come ottenere schiavi:
+[ICON_BULLET] Gli schiavi possono essere sottomessi in battaglia (vedi anche [LINK=CONCEPT_LOYAL] lealt&#224; in battaglia [\LINK])
+[ICON_BULLET] Possono essere soggiogati quando catturi una citt&#224; (numero di schiavi: 1 per ogni punto popolazione)
+[ICON_BULLET] Possono nascere in una citt&#224; che ha schiavi che lavorano in essa (Cristianesimo non deve essere la religione di stato)
 
-Vantaggi di schiavi :
-[ICON_BULLET] modernizzazione Costruire due volte pi&#249; veloce equipaggi di costruzione
-[ICON_BULLET] pu&#242; accelerare la produzione citt&#224;
-[ICON_BULLET] Pu&#242; essere venduti come schiavi nelle citt&#224; straniere ( 1-40 [ICON_GOLD] )
-[ICON_BULLET] Pu&#242; situato in una citt&#224; come una casa , di campo e mio schiavo ( vedi sotto )
-[ICON_BULLET] Possono unirsi a un cottage (montano), un borgo (montano) o un villaggio e accelerare i tempi di aggiornamento di 10
+Vantaggi degli schiavi:
+[ICON_BULLET] Gli schiavi apportano miglioramenti due volte pi&#249; velocemente dei normali lavoratori
+[ICON_BULLET] Possono accelerare la produzione di una citt&#224;
+[ICON_BULLET] Possono essere scambiati in un mercato di schiavi (1-40 [ICON_GOLD])
+[ICON_BULLET] Possono unirsi a una citt&#224; come contadini, minatori o schiavi domestici. (vedi sotto)
+[ICON_BULLET] Possono unirsi a una cottage (montano), un borgo (montagna) o un villaggio e accelerare il loro tempo di aggiornamento di 10
 [ICON_BULLET] Possono unirsi a un latifundium e accelerare il tempo di aggiornamento di 10
-[ICON_BULLET] Una nuova unit&#224; slave pu&#242; essere disponibile ( solo se il cristianesimo non &#232; la religione di stato , 1,5 % di possibilit&#224; per ogni turno e la citt&#224;, il 3% in Tyrannis ) da schiavo residente o un mercato di schiavi
-[ICON_BULLET] Pu&#242; essere situato in una citt&#224; come combattenti per occhiali ( match di esibizione tecnologia necessaria ) e contribuisce alla citt&#224; uno [ICON_COMMERCE] , +1 [ICON_CULTURE] e +1 esperienza. Tasso di mortalit&#224; per combattente della mostra 1%, max 5%. Controlla ogni 3 turni.
+[ICON_BULLET] Un nuovo schiavo pu&#242; essere disponibile se la citt&#224; ha schiavi residenti e/o un mercato di schiavi (1,5% di probabilit&#224; ogni turno in ogni citt&#224;, 3% con tirannia), a meno che il cristianesimo non sia la religione ufficiale.
+[ICON_BULLET] Possono unirsi a una citt&#224; come gladiatori per spettacoli nell'arena (tecnologia richiesta: Giochi Circensi) e dare +1 [ICON_COMMERCE], +1 [ICON_CULTURE] e +1 di esperienza alle unit&#224; costruite in questa citt&#224;. Tasso di mortalit&#224; per gladiatore 1%, massimo 5%. Applicato ogni 3 turni.
 
-[ICON_BULLET] Pu&#242; essere assegnato al palazzo (+1 [ICON_CULTURE] (nessun limite), mortalit&#224; 10% / controllare ogni 3 turni)
-[ICON_BULLET] Pu&#242; essere assegnato a un tempio (+1 [ICON_CULTURE], leader creativo +3 [ICON_CULTURE] (nessun limite), mortalit&#224; 8% / controllare ogni 3 turni)
-[ICON_BULLET] Pu&#242; essere assegnato a una casa di piacere (+2 [ICON_CULTURE] (max. 10), mortalit&#224; 10% / controllare ogni 3 turni)
+[ICON_BULLET] Pu&#242; essere assegnato al palazzo (+1 [ICON_CULTURE] (nessun limite), mortalit&#224; 10% / applicato ogni 3 turni)
+[ICON_BULLET] Pu&#242; essere assegnato a un tempio (+1 [ICON_CULTURE], leader creativo +3 [ICON_CULTURE] (nessun limite), mortalit&#224; 8% / applicato ogni 3 turni)
+[ICON_BULLET] Pu&#242; essere assegnato a un bordello (+2 [ICON_CULTURE] (max. 10), mortalit&#224; 10% / applicato ogni 3 turni)
 [ICON_BULLET] Pu&#242; essere assegnato a un teatro (+2 [ICON_CULTURE] (max. 10), mortalit&#224; 0%)
 [ICON_BULLET] Pu&#242; essere assegnato a una biblioteca (+2 [ICON_RESEARCH] (max. 10), mortalit&#224; 0%)
-[ICON_BULLET] Pu&#242; essere assegnato a una scuola (+2 [ICON_RESEARCH] (max. 10), mortalit&#224; 6% / controllare ogni 3 turni)
+[ICON_BULLET] Pu&#242; essere assegnato a una scuola (+2 [ICON_RESEARCH] (max. 10), mortalit&#224; 6% / applicato ogni 3 turni)
 Eccezione: Gymnasion/Gymnasium, guadagna comunque +6 [ICON_RESEARCH]
-[ICON_BULLET] Pu&#242; essere assegnato a un pane manifatturiero (+1 [ICON_FOOD] (max. 5), mortalit&#224; 8% / controllare ogni 3 turni)
-[ICON_BULLET] Pu&#242; essere assegnato a un manifatturiero (+1 [ICON_FOOD] o +1 [ICON_PRODUCTION] (max. 5 ciascuno), mortalit&#224; 8% / controllare ogni 3 turni)
-[ICON_BULLET] Pu&#242; essere assegnato a una servizi anti-incendio (+1 [ICON_HAPPY] (max. 3), mortalit&#224; 6% / controllare ogni 3 turni)
+[ICON_BULLET] Pu&#242; essere assegnato a un panificio (+1 [ICON_FOOD] (max. 5), mortalit&#224; 8% / applicato ogni 3 turni)
+[ICON_BULLET] Pu&#242; essere assegnato a una manifattura (+1 [ICON_FOOD] o +1 [ICON_PRODUCTION] (max. 5 ciascuno), mortalit&#224; 8% / applicato ogni 3 turni)
+[ICON_BULLET] Pu&#242; essere assegnato a una servizio anti-incendio (+1 [ICON_HAPPY] (max. 3), mortalit&#224; 6% / applicato ogni 3 turni)
 
-Il tasso di mortalit&#224; diminuisce del 2% per ciascuna delle seguenti tecnologie: patologia umorale, anatomia (esclusi combattenti / gladiatori della mostra)
+Il tasso di mortalit&#224; diminuisce del 2% per ciascuna delle seguenti tecnologie: patologia umorale, anatomia (esclusi combattenti / gladiatori dell'arena)
 
-[ICON_BULLET] combattenti domiciliati in grado di dimostrare entro la forma di governo " diritti civili " per riservisti (+1 [ICON_FOOD], +1 [ICON_PRODUCTION], +1 [ICON_COMMERCE] ) sono ( 2 % di possibilit&#224; per ogni turno )
-[ICON_BULLET] combattenti domiciliati in grado di dimostrare entro la forma di governo " diritto internazionale " per riservisti (+1 [ICON_FOOD], +1 [ICON_PRODUCTION], +1 [ICON_COMMERCE] ) essere ( 3 % di possibilit&#224; per round )
-[ICON_BULLET] combattenti espositivi domiciliati possono come unit&#224; di gladiatori sono al vostro servizio , se hai studiato i gladiatori tech ( 2 % possibilit&#224; per round , i gladiatori tecnologia necessaria )
-[ICON_BULLET] Gli schiavi possono essere sfidati a duello (possibile solo fino al livello 3, lo schiavo viene ucciso e l'unit&#224; ferita, pi&#249; debole &#232; la salute dell'unit&#224;, maggiore &#232; la possibilit&#224; che l'unit&#224; venga uccisa)
+[ICON_BULLET] Con la forma di governo "Diritti Civili", i combattenti dell'arena/gladiatori di una citt&#224; possono diventare riservisti (+1 [ICON_FOOD], +1 [ICON_PRODUCTION], +1 [ICON_COMMERCE], 2 % di possibilit&#224; per ogni turno )
+[ICON_BULLET] Con la forma di governo "Diritto Internazionale", i combattenti dell'arena/gladiatori di una citt&#224; possono diventare riservisti (+1 [ICON_FOOD], +1 [ICON_PRODUCTION], +1 [ICON_COMMERCE], 3 % di possibilit&#224; per round )
+[ICON_BULLET] I combattenti dell'arena stabiliti in una citt&#224; possono diventare un'unit&#224; di [LINK = UNIT_GLADIATOR] gladiatori [\ LINK], che possono fondare una scuola di gladiatori o servire nel tuo esercito (2% di probabilit&#224; ogni turno, tecnologia necessaria: Gladiatori)
+[ICON_BULLET] Gli schiavi possono essere sfidati a duello (possibile solo fino al livello 3, lo schiavo viene ucciso e l'unit&#224; ferita, pi&#249; debole &#232; la salute dell'unit&#224;, maggiore &#232; la possibilit&#224; che anche l'unit&#224; venga uccisa)
 [ICON_BULLET] Celti, Galli e Britannici: gli schiavi possono essere decapitati (lo schiavo muore, aumenta il morale dell'unit&#224;)
 
 
 Svantaggi di schiavi :
-[ICON_BULLET] Ribellione degli schiavi
-[ICON_BULLET] mostra Regolato da combattimento / gladiatori possono morire (probabilit&#224; 3 % per mostrare i combattenti in citt&#224; (ma non meno del 5% ) , solo l'1 Gladiatorentod per citt&#224; per turno, la probabilit&#224; e 3 i turni )
-[ICON_BULLET] Pu&#242; mentre Costruire una matrice di modernizzazione ( 3 % di possibilit&#224; per round )
-[ICON_BULLET] in piedi ( non-essere spostato) schiavi di ribellarsi : la probabilit&#224; 8 % tutti e quattro i turni
-[TAB] [ICON_BULLET] L'unit&#224; slave &#232; un [LINK=UNIT_REBELL] unit&#224; ribelle [\LINK] ( su un campo adiacente senza unit&#224; e per quanto possibile sulle colline )
-[TAB] [ICON_BULLET] Con la forma di stato " diritto internazionale " : Probabilit&#224; +4 %
-[TAB] [ICON_BULLET] Se un'unit&#224; militare dedicato &#232; nello stesso campo : Probabilit&#224; -4 %
-[TAB] [ICON_BULLET] Quando il cristianesimo &#232; stato stabilito : invece di un ribelle pu&#242; anche essere un missionario cristiano caso, il giocatore riceve : Probabilit&#224; 25 %
-Conquistata [TAB] [ICON_BULLET] Se schiavi di barbari , ma sono anche ai ribelli
+[ICON_BULLET] Favorisce le rivolte degli schiavi se numero di schiavi &#62; popolazione della citt&#224;
+[ICON_BULLET] Un gladiatore assegnato a una citt&#224; ha una probabilit&#224; (3% x numero di gladiatori nella citt&#224;, min 5%) di morire per turno (ogni 3 turni, 1 morte per citt&#224; per turno max.)
+[ICON_BULLET] Uno schiavo pu&#242; morire mentre costruisce un miglioramento (Probabilit&#224;: 3% per turno)
+[ICON_BULLET] Uno schiavo non assegnato a una citt&#224; pu&#242; ribellarsi (Probabilit&#224;: 8% ogni 4 turni)
+[TAB] [ICON_BULLET] Lo schiavo pu&#242; diventare un [LINK = UNIT_REBELL] Ribelle [\ LINK] in una casella senza un'unit&#224; militare (priorit&#224;: colline)
+[TAB] [ICON_BULLET] Con la forma di governo "Diritto Internazionale": Probabilit&#224; +4 %
+[TAB] [ICON_BULLET] Se un'unit&#224; militare &#232; nella stessa casella: Probabilit&#224; -4 %
+[TAB] [ICON_BULLET] Quando il Cristianesimo &#232; gi&#224; stato fondato, al posto di un ribelle pu&#242; apparire un missionario cristiano (probabilit&#224; del 25%)
+[TAB] [ICON_BULLET] Gli schiavi diventano ribelli se catturati da unit&#224; barbariche
 
 
-[H1] casa , sul campo ei miei schiavi [\H1]
-Gli schiavi possono essere risolte una citt&#224; come uno di questi 3 tipi di schiavi . In questo caso , non vi &#232; limite .
-[ICON_BULLET] schiavi casa : +1 [ICON_RESEARCH] , +1 [ICON_CULTURE] , +1 [ICON_GREATPEOPLE] , tasso di mortalit&#224; del 4% (calcolato ogni 4 giri )
-[ICON_BULLET] schiavi campo : +2 [ICON_FOOD] , +1 [ICON_GREATPEOPLE] , tasso di mortalit&#224; del 5% (calcolato ogni 4 giri )
-[ICON_BULLET] schiavi delle miniere : +2 [ICON_PRODUCTION] , +1 [ICON_GREATPEOPLE] , tasso di mortalit&#224; dell'8 % (calcolato ogni 4 giri )
-Solo uno schiavo per citt&#224; morire in quel turno .
-Schiavi e gladiatori pu&#242; anche essere rimosso dalle citt&#224; selezionando una unit&#224; in citt&#224; desiderata e premere il pulsante appropriato . Poi uno degli schiavi residenti / gladiatori ( selezionabile ) dal centro della citt&#224; e si riceve una unit&#224; slave.
+[H1] Schiavi domestici, contadini e minatori [\H1]
+Gli schiavi possono essere assegnati senza limiti alle citt&#224; come schiavi domestici, contadini o minatori.
+[ICON_BULLET] Schiavi domestici: +1 [ICON_RESEARCH], +1 [ICON_CULTURE], +1 [ICON_GREATPEOPLE], Probabilit&#224; di morire: 5%
+[ICON_BULLET] Contadini: +2 [ICON_FOOD], +1 [ICON_GREATPEOPLE], Probabilit&#224; di morire: 8%
+[ICON_BULLET] Minori: +2 [ICON_PRODUCTION], +1 [ICON_GREATPEOPLE], Probabilit&#224; di morire: 12%
+Pu&#242; morire solo uno schiavo per turno. La probabilit&#224; viene calcolata ogni 4 turni.
 
-Requirements: 
-[ICON_BULLET] Household slaves: none
-[ICON_BULLET] Field slaves: a farm or pasture is required next to the city
-[ICON_BULLET] Mine slaves: a mine or quarry is required next to the city
+Condizioni:
+[ICON_BULLET] Schiavi domestici: nessuno
+[ICON_BULLET] Contadini: fattoria o pascolo nell'area sfruttata dalla citt&#224;
+[ICON_BULLET] Minatore: miniera o cava nell'area sfruttata dalla citt&#224;
 
-Invece di risolvere gli schiavi in una citt&#224; , si pu&#242; anche costruire un mercato di schiavi . Ci&#242; presenta i seguenti vantaggi :
-[ICON_BULLET] +25 % [ICON_GOLD] in questa citt&#224;
-[ICON_BULLET] unit&#224; slave possono essere venduti in questa citt&#224; ( 10-40 [ICON_GOLD] )
-[ICON_BULLET], prevede gli schiavi di risorse (disponibili in tutte le citt&#224; che sono collegati con la citt&#224; )
-[ICON_BULLET] Nuove unit&#224; slave in citt&#224; con un mercato di schiavi e / o schiavi liquidati visualizzati ( 1,5 % / turno , 3 % in Tyrannis )
+Uno schiavo pu&#242; costruire un mercato di schiavi sacrificandolo. Il mercato degli schiavi porta:
+[ICON_BULLET] + 25% [ICON_GOLD] in questa citt&#224;
+[ICON_BULLET] Genera una risorsa schiavo che d&#224; un bonus a ogni citt&#224;: +1 [ICON_PRODUCTION], +1 [ICON_COMMERCE]
+[ICON_BULLET] Gli schiavi possono essere venduti in questa citt&#224; (10-40 [ICON_GOLD])
+[ICON_BULLET] Uno schiavo pu&#242; essere creato in citt&#224; con un mercato di schiavi e/o almeno uno schiavo assegnato (1,5% probabilit&#224;/turno, 3% con dottrina Tirannia)
 
+Svantaggi:
+[ICON_BULLET] Genera +1 [ICON_UNHAPPY] in citt&#224;
 
-[H1] rivolta degli schiavi [\H1]
-Calcolo , tutti e quattro i turni quando il numero degli schiavi &#232; maggiore rispetto alla popolazione urbana in ogni citt&#224; e la citt&#224; &#232; stato spostato pi&#249; schiavi come uno spettacolo di combattenti :
-(Numero degli slave + numero di combattenti negozio-la dimensione della citt&#224; ) * 10 ( in% )
+[H1] Rivolta degli schiavi [\H1]
+Ogni 4 turni, se il numero di schiavi installati &#232; maggiore del numero degli abitanti e del numero dei gladiatori:
+(numero di schiavi e gladiatori-popolazione cittadina) * 10 (in%) per citt&#224;
 
-Ulteriori fattori :
-[ICON_BULLET] per unit&#224; di trasporto [LINK=CONCEPT_PROMOTIONS]Eroe[\LINK] : -25 %
-[ICON_BULLET] per unit&#224; militare : -2 %
-[ICON_BULLET] Circo : -5 %
-[ICON_BULLET] Anfiteatro: -5 %
-[ICON_BULLET] per gli schiavi non residenti (unit&#224; ) : +2 %
-[ICON_BULLET] forma di governo Codex : +5 %
-[ICON_BULLET] forma di legge marziale governo: +5 %
-[ICON_BULLET] dello stato di diritti civili o di diritto internazionale : -5 %
-[ICON_BULLET] City &#232; infelice : +25 %
+Fattori aggiuntivi:
+[ICON_BULLET] Per unit&#224; con promozione [LINK = CONCEPT_PROMOTIONS] Eroe [\ LINK]: -25%
+[ICON_BULLET] Per unit&#224; militare: -2%
+[ICON_BULLET] Circo: -4%
+[ICON_BULLET] Anfiteatro: -4%
+[ICON_BULLET] Per gli schiavi non assegnati: + 2%
+[ICON_BULLET] Con la dottrina del Codex: + 5%
+[ICON_BULLET] Con la dottrina della Legge Marziale: + 5%
+[ICON_BULLET] Con le dottrine Diritti Civili o Diritto Internazionale: -5%
+[ICON_BULLET] Se la citt&#224; &#232; infelice: + 25%
 
-effetti :
-[ICON_BULLET] Il numero di schiavi ribelli &#232; dal 1 al numero dei residenti nei schiavi citt&#224; e in piedi .
-[ICON_BULLET] Nei dintorni della citt&#224;, creato [LINK=UNIT_REBELL] ribelli [\LINK] (se possibile sulle colline ) .
-[ICON_BULLET] A questo numero vanno al residente e gli schiavi non residenti persi.
-[ICON_BULLET] La citt&#224; cade in rivolta. Il numero di round pari al numero dei ribelli .
-[ICON_BULLET] Tutte le unit&#224; in piedi in citt&#224; prendono danno del 50 % .
+Conseguenze:
+[ICON_BULLET] Il numero di [LINK = UNIT_REBELL] Ribelli [\ LINK] creati &#232; determinato tra 1 e il numero di schiavi in &#8203;&#8203;citt&#224; (assegnati e non)
+[ICON_BULLET] I ribelli appaiono nei dintorni della citt&#224; (con priorit&#224; sulle colline)
+[ICON_BULLET] Per ogni ribelle creato, viene eliminato uno schiavo (assegnato o non)
+[ICON_BULLET] La citt&#224; cade in rivolta. La durata dipende dal numero di ribelli creati
+[ICON_BULLET] Ogni unit&#224; nella citt&#224; subisce il 50% di danni
 
-[H1] rivolta Christian [\H1]
-requisiti:
-[ICON_BULLET] schiavi residenti o combattenti negozio
-[ICON_BULLET] Il cristianesimo &#232; stato istituito ( indipendentemente da quale civilt&#224; )
-[ICON_BULLET] Il cristianesimo &#232; la religione di stato
+[H1] Rivolta dei cristiani [\H1]
+Prerequisiti:
+[ICON_BULLET] Presenza di schiavi o gladiatori assegnati alla citt&#224;
+[ICON_BULLET] La religione Cristianesimo &#232; stato fondato (non importa da chi)
+[ICON_BULLET] La religione di stato non &#232; il cristianesimo
 
-Calcolo: 2% di probabilit&#224; di tutti e tre i turni
+Probabilit&#224;: 2% di probabilit&#224; / 3 turni
 
-effetti :
-[ICON_BULLET] 4 giri di citt&#224; rivolta
-[ICON_BULLET] Tutte le unit&#224; in piedi nella citt&#224; subiscono danni del 50 %
-[ICON_BULLET] Uno schiavo o spettacolo combattente residente viene rimosso
+Conseguenze:
+[ICON_BULLET] La citt&#224; si rivolta per 4 turni
+[ICON_BULLET] Ogni unit&#224; nella citt&#224; subisce il 50% di danni
+[ICON_BULLET] Uno schiavo o un gladiatore assegnato viene perso
 
-[H1] gladiatore ribellione [\H1]
-[ICON_BULLET] Gli stessi effetti e lo stesso calcolo come nella rivolta degli schiavi (che pu&#242; verificarsi anche quando ci sono meno combattente vista come schiavi in citt&#224; ) .
-[ICON_BULLET] [LINK=UNIT_GLADIATOR] gladiatori [\LINK] apparir&#224; invece di ribelli .
+[H1] Rivolta dei gladiatori [\H1]
+[ICON_BULLET] Stesse condizioni e conseguenze della rivolta degli schiavi
+[ICON_BULLET] [LINK = UNIT_GLADIATOR] Dei gladiatori [\ LINK] vengono creati al posto dei ribelli
 
-[H1] schiavi liberati [\H1]
-Schiavi o combattenti del negozio che erano residenti in una citt&#224; appena conquistata vengono liberati . La citt&#224; perde tutti gli slave residenti e gladiatori .
-Questo " schiavi liberati " possono essere :
-[ICON_BULLET] Axeman ( 5 % )
-[ICON_BULLET] Immortal ( 5 % )
-[ICON_BULLET] Kompositbogensch&#252;tze ( 5 % )
-[ICON_BULLET] Spy ( 5 % )
-[ICON_BULLET] oplita ( 5 % )
-[ICON_BULLET] cretese Archer ( 5 % )
-[ICON_BULLET] guerriero gallico ( 5 % )
-[ICON_BULLET] fromboliere Baleari ( 5 % )
-[ICON_BULLET] Ger-man ( 5 % )
+[H1] Schiavi liberati [\H1]
+Quando una citt&#224; viene catturata, tutti gli schiavi e i gladiatori vengono liberati creando unit&#224; agli ordini del conquistatore
+Queste unit&#224; possono essere:
+[ICON_BULLET] Guerriero con ascia (5%)
+[ICON_BULLET] Immortale (5%)
+[ICON_BULLET] Arciere con arco composito (5%)
+[ICON_BULLET] Spia (5%)
+[ICON_BULLET] Oplita (5%)
+[ICON_BULLET] Arciere Cretese (5%)
+[ICON_BULLET] Guerriero Gallico (5%)
+[ICON_BULLET] Fromboliere delle Baleari (5%)
+[ICON_BULLET] Ger-Man (5%)
     </Italian>
     <Spanish>
 [H1]Esclavos y esclavos liberados[\H1]
@@ -4686,15 +4685,15 @@ See [LINK=CONCEPT_SLAVES]Slaves and freed slaves[\LINK] concept.
     <French>
 [H1]Gladiateurs[\H1]
 
-Avec la technologie [LINK=TECH_GLADIATOR]Jeux du cirque[\LINK], les esclaves peuvent &#234;tre affect&#233;s aux villes en tant que mun&#233;ristes.
+Avec la technologie [LINK=TECH_GLADIATOR]Jeux du cirque[\LINK], les esclaves peuvent &#234;tre affect&#233;s aux villes en tant que gladiateurs.
 
-Un mun&#233;riste apporte :
+Un gladiateur apporte :
 [ICON_BULLET] +1 [ICON_COMMERCE]
 [ICON_BULLET] +1 EXP pour les nouvelles unit&#233;s
 
 Un gladiateur par ville peut mourir &#224; chaque tour (Probabilit&#233; : 3% x nombre de gladiateurs)
 
-Avec la doctrine [COLOR_HIGHLIGHT_TEXT]Droit civil[COLOR_REVERT] (2% de chances) ou [COLOR_HIGHLIGHT_TEXT]Loi internationale[COLOR_REVERT] (3% de chances), un gladiateur peut racheter sa libert&#233; et devenir un citoyen libre (+2 [ICON_COMMERCE]). Le sp&#233;cialiste Mun&#233;riste est transform&#233; en sp&#233;cialiste Citoyen libre.
+Avec la doctrine [COLOR_HIGHLIGHT_TEXT]Droit civil[COLOR_REVERT] (2% de chances) ou [COLOR_HIGHLIGHT_TEXT]Loi internationale[COLOR_REVERT] (3% de chances), un gladiateur peut racheter sa libert&#233; et devenir un citoyen libre (+2 [ICON_COMMERCE]). Le sp&#233;cialiste Gladiateur est transform&#233; en sp&#233;cialiste Citoyen libre.
 
 Les gladiateurs affect&#233;s &#224; une ville peuvent rejoindre votre arm&#233;e en tant que [LINK=UNIT_GLADIATOR]Gladiateur[\LINK]. Cette unit&#233; peut fonder une Ecole de gladiateurs (N&#233;cessite la technologie Gladiateurs-Probabilit&#233; : 2% par tour)
 
@@ -5984,98 +5983,99 @@ Links und rechts oben sind kleine runde Buttons, die Beraterfenster aufmachen. D
 [ICON_BULLET] Ho Steam e non riesco a vedere / selezionare PAE, anche se ho copiato (e decompresso) PAE nella directory corretta (../common/ ..)
 Reinstalla la versione CIV IV di Steam e attiva l'opzione per BETA!
 
-[ICON_BULLET] Perch&#233; vedo la mia unit&#224; quando si sposta in una pelle diversa ( Originalskin ) ?
-Opzioni del menu Grafica: agganciare off " fermato Animazioni" a
+[ICON_BULLET] Perch&#233; vedo la mia unit&#224; quando si sposta col colore di pelle diversa (colore standard)?
+Opzioni del menu -> Grafica: deselezionare l'opzione "Animazioni bloccate"
 
-[ICON_BULLET] Il mio gioco si blocca subito dopo il primo turno da / Si dice " Siamo stati sconfitti " / Il mod non pu&#242; essere caricato !
-La mod &#232; stata probabilmente non completamente scaricato. Anche in questo caso , scaricarlo e installarlo . &#200; la corretta patch da BTS installato ?
+[ICON_BULLET] Il mio gioco si blocca subito dopo il primo turno da / Si dice " Siamo stati sconfitti " / Il mod non pu&#242; essere caricato!
+The mod has probably been downloaded incompletely. Try to download and install it again. Have you installed the correct patch for BTS?
+La mod non &#232; stata probabilmente scaricata completamente. Prova a scaricarla e installarla nuovamente. Hai installato la patch corretta per BTS?
 
-[ICON_BULLET] Siamo stati sconfitti ! o il gioco continua a bloccarsi !
-Ci&#242; pu&#242; accadere se , nelle " mie scenari" cambiato le impostazioni e si desidera giocare. Scenari modificati possono cambiare solo nel file stesso .
+[ICON_BULLET] Siamo stati sconfitti! o Il gioco continua a bloccarsi!
+Questo pu&#242; accadere quando vuoi giocare i "propri scenari" e cambiare le opzioni. Scenari modificati possono essere giocati solamente cambiando le opzioni nel file stesso.
 
-[ICON_BULLET] Il gioco &#232; bruscamente interrotto e ho atterrare sul desktop !
-In modalit&#224; finestra ( Menu-Opzioni-grafica ) CIV corre molto pi&#249; stabile . Se un cambiamento nella modalit&#224; a schermo intero mentre il gioco al desktop , si tratta pi&#249; avanti nel gioco garantisce un CTD ( Crash al desktop ) . Quindi, in modalit&#224; a schermo intero non &#232; sul desktop avanti e indietro , allora il gioco &#232; stabile .
+[ICON_BULLET] Il gioco &#232; bruscamente interrotto ed &#232; tornato al desktop!
+In modalit&#224; finestra (Menu-Opzioni-grafica) CIV viene eseguito in modo molto pi&#249; stabile. Se passi al desktop a schermo intero, il gioco si arrester&#224; in modo anomalo nelle partite successive. Quindi non passare al desktop quando giochi in modalit&#224; a schermo intero.
 
-[ICON_BULLET] Non ho interfaccia di gioco !
-1) be sure you have BTS 3.19 patch installed
-2) choose another screen resolution ingame (options/graphics)
-3) Essere impostato nel file ini nella directory principale PAE deve NoCustomArt = 1 e NoCustomAssets = 1 ( invece di 0 ) .
+[ICON_BULLET] Non vedo l'interfaccia di gioco!
+1) Accertati di avere installato la patch di BTS 3.19
+2) Scegli una risoluzione di gioco diverso (Menu-Opzioni-Grafica)
+3) Imposta nel file ini della directory principale di PAE l'opzione NoCustomArt = 1 e NoCustomAssets = 1 (invece di 0).
 
-[ICON_BULLET] When I load the mod I get a GFC-Error:
-Do not rename the main mod folder (PieAncientEurope).
+[ICON_BULLET] Quando carico il gioco ottengo un GFC-Error:
+Non rinominare la cartella principale del mod (PieAncientEurope).
 
-[ICON_BULLET] Ho un Dekomprimierungsproblem carico / iniziare una partita :
-Pu&#242; essere che hai ( o provare il mod re -download e l'installazione ), poi giocare con i file decompressi FPK
+[ICON_BULLET] Ho un problema di decompressione dei filequando carico una partita o lancio il gioco:
+Una soluzione potrebbe essere quella di giocare con i file FPK decompressi, altrimenti prova a scaricare nuovamente il mod e a re-installarlo.
 
-[ICON_BULLET] Multigiocatore : Come ha fatto ogni turno OOS ( Out of Synchronization ) errore !
-Esperimento 1 : In vario sistema operativo avete nei moderni sistemi operativi solo il gioco " come amministratore " per eseguire .
-Esperimento 2 : In simultanea giochi MP : Disattivare il firewall ( dovrebbe essere sufficiente solo per i clienti )
-Esperimento 3 : Inoltre , pu&#242; essere che gli eventi attivati &#8203;&#8203;(eventi) errori causa OOS .
-Tip: Disable the FileCaching (both) in Civilization.ini in MyGames/BTS-folder
+[ICON_BULLET] Multigiocatore: abbiamo errori OOS (Out of Synchronization) ogni turno!
+Prova 1: quando usi sistemi operativi diversi, devi avviare il gioco "come amministratore" sui PC con OS pi&#249; moderni.
+Prova 2: gioco MP simultaneo: disattiva il firewall (solo i client dovrebbero funzionare).
+Prova 3: Un altro motivo pu&#242; essere attivato dagli eventi. Possono anche causare errori OOS.
+Suggerimento: disabilita il FileCaching (entrambi) nel file Civilization.ini nella cartella MyGames/BTS
 
-[ICON_BULLET] Multiplayer : In Europa le mappe con assegnazione automatica del sito ( a partire copione) dovete fare in modo che le persone che hai selezionato , situato geograficamente sulla mappa , altrimenti &#232; nel primo turno un OOS . Ci&#242; riguarda ad esempio l'India sulle mappe pi&#249; piccole d'Europa .
+[ICON_BULLET] Multigiocatore: sulle mappe europee con script di avvio automatico, che imposta le civilit&#224; nella posizione corretta, non utilizzare civilt&#224; che non si trovano geograficamente nella regione. Potresti causere un OOS nel primo turno. Ad esempio le civilt&#224; dell'India sulle mappe europee pi&#249; piccole.
 
-[ICON_BULLET] Multiplayer: The game is not shown in the LAN overview: Use the option Direct-IP-Connection (IP of the game creator).
+[ICON_BULLET] Multigiocatore: la partita non viene mostrata tra le partite in LAN: usa l'opzione Connessione IP diretta (IP del creatore del gioco).
 
-[ICON_BULLET] I want to create a direct link to PAE on my desktop
-Copy the BTS link, and then right mouse click to "Properties" => category "Link" => 
-the text field "Target:" shows "...\Beyond the Sword\Civ4BeyondSword.exe"
-now change this to: ...\Beyond the Sword\Civ4BeyondSword.exe" mod=\PieAncientEurope...
+[ICON_BULLET] Voglio creare un collegamento diretto a PAE sul mio desktop
+Copia il link BTS, quindi fai clic con il pulsante destro del mouse su "Propriet&#224;" => categoria "Collegamento" =>
+il campo di testo "Da:" contiene "...\Beyond the Sword\Civ4BeyondSword.exe".
+Cambialo in: "...\Beyond the Sword\Civ4BeyondSword.exe" mod=\PieAncientEurope..."
 
 
 [H1]Domande sul gioco[\H1]
 
-[ICON_BULLET] Perch&#233; ci sono cos&#236; tanti animali all'inizio e poi anche cos&#236; forte ?
-Per lungo tempo sono stati temuti animali selvatici. Hanno impedito l'esplorazione di terre lontane e sono stati anche in villaggi senza palizzate un grosso problema .
-Inoltre , si doveva difendere la sua trib&#249; contro le altre trib&#249; e non poteva solo andare ad esplorare . Ogni uomo della trib&#249; ( clan ) era importante . Solo con le unit&#224; pi&#249; forti che esplorano e ' diventato possibile .
-Considerate :
-[TAB][ICON_BULLET] si &#232; disarmati o con solo un bastone in mano , in realt&#224; contro orsi, leoni o un branco di lupi una possibilit&#224;? Puoi esplorare cos&#236; da sola in tutto il mondo ? No.
-[TAB][ICON_BULLET] Se l'Europa come di una civilt&#224; gi&#224; nel 2000 aC pienamente esplorato ? No.
+[ICON_BULLET] Perch&#233; ci sono cos&#236; tanti animali all'inizio e per molto tempo a venire? Perch&#233; gli animali sono cos&#236; forti?
+Per molto tempo gli umani hanno avuto paura degli animali selvatici. Impedivano l'esplorazione di terre lontane e costituivano un grosso problema anche nei villaggi senza palizzate.
+Inoltre, le trib&#249; dovevano difendersi dalle altre trib&#249;. L'esplorazione quindi non era facile. Ogni membro della trib&#249; (clan) era importante e la perdita di una persona era un problema serio. Solo con unit&#224; pi&#249; forti l'esplorazione &#232; diventata possibile.
+Tenete conto di:
+[TAB][ICON_BULLET] Hai una possibilit&#224; da solo, da solo contro orsi, leoni o un branco di lupi, disarmato o solo con un bastone in mano? Una persona cos&#236; sola avrebbe potuto esplorare il mondo intero da sola? No.
+[TAB][ICON_BULLET] L'Europa &#232; stata completamente esplorata da qualche civilt&#224; gi&#224; nel 2000 a.C.? No.
 
-[ICON_BULLET] Gli animali provengono oltre i miei limiti !
-Animali conoscono confini e possono attraversarlo , a meno che possono attaccare una unit&#224; . &#200; anche possibile attaccare le citt&#224;. Quindi state attenti !
+[ICON_BULLET] Gli animali oltrepassano i confini culturali!
+Gli animali non riconoscono affatto il confine. Possono attraversarli ogni volta che possono attaccare un'unit&#224;. Possono anche attaccare le citt&#224;. Perci&#242; stai attento!
 
-[ICON_BULLET] Perch&#233; non riesco a costruire eventuali aggiornamenti ?
-Aggiornamenti costano denaro . Basta ricercare per diversi giri fino a mettere il denaro &#232; risparmiato .
+[ICON_BULLET] Perch&#233; non posso creare miglioramenti?
+I miglioramenti costano. Devi semplicemente diminuire la ricerca per diversi turni fino a quando il denaro non viene risparmiato.
 
-[ICON_BULLET] Perch&#233; il battello affonda oltre i miei limiti ?
-Barche da lavoro c'erano spie !
+[ICON_BULLET] Perch&#233; le mie barche da lavoro affondano fuori dai miei confini?
+Le barche da lavoro non sono esploratori e possono affondare in qualsiasi terreno sconosciuto.
 
-[ICON_BULLET] Perch&#233; non posso costruire coloni ?
-Lasciando la trib&#249; &#232; venuto solo dopo che si coltivano , addomesticare gli animali e potrebbe fare armi migliori . Pertanto, si pu&#242; coloni fino a una certa tecnologia creare .
+[ICON_BULLET] Perch&#233; non sono in grado di costruire un colono?
+L'abbandono della trib&#249; arriv&#242; solo dopo che gli umani poterono coltivare cereali, addomesticare animali e fabbricare armi migliori. Pertanto, puoi costruire coloni solo dopo aver raggiunto un certo livello di tecnologia.
 
-[ICON_BULLET] Perch&#233; non ho palazzo nella mia prima citt&#224; ?
-Questo pu&#242; essere creato solo dalla tecnologia di " leadership" . Palazzi non sono state inventate fino ad allora, come era abbastanza grande e si doveva rappresentare davanti ad altre trib&#249; .
+[ICON_BULLET] Perch&#233; non c'&#232; un palazzo nella mia prima citt&#224;?
+La costruzione di un palazzo &#232; possibile dopo aver ricercato la tecnologia "Comando". I palazzi venivano costruiti solo quando una trib&#249; era abbastanza grande e desiderava rappresentarsi davanti alle altre trib&#249;.
 
-[ICON_BULLET] Perch&#233; &#232; la mia citt&#224; gi&#224; infelice della dimensione 2 ?
-In questo mod CIV Standardgl&#252;cklichkeitsbonus era di 4 a 1. Attraverso l'oracolo , un'unit&#224; militare , la prossima forma possibile di risorse pubbliche e bonus pu&#242; essere ottenuto abbastanza presto bonus.
+[ICON_BULLET] Perch&#233; la mia citt&#224; di taglia 2 &#232; cos&#236; infelice?
+In questa mod i bonus di felicit&#224; standard di CIV da 4 sono stati impostati su 1. I modi per raggiungere la felicit&#224; includono l'Oracolo, un'unit&#224; militare, alcune forme di governo e risorse bonus.
 
-[ICON_BULLET] Perch&#233; &#232; la mia citt&#224; cos&#236; presto malsana ?
-In questo mod il bonus di salute norma CIV 4-1 viene azzerato , in quanto non ci sono "milioni di citt&#224;" erano a tarda antichit&#224; .
+[ICON_BULLET] Perch&#233; la mia citt&#224; &#232; cos&#236; malsana cos&#236; presto nel gioco?
+In questa mod i bonus salute standard di CIV da 4 sono stati impostati su 1, perch&#233; non c'erano "megacitt&#224;" nei tempi antichi. La malattia ha impedito presto la crescita delle citt&#224;.
 
-[ICON_BULLET] ho collegato colorante , ma perch&#233; ottengo alcun bonus soddisfazione?
-Per alcuni bonus &#232; necessario anche alcuni edifici .
+[ICON_BULLET] Ho collegato una risorsa colorante, ma come ottengo il bonus felicit&#224;?
+Per alcuni bonus &#232; necessario un edificio aggiuntivo.
 
-[ICON_BULLET] Perch&#233; non riesco a costruire il miracolo ?
-Per molti miracoli avete bisogno di una particolare religione e / o risorse specifiche .
+[ICON_BULLET] Perch&#233; non sono in grado di costruire la meraviglia?
+Per alcune meraviglie &#232; necessaria una certa religione e/o determinate risorse.
 
-[ICON_BULLET] Perch&#233; mie citt&#224; ribelli !
-Ci sono molti trigger per una rivolta . Vedere Mod Concepts in Civilop&#228;die .
+[ICON_BULLET] Le mie citt&#224; si stanno ribellando!
+Ci sono molte cause per una ribellione. Vedi i Mod-Concept in Civilopedia.
 
-[ICON_BULLET] Perch&#233; alcuni CIV (ad esempio Roma , Unni ) all'inizio cos&#236; debole ?
-Alcuni CIV erano potenti solo in antichit&#224; classica o tardiva .
+[ICON_BULLET] Perch&#233; alcuni CIV (es. Roma, Unni) sono cos&#236; deboli all'inizio?
+Alcuni CIV si sono rafforzati solo pi&#249; tardi nel tempo.
 
-[ICON_BULLET] Perch&#233; includere legioni non costoso e Longswordsman ?
-L'equipaggiamento delle legioni (soldati professionisti) &#232; stato finanziato dallo Stato , mentre altrove molti guerrieri dovevano pagare anche per le armi ancora .
+[ICON_BULLET] Perch&#233; le legioni sono cos&#236; costose e uno spadaccino non lo &#232;?
+L'equipaggiamento delle legioni (soldati di professione) era finanziato dallo Stato, mentre altrove molti soldati dovevano ancora pagare anche per le armi che trasportavano.
 
-[ICON_BULLET] Perch&#233; mercenari costano cos&#236; tanto denaro per ogni turno ?
-Newcomers mercenari in lotta per una paga pi&#249; alta , e non per la loro esistenza .
+[ICON_BULLET] Perch&#233; i mercenari hanno costi per turno cos&#236; alti?
+I mercenari non residenti combatteranno per una paga alta e non solo per l'esistenza o il beneficio della civilt&#224; in cui sono stranieri.
 
-[ICON_BULLET] Perch&#233; perdere improvvisamente le mie unit&#224; sanitarie ?
-Pile di 20, 15 o 10 unit&#224; (impostazioni handicap) devono essere alimentati da un carro di alimentazione . Vedere cura sotto Mod Concepts in Civilopedia .
+[ICON_BULLET] Perch&#233; le mie unit&#224; perdono improvvisamente salute?
+Le pile di 20, 15 o 10 unit&#224; (impostazioni di handicap) e oltre necessitano di un carro di rifornimento. Vedi Rifornimento nella Civilopedia.
 
-[ICON_BULLET] Dove vedo le condizioni di vittoria?
-In alto a sinistra e a destra ci sono piccoli pulsanti rotondi che aprono la finestra del consulente. Le condizioni di vittoria sono il simbolo di un pugno arancione in alto a sinistra.
+[ICON_BULLET] Dove posso vedere le condizioni di vittoria?
+In alto a sinistra e a destra ci sono piccoli pulsanti rotondi che aprono la finestra del consigliere. Le condizioni di vittoria sono il simbolo di un pugno arancione in alto a sinistra.
     </Italian>
     <Spanish>
 [H1]Preguntas t&#233;cnicas[\H1]
@@ -7475,7 +7475,7 @@ D) Dans le cas d'un Stade pr&#233;sent dans chacune des 10 villes participantes,
 
 2.) Si la ville avait un Stade lors de sa victoire, celui-ci g&#233;n&#233;rera perp&#233;tuellement +1 [ICON_CULTURE]
 
-3) +1 charrette d'or 
+3) +1 chariot de butin
 
 [H2]Et dans l'Histoire...[\H2]
 
@@ -7696,7 +7696,7 @@ Um diese Siegvariante erfolgreich zu meistern, musst du die von Antipatros von S
 
 3. Das Grab des K&#246;nigs Mausolos II. zu Halikarnassos (mit Marmor)
 
-4. Der Leuchtturm auf der Insel Pharos vor Alexandria (mit Befestigter Hafen)
+4. Der Leuchtturm auf der Insel Pharos vor Alexandria (mit befestigtem Hafen)
 
 5. Die Pyramiden von Gizeh in &#196;gypten (mit &#196;gyptische G&#246;tter)
 
@@ -10799,7 +10799,7 @@ Combat sur mer:
 
 1) Apr&#232;s un combat naval, le navire vainqueur perd la moiti&#233; de ses points de mouvements.
 
-2) Si le navire adverse n'est pas captur&#233; ou d&#233;truit, des d&#233;bris flottants peuvent s'amasser. Rep&#234;cher ces d&#233;bris est difficile. Ils peuvent en outre s'&#233;chouer, les &#233;paves devant alors &#234;tre collect&#233;es par des unit&#233;s terrestres. La r&#233;cup&#233;ration en mer donne de l'or ou des esclaves, le ramassage procure des charrettes d'or.
+2) Si le navire adverse n'est pas captur&#233; ou d&#233;truit, des d&#233;bris flottants peuvent s'amasser. Rep&#234;cher ces d&#233;bris est difficile. Ils peuvent en outre s'&#233;chouer, les &#233;paves devant alors &#234;tre collect&#233;es par des unit&#233;s terrestres. La r&#233;cup&#233;ration en mer donne de l'or ou des esclaves, le ramassage procure des chariots de butin.
 
 [H1]Unit&#233;s mont&#233;es[\H1]
 Certaines unit&#233;s mont&#233;es (cavalerie lourde, bataillon/l&#233;gion sacr&#233; &#224; cheval et pr&#233;toriens &#224; cheval) peuvent :
@@ -10965,116 +10965,115 @@ Es besteht nach jedem Kampf eine Chance von 3%, dass auf dem Schlachtfeld (Plot 
     </German>
     <Italian>
 [H1]Combat[\H1]
-In PAE, the combat unit versus unit has a variety of additional effects:
+In PAE, il combattiment&#224; unit&#224; contro unit&#224; ha una serie di effetti aggiuntivi:
 
-Battle on land:
+Combattimento sulla terraferma:
 
-1) Fighting experience: Each victorious unit is given the chance to increase its level of experience. The levels are: trained, experienced, routined, veteran, elite and legend. More about this in the PAE concepts under Units: Combat Experience
+1) Esperienza di combattimento: Ogni unit&#224; vittoriosa ha la possibilit&#224; di aumentare il suo livello di esperienza. I livelli sono: addestrato, esperto, di routine, veterano, &#233;lite e leggenda. Maggiori informazioni su questo nei concetti PAE in Unit&#224;: Esperienza di combattimento
 
-2) War weariness: Units that already have the status of a veteran and therefore fought for their empire a long time can suffer from war frustration. For more details, see: Units: War weariness
+2) Stanchezza di guerra: le unit&#224; che hanno gi&#224; lo status di veterani e quindi hanno combattuto a lungo per il loro impero possono soffrire di frustrazione bellica. Per maggiori dettagli, vedi: Unit&#224;: Stanchezza di guerra
 
-3) Mercenaries: Veteran units fighting on their own feet can lose this promotion after a battle. The chance is 25%. If the unit has a loyalty promotion, leadership, or is itself a commander, then 50%. If the victorious unit is part of a stack with a warlords, the chance increases by 5%.
+3) Mercenari: le unit&#224; veterane che combattono da sole possono perdere questa promozione dopo una battaglia. La possibilit&#224; &#232; del 25%. Se l'unit&#224; ha la promozione Lealt&#224;, Leadership o &#232; essa stessa un comandante, allora la probabilit&#224; &#232; del 50%. Se l'unit&#224; vittoriosa fa parte di un gruppo con un signore della guerra, la probabilit&#224; aumenta del 5%.
 
-4) Regeneration: Long-standing units (from status: Elite) need a longer recovery phase after a battle. Elite units complete the battle with 60% damage, and legendary with 80%.
+4) Rigenerazione: le unit&#224; di vecchia data (dallo stato: Elite) hanno bisogno di una fase di recupero pi&#249; lunga dopo una battaglia. Le unit&#224; d'&#233;lite completano la battaglia con il 60% di danni e le leggendarie con l'80%.
 
-5) Plague: a plague can appear on the fighing plots. See below.
+5) Peste: nelle caselle di combattimento pu&#242; comparire una pestilenza. Vedi sotto.
 
-6) Valuations: Each battle takes up to 1/10 of the construction costs of the opposing unit
+6) Valutazioni: ogni battaglia assorbe fino a 1/10 dei costi di costruzione dell'unit&#224; avversaria
 
-7) Desertation: Each winning unit gains a chance to conquer the enemy unit. Loyal units are not conquerable. Depending on whether the victorious unit is loyal, has leadership or is itself a commander, a hero or a mercenary. Furthermore, it depends on whether one of the state leaders is charismatic.
+7) Diserzione: ogni unit&#224; vincente ha la possibilit&#224; di conquistare l'unit&#224; nemica. Le unit&#224; fedeli non sono conquistabili. A seconda che l'unit&#224; vittoriosa sia leale, abbia un comando o sia essa stessa un comandante, un eroe o un mercenario. Inoltre, la caratteristica del tratto carismatico dei capi di stato influenza la possibilit&#224; di diserzione per entrambe le parti.
 
-8) Heroes: If a unit defeats a hero or a leader, he gets himself a hero.
+8) Eroi: se un'unit&#224; sconfigge un eroe o un leader, ottiene un eroe.
 
-9) Leaders: If a unit is victorious in a stack with a leader, one leader of this stack receives +1 XP.
+9) Comandanti: se un'unit&#224; vince in un gruppo con un comandante, un comandante di questo gruppo riceve +1 XP.
 
-10) Flight: Each defeated unit has the chance to flee. Flight promotions increase the chance to escape. See below. Caution: units (chariots, ships) that flee during defense lose their load!
+10) Fuga: ogni unit&#224; sconfitta ha la possibilit&#224; di fuggire. Le promozioni sulle fughe aumentano le possibilit&#224; di fuga. Vedi sotto. Attenzione: le unit&#224; (carri, navi) che fuggono durante la difesa perdono il loro carico!
 
-11) Mounted units: see below
+11) Unit&#224; montate: vedi sotto
 
-12) Defeated animals provide food (from Tech: Hunting). Domestizable animals (horses, camels, elephants) are captured as soon as their domestication has been investigated.
+12) Gli animali sconfitti forniscono cibo (da Tech: Hunting). Gli animali domestici (cavalli, cammelli, elefanti) vengono catturati non appena viene scoperta la relativa tecnologia di addomesticamento.
 
-13) Burning pigs die after they have been used.
+13) I maiali incendiari muoiono dopo essere stati usati.
 
-14) Defeated elephant units damage their own ranks. See below.
+14) Le unit&#224; di elefanti sconfitte danneggiano i propri ranghi. Vedi sotto.
 
-15) Combat against commissioned mercenaries: One of these units is the leader. If you defeat this unit you can subject him to torture. Depending on the opportunity, he reveals his or one of the potential clients.
+15) Combattimento contro mercenari su commissione: Una di queste unit&#224; &#232; il leader. Se sconfiggi questa unit&#224; puoi sottoporla a tortura. A seconda dell'opportunit&#224;, rivela il suo o uno dei potenziali mandanti.
 
-16) Leader's death: see Units: Leader's death
+16) Morte del Comandante: vedi Unit&#224;: Morte del Comandante
 
-17) Culture: Victorious units leave their culture on the plot. It may happen that neighboring opponent fields skip to their own culture. But this holds only if the plot lies in the cultural influence of a city of its own.
+17) Cultura: la cultura di un'unit&#224; vittoriosa ne influenza la cultura della casella del combattimento. A volte i territori nemici vicini vengono convertiti alla cultura dell'unit&#224;. Valido solo se queste caselle sono influenzate anche da una citt&#224; della stessa cultura.
 
-18) Slaves: defeated units can be enslaved (from Tech: Enslavement). Slaves can be used for many productive things. See Units: Slaves.
+18) Schiavi: un'unit&#224; vittoriosa pu&#242; rendere schiavo il suo avversario (Tecnologia: Schiavit&#249;). Gli schiavi sono utili per molte attivit&#224; produttive. Vedere Unit&#224;: Schiavo.
 
-19) Deflecting cities: If a unit is defeated in a city, the number of defenders and besieders is compared. If the ratio is more than 1: 4, the city can surrender. This does not apply to barbaric cities.
+19) Defezione della citt&#224;: quando un'unit&#224; presidiata viene sconfitta, viene confrontato il numero di difensori e attaccanti. Se il rapporto &#232; 1:4 o pi&#249; a favore degli assedianti, la citt&#224; potrebbe arrendersi. Non si applica alle citt&#224; barbariche.
 
-20) Conquered cities cause unrest in neighboring enemy cities. Thus, as once Alexander the Great, with fast units, one can occupy several easily defended cities in a very short time. This does not apply to barbaric cities.
+20) La conquista di una citt&#224; destabilizza le citt&#224; nemiche vicine. Come fece Alessandro Magno, &#232; possibile trarre vantaggio da queste rivolte catturando rapidamente diverse citt&#224; mal difese in poco tempo. Non si applica alle citt&#224; barbariche.
 
-21) Burned earth: If a battle is carried out on an improved field, city ruins may arise. The chance is 5%. Villages/Cottages are reduced by one step.
+21) Terra bruciata: &#232; probabile che le rovine appaiano su una casella migliorata che vede le unit&#224; scontrarsi (probabilit&#224; del 5%). I paesi e i villaggi sono ridotti al livello inferiore.
 
-22) Fortresses: When a fortress/fort is attacked, the chance of burned earth is 2%. If you attack with a siege unit (except for ranged attack), the chance is 10%.
+22) Fortezze: Quando viene attaccata una roccaforte, la probabilit&#224; di terra bruciata &#232; del 2%. Attaccare una macchina d'assedio (escluso l'attacco a distanza) aumenta la probabilit&#224; al 10%.
 
-23) Technological insights: If you win against a unit which technology has not yet explored by you, you'll automatically gain research points for this technology.
+23) Scoperta intuitiva: la vittoria contro un'unit&#224; di cui non hai scoperto la tecnologia fa guadagnare punti ricerca per quella tecnologia.
 
-24) Blessed units will lose this promotion after each combat (whether attacker or defender). See Unit: Promotions
+24) Un'unit&#224; benedetta perde questa promozione dopo qualsiasi combattimento (in attacco o in difesa). Vedi Unit&#224;: promozioni.
 
-25) Terrore: I carri, le unit&#224; montate, i cavalieri di cammelli e gli elefanti da guerra causano la paura solo in cataste di soldati a piedi. Questa paura si perde solo quando un'unit&#224; in pila vince contro tali unit&#224; che promuovono l'ansia. Druidi con sacrificio di schiavi e i signori della guerra (generali) con il dono della retorica (promozione) possono anche rassicurare le unit&#224; ansiose e ripristinare il loro morale.
+25) Terrore: carri, unit&#224; a cavallo, cammellieri ed elefanti da guerra spaventano solo gruppi di soldati a piedi. Questa paura permane finch&#233; un'unit&#224; del gruppo a piedi vince contro una unit&#224; che provoca paura. I druidi con il sacrificio degli schiavi e i signori della guerra (generali) con il dono della retorica (promozione) possono anche rassicurare le unit&#224; impaurite e aumentare il loro morale.
 
-26) Deportazioni: le citt&#224; conquistate o svanite producono emigranti che possono essere portati e sistemati nel tuo impero. Questa funzione &#232; attiva solo fino alla tecnologia di assimilazione.
+26) Deportazioni: le citt&#224; conquistate o scomparse producono emigranti che possono essere portati e stabiliti nel tuo impero. Questa funzione &#232; attiva solo fino alla tecnologia di assimilazione.
 
 
-Battle on water:
+Combattimento in mare:
 
-1) After a naval battle, the victorious vassal loses half of its movement points.
+1) Dopo un combattimento navale, la nave vincitrice perde met&#224; dei suoi punti movimento.
 
-2) If the opposing ship is not captured or destroyed, floatsam can arise. This floatsam is not easy to capture and can get stranded on the coast and can then only be collected with land units. Floatsam brings money or slaves. Jetsam becomes to a gold cart.
+2) Se la nave avversaria non viene catturata o distrutta, possono accumularsi detriti galleggianti. La raccolta di questi detriti &#232; difficile. Possono anche arenarsi, causando la raccolta di rottami da parte delle unit&#224; di terra. Recuperarli in mare frutta oro o schiavi, mentre sulla terraferma carri di bottino.
 
-[H1]Le unit&#224; a cavallo[\H1]
-Cavalleria pesante , montata Sacred Band e montato Pretorio pu&#242;:
-[ICON_BULLET] perdere i loro cavalli in battaglia , sopravvissuto l'unit&#224; come unit&#224; da mischia (10 % )
-[TAB] Cavalleria=> scudiero
-[TAB] Ausiliari a cavallo => Ausiliari
-[TAB] Mounted Pretorio=> Praetorian
-[TAB] Sacred Banda Mounted=> Sacred Banda
-[TAB] 'anche i cavalli sopravvivere ( e nascono come unit&#224; barbariche su un campo vicino, se possibile) , ma l'unit&#224; muore (20 % )
-[ICON_BULLET] discendere on / off cavallo , al fine di meglio adattarsi all'avversario
+[H1] Unit&#224; montate [\H1]
+Alcune unit&#224; a cavallo (Cavalleria Pesante, Banda Sacra/Legionari a Cavallo e Pretoriani a Cavallo) possono:
+[ICON_BULLET] L'unit&#224; pu&#242; perdere la propria cavalcatura se sopravvive a un combattimento, diventando un'unit&#224; di fanteria Probabilit&#224;: 10%
+[TAB] Cavaliere Pesante => Portatore di Scudo
+[TAB] Ausiliario montato => Ausiliario
+[TAB] Cavaliere Pretoriano => Pretoriano
+[TAB] Banda Sacra a cavallo => Banda Sacra
+[TAB] Anche il cavallo pu&#242; sopravvivere (viene quindi creata un'unit&#224; di cavallo barbaro in una casella adiacente) ma in questo caso l'unit&#224; militare muore => Probabilit&#224;: 20%
+[ICON_BULLET] Montare e smontare da cavallo secondo necessit&#224;
 
-[H2] elefante [\H2]
+[H2] Elefanti [\H2]
 
-[ICON_BULLET] elefanti causano danni collaterali durante un attacco :
-[TAB] War Elephant : 14/50 % / 4
-[ICON_BULLET] elefanti causano a loro soldati danno del 10 % se perdono
+[ICON_BULLET] Gli elefanti causano danni collaterali quando attaccano
+[TAB] Elefante da guerra: 14/50% / 4
+[ICON_BULLET] Gli elefanti infliggono il 10% di danni alle proprie truppe quando perdono un combattimento
 
-[H1] situazioni di combattimento [\H1]
+[H1] Combattimenti [\H1]
 
-[ICON_BULLET] unit&#224; rinnegati o schiavi ( vedi [LINK=CONCEPT_LOYAL]fedelt&#224;[\LINK] )
+[ICON_BULLET] Diserzione e schiavi (Vedi il concetto [LINK = CONCEPT_LOYAL] Lealt&#224; [\ LINK])
 
-[H2] fuga nella lotta [\H2]
+[H2] Combattimento e fuga [\H2]
 
-Ogni unit&#224; ha una probabilit&#224; del 20 % di fuggire . Gestire l'unit&#224; di scappare , in modo che possano essere un massimo del 10 % della energia vitale totale ( = 100 % / illeso ) sopravvivere (non importa quanto male che era prima ) . Caution: units (chariots, ships) that flee during defense lose their cargo!
-Le navi e le unit&#224; montate in spazi aperti hanno una probabilit&#224; di fuga del 30% per impostazione predefinita.
+Ogni unit&#224; ha una probabilit&#224; del 20% di fuggire da un combattimento perso con un massimo del 10% della sua salute massima. Attenzione: alcune unit&#224; (carri, navi) in fuga da un attacco perdono il carico!
+Le navi e le unit&#224; montate in spazi aperti hanno una probabilit&#224; base di fuggire del 30%.
 
-Le seguenti condizioni aumentano la possibilit&#224; e l'energia massima di vita. A seconda della situazione, viene utilizzato il bonus pi&#249; elevato :
+Le seguenti condizioni migliorano la possibilit&#224; di fuga e la salute residua. A seconda della situazione, viene utilizzato il bonus pi&#249; alto:
+[ICON_BULLET] Predefinito: 20% di possibilit&#224; di fuga e fino al 10% di salute massima
+[ICON_BULLET] Cavalcature e navi: 30% di possibilit&#224; di fuga e fino al 10% di salute massima
+[ICON_BULLET] Villaggi e villaggi di montagna: 30% di possibilit&#224; di fuggire e fino al 12% di salute massima
+[ICON_BULLET] Promozione Fuga I: 40% di possibilit&#224; di fuggire e fino al 10% di salute massima
+[ICON_BULLET] Citt&#224;: 40% di possibilit&#224; di fuggire e fino al 15% di salute massima
+[ICON_BULLET] Promotion Fuga II: 60% di possibilit&#224; di fuggire e fino al 15% di salute massima
+[ICON_BULLET] Grandi citt&#224;: 60% di possibilit&#224; di fuggire e fino al 18% di salute massima
+[ICON_BULLET] Metropoli: 70% di possibilit&#224; di fuga e fino al 20% di salute massima
+[ICON_BULLET] Promozione Fuga III: 80% di possibilit&#224; di fuggire e fino al 20% di salute massima
 
-[ICON_BULLET] By default: 20% chance of escape and up to 10% of the total life energy
-[ICON_BULLET] Mounted units and ships: 30% chance of escape and up to 10% of the total life energy
-[ICON_BULLET] Villages and mountain villages: 30% chance of escape and up to 12% of the total life energy
-[ICON_BULLET] Promotion Escape I: 40% chance of escape and up to 10% of the total life energy
-[ICON_BULLET] Cities: 40% chance of escape and up to 15% of the total life energy
-[ICON_BULLET] Promotion Escape II: 60% chance of escape and up to 15% of the total life energy
-[ICON_BULLET] Provincial cities: 60% chance of escape and up to 18% of the total life energy
-[ICON_BULLET] Metropolis: 70% chance of escape and up to 20% of the total life energy
-[ICON_BULLET] Promotion Escape III: 80% chance of escape and up to 20% of the total life energy
+Animali:
+[ICON_BULLET] Animali: 40% di possibilit&#224; di fuggire e fino al 25% di salute massima
+[ICON_BULLET] Animali di livello &#62; 1: 60% di possibilit&#224; di fuggire e fino al 35% di salute massima
+[ICON_BULLET] Uri e animali di livello &#62; 2: 80% di possibilit&#224; di fuga e fino al 50% di salute massima
 
-Animals:
-[ICON_BULLET] Animals: 40% chance of escape and up to 25% of the total life energy
-[ICON_BULLET] Animals of XP level &#62; 1: 60% chance of escape and up to 35% of the total life energy
-[ICON_BULLET] Urus and animals of XP level &#62; 2: 80% chance of escape and up to 50% of the total life energy
+La fuga delle unit&#224; in campo aperto le sposter&#224; su un'altra casella. Le unit&#224; che sono posizionate in citt&#224; o villaggi rimarranno nella stessa casella.
 
-Unit&#224; che sono in piedi in un campo aperto in fuga si sposta in un altro campo . Le unit&#224; che si trovano in citt&#224; o villaggi , si fermano qui .
+[H2]Malattie sul campo di battaglia[\H2]
 
-[H2] malattia sul campo di battaglia [\H2]
-
-C'&#232; dopo ogni battaglia una probabilit&#224; del 3 % che sul campo di battaglia ( la trama attaccante e trama del perdente ) &#232; un focolaio di malattia superiore a 3 unit&#224; sono sul Verliererplot .
+Dopo ogni battaglia, c'&#232; la probabilit&#224; del 3% che una malattia appaia sul campo di battaglia (sia nella casella del vincitore che in quella dello sconfitto).
     </Italian>
     <Spanish>
 [H1]Combate[\H1]
@@ -11213,7 +11212,6 @@ Cattle:
 Strategic:
 [ICON_BULLET] Horses
 [ICON_BULLET] Camels
-[ICON_BULLET] War dogs
 Misc:
 [ICON_BULLET] Grapes
 [ICON_BULLET] Olives
@@ -11315,7 +11313,6 @@ B&#233;tail :
 Strat&#233;giques :
 [ICON_BULLET] Chevaux
 [ICON_BULLET] Dromadaires
-[ICON_BULLET] Chiens de guerre
 Divers:
 [ICON_BULLET] Raisins
 [ICON_BULLET] Olives
@@ -11417,7 +11414,6 @@ Vieh:
 [ICON_BULLET] Schaf
 Strategisches:
 [ICON_BULLET] Pferde
-[ICON_BULLET] Kampfhunde
 [ICON_BULLET] Kamele
 Sonstiges:
 [ICON_BULLET] Trauben
@@ -11521,7 +11517,6 @@ Cattle:
 Strategic:
 [ICON_BULLET] Horses
 [ICON_BULLET] Camels
-[ICON_BULLET] War dogs
 Misc:
 [ICON_BULLET] Grapes
 [ICON_BULLET] Olives
@@ -11624,7 +11619,6 @@ Ganado:
 Strategic:
 [ICON_BULLET] Horses
 [ICON_BULLET] Camels
-[ICON_BULLET] War dogs
 Misc:
 [ICON_BULLET] Aceitunas
 [ICON_BULLET] D&#225;tiles
@@ -12122,7 +12116,7 @@ Chance: 1:4
 1. Warband
 2. Battle companion
 3. Clan leader 
-4. Upgrade => Tribal chief
+4. Upgrade => Tribal chief (melee only)
 
 
 [H1]Huns[\H1]
@@ -12421,7 +12415,7 @@ Chance: 1:4
 1. Groupe de guerre
 2. Compagnon d'armes
 3. Chef de clan
-4. Am&#233;lioration => Prince des tribus
+4. Am&#233;lioration => Prince des tribus (m&#234;l&#233;e seulement)
 
 
 [H1]Huns[\H1]
@@ -12720,7 +12714,7 @@ Chance: 1:4
 1. Kriegesbande
 2. Kampfgef&#228;hrte
 3. Clanf&#252;hrer 
-4. Upgrade => Stammesf&#252;rst
+4. Upgrade => Stammesf&#252;rst (nur Nahk&#228;mpfer)
 
 
 [H1]Hunnen[\H1]
@@ -13020,7 +13014,7 @@ Chance: 1:4
 1. Warband
 2. Battle companion
 3. Clan leader 
-4. Upgrade => Tribal chief
+4. Upgrade => Tribal chief (melee only)
 
 
 [H1]Huns[\H1]
@@ -13319,7 +13313,7 @@ Probabilidad: 10%
 1. Grupo de guerra
 2. Compa&#241;ero de batalla
 3. L&#237;der del clan 
-4. Promoci&#243;n => Jefe Tribal
+4. Promoci&#243;n => Jefe Tribal (solo cuerpo a cuerpo)
 
 [H1]Hunos[\H1]
 Tecnolog&#237;a requerida: Ethos del guerrero

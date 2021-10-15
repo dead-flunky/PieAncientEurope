@@ -845,7 +845,7 @@
     <English>%s1_civ_adjective horticulturists have harnessed rare local resources to produce remedies.</English>
     <French>Des horticulteurs %s1:3_civ_adjective ont exploit&#233; des ressources locales pour produire des rem&#232;des.</French>
     <German>%s1:3_civ_adjective Gartenbauingenieure haben seltene einheimische Ressourcen f&#252;r die Produktion von Heilmitteln erschlossen.</German>
-    <Italian>Gli orticultori %s1_civ_adjective hanno sfruttato rare risorse locali per produrre farmaci.</Italian>
+    <Italian>Gli orticoltori %s1_civ_adjective hanno sfruttato rare risorse locali per produrre farmaci.</Italian>
     <Spanish>Los horticultores %s1:3 han aprovechado extra&#241;os recursos del lugar para producir remedios.</Spanish>
   </TEXT>
   <TEXT>
@@ -2049,15 +2049,7 @@
     <Spanish>El imperio %s1:1_civ_adjective se ha convertido en el primer productor mundial de esta&#241;o.</Spanish>
   </TEXT>
   <TEXT>
-    <Tag>TXT_KEY_EVENT_TRIGGER_TIN_1</Tag>
-    <English>A rich source of Tin has been discovered in the hills!</English>
-    <French>Une source importante d'&#233;tain a &#233;t&#233; d&#233;couverte dans les collines !</French>
-    <German>In den H&#252;geln ist ein reiches Zinnvorkommen entdeckt worden!</German>
-    <Italian>Nelle colline &#232; stato scoperto un ricco filone di stagno!</Italian>
-    <Spanish>&#161;Se ha descubierto una rica veta de esta&#241;o en las colinas!</Spanish>
-  </TEXT>
-  <TEXT>
-    <Tag>TXT_KEY_EVENT_TIN_1</Tag>
+    <Tag>TXT_KEY_EVENT_BRONZE</Tag>
     <English>Excellent news. Among other things, this will boost our production of bronze.</English>
     <French>Excellentes nouvelles ! Entre autres choses, cela augmentera notre production de bronze.</French>
     <German>Das sind sehr gute Neuigkeiten! Damit k&#246;nnen wir unsere Bronzeproduktion ankurbeln.</German>
@@ -2235,7 +2227,7 @@
   <TEXT>
     <Tag>TXT_KEY_EVENTTRIGGER_SETBACK_2</Tag>
     <English>%s1_civ_adjective discoveries have turned out to be false! This dead end result has slowed their current research project.</English>
-    <French>Les d&#233;couvertes %s1:4_civ_adjective se sont av&#233;r&#233;es erron&#233;es ! Ce travail en pure perte a ralenti leur projet de recherches actuel.</French>
+    <French>Les d&#233;couvertes %s1:4_civ_adjective se sont av&#233;r&#233;es erron&#233;es ! Ce travail en pure perte a ralenti leur projet de recherche actuel.</French>
     <German>Die %s1:2_civ_adjective Entdeckungen haben sich als falsch erwiesen. Dies bedeutet einen herben R&#252;ckschlag f&#252;r ihr aktuelles Forschungsprojekt.</German>
     <Italian>Le scoperte %s1_civ_adjective si sono rivelate false! Questo vicolo cieco ha rallentato il progresso del loro attuale progetto di ricerca.</Italian>
     <Spanish>&#161;Los descubrimientos %s1:3 han resultado ser falsos! Este callej&#243;n sin salida ha entorpecido mucho su proyecto de investigaci&#243;n.</Spanish>
@@ -3269,7 +3261,7 @@
     <English>Horse Whispering[PARAGRAPH:1]You are tasked by your elite trainers to build enough stables for them to transcend the traditional limits of animal husbandry.</English>
     <French>Murmurer &#224; l'oreille des chevaux[PARAGRAPH:1]Vos entra&#238;neurs d'&#233;lite vous chargent de construire suffisamment d'&#233;curies, afin de d&#233;passer les limites de l'&#233;levage traditionnel.</French>
     <German>Pferdefl&#252;stern[PARAGRAPH:1]Eure Elite-Trainer verlangen, dass Ihr genug St&#228;lle baut, um &#252;ber die Grenzen der traditionellen Tierzucht hinauszugehen.</German>
-    <Italian>Sussurrare ai cavalli[PARAGRAPH:1]Hai ricevuto il compito, dai tuoi allevatori d'elite, di costruire abbastanza stalle affinch&#233; loro possano superare i tradizionali limiti dell'allevamento.</Italian>
+    <Italian>Sussurrare ai cavalli[PARAGRAPH:1]Hai ricevuto il compito dai tuoi allevatori d'elite di costruire abbastanza stalle affinch&#233; possano venire superati i limiti dell'allevamento tradizionale.</Italian>
     <Spanish>Susurradores de caballos[PARAGRAPH:1]Los adiestradores de &#233;lite han encargado la construcci&#243;n de establos suficientes para traspasar los l&#237;mites tradicionales de la ganader&#237;a.</Spanish>
   </TEXT>
   <TEXT>
@@ -4839,5 +4831,13 @@
     <German>Eine kleine Spende k&#246;nnen wir uns wohl leisten.</German>
     <Italian>Possiamo permetterci una piccola donazione.</Italian>
     <Spanish>Nos podemos permitir un peque&#241;o donativo.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENT_TRIGGER_TIN_1</Tag>
+    <English>A rich source of Tin has been discovered in the hills!</English>
+    <French>Une source importante d'&#233;tain a &#233;t&#233; d&#233;couverte dans les collines !</French>
+    <German>In den H&#252;geln ist ein reiches Zinnvorkommen entdeckt worden!</German>
+    <Italian>Nelle colline &#232; stato scoperto un ricco filone di stagno!</Italian>
+    <Spanish>&#161;Se ha descubierto una rica veta de esta&#241;o en las colinas!</Spanish>
   </TEXT>
 </Civ4GameText>

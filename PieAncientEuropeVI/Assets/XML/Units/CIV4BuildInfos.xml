@@ -12,7 +12,7 @@
       <Help/>
       <PrereqTech>TECH_THE_WHEEL2</PrereqTech>
       <iTime>300</iTime>
-      <iCost>10</iCost>
+      <iCost>8</iCost>
       <bKill>0</bKill>
       <ImprovementType>NONE</ImprovementType>
       <RouteType>ROUTE_ROAD</RouteType>
@@ -31,7 +31,7 @@
       <Help/>
       <PrereqTech>TECH_ROMAN_ROADS</PrereqTech>
       <iTime>400</iTime>
-      <iCost>50</iCost>
+      <iCost>40</iCost>
       <bKill>0</bKill>
       <ImprovementType>NONE</ImprovementType>
       <RouteType>ROUTE_RAILROAD</RouteType>
@@ -68,7 +68,7 @@
       <Description>TXT_KEY_BUILD_TORF</Description>
       <Help/>
       <PrereqTech>TECH_KULTIVIERUNG</PrereqTech>
-      <iTime>600</iTime>
+      <iTime>300</iTime>
       <iCost>8</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_TORF</ImprovementType>
@@ -123,7 +123,7 @@
       <Description>TXT_KEY_BUILD_BRUNNEN</Description>
       <Help/>
       <PrereqTech>TECH_IRRIGATION</PrereqTech>
-      <iTime>600</iTime>
+      <iTime>400</iTime>
       <iCost>20</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_BRUNNEN</ImprovementType>
@@ -142,7 +142,7 @@
       <Description>TXT_KEY_BUILD_CAMP</Description>
       <Help/>
       <PrereqTech>TECH_HUNTING</PrereqTech>
-      <iTime>400</iTime>
+      <iTime>300</iTime>
       <iCost>5</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_CAMP</ImprovementType>
@@ -161,7 +161,7 @@
       <Description>TXT_KEY_BUILD_LUMBER_CAMP</Description>
       <Help/>
       <PrereqTech>TECH_BEWAFFNUNG2</PrereqTech>
-      <iTime>400</iTime>
+      <iTime>300</iTime>
       <iCost>8</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_LUMBER_CAMP</ImprovementType>
@@ -180,7 +180,7 @@
       <Description>TXT_KEY_BUILD_PASTURE</Description>
       <Help/>
       <PrereqTech>TECH_ANIMAL_HUSBANDRY</PrereqTech>
-      <iTime>500</iTime>
+      <iTime>400</iTime>
       <iCost>10</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_PASTURE</ImprovementType>
@@ -235,7 +235,7 @@
       <Description>TXT_KEY_BUILD_FARM</Description>
       <Help/>
       <PrereqTech>TECH_PFLUG</PrereqTech>
-      <iTime>500</iTime>
+      <iTime>400</iTime>
       <iCost>10</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_FARM</ImprovementType>
@@ -290,7 +290,7 @@
       <Description>TXT_KEY_BUILD_WINERY</Description>
       <Help/>
       <PrereqTech>TECH_WEINBAU</PrereqTech>
-      <iTime>750</iTime>
+      <iTime>400</iTime>
       <iCost>15</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_WINERY</ImprovementType>
@@ -364,8 +364,8 @@
       <Description>TXT_KEY_BUILD_MINE</Description>
       <Help/>
       <PrereqTech>TECH_MINING</PrereqTech>
-      <iTime>600</iTime>
-      <iCost>30</iCost>
+      <iTime>400</iTime>
+      <iCost>25</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_MINE</ImprovementType>
       <RouteType>NONE</RouteType>
@@ -383,7 +383,7 @@
       <Description>TXT_KEY_BUILD_SALTMINE</Description>
       <Help/>
       <PrereqTech>TECH_MINING</PrereqTech>
-      <iTime>600</iTime>
+      <iTime>400</iTime>
       <iCost>30</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_SALTMINE</ImprovementType>
@@ -402,7 +402,7 @@
       <Description>TXT_KEY_BUILD_PLANTATION</Description>
       <Help/>
       <PrereqTech>TECH_KULTIVIERUNG</PrereqTech>
-      <iTime>750</iTime>
+      <iTime>500</iTime>
       <iCost>25</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_PLANTATION</ImprovementType>
@@ -457,7 +457,7 @@
       <Description>TXT_KEY_BUILD_OLIVE_PRESS</Description>
       <Help/>
       <PrereqTech>TECH_CALENDAR</PrereqTech>
-      <iTime>750</iTime>
+      <iTime>500</iTime>
       <iCost>20</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_OLIVE_PRESS</ImprovementType>
@@ -512,8 +512,8 @@
       <Description>TXT_KEY_BUILD_QUARRY</Description>
       <Help/>
       <PrereqTech>TECH_STEINABBAU</PrereqTech>
-      <iTime>900</iTime>
-      <iCost>20</iCost>
+      <iTime>300</iTime>
+      <iCost>15</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_QUARRY</ImprovementType>
       <RouteType>NONE</RouteType>
@@ -567,7 +567,7 @@
       <Description>TXT_KEY_BUILD_COTTAGE</Description>
       <Help>TXT_KEY_BUILD_COTTAGE_HELP</Help>
       <PrereqTech>TECH_STAATENBILDUNG</PrereqTech>
-      <iTime>600</iTime>
+      <iTime>300</iTime>
       <iCost>15</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_COTTAGE</ImprovementType>
@@ -586,7 +586,7 @@
       <Description>TXT_KEY_BUILD_COTTAGE_HILL</Description>
       <Help/>
       <PrereqTech>TECH_AGRICULTURE2</PrereqTech>
-      <iTime>600</iTime>
+      <iTime>300</iTime>
       <iCost>15</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_COTTAGE_HILL</ImprovementType>
@@ -756,7 +756,7 @@
         <FeatureStruct>
           <FeatureType>FEATURE_SAVANNA</FeatureType>
           <PrereqTech>TECH_BEWAFFNUNG</PrereqTech>
-          <iTime>250</iTime>
+          <iTime>200</iTime>
           <iProduction>25</iProduction>
           <bRemove>1</bRemove>
         </FeatureStruct>
@@ -1156,7 +1156,7 @@
       <Description>TXT_KEY_IMPROVEMENT_BUILD_KASTELL</Description>
       <Help>TXT_KEY_BUILD_FORT_HELP</Help>
       <PrereqTech>TECH_ROMAN_ROADS</PrereqTech>
-      <iTime>300</iTime>
+      <iTime>500</iTime>
       <iCost>20</iCost>
       <bKill>0</bKill>
       <ImprovementType>IMPROVEMENT_KASTELL</ImprovementType>

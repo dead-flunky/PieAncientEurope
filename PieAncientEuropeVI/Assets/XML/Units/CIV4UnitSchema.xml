@@ -105,6 +105,8 @@
 	<ElementType name="Advisor" content="textOnly"/>
 	<ElementType name="bAnimal" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bFood" content="textOnly" dt:type="boolean"/>
+	<ElementType name="iAnimalPatrolWeight" content="textOnly" dt:type="int"/>
+	<ElementType name="iAnimalAttackWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="bNoBadGoodies" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bOnlyDefensive" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoCapture" content="textOnly" dt:type="boolean"/>
@@ -530,6 +532,8 @@
 		<element type="Advisor"/>
 		<element type="bAnimal"/>
 		<element type="bFood"/>
+		<element type="iAnimalPatrolWeight" minOccurs="0"/>
+		<element type="iAnimalAttackWeight" minOccurs="0"/>
 		<element type="bNoBadGoodies"/>
 		<element type="bOnlyDefensive"/>
 		<element type="bNoCapture"/>

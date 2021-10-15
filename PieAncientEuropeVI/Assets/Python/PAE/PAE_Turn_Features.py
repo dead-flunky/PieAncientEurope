@@ -1034,47 +1034,47 @@ def doOlympicGames():
 
 
 # Kultur bei Forts (Feature deaktiviert: nur Vorteil für HI)
-def doCheckFortCulture(pPlot):
-    iPlotData = int(CvUtil.getScriptData(pPlot, ["p", "t"], pPlot.getOwner()))
+# def doCheckFortCulture(pPlot):
+    # iPlotData = int(CvUtil.getScriptData(pPlot, ["p", "t"], pPlot.getOwner()))
 
-    # Wenn der Plot bereits in kulturellem Besitz ist
-    if pPlot.getOwner() > 0:
-        if iPlotData != -1:
-            CvUtil.removeScriptData(pPlot, "p")
-        return
+    # # Wenn der Plot bereits in kulturellem Besitz ist
+    # if pPlot.getOwner() > 0:
+        # if iPlotData != -1:
+            # CvUtil.removeScriptData(pPlot, "p")
+        # return
 
-    # Wenn der Plot keinen Besitzer hat
-    else:
-        iNumUnits = pPlot.getNumUnits()
+    # # Wenn der Plot keinen Besitzer hat
+    # else:
+        # iNumUnits = pPlot.getNumUnits()
 
-        # wenns keine Einheiten gibt
-        if iNumUnits == 0:
-            if iPlotData != -1:
-                CvUtil.removeScriptData(pPlot, "p")
-            return
+        # # wenns keine Einheiten gibt
+        # if iNumUnits == 0:
+            # if iPlotData != -1:
+                # CvUtil.removeScriptData(pPlot, "p")
+            # return
 
-        # wenn das Fort jemandem gehört
-        # wird gecheckt, ob der Besitzer noch eine Einheit drin stehen hat
-        if iPlotData != -1:
-            for i in range(iNumUnits):
-                if pPlot.getUnit(i).getOwner() == iPlotData:
-                    pPlot.setCulture(iPlotData, 1, True)
-                    pPlot.setOwner(iPlotData)
-                    return
+        # # wenn das Fort jemandem gehört
+        # # wird gecheckt, ob der Besitzer noch eine Einheit drin stehen hat
+        # if iPlotData != -1:
+            # for i in range(iNumUnits):
+                # if pPlot.getUnit(i).getOwner() == iPlotData:
+                    # pPlot.setCulture(iPlotData, 1, True)
+                    # pPlot.setOwner(iPlotData)
+                    # return
 
-        # wenn das Fort niemandem gehört oder der Besitzer nicht mehr drin ist,
-        # bekommts der mit den meisten Einheiten drin
-        dictPlayers = {}
-        for i in range(iNumUnits):
-            iPlayer = pPlot.getUnit(i).getOwner()
-            if iPlayer not in dictPlayers:
-                dictPlayers[iPlayer] = 1
-            else:
-                dictPlayers[iPlayer] += 1
+        # # wenn das Fort niemandem gehört oder der Besitzer nicht mehr drin ist,
+        # # bekommts der mit den meisten Einheiten drin
+        # dictPlayers = {}
+        # for i in range(iNumUnits):
+            # iPlayer = pPlot.getUnit(i).getOwner()
+            # if iPlayer not in dictPlayers:
+                # dictPlayers[iPlayer] = 1
+            # else:
+                # dictPlayers[iPlayer] += 1
 
-        if dictPlayers:
-            iPlayer = max(dictPlayers) #, key=dictPlayers.get)
+        # if dictPlayers:
+            # iPlayer = max(dictPlayers) #, key=dictPlayers.get)
 
-            CvUtil.addScriptData(pPlot, "p", iPlayer)
-            pPlot.setCulture(iPlayer, 1, True)
-            pPlot.setOwner(iPlayer)
+            # CvUtil.addScriptData(pPlot, "p", iPlayer)
+            # pPlot.setCulture(iPlayer, 1, True)
+            # pPlot.setOwner(iPlayer)

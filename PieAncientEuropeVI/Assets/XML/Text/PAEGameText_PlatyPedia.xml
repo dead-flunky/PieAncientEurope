@@ -155,7 +155,7 @@
   <TEXT>
     <Tag>TXT_KEY_WB_XLEVEL</Tag>
     <English>Level</English>
-    <French>Niveau</French>
+    <French>Niveau[SPACE]</French>
     <German>Level</German>
     <Italian>Livello</Italian>
     <Spanish>Nivel</Spanish>
@@ -549,7 +549,7 @@
     <English>Entrenched/Sleeping</English>
     <French>Fortifier / Attendre</French>
     <German>Verschanzt/Schl&#228;ft</German>
-    <Italian>Entrenched/Sleeping</Italian>
+    <Italian>Trincerato/Dormiente</Italian>
     <Spanish>detenido/durmiendo</Spanish>
   </TEXT>
   <TEXT>
@@ -613,7 +613,7 @@
     <English>Unit Data</English>
     <French>Donn&#233;es de l'unit&#233;</French>
     <German>Einheitendaten</German>
-    <Italian>Dati dell'unit</Italian>
+    <Italian>Dati dell'unit&#224;</Italian>
     <Spanish>Datos de unidad</Spanish>
   </TEXT>
   <TEXT>
@@ -709,7 +709,7 @@
     <English>Tech Trading</English>
     <French>Echange de technologies</French>
     <German>Techtausch</German>
-    <Italian>Commercio di tecnologie</Italian>
+    <Italian>Scambio di tecnologie</Italian>
     <Spanish>Comercio con tecnolog&#237;a</Spanish>
   </TEXT>
   <TEXT>

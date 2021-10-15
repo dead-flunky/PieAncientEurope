@@ -1661,7 +1661,7 @@
     <English>Your soldiers are disappointed because you have not managed to ensure enough worship of the Cult of Mithras.</English>
     <French>Vos soldats sont d&#233;&#231;us par votre manque d'entrain &#224; propager le culte de Mithra.</French>
     <German>Eure Soldaten sind entt&#228;uscht, weil es euch nicht gelungen ist, f&#252;r eine anst&#228;ndige Verehrung des Mithras Kultes zu sorgen.</German>
-    <Italian>I tuoi soldati sono delusi perch&#233; non &#232; si stato in grado di fornire un culto decente di culto di Mitra.</Italian>
+    <Italian>I tuoi soldati sono delusi dalla tua mancanza di entusiasmo nel diffondere il culto di Mitra.</Italian>
     <Spanish>Tus soldados est&#225;n decepcionados porque no has sabido asegurarte suficiente adoraci&#243;n del culto a Mitra.</Spanish>
   </TEXT>
   <TEXT>
@@ -1669,7 +1669,7 @@
     <English>The Cult of Mithras is particularly widespread in the %s1_civ_adjective Empire.</English>
     <French>Le culte de Mithra est particuli&#232;rement populaire dans l'empire %s1_civ_adjective.</French>
     <German>Im %s1:2_civ_adjective Reich erfreut sich der Mithras Kult besonderer Verehrung.</German>
-    <Italian>Nell'impero %s1:2_civ_adjective il culto di Mitra riceve devozione talmente speciale.</Italian>
+    <Italian>Il culto di Mitra &#232; particolarmente diffuso nell'impero % s1:1.</Italian>
     <Spanish>El culto a Mitra est&#225; extendido particularmente en el imperio %s1:1.</Spanish>
   </TEXT>
   <TEXT>
@@ -1677,7 +1677,7 @@
     <English>There are numerous cult centres for the god Mithras in the world now.</English>
     <French>Le culte de Mithra est d&#233;sormais largement r&#233;pandu &#224; travers le monde.</French>
     <German>Es gibt nun in zahlreichen St&#228;dten der Welt ein Kultzentrum f&#252;r den Gott Mithras.</German>
-    <Italian>Ora ci sono in molte citt&#224; del mondo, un centro di culto per il dio Mitra.</Italian>
+    <Italian>Ci sono ormai numerosi centri di culto per il dio Mitra nel mondo.</Italian>
     <Spanish>Hay ahora numerosos centros de culto para el dios Mitra en el mundo.</Spanish>
   </TEXT>
   <TEXT>
@@ -1685,7 +1685,7 @@
     <English>The priests of the Cult of Mithras have decided to honor you for following their cult. They will take care of the maintenance for some of your soldiers now.</English>
     <French>Les pr&#234;tres du culte ont d&#233;cid&#233; d'honorer votre foi en Mithra. Ils prendront d&#233;sormais en charge l'entretien d'une partie de vos soldats.</French>
     <German>Die Priester des Mithras Kultes haben beschlossen, euch f&#252;r den Einsatz ihres Kultes zu w&#252;rdigen. Sie werden sich ab jetzt um die Versorgung einiger Truppen eures Heeres k&#252;mmern.</German>
-    <Italian>I sacerdoti del culto di Mitra hanno deciso di rendere omaggio a voi per l'uso del suo culto. Si prenderanno cura della fornitura di alcune truppe del vostro esercito da ora.</Italian>
+    <Italian>I sacerdoti del culto di Mitra onorano la tua fede in Mitra. Da oggi in poi si occuperanno del mantenimento di una parte dei tuoi soldati.</Italian>
     <Spanish>Los sacerdortes del culto de Mitra han decidido honrarte por seguir su culto. Ellos se har&#225;n cargo ahora del mantenimiento de algunos de tus soldados.</Spanish>
   </TEXT>
   <TEXT>
@@ -1794,26 +1794,26 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_EVENTTRIGGER_MEUTEREI</Tag>
-    <English>The slaves on a %s1_civ_adjective galley mutinied.</English>
-    <French>Les esclaves d'une gal&#232;re %s1:2_civ_adjective se sont mutin&#233;s.</French>
-    <German>Die Sklaven auf einer %s1:2_civ_adjective Galeere haben gemeutert.</German>
-    <Italian>Gli schiavi su una cambusa %s1:2_civ_adjective si sono ammutinati.</Italian>
-    <Spanish>Los esclavos en una galera %s1:2 se han amotinado.</Spanish>
+    <English>The rowers on a %s1_civ_adjective vessel mutinied.</English>
+    <French>Les rameurs d'un navire %s1:2_civ_adjective se sont mutin&#233;s.</French>
+    <German>Die Ruderer auf einem %s1:2_civ_adjective Schiff haben gemeutert.</German>
+    <Italian>I rematori di un nave %s1:2_civ_adjective si sono ammutinati.</Italian>
+    <Spanish>Los remeros en un barco %s1:2 se han amotinado.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_EVENT_TRIGGER_MEUTEREI_1</Tag>
-    <English>The slaves on one of your galleys freed themselves from their chains and overpowered the guards.</English>
-    <French>Les esclaves d'une de vos gal&#232;res se sont lib&#233;r&#233;s de leurs cha&#238;nes et ont submerg&#233; leurs gardes.</French>
-    <German>Die Sklaven auf einer eurer Galeeren haben sich von ihren Ketten befreit und die Aufseher &#252;berw&#228;ltigt.</German>
-    <Italian>Gli schiavi in una delle tue galere si sono liberati dalle loro catene e sopraffatto le guardie.</Italian>
-    <Spanish>Los esclavos en una de tus galeras se han liberado de sus cadenas y han derrotado a los guardias.</Spanish>
+    <English>The rowers on your trireme have banded together and overwhelmed the overseers.</English>
+    <French>Les rameurs de votre trir&#232;me se sont regroup&#233;s et ont submerg&#233; les surveillants.</French>
+    <German>Die Ruderer auf eurer Triere haben sich zusammengeschlossen und die Aufseher &#252;berw&#228;ltigt.</German>
+    <Italian>I rematori della tua trireme si sono uniti e hanno sopraffatto i sorveglianti.</Italian>
+    <Spanish>Los remeros de tu trirreme se han unido y abrumado a los capataces.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_EVENT_MEUTEREI_1</Tag>
     <English>Let's hope the gods are gracious. In future, we should take care that the the crew is more loyal to us.</English>
     <French>Souhaitons la gr&#226;ce de nos dieux! Dans un futur aussi incertain, il faut s'assurer que l'&#233;quipage soit plus loyal envers l'autorit&#233;.</French>
-    <German>Die G&#246;tter seinen uns gn&#228;dig. In Zukunft sollten wir darauf achten, dass sich die Besatzungen der Schiffe loyaler zu uns verhalten.</German>
-    <Italian>Gli d&#232;i la sua piet&#224; di noi. In futuro, dovremmo prestare attenzione che gli equipaggi delle navi si comportano pi&#249; fedeli a noi.</Italian>
+    <German>Die G&#246;tter seien uns gn&#228;dig. In Zukunft sollten wir darauf achten, dass sich die Besatzungen der Schiffe loyaler zu uns verhalten.</German>
+    <Italian>Speriamo che gli dei siano gentili. In futuro, dovremo fare in modo che l'equipaggio ci sia pi&#249; fedele.</Italian>
     <Spanish>Esperemos que los dioses sean amables. En el futuro, tendremos que tener cuidado de que la tripulaci&#243;n sea m&#225;s leal a nosotros.</Spanish>
   </TEXT>
   <TEXT>
@@ -2423,5 +2423,45 @@
     <German>Schlie&#223;t die Massager&#228;ume auf unbestimmte Zeit.</German>
     <Italian>Close the massage rooms for an indefinite period of time.</Italian>
     <Spanish>Cerrar las salas de masajes por un periodo de tiempo indefinido.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENT_TRIGGER_MEUTEREI_2</Tag>
+    <English>The rowers on your quadrireme have banded together and overwhelmed the overseers.</English>
+    <French>Les rameurs de votre quadrir&#232;me se sont regroup&#233;s et ont submerg&#233; les surveillants.</French>
+    <German>Die Ruderer auf eurer Quadrireme haben sich zusammengeschlossen und die Aufseher &#252;berw&#228;ltigt.</German>
+    <Italian>I rematori della tua quadrireme si sono ammutinati e hanno sopraffatto i sorveglianti.</Italian>
+    <Spanish>Los remeros de tu quatrirreme se han unido y abrumado a los capataces.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENT_TRIGGER_KUPFER</Tag>
+    <English>A rich source of copper has been discovered in the hills!</English>
+    <French>Une source importante de cuivre a &#233;t&#233; d&#233;couverte dans les collines !</French>
+    <German>In den H&#252;geln ist ein reiches Kupfervorkommen entdeckt worden!</German>
+    <Italian>Nelle colline &#232; stato scoperto un ricco filone di rame!</Italian>
+    <Spanish>Nelle colline &#232; stato scoperto un ricco filone di cobre!</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENT_TRIGGER_BLEI</Tag>
+    <English>A rich source of lead has been discovered in the hills!</English>
+    <French>Une source importante de plomb a &#233;t&#233; d&#233;couverte dans les collines !</French>
+    <German>In den H&#252;geln ist ein reiches Bleivorkommen entdeckt worden!</German>
+    <Italian>Nelle colline &#232; stato scoperto un ricco filone di piombo!</Italian>
+    <Spanish>&#161;Se ha descubierto una rica veta de plomo en las colinas!</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENT_TRIGGER_MEUTEREI_3</Tag>
+    <English>The rowers on your quinquireme have banded together and overwhelmed the overseers.</English>
+    <French>Les rameurs de votre quinqu&#233;r&#232;me se sont regroup&#233;s et ont submerg&#233; les surveillants.</French>
+    <German>Die Ruderer auf eurer Quinquireme haben sich zusammengeschlossen und die Aufseher &#252;berw&#228;ltigt.</German>
+    <Italian>I rematori della tua quinquereme si sono ammutinati e hanno sopraffatto i sorveglianti.</Italian>
+    <Spanish>Los remeros de tu quinquerreme se han unido y abrumado a los capataces.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENT_TRIGGER_MEUTEREI_4</Tag>
+    <English>The rowers on your liburna have banded together and overwhelmed the overseers.</English>
+    <French>Les rameurs de votre liburne se sont regroup&#233;s et ont submerg&#233; les surveillants.</French>
+    <German>Die Ruderer auf eurer Liburne haben sich zusammengeschlossen und die Aufseher &#252;berw&#228;ltigt.</German>
+    <Italian>I rematori della tua liburna si sono ammutinati e hanno sopraffatto i sorveglianti.</Italian>
+    <Spanish>Los remeros de tu liburna se han unido y abrumado a los capataces.</Spanish>
   </TEXT>
 </Civ4GameText>

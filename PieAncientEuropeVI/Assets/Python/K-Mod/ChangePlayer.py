@@ -25,7 +25,7 @@ class ChangePlayer :
 
     def __init__(self, customEM ) :
 
-        print "Initializing ChangePlayer Mod"
+        CvUtil.pyPrint("Initializing ChangePlayer Mod")
 
         global LOG_DEBUG
 
@@ -42,8 +42,8 @@ class ChangePlayer :
         # Keep game from showing messages about handling these popups
         CvUtil.SilentEvents.extend([changeCivPopupNum,changeHumanPopupNum])
 
-    def removeEventHandlers( self ) :
-        print "Removing event handlers from ChangePlayer"
+    def removeEventHandlers(self):
+        CvUtil.pyPrint("Removing event handlers from ChangePlayer")
         
         self.customEM.removeEventHandler( "kbdEvent", self.onKbdEvent )
 
@@ -59,16 +59,16 @@ class ChangePlayer :
         'keypress handler'
         eventType,key,mx,my,px,py = argsList
 
-        if ( eventType == 6 ):
+        if eventType == 6:
             theKey=int(key)
 
-            if( theKey == int(InputTypes.KB_P) and self.customEM.bShift and self.customEM.bCtrl ) :
+            if theKey == int(InputTypes.KB_P) and self.customEM.bShift and self.customEM.bCtrl:
                 changeCivPopup( )
 
-            if( theKey == int(InputTypes.KB_L) and self.customEM.bShift and self.customEM.bCtrl ) :
+            if theKey == int(InputTypes.KB_L) and self.customEM.bShift and self.customEM.bCtrl:
                 changeHumanPopup( )
             
-            if( theKey == int(InputTypes.KB_U) and self.customEM.bShift and self.customEM.bCtrl ) :
+            if theKey == int(InputTypes.KB_U) and self.customEM.bShift and self.customEM.bCtrl:
                 updateGraphics( )
 
 def changeCivPopup( ) :

@@ -17,21 +17,21 @@
 	<options id="Advisors" file="BUG Advisors.ini">
 		<section id="Advisors">
 			<!-- Exotic Foreign Advisor (F4) by Requies, Dresden, EmperorFool -->
-			<option id="EFAGlanceTab" key="EFA Glance" 
-					type="boolean" default="True" 
-					get="isShowGlance"/>
-			<list   id="EFAGlanceAttitudes" key="EFA Glance Attitudes" 
-					type="int" default="1" listType="string">
-				<choice id="Numbers" get="isShowGlanceNumbers"/>
-				<choice id="Smilies" get="isShowGlanceSmilies"/>
-				<choice id="Both" get="isShowGlanceNumbers isShowGlanceSmilies"/>
-			</list>
-			<option id="EFAImprovedInfo" key="EFA Improved Info" 
-					type="boolean" default="True" 
-					get="isUseImprovedEFAInfo"/>
-			<option id="EFADealTurnsLeft" key="EFA Deal Turns Left" 
-					type="boolean" default="True" 
-					get="isShowDealTurnsLeft"/>
+			<!-- <option id="EFAGlanceTab" key="EFA Glance"  -->
+					<!-- type="boolean" default="True"  -->
+					<!-- get="isShowGlance"/> -->
+			<!-- <list   id="EFAGlanceAttitudes" key="EFA Glance Attitudes"  -->
+					<!-- type="int" default="1" listType="string"> -->
+				<!-- <choice id="Numbers" get="isShowGlanceNumbers"/> -->
+				<!-- <choice id="Smilies" get="isShowGlanceSmilies"/> -->
+				<!-- <choice id="Both" get="isShowGlanceNumbers isShowGlanceSmilies"/> -->
+			<!-- </list> -->
+			<!-- <option id="EFAImprovedInfo" key="EFA Improved Info"  -->
+					<!-- type="boolean" default="True"  -->
+					<!-- get="isUseImprovedEFAInfo"/> -->
+			<!-- <option id="EFADealTurnsLeft" key="EFA Deal Turns Left"  -->
+					<!-- type="boolean" default="True"  -->
+					<!-- get="isShowDealTurnsLeft"/> -->
 	
 			<!-- BUG Military Advisor (F5) by Ruff_Hi, EmperorFool, Karadoc -->
 			<option id="BugMA" key="BugMilitaryAdvisor"
@@ -42,24 +42,24 @@
 			<option id="GPTechPrefs" key="GP Tech Prefs" 
 					type="boolean" default="True" 
 					get="isShowGPTechPrefs"/>
-			<option id="WideTechScreen" key="Wide Tech Screen" 
-					type="boolean" default="False" 
-					get="isWideTechScreen"/>
-			<option id="ShowTechEra" key="Show Tech Era" 
-					type="boolean" default="False"
-					get="isShowTechEra"/>
+			<!-- <option id="WideTechScreen" key="Wide Tech Screen"  -->
+					<!-- type="boolean" default="False"  -->
+					<!-- get="isWideTechScreen"/> -->
+			<!-- <option id="ShowTechEra" key="Show Tech Era"  -->
+					<!-- type="boolean" default="False" -->
+					<!-- get="isShowTechEra"/> -->
 	
 			<!-- BUG Religion Advisor (F7) by Ruff_Hi -->
-			<option id="BugReligiousTab" key="Religious" 
-					type="boolean" default="False" 
-					get="isReligious"/>
-			<list   id="ShowReligions" key="Show Religions" 
-					type="int" default="0" listType="string" 
-					get="getShowReligions">
-				<choice id="All" get="isShowAllReligions isShowFoundedReligions isShowPlayerReligions"/>
-				<choice id="Founded" get="isShowFoundedReligions"/>
-				<choice id="Player" get="isShowPlayerReligions"/>
-			</list>
+			<!-- <option id="BugReligiousTab" key="Religious"  -->
+					<!-- type="boolean" default="False"  -->
+					<!-- get="isReligious"/> -->
+			<!-- <list   id="ShowReligions" key="Show Religions"  -->
+					<!-- type="int" default="0" listType="string"  -->
+					<!-- get="getShowReligions"> -->
+				<!-- <choice id="All" get="isShowAllReligions isShowFoundedReligions isShowPlayerReligions"/> -->
+				<!-- <choice id="Founded" get="isShowFoundedReligions"/> -->
+				<!-- <choice id="Player" get="isShowPlayerReligions"/> -->
+			<!-- </list> -->
 
 			<!-- BUG Victory Advisor (F8) by Ruff_Hi -->
 			<option id="BugVictoriesTab" key="Victories" 
@@ -99,16 +99,16 @@
 		</section>
 	</options>
 	
-	<widget name="WIDGET_INFO_WORLD_WONDERS" xml="TXT_KEY_TOP_CITIES_SCREEN_WORLD_WONDERS"/>
-	<widget name="WIDGET_INFO_NATIONAL_WONDERS" xml="TXT_KEY_TOP_CITIES_SCREEN_NATIONAL_WONDERS"/>
-	<widget name="WIDGET_INFO_PROJECTS" xml="TXT_KEY_PEDIA_CATEGORY_PROJECT"/>
+	<!-- <widget name="WIDGET_INFO_WORLD_WONDERS" xml="TXT_KEY_TOP_CITIES_SCREEN_WORLD_WONDERS"/> -->
+	<!-- <widget name="WIDGET_INFO_NATIONAL_WONDERS" xml="TXT_KEY_TOP_CITIES_SCREEN_NATIONAL_WONDERS"/> -->
+	<!-- <widget name="WIDGET_INFO_PROJECTS" xml="TXT_KEY_PEDIA_CATEGORY_PROJECT"/> -->
 
-	<widget name="WIDGET_TECH_PREFS_ALL" module="CvTechChooser" function="getAllTechPrefsHover"/>
-	<widget name="WIDGET_TECH_PREFS_CURRENT" module="CvTechChooser" function="getCurrentTechPrefsHover"/>
-	<widget name="WIDGET_TECH_PREFS_FUTURE" module="CvTechChooser" function="getFutureTechPrefsHover"/>
-	<widget name="WIDGET_TECH_CHOOSER_ERA" module="CvTechChooser" function="getEraDescription"/>
+	<!-- <widget name="WIDGET_TECH_PREFS_ALL" module="CvTechChooser" function="getAllTechPrefsHover"/> -->
+	<!-- <widget name="WIDGET_TECH_PREFS_CURRENT" module="CvTechChooser" function="getCurrentTechPrefsHover"/> -->
+	<!-- <widget name="WIDGET_TECH_PREFS_FUTURE" module="CvTechChooser" function="getFutureTechPrefsHover"/> -->
+	<!-- <widget name="WIDGET_TECH_CHOOSER_ERA" module="CvTechChooser" function="getEraDescription"/> -->
 
-	<event type="ResolutionChanged" module="CvCustomizableDomesticAdvisor" function="forcePositionCalc"/>
-	<event type="LanguageChanged" module="CvCustomizableDomesticAdvisor" function="forcePositionCalc"/>
+	<!-- <event type="ResolutionChanged" module="CvCustomizableDomesticAdvisor" function="forcePositionCalc"/> -->
+	<!-- <event type="LanguageChanged" module="CvCustomizableDomesticAdvisor" function="forcePositionCalc"/> -->
 
 </mod>

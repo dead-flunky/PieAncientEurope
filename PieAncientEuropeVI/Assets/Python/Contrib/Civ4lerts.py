@@ -72,7 +72,6 @@ import AttitudeUtil
 import BugCore
 import BugUtil
 import CityUtil
-import DiplomacyUtil
 import PlayerUtil
 import TradeUtil
 
@@ -866,7 +865,7 @@ class RefusesToTalk(AbstractStatefulAlert):
 		refusals = self.refusals[eActivePlayer]
 		newRefusals = set()
 		for player in PlayerUtil.players(True, False, False, False):
-			if DiplomacyUtil.canContact(activePlayer, player) and not DiplomacyUtil.isWillingToTalk(player, eActivePlayer):
+			if PlayerUtil.canContact(activePlayer, player) and not PlayerUtil.isWillingToTalk(player, eActivePlayer):
 				newRefusals.add(player.getID())
 		self.display(eActivePlayer, "TXT_KEY_CIV4LERTS_ON_WILLING_TO_TALK", refusals.difference(newRefusals))
 		self.display(eActivePlayer, "TXT_KEY_CIV4LERTS_ON_REFUSES_TO_TALK", newRefusals.difference(refusals))

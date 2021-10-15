@@ -15,8 +15,10 @@
 # **********************************
 
 import BugEventManager
+# import CvEventManager
 
 eventManager = BugEventManager.BugEventManager()
+# eventManager = CvEventManager.CvEventManager()
 
 def getEventManager():
     return eventManager

@@ -272,6 +272,10 @@ void CyInfoPythonInterface1()
 		.def("getCommandType", &CvUnitInfo::getCommandType, "int ()")
 
 		.def("isAnimal", &CvUnitInfo::isAnimal, "bool ()")
+		// < JAnimals Mod Start > Flunky for PAE
+		.def("getAnimalPatrolWeight", &CvUnitInfo::getAnimalPatrolWeight, "int ()")
+		.def("getAnimalAttackWeight", &CvUnitInfo::getAnimalAttackWeight, "int ()")
+		// < JAnimals Mod End >
 		.def("isFoodProduction", &CvUnitInfo::isFoodProduction, "bool ()")
 		.def("isNoBadGoodies", &CvUnitInfo::isNoBadGoodies, "bool ()")
 /************************************************************************************************/

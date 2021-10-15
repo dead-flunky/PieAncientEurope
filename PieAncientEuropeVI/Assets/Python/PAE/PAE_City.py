@@ -1072,12 +1072,15 @@ def doEmigrant(pCity, pUnit):
 def doDisbandCity(pCity, pUnit, pPlayer):
     iRand = CvUtil.myRandom(10, "disbandCity")
     if iRand < 8:
+
+        if not isCityState(pCity.getOwner()):
+            iUnitType = gc.getInfoTypeForString("UNIT_EMIGRANT")
+            pNewUnit = pPlayer.initUnit(iUnitType, pCity.getX(), pCity.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+            pNewUnit.finishMoves()
+            pUnit.finishMoves()
+
         CyInterface().addMessage(pCity.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DISBAND_CITY_OK", (pCity.getName(),)), "AS2D_PILLAGE", 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), False, False)
         pPlayer.disband(pCity)
-        iUnitType = gc.getInfoTypeForString("UNIT_EMIGRANT")
-        pNewUnit = pPlayer.initUnit(iUnitType, pCity.getX(), pCity.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-        pNewUnit.finishMoves()
-        pUnit.finishMoves()
     else:
         CyInterface().addMessage(pCity.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DISBAND_CITY_NOT_OK", (pCity.getName(),)), "AS2D_CITY_REVOLT", 2, None, ColorTypes(7), pCity.getX(), pCity.getY(), False, False)
         # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
@@ -3888,3 +3891,7 @@ def getHolyRelic(pCity, iPlayer):
 
           if pPlayer.isHuman():
             CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_INFO_RELIC", (pCity.getName(),)), None, 2, gc.getUnitInfo(gc.getInfoTypeForString("UNIT_RELIC")).getButton(), ColorTypes(8), pCity.getX(), pCity.getY(), True, True)
+
+def isCityState(iPlayer):
+    # city states / Stadtstaaten
+    return gc.getTeam(gc.getPlayer(iPlayer).getTeam()).isHasTech(gc.getInfoTypeForString("TECH_CITY_STATE"))

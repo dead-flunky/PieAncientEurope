@@ -33,8 +33,8 @@
 		<config tag="event" parents="mod" module="BugConfig" class="EventHandler"/>
 		
 		<config tag="symbol" parents="mod" module="FontUtil" class="SymbolHandler"/>
-		<config tag="shortcut" parents="mod" module="InputUtil" class="ShortcutHandler"/>
-		<config tag="widget" parents="mod" module="WidgetUtil" class="WidgetHandler"/>
+		<!-- <config tag="shortcut" parents="mod" module="InputUtil" class="ShortcutHandler"/> -->
+		<!-- <config tag="widget" parents="mod" module="WidgetUtil" class="WidgetHandler"/> -->
 		
 		<config tag="screen" parents="mod" module="BugOptionsScreen" class="ScreenHandler">
 			<config tag="tab" class="TabHandler"/>

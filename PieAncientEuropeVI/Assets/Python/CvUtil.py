@@ -9,13 +9,13 @@ import traceback
 import sys
 
 # For Civ game code access
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyTranslator, CyPythonMgr,
+                                CyInterface, CyGame, CardinalDirectionTypes,
+                                UnitAITypes, FontSymbols, YieldTypes,
+                                CommerceTypes, shuffleList, DirectionTypes)
 
 # For ScriptData dict
 import simplejson as json
-
-# Load lists with types
-from PAE_Lists import *
 
 # For exception handling
 SHOWEXCEPTIONS = 1
@@ -164,7 +164,7 @@ def convertToUnicode(s):
 
 def convertToStr(s):
     "if the string is unicode, convert it to str by encoding it using 8859-1, latin_1"
-    if isinstance(s, unicode):
+    if isinstance(s, unicode): #noqa
         return s.encode("latin_1")
     return s
 
@@ -176,7 +176,7 @@ class RedirectDebug:
     def write(self, stuff):
         # if str is non unicode and contains encoded unicode data, supply the
         # right encoder to encode it into a unicode object
-        if isinstance(stuff, unicode):
+        if isinstance(stuff, unicode): #noqa
             self.m_PythonMgr.debugMsgWide(stuff)
         else:
             self.m_PythonMgr.debugMsg(stuff)
@@ -189,7 +189,7 @@ class RedirectError:
     def write(self, stuff):
         # if str is non unicode and contains encoded unicode data, supply the
         # right encoder to encode it into a unicode object
-        if isinstance(stuff, unicode):
+        if isinstance(stuff, unicode): #noqa
             self.m_PythonMgr.errorMsgWide(stuff)
         else:
             self.m_PythonMgr.errorMsg(stuff)
@@ -207,7 +207,12 @@ def myExceptHook(eType, value, tb):
         sys.stdout.write(total)
 
 def pyPrint(stuff):
-    stuff = 'PY:' + stuff + "\n"
+
+    if isinstance(stuff, str):
+        stuff = unicode(stuff, errors='replace') # noqa
+    elif isinstance(stuff, unicode): # noqa
+        pass
+    stuff = u'PY:' + stuff + "\n"
     stuff = stuff.encode('utf-8')
     sys.stdout.write(stuff)
 
@@ -520,7 +525,7 @@ def initDynamicFontIcons():
 def addIconToMap(infoChar, desc):
     global FontIconMap
     desc = convertToStr(desc)
-    print "%s - %s" %(infoChar(), desc)
+    pyPrint("%s - %s" %(infoChar(), desc))
     uc = infoChar()
     if uc >= 0:
         FontIconMap[desc] = u"%c" %(uc,)
@@ -655,7 +660,7 @@ def removeScriptData(pOwner, key):
 def _decode_list(data):
     rv = []
     for item in data:
-        if isinstance(item, unicode):
+        if isinstance(item, unicode): #noqa
             item = item.encode('utf-8')
         elif isinstance(item, list):
             item = _decode_list(item)
@@ -668,9 +673,9 @@ def _decode_list(data):
 def _decode_dict(data):
     rv = {}
     for key, value in data.iteritems():
-        if isinstance(key, unicode):
+        if isinstance(key, unicode): #noqa
             key = key.encode('utf-8')
-        if isinstance(value, unicode):
+        if isinstance(value, unicode): #noqa
             value = value.encode('utf-8')
         elif isinstance(value, list):
             value = _decode_list(value)
