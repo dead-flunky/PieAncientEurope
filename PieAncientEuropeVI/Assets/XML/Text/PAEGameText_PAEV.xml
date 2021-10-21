@@ -737,7 +737,7 @@
     <Spanish>&#161;Has perdido -%d1[ICON_RESEARCH] de tu investigaci&#243;n!</Spanish>
   </TEXT>
   <TEXT>
-    <Tag>TXT_KEY_ERA_LATE_ANTIK</Tag>
+    <Tag>TXT_KEY_ERA_LATE_ANTIQUITY</Tag>
     <English>Late Antiquity</English>
     <French>Antiquit&#233; tardive</French>
     <German>Sp&#228;tantike</German>
@@ -1970,11 +1970,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_UNIT_ESCAPE_4</Tag>
-    <English>The unit was able to withdraw and hide in the village.</English>
-    <French>L'unit&#233; a pu se retirer et se cacher dans le village.</French>
-    <German>Die Einheit konnte sich im Dorf zur&#252;ckziehen.</German>
-    <Italian>L'unit&#224; &#232; stata in grado di ritirarsi e nascondersi nel villaggio.</Italian>
-    <Spanish>La unidad pudo retirarse y esconderse en el pueblo.</Spanish>
+    <English>The unit %s1_unit was able to withdraw and hide in the village.</English>
+    <French>L'unit&#233; %s1_unit a pu se retirer et se cacher dans le village.</French>
+    <German>Die Einheit %s1_unit konnte sich im Dorf zur&#252;ckziehen.</German>
+    <Italian>L'unit&#224; &#232; %s1_unit stata in grado di ritirarsi e nascondersi nel villaggio.</Italian>
+    <Spanish>La unidad %s1_unit pudo retirarse y esconderse en el pueblo.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_PROMOTION_MORALE_HELP</Tag>
@@ -7039,14 +7039,6 @@
     <German><Text>Stadtstaat</Text><Gender>Male</Gender><Plural>0</Plural></German>
     <Italian><Text>Citt&#224;-stato</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Ciudad-estado</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
-  </TEXT>
-  <TEXT>
-    <Tag>TXT_KEY_FREE</Tag>
-    <English></English>
-    <French></French>
-    <German></German>
-    <Italian></Italian>
-    <Spanish></Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_LION2</Tag>
