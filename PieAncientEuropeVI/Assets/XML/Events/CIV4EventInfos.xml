@@ -26855,7 +26855,7 @@
     </EventInfo>
     <EventInfo>
       <Type>EVENT_MEUTEREI_1</Type>
-      <Description>TXT_KEY_EVENT_MEUTEREI_1</Description>
+      <Description>TXT_KEY_EVENT_MEUTEREI</Description>
       <LocalInfoText/>
       <WorldNewsTexts/>
       <OtherPlayerPopup/>
@@ -26936,7 +26936,7 @@
     </EventInfo>
     <EventInfo>
       <Type>EVENT_MEUTEREI_2</Type>
-      <Description>TXT_KEY_EVENT_MEUTEREI_2</Description>
+      <Description>TXT_KEY_EVENT_MEUTEREI</Description>
       <LocalInfoText/>
       <WorldNewsTexts/>
       <OtherPlayerPopup/>
@@ -27017,7 +27017,7 @@
     </EventInfo>
     <EventInfo>
       <Type>EVENT_MEUTEREI_3</Type>
-      <Description>TXT_KEY_EVENT_MEUTEREI_3</Description>
+      <Description>TXT_KEY_EVENT_MEUTEREI</Description>
       <LocalInfoText/>
       <WorldNewsTexts/>
       <OtherPlayerPopup/>
@@ -27098,7 +27098,7 @@
     </EventInfo>
     <EventInfo>
       <Type>EVENT_MEUTEREI_4</Type>
-      <Description>TXT_KEY_EVENT_MEUTEREI_4</Description>
+      <Description>TXT_KEY_EVENT_MEUTEREI</Description>
       <LocalInfoText/>
       <WorldNewsTexts/>
       <OtherPlayerPopup/>

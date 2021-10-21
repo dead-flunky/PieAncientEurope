@@ -2,7 +2,11 @@
 # From Flunky
 
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
+                                CyTranslator, DirectionTypes, plotDirection,
+                                ColorTypes, UnitAITypes, CyPopupInfo,
+                                ButtonPopupTypes, CommerceTypes, YieldTypes,
+                                CommandTypes, InterfaceMessageTypes)
 # import CvEventInterface
 import CvUtil
 import PAE_Lists as L
@@ -68,7 +72,7 @@ def onModNetMessage(iData1, iData2, iData3, iData4, iData5):
         doSlave2Feuerwehr(pCity, pUnit)
     # Slave -> Brotmanufaktur Nahrung
     elif iData1 == 755:
-        doSlave2Brotmanufaktur(pCity, pUnit)        
+        doSlave2Brotmanufaktur(pCity, pUnit)
 
 
 def doSlave2Gladiator(pCity, pUnit):
@@ -240,7 +244,7 @@ def doSlave2Feuerwehr(pCity, pUnit):
 def dyingBuildingSlave(pCity):
     iPlayer = pCity.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
-    
+
     iReduceChance = 0
     if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_MEDICINE3")): iReduceChance += 2
     if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_ANATOMIE")):  iReduceChance += 2
@@ -337,7 +341,7 @@ def dyingBuildingSlave(pCity):
                 # ***TEST***
                 #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Palastsklave verschwunden (Zeile 334)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-    # Tempel    
+    # Tempel
     TempleArray = []
     # Trait Creative: 3 Kultur pro Sklave / 3 culture per slave
     if gc.getPlayer(pCity.getOwner()).hasTrait(gc.getInfoTypeForString("TRAIT_CREATIVE")):
@@ -448,7 +452,7 @@ def doReleaseSlaves(pPlayer, pCity, iData5):
     # PopUp
     if iData5 != -1 or bPopUp:
       # Dies soll doppelte Popups in PB-Spielen vermeiden.
-      if pCity.getOwner() == gc.getGame().getActivePlayer():    
+      if pCity.getOwner() == gc.getGame().getActivePlayer():
         # PopUp
         popupInfo = CyPopupInfo()
         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
@@ -673,19 +677,19 @@ def freeSlaves(pCity, pPlayer):
             [gc.getInfoTypeForString('UNIT_UNSTERBLICH'), UnitAITypes.UNITAI_ATTACK],
             [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK],
             [gc.getInfoTypeForString('UNIT_SOLDURII'), UnitAITypes.UNITAI_ATTACK]
-          ]          
+          ]
         elif pPlayer.getCurrentEra() == 2:
           lUnits = [
             [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
             [gc.getInfoTypeForString('UNIT_ARCHER_KRETA'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_LIBYAN_AMAZON'), UnitAITypes.UNITAI_COUNTER],            
+            [gc.getInfoTypeForString('UNIT_LIBYAN_AMAZON'), UnitAITypes.UNITAI_COUNTER],
             [gc.getInfoTypeForString('UNIT_AXEMAN2'), UnitAITypes.UNITAI_ATTACK],
             [gc.getInfoTypeForString('UNIT_ARCHER_NUBIA'), UnitAITypes.UNITAI_CITY_COUNTER],
             [gc.getInfoTypeForString('UNIT_JAVELIN_GERMAN'), UnitAITypes.UNITAI_ATTACK],
             [gc.getInfoTypeForString('UNIT_COMPOSITE_ARCHER'), UnitAITypes.UNITAI_CITY_DEFENSE],
             [gc.getInfoTypeForString('UNIT_PELTIST'), UnitAITypes.UNITAI_CITY_COUNTER],
             [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK]
-          ]  
+          ]
         elif pPlayer.getCurrentEra() == 1:
           lUnits = [
             [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
@@ -697,7 +701,7 @@ def freeSlaves(pCity, pPlayer):
             [gc.getInfoTypeForString('UNIT_PELTIST'), UnitAITypes.UNITAI_CITY_COUNTER],
             [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK]
           ]
-        
+
         if pPlayer.getCurrentEra() == 4:
           lUnits.append([gc.getInfoTypeForString('UNIT_WURFAXT'), UnitAITypes.UNITAI_ATTACK])
           lUnits.append([gc.getInfoTypeForString('UNIT_SWORDSMAN'), UnitAITypes.UNITAI_ATTACK])
@@ -731,14 +735,14 @@ def freeSlaves(pCity, pPlayer):
 def freeCitizen(pCity):
     # Fehler trat ohne dem getName == "" auf (04.06.2020)
     if pCity is None or pCity.isNone() or pCity.getName() == "": return 0
-    
+
     # TEST
     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", (pCity.getName(), 0)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-    iPlayer = pCity.getOwner()
-    pPlayer = gc.getPlayer(iPlayer)
-    
-    eSpecialistFreeCitizen = gc.getInfoTypeForString("SPECIALIST_CITIZEN2")
+    #iPlayer = pCity.getOwner()
+    #pPlayer = gc.getPlayer(iPlayer)
+
+    #eSpecialistFreeCitizen = gc.getInfoTypeForString("SPECIALIST_CITIZEN2")
     eSpecialistHouse = gc.getInfoTypeForString("SPECIALIST_SLAVE")
     eSpecialistFood = gc.getInfoTypeForString("SPECIALIST_SLAVE_FOOD")
     eSpecialistProd = gc.getInfoTypeForString("SPECIALIST_SLAVE_PROD")
@@ -746,7 +750,7 @@ def freeCitizen(pCity):
     iCitySlavesFood = pCity.getFreeSpecialistCount(eSpecialistFood)
     iCitySlavesProd = pCity.getFreeSpecialistCount(eSpecialistProd)
     iCitySlaves = iCitySlavesHaus + iCitySlavesFood + iCitySlavesProd
-    
+
     # PAE 6.2: Free Citizen deaktiviert
     """
     if iCitySlaves > 0:
@@ -782,7 +786,7 @@ def freeCitizenGlad(pCity):
     iPlayer = pCity.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
 
-    eSpecialistFreeCitizen = gc.getInfoTypeForString("SPECIALIST_CITIZEN2")
+    #eSpecialistFreeCitizen = gc.getInfoTypeForString("SPECIALIST_CITIZEN2")
     eSpecialistGlad = gc.getInfoTypeForString("SPECIALIST_GLADIATOR")
     eSpecialistReservist = gc.getInfoTypeForString("SPECIALIST_RESERVIST")
     eCivicBuergerrecht = gc.getInfoTypeForString("CIVIC_BUERGERRECHT")
@@ -903,7 +907,7 @@ def dyingGlad(pCity, iCityGlads, bTeamHasGladiators):
 def doUpgradeLatifundium(pPlot):
     # alte Version: Latifundien werden besser und blieben auf Stufe 5
     #pPlot.changeUpgradeProgress(10)
-    
+
     # ab PAE 6.6: Latifunden können nur von Sklaven auf eine Stufe erhöht werden und verlieren ihren Wert bis runter auf Stufe 1 (Boni wie normale Modernisierungen)
     if pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM1"): pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM2"))
     elif pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM2"): pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM3"))

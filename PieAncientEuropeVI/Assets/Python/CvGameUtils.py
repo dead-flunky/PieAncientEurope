@@ -2262,9 +2262,10 @@ class CvGameUtils:
                                         pUnit.kill(True, -1)  # RAMK_CTD
                                         return True
                         else:
-                            pCity = PAE_Unit.getNearestCity(pUnit)
-                            if pCity:
-                                pUnit.getGroup().pushMoveToMission(pCity.getX(), pCity.getY())
+                            PAE_Unit.move2GovCenter(pUnit)
+                            #pCity = PAE_Unit.getNearestCity(pUnit)
+                            #if pCity:
+                            #    pUnit.getGroup().pushMoveToMission(pCity.getX(), pCity.getY())
 
                 return False
 
@@ -3401,9 +3402,16 @@ class CvGameUtils:
                 CvTechChooser.getCurrentTechPrefsHover(iData2)
             elif iData1 == 769:
                 CvTechChooser.getFutureTechPrefsHover(iData2)
-	# <widget name="WIDGET_TECH_PREFS_ALL" module="CvTechChooser" function="getAllTechPrefsHover"/>
-	# <widget name="WIDGET_TECH_PREFS_CURRENT" module="CvTechChooser" function="getCurrentTechPrefsHover"/>
-	# <widget name="WIDGET_TECH_PREFS_FUTURE" module="CvTechChooser" function="getFutureTechPrefsHover"/>
+            # <widget name="WIDGET_TECH_PREFS_ALL" module="CvTechChooser" function="getAllTechPrefsHover"/>
+            # <widget name="WIDGET_TECH_PREFS_CURRENT" module="CvTechChooser" function="getCurrentTechPrefsHover"/>
+            # <widget name="WIDGET_TECH_PREFS_FUTURE" module="CvTechChooser" function="getFutureTechPrefsHover"/>
+
+            # Pferdewechsel / Horse Swap
+            elif iData1 == 766:
+                if iData2 == 1:
+                    return CyTranslator().getText("TXT_KEY_ACTION_CAMEL_SWAP", ())
+                return CyTranslator().getText("TXT_KEY_ACTION_HORSE_SWAP", ())
+
             # CITY_TAB replacements
             elif iData1 == 88000:
                 return gc.getCityTabInfo(iData2).getDescription()

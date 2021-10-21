@@ -1,7 +1,11 @@
 # Plot features and events per turn
 
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
+                                CyTranslator, DirectionTypes, CommerceTypes,
+                                ColorTypes, UnitAITypes, CyPopupInfo,
+                                ButtonPopupTypes, plotXY, plotDirection,
+                                GameOptionTypes)
 # import CvEventInterface
 import CvUtil
 import PAE_Barbaren
@@ -128,7 +132,7 @@ def doPlotFeatures():
     Plains = []
     Jungle = []
     Hills = []
-    GoodyPlots = []
+    #GoodyPlots = []
 
     # map
     iMapW = gc.getMap().getGridWidth()
@@ -850,7 +854,7 @@ def doMoveDesertStorm(lDesertStorm):
 # Tiefsee / Deep Ocean setzen
 def doPlaceDeepOcean():
     iNumMapPlots = gc.getMap().numPlots()
-    iDirectionTypes = DirectionTypes.NUM_DIRECTION_TYPES
+    #iDirectionTypes = DirectionTypes.NUM_DIRECTION_TYPES
     iCoast = gc.getInfoTypeForString("TERRAIN_COAST")
     iOcean = gc.getInfoTypeForString("TERRAIN_OCEAN")
     iDeepOcean = gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN")

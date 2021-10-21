@@ -1918,6 +1918,12 @@ class CvEventManager:
             PAE_Unit.doBurnDownForest(pUnit)
             PAE_Unit.doGoToNextUnit(pUnit)
 
+        # Pferdewechsel (Held, General oder bestimmte Einheiten mit sehr hohem Rang)
+        elif iData1 == 766:
+            pPlayer = gc.getPlayer(iData4)
+            pUnit = pPlayer.getUnit(iData5)
+            CyInterface().addMessage(iData4, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_PFERDEWECHSEL_DONE",()), None, 2, None, ColorTypes(8), 0, 0, False, False)
+            pUnit.setMoves(0)
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

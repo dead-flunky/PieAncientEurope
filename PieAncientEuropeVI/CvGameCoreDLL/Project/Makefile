@@ -292,7 +292,7 @@ $(Target_BIN): $(Target_BIN_TEMP)
 		
 build: $(Target_BIN)
 !IFDEF YOURMOD
-	-COPY "$(Target_BIN)" "$(YOURMOD)."
+	-COPY "$(Target_BIN)" "$(YOURMOD)\."
 !ENDIF
 !IFDEF YOURMOD2
 	-COPY "$(Target_BIN)" "$(YOURMOD2)\Assets\."

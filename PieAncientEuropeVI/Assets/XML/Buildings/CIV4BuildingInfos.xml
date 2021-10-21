@@ -13672,7 +13672,7 @@
           <Strategy/>
           <Advisor>ADVISOR_ECONOMY</Advisor>
           <ArtDefineTag>ART_DEF_BUILDING_NATIONAL_CRAFT_CENTER</ArtDefineTag>
-          <MovieDefineTag/>
+          <MovieDefineTag>ART_DEF_MOVIE_NATIONAL_CRAFT_CENTER</MovieDefineTag>
           <HolyCity/>
           <ReligionType/>
           <StateReligion/>
@@ -20334,7 +20334,7 @@
           <ObsoleteSafeCommerceChanges/>
           <CommerceChangeDoubleTimes/>
           <CommerceModifiers>
-            <iCommerce>20</iCommerce>
+            <iCommerce>10</iCommerce>
           </CommerceModifiers>
           <GlobalCommerceModifiers/>
           <SpecialistExtraCommerces/>
@@ -30685,11 +30685,11 @@
           <Type>BUILDING_ORACLE2</Type>
           <SpecialBuildingType/>
           <Description>TXT_KEY_BUILDING_ORACLE2</Description>
-          <Civilopedia>TXT_KEY_BUILDING_ORACLE_PEDIA</Civilopedia>
+          <Civilopedia>TXT_KEY_BUILDING_ORACLE2_PEDIA</Civilopedia>
           <Strategy>TXT_KEY_BUILDING_ORACLE_STRATEGY</Strategy>
           <Advisor>ADVISOR_MILITARY</Advisor>
           <ArtDefineTag>ART_DEF_BUILDING_ORACLE2</ArtDefineTag>
-          <MovieDefineTag/>
+          <MovieDefineTag>ART_DEF_MOVIE_ORACLE2</MovieDefineTag>
           <HolyCity/>
           <ReligionType/>
           <StateReligion/>
@@ -31923,7 +31923,7 @@
           <Strategy>TXT_KEY_BUILDING_HUNDEZUCHT_STRATEGY</Strategy>
           <Advisor>ADVISOR_ECONOMY</Advisor>
           <ArtDefineTag>ART_DEF_BUILDING_HUNDEZUCHT</ArtDefineTag>
-          <MovieDefineTag/>
+          <MovieDefineTag>ART_DEF_MOVIE_HUNDEZUCHT</MovieDefineTag>
           <HolyCity/>
           <ReligionType/>
           <StateReligion/>

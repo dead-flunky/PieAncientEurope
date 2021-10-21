@@ -1,7 +1,11 @@
 # Disasters features and events
 
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap, CyGame,
+                                CyCamera, CyEngine, PlotTypes,
+                                CyTranslator, DirectionTypes,
+                                ColorTypes, CyPopupInfo, isWorldWonderClass,
+                                ButtonPopupTypes, plotXY, plotDirection)
 import CvUtil
 
 import PAE_City
@@ -15,7 +19,7 @@ def doGenerateDisaster(iGameTurn):
 
     if iGameTurn == 0:
         return
-    
+
     #doNebel()
 
     iTurnDisastersModulo = 80
@@ -99,27 +103,32 @@ def doSandsturm():
     terr_desert = gc.getInfoTypeForString("TERRAIN_DESERT")
     iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
 
-    lImprovements = [
-      gc.getInfoTypeForString("IMPROVEMENT_FORT"),
-      gc.getInfoTypeForString("IMPROVEMENT_FORT2"),
-      gc.getInfoTypeForString("IMPROVEMENT_TURM2")
-    ]
+    # lImprovements = [
+    #   gc.getInfoTypeForString("IMPROVEMENT_FORT"),
+    #   gc.getInfoTypeForString("IMPROVEMENT_FORT2"),
+    #   gc.getInfoTypeForString("IMPROVEMENT_TURM2")
+    # ]
 
     lDesert = []
     # Schritt 1: DesertPlots raussuchen
     for x in range(iMapW):
-      for y in range(iMapH):
-        loopPlot = gc.getMap().plot(x, y)
-        if loopPlot is not None and not loopPlot.isNone():
-          if loopPlot.getFeatureType() == iDarkIce: continue
-          if loopPlot.getTerrainType() != terr_desert: continue
-          if loopPlot.getFeatureType() != -1: continue
-          if loopPlot.getImprovementType() != -1: continue
-          if loopPlot.isPeak(): continue
-          if plotXY(loopPlot.getX(), loopPlot.getY(), 2, 0).getTerrainType() == terr_desert:
-            # nur x-Koordinaten speichern
-            lDesert.append(x)
-            break
+        for y in range(iMapH):
+            loopPlot = gc.getMap().plot(x, y)
+            if loopPlot is not None and not loopPlot.isNone():
+                if loopPlot.getFeatureType() == iDarkIce:
+                    continue
+                if loopPlot.getTerrainType() != terr_desert:
+                    continue
+                if loopPlot.getFeatureType() != -1:
+                    continue
+                if loopPlot.getImprovementType() != -1:
+                    continue
+                if loopPlot.isPeak():
+                    continue
+                if plotXY(loopPlot.getX(), loopPlot.getY(), 2, 0).getTerrainType() == terr_desert:
+                    # nur x-Koordinaten speichern
+                    lDesert.append(x)
+                    break
 
     # Schritt 2: Sandsturm setzen
     if len(lDesert):
@@ -135,7 +144,7 @@ def doSandsturm():
         if len(lDesert):
           iRand = CvUtil.myRandom(len(lDesert), "doSandsturmGetRandomXCoord")
           iPlotX = lDesert[iRand]
-          
+
           # Sandsturm 3 breit
           # entlang der x-Koordinate auf allen y Plots
           for x in range(3):
@@ -147,13 +156,13 @@ def doSandsturm():
                 if loopPlot.getFeatureType() != -1: continue
                 if loopPlot.getImprovementType() != -1: continue
                 if loopPlot.isPeak(): continue
-                
+
                 loopPlot.setFeatureType(feat_desertstorm, 0)
-                
+
                 # Besitzer herausfinden
                 if loopPlot.getOwner() not in OwnerArray:
                     OwnerArray.append(loopPlot.getOwner())
-          
+
           # Remove x-Koordinaten 3 Felder breit
           for i in range(-3,4):
             j = iPlotX + i
@@ -304,7 +313,7 @@ def doNebel():
                               elif loopPlot.getTerrainType() in lOceans:
                                     loopPlot.setFeatureType(-1, 0) # Required for reset of visibility
                                     loopPlot.setFeatureType(feat_nebel, (i+j)%2)
-                                    
+
                                     # Nebel Variationen
                                     num_remove = CyGame().getMapRandNum(8,"Nebelvariation")
                                     for r in range (num_remove):
@@ -314,7 +323,7 @@ def doNebel():
                                     loopPlot.setFeatureDummyVisibility("Plane07", False)
                                     loopPlot.setFeatureDummyVisibility("Plane10", False)
                                     #loopPlot.resetFeatureModel()
-                                            
+
                                     # Besitzer herausfinden
                                     if loopPlot.getOwner() != -1 and loopPlot.getOwner() not in OwnerArray:
                                         OwnerArray.append(loopPlot.getOwner())
@@ -335,7 +344,7 @@ def doSeesturm():
     iMapH = gc.getMap().getGridHeight()
 
     feat_seesturm = gc.getInfoTypeForString("FEATURE_SEESTURM")
-    
+
     lIce = [
         gc.getInfoTypeForString("FEATURE_ICE"),
         gc.getInfoTypeForString("FEATURE_DARK_ICE")
@@ -345,7 +354,7 @@ def doSeesturm():
       gc.getInfoTypeForString("TERRAIN_OCEAN"),
       gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN")
     ]
-    
+
     #  0 = WORLDSIZE_DUEL
     #  1 = WORLDSIZE_TINY
     #  2 = WORLDSIZE_SMALL
@@ -377,7 +386,7 @@ def doSeesturm():
         if pPlot is not None and not pPlot.isNone():
 
             if pPlot.getFeatureType() in lIce: continue
-            
+
             if pPlot.getTerrainType() in lOceans:
                 OwnerArray = []
                 iMaxEffect += 1
@@ -560,9 +569,9 @@ def doErdbeben(iX, iY):
         iPlayer = pPlot.getOwner()
 
         if pPlot is not None and not pPlot.isNone():
-            
+
             doOracleShowsDisaster(iRandX,iRandY)
-            
+
             if not pPlot.isWater() and pPlot.getFeatureType() != iDarkIce:
                 if pPlot.isVisibleToWatchingHuman():
                     CyCamera().JustLookAtPlot(pPlot)
@@ -884,9 +893,9 @@ def doVulkan(iX, iY, iSkala):
                 break
 
     if iX > 0 and iY > 0:
-        
+
         doOracleShowsDisaster(iX,iY)
-        
+
         pPlot = gc.getMap().plot(iX, iY)
 
         # terr_peak   = gc.getInfoTypeForString("TERRAIN_PEAK")
@@ -1355,7 +1364,7 @@ def doTsunami(iX, iY):
                             pEffectPlot = CyMap().plot(iX - i + 2, iY)
                         CyEngine().triggerEffect(iEffect, pEffectPlot.getPoint())
                         bEffectDone = True
-                        
+
                         doOracleShowsDisaster(pEffectPlot.getX(), pEffectPlot.getY())
 
                         if gc.getPlayer(gc.getGame().getActivePlayer()).isHuman() and pEffectPlot.isVisibleToWatchingHuman():
@@ -1485,9 +1494,9 @@ def doMeteorites():
         if pPlot is not None and not pPlot.isNone():
             if pPlot.getFeatureType() == iDarkIce:
                 continue
-            
+
             doOracleShowsDisaster(iRandX,iRandY)
-            
+
             iMaxEffect += 1
             # Modernisierung und Strasse entfernen
             if not pPlot.isCity():
@@ -1626,9 +1635,9 @@ def doComet():
         if pPlot is not None and not pPlot.isNone():
             if pPlot.getFeatureType() == iDarkIce:
                 continue
-                
+
             doOracleShowsDisaster(iRandX,iRandY)
-            
+
             # Modernisierung und Strasse entfernen
             if not pPlot.isCity():
                 pPlot.setRouteType(-1)
@@ -1802,7 +1811,7 @@ def doDestroyCityWonders(pCity, iChance, iFeatureType):
 
 
   # iChance = Wahrscheinlichkeit, dass eine Unit gekillt wird
-def doKillUnits(pPlot, iChance):    
+def doKillUnits(pPlot, iChance):
     iRange = pPlot.getNumUnits()
     for iUnit in range(iRange):
         pUnit = pPlot.getUnit(iUnit)
@@ -1817,7 +1826,7 @@ def doKillUnits(pPlot, iChance):
                     # Message: Eure Einheit %s hat diese schreckliche Naturgewalt nicht ueberlebt!
                     CyInterface().addMessage(iOwner, True, 8, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_UNIT_KILLED", (pUnit.getName(), 0)), "AS2D_PLAGUE", 2, pUnit.getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
                 # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
-                pUnit.kill(True, -1)  # RAMK_CTD                
+                pUnit.kill(True, -1)  # RAMK_CTD
             else:
                 pUnit.setDamage(60, -1)
                 pUnit.setImmobileTimer(1)
@@ -1831,7 +1840,7 @@ def doDestroyWalls(pCity):
     iBuildingHW2 = gc.getInfoTypeForString('BUILDING_CELTIC_DUN')
     iBuildingHW3 = gc.getInfoTypeForString('BUILDING_HIGH_WALLS_GRECO')
     bDestroyed = False
-    
+
     iChance = CvUtil.myRandom(100, "destroy_HW1")
     if pCity.isHasBuilding(iBuildingHW1) and iChance < 25:
         bDestroyed = True
@@ -1851,7 +1860,7 @@ def doDestroyWalls(pCity):
         pCity.setNumRealBuilding(iBuildingHW3, 0)
         if iPlayer != -1 and gc.getPlayer(iPlayer).isHuman():
             CyInterface().addMessage(gc.getPlayer(iPlayer).getID(), True, 8, CyTranslator().getText("TXT_KEY_DISASTER_DESTROYED_BUILDING", (pCity.getName(), pBuilding.getDescription())), None, 2, pBuilding.getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
-    
+
     if pCity.isHasBuilding(iBuildingWalls):
         if (bDestroyed and iChance < 15) or (not bDestroyed and iChance < 50):
             bDestroyed = True
@@ -1859,14 +1868,14 @@ def doDestroyWalls(pCity):
             pCity.setNumRealBuilding(iBuildingWalls, 0)
             if iPlayer != -1 and gc.getPlayer(iPlayer).isHuman():
                 CyInterface().addMessage(gc.getPlayer(iPlayer).getID(), True, 8, CyTranslator().getText("TXT_KEY_DISASTER_DESTROYED_BUILDING", (pCity.getName(), pBuilding.getDescription())), None, 2, pBuilding.getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
-    
+
     if pCity.isHasBuilding(iBuildingPalisade):
         if (bDestroyed and iChance < 15) or not bDestroyed:
             pBuilding = gc.getBuildingInfo(iBuildingPalisade)
             pCity.setNumRealBuilding(iBuildingPalisade, 0)
             if iPlayer != -1 and gc.getPlayer(iPlayer).isHuman():
                 CyInterface().addMessage(gc.getPlayer(iPlayer).getID(), True, 8, CyTranslator().getText("TXT_KEY_DISASTER_DESTROYED_BUILDING", (pCity.getName(), pBuilding.getDescription())), None, 2, pBuilding.getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
-    
+
     if bDestroyed and pCity.getProductionProcess() != -1: pCity.clearOrderQueue()
 
 # Naturkatastrophen vernichten verbreitbare Bonusresourcen

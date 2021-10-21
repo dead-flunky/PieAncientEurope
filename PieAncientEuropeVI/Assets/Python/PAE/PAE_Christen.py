@@ -1,7 +1,9 @@
 # Christian features and events
 
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface,
+                                CyTranslator, ColorTypes, isWorldWonderClass,
+                                isTeamWonderClass, isNationalWonderClass)
 # import CvEventInterface
 import CvUtil
 
@@ -82,7 +84,7 @@ def setHolyCity():
     # 1. Religion den Barbaren zukommen (sonst kommt Religionswahl bei Theologie)
     pBarbTeam = gc.getTeam(gc.getPlayer(gc.getBARBARIAN_PLAYER()).getTeam())
     pBarbTeam.setHasTech(gc.getInfoTypeForString("TECH_THEOLOGY"), True, gc.getBARBARIAN_PLAYER(), True, False)
-                
+
     # 2. Heilige Stadt setzen
     if pCity is not None:
         gc.getGame().setHolyCity(gc.getInfoTypeForString("RELIGION_CHRISTIANITY"), pCity, True)
@@ -184,7 +186,7 @@ def removePagans(pCity):
                         iBuildingClass = pBuilding.getBuildingClassType()
                         if not isWorldWonderClass(iBuildingClass) and not isTeamWonderClass(iBuildingClass) and not isNationalWonderClass(iBuildingClass):
                             pCity.setNumRealBuilding(iBuildingLoop,0)
-        
+
         pCity.setHasReligion(lReli[iRand], 0, 0, 0)
         text = gc.getReligionInfo( lReli[iRand] ).getText()
 

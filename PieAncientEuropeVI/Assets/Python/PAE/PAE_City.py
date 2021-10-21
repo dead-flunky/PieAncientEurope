@@ -1,6 +1,12 @@
 # Imports
 # Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface,
+                                CyTranslator, CyMap, DirectionTypes,
+                                ColorTypes, UnitAITypes, CyPopupInfo,
+                                ButtonPopupTypes, plotDirection, UnitTypes,
+                                CyAudioGame, plotDistance, plotXY,
+                                isWorldWonderClass, isTeamWonderClass,
+                                isNationalWonderClass, InterfaceMessageTypes)
 # import CvEventInterface
 import CvUtil
 
@@ -198,7 +204,7 @@ def onModNetMessage(argsList):
         # -- Einfluss verbessern --
         elif iData4 == 0:
 
-            iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
+            #iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
             iBuildingHappiness = pCity.getExtraHappiness()
             # Button 0: kleine Spende
             iGold1 = pCity.getPopulation() * 4
@@ -276,7 +282,7 @@ def onModNetMessage(argsList):
         # -- Tribut fordern --
         elif iData4 == 1:
 
-            iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
+            #iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
             iBuildingHappiness = pCity.getExtraHappiness()
             iUnit1 = gc.getInfoTypeForString("UNIT_GOLDKARREN")
             iUnhappy1 = 2
@@ -1081,6 +1087,7 @@ def doDisbandCity(pCity, pUnit, pPlayer):
 
         CyInterface().addMessage(pCity.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DISBAND_CITY_OK", (pCity.getName(),)), "AS2D_PILLAGE", 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), False, False)
         pPlayer.disband(pCity)
+
     else:
         CyInterface().addMessage(pCity.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DISBAND_CITY_NOT_OK", (pCity.getName(),)), "AS2D_CITY_REVOLT", 2, None, ColorTypes(7), pCity.getX(), pCity.getY(), False, False)
         # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
@@ -1419,11 +1426,14 @@ def doRenegadeCity(pCity, iNewOwner, LoserUnit):
     UnitArray = []
     JumpArray = []
 
+    # Kultur vorher entfernen (sonst CtD)
+    pCity.setCulture (iNewOwner, 0, True)
+
     if LoserUnit != None:
-        iLoserOwner = LoserUnit.getOwner()
+        #iLoserOwner = LoserUnit.getOwner()
         iLoserID = LoserUnit.getID()
     else:
-        iLoserOwner = -1
+        #iLoserOwner = -1
         iLoserID = -1
 
     iRange = pPlot.getNumUnits()
@@ -2249,19 +2259,19 @@ def bonusMissing(pCity, eBuilding):
 def bonusMissingCity(pCity, eBuilding):
     eBonus = gc.getBuildingInfo(eBuilding).getPrereqAndBonus()
     if eBonus != -1:
-      for iI in range(gc.getNUM_CITY_PLOTS()):
-        loopPlot = pCity.getCityIndexPlot(iI)
-        if loopPlot is not None and not loopPlot.isNone():
-          if loopPlot.getBonusType(-1) == eBonus:
-            iImprovement = loopPlot.getImprovementType()
-            if iImprovement != -1 and gc.getImprovementInfo(iImprovement).isImprovementBonusTrade(eBonus):
-              eBonus = None
-              break
+        for iI in range(gc.getNUM_CITY_PLOTS()):
+            loopPlot = pCity.getCityIndexPlot(iI)
+            if loopPlot is not None and not loopPlot.isNone():
+                if loopPlot.getBonusType(-1) == eBonus:
+                    iImprovement = loopPlot.getImprovementType()
+                    if iImprovement != -1 and gc.getImprovementInfo(iImprovement).isImprovementBonusTrade(eBonus):
+                        eBonus = None
+                        break
     return eBonus
 
 def onEmigrantBuilt(city, unit):
-    iPlayer = city.getOwner()
-    pPlayer = gc.getPlayer(iPlayer)
+    #iPlayer = city.getOwner()
+    #pPlayer = gc.getPlayer(iPlayer)
     pPlot = city.plot()
     iPop = city.getPopulation()
     # Einheit die richtige Kultur geben
@@ -2284,7 +2294,8 @@ def onEmigrantBuilt(city, unit):
     # Pop senken, Nahrungslager leeren
     city.setFood(0)
 
-    if iPop > 1: city.changePopulation(-1)
+    if iPop > 1:
+        city.changePopulation(-1)
 
     doCheckCityState(city)
     # ***TEST***
@@ -3593,7 +3604,7 @@ def doCheckCityName(pCity):
 
   if Filename != "":
     # init
-    thisCityName = pCity.getName()
+    #thisCityName = pCity.getName()
     thisCityX = pCity.getX()
     thisCityY = pCity.getY()
 
@@ -3638,23 +3649,40 @@ def doCheckCityName(pCity):
 def getRangeCut(string):
     string = str(string)
     string = string.strip()
-    if "-" not in string:
-      return [int(string)]
+    iPos = string.find('-')
+    if iPos == -1:
+        return [int(string)]
     else:
-      for i in xrange(len(string)):
-        if string[i] == "-":
-          iPos = i
-          break
-      iBegin = int(string[:iPos])
-      iEnd = string[iPos+1:]
-      iDiff = int(iEnd) - int(iBegin)
-      if iDiff < 0: iDiff *= -1
-      xyRange = []
-      xyRange.append(iBegin)
-      for i in range (iDiff):
-        iBegin += 1
+        iBegin = int(string[:iPos])
+        iEnd = string[iPos+1:]
+        iDiff = int(iEnd) - int(iBegin)
+        if iDiff < 0:
+            iDiff *= -1
+        xyRange = []
         xyRange.append(iBegin)
-      return xyRange
+        for i in range(iDiff):
+            iBegin += 1
+            xyRange.append(iBegin)
+        return xyRange
+
+    # if "-" not in string:
+    #     return [int(string)]
+    # else:
+    #     for i in range(len(string)):
+    #         if string[i] == "-":
+    #             iPos = i
+    #             break
+    #     iBegin = int(string[:iPos])
+    #     iEnd = string[iPos+1:]
+    #     iDiff = int(iEnd) - int(iBegin)
+    #     if iDiff < 0:
+    #         iDiff *= -1
+    #     xyRange = []
+    #     xyRange.append(iBegin)
+    #     for i in range (iDiff):
+    #         iBegin += 1
+    #         xyRange.append(iBegin)
+    #     return xyRange
 
 # PAE Stadtstatus
 # 0: Siedlung
@@ -3701,7 +3729,7 @@ def doCheckCivilWar(pCity):
     # Inits
     iPlayer = pCity.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
-    pPlot = pCity.plot()
+    #pPlot = pCity.plot()
     iPop = pCity.getPopulation()
     bHuman = pPlayer.isHuman()
 
@@ -3855,7 +3883,7 @@ def doPanhellenismus(iPlayer):
           pCity.setHasCorporation(iCorp, 1, 0, 1)
 
     iHegemonTeam = pPlayer.getTeam()
-    pHegemonTeam = gc.getTeam(iHegemonTeam)
+    #pHegemonTeam = gc.getTeam(iHegemonTeam)
     iRange = gc.getMAX_PLAYERS()
     for _ in range(iRange):
       pLoopPlayer = gc.getPlayer(_)

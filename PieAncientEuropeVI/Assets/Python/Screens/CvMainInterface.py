@@ -3949,6 +3949,28 @@ class CvMainInterface:
                                         screen.show("BottomButtonContainer")
                                         iCount = iCount + 1
 
+                        # PAE 6.11: Pferdewechsel / change horse to get all move points again
+                        if bCity:
+                            if pUnit.hasMoved() and (pUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MOUNTED") or pUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_CHARIOT")):
+
+                                bOK = False
+                                # General oder Held
+                                if pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_LEADER")) or pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_HERO")):
+                                    bOK = True
+
+                                # Kamelstall
+                                if bOK and pUnit.getUnitType() in L.LCamelUnits:
+                                    if pCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_CAMEL_STABLE")):
+                                        screen.appendMultiListButton("BottomButtonContainer", "Art/Interface/Buttons/Actions/button_camel_refresh.dds", 0, WidgetTypes.WIDGET_GENERAL, 766, 1, False)
+                                        screen.show("BottomButtonContainer")
+                                        iCount = iCount + 1
+                                # Pferdestall
+                                elif bOK or pUnit.getUnitType() in L.LUnits4HorseSwap:
+                                    if pCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_STABLE")):
+                                        screen.appendMultiListButton("BottomButtonContainer", "Art/Interface/Buttons/Actions/button_horse_refresh.dds", 0, WidgetTypes.WIDGET_GENERAL, 766, 0, False)
+                                        screen.show("BottomButtonContainer")
+                                        iCount = iCount + 1
+
                         # ---------- INFO BUTTONS --------------------
 
                         # Info Button: Legion
@@ -7994,7 +8016,7 @@ class CvMainInterface:
                         CyAudioGame().Play2DSound("AS2D_COINS")
                         CyAudioGame().Play2DSound("AS2D_IF_LEVELUP")
                         CyAudioGame().Play2DSound("AS2D_WELOVEKING")
-                        CyMessageControl().sendModNetMessage(751, -1, -1, iOwner, iUnitID)
+                        CyMessageControl().sendModNetMessage(iData1, -1, -1, iOwner, iUnitID)
 
                 # iData2 0: Bless units (Great General or Hagia Sophia)
                 # iData2 1: Better morale (Zeus)
@@ -8003,71 +8025,76 @@ class CvMainInterface:
                         CyAudioGame().Play2DSound("AS2D_BUILD_CHRISTIAN")
                     else:
                         CyAudioGame().Play2DSound("AS2D_WELOVEKING")
-                    CyMessageControl().sendModNetMessage(752, iData2, -1, iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, iData2, -1, iOwner, iUnitID)
 
                 # Slave -> Latifundium oder Village
                 elif iData1 == 753:
                     CyAudioGame().Play2DSound("AS2D_BUILD_GRANARY")
-                    CyMessageControl().sendModNetMessage(753, iData2, 0, iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, iData2, 0, iOwner, iUnitID)
 
                 # 754: Obsolete Unit text in Tech Screen
 
                 # Sklave -> Manufaktur Nahrung
                 elif iData1 == 755 and iData2 == 755:
                     CyAudioGame().Play2DSound("AS2D_BUILD_GRANARY")
-                    CyMessageControl().sendModNetMessage(755, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
 
                 # Legion Rang Ausbildung / Upgrade to rank via academy/kastell
                 elif iData1 == 756:
                     if bOption:
                         CyAudioGame().Play2DSound("AS2D_COINS")
                         CyAudioGame().Play2DSound("AS2D_IF_LEVELUP")
-                        CyMessageControl().sendModNetMessage(756, -1, -1, iOwner, iUnitID)
+                        CyMessageControl().sendModNetMessage(iData1, -1, -1, iOwner, iUnitID)
 
                 # Statthalter ansiedeln
                 elif iData1 == 757:
                     CyAudioGame().Play2DSound("AS2D_WELOVEKING")
-                    CyMessageControl().sendModNetMessage(757, -1, iOwner, iUnitID, pPlot.getPlotCity().getID())
+                    CyMessageControl().sendModNetMessage(iData1, -1, iOwner, iUnitID, pPlot.getPlotCity().getID())
 
                 # Collect Heldendenkmal (iData2: 0 = collect, 1 = build)
                 elif iData1 == 758:
-                    CyMessageControl().sendModNetMessage(758, iData2, -1, iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, iData2, -1, iOwner, iUnitID)
 
                 # Give units morale
                 elif iData1 == 759:
                     if iData2 == 2:
                         CyAudioGame().Play2DSound("AS2D_HIT_UNIT")
                     CyAudioGame().Play2DSound("AS2D_WELOVEKING")
-                    CyMessageControl().sendModNetMessage(759, iData2, -1, iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, iData2, -1, iOwner, iUnitID)
 
                 # Slave on plot: head off
                 elif iData1 == 760:
                     CyAudioGame().Play2DSound("AS2D_HIT_UNIT")
-                    CyMessageControl().sendModNetMessage(760, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
 
                 # Slave on plot: win XP
                 elif iData1 == 761:
                     if bOption:
-                        CyMessageControl().sendModNetMessage(761, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
+                        CyMessageControl().sendModNetMessage(iData1, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
 
                 # Escort for merchant / Begleitschutz
                 elif iData1 == 762:
                     CyAudioGame().Play2DSound("AS2D_COINS")
-                    CyMessageControl().sendModNetMessage(762, iData2, -1, iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, iData2, -1, iOwner, iUnitID)
 
                 # Fort/Handelsposten erobern
                 elif iData1 == 763:
                     CyAudioGame().Play2DSound("AS2D_CITYCAPTURED")
-                    CyMessageControl().sendModNetMessage(763, iData2, -1, iOwner, iUnitID)
+                    CyMessageControl().sendModNetMessage(iData1, iData2, -1, iOwner, iUnitID)
 
                 # Provinzstatthalter / Tribut
                 elif iData1 == 764:
-                    CyMessageControl().sendModNetMessage(764, iOwner, -1, -1, -1)
+                    CyMessageControl().sendModNetMessage(iData1, iOwner, -1, -1, -1)
 
                 # Wald verbrennen
                 elif iData1 == 765:
-                    CyAudioGame().Play2DSound('AS2D_PILLAGE')
-                    CyMessageControl().sendModNetMessage(765, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
+                    CyAudioGame().Play2DSound("AS2D_PILLAGE")
+                    CyMessageControl().sendModNetMessage(iData1, pPlot.getX(), pPlot.getY(), iOwner, iUnitID)
+
+                # Pferdewechsel 
+                elif iData1 == 766:
+                    CyAudioGame().Play2DSound("AS2D_HORSE_UP")
+                    CyMessageControl().sendModNetMessage(iData1, iData2, -1, iOwner, iUnitID)
 
             # Platy ScoreBoard - Start
             if inputClass.getFunctionName() == "ScoreRowPlus":
@@ -8098,7 +8125,7 @@ class CvMainInterface:
                 CyMessageControl().sendModNetMessage(718, 0, inputClass.getData1(), iOwner, iUnitID)
 
 
-# PAE, Ramk - Fix jumping in build menu
+        # PAE, Ramk - Fix jumping in build menu
         if inputClass.getButtonType() in self.buildWidgets:
             if inputClass.getFunctionName() == "BottomButtonContainer":
                 screen = CyGInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE)
@@ -8124,7 +8151,7 @@ class CvMainInterface:
             CyInterface().setCityTabSelectionRow(iRow)
             screen.selectMultiList("BottomButtonContainer", iRow)
 
-# PAE, Ramk - End
+        # PAE, Ramk - End
         return 0
 
 # Begin - From PLE

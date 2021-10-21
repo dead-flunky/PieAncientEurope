@@ -1,6 +1,12 @@
 ### Imports
 import re
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
+                                CyTranslator, DirectionTypes, CommerceTypes,
+                                InterfaceMessageTypes, CommandTypes, YieldTypes,
+                                ColorTypes, UnitAITypes, CyPopupInfo,
+                                ButtonPopupTypes, MissionTypes, MissionAITypes,
+                                DomainTypes, plotXY, plotDirection,
+                                plotDistance, directionXYFromPlot)
 
 import CvUtil
 import PAE_City
@@ -345,11 +351,14 @@ def stackDoTurn(iPlayer, iGameTurn):
                     iSupplyChange += 10
 
             # Farm/Pasture
-            if loopPlot.getImprovementType() in lImpFood: iSupplyChange += 10
+            if loopPlot.getImprovementType() in lImpFood:
+                iSupplyChange += 10
             # Oase
-            if loopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_OASIS"): iSupplyChange += 10
+            if loopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_OASIS"):
+                iSupplyChange += 10
             # Fluss
-            if loopPlot.isRiver(): iSupplyChange += 10
+            if loopPlot.isRiver() or loopPlot.isFreshWater():
+                iSupplyChange += 10
 
             # ++++ Supply Units update ------------
             # 1. Aufladen
@@ -709,7 +718,7 @@ def doUpgradeVeteran(pUnit, iNewUnit, bChangeCombatPromo):
                         NewUnit.setHasPromotion(j, True)
 
             # Einheit: max Combat 2
-            iPromoCombat2 = gc.getInfoTypeForString("PROMOTION_COMBAT2")
+            #iPromoCombat2 = gc.getInfoTypeForString("PROMOTION_COMBAT2")
             iPromoCombat3 = gc.getInfoTypeForString("PROMOTION_COMBAT3")
             iPromoCombat4 = gc.getInfoTypeForString("PROMOTION_COMBAT4")
             iPromoCombat5 = gc.getInfoTypeForString("PROMOTION_COMBAT5")
@@ -1547,7 +1556,7 @@ def doMobiliseFortifiedArmy(pCity):
 def doBuildHandelsposten(pUnit):
     #iPrice = 25
     iPlayer = pUnit.getOwner()
-    pPlayer = gc.getPlayer(iPlayer)
+    #pPlayer = gc.getPlayer(iPlayer)
     #if pPlayer.getGold() < iPrice:
     #    # TODO: eigener Text
     #    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TRADE_COLLECT_NO_GOODS", ("",)), None, 2, "Art/Interface/PlotPicker/Warning.dds", ColorTypes(7), pUnit.getX(), pUnit.getY(), True, True)
@@ -1785,7 +1794,7 @@ def doMoralUnit(pUnit):
         pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORALE"), True)
 
 def doMoralUnitsAI(pUnit):
-    pPlayer = gc.getPlayer(pUnit.getOwner())
+    #pPlayer = gc.getPlayer(pUnit.getOwner())
     iPromo = gc.getInfoTypeForString("PROMOTION_MORALE")
     pPlot = pUnit.plot()
     iNumUnits = pPlot.getNumUnits()
@@ -1809,8 +1818,8 @@ def doMoralUnitAI(pUnit):
 
 # PAE Angst - EventManager: onCombatResult
 def doCheckAngst(pWinnerUnit, pLoserUnit):
-    pWinnerPlot = pWinnerUnit.plot()
-    pLoserPlot = pLoserUnit.plot()
+    #pWinnerPlot = pWinnerUnit.plot()
+    #pLoserPlot = pLoserUnit.plot()
 
     bW = pWinnerUnit.getUnitCombatType() in L.LAngstUnits # if winner is Angst Unit
     bL = pLoserUnit.getUnitCombatType() in L.LAngstUnits # if Loser is Angst Unit
@@ -2005,7 +2014,7 @@ def doRankPromo(pWinner):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_15")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_TRAIT_" in iPromoType:
                     break
@@ -2033,7 +2042,7 @@ def doRankPromo(pWinner):
                 # Chance: 1:4
                 #if CvUtil.myRandom(4, "RangEques") == 1:
                 iNumPromos = gc.getNumPromotionInfos() - 1
-                for iPromo in xrange(iNumPromos, -1, -1): #-1 als zweites Argument, damit es bis 0 runterzaehlt.
+                for iPromo in range(iNumPromos, -1, -1): #-1 als zweites Argument, damit es bis 0 runterzaehlt.
                     iPromoType = gc.getPromotionInfo(iPromo).getType()
                     if "_TRAIT_" in iPromoType:
                         break
@@ -2055,7 +2064,7 @@ def doRankPromo(pWinner):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_LATE_15")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_TRAIT_" in iPromoType:
                     break
@@ -2077,7 +2086,7 @@ def doRankPromo(pWinner):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_GREEK_12")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_ROM_" in iPromoType:
                     break
@@ -2100,7 +2109,7 @@ def doRankPromo(pWinner):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_SPARTA_10")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_GREEK_" in iPromoType:
                     break
@@ -2126,7 +2135,7 @@ def doRankPromo(pWinner):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
             iNewPromo = -1
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_SPARTA_" in iPromoType:
                     break
@@ -2157,7 +2166,7 @@ def doRankPromo(pWinner):
             iNewPromo = -1
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_MACEDON_" in iPromoType:
                     break
@@ -2184,7 +2193,7 @@ def doRankPromo(pWinner):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_PERSIA2_15")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_PERSIA_" in iPromoType:
                     break
@@ -2220,7 +2229,7 @@ def doRankPromo(pWinner):
               iNumPromos = gc.getNumPromotionInfos()-1
               iPromo = iNumPromos
               iNewPromo = -1
-              for iPromo in xrange(iNumPromos, 0, -1):
+              for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_PERSIA2_" in iPromoType:
                     break
@@ -2253,7 +2262,7 @@ def doRankPromo(pWinner):
           if iRand == 1:
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in xrange(iNumPromos, 0, -1):
+            for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_EGYPT_" in iPromoType:
                     break
@@ -2285,7 +2294,7 @@ def doRankPromo(pWinner):
               iNumPromos = gc.getNumPromotionInfos()-1
               iPromo = iNumPromos
               iNewPromo = -1
-              for iPromo in xrange(iNumPromos, 0, -1):
+              for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_CARTHAGE_" in iPromoType:
                     break
@@ -2327,7 +2336,7 @@ def doRankPromo(pWinner):
               iNumPromos = gc.getNumPromotionInfos()-1
               iPromo = iNumPromos
               iNewPromo = -1
-              for iPromo in xrange(iNumPromos, 0, -1):
+              for iPromo in range(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_ASSUR_" in iPromoType:
                     break
@@ -3608,7 +3617,7 @@ def initStatthalter(pUnit):
     CvUtil.addScriptData(pUnit, "typ", iRand)
 
 def doSettleStatthalter(pUnit,pCity):
-    pPlayer = gc.getPlayer(pUnit.getOwner())
+    #pPlayer = gc.getPlayer(pUnit.getOwner())
     iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
     iBuildingClass = gc.getBuildingInfo(iBuilding).getBuildingClassType()
     # Statthalter Happiness holen
@@ -3629,14 +3638,22 @@ def doSettleStatthalter(pUnit,pCity):
         iTyp = int(CvUtil.getScriptData(pUnit, ["typ", -1]))
         # Test Message
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Statthaltertyp",iTyp)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-        if iTyp == 0:   pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_RESEARCH, 5)
-        elif iTyp == 1: pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_CULTURE, 5)
-        elif iTyp == 2: pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_GOLD, 5)
-        elif iTyp == 3: pCity.setBuildingYieldChange(iBuildingClass, YieldTypes.YIELD_PRODUCTION, 5)
-        elif iTyp == 4: pCity.setBuildingYieldChange(iBuildingClass, YieldTypes.YIELD_COMMERCE, 5)
-        elif iTyp == 5: pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_ESPIONAGE, 5)
-        elif iTyp == 6: iHappy += 2
-        elif iTyp == 7: pCity.setBuildingHealthChange(iBuildingClass, 2)
+        if iTyp == 0:
+            pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_RESEARCH, 5)
+        elif iTyp == 1:
+            pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_CULTURE, 5)
+        elif iTyp == 2:
+            pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_GOLD, 5)
+        elif iTyp == 3:
+            pCity.setBuildingYieldChange(iBuildingClass, YieldTypes.YIELD_PRODUCTION, 5)
+        elif iTyp == 4:
+            pCity.setBuildingYieldChange(iBuildingClass, YieldTypes.YIELD_COMMERCE, 5)
+        elif iTyp == 5:
+            pCity.setBuildingCommerceChange(iBuildingClass, CommerceTypes.COMMERCE_ESPIONAGE, 5)
+        elif iTyp == 6:
+            iHappy += 2
+        elif iTyp == 7:
+            pCity.setBuildingHealthChange(iBuildingClass, 2)
         pCity.setBuildingHappyChange(iBuildingClass, iHappy)
     # Held / Feldherr ansiedeln
     else:
@@ -3780,7 +3797,7 @@ def getSupplyFromPlot(iPlayer, pPlot):
     iLoopOwner = pPlot.getOwner()
     iSupplyChange = 0
     # Plot properties
-    bDesert = pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DESERT")
+    #bDesert = pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DESERT")
 
     lImpFood = [
         gc.getInfoTypeForString("IMPROVEMENT_FARM"),
@@ -3828,10 +3845,12 @@ def getSupplyFromPlot(iPlayer, pPlot):
     if pPlot.getImprovementType() in lImpFood: iSupplyChange += 10
     # Oase
     if pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_OASIS"): iSupplyChange += 10
-    # Fluss
-    if pPlot.isRiver(): iSupplyChange += 10
+    # Fluss oder fresh water
+    if pPlot.isRiver() or pPlot.isFreshWater():
+        iSupplyChange += 10
 
-    if iSupplyChange <= 0: return 0
+    if iSupplyChange <= 0:
+        return 0
 
     return iSupplyChange
 

@@ -2913,8 +2913,8 @@
       <Type>ART_DEF_BUILDING_GREAT_LIGHTHOUSE</Type>
       <LSystem>LSYSTEM_WATER</LSystem>
       <bAnimated>1</bAnimated>
-      <fScale>2.3</fScale>
-      <fInterfaceScale>0.36</fInterfaceScale>
+      <fScale>3.0</fScale>
+      <fInterfaceScale>0.3</fInterfaceScale>
       <NIF>Art/Structures/Buildings/GreatLighthouse/GreatLighthouse.nif</NIF>
       <KFM/>
       <Button>,Art/Interface/Buttons/Buildings/GreatLighthouse.dds,Art/Interface/Buttons/Buildings_Atlas.dds,6,15</Button>
@@ -2933,7 +2933,7 @@
       <Type>ART_DEF_BUILDING_COLOSSUS</Type>
       <LSystem>LSYSTEM_WATER</LSystem>
       <bAnimated>1</bAnimated>
-      <fScale>2.0</fScale>
+      <fScale>1.8</fScale>
       <fInterfaceScale>0.3</fInterfaceScale>
       <NIF>Art/Structures/Buildings/Colossus/Colossus.nif</NIF>
       <KFM/>

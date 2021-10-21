@@ -212,6 +212,11 @@
       <Civilopedia>TXT_KEY_CONCEPT_PAE_SUPPLY_PEDIA</Civilopedia>
     </ConceptInfo>
     <ConceptInfo>
+      <Type>CONCEPT_PAE_PFERDEWECHSEL</Type>
+      <Description>TXT_KEY_CONCEPT_PAE_PFERDEWECHSEL_TITLE</Description>
+      <Civilopedia>TXT_KEY_CONCEPT_PAE_PFERDEWECHSEL_PEDIA</Civilopedia>
+    </ConceptInfo>
+    <ConceptInfo>
       <Type>CONCEPT_VETERANS</Type>
       <Description>TXT_KEY_CONCEPT_VETERANS</Description>
       <Civilopedia>TXT_KEY_CONCEPT_VETERANS_PEDIA</Civilopedia>

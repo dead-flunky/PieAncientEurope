@@ -2,7 +2,10 @@
 # From BoggyB
 
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface,
+                                CyTranslator,
+                                ColorTypes, CyPopupInfo,
+                                ButtonPopupTypes, plotXY)
 # import CvEventInterface
 import CvUtil
 
@@ -646,7 +649,7 @@ def _isBonusCultivableInRealm(iPlayer,eBonus):
 
 def wine(pCity):
     iPlayer = pCity.getOwner()
-    pPlayer = gc.getPlayer(iPlayer)
+    #pPlayer = gc.getPlayer(iPlayer)
     eBonus = gc.getInfoTypeForString("BONUS_GRAPES")
     # sorted by priority
     lTerrains = [
@@ -666,7 +669,7 @@ def wine(pCity):
     iSecondBlock = len(lImprovements)
 
     # lPlotPrio = [[],[],[],[],[],[],[],[],[]]
-    lPlotPrio = [[] for x in xrange(0, iFirstBlock + iSecondBlock + 1)]
+    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 1)]
 
     for iI in range(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
@@ -728,7 +731,7 @@ def horse(pCity, bPrioPlotOnly):
     iSecondBlock = len(lImprovements)
 
     # lPlotPrio = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
-    lPlotPrio = [[] for x in xrange(0, iFirstBlock + iSecondBlock + 1)]
+    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 1)]
     lAllPossiblePlots = []
 
     for iI in range(gc.getNUM_CITY_PLOTS()):
@@ -777,7 +780,7 @@ def camel(pCity, bPrioPlotOnly):
     iFirstBlock = len(lTerrains)
 
     # lPlotPrio = [[],[],[],[],[]]
-    lPlotPrio = [[] for x in xrange(0, iFirstBlock + 3)]
+    lPlotPrio = [[] for x in range(iFirstBlock + 3)]
     lAllPossiblePlots = []
 
     for iI in range(gc.getNUM_CITY_PLOTS()):
@@ -815,6 +818,8 @@ def elephant(pCity, bPrioPlotOnly):
     lFeatures = [
         gc.getInfoTypeForString("FEATURE_JUNGLE")
     ]
+    iJ = 0
+
     iFirstBlock = len(lFeatures)
     lTerrains = [
         gc.getInfoTypeForString("TERRAIN_GRASS"),
@@ -828,14 +833,15 @@ def elephant(pCity, bPrioPlotOnly):
     iImpCamp = gc.getInfoTypeForString("IMPROVEMENT_CAMP")
 
     # lPlotPrio = [[],[],[],[],[],[],[]]
-    lPlotPrio = [[] for x in xrange(0, iFirstBlock + iSecondBlock + 3)]
+    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 3)]
     lAllPossiblePlots = []
 
     for iI in range(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
-            if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus: return []
+            if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus:
+                return []
             elif not loopPlot.isHills():
                 if loopPlot.getOwner() == pCity.getOwner():
                     if loopPlot.getTerrainType() in lTerrains and loopPlot.getFeatureType() in lFeatures:
@@ -895,7 +901,7 @@ def dog(pCity, bPrioPlotOnly):
     iSecondBlock = len(lImprovements)
 
 
-    lPlotPrio = [[] for x in xrange(0, iFirstBlock + iSecondBlock + 1)]
+    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 1)]
     lAllPossiblePlots = []
 
     for iI in range(gc.getNUM_CITY_PLOTS()):
@@ -936,7 +942,7 @@ def trimPlots(lPlots):
 def doBuildingCultivate(pCity, iBuildingType):
     iPlayer = pCity.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
-    iImprovement = -1
+    #iImprovement = -1
     eBonus = -1
     bRemoveFeature = False
     bText = False
@@ -987,7 +993,7 @@ def doBuildingCultivate(pCity, iBuildingType):
         eBonus = gc.getInfoTypeForString("BONUS_HUNDE")
         if isCityHasBonus(pCity, eBonus): return
         lPlotPrio = dog(pCity, True)
-        iImprovement = gc.getInfoTypeForString("IMPROVEMENT_CAMP")
+        #iImprovement = gc.getInfoTypeForString("IMPROVEMENT_CAMP")
 
 
     if lPlotPrio and len(lPlotPrio):

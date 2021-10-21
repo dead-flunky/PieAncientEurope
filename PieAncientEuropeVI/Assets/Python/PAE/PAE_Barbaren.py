@@ -1,7 +1,11 @@
 # Barbarian features and events
 
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface,
+                                CyTranslator, DirectionTypes,
+                                ColorTypes, UnitAITypes, CyPopupInfo,
+                                ButtonPopupTypes, CyAudioGame, plotXY,
+                                GameOptionTypes)
 # import CvEventInterface
 import CvUtil
 import PyHelpers
@@ -24,7 +28,7 @@ def setFortDefence(pPlot):
     # inits
     iBarbPlayer = gc.getBARBARIAN_PLAYER()
     pBarbPlayer = gc.getPlayer(iBarbPlayer)
-    eCiv = gc.getCivilizationInfo(pBarbPlayer.getCivilizationType())
+    #eCiv = gc.getCivilizationInfo(pBarbPlayer.getCivilizationType())
 
     iPromo = gc.getInfoTypeForString("PROMOTION_FORM_FORTRESS") # Moves -1
     iPromo2 = gc.getInfoTypeForString("PROMOTION_FORM_FORTRESS2") # Moves -2
@@ -61,7 +65,7 @@ def createBarbUnit(pPlot):
 
     iBarbPlayer = gc.getBARBARIAN_PLAYER()
     pBarbPlayer = gc.getPlayer(iBarbPlayer)
-    eCiv = gc.getCivilizationInfo(pBarbPlayer.getCivilizationType())
+    #eCiv = gc.getCivilizationInfo(pBarbPlayer.getCivilizationType())
 
     iAnz = 1
     if bRageBarbs:
@@ -132,9 +136,9 @@ def createBarbUnit(pPlot):
         lUnits.append(iUnit)
 
     lUnitAIs = [UnitAITypes.UNITAI_ATTACK, UnitAITypes.UNITAI_PILLAGE, UnitAITypes.UNITAI_ATTACK_CITY_LEMMING]
-    
+
     iAnzUnits = len(lUnits)
-    
+
     if iAnzUnits == 0:
       if gc.getGame().getCurrentEra() > 3:
         lUnits.append(gc.getInfoTypeForString("UNIT_SWORDSMAN"))
@@ -144,7 +148,7 @@ def createBarbUnit(pPlot):
         lUnits.append(gc.getInfoTypeForString("UNIT_SPEARMAN"))
       elif gc.getGame().getCurrentEra() > 0:
         lUnits.append(gc.getInfoTypeForString("UNIT_LIGHT_SPEARMAN"))
-    
+
     # Einheit setzen
     for _ in range(iAnz):
         iUnit = lUnits[CvUtil.myRandom(iAnzUnits, "createBarbUnit")]
@@ -160,8 +164,8 @@ def createCampUnit(iPlayer, iGameTurn):
 
     iTeam = pPlayer.getTeam()
     pTeam = gc.getTeam(iTeam)
-    eCiv = gc.getCivilizationInfo(pPlayer.getCivilizationType())
-  
+    #eCiv = gc.getCivilizationInfo(pPlayer.getCivilizationType())
+
     if pPlayer.getUnitClassCount(gc.getInfoTypeForString("UNITCLASS_SPECIAL1")) > 0:
         # Terrain
         #eTundra = gc.getInfoTypeForString("TERRAIN_TUNDRA")
@@ -178,15 +182,15 @@ def createCampUnit(iPlayer, iGameTurn):
             if pUnit is not None and not pUnit.isNone():
                 #pUnit.NotifyEntity(MissionTypes.MISSION_FOUND)
                 if pUnit.getFortifyTurns() == 0: return
-                
+
                 bCreateUnit = False
                 iFortified = CvUtil.getScriptData(pUnit, ["f"], -1)
-                
+
                 if iFortified == -1:
                     CvUtil.addScriptData(pUnit, "f", iGameTurn)
                 elif (iGameTurn-iFortified) % 5 == 0:
                     bCreateUnit = True
-                
+
                 if bCreateUnit:
                     pPlot = pUnit.plot()
                     lUnits = []
@@ -195,9 +199,9 @@ def createCampUnit(iPlayer, iGameTurn):
                     if pPlayer.isHuman() and pPlot.isHills():
                         CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_HELP_NOCAMPUNIT", ("",)), None, 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(11), pPlot.getX(), pPlot.getY(), True, True)
                         return
-                    
+
                     # Desert
-                    if pPlot.getTerrainType() == eDesert:                
+                    if pPlot.getTerrainType() == eDesert:
                         if pPlayer.canTrain(gc.getInfoTypeForString("UNIT_ARABIA_CAMELARCHER"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_ARABIA_CAMELARCHER"))
                         if pPlayer.canTrain(gc.getInfoTypeForString("UNIT_CAMEL_CATAPHRACT"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_CAMEL_CATAPHRACT"))
 
@@ -212,20 +216,20 @@ def createCampUnit(iPlayer, iGameTurn):
 
                     # On forests or if no mounted units available/constructable
                     if not lUnits:
-                      
+
                         if pPlayer.canTrain(gc.getInfoTypeForString("UNIT_REFLEX_ARCHER"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_REFLEX_ARCHER"))
                         else: lUnits.append(gc.getInfoTypeForString("UNIT_COMPOSITE_ARCHER"))
-                      
-                        if pPlayer.canTrain(gc.getInfoTypeForString("UNIT_SKIRMISHER"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_SKIRMISHER"))          
-                      
+
+                        if pPlayer.canTrain(gc.getInfoTypeForString("UNIT_SKIRMISHER"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_SKIRMISHER"))
+
                         if pPlayer.canTrain(gc.getInfoTypeForString("UNIT_AXEMAN2"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_AXEMAN2"))
-                      
+
                         if pPlayer.canTrain(gc.getInfoTypeForString("UNIT_SWORDSMAN"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_SWORDSMAN"))
                         elif pPlayer.canTrain(gc.getInfoTypeForString("UNIT_SCHILDTRAEGER"),0,0): lUnits.append(gc.getInfoTypeForString("UNIT_SCHILDTRAEGER"))
                         else: lUnits.append(gc.getInfoTypeForString("UNIT_KURZSCHWERT"))
-                      
+
                         # standard unit
-                        lUnits.append(gc.getInfoTypeForString("UNIT_SPEARMAN"))	
+                        lUnits.append(gc.getInfoTypeForString("UNIT_SPEARMAN"))
 
                         iUnit = -1
                         if lUnits:
@@ -251,12 +255,12 @@ def doSeevoelker():
     # Worldsize: 0 (Duell) - 5 (Huge)
     iRange = 1 + gc.getMap().getWorldSize() + gc.getGame().getHandicapType()
     #iRange = max(iRange,8)
-    
+
     iPlots = gc.getMap().numPlots()
     iLandPlots = gc.getMap().getLandPlots()
     # Wenn es mehr Land als Wasser gibt
     if iLandPlots > iPlots / 2: iRange /= 2
-    
+
     for _ in range(iRange):
         # Wird geaendert zu einem Mittelmeerstreifen: x: 5 bis (X-5), y: 5 bis letztes Drittel von Y
         iMapX = gc.getMap().getGridWidth() - 5
@@ -280,7 +284,7 @@ def doSeevoelker():
                   iAnz = 2
                 #elif gc.getGame().getGameTurnYear() > -1200:
                 #  iAnz = 2
-                
+
                 for _ in range(iAnz):
                     CvUtil.spawnUnit(iUnitTypeShip, loopPlot, pBarbPlayer)
                     CvUtil.spawnUnit(iUnitTypeWarrior1, loopPlot, pBarbPlayer)
@@ -308,7 +312,7 @@ def doVikings():
     iMapW = gc.getMap().getGridWidth()
     iMapH = gc.getMap().getGridHeight()
     bMeldung = False
-    
+
     for _ in range(4):
         iRandX = CvUtil.myRandom(iMapW, "W")
         iRandY = iMapH - CvUtil.myRandom(5, "H")
@@ -322,7 +326,7 @@ def doVikings():
                 CvUtil.spawnUnit(iUnitTypeShip, loopPlot, pBarbPlayer)
                 for _ in range(4):
                     CvUtil.spawnUnit(iUnitTypeUnit, loopPlot, pBarbPlayer)
-    
+
     if bMeldung:
         if gc.getGame().getGameTurnYear() == 400:
             for iPlayer in range(gc.getMAX_PLAYERS()):
@@ -376,7 +380,7 @@ def doHuns():
                 else:
                     popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_HUNNEN_3", ("", )))
                 popupInfo.addPopup(pPlayer.getID())
-            
+
 
         iMapW = gc.getMap().getGridWidth()
         iMapH = gc.getMap().getGridHeight()
@@ -498,7 +502,7 @@ def doOnUnitMove(pUnit, pPlot, pOldPlot):
     elif pUnit.getUnitType() == gc.getInfoTypeForString("UNIT_FREED_SLAVE"):
         pUnit.kill(True, -1)
         return True
-        
+
     return False
 
 def checkNearbyUnits(pPlot, iRange):
