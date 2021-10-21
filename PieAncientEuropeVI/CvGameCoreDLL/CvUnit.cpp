@@ -1288,7 +1288,9 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		CvEventReporter::getInstance().genericEvent("combatLogCalc", pyArgsCD.makeFunctionArgs());
 	}
 	
-	// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives.
+	// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives/flees.
+    flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
+
 	collateralCombat(pPlot, pDefender);
 
 	while (true)
@@ -1301,7 +1303,8 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 				{
 					if (GC.getGameINLINE().getSorenRandNum(100, "Withdrawal") < withdrawalProbability())
 					{
-						flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
+						// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives/flees.
+						//flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
 
 						changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
 						combat_log.push_back(0); // K-Mod
@@ -1312,11 +1315,11 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 					{
 						pDefender->changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !isBarbarian());
 						// after flight, be at least as hurt as before --> new health at most as high as before, or less if the circumstances of your flight demand that. 
-						int iMaxHealth = std::min(maxHitPoints()-getDamage(), flightMaxHealth());
+						int iMaxHealth = std::min(GC.getMAX_HIT_POINTS()-getDamage(), flightMaxHealth());
 						// remaining health uniformly distributed between 1 and max
 						int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "AttackerFlightDamage"));
 						// damage to be set is full minus remaining health
-						int iAttackerFlightDamage = maxHitPoints()-iHealth;
+						int iAttackerFlightDamage = GC.getMAX_HIT_POINTS()-iHealth;
 						setDamage(iAttackerFlightDamage, pDefender->getOwnerINLINE());
 						setFlight(true);
 						combat_log.push_back(-(iAttackerFlightDamage - getDamage()));
@@ -1412,9 +1415,9 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 
 					if (bFlightValid){
 						changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
-						int iMaxHealth = std::max(pDefender->maxHitPoints()-pDefender->getDamage(), pDefender->flightMaxHealth());
+						int iMaxHealth = std::max(GC.getMAX_HIT_POINTS()-pDefender->getDamage(), pDefender->flightMaxHealth());
 						int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "DefenderFlightDamage"));
-						int iDefenderFlightDamage = pDefender->maxHitPoints()-iHealth;
+						int iDefenderFlightDamage = GC.getMAX_HIT_POINTS()-iHealth;
 
 						combat_log.push_back(iDefenderFlightDamage - pDefender->getDamage());
 						pDefender->setDamage(iDefenderFlightDamage, getOwnerINLINE());
@@ -1485,7 +1488,6 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		if (isDead() || pDefender->isDead())
 		{
             
-            flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
             
 			if (isDead())
 			{
@@ -1875,28 +1877,21 @@ void CvUnit::updateCombat(bool bQuick)
 			}
 			else
 			{
-				
-				// TODO: requires !isFighting. How can we move the defender from the battle without breaking stuff?
-				// should always be true
-				if (!pDefender->isFighting())
-				{
-					CvPlot* pAdjacentPlot;
-					for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
-						pAdjacentPlot = plotDirection(pDefender->getX_INLINE(), pDefender->getY_INLINE(), ((DirectionTypes)iI));
+				FAssertMsg(!pDefender->isFighting(), "Is pDefender->setCombatUnit(NULL); not enough for !pDefender->isFighting?");
 
-						if (pAdjacentPlot != NULL)
+				CvPlot* pAdjacentPlot;
+				for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
+					pAdjacentPlot = plotDirection(pDefender->getX_INLINE(), pDefender->getY_INLINE(), ((DirectionTypes)iI));
+
+					if (pAdjacentPlot != NULL)
+					{
+						if (pDefender->canMoveInto(pAdjacentPlot , false, false, true))
 						{
-							if (pDefender->canMoveInto(pAdjacentPlot , false, false, true))
-							{
-								// TODO: select randomly one possible
-								pDefender->setXY(pAdjacentPlot->getX_INLINE(), pAdjacentPlot->getY_INLINE(), false, true, true);
-							}
+							// TODO: select randomly one possible
+							pDefender->move(pAdjacentPlot, true);
+							//pDefender->setXY(pAdjacentPlot->getX_INLINE(), pAdjacentPlot->getY_INLINE(), false, true, true);
 						}
 					}
-					
-				}
-				else {
-					FAssertMsg(false, "Is pDefender->setCombatUnit(NULL); not enough for !pDefender->isFighting?");
 				}
 				
 				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey());

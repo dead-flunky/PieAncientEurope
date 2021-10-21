@@ -1505,6 +1505,30 @@
     <Spanish>tienen</Spanish>
   </TEXT>
   <TEXT>
+    <Tag>TXT_KEY_MISSION_INQUISITION</Tag>
+    <English>Drive out religion</English>
+    <French>D&#233;velopper un culte</French>
+    <German>Religion austreiben</German>
+    <Italian>Espandi culto</Italian>
+    <Spanish>Expandir culto</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MISSION_INQUISITION_HELP</Tag>
+    <English>This order will consume the [COLOR_UNIT_TEXT]Missionary[COLOR_REVERT] unit and drive out the selected religion from the city.</English>
+    <French>Cet ordre d&#233;truira le [COLOR_UNIT_TEXT]Cultiste[COLOR_REVERT] mais d&#233;veloppera son culte dans la ville.</French>
+    <German>Der [COLOR_UNIT_TEXT]Missionar[COLOR_REVERT] wird geopfert, um eine gew&#228;hlte andere Religion aus der Stadt zu vertreiben.</German>
+    <Italian>Con questo ordine, si sacrifica un [COLOR_UNIT_TEXT]Funzionario[COLOR_REVERT], ma il culto si espande nella citt&#224;.</Italian>
+    <Spanish>Esta orden consumir&#225; a la unidad de [COLOR_UNIT_TEXT]Ejecutivo[COLOR_REVERT] pero expandir&#225; su culto en la ciudad.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_ACTION_CANNOT_DRIVE_OUT_STATE_RELIGION</Tag>
+    <English>[COLOR_WARNING_TEXT]Cannot drive out state religion [ICON_RELIGION].[COLOR_REVERT]</English>
+    <French>[COLOR_WARNING_TEXT]Impossible d'expulser la [ICON_RELIGION] qui est la religion d'&#233;tat dans cette ville.[COLOR_REVERT]</French>
+    <German>[COLOR_WARNING_TEXT]Kann die Staatsreligion [ICON_RELIGION] in dieser Stadt nicht vertreiben.[COLOR_REVERT]</German>
+    <Italian>[COLOR_WARNING_TEXT]Non si pu&#242; sfrattare la religione ufficiale[ICON_RELIGION] in questa citt&#224;.[COLOR_REVERT]</Italian>
+    <Spanish>[COLOR_WARNING_TEXT]En esta ciudad no se puede desalojar la [ICON_RELIGION] que sea la oficial.[COLOR_REVERT]</Spanish>
+  </TEXT>
+  <TEXT>
     <Tag>TXT_KEY_PROMOTION_RANG_ROM_EQUES_1</Tag>
     <English>Curator</English>
     <French>Curator</French>

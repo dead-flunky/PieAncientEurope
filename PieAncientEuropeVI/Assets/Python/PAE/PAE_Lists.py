@@ -110,6 +110,8 @@ LCapitalPromoUpUnits = []
 LMonoReligions = []
 LForests = []
 LFireUnits = []
+LCamelUnits = []
+LUnits4HorseSwap = []
 
 # Naturkatas und das andere schreckliche Zeugs ;)
 LNaturkatas = []
@@ -210,6 +212,8 @@ def init():
     global LMonoReligions
     global LForests
     global LFireUnits
+    global LCamelUnits
+    global LUnits4HorseSwap
     global LNaturkatas
 
     if gc.getInfoTypeForString("COLOR_EMPTY") == -1:
@@ -332,7 +336,7 @@ def init():
         gc.getInfoTypeForString("BUILD_LIMES2_7"),
         gc.getInfoTypeForString("BUILD_LIMES2_8"),
         gc.getInfoTypeForString("BUILD_LIMES2_9")
-    ]    
+    ]
 
     LImprFort = [
         gc.getInfoTypeForString("IMPROVEMENT_TURM2"),
@@ -342,7 +346,7 @@ def init():
         gc.getInfoTypeForString("IMPROVEMENT_KASTELL")
     ]
     LImprFort.append(LLimes)
-    
+
     LImprFortSentry = [
         gc.getInfoTypeForString("IMPROVEMENT_TURM"),
         gc.getInfoTypeForString("IMPROVEMENT_TURM2"),
@@ -571,13 +575,13 @@ def init():
         gc.getInfoTypeForString("UNIT_ARABIA_CAMELARCHER")
     ]
     LUnitNoRuestung.extend(LUnitWarAnimals)
-    
+
     # Belobigte Krieger - hoechster Rang
     LUnitsHeadRang = [
         gc.getInfoTypeForString("UNIT_STAMMESFUERST"),
         gc.getInfoTypeForString("UNIT_HEAVY_HORSEMAN_HUN")
     ]
-    
+
     LUnitSkirmish = [
         gc.getInfoTypeForString("UNIT_BALEAREN"),
         gc.getInfoTypeForString("UNIT_HORSE_ARCHER_BAKTRIEN"),
@@ -703,7 +707,7 @@ def init():
         gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM1"),
         gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM2"),
         gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM3"),
-        gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM4")        
+        gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM4")
     ]
     # gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM5")
     LFarms = [
@@ -1205,10 +1209,10 @@ def init():
         # BonusClass wonder and general are not stored separately (bc. unnecessary)
 
     LBonusCultivatable = LBonusCorn + LBonusLivestock + LBonusPlantation # + [gc.getInfoTypeForString("BONUS_HORSE")]
-    
+
     LBonusGetreide = LBonusCorn
     LBonusGetreide.remove(gc.getInfoTypeForString("BONUS_RICE"))
-    
+
     LBonusStrategic = [
         gc.getInfoTypeForString("BONUS_BRONZE"),
         gc.getInfoTypeForString("BONUS_IRON"),
@@ -1219,13 +1223,13 @@ def init():
         gc.getInfoTypeForString("BONUS_MARBLE"),
         gc.getInfoTypeForString("BONUS_SLAVES")
     ]
-    
+
     LBonusStratCultivatable = [
         gc.getInfoTypeForString("BONUS_CAMEL"),
         gc.getInfoTypeForString("BONUS_HORSE"),
         gc.getInfoTypeForString("BONUS_HUNDE")
     ]
-    
+
     LBonus4Units = [
         gc.getInfoTypeForString("BONUS_BRONZE"),
         gc.getInfoTypeForString("BONUS_IRON"),
@@ -1259,7 +1263,7 @@ def init():
         gc.getInfoTypeForString("UNIT_WAR_ELEPHANT"),
         gc.getInfoTypeForString("UNIT_STATTHALTER_NORTH")
     ]
-    
+
     LRankUnitBuilt = [
         gc.getInfoTypeForString("CIVILIZATION_EGYPT"),
         gc.getInfoTypeForString("CIVILIZATION_NUBIA"),
@@ -1267,18 +1271,18 @@ def init():
         gc.getInfoTypeForString("CIVILIZATION_BABYLON"),
         gc.getInfoTypeForString("CIVILIZATION_SUMERIA")
     ]
-    
+
     LAngstUnits = [
         gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"),
         gc.getInfoTypeForString("UNITCOMBAT_CHARIOT"),
         gc.getInfoTypeForString("UNITCOMBAT_ELEPHANT")
     ]
-    
+
     LUnitsNoFoodCosts = [
         gc.getInfoTypeForString("UNIT_WARRIOR"),
         gc.getInfoTypeForString("UNIT_HUNTER")
     ]
-    
+
     LCivsWithAqueduct = [
         gc.getInfoTypeForString("CIVILIZATION_ASSYRIA"),
         gc.getInfoTypeForString("CIVILIZATION_BABYLON"),
@@ -1290,7 +1294,7 @@ def init():
         gc.getInfoTypeForString("CIVILIZATION_ETRUSCANS"),
         gc.getInfoTypeForString("CIVILIZATION_ROME")
     ]
-    
+
     # diese Einheiten muessen in der Hauptstadt oder Provinzhauptstadt belobigt werden
     LCapitalPromoUpUnits = [
         gc.getInfoTypeForString("UNIT_LEGION_CENTURIO"),
@@ -1303,26 +1307,46 @@ def init():
         gc.getInfoTypeForString("UNIT_ASSUR_RANG2"),
         gc.getInfoTypeForString("UNIT_SUMER_RANG1")
     ]
-    
+
     # monotheistische Religionen
     LMonoReligions = [
         gc.getInfoTypeForString("RELIGION_BUDDHISM"),
         gc.getInfoTypeForString("RELIGION_JUDAISM"),
         gc.getInfoTypeForString("RELIGION_CHRISTIANITY")
     ]
-    
+
     LForests = [
         gc.getInfoTypeForString("FEATURE_JUNGLE"),
         gc.getInfoTypeForString("FEATURE_SAVANNA"),
         gc.getInfoTypeForString("FEATURE_FOREST"),
         gc.getInfoTypeForString("FEATURE_DICHTERWALD")
     ]
-    
+
     LFireUnits = [
         gc.getInfoTypeForString("UNIT_BURNING_PIGS"),
         gc.getInfoTypeForString("UNIT_FIRE_CATAPULT")
     ]
-    
+
+    # Pferdewechsel: berittener General UND diese Einheit (MainInterface)
+    LCamelUnits = [
+        gc.getInfoTypeForString("UNIT_ARABIA_CAMELARCHER"),
+        gc.getInfoTypeForString("UNIT_CAMEL_CATAPHRACT"),
+        gc.getInfoTypeForString("UNIT_CAMEL_CATAPHRACT_ROME")
+    ]
+
+    # Pferdewechsel: berittener General ODER diese Einheit (MainInterface)
+    LUnits4HorseSwap = [
+        gc.getInfoTypeForString("UNIT_LEGION_TRIBUN"),
+        gc.getInfoTypeForString("UNIT_ROME_SCHOLAE"),
+        gc.getInfoTypeForString("UNIT_HORSEMAN_MACEDON3"),
+        gc.getInfoTypeForString("UNIT_HORSEMAN_MACEDON4"),
+        gc.getInfoTypeForString("UNIT_HORSE_PERSIA_NOBLE2"),
+        gc.getInfoTypeForString("UNIT_GREEK_HIPPARCH"),
+        gc.getInfoTypeForString("UNIT_PERSIA_AZADAN"),
+        gc.getInfoTypeForString("UNIT_SUMER_RANG2"),
+        gc.getInfoTypeForString("UNIT_ASSUR_RANG3")
+    ]
+
     LNaturkatas = [
         gc.getInfoTypeForString("FEATURE_FOREST_BURNT"),
         gc.getInfoTypeForString("FEATURE_FALLOUT"),

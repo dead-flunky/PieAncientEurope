@@ -329,6 +329,14 @@
     <Spanish>Guerra civil</Spanish>
   </TEXT>
   <TEXT>
+    <Tag>TXT_KEY_CONCEPT_PAE_PFERDEWECHSEL_TITLE</Tag>
+    <English>Mount change station</English>
+    <French>Station de changement de monture</French>
+    <German>Reittierwechselstation</German>
+    <Italian>Stazione di cambio montatura</Italian>
+    <Spanish>Monte la estaci&#243;n de cambio</Spanish>
+  </TEXT>
+  <TEXT>
     <Tag>TXT_KEY_VICTORY_7_WONDERS</Tag>
     <English>Seven Wonders of the Ancient World</English>
     <French>Sept Merveilles du Monde Antique</French>

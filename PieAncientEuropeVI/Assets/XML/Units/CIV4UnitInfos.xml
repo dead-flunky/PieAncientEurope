@@ -52360,8 +52360,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
@@ -52558,8 +52558,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
@@ -52760,9 +52760,9 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>0</iCollateralDamage>
-      <iCollateralDamageLimit>0</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
@@ -52965,9 +52965,9 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>3</iCollateralDamageMaxUnits>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
@@ -53155,9 +53155,9 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>0</iCollateralDamage>
-      <iCollateralDamageLimit>0</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
@@ -53363,8 +53363,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
@@ -53556,9 +53556,9 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>0</iCollateralDamage>
-      <iCollateralDamageLimit>0</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
@@ -53756,8 +53756,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
@@ -53942,8 +53942,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>3</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
@@ -54135,8 +54135,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>60</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
@@ -54322,8 +54322,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
@@ -54512,9 +54512,9 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>0</iCollateralDamage>
-      <iCollateralDamageLimit>0</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
@@ -54705,9 +54705,9 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>20</iWithdrawalProb>
-      <iCollateralDamage>0</iCollateralDamage>
-      <iCollateralDamageLimit>0</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
@@ -56607,7 +56607,7 @@
       <Type>UNIT_JEWISH_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -56785,7 +56785,7 @@
       <Type>UNIT_CHRISTIAN_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57141,7 +57141,7 @@
       <Type>UNIT_ROME_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57319,7 +57319,7 @@
       <Type>UNIT_SUMER_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57497,7 +57497,7 @@
       <Type>UNIT_HINDU_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57675,7 +57675,7 @@
       <Type>UNIT_BUDDHIST_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -57853,7 +57853,7 @@
       <Type>UNIT_ZORO_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58031,7 +58031,7 @@
       <Type>UNIT_PHOEN_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58209,7 +58209,7 @@
       <Type>UNIT_GREEK_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58387,7 +58387,7 @@
       <Type>UNIT_CELTIC_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58565,7 +58565,7 @@
       <Type>UNIT_EGYPT_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -58743,7 +58743,7 @@
       <Type>UNIT_NORDIC_MISSIONARY</Type>
       <UniqueNames/>
       <Special>SPECIALUNIT_PEOPLE</Special>
-      <Capture>NONE</Capture>
+      <Capture>UNITCLASS_SLAVE</Capture>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_MISSIONARY</DefaultUnitAI>
@@ -60997,7 +60997,7 @@
       <iBaseHurry>40</iBaseHurry>
       <iHurryMultiplier>2</iHurryMultiplier>
       <iBaseTrade>10</iBaseTrade>
-      <iTradeMultiplier>10</iTradeMultiplier>
+      <iTradeMultiplier>5</iTradeMultiplier>
       <iGreatWorkCulture>0</iGreatWorkCulture>
       <iEspionagePoints>0</iEspionagePoints>
       <TerrainImpassables/>
@@ -65735,9 +65735,9 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>50</iWithdrawalProb>
-      <iCollateralDamage>0</iCollateralDamage>
-      <iCollateralDamageLimit>0</iCollateralDamageLimit>
-      <iCollateralDamageMaxUnits>0</iCollateralDamageMaxUnits>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
+      <iCollateralDamageMaxUnits>2</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>
       <iAnimalCombat>0</iAnimalCombat>
@@ -66518,8 +66518,8 @@
       <iInterceptionProbability>0</iInterceptionProbability>
       <iEvasionProbability>0</iEvasionProbability>
       <iWithdrawalProb>50</iWithdrawalProb>
-      <iCollateralDamage>100</iCollateralDamage>
-      <iCollateralDamageLimit>80</iCollateralDamageLimit>
+      <iCollateralDamage>80</iCollateralDamage>
+      <iCollateralDamageLimit>50</iCollateralDamageLimit>
       <iCollateralDamageMaxUnits>3</iCollateralDamageMaxUnits>
       <iCityAttack>0</iCityAttack>
       <iCityDefense>0</iCityDefense>

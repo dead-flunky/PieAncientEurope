@@ -737,7 +737,7 @@
     <Spanish>&#161;Has perdido -%d1[ICON_RESEARCH] de tu investigaci&#243;n!</Spanish>
   </TEXT>
   <TEXT>
-    <Tag>TXT_KEY_ERA_LATE_ANTIK</Tag>
+    <Tag>TXT_KEY_ERA_LATE_ANTIQUITY</Tag>
     <English>Late Antiquity</English>
     <French>Antiquit&#233; tardive</French>
     <German>Sp&#228;tantike</German>
@@ -1858,11 +1858,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_STATTHALTER_HELP</Tag>
-    <English>[ICON_BULLET]Can build a provincial palace in cities (status: city)</English>
-    <French>[ICON_BULLET]Peut construire un palais provincial dans une ville (statut: ville)</French>
-    <German>[ICON_BULLET]Kann in St&#228;dten (Status: Stadt) einen Provinzpalast bauen</German>
-    <Italian>[ICON_BULLET]Pu&#242; costruire un palazzo della provincia nelle citt&#224; (stato: citt&#224;)</Italian>
-    <Spanish>[ICON_BULLET]Puede construir una palacio provincial en ciudades (status: ciudad)</Spanish>
+    <English>[ICON_BULLET]Can build a provincial palace in cities (status: city)[NEWLINE][ICON_BULLET]Can manage a provincial palace and has one of these properties:[NEWLINE]-) philosophical: +5 [ICON_RESEARCH][NEWLINE]-) spiritual: +5 [ICON_CULTURE][NEWLINE]-) financially: +5 [ICON_GOLD][NEWLINE]-) productive: +5 [ICON_PRODUCTION][NEWLINE]-) creative: +5 [ICON_COMMERCE][NEWLINE]-) imperialist: +5 [ICON_ESPIONAGE][NEWLINE]-) organized: +2 [ICON_HAPPY][NEWLINE]-) expansive: +2 [ICON_HEALTHY]</English>
+    <French>[ICON_BULLET]Peut construire un palais provincial dans une ville (statut: ville)[NEWLINE][ICON_BULLET]Peut g&#233;rer un palais provincial et poss&#232;de l'une des propri&#233;t&#233;s suivantes :[NEWLINE]-) philosophique : +5 [ICON_RESEARCH][NEWLINE]-) spirituel : +5 [ICON_CULTURE][NEWLINE]-) financi&#232;rement : +5 [ICON_GOLD][NEWLINE]-) productif : +5 [ICON_PRODUCTION][NEWLINE]-) cr&#233;ation : +5 [ICON_COMMERCE][NEWLINE]-) imp&#233;rialiste : +5 [ICON_ESPIONAGE][NEWLINE]-) organis&#233; : +2 [ICON_HAPPY][NEWLINE]-) expansif : +2 [ICON_HEALTHY]</French>
+    <German>[ICON_BULLET]Kann in St&#228;dten (Status: Stadt) einen Provinzpalast bauen[NEWLINE][ICON_BULLET]Kann einen Provinzpalast verwalten und besitzt eine dieser Eigenschaften:[NEWLINE]-) philosophisch: +5 [ICON_RESEARCH][NEWLINE]-) spirituell: +5 [ICON_CULTURE][NEWLINE]-) finanziell: +5 [ICON_GOLD][NEWLINE]-) produktiv: +5 [ICON_PRODUCTION][NEWLINE]-) kreativ: +5 [ICON_COMMERCE][NEWLINE]-) imperialistisch: +5 [ICON_ESPIONAGE][NEWLINE]-) organisiert: +2 [ICON_HAPPY][NEWLINE]-) expansiv: +2 [ICON_HEALTHY]</German>
+    <Italian>[ICON_BULLET]Pu&#242; costruire un palazzo della provincia nelle citt&#224; (stato: citt&#224;)[NEWLINE][ICON_BULLET]Pu&#242; gestire un palazzo della provincia e possiede una di queste propriet&#224;:[NEWLINE]-) filosofico: +5 [ICON_RESEARCH][NEWLINE]-) spirituale: +5 [ICON_CULTURE][NEWLINE]-) finanziariamente: +5 [ICON_GOLD][NEWLINE]-) produttivo: +5 [ICON_PRODUCTION][NEWLINE]-) creativit&#224;: +5 [ICON_COMMERCE][NEWLINE]-) imperialista: +5 [ICON_ESPIONAGE][NEWLINE]-) organizzato: +2 [ICON_HAPPY][NEWLINE]-) espansivo: +2 [ICON_HEALTHY]</Italian>
+    <Spanish>[ICON_BULLET]Puede construir una palacio provincial en ciudades (status: ciudad)[NEWLINE][ICON_BULLET]Puede administrar un palacio provincial y tiene una de estas propiedades:[NEWLINE]-) filos&#243;fico: +5 [ICON_RESEARCH][NEWLINE]-) espiritual: +5 [ICON_CULTURE][NEWLINE]-) financieramente: +5 [ICON_GOLD][NEWLINE]-) productivo: +5 [ICON_PRODUCTION][NEWLINE]-) creatividad: +5 [ICON_COMMERCE][NEWLINE]-) imperialista: +5 [ICON_ESPIONAGE][NEWLINE]-) organizado: +2 [ICON_HAPPY][NEWLINE]-) expansivo: +2 [ICON_HEALTHY]</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_BUTTON_SETTLE_STATTHALTER</Tag>
@@ -1970,11 +1970,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_UNIT_ESCAPE_4</Tag>
-    <English>The unit was able to withdraw and hide in the village.</English>
-    <French>L'unit&#233; a pu se retirer et se cacher dans le village.</French>
-    <German>Die Einheit konnte sich im Dorf zur&#252;ckziehen.</German>
-    <Italian>L'unit&#224; &#232; stata in grado di ritirarsi e nascondersi nel villaggio.</Italian>
-    <Spanish>La unidad pudo retirarse y esconderse en el pueblo.</Spanish>
+    <English>The unit %s1_unit was able to withdraw and hide in the village.</English>
+    <French>L'unit&#233; %s1_unit a pu se retirer et se cacher dans le village.</French>
+    <German>Die Einheit %s1_unit konnte sich im Dorf zur&#252;ckziehen.</German>
+    <Italian>L'unit&#224; &#232; %s1_unit stata in grado di ritirarsi e nascondersi nel villaggio.</Italian>
+    <Spanish>La unidad %s1_unit pudo retirarse y esconderse en el pueblo.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_PROMOTION_MORALE_HELP</Tag>
@@ -2223,6 +2223,30 @@
     <German>[ICON_BULLET]Kein B&#252;rgerkrieg in St&#228;dten durch fehlende Staatsreligion</German>
     <Italian>[ICON_BULLET]Nessuna guerra civile nelle citt&#224; a causa della mancanza di religione di stato</Italian>
     <Spanish>[ICON_BULLET]No hay guerra civil en las ciudades debido a la falta de religi&#243;n estatal</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_ACTION_HORSE_SWAP</Tag>
+    <English>[COLOR_HIGHLIGHT_TEXT]Horse changing station[COLOR_REVERT][NEWLINE]Change your mount to get more movement points.</English>
+    <French>[COLOR_HIGHLIGHT_TEXT]Station de changement de chevaux[COLOR_REVERT][NEWLINE]Changez de monture pour obtenir plus de points de mouvement.</French>
+    <German>[COLOR_HIGHLIGHT_TEXT]Pferdewechselstation[COLOR_REVERT][NEWLINE]Wechsle dein Reittier, um weitere Bewegungspunkte zu erhalten.</German>
+    <Italian>[COLOR_HIGHLIGHT_TEXT]Stazione di cambio cavalli[COLOR_REVERT][NEWLINE]Cambia la tua cavalcatura per ottenere pi&#249; punti movimento.</Italian>
+    <Spanish>[COLOR_HIGHLIGHT_TEXT]Puesto de cambio de caballos[COLOR_REVERT][NEWLINE]Cambia tu montura para conseguir m&#225;s puntos de movimiento.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_ACTION_CAMEL_SWAP</Tag>
+    <English>[COLOR_HIGHLIGHT_TEXT]Camel changing station[COLOR_REVERT][NEWLINE]Change your mount to get more movement points.</English>
+    <French>[COLOR_HIGHLIGHT_TEXT]Station de changement de chameaux[COLOR_REVERT][NEWLINE]Changez de monture pour obtenir plus de points de mouvement.</French>
+    <German>[COLOR_HIGHLIGHT_TEXT]Kamelwechselstation[COLOR_REVERT][NEWLINE]Wechsle dein Reittier, um weitere Bewegungspunkte zu erhalten.</German>
+    <Italian>[COLOR_HIGHLIGHT_TEXT]Stazione di cambio cammello[COLOR_REVERT][NEWLINE]Cambia la tua cavalcatura per ottenere pi&#249; punti movimento.</Italian>
+    <Spanish>[COLOR_HIGHLIGHT_TEXT]Estaci&#243;n de cambio de camellos[COLOR_REVERT][NEWLINE]Cambia tu montura para conseguir m&#225;s puntos de movimiento.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_PFERDEWECHSEL_DONE</Tag>
+    <English>And on it goes ...</English>
+    <French>Et ainsi de suite ...</French>
+    <German>Und weiter geht's ...</German>
+    <Italian>E va avanti ...</Italian>
+    <Spanish>Y as&#237; sigue ...</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_LEADER_SARGON1</Tag>
@@ -3386,7 +3410,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_HEILIGER_ORT</Tag>
-    <English>Sacred places</English>
+    <English>Sacred Places</English>
     <French>Lieux sacr&#233;s</French>
     <German>Heilige Orte</German>
     <Italian><Text>Luoghi sacri</Text><Gender>Male</Gender><Plural>1</Plural></Italian>
@@ -3514,7 +3538,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_TORSION</Tag>
-    <English>Torsion siege engines</English>
+    <English>Torsion Siege Engines</English>
     <French>Armes &#224; torsion</French>
     <German>Torsionsgesch&#252;tze</German>
     <Italian>Macchine d'assedio a torsione</Italian>
@@ -3570,7 +3594,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_PARKANLAGEN</Tag>
-    <English>Public facilities</English>
+    <English>Public Facilities</English>
     <French>Les &#233;tablissements publics</French>
     <German>&#214;ffentliche Einrichtungen</German>
     <Italian>Strutture pubbliche</Italian>
@@ -3746,7 +3770,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_GLADIATOR4</Tag>
-    <English>Bread and circuses</English>
+    <English>Bread and Games</English>
     <French>Du pain et des jeux</French>
     <German>Brot und Spiele</German>
     <Italian>Panem et circenses</Italian>
@@ -5354,7 +5378,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_SERVIAN_REFORM</Tag>
-    <English>Servian reform</English>
+    <English>Servian Reform</English>
     <French>R&#233;forme servienne</French>
     <German>Servianische Reform</German>
     <Italian>Riforma serviana</Italian>
@@ -5418,7 +5442,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_TESTUDO</Tag>
-    <English>Tortoise formation</English>
+    <English>Tortoise Formation</English>
     <French>Tortue romaine</French>
     <German>Schildkr&#246;tenformation</German>
     <Italian>Testuggine romana</Italian>
@@ -5434,11 +5458,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_KANTAKREIS</Tag>
-    <English>Cantabrian maneuver</English>
+    <English>Cantabrian Maneuver</English>
     <French>Manoeuvre cantabrique</French>
     <German>Kantabrisches Man&#246;ver</German>
-    <Italian>Manovra cantabrica</Italian>
-    <Spanish>Maniobra c&#225;ntabra</Spanish>
+    <Italian>Manovra Cantabrica</Italian>
+    <Spanish>Maniobra C&#225;ntabra</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_HORSE_ARMOR</Tag>
@@ -5706,7 +5730,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_MANIPEL</Tag>
-    <English>Battle management</English>
+    <English>Battle Management</English>
     <French>Plan de bataille</French>
     <German>Schlachtf&#252;hrung</German>
     <Italian>Pianificazione della battaglia</Italian>
@@ -5826,7 +5850,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_WASSERRAD</Tag>
-    <English>The waterwheel</English>
+    <English>The Waterwheel</English>
     <French>Roue &#224; aubes</French>
     <German>Das Wasserrad</German>
     <Italian>La ruota idraulica</Italian>
@@ -5850,7 +5874,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_GLAS4</Tag>
-    <English>Windows and mirrors</English>
+    <English>Windows and Mirrors</English>
     <French>Vitres et miroirs</French>
     <German>Fenster und Spiegel</German>
     <Italian>Finestre e specchi</Italian>
@@ -5858,7 +5882,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_SKLAVENRECHTE</Tag>
-    <English>Slaves rights</English>
+    <English>Slaves Rights</English>
     <French>Esclavage codifi&#233;</French>
     <German>Sklavenrechte</German>
     <Italian>Diritti degli schiavi</Italian>
@@ -5866,7 +5890,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_MANUFAKTUREN2</Tag>
-    <English>Weapons manufactories</English>
+    <English>Weapons Manufactories</English>
     <French>Manufactures d'armes</French>
     <German>Waffenmanufakturen</German>
     <Italian>Manifatture di armi</Italian>
@@ -6050,7 +6074,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_HERRSCHERKULT</Tag>
-    <English>Clientele being</English>
+    <English>Clientele Being</English>
     <French>Client&#233;lisme</French>
     <German>Klientelwesen</German>
     <Italian>Clientelismo</Italian>
@@ -6698,7 +6722,7 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_TECH_BRUNNEN</Tag>
-    <English>Well building</English>
+    <English>Well Building</English>
     <French>Construction de puits</French>
     <German>Brunnenbau</German>
     <Italian>Costruire pozzi</Italian>
@@ -7015,14 +7039,6 @@
     <German><Text>Stadtstaat</Text><Gender>Male</Gender><Plural>0</Plural></German>
     <Italian><Text>Citt&#224;-stato</Text><Gender>Female</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Ciudad-estado</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
-  </TEXT>
-  <TEXT>
-    <Tag>TXT_KEY_FREE</Tag>
-    <English></English>
-    <French></French>
-    <German></German>
-    <Italian></Italian>
-    <Spanish></Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_LION2</Tag>

@@ -1,5 +1,8 @@
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyPopupInfo, ButtonPopupTypes,
+                                CyTranslator, CyMessageControl, CyAudioGame,
+                                CyCamera, CyInterface, UnitAITypes, ColorTypes,
+                                DirectionTypes)
 # import CvEventInterface
 import CvUtil
 import PAE_City
@@ -235,7 +238,7 @@ def onCityAcquired(pCity, iNewOwner, iPreviousOwner):
         if pLoser.getNumCities() > 0 and not pWinnerTeam.isAVassal() and \
             iNewOwner != gc.getBARBARIAN_PLAYER() and iPreviousOwner != gc.getBARBARIAN_PLAYER() and \
             (iLoserPowerWithVassals < iWinnerPower and pLoser.getNumCities() < iMinimumCities or iLoserPowerWithVassals * 2 < iWinnerPower):
-            
+
             #Abfrage ob man als Gewinner den Schwaecheren zum Vasall nimmt
             # HI-HI
             if pWinner.isHuman() and pLoser.isHuman():
@@ -430,46 +433,46 @@ def onModNetMessage(iData1, iData2, iData3, iData4, iData5):
     # HI Vasall erklaert eigenmaechtig Krieg gegen Hegemon
     elif iData1 == 691:
         do691(iData2, iData3, iData4)
-    
+
     # ------------------------------------------------------------
-    
+
     # Vassallen entfernen oder Städte schenken (Button in der Hauptstadt)
     elif iData1 == 764:
         # iData1, iData2, ... , iData5
         # First:  764, iPlayer, -1, -1, -1
         # Second: 764, iPlayer, iVasall, iButtonID, -1
         pPlayer = gc.getPlayer(iData2)
-        
+
         # Vasallen auflisten und Vasall auswählen
         if iData3 == -1:
           # Dies soll doppelte Popups in PB-Spielen vermeiden.
-          if iData2 == gc.getGame().getActivePlayer():           
+          if iData2 == gc.getGame().getActivePlayer():
             popupInfo = CyPopupInfo()
             popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
             popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASALLEN_0", ()))
             popupInfo.setData1(iData2) # iPlayer
             popupInfo.setOnClickedPythonCallback("popupVasallen")
-            
+
             lVassals = getVassals(iData2)
             if len(lVassals):
               for iVassal in lVassals:
                 iCities = gc.getPlayer(iVassal).getNumCities()
                 popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_VASALLEN_1", (gc.getPlayer(iVassal).getCivilizationShortDescriptionKey(), iCities)), gc.getCivilizationInfo(gc.getPlayer(iVassal).getCivilizationType()).getButton())
-            
+
             # Cancel button
             popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
             popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
             popupInfo.addPopup(iData2)
-            
+
         # Vasall: Entlassen oder eine Stadt schenken, wo eigene Kultur < 50%
         else:
-          
+
           if iData4 == -1:
             # Dies soll doppelte Popups in PB-Spielen vermeiden.
             if iData2 == gc.getGame().getActivePlayer():
-            
+
               lVassals = getVassals(iData2)
-              
+
               popupInfo = CyPopupInfo()
               popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
               popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASALLEN_2", (gc.getPlayer(lVassals[iData3]).getCivilizationShortDescriptionKey(),)))
@@ -486,17 +489,17 @@ def onModNetMessage(iData1, iData2, iData3, iData4, iData5):
                 pCity = gc.getPlayer(iData2).getCity(iCity)
                 iCulture = pCity.plot().calculateTeamCulturePercent(pPlayer.getTeam())
                 popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_VASALLEN_4", (pCity.getName(), iCulture)), PAE_City.getCityStatus(None, iData2, iCity, True))
-              
+
               # Cancel button
               popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
               popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
               popupInfo.addPopup(iData2)
-              
+
           # Vasall freilassen
           elif iData4 == 0:
               #lVassals = getVassals(iData2)
               VassalUnsetHegemon(iData3)
-              
+
               if iData2 == gc.getGame().getActivePlayer():
                   CyAudioGame().Play2DSound("AS2D_WELOVEKING")
           # Stadt schenken
@@ -505,7 +508,7 @@ def onModNetMessage(iData1, iData2, iData3, iData4, iData5):
               pCity = pPlayer.getCity(lCities[iData4-1]) #iData4 - 1, weil buttonId 0 die Freilassung ist
               pPlot = pCity.plot()
               doGiveCity2Vassal(pCity, iData3)
-              
+
               if iData2 == gc.getGame().getActivePlayer():
                   CyCamera().JustLookAtPlot(pPlot)
                   CyAudioGame().Play2DSound("AS2D_WELOVEKING")
@@ -745,7 +748,7 @@ def do687(iWinner, iLoser, iVassal, iGold):
     #iWinnerTeam = pWinner.getTeam()
     #pWinnerTeam = gc.getTeam(iWinnerTeam)
     iLoserTeam = pLoser.getTeam()
-    pLoserTeam = gc.getTeam(iLoserTeam)
+    #pLoserTeam = gc.getTeam(iLoserTeam)
     iVassalTeam = pVassal.getTeam()
     pVassalTeam = gc.getTeam(iVassalTeam)
 
@@ -852,7 +855,7 @@ def do690(iWinner, iLoser, iVassal, iGold):
     #iWinnerTeam = pWinner.getTeam()
     #pWinnerTeam = gc.getTeam(iWinnerTeam)
     iLoserTeam = pLoser.getTeam()
-    pLoserTeam = gc.getTeam(iLoserTeam)
+    #pLoserTeam = gc.getTeam(iLoserTeam)
 
     # Botschafter-Kill
     if iGold == -1:
@@ -898,7 +901,7 @@ def do691(iWinner, iLoser, iVassal):
     #iWinnerTeam = pWinner.getTeam()
     #pWinnerTeam = gc.getTeam(iWinnerTeam)
     iLoserTeam = pLoser.getTeam()
-    pLoserTeam = gc.getTeam(iLoserTeam)
+    #pLoserTeam = gc.getTeam(iLoserTeam)
 
     # Vom Hegemon loesen
     VassalUnsetHegemon (iLoserTeam)
@@ -955,7 +958,7 @@ def do702(iHegemon, iVassal, iTech, iTechCost):
                 pHegemon.changeGold(iTechCost)
                 if iHegemon == gc.getGame().getActivePlayer():
                     CyAudioGame().Play2DSound('AS2D_COINS')
-                    
+
                 # Tech cost check
                 # the more CIVs do have this tech, the cheaper
                 iFaktor = gc.getGame().countKnownTechNumTeams(iTech)
@@ -1008,7 +1011,7 @@ def do703(iHegemon, iVassal, iTech, iTechCost):
 def getVassals(iHegemon):
     pHegemon = gc.getPlayer(iHegemon)
     iHegemonTeam = pHegemon.getTeam()
-    
+
     lVassals = []
     iRange = gc.getMAX_PLAYERS()
     for iPlayer in range(iRange):
@@ -1023,7 +1026,7 @@ def getVassals(iHegemon):
 # Get List of a player's cities with less owned culture
 def getCitiesOfLowCultureLevel(iPlayer):
     pPlayer = gc.getPlayer(iPlayer)
-    
+
     lCities = []
     iNumCities = pPlayer.getNumCities()
     for iCity in range (iNumCities):
@@ -1032,30 +1035,30 @@ def getCitiesOfLowCultureLevel(iPlayer):
             iCulture = pCity.plot().calculateTeamCulturePercent(pPlayer.getTeam())
             if iCulture < 51:
                 lCities.append(iCity)
-    
+
     return lCities
 
 
 # ueberlaufende Stadt / City renegade
 # When Unit gets attacked: LoserUnitID (must not get killed automatically) , no unit = None
 def doGiveCity2Vassal (pCity, iNewOwner):
-    
+
     # ***TEST***
     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Give City 2 Vassal",iNewOwner)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-    
+
     if iNewOwner == -1: iNewOwner = gc.getBARBARIAN_PLAYER()
     if pCity.getOwner() == iNewOwner: return
-    
+
     pNewOwner = gc.getPlayer(iNewOwner)
-    
+
     iX = pCity.getX()
     iY = pCity.getY()
     pPlot = pCity.plot()
     iOldOwner = pCity.getOwner()
-    
+
     # AI Attitude dadurch aufbessern
     pNewOwner.AI_changeAttitudeExtra(iOldOwner, +1)
-    
+
     # Einheiten auslesen bevor die Stadt ueberlaeuft
     UnitArray = []
     iRange = pPlot.getNumUnits()
@@ -1066,22 +1069,22 @@ def doGiveCity2Vassal (pCity, iNewOwner):
                   if pLoopUnit.isCargo():
                       pLoopUnit.setTransportUnit(None) # Fehlerquelle
                   UnitArray.append(pLoopUnit)
-    
+
     # Stadt laeuft automatisch ueber (CyCity pCity, BOOL bConquest, BOOL bTrade)
-    pNewOwner.acquireCity(pCity, 0, 1)    
-    
+    pNewOwner.acquireCity(pCity, 0, 1)
+
     # Einheiten generieren
     for pLoopUnit in UnitArray:
         if pLoopUnit is None or pLoopUnit.isNone():
             # TEST
             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Test 1 - Unit none",iOldOwner)), None, 2, None, ColorTypes(10), 0, 0, False, False)
             continue
-        
+
         iUnitType = pLoopUnit.getUnitType()
         #iUnitAIType = pLoopUnit.getUnitAIType() # Fehlerquelle
         iUnitAIType = -1
         iUnitCombatType = pLoopUnit.getUnitCombatType()
-        
+
         # UnitAIType -1 (NO_UNITAI) -> UNITAI_UNKNOWN = 0 , ATTACK = 4, City Defense = 10
         if iUnitAIType in [-1, 0]:
             if iUnitType == gc.getInfoTypeForString('UNIT_FREED_SLAVE'):
@@ -1092,7 +1095,7 @@ def doGiveCity2Vassal (pCity, iNewOwner):
                 iUnitAIType = 19
             else:
                 iUnitAIType = -1
-        
+
         # Slaves will be freed, nur wenn dessen Besitzer neu ist
         if iUnitType == gc.getInfoTypeForString('UNIT_SLAVE'):
             iUnitType = gc.getInfoTypeForString('UNIT_FREED_SLAVE')
@@ -1112,13 +1115,13 @@ def doGiveCity2Vassal (pCity, iNewOwner):
 
         if pLoopUnit:
           pLoopUnit.kill(True, -1)
-    
+
     if iNewOwner == gc.getBARBARIAN_PLAYER():
         iPartisan = gc.getInfoTypeForString("UNIT_FREEDOM_FIGHTER")
         pNewOwner.initUnit(iPartisan, iX, iY, UnitAITypes.UNITAI_CITY_DEFENSE, DirectionTypes.DIRECTION_SOUTH)
         pNewOwner.initUnit(iPartisan, iX, iY, UnitAITypes.UNITAI_CITY_DEFENSE, DirectionTypes.DIRECTION_SOUTH)
         pNewOwner.initUnit(iPartisan, iX, iY, UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
-    
+
     # Pointer anpassen
     if pPlot.isCity():
         pCity = pPlot.getPlotCity()
@@ -1136,13 +1139,13 @@ def doOpenBorders2Vassal(iWinner, iLoser):
     pWinner = gc.getPlayer(iWinner)
     pLoser = gc.getPlayer(iLoser)
     iWinnerTeam = pWinner.getTeam()
-    pWinnerTeam = gc.getTeam(iWinnerTeam)
+    #pWinnerTeam = gc.getTeam(iWinnerTeam)
     iLoserTeam = pLoser.getTeam()
     pLoserTeam = gc.getTeam(iLoserTeam)
-    
+
     # OpenBorders zum Hegemon
     pLoserTeam.signOpenBorders(iWinnerTeam)
-    
+
     #OpenBorders zu den Vasallen des Hegemons
     iRange = gc.getMAX_PLAYERS()
     for i in range(iRange):

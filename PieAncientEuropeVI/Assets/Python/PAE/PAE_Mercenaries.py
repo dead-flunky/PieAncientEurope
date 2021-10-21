@@ -2,7 +2,11 @@
 # adapted into this file by Flunky
 
 ### Imports
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
+                                CyTranslator, DirectionTypes, AttitudeTypes,
+                                ColorTypes, UnitAITypes, CyPopupInfo,
+                                ButtonPopupTypes, TechTypes, BonusTypes,
+                                DomainTypes, CyAudioGame, plotXY, CyCamera)
 # import CvEventInterface
 import CvUtil
 
@@ -357,9 +361,9 @@ def onModNetMessage(argsList):
         iPlayer = iData2
         iMercenaryCiv = iData1
         pPlayer = gc.getPlayer(iPlayer)
-        
+
         iCosts = getTortureCosts(iPlayer)
-        
+
         if pPlayer.getGold() < iCosts:
             if gc.getPlayer(iPlayer).isHuman():
                 CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
@@ -442,7 +446,7 @@ def onModNetMessage(argsList):
         iMercenaryCiv = iData1
         pPlayer = gc.getPlayer(iPlayer)
         iCosts = getTortureCosts(iPlayer)
-        
+
         if iData3 == 0:
             iGold = iCosts / 4 * 3
             iChance = 10
@@ -615,7 +619,7 @@ def doFailedMercenaryTortureMessage(iPlayer):
 def doAIMercTorture(iPlayer, iMercenaryCiv):
     pPlayer = gc.getPlayer(iPlayer)
     iGold = pPlayer.getGold()
-    
+
     if iGold >= 300:
         if CvUtil.myRandom(2, "doAIPlanAssignMercenaries") == 1:
             iCosts = getTortureCosts(iPlayer)
@@ -787,7 +791,7 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
             doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer)
     else:
       return -1
-      
+
     return iTargetPlayer
 
 
@@ -1141,7 +1145,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                 if iUnitSword == -1:
                     if pNeighborTeam.isHasTech(gc.getInfoTypeForString("TECH_BEWAFFNUNG3")):
                         iUnitSword = pPlayerCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KURZSCHWERT"))
-                        if iUnitSword == -1: 
+                        if iUnitSword == -1:
                             iUnitSword = gc.getInfoTypeForString("UNIT_KURZSCHWERT")
             if not bLongsword:
                 if pNeighbor.hasBonus(iBonus2):
@@ -1595,7 +1599,7 @@ def doHireMercenariesINIT(pPlayer, lNeighbors):
         gc.getInfoTypeForString("UNIT_SPEARMAN"),
     ]
     iUnit = gc.getCivilizationInfo(pPlayer.getCivilizationType()).getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KURZSCHWERT"))
-    if iUnit == -1: 
+    if iUnit == -1:
         iUnit = gc.getInfoTypeForString("UNIT_KURZSCHWERT")
     lEarlyInfantry.append(iUnit)
     lInfantry = [

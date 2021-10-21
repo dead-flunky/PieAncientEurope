@@ -23,6 +23,18 @@
    <Path>Art/Movies/Placeholder.bik</Path>
   </MovieArtInfo>
   <MovieArtInfo>
+   <Type>ART_DEF_MOVIE_ORACLE2</Type>
+   <Path>Art/Movies/Buildings/Orakel2_Leutemann.dds</Path>
+  </MovieArtInfo>
+  <MovieArtInfo>
+   <Type>ART_DEF_MOVIE_NATIONAL_CRAFT_CENTER</Type>
+   <Path>Art/Movies/Buildings/Handwerk_Urmston.dds</Path>
+  </MovieArtInfo>
+  <MovieArtInfo>
+   <Type>ART_DEF_MOVIE_HUNDEZUCHT</Type>
+   <Path>Art/Movies/Buildings/hundezucht.dds</Path>
+  </MovieArtInfo>
+  <MovieArtInfo>
    <Type>ART_DEF_MOVIE_COLOSSUS</Type>
    <Path>Art/Movies/Wonders/Colossus.bik</Path>
   </MovieArtInfo>
