@@ -1252,6 +1252,7 @@
       <UniqueNames/>
       <Special>NONE</Special>
       <Capture>NONE</Capture>
+      <PrereqCaptureTech>NONE</PrereqCaptureTech>
       <Combat>NONE</Combat>
       <Domain>DOMAIN_LAND</Domain>
       <DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>

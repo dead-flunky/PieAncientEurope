@@ -2866,6 +2866,7 @@ class CvEventManager:
                     # ***TEST***
                     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Gold durch Einheitensieg (Zeile 1711)",iGold)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
+            # Flunky: moved to XML
             # ------- Certain animals can be captured, when domestication has been researched
             # ------- Bestimmte Tiere koennen eingefangen werden, wenn Domestizier-Tech erforscht wurde
             # elif iLoserUnitType in L.LUnitCanBeDomesticated:

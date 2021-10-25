@@ -632,44 +632,47 @@ void CvUnit::kill(bool bDelay, PlayerTypes ePlayer)
 	CvEventReporter::getInstance().unitLost(this);
 
 	GET_PLAYER(getOwnerINLINE()).deleteUnit(getID());
-	TechTypes eTech = (TechTypes) GC.getUnitInfo(eCaptureUnitType).getPrereqCaptureTech();
-	if ((eCapturingPlayer != NO_PLAYER) && (eCaptureUnitType != NO_UNIT) && !(GET_PLAYER(eCapturingPlayer).isBarbarian()) && 
-		/* Flunky PAE Domestication*/
-		(eTech == NO_TECH || GET_TEAM(GET_PLAYER(eCapturingPlayer).getTeam()).isHasTech(eTech)))
+	
+	if ((eCapturingPlayer != NO_PLAYER) && (eCaptureUnitType != NO_UNIT) && !(GET_PLAYER(eCapturingPlayer).isBarbarian()))
+	/* Flunky PAE Domestication*/
 	{
-		if (GET_PLAYER(eCapturingPlayer).isHuman() || GET_PLAYER(eCapturingPlayer).AI_captureUnit(eCaptureUnitType, pPlot) || 0 == GC.getDefineINT("AI_CAN_DISBAND_UNITS"))
+		TechTypes eTech = (TechTypes) GC.getUnitInfo(eCaptureUnitType).getPrereqCaptureTech();
+		if (eTech == NO_TECH || GET_TEAM(GET_PLAYER(eCapturingPlayer).getTeam()).isHasTech(eTech))
 		{
-			CvUnit* pkCapturedUnit = GET_PLAYER(eCapturingPlayer).initUnit(eCaptureUnitType, pPlot->getX_INLINE(), pPlot->getY_INLINE());
-
-			if (pkCapturedUnit != NULL)
+			if (GET_PLAYER(eCapturingPlayer).isHuman() || GET_PLAYER(eCapturingPlayer).AI_captureUnit(eCaptureUnitType, pPlot) || 0 == GC.getDefineINT("AI_CAN_DISBAND_UNITS"))
 			{
-				CvWString szBuffer;
-				szBuffer = gDLL->getText("TXT_KEY_MISC_YOU_CAPTURED_UNIT", GC.getUnitInfo(eCaptureUnitType).getTextKeyWide());
-				gDLL->getInterfaceIFace()->addHumanMessage(eCapturingPlayer, true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_UNITCAPTURE", MESSAGE_TYPE_INFO, pkCapturedUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
+				CvUnit* pkCapturedUnit = GET_PLAYER(eCapturingPlayer).initUnit(eCaptureUnitType, pPlot->getX_INLINE(), pPlot->getY_INLINE());
 
-				// Add a captured mission
-				if (pPlot->isActiveVisible(false)) // K-Mod
+				if (pkCapturedUnit != NULL)
 				{
-					CvMissionDefinition kMission;
-					kMission.setMissionTime(GC.getMissionInfo(MISSION_CAPTURED).getTime() * gDLL->getSecsPerTurn());
-					kMission.setUnit(BATTLE_UNIT_ATTACKER, pkCapturedUnit);
-					kMission.setUnit(BATTLE_UNIT_DEFENDER, NULL);
-					kMission.setPlot(pPlot);
-					kMission.setMissionType(MISSION_CAPTURED);
-					gDLL->getEntityIFace()->AddMission(&kMission);
-				}
+					CvWString szBuffer;
+					szBuffer = gDLL->getText("TXT_KEY_MISC_YOU_CAPTURED_UNIT", GC.getUnitInfo(eCaptureUnitType).getTextKeyWide());
+					gDLL->getInterfaceIFace()->addHumanMessage(eCapturingPlayer, true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_UNITCAPTURE", MESSAGE_TYPE_INFO, pkCapturedUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
 
-				pkCapturedUnit->finishMoves();
-
-				if (!GET_PLAYER(eCapturingPlayer).isHuman())
-				{
-					CvPlot* pPlot = pkCapturedUnit->plot();
-					if (pPlot && !pPlot->isCity(false))
+					// Add a captured mission
+					if (pPlot->isActiveVisible(false)) // K-Mod
 					{
-						if (GET_PLAYER(eCapturingPlayer).AI_getPlotDanger(pPlot) && GC.getDefineINT("AI_CAN_DISBAND_UNITS"))
+						CvMissionDefinition kMission;
+						kMission.setMissionTime(GC.getMissionInfo(MISSION_CAPTURED).getTime() * gDLL->getSecsPerTurn());
+						kMission.setUnit(BATTLE_UNIT_ATTACKER, pkCapturedUnit);
+						kMission.setUnit(BATTLE_UNIT_DEFENDER, NULL);
+						kMission.setPlot(pPlot);
+						kMission.setMissionType(MISSION_CAPTURED);
+						gDLL->getEntityIFace()->AddMission(&kMission);
+					}
+
+					pkCapturedUnit->finishMoves();
+
+					if (!GET_PLAYER(eCapturingPlayer).isHuman())
+					{
+						CvPlot* pPlot = pkCapturedUnit->plot();
+						if (pPlot && !pPlot->isCity(false))
 						{
-							//pkCapturedUnit->kill(false);
-							pkCapturedUnit->scrap(); // K-Mod. roughly the same thing, but this is more appropriate.
+							if (GET_PLAYER(eCapturingPlayer).AI_getPlotDanger(pPlot) && GC.getDefineINT("AI_CAN_DISBAND_UNITS"))
+							{
+								//pkCapturedUnit->kill(false);
+								pkCapturedUnit->scrap(); // K-Mod. roughly the same thing, but this is more appropriate.
+							}
 						}
 					}
 				}
