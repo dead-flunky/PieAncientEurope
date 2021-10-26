@@ -3972,8 +3972,8 @@ class CvEventManager:
 
     def onGreatPersonBorn(self, argsList):
         ## Platy WorldBuilder ##
-        # if CyGame().GetWorldBuilderMode() and not CvPlatyBuilderScreen.bPython:
-        #     return
+        if CyGame().GetWorldBuilderMode() and not CvPlatyBuilderScreen.bPython:
+            return
         ## Platy WorldBuilder ##
         'Great Person Born'
         pUnit, iPlayer, pCity = argsList
@@ -4918,13 +4918,6 @@ class CvEventManager:
         # Added by Gerikes for OOS logging.
         OOSLogger.doGameUpdate()
         # End added by Gerikes for OOS logging.
-
-        # eState = CyInterface().getEndTurnState()
-        # if eState == EndTurnButtonStates.END_TURN_GO:
-            # self.checkActivePlayerTurnStart()
-        # else:
-            # self.checkActivePlayerTurnEnd()
-
 
     def onMouseEvent(self, argsList):
         'mouse handler - returns 1 if the event was consumed'
