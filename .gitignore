@@ -12,3 +12,9 @@
 /PAK
 /PieAncientEuropeVI/CvGameCoreDLL/Project/Debug
 /PieAncientEuropeVI/CvGameCoreDLL/Project/temp_files/Debug
+*.dds
+*.bik
+*.mov
+*.mp3
+*.wav
+*.FPK
