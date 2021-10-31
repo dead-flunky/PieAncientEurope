@@ -2600,9 +2600,10 @@ class CvEventManager:
             return
         CvUtil.pyPrint('Team %d has met Team %d' %(iTeamX, iHasMetTeamY))
 
+    # called on clear combat results - not after retreat or flight, but after (or actually before) capture
     def onCombatResult(self, argsList):
         'Combat Result'
-        pWinner, pLoser = argsList
+        pWinner, pLoser, attackerWinner = argsList
         iWinnerPlayer = pWinner.getOwner()
         iLoserPlayer = pLoser.getOwner()
         pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
@@ -2625,18 +2626,18 @@ class CvEventManager:
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Loser "+pLoser.getName()+" "+str(pLoserPlot.getX())+"|"+str(pLoserPlot.getY()),1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
         #### ---- Anfang unabhaengige Ereignisse ---- ####
-        bWinnerAnimal = (pWinner.isAnimal() or 
-                         pWinner.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
-                         iWinnerUnitType in L.LUnitCanBeDomesticated or
-                         iWinnerUnitType in L.LUnitWildAnimals or
-                         iWinnerUnitType in L.LUnitWarAnimals or
-                         iWinnerUnitType in L.LUnitDomesticated)
-        bLoserAnimal = (pLoser.isAnimal() or 
-                        pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
-                        iLoserUnitType in L.LUnitCanBeDomesticated or
-                        iLoserUnitType in L.LUnitWildAnimals or
-                        iLoserUnitType in L.LUnitWarAnimals or
-                        iLoserUnitType in L.LUnitDomesticated)
+        bWinnerAnimal = pWinner.isAnimal()
+                        # (pWinner.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
+                        #  iWinnerUnitType in L.LUnitCanBeDomesticated or
+                        #  iWinnerUnitType in L.LUnitWildAnimals or
+                        #  iWinnerUnitType in L.LUnitWarAnimals or
+                        #  iWinnerUnitType in L.LUnitDomesticated)
+        bLoserAnimal = pLoser.isAnimal()
+                        # (pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
+                        # iLoserUnitType in L.LUnitCanBeDomesticated or
+                        # iLoserUnitType in L.LUnitWildAnimals or
+                        # iLoserUnitType in L.LUnitWarAnimals or
+                        # iLoserUnitType in L.LUnitDomesticated)
 
         sScenarioName = CvUtil.getScriptData(CyMap().plot(0, 0), ["S", "t"])
         if sScenarioName == "FirstPunicWar":
@@ -2645,20 +2646,20 @@ class CvEventManager:
         # ---- Blessed Units
         # Blessed promo only helps one time
         iPromo = gc.getInfoTypeForString("PROMOTION_BLESSED")
-        if pWinner.isHasPromotion(iPromo):
-            pWinner.setHasPromotion(iPromo, False)
-        if pLoser.isHasPromotion(iPromo):
-            pLoser.setHasPromotion(iPromo, False)
+        #if pWinner.isHasPromotion(iPromo):
+        pWinner.setHasPromotion(iPromo, False)
+        #if pLoser.isHasPromotion(iPromo):
+        pLoser.setHasPromotion(iPromo, False)
 
         # ---- Morale Units
         # Moral promo can disappear by 50%
         iPromo = gc.getInfoTypeForString("PROMOTION_MORALE")
         if pWinner.isHasPromotion(iPromo):
-          if CvUtil.myRandom(2, "TakeAwayMoralPromoWinner") == 1:
-            pWinner.setHasPromotion(iPromo, False)
+            if CvUtil.myRandom(2, "TakeAwayMoralPromoWinner") == 1:
+                pWinner.setHasPromotion(iPromo, False)
         if pLoser.isHasPromotion(iPromo):
-          if CvUtil.myRandom(2, "TakeAwayMoralPromoLoser") == 1:
-            pLoser.setHasPromotion(iPromo, False)
+            if CvUtil.myRandom(2, "TakeAwayMoralPromoLoser") == 1:
+                pLoser.setHasPromotion(iPromo, False)
 
         # --------- Feature - Seuche auf dem Schlachtfeld ----------------------
         # Wahrscheinlichkeit einer Seuche auf dem Schlachtfeld
@@ -2669,9 +2670,9 @@ class CvEventManager:
             if iRand == 1:
                 #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Seuche "+pLoserPlot.getX()+"|"+pLoserPlot.getY(),1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
                 if pWinnerPlot.getFeatureType() == -1 and not pWinnerPlot.isCity() and not pWinnerPlot.isWater():
-                   pWinnerPlot.setFeatureType(feat_seuche, 0)
+                    pWinnerPlot.setFeatureType(feat_seuche, 0)
                 if pLoserPlot.getFeatureType() == -1 and not pLoserPlot.isCity() and not pLoserPlot.isWater():
-                   pLoserPlot.setFeatureType(feat_seuche, 0)
+                    pLoserPlot.setFeatureType(feat_seuche, 0)
 
         # ------- Change Culture Percent on the Plots after a battle
         # Choose Plot and add 20% culture to the winner
@@ -2778,17 +2779,15 @@ class CvEventManager:
         # Einheiten, die Wälder niederbrennen können
 
         # Brandchance 20%
-        if pWinner.getUnitType() in L.LFireUnits:
-            if pLoserPlot.getFeatureType() in L.LForests:
-                if CvUtil.myRandom(5, "WinnerUnitBurnsForest") == 1:
-                    pLoserPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
-                    pLoser.getGroup().setActivityType(-1) # to reload the map!
+        if pWinner.getUnitType() in L.LFireUnits and pLoserPlot.getFeatureType() in L.LForests:
+            if CvUtil.myRandom(5, "WinnerUnitBurnsForest") == 1:
+                pLoserPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
+                pLoser.getGroup().setActivityType(-1) # to reload the map!
         # Falls auch der Gegner Feuer unterm Hintern hat
-        if pLoser.getUnitType() in L.LFireUnits:
-            if pWinnerPlot.getFeatureType() in L.LForests:
-                if CvUtil.myRandom(5, "LoserUnitBurnsForest") == 1:
-                    pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
-                    pWinner.getGroup().setActivityType(-1) # to reload the map!
+        if pLoser.getUnitType() in L.LFireUnits and pWinnerPlot.getFeatureType() in L.LForests:
+            if CvUtil.myRandom(5, "LoserUnitBurnsForest") == 1:
+                pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
+                pWinner.getGroup().setActivityType(-1) # to reload the map!
 
         # Flunky PAE fixed bSuicide to iSuicide in dll, also including kamikaze from promotions
         # # Angreifende brennende Schweine killen
@@ -2799,7 +2798,6 @@ class CvEventManager:
             # # Weil bSuicide in XML scheinbar so funktioniert, dass auf jeden Fall der Gegner stirbt (was ich nicht will)
             # bWinnerIsDead = True
 
-
         # Promotions for winner (Combat Stufen, Terrain Promos, City Promos)
         if not bWinnerIsDead and gc.getUnitInfo(pLoser.getUnitType()).getCombat() > 0 and not pLoser.isOnlyDefensive():
             bDone = False
@@ -2808,14 +2806,10 @@ class CvEventManager:
 
             # ------- Unit gets certain promotion PAE V Beta 2 Patch 7
             if not bDone and pLoser.getUnitCombatType() != -1 and not bNavalUnit and not bWinnerAnimal and not (bLoserAnimal and pLoser.isOnlyDefensive()):
-                if pWinner.isMadeAttack() and pWinnerPlayer.isTurnActive():
-                    # bUnitDone =
+                if attackerWinner: # pWinner.isMadeAttack() and pWinnerPlayer.isTurnActive():
                     PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pLoserPlot, True, bLoserAnimal)
                 else:
-                    # bUnitDone =
                     PAE_Unit.doUnitGetsPromo(pWinner, pLoser, pWinnerPlot, False, bLoserAnimal)
-            # damit es unten wieder weiter geht
-            # bUnitDone = False
 
         # Auto Formation Flight
         #iFormation = gc.getInfoTypeForString("PROMOTION_FORM_WHITEFLAG")
@@ -2920,9 +2914,9 @@ class CvEventManager:
                         NewUnit.finishMoves()
                     if pLoserPlayer.isHuman():
                         CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_CAPTURED_SLAVES", ("", 0)), None, 2, "Art/Interface/Buttons/Units/button_rebell.dds", ColorTypes(7), pLoserPlot.getX(), pLoserPlot.getY(), True, True)
+                    # ***TEST***
+                    #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Rebell holt sich Bausklaven zu sich (Zeile 1947)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-                        # ***TEST***
-                        #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Rebell holt sich Bausklaven zu sich (Zeile 1947)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
                 if not bWinnerIsDead:
                     # pWinner may get bonus experience etc, if pLoser is not being domesticated and pLoser is not Treibgut
                     # ------- Feature 1: Generalseinheiten bekommen +1XP, wenn im selben Stack eine angreifende Einheit siegt (10%)
@@ -2931,7 +2925,7 @@ class CvEventManager:
                     # ------------------ Und Gewinner bekommt additional +3 XP
                     iPromoHero = gc.getInfoTypeForString("PROMOTION_HERO")
                     # ------- Diese Features betreffen nur attackierende Einheiten (keine defensiven)
-                    if pWinner.isMadeAttack() and not bWinnerAnimal and pWinner.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE:
+                    if attackerWinner and not bWinnerAnimal and pWinner.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE: #pWinner.isMadeAttack()
                         iPromoLeader = gc.getInfoTypeForString("PROMOTION_LEADER")
                         bPromoHero = False
                         bPromoHeroDone = False
@@ -2945,7 +2939,6 @@ class CvEventManager:
                         # Eine Einheit mit Mercenary-Promo kann diese verlieren, wenn ein General im Stack ist (5% Chance)
                         if bLeaderAnwesend:
                             PAE_Unit.removeMercenaryPromo(pWinner)
-                    # end if pWinner.isMadeAttack
 
                     if bLoserAnimal:
                         # Held Promo + 3 XP wenn Stier (Ur) oder Tier mit mehr als 3 Level erlegt wird
@@ -2962,14 +2955,15 @@ class CvEventManager:
                         pWinnerTeam = gc.getTeam(pWinnerPlayer.getTeam())
                         if pWinnerTeam.isHasTech(iTech):
                             iXP = 1
-                            if pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_AGGRESSIVE")) or pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_EROBERER")):
+                            if pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_AGGRESSIVE")) \
+                                or pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_EROBERER")):
                                 iXP = 2
                             pWinner.changeExperience(iXP, -1, 0, 0, 0)
 
                         # Unit ranks / Unit Rang Promo
                         if pLoser.isMilitaryHappiness() and pLoser.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE:
                             # PAE Feature 3: Unit Rang Promos
-                            if pWinner.isMadeAttack() or CvUtil.myRandom(2, "Rank of a losing unit") == 1:
+                            if attackerWinner or CvUtil.myRandom(2, "Rank of a defending unit") == 1: # pWinner.isMadeAttack()
                                 PAE_Unit.doRankPromo(pWinner)
 
                         # ---- Script DATAs in Units
@@ -2993,7 +2987,6 @@ class CvEventManager:
                                 # pLoser wird nicht angetastet
                                 #CvUtil.pyPrint('EventManager 2951: Unit %s, ID: %d' % (pLoser.getName(),pLoser.getID()))
                                 bCityRenegade = PAE_City.doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer)
-
 
                 if not bCityRenegade:
                     bUnitRenegades = PAE_Unit.renegade(pWinner, pLoser)

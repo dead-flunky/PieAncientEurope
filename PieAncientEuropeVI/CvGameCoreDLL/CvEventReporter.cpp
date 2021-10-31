@@ -114,9 +114,9 @@ void CvEventReporter::firstContact(TeamTypes eTeamID1, TeamTypes eTeamID2)
 	m_kPythonEventMgr.reportFirstContact(eTeamID1, eTeamID2);
 }
 
-void CvEventReporter::combatResult(CvUnit* pWinner, CvUnit* pLoser)
+void CvEventReporter::combatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner)
 {
-	m_kPythonEventMgr.reportCombatResult(pWinner, pLoser);
+	m_kPythonEventMgr.reportCombatResult(pWinner, pLoser, attackerWinner);
 }
 
 void CvEventReporter::improvementBuilt(int iImprovementType, int iX, int iY)

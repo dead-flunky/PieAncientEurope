@@ -210,7 +210,7 @@ void CvDllPythonEvents::reportFirstContact(TeamTypes eTeamID1, TeamTypes eTeamID
 	}
 }
 
-void CvDllPythonEvents::reportCombatResult(CvUnit* pWinner, CvUnit* pLoser)
+void CvDllPythonEvents::reportCombatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner)
 {
 	if (preEvent())
 	{
@@ -222,6 +222,9 @@ void CvDllPythonEvents::reportCombatResult(CvUnit* pWinner, CvUnit* pLoser)
 
 		CyUnit* pCyLoser = new CyUnit(pLoser);
 		eventData.add(gDLL->getPythonIFace()->makePythonObject(pCyLoser));
+		
+		// Flunky PAE - flag if winner is attacker. 
+		eventData.add(attackerWinner);
 
 		postEvent(eventData);
 		delete pCyLoser;

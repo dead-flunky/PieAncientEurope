@@ -63335,7 +63335,7 @@
       <Strategy>TXT_KEY_UNIT_HORSE_STRATEGY</Strategy>
       <Help>TXT_KEY_UNIT_HORSE_HELP</Help>
       <Advisor>ADVISOR_ECONOMY</Advisor>
-      <bAnimal>0</bAnimal>
+      <bAnimal>1</bAnimal>
       <bFood>0</bFood>
       <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
       <iAnimalAttackWeight>0</iAnimalAttackWeight>
@@ -63520,12 +63520,12 @@
       <Strategy>TXT_KEY_UNIT_CAMEL_STRATEGY</Strategy>
       <Help>TXT_KEY_UNIT_CAMEL_HELP</Help>
       <Advisor>ADVISOR_ECONOMY</Advisor>
-      <bAnimal>0</bAnimal>
+      <bAnimal>1</bAnimal>
       <bFood>0</bFood>
       <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
       <iAnimalAttackWeight>0</iAnimalAttackWeight>
       <bNoBadGoodies>0</bNoBadGoodies>
-      <bOnlyDefensive>0</bOnlyDefensive>
+      <bOnlyDefensive>1</bOnlyDefensive>
       <bNoCapture>0</bNoCapture>
       <bQuickCombat>1</bQuickCombat>
       <bRivalTerritory>0</bRivalTerritory>
@@ -63723,7 +63723,7 @@
       <Strategy>TXT_KEY_UNIT_ANIMAL_STRATEGY</Strategy>
       <Help>TXT_KEY_UNIT_ELEFANT_HELP</Help>
       <Advisor>NONE</Advisor>
-      <bAnimal>0</bAnimal>
+      <bAnimal>1</bAnimal>
       <bFood>0</bFood>
       <iAnimalPatrolWeight>0</iAnimalPatrolWeight>
       <iAnimalAttackWeight>0</iAnimalAttackWeight>

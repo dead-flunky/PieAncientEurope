@@ -1339,19 +1339,19 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_UNIT_ESCAPE</Tag>
-    <English>Our %s1 barely escaped!</English>
-    <French>Notre unit&#233; (%s1) a pu s'&#233;chapper de justesse !</French>
-    <German>Unsere Einheit %s1 konnte sich gerade noch in die Flucht schlagen!</German>
-    <Italian>La nostra unit&#224; %s1 &#232; riuscita a scappare per un soffio!</Italian>
-    <Spanish>&#161;Nuestra unidad %s1 escap&#243; por poco!</Spanish>
+    <English>Our %s1 barely escaped from combat with a %s2!</English>
+    <French>Notre unit&#233; (%s1) a pu s'&#233;chapper de justesse! %s2</French>
+    <German>Unsere Einheit %s1 konnte sich im Kampf gegen eine Einheit %s2 gerade noch in die Flucht schlagen!</German>
+    <Italian>La nostra unit&#224; %s1 &#232; riuscita a scappare per un soffio! %s2</Italian>
+    <Spanish>&#161;Nuestra unidad %s1 escap&#243; por poco! %s2</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_UNIT_ESCAPE_2</Tag>
-    <English>The enemy %s1 barely escaped!</English>
-    <French>L'unit&#233; ennemie (%s1) a pu s'&#233;chapper de justesse !</French>
-    <German>Die gegnerische Einheit %s1 konnte gerade noch fl&#252;chten!</German>
-    <Italian>L'unit&#224; nemica %s1 &#232; riuscita a scappare per un soffio!</Italian>
-    <Spanish>&#161;La unidad enemiga %s1 escap&#243; por poco!</Spanish>
+    <English>The enemy %s1 barely escaped our unit %s2!</English>
+    <French>L'unit&#233; ennemie (%s1) a pu s'&#233;chapper de justesse! %s2</French>
+    <German>Die gegnerische Einheit %s1 konnte gerade noch vor unserer Einheit %s2 fl&#252;chten!</German>
+    <Italian>L'unit&#224; nemica %s1 &#232; riuscita a scappare per un soffio! %s2</Italian>
+    <Spanish>&#161;La unidad enemiga %s1 escap&#243; por poco! %s2</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MESSAGE_UNIT_LOST_HORSE_1</Tag>

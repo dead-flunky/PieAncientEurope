@@ -1,5 +1,6 @@
 // unit.cpp
 
+//#include <algorithm>
 #include "CvGameCoreDLL.h"
 #include "CvUnit.h"
 #include "CvArea.h"
@@ -696,6 +697,8 @@ void CvUnit::doTurn()
 	FAssertMsg(getGroup() != NULL, "getGroup() is not expected to be equal with NULL");
 
 	testPromotionReady();
+	
+	setFlight(false);
 
 	if (isBlockading())
 	{
@@ -813,7 +816,7 @@ void CvUnit::updateAirStrike(CvPlot* pPlot, bool bQuick, bool bFinish)
 	setAttackPlot(NULL, false);
 
 	getGroup()->clearMissionQueue();
-
+	// Flunky PAE - Suicide with chance
 	if (GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance() && !isDead())
 	{
 		kill(true);
@@ -1118,7 +1121,7 @@ void CvUnit::updateAirCombat(bool bQuick)
 		setAttackPlot(NULL, false);
 		setCombatUnit(NULL);
 		pInterceptor->setCombatUnit(NULL);
-		
+		// Flunky PAE - Suicide with chance
 		if (!isDead() && GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance())
 		{
 			kill(true);
@@ -1126,128 +1129,10 @@ void CvUnit::updateAirCombat(bool bQuick)
 	}
 }
 
-// Flunky PAE - Flight
-int CvUnit::flightMaxHealth(){
-    //# Tiere
-    if (isAnimal()) //was: (AI_getUnitAIType() == UNITAI_ANIMAL)
-	{
-        if (getUnitType() == GC.getInfoTypeForString("UNIT_UR") || getLevel() > 2)
-            return 50;
-        else if (getLevel() > 1)
-			return 35;
-        return 25;
-    }
-
-    int iMaxHealth = 10; // Standard: max 10% Gesundheit
-	// # Promo Flucht I - 40%, max 10
-	// # Promo Flucht II - 60%, max 15
-	// # Promo Flucht III - 80%, max 20
-	int iExtraHealth = iMaxHealth+getExtraFlightDamageProtection();
-
-	if (plot()->isCity())
-	{
-		int iCityStatus = plot()->getPlotCity()->getCityStatus();
-		// # Metropole
-		if (iCityStatus == 4)
-			iMaxHealth = 20;
-		// # Provinzstadt
-		else if (iCityStatus == 3)
-			iMaxHealth = 18;
-		// # Stadt
-		else if (iCityStatus == 2)
-			iMaxHealth = 15;
-	}
-	else 
-	{
-		ImprovementTypes eImprovement = plot()->getImprovementType();
-		// # Gemeinde
-		if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_TOWN"))
-			iMaxHealth = 15;
-		else if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE") || eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL"))
-			iMaxHealth = 12;
-	}
-	return std::max(iExtraHealth, iMaxHealth);
-}
-
-// Flunky PAE - Flight
-int CvUnit::flightProbability(int iWinnerDamage){
-	if (getDomainType() == DOMAIN_LAND && plot()->isWater())
-	{
-		return 0;
-	}
-    //# Tiere
-    if (isAnimal()) //was: (AI_getUnitAIType() == UNITAI_ANIMAL)
-	{
-        if (getUnitType() == GC.getInfoTypeForString("UNIT_UR") || getLevel() > 2)
-            return 80;
-        else if (getLevel() > 1)
-            return 60;
-        return 40;
-    }
-	
-    int iChance = 20; // Standard Fluchtchance: 20%
-    int iChanceShipsAndRiders = 30; // Standard: 30%
-	// # Promo Flucht I - 40%, max 10
-	// # Promo Flucht II - 60%, max 15
-	// # Promo Flucht III - 80%, max 20
-	int iExtraChance = iChance+getExtraFlight();
-
-	if (plot()->isCity()){
-		int iCityStatus = plot()->getPlotCity()->getCityStatus();
-		// # Metropole
-		if (iCityStatus == 4)
-			iChance = 70;
-		// # Provinzstadt
-		else if (iCityStatus == 3)
-			iChance = 60;
-		// # Stadt
-		else if (iCityStatus == 2)
-			iChance = 40;
-	}
-	else
-	{
-		ImprovementTypes eImprovement = plot()->getImprovementType();
-		// # Gemeinde
-		if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_TOWN"))
-		{
-			iChance = 40;
-		}
-		else if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE") || eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL"))
-		{
-			iChance = 30;
-		}
-	}
-
-	//# Bei Schiffen eine Extra-Berechnung
-    if (getUnitCombatType() == (UnitCombatTypes) GC.getInfoTypeForString("UNITCOMBAT_NAVAL"))
-        if (iWinnerDamage >= 50)
-            iChance = 80;  //# 80%: somit muss man womoeglich ein Schiff 2x angreifen, bevor es sinkt
-        else if (iChance < iChanceShipsAndRiders)
-            iChance = iChanceShipsAndRiders;
-
-    //# Berittene
-    else if (iChance < iChanceShipsAndRiders && getUnitCombatType() == (UnitCombatTypes) GC.getInfoTypeForString("UNITCOMBAT_MOUNTED"))
-        iChance = iChanceShipsAndRiders;
-
-    //# Generals Formation
-    if (isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_FORM_LEADER_POSITION")))
-        iChance = 100;
-
-	return std::max(iExtraChance, iChance);
-
-}
-
-bool CvUnit::isFlight()
-{
-	return m_bFlight;
-}
-
-void CvUnit::setFlight(bool bFlight)
-{
-	m_bFlight = bFlight;
-}
-
-//#define LOG_COMBAT_OUTCOMES // K-Mod -- this makes the game log the odds and outcomes of every battle, to help verify the accuracy of the odds calculation.
+#define UNCONDITIONAL_FLANKING_STRIKE
+#define ATTACKER_FLIGHT
+#define DEFENDER_FLIGHT
+#define LOG_COMBAT_OUTCOMES // K-Mod -- this makes the game log the odds and outcomes of every battle, to help verify the accuracy of the odds calculation.
 
 // K-Mod. I've edited this function so that it handles the battle planning internally rather than feeding details back to the caller.
 void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
@@ -1293,9 +1178,10 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		CvEventReporter::getInstance().genericEvent("combatLogCalc", pyArgsCD.makeFunctionArgs());
 	}
 	
+# ifdef UNCONDITIONAL_FLANKING_STRIKE
 	// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives/flees.
-    flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
-
+	flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
+# endif
 	collateralCombat(pPlot, pDefender);
 
 	while (true)
@@ -1304,49 +1190,48 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		{
 			if (getCombatFirstStrikes() == 0)
 			{
-				if (getDamage() + iAttackerDamage >= maxHitPoints())
+				if (getDamage() + iAttackerDamage >= maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "Withdrawal") < withdrawalProbability())
 				{
-					if (GC.getGameINLINE().getSorenRandNum(100, "Withdrawal") < withdrawalProbability())
-					{
-						// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives/flees.
-						//flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
-
-						changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
-						combat_log.push_back(0); // K-Mod
-						break;
+# ifndef UNCONDITIONAL_FLANKING_STRIKE
+					// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives/flees.
+					flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
+# endif
+					changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
+					combat_log.push_back(0); // K-Mod
+					break;
 					}
+# ifdef ATTACKER_FLIGHT
 					// Flunky: attacker flees from battle
-					if (GC.getGameINLINE().getSorenRandNum(100, "AttackerFlight") < flightProbability(pDefender->getDamage()))
-					{
-						pDefender->changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !isBarbarian());
-						// after flight, be at least as hurt as before --> new health at most as high as before, or less if the circumstances of your flight demand that. 
-						int iMaxHealth = std::min(GC.getMAX_HIT_POINTS()-getDamage(), flightMaxHealth());
-						// remaining health uniformly distributed between 1 and max
-						int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "AttackerFlightDamage"));
-						// damage to be set is full minus remaining health
-						int iAttackerFlightDamage = GC.getMAX_HIT_POINTS()-iHealth;
-						setDamage(iAttackerFlightDamage, pDefender->getOwnerINLINE());
-						setFlight(true);
-						combat_log.push_back(-(iAttackerFlightDamage - getDamage()));
+				else if (getDamage() + iAttackerDamage >= maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "AttackerFlight") < flightProbability(pDefender->getDamage()))
+				{
+					pDefender->changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !isBarbarian());
+					// after flight, be at least as hurt as before --> new health at most as high as before, or less if the circumstances of your flight demand that. 
+					int iMaxHealth = std::min(GC.getMAX_HIT_POINTS()-getDamage(), flightMaxHealth());
+					// remaining health uniformly distributed between 1 and max
+					int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "AttackerFlightDamage"));
+					// damage to be set is full minus remaining health
+					int iAttackerFlightDamage = GC.getMAX_HIT_POINTS()-iHealth;
+					setDamage(iAttackerFlightDamage, pDefender->getOwnerINLINE());
+					setFlight(true);
+					combat_log.push_back(-(iAttackerFlightDamage - getDamage()));
 						
-						cdAttackerDetails.iCurrHitPoints = currHitPoints();
-						if (isHuman() || pDefender->isHuman())
-						{
-							CyArgsList pyArgs;
-							pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdAttackerDetails));
-							pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdDefenderDetails));
-							pyArgs.add(1);
-							pyArgs.add(iAttackerFlightDamage - getDamage());
-							CvEventReporter::getInstance().genericEvent("combatLogHit", pyArgs.makeFunctionArgs());
-						}
-						break;
+					cdAttackerDetails.iCurrHitPoints = currHitPoints();
+					if (isHuman() || pDefender->isHuman())
+					{
+						CyArgsList pyArgs;
+						pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdAttackerDetails));
+						pyArgs.add(gDLL->getPythonIFace()->makePythonObject(&cdDefenderDetails));
+						pyArgs.add(1);
+						pyArgs.add(iAttackerFlightDamage - getDamage());
+						CvEventReporter::getInstance().genericEvent("combatLogHit", pyArgs.makeFunctionArgs());
 					}
-                }
-				else
-                {
-					changeDamage(iAttackerDamage, pDefender->getOwnerINLINE());
-					combat_log.push_back(-iAttackerDamage); // K-Mod
+						
+					break;
 				}
+# endif
+
+				changeDamage(iAttackerDamage, pDefender->getOwnerINLINE());
+				combat_log.push_back(-iAttackerDamage); // K-Mod
 
 				/*if (pDefender->getCombatFirstStrikes() > 0 && pDefender->isRanged())
 				{
@@ -1386,9 +1271,10 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 					pDefender->setDamage(combatLimit(), getOwnerINLINE());
 					break;
 				}
-                // Flunky: defender flees from battle
-                if (pDefender->getDamage() + iDefenderDamage >= pDefender->maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "DefenderFlight") < pDefender->flightProbability(getDamage()))
-                {   
+# ifdef DEFENDER_FLIGHT
+				// Flunky: defender flees from battle
+				if (pDefender->getDamage() + iDefenderDamage >= pDefender->maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "DefenderFlight") < pDefender->flightProbability(getDamage()))
+				{
 					bool bFlightValid = false;
 					ImprovementTypes eImprovement = pDefender->plot()->getImprovementType();
 					// Fluchtplot
@@ -1443,13 +1329,10 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 						break;
 					}
 
-                } 
-				// Flunky - no else because of break above. 
-                //else
-                //{
-                    pDefender->changeDamage(iDefenderDamage, getOwnerINLINE());
-                    combat_log.push_back(iDefenderDamage); // K-Mod
-                //}
+				}
+# endif
+				pDefender->changeDamage(iDefenderDamage, getOwnerINLINE());
+				combat_log.push_back(iDefenderDamage); // K-Mod
 
 				/*if (getCombatFirstStrikes() > 0 && isRanged())
 				{
@@ -1488,12 +1371,9 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		{
 			pDefender->changeCombatFirstStrikes(-1);
 		}
-		
 
 		if (isDead() || pDefender->isDead())
 		{
-            
-            
 			if (isDead())
 			{
 				int iExperience = defenseXPValue();
@@ -1503,9 +1383,10 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 			}
 			else
 			{
+# ifndef UNCONDITIONAL_FLANKING_STRIKE
 				// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives.
-				// flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
-
+				flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
+# endif
 				int iExperience = pDefender->attackXPValue();
 				iExperience = ((iExperience * iDefenderStrength) / iAttackerStrength);
 				iExperience = range(iExperience, GC.getDefineINT("MIN_EXPERIENCE_PER_COMBAT"), GC.getDefineINT("MAX_EXPERIENCE_PER_COMBAT"));
@@ -1775,7 +1656,7 @@ void CvUnit::updateCombat(bool bQuick)
 			gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getEraInfo(GC.getGameINLINE().getCurrentEra()).getAudioUnitVictoryScript(), MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
 
 			// report event to Python, along with some other key state
-			CvEventReporter::getInstance().combatResult(pDefender, this);
+			CvEventReporter::getInstance().combatResult(pDefender, this, false);
 		}
 		else if (pDefender->isDead())
 		{
@@ -1804,7 +1685,7 @@ void CvUnit::updateCombat(bool bQuick)
 			gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer,GC.getEraInfo(GC.getGameINLINE().getCurrentEra()).getAudioUnitDefeatScript(), MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
 
 			// report event to Python, along with some other key state
-			CvEventReporter::getInstance().combatResult(this, pDefender);
+			CvEventReporter::getInstance().combatResult(this, pDefender, true);
 
 			bool bAdvance = false;
 
@@ -1850,60 +1731,81 @@ void CvUnit::updateCombat(bool bQuick)
 			getGroup()->clearMissionQueue();
 		}
 		// Flunky PAE - Flight
+# ifdef ATTACKER_FLIGHT
 		else if (isFlight())
 		{
-			szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", getNameKey());
-			gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
-			szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", getNameKey());
-			gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
+			// TODO only reset on start of next turn - can be used for flight promotion/only one flight per turn...
+			setFlight(false);
+			// Attacker text
+			szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", getNameKey(), pDefender->getNameKey()); // Our %s1 barely escaped! --> Our %s1 barely escaped from combat with a %s2!
+			gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), getX_INLINE(), getY_INLINE());
+			
+			// Defender text
+			szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", getNameKey(), pDefender->getNameKey()); // The enemy %s1 barely escaped! --> The enemy %s1 barely escaped our unit %s2!
+			gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), getX_INLINE(), getY_INLINE());
 
 			changeMoves(std::max(GC.getMOVE_DENOMINATOR(), pPlot->movementCost(this, plot())));
 			checkRemoveSelectionAfterAttack();
 
 			getGroup()->clearMissionQueue();
 		}
+# endif
+#ifdef DEFENDER_FLIGHT
 		else if (pDefender->isFlight())
 		{
+			// TODO only reset on start of next turn - can be used for flight promotion/only one flight per turn...
+			pDefender->setFlight(false);
 			ImprovementTypes eImprovement = pDefender->plot()->getImprovementType();
 			if (pDefender->plot()->isCity())
 			{
-				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_3", pDefender->getNameKey());
-				gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
-				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_3", pDefender->getNameKey());
-				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
+				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_3", pDefender->getNameKey()); // The city offered the unit %s1_unit optimal retreat options!
+				gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
+				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pDefender->getX_INLINE(), pDefender->getY_INLINE());				
 			}
 			else if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_TOWN") ||
 				  	 eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE") || 
 					 eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL"))
 			{
 				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_4", pDefender->getNameKey());
-				gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
-				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_4", pDefender->getNameKey());
-				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
+				gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
+				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
 			}
 			else
 			{
 				FAssertMsg(!pDefender->isFighting(), "Is pDefender->setCombatUnit(NULL); not enough for !pDefender->isFighting?");
 
+				//int directions[NUM_DIRECTION_TYPES];
+				//
+				//for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
+				//	directions[iI] = iI;
+				//}
+				//std::random_shuffle(&directions[0], &directions[NUM_DIRECTION_TYPES]);
 				CvPlot* pAdjacentPlot;
-				for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
-					pAdjacentPlot = plotDirection(pDefender->getX_INLINE(), pDefender->getY_INLINE(), ((DirectionTypes)iI));
 
+				int iX = pDefender->getX_INLINE();
+				int iY = pDefender->getY_INLINE();
+
+				for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
+					pAdjacentPlot = plotDirection(iX, iY, (DirectionTypes)iI);
+					
 					if (pAdjacentPlot != NULL)
 					{
+						FAssertMsg(pAdjacentPlot->getX_INLINE() != iX || pAdjacentPlot->getY_INLINE() != iY, "We found our old plot");
 						if (pDefender->canMoveInto(pAdjacentPlot , false, false, true))
 						{
 							// TODO: select randomly one possible
 							pDefender->move(pAdjacentPlot, true);
-							//pDefender->setXY(pAdjacentPlot->getX_INLINE(), pAdjacentPlot->getY_INLINE(), false, true, true);
+							break;
 						}
 					}
 				}
+				// Attacker text
+				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", pDefender->getNameKey(), getNameKey()); // The enemy %s1 barely escaped! --> The enemy %s1 barely escaped our unit %s2!
+				gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
+				// Defender text
+				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey(), getNameKey()); // Our %s1 barely escaped! --> Our %s1 barely escaped from combat with a %s2!
+				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
 				
-				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey());
-				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
-				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", pDefender->getNameKey());
-				gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
 			}
 			
 			bool bAdvance = canAdvance(pPlot, 0);
@@ -1912,12 +1814,16 @@ void CvUnit::updateCombat(bool bQuick)
 				//getGroup()->groupMove(pPlot, true, ((bAdvance) ? this : NULL));
 				getGroup()->groupMove(pPlot, true, bAdvance ? this : NULL, true); // K-Mod
 			}
+			checkRemoveSelectionAfterAttack();
 			getGroup()->clearMissionQueue();
 		}
+# endif
 		else	
 		{
+			// Attacker text
 			szBuffer = gDLL->getText("TXT_KEY_MISC_YOU_UNIT_WITHDRAW", getNameKey(), pDefender->getNameKey());
 			gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
+			// Defender text
 			szBuffer = gDLL->getText("TXT_KEY_MISC_ENEMY_UNIT_WITHDRAW", getNameKey(), pDefender->getNameKey());
 			gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
 
@@ -2361,6 +2267,7 @@ bool CvUnit::isBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttack
 	return (iOurDefense > iTheirDefense);
 }
 
+
 bool CvUnit::canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible, bool bTestBusy)
 {
 	CvUnit* pUnit;
@@ -2745,7 +2652,7 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		return false;
 	}
 
-	if ((!m_pUnitInfo->isCanMoveImpassable() && pPlot->isImpassable()))
+	if (!canMoveImpassable() && pPlot->isImpassable())
 	{
 		return false;
 	}
@@ -2756,7 +2663,7 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		return false;
 	}
 
-	if (m_pUnitInfo->isSpy() && GC.getUSE_SPIES_NO_ENTER_BORDERS())
+	if (isSpy() && GC.getUSE_SPIES_NO_ENTER_BORDERS())
 	{
 		if (pPlot->getOwnerINLINE() != NO_PLAYER && !GET_PLAYER(getOwnerINLINE()).canSpiesEnterBorders(pPlot->getOwnerINLINE()))
 		{
@@ -3002,136 +2909,142 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 /* UNOFFICIAL_PATCH                        END                                                  */
 /************************************************************************************************/
 
-	if (getDomainType() == DOMAIN_AIR)
+	// Flunky PAE - no domain_air
+	//if (getDomainType() == DOMAIN_AIR)
+	//{
+	//	if (bAttack)
+	//	{
+	//		if (!canAirStrike(pPlot))
+	//		{
+	//			return false;
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	if (canAttack())
 	{
+		if (bAttack || !canCoexistWithEnemyUnit(NO_TEAM))
+		{
+			//if (!isHuman() || (pPlot->isVisible(getTeam(), false)))
+			if (bAssumeVisible || pPlot->isVisible(getTeam(), false))
+			{
+				if (pPlot->isVisibleEnemyUnit(this) != bAttack)
+				{
+					//FAssertMsg(isHuman() || (!bDeclareWar || (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack)), "hopefully not an issue, but tracking how often this is the case when we dont want to really declare war");
+					// Flunky PAE - if Keldath is not sure what he's doing, leave original bts code
+					if (!bDeclareWar || (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack && !(bAttack && pPlot->getPlotCity() && !isNoCapture())))
+					/* refactored
+					if (!bDeclareWar 
+						|| pPlot->isVisibleOtherUnit(getOwnerINLINE()) && !bAttack 
+						|| !pPlot->isVisibleOtherUnit(getOwnerINLINE()) && bAttack && (!pPlot->getPlotCity() || isNoCapture())						
+					) */
+					// K-Mod. I'm not entirely sure I understand what they were trying to do here. But I'm pretty sure it's wrong.
+					// I think the rule should be that bAttack means we have to actually fight an enemy unit. Capturing an undefended city doesn't not count.
+					// (there is no "isVisiblePotentialEnemyUnit" function, so I just wrote the code directly.)
+					/* if (!bDeclareWar || !bAttack || !pPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE())) */
+					// K-Mod end
+					{
+						return false;
+					}
+				}
+			}
+		}
+
 		if (bAttack)
 		{
-			if (!canAirStrike(pPlot))
+			/* CvUnit* pDefender = pPlot->getBestDefender(NO_PLAYER, getOwnerINLINE(), this, true);
+			if (NULL != pDefender)
 			{
+				if (!canAttack(*pDefender))
+				{
+					return false;
+				}
+			} */
+			// K-Mod. (this is much faster.)
+			if (!pPlot->hasDefender(true, NO_PLAYER, getOwnerINLINE(), this, true))
 				return false;
-			}
+			// K-Mod end
 		}
 	}
 	else
 	{
-		if (canAttack())
+		if (bAttack)
 		{
-			if (bAttack || !canCoexistWithEnemyUnit(NO_TEAM))
+			return false;
+		}
+
+		if (!canCoexistWithEnemyUnit(NO_TEAM))
+		{
+			//if (!isHuman() || pPlot->isVisible(getTeam(), false))
+			if (bAssumeVisible || pPlot->isVisible(getTeam(), false)) // K-Mod
 			{
-				//if (!isHuman() || (pPlot->isVisible(getTeam(), false)))
-				if (bAssumeVisible || pPlot->isVisible(getTeam(), false))
+				if (pPlot->isEnemyCity(*this))
 				{
-					if (pPlot->isVisibleEnemyUnit(this) != bAttack)
-					{
-						//FAssertMsg(isHuman() || (!bDeclareWar || (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack)), "hopefully not an issue, but tracking how often this is the case when we dont want to really declare war");
-						/* original bts code
-						if (!bDeclareWar || (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack && !(bAttack && pPlot->getPlotCity() && !isNoCapture()))) */
-						// K-Mod. I'm not entirely sure I understand what they were trying to do here. But I'm pretty sure it's wrong.
-						// I think the rule should be that bAttack means we have to actually fight an enemy unit. Capturing an undefended city doesn't not count.
-						// (there is no "isVisiblePotentialEnemyUnit" function, so I just wrote the code directly.)
-						if (!bAttack || !bDeclareWar || !pPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE()))
-						// K-Mod end
-						{
-							return false;
-						}
-					}
+					return false;
+				}
+
+				if (pPlot->isVisibleEnemyUnit(this))
+				{
+					return false;
 				}
 			}
+		}
+	}
 
-			if (bAttack)
+	if (isHuman()) // (should this be !bAssumeVisible? It's a bit different to the other isHuman() checks)
+	{
+		ePlotTeam = pPlot->getRevealedTeam(getTeam(), false);
+		bCanEnterArea = canEnterArea(ePlotTeam, pPlotArea);
+	}
+
+	if (!bCanEnterArea)
+	{
+		FAssert(ePlotTeam != NO_TEAM);
+
+		if (!(GET_TEAM(getTeam()).canDeclareWar(ePlotTeam)))
+		{
+			return false;
+		}
+
+		/* original bts code
+		if (isHuman())
+		{
+			if (!bDeclareWar)
 			{
-				/* CvUnit* pDefender = pPlot->getBestDefender(NO_PLAYER, getOwnerINLINE(), this, true);
-				if (NULL != pDefender)
-				{
-					if (!canAttack(*pDefender))
-					{
-						return false;
-					}
-				} */
-				// K-Mod. (this is much faster.)
-				if (!pPlot->hasDefender(true, NO_PLAYER, getOwnerINLINE(), this, true))
-					return false;
-				// K-Mod end
+				return false;
 			}
 		}
 		else
 		{
-			if (bAttack)
+			if (GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam))
 			{
-				return false;
-			}
-
-			if (!canCoexistWithEnemyUnit(NO_TEAM))
-			{
-				//if (!isHuman() || pPlot->isVisible(getTeam(), false))
-				if (bAssumeVisible || pPlot->isVisible(getTeam(), false)) // K-Mod
-				{
-					if (pPlot->isEnemyCity(*this))
-					{
-						return false;
-					}
-
-					if (pPlot->isVisibleEnemyUnit(this))
-					{
-						return false;
-					}
-				}
-			}
-		}
-
-		if (isHuman()) // (should this be !bAssumeVisible? It's a bit different to the other isHuman() checks)
-		{
-			ePlotTeam = pPlot->getRevealedTeam(getTeam(), false);
-			bCanEnterArea = canEnterArea(ePlotTeam, pPlotArea);
-		}
-
-		if (!bCanEnterArea)
-		{
-			FAssert(ePlotTeam != NO_TEAM);
-
-			if (!(GET_TEAM(getTeam()).canDeclareWar(ePlotTeam)))
-			{
-				return false;
-			}
-
-			/* original bts code
-			if (isHuman())
-			{
-				if (!bDeclareWar)
+				if (!(getGroup()->AI_isDeclareWar(pPlot)))
 				{
 					return false;
 				}
 			}
 			else
 			{
-				if (GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam))
-				{
-					if (!(getGroup()->AI_isDeclareWar(pPlot)))
-					{
-						return false;
-					}
-				}
-				else
-				{
-					return false;
-				}
-			} */
-			// K-Mod. Rather than allowing the AI to move in forbidden territory when it is planning war.
-			// I'm going to disallow it from doing so when _not_ planning war.
-			if (!bDeclareWar)
+				return false;
+			}
+		} */
+		// K-Mod. Rather than allowing the AI to move in forbidden territory when it is planning war.
+		// I'm going to disallow it from doing so when _not_ planning war.
+		if (!bDeclareWar)
+		{
+			return false;
+		}
+		else if (!isHuman())
+		{
+			if (!GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam) || !getGroup()->AI_isDeclareWar(pPlot))
 			{
 				return false;
 			}
-			else if (!isHuman())
-			{
-				if (!GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam) || !getGroup()->AI_isDeclareWar(pPlot))
-				{
-					return false;
-				}
-			}
-			// K-Mod end
 		}
+		// K-Mod end
 	}
+	//} // Flunky PAE - no domain air - end
 
 	if (GC.getUSE_UNIT_CANNOT_MOVE_INTO_CALLBACK())
 	{
@@ -4112,14 +4025,20 @@ void CvUnit::airCircle(bool bStart)
 bool CvUnit::canHeal(const CvPlot* pPlot) const
 {
 	if (!isHurt())
+	{
 		return false;
+	}
 
 	//if (isWaiting())
 	if (getGroup()->getActivityType() == ACTIVITY_HEAL) // K-Mod
+	{
 		return false;
+	}
 
 	if (healTurns(pPlot) == MAX_INT)
+	{
 		return false;
+	}
 
 	return true;
 }
@@ -9915,29 +9834,6 @@ void CvUnit::changeCargoSpace(int iChange)
 	}
 }
 
-int CvUnit::getExtraFlight() const
-{
-	return m_iExtraFlight;
-}
-
-void CvUnit::changeExtraFlight(int iChange)															
-{
-	m_iExtraFlight += iChange;
-	FAssert(getExtraFlight() >= 0); 
-}
-
-int CvUnit::getExtraFlightDamageProtection() const
-{
-	return m_iExtraFlightDamageProtection;
-}
-
-
-void CvUnit::changeExtraFlightDamageProtection(int iChange)															
-{
-	m_iExtraFlightDamageProtection += iChange;
-	FAssert(getExtraFlightDamageProtection() >= 0);
-}
-
 bool CvUnit::isFull() const
 {
 	return (getCargo() >= cargoSpace());
@@ -10438,7 +10334,7 @@ void CvUnit::setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow, bool b
 			pOldPlot->area()->changeNumAIUnits(getOwnerINLINE(), AI_getUnitAIType(), -1);
 		}
 
-		// Flunky TODO: only if barbarian animal
+		// TODO: only if barbarian animal (Flunky for PAE)
 		if (isAnimal())
 		{
 			pOldPlot->area()->changeAnimalsPerPlayer(getOwnerINLINE(), -1);
@@ -11411,7 +11307,7 @@ int CvUnit::getExtraChanceFirstStrikes() const
 	return m_iExtraChanceFirstStrikes;
 }
 
-void CvUnit::changeExtraChanceFirstStrikes(int iChange)			
+void CvUnit::changeExtraChanceFirstStrikes(int iChange)
 {
 	m_iExtraChanceFirstStrikes += iChange;
 	FAssert(getExtraChanceFirstStrikes() >= 0);
@@ -11424,7 +11320,7 @@ int CvUnit::getExtraWithdrawal() const
 }
 
 
-void CvUnit::changeExtraWithdrawal(int iChange)															
+void CvUnit::changeExtraWithdrawal(int iChange)
 {
 	m_iExtraWithdrawal += iChange;
 	//FAssert(getExtraWithdrawal() >= 0);
@@ -11436,7 +11332,7 @@ int CvUnit::getExtraCollateralDamage() const
 	return m_iExtraCollateralDamage;
 }
 
-void CvUnit::changeExtraCollateralDamage(int iChange)													
+void CvUnit::changeExtraCollateralDamage(int iChange)
 {
 	m_iExtraCollateralDamage += iChange;
 	FAssert(getExtraCollateralDamage() >= 0);
@@ -12574,9 +12470,9 @@ void CvUnit::setHasPromotion(PromotionTypes eIndex, bool bNewValue)
 		changeCargoSpace(GC.getPromotionInfo(eIndex).getCargoChange() * iChange);
 
 		// Flunky PAE - Flight
-        changeExtraFlight(GC.getPromotionInfo(eIndex).getFlightChanceChange() * iChange);
-        changeExtraFlightDamageProtection(GC.getPromotionInfo(eIndex).getFlightMaxHealth() * iChange);
-        
+		changeExtraFlight(GC.getPromotionInfo(eIndex).getFlightChanceChange() * iChange);
+		changeExtraFlightDamageProtection(GC.getPromotionInfo(eIndex).getFlightMaxHealth() * iChange);
+
 		for (iI = 0; iI < GC.getNumTerrainInfos(); iI++)
 		{
 			changeExtraTerrainAttackPercent(((TerrainTypes)iI), (GC.getPromotionInfo(eIndex).getTerrainAttackPercent(iI) * iChange));
@@ -13397,7 +13293,7 @@ bool CvUnit::rangeStrike(int iX, int iY)
 //------------------------------------------------------------------------------------------------
 
 // Rewriten for K-Mod!
-int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& combat_log_argument) const
+int CvUnit::planBattle(CvBattleDefinition& kBattleDefinition, const std::vector<int>& combat_log_argument) const
 {
 	const int BATTLE_TURNS_SETUP = 4;
 	const int BATTLE_TURNS_ENDING = 4;
@@ -13405,11 +13301,11 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 	const int BATTLE_TURNS_RANGED = 6;
 	const int BATTLE_TURN_RECHECK = 4;
 
-	CvUnit* pAttackUnit = kBattle.getUnit(BATTLE_UNIT_ATTACKER);
-	CvUnit* pDefenceUnit = kBattle.getUnit(BATTLE_UNIT_DEFENDER);
+	CvUnit* pAttackUnit = kBattleDefinition.getUnit(BATTLE_UNIT_ATTACKER);
+	CvUnit* pDefenceUnit = kBattleDefinition.getUnit(BATTLE_UNIT_DEFENDER);
 
-	int iAttackerDamage = kBattle.getDamage(BATTLE_UNIT_ATTACKER, BATTLE_TIME_BEGIN);
-	int iDefenderDamage = kBattle.getDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_BEGIN);
+	int iAttackerDamage = kBattleDefinition.getDamage(BATTLE_UNIT_ATTACKER, BATTLE_TIME_BEGIN);
+	int iDefenderDamage = kBattleDefinition.getDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_BEGIN);
 
 	int iAttackerUnits = pAttackUnit->getSubUnitsAlive(iAttackerDamage);
 	int iDefenderUnits = pDefenceUnit->getSubUnitsAlive(iDefenderDamage);
@@ -13423,13 +13319,13 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 	// now we can just use 'combat_log' without having to worry about it being empty.
 
 	//
-	kBattle.setNumRangedRounds(0);
-	kBattle.setNumMeleeRounds(0);
-	kBattle.setDamage(BATTLE_UNIT_ATTACKER, BATTLE_TIME_RANGED, iAttackerDamage);
-	kBattle.setDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_RANGED, iDefenderDamage);
-	kBattle.clearBattleRounds();
-	// kBattle.setNumRangedRounds(iFirstStrikeRounds); // originally max(iFirstStrikesDelta, iKills / iFirstStrikesDelta)
-	// int iFirstStrikeRounds = kBattle.getFirstStrikes(BATTLE_UNIT_ATTACKER) + kBattle.getFirstStrikes(BATTLE_UNIT_DEFENDER);
+	kBattleDefinition.setNumRangedRounds(0);
+	kBattleDefinition.setNumMeleeRounds(0);
+	kBattleDefinition.setDamage(BATTLE_UNIT_ATTACKER, BATTLE_TIME_RANGED, iAttackerDamage);
+	kBattleDefinition.setDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_RANGED, iDefenderDamage);
+	kBattleDefinition.clearBattleRounds();
+	// kBattleDefinition.setNumRangedRounds(iFirstStrikeRounds); // originally max(iFirstStrikesDelta, iKills / iFirstStrikesDelta)
+	// int iFirstStrikeRounds = kBattleDefinition.getFirstStrikes(BATTLE_UNIT_ATTACKER) + kBattleDefinition.getFirstStrikes(BATTLE_UNIT_DEFENDER);
 	bool bRanged = true;
 
 	const static int iStandardNumRounds = GC.getDefineINT("STANDARD_BATTLE_ANIMATION_ROUNDS", 6);
@@ -13454,7 +13350,7 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 			iDefenderUnitsKilled = std::min(iAttackerUnits - iAttackerUnitsKilled, iDefenderUnits - pDefenceUnit->getSubUnitsAlive(iDefenderDamage));
 			bRanged = bRanged && pAttackUnit->isRanged();
 			if (bRanged)
-				kBattle.addDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_RANGED, combat_log[i]); // I'm not sure if this is actually used for the animation...
+				kBattleDefinition.addDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_RANGED, combat_log[i]); // I'm not sure if this is actually used for the animation...
 		}
 		else if (combat_log[i] < 0)
 		{
@@ -13462,7 +13358,7 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 			iAttackerUnitsKilled = std::min(iDefenderUnits - iDefenderUnitsKilled, iAttackerUnits - pAttackUnit->getSubUnitsAlive(iAttackerDamage));
 			bRanged = bRanged && pDefenceUnit->isRanged();
 			if (bRanged)
-				kBattle.addDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_RANGED, combat_log[i]);
+				kBattleDefinition.addDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_RANGED, combat_log[i]);
 		}
 
 		// Sometimes we may need to end more than one round at a time...
@@ -13487,9 +13383,9 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 				//bRanged = bRanged && (i < iFirstStrikeRounds || (pAttackUnit->isRanged() && pDefenceUnit->isRanged()));
 
 				if (bRanged)
-					kBattle.addNumRangedRounds(1);
+					kBattleDefinition.addNumRangedRounds(1);
 				else
-					kBattle.addNumMeleeRounds(1);
+					kBattleDefinition.addNumMeleeRounds(1);
 
 				//
 				CvBattleRound kRound;
@@ -13506,7 +13402,7 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 				kRound.setNumKilled(BATTLE_UNIT_DEFENDER, iDefenderUnitsKilled);
 				//
 
-				kBattle.addBattleRound(kRound);
+				kBattleDefinition.addBattleRound(kRound);
 
 				iBattleRound++;
 				// there may be some spillover kills if the round was forced...
@@ -13519,11 +13415,11 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 		} while (bNextRound);
 	}
 	//FAssert(iBattleRound == iTotalBattleRounds);
-	FAssert(iAttackerDamage == kBattle.getDamage(BATTLE_UNIT_ATTACKER, BATTLE_TIME_END));
-	FAssert(iDefenderDamage == kBattle.getDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_END));
+	FAssert(iAttackerDamage == kBattleDefinition.getDamage(BATTLE_UNIT_ATTACKER, BATTLE_TIME_END));
+	FAssert(iDefenderDamage == kBattleDefinition.getDamage(BATTLE_UNIT_DEFENDER, BATTLE_TIME_END));
 
-	FAssert(kBattle.getNumBattleRounds() >= 2);
-	FAssert(verifyRoundsValid(kBattle));
+	FAssert(kBattleDefinition.getNumBattleRounds() >= 2);
+	FAssert(verifyRoundsValid(kBattleDefinition));
 
 	int extraTime = 0;
 
@@ -13539,7 +13435,7 @@ int CvUnit::planBattle(CvBattleDefinition& kBattle, const std::vector<int>& comb
 	//   gDLL->getEntityIFace()->GetSiegeTower(pAttackUnit->getUnitEntity()) || gDLL->getEntityIFace()->GetSiegeTower(pDefenceUnit->getUnitEntity())
 	// I've changed that to use showSiegeTower, because GetSiegeTower does not work for the Pitboss host, and therefore can cause OOS errors.
 
-	return BATTLE_TURNS_SETUP + BATTLE_TURNS_ENDING + kBattle.getNumMeleeRounds() * BATTLE_TURNS_MELEE + kBattle.getNumRangedRounds() * BATTLE_TURNS_MELEE + extraTime;
+	return BATTLE_TURNS_SETUP + BATTLE_TURNS_ENDING + kBattleDefinition.getNumMeleeRounds() * BATTLE_TURNS_MELEE + kBattleDefinition.getNumRangedRounds() * BATTLE_TURNS_MELEE + extraTime;
 }
 
 //------------------------------------------------------------------------------------------------
@@ -13679,6 +13575,7 @@ bool CvUnit::isSuicide() const
 	return (m_pUnitInfo->isSuicide() || getKamikazePercent() != 0);
 }
 
+// Flunky PAE Suicide with chance
 int CvUnit::getSuicideChance() const
 {
 	return std::max(m_pUnitInfo->getSuicideChance(), getKamikazePercent());
@@ -14443,3 +14340,151 @@ int CvUnit::LFBgetDefenderCombatOdds(const CvUnit* pAttacker) const
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
 
+// Flunky PAE Flight
+
+// Flunky PAE - Flight
+int CvUnit::flightMaxHealth(){
+    //# Tiere
+    if (isAnimal()) //was: (AI_getUnitAIType() == UNITAI_ANIMAL)
+	{
+        if (getUnitType() == GC.getInfoTypeForString("UNIT_UR") || getLevel() > 2)
+            return 50;
+        else if (getLevel() > 1)
+			return 35;
+        return 25;
+    }
+
+    int iMaxHealth = 10; // Standard: max 10% Gesundheit
+	// # Promo Flucht I - 40%, max 10
+	// # Promo Flucht II - 60%, max 15
+	// # Promo Flucht III - 80%, max 20
+	int iExtraHealth = iMaxHealth+getExtraFlightDamageProtection();
+
+	if (plot()->isCity())
+	{
+		int iCityStatus = plot()->getPlotCity()->getCityStatus();
+		// # Metropole
+		if (iCityStatus == 4)
+			iMaxHealth = 20;
+		// # Provinzstadt
+		else if (iCityStatus == 3)
+			iMaxHealth = 18;
+		// # Stadt
+		else if (iCityStatus == 2)
+			iMaxHealth = 15;
+	}
+	else 
+	{
+		ImprovementTypes eImprovement = plot()->getImprovementType();
+		// # Gemeinde
+		if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_TOWN"))
+			iMaxHealth = 15;
+		else if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE") || eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL"))
+			iMaxHealth = 12;
+	}
+	return std::max(iExtraHealth, iMaxHealth);
+}
+
+// Flunky PAE - Flight
+
+int CvUnit::flightProbability(int iWinnerDamage){
+	if (getDomainType() == DOMAIN_LAND && plot()->isWater())
+	{
+		return 0;
+	}
+    //# Tiere
+    if (isAnimal()) //was: (AI_getUnitAIType() == UNITAI_ANIMAL)
+	{
+        if (getUnitType() == GC.getInfoTypeForString("UNIT_UR") || getLevel() > 2)
+            return 80;
+        else if (getLevel() > 1)
+            return 60;
+        return 40;
+    }
+	
+    int iChance = 20; // Standard Fluchtchance: 20%
+    int iChanceShipsAndRiders = 30; // Standard: 30%
+	// # Promo Flucht I - 40%, max 10
+	// # Promo Flucht II - 60%, max 15
+	// # Promo Flucht III - 80%, max 20
+	int iExtraChance = iChance+getExtraFlight();
+
+	if (plot()->isCity()){
+		int iCityStatus = plot()->getPlotCity()->getCityStatus();
+		// # Metropole
+		if (iCityStatus == 4)
+			iChance = 70;
+		// # Provinzstadt
+		else if (iCityStatus == 3)
+			iChance = 60;
+		// # Stadt
+		else if (iCityStatus == 2)
+			iChance = 40;
+	}
+	else
+	{
+		ImprovementTypes eImprovement = plot()->getImprovementType();
+		// # Gemeinde
+		if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_TOWN"))
+		{
+			iChance = 40;
+		}
+		else if (eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE") || eImprovement == GC.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL"))
+		{
+			iChance = 30;
+		}
+	}
+
+	//# Bei Schiffen eine Extra-Berechnung
+	if (getUnitCombatType() == (UnitCombatTypes) GC.getInfoTypeForString("UNITCOMBAT_NAVAL"))
+		if (iWinnerDamage >= 50)
+			iChance = 80;  //# 80%: somit muss man womoeglich ein Schiff 2x angreifen, bevor es sinkt
+		else if (iChance < iChanceShipsAndRiders)
+			iChance = iChanceShipsAndRiders;
+
+	//# Berittene
+	else if (iChance < iChanceShipsAndRiders && getUnitCombatType() == (UnitCombatTypes) GC.getInfoTypeForString("UNITCOMBAT_MOUNTED"))
+		iChance = iChanceShipsAndRiders;
+
+	//# Generals Formation
+	if (isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_FORM_LEADER_POSITION")))
+		iChance = 100;
+
+	return std::max(iExtraChance, iChance);
+
+}
+
+bool CvUnit::isFlight()
+{
+	return m_bFlight;
+}
+
+void CvUnit::setFlight(bool bFlight)
+{
+	m_bFlight = bFlight;
+}
+
+int CvUnit::getExtraFlight() const
+{
+	return m_iExtraFlight;
+}
+
+void CvUnit::changeExtraFlight(int iChange)
+{
+	m_iExtraFlight += iChange;
+	FAssert(getExtraFlight() >= 0); 
+}
+
+int CvUnit::getExtraFlightDamageProtection() const
+{
+	return m_iExtraFlightDamageProtection;
+}
+
+
+void CvUnit::changeExtraFlightDamageProtection(int iChange)
+{
+	m_iExtraFlightDamageProtection += iChange;
+	FAssert(getExtraFlightDamageProtection() >= 0);
+}
+
+// Flunky PAE - Flight - END
