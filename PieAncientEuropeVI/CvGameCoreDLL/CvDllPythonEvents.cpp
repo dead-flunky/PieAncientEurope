@@ -210,7 +210,7 @@ void CvDllPythonEvents::reportFirstContact(TeamTypes eTeamID1, TeamTypes eTeamID
 	}
 }
 
-void CvDllPythonEvents::reportCombatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner)
+void CvDllPythonEvents::reportCombatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner, bool bSuicide, bool bCapture)
 {
 	if (preEvent())
 	{
@@ -225,6 +225,10 @@ void CvDllPythonEvents::reportCombatResult(CvUnit* pWinner, CvUnit* pLoser, bool
 		
 		// Flunky PAE - flag if winner is attacker. 
 		eventData.add(attackerWinner);
+		// Flunky PAE - flag if winner committed suicide. 
+		eventData.add(bSuicide);
+		// Flunky PAE - flag if loser is captured. 
+		eventData.add(bCapture);
 
 		postEvent(eventData);
 		delete pCyLoser;

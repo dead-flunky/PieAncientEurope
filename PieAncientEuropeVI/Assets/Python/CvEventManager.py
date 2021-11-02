@@ -2600,44 +2600,19 @@ class CvEventManager:
             return
         CvUtil.pyPrint('Team %d has met Team %d' %(iTeamX, iHasMetTeamY))
 
-    # called on clear combat results - not after retreat or flight, but after (or actually before) capture
-    def onCombatResult(self, argsList):
-        'Combat Result'
-        pWinner, pLoser, attackerWinner = argsList
+    def unconditionalOnCombat(self, pWinner, pLoser):
+        """ ---- Unabhaengige Ereignisse ----"""
+
         iWinnerPlayer = pWinner.getOwner()
         iLoserPlayer = pLoser.getOwner()
         pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
         pLoserPlayer = gc.getPlayer(iLoserPlayer)
-        playerX = PyPlayer(iWinnerPlayer)
         iWinnerUnitType = pWinner.getUnitType()
-        unitX = gc.getUnitInfo(iWinnerUnitType)
-        playerY = PyPlayer(iLoserPlayer)
         iLoserUnitType = pLoser.getUnitType()
-        unitY = gc.getUnitInfo(iLoserUnitType)
         pLoserPlot = pLoser.plot()
         pWinnerPlot = pWinner.plot()
-        # PAE
-        bUnitDone = False
-        bWinnerIsDead = pWinner.isDead()
-        bNavalUnit = pWinner.getDomainType() == DomainTypes.DOMAIN_SEA
-
-        # PAE Debug Mark
-        #"""
-        #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Loser "+pLoser.getName()+" "+str(pLoserPlot.getX())+"|"+str(pLoserPlot.getY()),1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-
-        #### ---- Anfang unabhaengige Ereignisse ---- ####
         bWinnerAnimal = pWinner.isAnimal()
-                        # (pWinner.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
-                        #  iWinnerUnitType in L.LUnitCanBeDomesticated or
-                        #  iWinnerUnitType in L.LUnitWildAnimals or
-                        #  iWinnerUnitType in L.LUnitWarAnimals or
-                        #  iWinnerUnitType in L.LUnitDomesticated)
         bLoserAnimal = pLoser.isAnimal()
-                        # (pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
-                        # iLoserUnitType in L.LUnitCanBeDomesticated or
-                        # iLoserUnitType in L.LUnitWildAnimals or
-                        # iLoserUnitType in L.LUnitWarAnimals or
-                        # iLoserUnitType in L.LUnitDomesticated)
 
         sScenarioName = CvUtil.getScriptData(CyMap().plot(0, 0), ["S", "t"])
         if sScenarioName == "FirstPunicWar":
@@ -2748,8 +2723,60 @@ class CvEventManager:
                         pLoserPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_CITY_RUINS"))
                     else:
                         pLoserPlot.setImprovementType(-1)
+
+        # Einheiten, die Wälder niederbrennen können
+        # Brandchance 20%
+        if pWinner.getUnitType() in L.LFireUnits and pLoserPlot.getFeatureType() in L.LForests:
+            if CvUtil.myRandom(5, "WinnerUnitBurnsForest") == 1:
+                pLoserPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
+                pLoser.getGroup().setActivityType(-1) # to reload the map!
+        # Falls auch der Gegner Feuer unterm Hintern hat
+        if pLoser.getUnitType() in L.LFireUnits and pWinnerPlot.getFeatureType() in L.LForests:
+            if CvUtil.myRandom(5, "LoserUnitBurnsForest") == 1:
+                pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
+                pWinner.getGroup().setActivityType(-1) # to reload the map!
+
         #### ---- Ende unabhaengige Ereignisse ---- ####
 
+    # called on clear combat results - not after retreat or attacker flight, but after (or actually before) capture
+    def onCombatResult(self, argsList):
+        'Combat Result'
+        pWinner, pLoser, attackerWinner, bSuicide, bCapture = argsList
+        iWinnerPlayer = pWinner.getOwner()
+        iLoserPlayer = pLoser.getOwner()
+        pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
+        pLoserPlayer = gc.getPlayer(iLoserPlayer)
+        playerX = PyPlayer(iWinnerPlayer)
+        iWinnerUnitType = pWinner.getUnitType()
+        unitX = gc.getUnitInfo(iWinnerUnitType)
+        playerY = PyPlayer(iLoserPlayer)
+        iLoserUnitType = pLoser.getUnitType()
+        unitY = gc.getUnitInfo(iLoserUnitType)
+        pLoserPlot = pLoser.plot()
+        pWinnerPlot = pWinner.plot()
+        # PAE
+        # bUnitDone = False
+        bWinnerIsDead = bSuicide
+        bNavalUnit = pWinner.getDomainType() == DomainTypes.DOMAIN_SEA
+
+        # PAE Debug Mark
+        #"""
+        #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Loser "+pLoser.getName()+" "+str(pLoserPlot.getX())+"|"+str(pLoserPlot.getY()),1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+
+        bWinnerAnimal = pWinner.isAnimal()
+                        # (pWinner.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
+                        #  iWinnerUnitType in L.LUnitCanBeDomesticated or
+                        #  iWinnerUnitType in L.LUnitWildAnimals or
+                        #  iWinnerUnitType in L.LUnitWarAnimals or
+                        #  iWinnerUnitType in L.LUnitDomesticated)
+        bLoserAnimal = pLoser.isAnimal()
+                        # (pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
+                        # iLoserUnitType in L.LUnitCanBeDomesticated or
+                        # iLoserUnitType in L.LUnitWildAnimals or
+                        # iLoserUnitType in L.LUnitWarAnimals or
+                        # iLoserUnitType in L.LUnitDomesticated)
+
+        self.unconditionalOnCombat(pWinner, pLoser)
         # Flunky modified dll such that kamikaze from promotions kills with a chance and doesn't give strength (except for planes)
         #### ---- betrifft Winner ---- ####
         # iPromoFuror1 = gc.getInfoTypeForString('PROMOTION_FUROR1')
@@ -2775,19 +2802,6 @@ class CvEventManager:
                       # CyInterface().addMessage(iWinnerPlayer, True, 5,
                       # CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_FUROR_SUICIDE", (pWinner.getName(), 0)),
                       # None, 2, pWinner.getButton(), ColorTypes(7), pWinner.getX(), pWinner.getY(), True, True)
-
-        # Einheiten, die Wälder niederbrennen können
-
-        # Brandchance 20%
-        if pWinner.getUnitType() in L.LFireUnits and pLoserPlot.getFeatureType() in L.LForests:
-            if CvUtil.myRandom(5, "WinnerUnitBurnsForest") == 1:
-                pLoserPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
-                pLoser.getGroup().setActivityType(-1) # to reload the map!
-        # Falls auch der Gegner Feuer unterm Hintern hat
-        if pLoser.getUnitType() in L.LFireUnits and pWinnerPlot.getFeatureType() in L.LForests:
-            if CvUtil.myRandom(5, "LoserUnitBurnsForest") == 1:
-                pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
-                pWinner.getGroup().setActivityType(-1) # to reload the map!
 
         # Flunky PAE fixed bSuicide to iSuicide in dll, also including kamikaze from promotions
         # # Angreifende brennende Schweine killen
@@ -2825,14 +2839,8 @@ class CvEventManager:
                     pLoopUnit.changeDamage(20, False)
             if pWinnerPlayer.isHuman():
                 CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ELEPHANT_DAMAGE_1", (unitY.getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
-                CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ELEPHANT_DAMAGE_1", (unitY.getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
             if pLoserPlayer.isHuman():
                 CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ELEPHANT_DAMAGE_2", (unitY.getDescription(), 0)), None, 2, None, ColorTypes(7), 0, 0, False, False)
-
-        # Angst Promo
-        if not bWinnerIsDead and not bNavalUnit and not bWinnerAnimal and not bLoserAnimal:
-            if pWinner.getUnitCombatType() in L.LAngstUnits or pLoser.getUnitCombatType() in L.LAngstUnits:
-                PAE_Unit.doCheckAngst(pWinner,pLoser)
 
         # AI: Unit Formations
         if not pLoserPlayer.isHuman() and pLoserPlot.getNumUnits() > 4:
@@ -2840,6 +2848,7 @@ class CvEventManager:
 
         # Einheit soll alles ausladen, wenn besiegt   #pie
         # Geht nicht, leider wird zuerst das Cargo und dann die Einheit gekillt! Schade!
+        # Flunky: implemented in CvUnit::kill()
         #    if pLoser.getDomainType() == DomainTypes.DOMAIN_LAND and pLoser.hasCargo(): pLoser.doCommand(CommandTypes.COMMAND_UNLOAD_ALL,0,0)
 
         if bNavalUnit:
@@ -2849,7 +2858,13 @@ class CvEventManager:
         elif not bWinnerIsDead:
             # ---- LAND: Player can earn gold by winning a battle
             # Flunky: but dead warriors don't take loot
+
             if not bLoserAnimal:
+                # Angst Promo
+                if not bWinnerAnimal:
+                    if pWinner.getUnitCombatType() in L.LAngstUnits or pLoser.getUnitCombatType() in L.LAngstUnits:
+                        PAE_Unit.doCheckAngst(pWinner,pLoser)
+
                 iGold = int(unitY.getProductionCost() / 10)
                 if iGold > 1:
                     iGold = CvUtil.myRandom(iGold, "LandeinheitenKillMoney")
@@ -2860,7 +2875,7 @@ class CvEventManager:
                     # ***TEST***
                     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Gold durch Einheitensieg (Zeile 1711)",iGold)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-            # Flunky: moved to XML
+            # Flunky: moved to XML/DLL
             # ------- Certain animals can be captured, when domestication has been researched
             # ------- Bestimmte Tiere koennen eingefangen werden, wenn Domestizier-Tech erforscht wurde
             # elif iLoserUnitType in L.LUnitCanBeDomesticated:
@@ -2886,7 +2901,7 @@ class CvEventManager:
         #bUnitFlucht = False
         #pLoserFlucht = None
 
-        if not bUnitDone:
+        if not bCapture:
 
             # pLoser tries to flee if pLoser is not being domesticated and pLoser is not Treibgut
             # Generals Formation (PROMOTION_FORM_LEADER_POSITION)

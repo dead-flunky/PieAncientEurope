@@ -521,10 +521,20 @@ void CvUnit::kill(bool bDelay, PlayerTypes ePlayer)
 		{
 			if (pPlot->isValidDomainForLocation(*pLoopUnit))
 			{
+				// Flunky for PAE - unload if possible
+				pLoopUnit->setTransportUnit(NULL);
+				/* BtS original code
 				pLoopUnit->setCapturingPlayer(NO_PLAYER);
+				*/
 			}
-
+			// Flunky for PAE - kill only on invalid plot
+			else
+			{
+				pLoopUnit->kill(false, ePlayer);
+			}
+			/* BtS original code
 			pLoopUnit->kill(false, ePlayer);
+			*/
 		}
 	}
 
@@ -1656,7 +1666,7 @@ void CvUnit::updateCombat(bool bQuick)
 			gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getEraInfo(GC.getGameINLINE().getCurrentEra()).getAudioUnitVictoryScript(), MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
 
 			// report event to Python, along with some other key state
-			CvEventReporter::getInstance().combatResult(pDefender, this, false);
+			CvEventReporter::getInstance().combatResult(pDefender, this, false, false, false);
 		}
 		else if (pDefender->isDead())
 		{
@@ -1683,13 +1693,30 @@ void CvUnit::updateCombat(bool bQuick)
 				szBuffer = gDLL->getText("TXT_KEY_MISC_YOU_UNIT_WAS_DESTROYED", pDefender->getNameKey(), getNameKey(), getVisualCivAdjective(pDefender->getTeam()));
 			}
 			gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer,GC.getEraInfo(GC.getGameINLINE().getCurrentEra()).getAudioUnitDefeatScript(), MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE());
-
+						
+			bool bCapture = false;
+			if (canAdvance(pPlot, pDefender->canDefend() ? 1 : 0))
+			{
+				if (!isNoCapture())
+				{
+					
+					PlayerTypes eCapturingPlayer = getOwnerINLINE();
+					UnitTypes eCaptureUnitType = pDefender->getCaptureUnitType(GET_PLAYER(eCapturingPlayer).getCivilizationType());
+					if (eCapturingPlayer != NO_PLAYER && eCaptureUnitType != NO_UNIT)
+					{
+						TechTypes eTech = (TechTypes) GC.getUnitInfo(eCaptureUnitType).getPrereqCaptureTech();
+						bCapture = eTech == NO_TECH || GET_TEAM(GET_PLAYER(eCapturingPlayer).getTeam()).isHasTech(eTech);
+					}
+				}
+			}
+						
+			bool bSuicide = GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance();
 			// report event to Python, along with some other key state
-			CvEventReporter::getInstance().combatResult(this, pDefender, true);
+			CvEventReporter::getInstance().combatResult(this, pDefender, true, bSuicide, bCapture);
 
 			bool bAdvance = false;
 
-			if (GC.getGameINLINE().getSorenRandNum(100, "Suicide") < getSuicideChance())
+			if (bSuicide)
 			{
 				kill(true);
 
@@ -1699,7 +1726,7 @@ void CvUnit::updateCombat(bool bQuick)
 			}
 			else
 			{
-				bAdvance = canAdvance(pPlot, ((pDefender->canDefend()) ? 1 : 0));
+				bAdvance = canAdvance(pPlot, pDefender->canDefend() ? 1 : 0);
 
 				if (bAdvance)
 				{
@@ -1708,7 +1735,6 @@ void CvUnit::updateCombat(bool bQuick)
 						pDefender->setCapturingPlayer(getOwnerINLINE());
 					}
 				}
-
 
 				pDefender->kill(false);
 				pDefender = NULL;
@@ -1726,7 +1752,7 @@ void CvUnit::updateCombat(bool bQuick)
 				getGroup()->groupMove(pPlot, true, bAdvance ? this : NULL, true); // K-Mod
 			}
 
-			// This is is put before the plot advancement, the unit will always try to walk back
+			// If this is put before the plot advancement, the unit will always try to walk back
 			// to the square that they came from, before advancing.
 			getGroup()->clearMissionQueue();
 		}
@@ -1753,9 +1779,8 @@ void CvUnit::updateCombat(bool bQuick)
 #ifdef DEFENDER_FLIGHT
 		else if (pDefender->isFlight())
 		{
-			// TODO only reset on start of next turn - can be used for flight promotion/only one flight per turn...
-			pDefender->setFlight(false);
 			ImprovementTypes eImprovement = pDefender->plot()->getImprovementType();
+
 			if (pDefender->plot()->isCity())
 			{
 				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_3", pDefender->getNameKey()); // The city offered the unit %s1_unit optimal retreat options!
@@ -1795,19 +1820,21 @@ void CvUnit::updateCombat(bool bQuick)
 						{
 							// TODO: select randomly one possible
 							pDefender->move(pAdjacentPlot, true);
+											// Attacker text
+							szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", pDefender->getNameKey(), getNameKey()); // The enemy %s1 barely escaped! --> The enemy %s1 barely escaped our unit %s2!
+							gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
+							// Defender text
+							szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey(), getNameKey()); // Our %s1 barely escaped! --> Our %s1 barely escaped from combat with a %s2!
+							gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
+				
 							break;
 						}
 					}
 				}
-				// Attacker text
-				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", pDefender->getNameKey(), getNameKey()); // The enemy %s1 barely escaped! --> The enemy %s1 barely escaped our unit %s2!
-				gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
-				// Defender text
-				szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey(), getNameKey()); // Our %s1 barely escaped! --> Our %s1 barely escaped from combat with a %s2!
-				gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
-				
 			}
 			
+			CvEventReporter::getInstance().combatResult(this, pDefender, true, false, false);
+
 			bool bAdvance = canAdvance(pPlot, 0);
 			if (pPlot->getNumVisibleEnemyDefenders(this) == 0)
 			{
@@ -1816,6 +1843,9 @@ void CvUnit::updateCombat(bool bQuick)
 			}
 			checkRemoveSelectionAfterAttack();
 			getGroup()->clearMissionQueue();
+			
+			// TODO only reset on start of next turn - can be used for flight promotion/only one flight per turn...
+			pDefender->setFlight(false);
 		}
 # endif
 		else	

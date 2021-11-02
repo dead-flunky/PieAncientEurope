@@ -49,7 +49,7 @@ public:
 	void endPlayerTurn(int iGameTurn, PlayerTypes);
 
 	void firstContact(TeamTypes eTeamID1, TeamTypes eTeamID2);						
-	void combatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner);					
+	void combatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner, bool bSuicide, bool bCapture);					
 	void improvementBuilt(int iImprovementType, int iX, int iY);	
 	void improvementDestroyed(int iImprovementType, int iPlayer, int iX, int iY);	
 	void routeBuilt(int iRouteType, int iX, int iY);	
