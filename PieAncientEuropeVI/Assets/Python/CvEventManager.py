@@ -2736,6 +2736,16 @@ class CvEventManager:
                 pWinnerPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
                 pWinner.getGroup().setActivityType(-1) # to reload the map!
 
+        # Stadtverteidigung
+        if pLoserPlot.isCity():
+            pCity = pLoserPlot.getPlotCity()
+            if pCity.getOwner() == iLoserPlayer:
+                # AI
+                if not pLoserPlayer.isHuman():
+                    # PAE V ab Patch 3: Einheiten mobilisieren
+                    # PAE 6.6 nur wenn die Angreifer doppelt so stark sind wie die Verteidiger
+                    if pWinnerPlot.getNumUnits() >= pLoserPlot.getNumUnits() * 2:
+                        PAE_Unit.doMobiliseFortifiedArmy(pCity)
         #### ---- Ende unabhaengige Ereignisse ---- ####
 
     # called on clear combat results - not after retreat or attacker flight, but after (or actually before) capture
@@ -2917,7 +2927,9 @@ class CvEventManager:
                 # Feature: Wenn die Generalseinheit stirbt, ist in jeder Stadt Civil War! (GG Great General dies)
                 # Richtet sich nach der Anzahl der lebenden Generals
                 # PAE V: Einheiten im Stack bekommen Mercenary-Promo (je nach Anzahl an Generals im Stack)
-                PAE_Unit.doDyingGeneral(pLoser, iWinnerPlayer)
+
+                if pLoser.getLeaderUnitType() != -1:
+                    PAE_Unit.doDyingGeneral(pLoser, iWinnerPlayer)
 
                 # ------- Rebell takes over slaves if capturing
                 if iLoserUnitType == gc.getInfoTypeForString("UNIT_SLAVE") and iWinnerPlayer == gc.getBARBARIAN_PLAYER() and not bWinnerAnimal:
@@ -2983,33 +2995,27 @@ class CvEventManager:
 
                         # ---- Script DATAs in Units
                         PAE_Mercenaries.startMercTorture(pLoser, iWinnerPlayer)
-                bCityRenegade = False
-                # Stadtverteidigung
-                if pLoserPlot.isCity():
-                    pCity = pLoserPlot.getPlotCity()
-                    if pCity.getOwner() == iLoserPlayer:
-                        # AI
-                        if not pLoserPlayer.isHuman():
-                            # PAE V ab Patch 3: Einheiten mobilisieren
-                            # PAE 6.6 nur wenn die Angreifer doppelt so stark sind wie die Verteidiger
-                            if pWinnerPlot.getNumUnits() >= pLoserPlot.getNumUnits() * 2:
-                                PAE_Unit.doMobiliseFortifiedArmy(pCity)
+                    # Flunky - increased indentation, because renegade should only trigger if winner is not dead
+                    bCityRenegade = False
+                    # Stadtverteidigung
+                    if pLoserPlot.isCity():
+                        pCity = pLoserPlot.getPlotCity()
+                        if pCity.getOwner() == iLoserPlayer:
+                            # ------ ueberlaufende Stadt - City renegades - renegade city
+                            if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_CITY_RAZING):
+                                # nicht bei captureable units erlauben, da sie sonst bei renegade gecaptured wird und dann die ID zum killen weg ist (CtD)
+                                if pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT:
+                                    # pLoser wird nicht angetastet
+                                    #CvUtil.pyPrint('EventManager 2951: Unit %s, ID: %d' % (pLoser.getName(),pLoser.getID()))
+                                    bCityRenegade = PAE_City.doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer)
 
-                        # ------ ueberlaufende Stadt - City renegades - renegade city
-                        if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_CITY_RAZING):
-                            # nicht bei captureable units erlauben, da sie sonst bei renegade gecaptured wird und dann die ID zum killen weg ist (CtD)
-                            if pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT:
-                                # pLoser wird nicht angetastet
-                                #CvUtil.pyPrint('EventManager 2951: Unit %s, ID: %d' % (pLoser.getName(),pLoser.getID()))
-                                bCityRenegade = PAE_City.doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer)
+                    if not bCityRenegade:
+                        bUnitRenegades = PAE_Unit.renegade(pWinner, pLoser)
 
-                if not bCityRenegade:
-                    bUnitRenegades = PAE_Unit.renegade(pWinner, pLoser)
-
-                    # LOSER: Mounted -> Melee or Horse
-                    # Nur wenn die Einheit nicht desertiert hat: bUnitRenegades
-                    if not bUnitRenegades and pLoser.getUnitCombatType() in [gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"), gc.getInfoTypeForString("UNITCOMBAT_CHARIOT")]:
-                        PAE_Unit.doLoserLoseHorse(pLoser, iWinnerPlayer)
+                        # LOSER: Mounted -> Melee or Horse
+                        # Nur wenn die Einheit nicht desertiert hat: bUnitRenegades
+                        if not bUnitRenegades and pLoser.getUnitCombatType() in [gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"), gc.getInfoTypeForString("UNITCOMBAT_CHARIOT")]:
+                            PAE_Unit.doLoserLoseHorse(pLoser, iWinnerPlayer)
 
         # PAE Debug Mark
         #"""

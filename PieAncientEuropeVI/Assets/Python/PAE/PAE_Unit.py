@@ -200,10 +200,7 @@ def stackDoTurn(iPlayer, iGameTurn):
             # Missing fort on a plot
             if sUnit.isHasPromotion(iPromoFort) or sUnit.isHasPromotion(iPromoFort2):
                 iImp = tmpPlot.getImprovementType()
-                if iImp > -1:
-                    if gc.getImprovementInfo(iImp).getDefenseModifier() < 10 or tmpPlot.getOwner() != sUnit.getOwner():
-                        doUnitFormation(sUnit, -1)
-                else:
+                if iImp == -1 or gc.getImprovementInfo(iImp).getDefenseModifier() < 10 or tmpPlot.getOwner() != sUnit.getOwner():
                     doUnitFormation(sUnit, -1)
 
         (sUnit, pIter) = pPlayer.nextUnit(pIter, False)
@@ -215,21 +212,21 @@ def stackDoTurn(iPlayer, iGameTurn):
         for x in range(3):
             for y in range(3):
                 loopPlot = gc.getMap().plot(h[0]-1+x, h[1]-1+y)
-                if loopPlot is not None and not loopPlot.isNone():
+                if loopPlot and not loopPlot.isNone():
                     iLoopPlotOwner = loopPlot.getOwner()
                     if iLoopPlotOwner != -1 and loopPlot.isCity():
                         if pTeam.isAtWar(gc.getPlayer(iLoopPlotOwner).getTeam()):
                             pPlotEnemyCity = loopPlot
                             break
-            if pPlotEnemyCity is not None:
+            if pPlotEnemyCity:
                 break
 
         # vor den Toren der feindlichen Stadt
-        if pPlotEnemyCity is not None:
+        if pPlotEnemyCity:
             # Bombardement
             pStackPlot = gc.getMap().plot(h[0], h[1])
-            iNumUnits = pStackPlot.getNumUnits()
-            for i in range(iNumUnits):
+
+            for i in range(pStackPlot.getNumUnits()):
                 pUnit = pStackPlot.getUnit(i)
                 if pUnit.getOwner() == iPlayer:
                     if pUnit.isRanged():
@@ -1368,11 +1365,12 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
                     lTerrain.append("Desert")
 
             # Forest, Jungle and Swamp nicht fuer Mounted
-            if (not pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_CHARIOT")
-                    and not pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MOUNTED")
-                    and not pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_ELEPHANT")
-                    and not pUnitTarget.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SIEGE")):
-                if pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_FOREST") or pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_DICHTERWALD"):
+            if pUnitTarget.getUnitCombatType() not in [gc.getInfoTypeForString("UNITCOMBAT_CHARIOT"),
+                                                       gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"),
+                                                       gc.getInfoTypeForString("UNITCOMBAT_ELEPHANT"),
+                                                       gc.getInfoTypeForString("UNITCOMBAT_SIEGE")]:
+
+                if pPlot.getFeatureType() in [gc.getInfoTypeForString("FEATURE_FOREST"), gc.getInfoTypeForString("FEATURE_DICHTERWALD")]:
                     if not pUnitTarget.isHasPromotion(gc.getInfoTypeForString("PROMOTION_WOODSMAN5")):
                         lTerrain.append("Forest")
                 elif pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_JUNGLE"):
@@ -1514,42 +1512,42 @@ def doRetireVeteran(pUnit):
 
 
 def doMobiliseFortifiedArmy(pCity):
+    if not pCity:
+        return
     #PAE V ab Patch 3: Wenn Hauptstadt angegriffen wird, sollen alle Einheiten in Festungen remobilisiert werden (Promo FORTRESS)
     #PAE 6.6: auch bei normalen Städten, wenn im Umkreis eine Festung ist
 
     #PAE 6.6: ausser Barbaren
-    if pCity.getOwner() == gc.getBARBARIAN_PLAYER(): return
+    if pCity.getOwner() == gc.getBARBARIAN_PLAYER():
+        return
 
     pPlayer = gc.getPlayer(pCity.getOwner())
-    if pCity is not None:
-      iX = pCity.getX()
-      iY = pCity.getY()
-      iPromoFort = gc.getInfoTypeForString("PROMOTION_FORM_FORTRESS")
-      iPromoFort2 = gc.getInfoTypeForString("PROMOTION_FORM_FORTRESS2")
 
-      if pCity.isCapital():
+    iX = pCity.getX()
+    iY = pCity.getY()
+    iPromoFort = gc.getInfoTypeForString("PROMOTION_FORM_FORTRESS")
+    iPromoFort2 = gc.getInfoTypeForString("PROMOTION_FORM_FORTRESS2")
+
+    if pCity.isCapital():
         (pUnit, pIter) = pPlayer.firstUnit(False)
         while pUnit:
-          if pUnit is not None:
             pUnit.setHasPromotion(iPromoFort, False)
             pUnit.setHasPromotion(iPromoFort2, False)
             pUnit.getGroup().pushMission(MissionTypes.MISSION_MOVE_TO, iX, iY, 0, False, False, MissionAITypes.NO_MISSIONAI, pUnit.plot(), pUnit)
             (pUnit, pIter) = pPlayer.nextUnit(pIter, False)
-      else:
+    else:
         iCityOwner = pCity.getOwner()
         iRange = 4 # Radius
         for x in range(-iRange, iRange+1):
-          for y in range(-iRange, iRange+1):
-            loopPlot = plotXY(iX, iY, x, y)
-            if loopPlot.getImprovementType() in L.LImprFortSentry:
-              iRange = loopPlot.getNumUnits()
-              for iLoopUnit in range(iRange):
-                  pUnit = loopPlot.getUnit(iLoopUnit)
-                  if pUnit is not None:
-                    if pUnit.getOwner() == iCityOwner:
-                      pUnit.setHasPromotion(iPromoFort, False)
-                      pUnit.setHasPromotion(iPromoFort2, False)
-                      pUnit.getGroup().pushMission(MissionTypes.MISSION_MOVE_TO, iX, iY, 0, False, False, MissionAITypes.NO_MISSIONAI, pUnit.plot(), pUnit)
+            for y in range(-iRange, iRange+1):
+                loopPlot = plotXY(iX, iY, x, y)
+                if loopPlot.getImprovementType() in L.LImprFortSentry:
+                    for iLoopUnit in range(loopPlot.getNumUnits()):
+                          pUnit = loopPlot.getUnit(iLoopUnit)
+                          if pUnit and pUnit.getOwner() == iCityOwner:
+                              pUnit.setHasPromotion(iPromoFort, False)
+                              pUnit.setHasPromotion(iPromoFort2, False)
+                              pUnit.getGroup().pushMission(MissionTypes.MISSION_MOVE_TO, iX, iY, 0, False, False, MissionAITypes.NO_MISSIONAI, pUnit.plot(), pUnit)
 
 # Handelsposten errichten (soll kein Gold kosten ab PAE 6.5.2)
 # Grund: Strassen kosten Geld, Einheit kostet Geld (indirekt beim Bau, pro Runde)
@@ -2805,103 +2803,103 @@ def doTrojanHorse(pCity, pUnit):
 
 # PAE Feature: Auswirkungen, wenn ein General stirbt
 def doDyingGeneral(pUnit, iWinnerPlayer=-1):
-    # PROMOTION_LEADER
-    if pUnit.getLeaderUnitType() > -1:
-        # Inits
-        iPromoMercenary = gc.getInfoTypeForString("PROMOTION_MERCENARY")
-        iPlayer = pUnit.getOwner()
-        pPlayer = gc.getPlayer(iPlayer)
 
-        # Keine Auswirkungen, bei Civic Polyarchie
-        if pPlayer.isCivic(gc.getInfoTypeForString("CIVIC_POLYARCHIE")): return
+    if pUnit.getLeaderUnitType() == -1:
+        return
 
-        iTeam = pPlayer.getTeam()
-        pTeam = gc.getTeam(iTeam)
-        pPlot = pUnit.plot()
-        iNumLeadersOnPlot = 0
+    iPlayer = pUnit.getOwner()
+    pPlayer = gc.getPlayer(iPlayer)
 
-        # Anzahl der Generaele des Spielers
-        iLeader = 0
-        (loopUnit, pIter) = pPlayer.firstUnit(False)
-        while loopUnit:
-            if loopUnit.getLeaderUnitType() > -1:
-                if loopUnit.getID() != pUnit.getID():
-                    iLeader += 1
-            (loopUnit, pIter) = pPlayer.nextUnit(pIter, False)
+    # Keine Auswirkungen, bei Civic Polyarchie
+    if pPlayer.isCivic(gc.getInfoTypeForString("CIVIC_POLYARCHIE")):
+        return
 
-        # Units: bekommen Mercenary-Promo
-        iNumUnits = pPlot.getNumUnits()
-        # 1. Check Generals im Stack
-        for i in range(iNumUnits):
-            pLoopUnit = pPlot.getUnit(i)
-            if pLoopUnit.getOwner() == iPlayer:
-                if pLoopUnit.getLeaderUnitType() > -1:
-                    iNumLeadersOnPlot += 1
+    pPlot = pUnit.plot()
 
-        # 2. Vergabe der Promo
-        for i in range(iNumUnits):
-            pLoopUnit = pPlot.getUnit(i)
-            if pLoopUnit.getOwner() == iPlayer:
-                if i % iNumLeadersOnPlot == 0:
-                    pLoopUnit.setHasPromotion(iPromoMercenary, True)
+    # Anzahl der Generaele des Spielers
+    iLeader = 0
+    (loopUnit, pIter) = pPlayer.firstUnit(False)
+    while loopUnit:
+        if loopUnit.getLeaderUnitType() > -1:
+            if loopUnit.getID() != pUnit.getID():
+                iLeader += 1
+        (loopUnit, pIter) = pPlayer.nextUnit(pIter, False)
 
-        # Cities: Stadtaufruhr
-        (loopCity, pIter) = pPlayer.firstCity(False)
-        while loopCity:
-            cityOwner = loopCity.getOwner()
-            if not loopCity.isNone() and cityOwner == iPlayer: #only valid cities
-                if CvUtil.myRandom(iLeader, "Stadtaufruhr1") == 0:
-                    # 2 bis 4 Runden Aufstand!
-                    #iRand = 2 + CvUtil.myRandom(2, "Stadtaufruhr2")
+    # Units: bekommen Mercenary-Promo
+    iNumUnits = pPlot.getNumUnits()
+    # 1. Check Generals im Stack
+    iNumLeadersOnPlot = 0
+    for i in range(iNumUnits):
+        pLoopUnit = pPlot.getUnit(i)
+        if pLoopUnit.getOwner() == iPlayer:
+            if pLoopUnit.getLeaderUnitType() > -1:
+                iNumLeadersOnPlot += 1
 
-                    # in Abhaengigkeit von HURRY_ANGER_DIVISOR (GlobalDefines.xml) und iHurryConscriptAngerPercent (GameSpeedInfo.xml)
-                    #iRand = loopCity.flatHurryAngerLength()
-                    #loopCity.changeHurryAngerTimer(iRand)
+    # 2. Vergabe der Promo
+    iPromoMercenary = gc.getInfoTypeForString("PROMOTION_MERCENARY")
+    for i in range(iNumUnits):
+        pLoopUnit = pPlot.getUnit(i)
+        if pLoopUnit.getOwner() == iPlayer:
+            if i % iNumLeadersOnPlot == 0:
+                pLoopUnit.setHasPromotion(iPromoMercenary, True)
 
-                    # Stadt ohne Kulturgrenzen
-                    #iRand = 2 + CvUtil.myRandom(3, "Stadtaufruhr3")
-                    #loopCity.setOccupationTimer (iRand)
-                    #if pPlayer.isHuman():
-                    #    CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MAIN_CITY_RIOT", (loopCity.getName(),)), "AS2D_REVOLTSTART", 2, ",Art/Interface/Buttons/Promotions/Combat5.dds,Art/Interface/Buttons/Warlords_Atlas_1.dds,5,10", ColorTypes(7), loopCity.getX(), loopCity.getY(), True, True)
+    # Cities: Stadtaufruhr
+    (loopCity, pIter) = pPlayer.firstCity(False)
+    while loopCity:
+        cityOwner = loopCity.getOwner()
+        if not loopCity.isNone() and cityOwner == iPlayer: #only valid cities
+            if CvUtil.myRandom(iLeader, "Stadtaufruhr1") == 0:
+                # 2 bis 4 Runden Aufstand!
+                #iRand = 2 + CvUtil.myRandom(2, "Stadtaufruhr2")
 
-                    # Civil War (ab PAE 6.3.2)
-                    PAE_City.doStartCivilWar(loopCity, 100)
+                # in Abhaengigkeit von HURRY_ANGER_DIVISOR (GlobalDefines.xml) und iHurryConscriptAngerPercent (GameSpeedInfo.xml)
+                #iRand = loopCity.flatHurryAngerLength()
+                #loopCity.changeHurryAngerTimer(iRand)
 
-            (loopCity, pIter) = pPlayer.nextCity(pIter, False)
+                # Stadt ohne Kulturgrenzen
+                #iRand = 2 + CvUtil.myRandom(3, "Stadtaufruhr3")
+                #loopCity.setOccupationTimer (iRand)
+                #if pPlayer.isHuman():
+                #    CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MAIN_CITY_RIOT", (loopCity.getName(),)), "AS2D_REVOLTSTART", 2, ",Art/Interface/Buttons/Promotions/Combat5.dds,Art/Interface/Buttons/Warlords_Atlas_1.dds,5,10", ColorTypes(7), loopCity.getX(), loopCity.getY(), True, True)
 
-        # PopUp
-        if pPlayer.isHuman():
+                # Civil War (ab PAE 6.3.2)
+                PAE_City.doStartCivilWar(loopCity, 100)
+
+        (loopCity, pIter) = pPlayer.nextCity(pIter, False)
+
+    # PopUp
+    if pPlayer.isHuman():
+        popupInfo = CyPopupInfo()
+        popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT) # Text PopUp only!
+        popupInfo.setText(CyTranslator().getText(
+            "TXT_KEY_POPUP_GENERALSTOD", (pUnit.getName(),)))
+        popupInfo.addPopup(iPlayer)
+
+    if iWinnerPlayer != -1:
+        pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
+        # War Weariness
+        gc.getTeam(pPlayer.getTeam()).changeWarWeariness(pWinnerPlayer.getTeam(), 10)
+
+        # PAE Movie
+        if pPlayer.isHuman() and pPlayer.isTurnActive() or pWinnerPlayer.isHuman() and pWinnerPlayer.isTurnActive():
+
+            if pPlayer.getCurrentEra() > 2 or pWinnerPlayer.getCurrentEra() > 2:
+                iVids = 14
+            else:
+                iVids = 11
+            # GG dying movies (CvWonderMovieScreen)
+            iMovie = 1 + CvUtil.myRandom(iVids, "GGDyingMovie")
+
             popupInfo = CyPopupInfo()
-            popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT) # Text PopUp only!
-            popupInfo.setText(CyTranslator().getText(
-                "TXT_KEY_POPUP_GENERALSTOD", (pUnit.getName(),)))
-            popupInfo.addPopup(iPlayer)
-
-        if iWinnerPlayer != -1:
-            pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
-            # War Weariness
-            pTeam.changeWarWeariness(pWinnerPlayer.getTeam(), 10)
-
-            # PAE Movie
-            if pPlayer.isHuman() and pPlayer.isTurnActive() or pWinnerPlayer.isHuman() and pWinnerPlayer.isTurnActive():
-
-                if pPlayer.getCurrentEra() > 2 or pWinnerPlayer.getCurrentEra() > 2:
-                    iVids = 14
-                else:
-                    iVids = 11
-                # GG dying movies (CvWonderMovieScreen)
-                iMovie = 1 + CvUtil.myRandom(iVids, "GGDyingMovie")
-
-                popupInfo = CyPopupInfo()
-                popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
-                popupInfo.setData1(iMovie)  # dynamicID in CvWonderMovieScreen
-                popupInfo.setData2(-1)  # fix pCity.getID()
-                popupInfo.setData3(4)  # fix PAE Movie ID for GG dies
-                popupInfo.setText(u"showWonderMovie")
-                if pPlayer.isHuman():
-                    popupInfo.addPopup(iPlayer)
-                elif pWinnerPlayer.isHuman():
-                    popupInfo.addPopup(iWinnerPlayer)
+            popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON_SCREEN)
+            popupInfo.setData1(iMovie)  # dynamicID in CvWonderMovieScreen
+            popupInfo.setData2(-1)  # fix pCity.getID()
+            popupInfo.setData3(4)  # fix PAE Movie ID for GG dies
+            popupInfo.setText(u"showWonderMovie")
+            if pPlayer.isHuman():
+                popupInfo.addPopup(iPlayer)
+            elif pWinnerPlayer.isHuman():
+                popupInfo.addPopup(iWinnerPlayer)
 
 
 def unsettledSlaves(iPlayer):
