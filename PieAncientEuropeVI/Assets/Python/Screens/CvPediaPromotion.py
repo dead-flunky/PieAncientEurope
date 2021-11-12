@@ -1,8 +1,11 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CyGameTextMgr,
+                                WidgetTypes, PanelStyles, GenericButtonSizes,
+                                TableStyles, CivilopediaPageTypes)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 
 # globals
@@ -75,15 +78,15 @@ class CvPediaPromotion:
         screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROMOTION, -1)
 
         if self.top.iLastScreen != CvScreenEnums.PEDIA_PROMOTION or bNotActive:
-            self.placeLinks(true)
+            self.placeLinks(True)
             self.top.iLastScreen = CvScreenEnums.PEDIA_PROMOTION
         else:
-            self.placeLinks(false)
+            self.placeLinks(False)
 
         # Icon
         screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
             self.X_UNIT_PANE, self.Y_UNIT_PANE, self.W_UNIT_PANE, self.H_UNIT_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-        screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+        screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
             self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
         screen.addDDSGFC(self.top.getNextWidgetName(), gc.getPromotionInfo(self.iPromotion).getButton(),
             self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -106,7 +109,7 @@ class CvPediaPromotion:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", false, true,
+        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True,
                         self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
         screen.attachLabel(panelName, "", "  ")
@@ -184,13 +187,13 @@ class CvPediaPromotion:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_LEADS_TO", ()), "", false, true,
+        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_LEADS_TO", ()), "", False, True,
                         self.X_LEADS_TO_PANE, self.Y_LEADS_TO_PANE, self.W_LEADS_TO_PANE, self.H_LEADS_TO_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
         screen.attachLabel(panelName, "", "  ")
 
-        for j in range(gc.getNumPromotionInfos()):
-            iPrereq = gc.getPromotionInfo(j).getPrereqPromotion()
+        for j in xrange(gc.getNumPromotionInfos()):
+            # iPrereq = gc.getPromotionInfo(j).getPrereqPromotion()
             if (gc.getPromotionInfo(j).getPrereqPromotion() == self.iPromotion or gc.getPromotionInfo(j).getPrereqOrPromotion1() == self.iPromotion or gc.getPromotionInfo(j).getPrereqOrPromotion2() == self.iPromotion):
                 screen.attachImageButton( panelName, "", gc.getPromotionInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, j, 1, False )
 
@@ -227,7 +230,7 @@ class CvPediaPromotion:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", true, false,
+        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False,
                         self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
         listName = self.top.getNextWidgetName()
@@ -239,7 +242,7 @@ class CvPediaPromotion:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_PROMOTION_UNITS", ()), "", true, true,
+        screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_PROMOTION_UNITS", ()), "", True, True,
             self.X_UNIT_GROUP_PANE, self.Y_UNIT_GROUP_PANE, self.W_UNIT_GROUP_PANE, self.H_UNIT_GROUP_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
         szTable = self.top.getNextWidgetName()
@@ -247,9 +250,9 @@ class CvPediaPromotion:
             self.X_UNIT_GROUP_PANE + 10, self.Y_UNIT_GROUP_PANE + 40, self.W_UNIT_GROUP_PANE - 20, self.H_UNIT_GROUP_PANE - 50, False, False, 24, 24, TableStyles.TABLE_STYLE_EMPTY)
 
         i = 0
-        for iI in range(gc.getNumUnitCombatInfos()):
+        for iI in xrange(gc.getNumUnitCombatInfos()):
             if (0 != gc.getPromotionInfo(self.iPromotion).getUnitCombat(iI)):
-                iRow = screen.appendTableRow(szTable)
+                # iRow = screen.appendTableRow(szTable)
                 screen.setTableText(szTable, 0, i, u"<font=2>" + gc.getUnitCombatInfo(iI).getDescription() + u"</font>", gc.getUnitCombatInfo(iI).getButton(), WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT_COMBAT, iI, -1, CvUtil.FONT_LEFT_JUSTIFY)
                 i += 1
 
@@ -262,7 +265,7 @@ class CvPediaPromotion:
 
         # sort techs alphabetically
         #listSorted=[(0,0)]*gc.getNumPromotionInfos()
-        #for j in range(gc.getNumPromotionInfos()):
+        #for j in xrange(gc.getNumPromotionInfos()):
         #  listSorted[j] = (gc.getPromotionInfo(j).getDescription(), j)
         #listSorted.sort()
 
@@ -270,7 +273,7 @@ class CvPediaPromotion:
 
         i = 0
         iSelected = 0
-        #for iI in range(gc.getNumPromotionInfos()):
+        #for iI in xrange(gc.getNumPromotionInfos()):
         for iPromo in listSorted:
             if not gc.getPromotionInfo(iPromo[1]).isGraphicalOnly():
                 if bRedraw:
@@ -300,7 +303,7 @@ class CvPediaPromotion:
         listPromos = []
         iCount = 0
 
-        for iPromo in range(gc.getNumPromotionInfos()):
+        for iPromo in xrange(gc.getNumPromotionInfos()):
             if (iType == 0 and "_FORM_" not in gc.getPromotionInfo(iPromo).getType() and "_RANG_" not in gc.getPromotionInfo(iPromo).getType()):
                listPromos.append(iPromo)
                iCount += 1

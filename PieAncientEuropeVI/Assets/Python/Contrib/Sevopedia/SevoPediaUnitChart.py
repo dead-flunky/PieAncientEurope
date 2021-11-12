@@ -58,7 +58,7 @@ class SevoPediaUnitChart:
         screen.setTableColumnHeader(szTable, 2, u"%c" % CyGame().getSymbolID(FontSymbols.MOVES_CHAR), iColWidth)
         screen.setTableColumnHeader(szTable, 3, u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar(), iColWidth)
         nUnits = 0
-        for j in range(gc.getNumUnitInfos()):
+        for j in xrange(gc.getNumUnitInfos()):
             if (self.iGroup == gc.getUnitInfo(j).getUnitCombatType() or self.iGroup == gc.getNumUnitCombatInfos()):
                 nUnits += 1
         dy = self.DY_UNITS
@@ -68,7 +68,7 @@ class SevoPediaUnitChart:
             yTextMargin = 0
         i = 0
         unitsList=[(0,0,0,0,0)]*nUnits
-        for j in range(gc.getNumUnitInfos()):
+        for j in xrange(gc.getNumUnitInfos()):
             if (self.iGroup == gc.getUnitInfo(j).getUnitCombatType() or self.iGroup == gc.getNumUnitCombatInfos()):
                 if (gc.getUnitInfo(j).getProductionCost() < 0):
                     szCost = localText.getText("TXT_KEY_NON_APPLICABLE", ())
@@ -76,7 +76,7 @@ class SevoPediaUnitChart:
                     szCost = unicode(gc.getUnitInfo(j).getProductionCost())# + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar()
                 unitsList[i] = (gc.getUnitInfo(j).getCombat(), gc.getUnitInfo(j).getMoves(), szCost, gc.getUnitInfo(j).getDescription(), j)
                 i += 1
-        for i in range(nUnits):
+        for i in xrange(nUnits):
             iRow = screen.appendTableRow(szTable)
             screen.setTableText(szTable, 0, iRow, u"<font=3>" + unitsList[i][3] + u"</font>", "", WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, unitsList[i][4], 1, CvUtil.FONT_LEFT_JUSTIFY)
             screen.setTableInt(szTable, 1, iRow, u"<font=3>" + unicode(unitsList[i][0]) + u"</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)

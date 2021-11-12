@@ -55,11 +55,18 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, TradeData, TradeableItems,
+                                DenialTypes, DirectionTypes,
+                                plotDirection, CivicTypes, CyTeam, CyPlayer)
 import TradeUtil
 import GameUtil
 
 gc = CyGlobalContext()
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 ## Players and Teams - Getting IDs and Cy objects
 
@@ -213,7 +220,7 @@ def players(alive=None, human=None, barbarian=None, minor=None, active=None):
     for player in PlayerUtil.players():
         ...
     """
-    for ePlayer in range(gc.getMAX_PLAYERS()):
+    for ePlayer in xrange(gc.getMAX_PLAYERS()):
         player = gc.getPlayer(ePlayer)
         if not player.isNone() and player.isEverAlive():
             if matchPlayerOrTeam(player, alive, human, barbarian, minor, active):
@@ -252,7 +259,7 @@ def teams(alive=None, human=None, barbarian=None, minor=None, active=None):
     for team in PlayerUtil.teams():
         ...
     """
-    for eTeam in range(gc.getMAX_TEAMS()):
+    for eTeam in xrange(gc.getMAX_TEAMS()):
         team = gc.getTeam(eTeam)
         if (not team.isNone() and team.isEverAlive()
                 and matchPlayerOrTeam(team, alive, human, barbarian, minor)):
@@ -520,7 +527,7 @@ def isGivingFavoriteCivicDenial(playerOrID, askingPlayerOrID):
     askedPlayer, askedTeam = getPlayerAndTeam(playerOrID)
     askingPlayer, askingTeam = getPlayerAndTeam(askingPlayerOrID)
     if askingTeam.isHasMet(askedTeam.getID()):
-        for iCategory in range(gc.getNumCivicOptionInfos()):
+        for iCategory in xrange(gc.getNumCivicOptionInfos()):
             iCivic = askingPlayer.getCivics(iCategory)
             tradeData.iData = iCivic
             if askedPlayer.canTradeItem(askingPlayer.getID(), tradeData, False):
@@ -607,8 +614,8 @@ def isSaltWaterPort(city, askingTeamOrID=None):
     """
     if city:
         eAskingTeam = getTeamID(askingTeamOrID)
-        map = CyMap()
-        for eDirection in range(DirectionTypes.NUM_DIRECTION_TYPES):
+        # map = CyMap()
+        for eDirection in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
             plot = plotDirection(city.getX(), city.getY(), DirectionTypes(eDirection))
             if eAskingTeam != -1 and not plot.isRevealed(eAskingTeam, False):
                 continue

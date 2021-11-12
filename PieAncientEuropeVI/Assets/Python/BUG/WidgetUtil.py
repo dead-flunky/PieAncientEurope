@@ -38,7 +38,7 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (WidgetTypes)
 import BugConfig
 import BugUtil
 
@@ -50,7 +50,7 @@ g_nextWidget = WidgetTypes.NUM_WIDGET_TYPES
 def createWidget(name):
 	"""
 	Creates and returns the next unique WidgetTypes constant to be used with custom UI widgets.
-	
+
 	If <name> already exists, a warning is logged and the widget is returned.
 	Otherwise the new widget is assigned to WidgetTypes.<name> and returned.
 	"""
@@ -85,14 +85,14 @@ def setWidgetHelpXml(widget, key):
 def setWidgetHelpFunction(widget, func):
 	"""
 	Assigns the function <func> to be called to get the hover text for <widget>.
-	
+
 	The function will be called each time the hover text is needed with these parameters:
-	
+
 		eWidgetType         WidgetTypes constant
 		data1               int
 		data2               int
 		bOption             boolean
-	
+
 	The first three are the ones used when creating the UI widget.
 	I have no idea what <bOption> is or where it comes from as it's supplied by the EXE.
 	"""
@@ -101,7 +101,7 @@ def setWidgetHelpFunction(widget, func):
 def _setWidgetHelp(widget, type, func):
 	"""
 	Registers the hover text <func> for <widget> if it hasn't been already.
-	
+
 	Do not call this function as it is used internally by the registration functions above.
 	"""
 	if widget in g_widgetHelp:
@@ -110,11 +110,11 @@ def _setWidgetHelp(widget, type, func):
 		BugUtil.debug("WidgetUtil - registering %s hover help for WidgetTypes %d: %s", type, widget, func)
 		g_widgetHelp[widget] = func
 
-	
+
 def getWidgetHelp(argsList):
 	"""
 	Returns the hover help text for <eWidgetType> if registered, otherwise returns an empty string.
-	
+
 	This function is a BugGameUtils handler registered in init.xml.
 	"""
 	eWidgetType, iData1, iData2, bOption = argsList
@@ -127,9 +127,9 @@ def getWidgetHelp(argsList):
 ## Configuration Handler
 
 class WidgetHandler(BugConfig.Handler):
-	
+
 	TAG = "widget"
-	
+
 	def __init__(self):
 		BugConfig.Handler.__init__(self, WidgetHandler.TAG, "name text xml module function")
 		self.addAttribute("name", True)
@@ -137,7 +137,7 @@ class WidgetHandler(BugConfig.Handler):
 		self.addAttribute("xml")
 		self.addAttribute("module", False, True)
 		self.addAttribute("function")
-	
+
 	def handle(self, element, name, text, xml, module, function):
 		widget = createWidget(name)
 		if text:

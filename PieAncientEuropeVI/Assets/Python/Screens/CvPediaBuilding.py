@@ -1,9 +1,15 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 ## Edited by pie (pierre@voak.at), Austria 2016
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, GenericButtonSizes, FontSymbols,
+                                WidgetTypes, PanelStyles, CyGame, TableStyles,
+                                CommerceTypes, YieldTypes, CyGameTextMgr,
+                                isNationalWonderClass, isTeamWonderClass,
+                                isWorldWonderClass, isTechRequiredForBuilding,
+                                CivilopediaPageTypes)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 
 # globals
@@ -16,7 +22,7 @@ class CvPediaBuilding:
 
         def __init__(self, main):
                 self.iBuilding = -1
-                self.bLastBuildingType = false
+                self.bLastBuildingType = False
                 self.top = main
 
                 self.BUTTON_SIZE = 46
@@ -86,16 +92,16 @@ class CvPediaBuilding:
                 screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, link, -1)
 
                 if self.top.iLastScreen != CvScreenEnums.PEDIA_BUILDING or bNotActive or self.bLastBuildingType != self.getBuildingType(self.iBuilding):
-                        self.placeLinks(true)
+                        self.placeLinks(True)
                         self.top.iLastScreen = CvScreenEnums.PEDIA_BUILDING
                 else:
-                        self.placeLinks(false)
+                        self.placeLinks(False)
                 self.bLastBuildingType = self.getBuildingType(self.iBuilding)
 
                 screen.addPanel( self.top.getNextWidgetName(), "", "", False, False, self.X_BUILDING_PANE, self.Y_BUILDING_PANE, self.W_BUILDING_PANE, self.H_BUILDING_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 
                 # Icon
-                screen.addPanel(self.top.getNextWidgetName(), "", "", false, false, self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
+                screen.addPanel(self.top.getNextWidgetName(), "", "", False, False, self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
                 screen.addDDSGFC(self.top.getNextWidgetName(), gc.getBuildingInfo(self.iBuilding).getButton(), self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 
                 # Unit animation
@@ -118,7 +124,7 @@ class CvPediaBuilding:
                 buildingInfo = gc.getBuildingInfo(self.iBuilding)
 
                 panelName = self.top.getNextWidgetName()
-                
+
                 if buildingInfo.getGreatPeopleRateChange() != 0: y = self.Y_STATS_PANE - 30
                 else: y = self.Y_STATS_PANE
 
@@ -153,7 +159,7 @@ class CvPediaBuilding:
                                 szCost = localText.getText("TXT_KEY_PEDIA_COST", (gc.getPlayer(self.top.iActivePlayer).getBuildingProductionNeeded(self.iBuilding),))
                         screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-                for k in range(YieldTypes.NUM_YIELD_TYPES):
+                for k in xrange(YieldTypes.NUM_YIELD_TYPES):
                         if (buildingInfo.getYieldChange(k) != 0):
                                 if (buildingInfo.getYieldChange(k) > 0):
                                         szSign = "+"
@@ -167,7 +173,7 @@ class CvPediaBuilding:
                                 screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
 
-                for k in range(CommerceTypes.NUM_COMMERCE_TYPES):
+                for k in xrange(CommerceTypes.NUM_COMMERCE_TYPES):
 
                         iTotalCommerce = buildingInfo.getObsoleteSafeCommerceChange(k) + buildingInfo.getCommerceChange(k)
                         if (iTotalCommerce != 0):
@@ -224,18 +230,18 @@ class CvPediaBuilding:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", false, true,
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True,
                                  self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE+10, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 screen.attachLabel(panelName, "", "  ")
 
                 # add tech buttons
-                for iPrereq in range(gc.getNumTechInfos()):
+                for iPrereq in xrange(gc.getNumTechInfos()):
                     if isTechRequiredForBuilding(iPrereq, self.iBuilding):
                         screen.attachImageButton( panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, 1, False )
 
                 # add req buildings
-                for iPrereq in range(gc.getNumBuildingInfos()):
+                for iPrereq in xrange(gc.getNumBuildingInfos()):
                   if gc.getBuildingInfo(self.iBuilding).isBuildingClassNeededInCity (gc.getBuildingInfo(iPrereq).getBuildingClassType()):
                     screen.attachImageButton( panelName, "", gc.getBuildingInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iPrereq, -1, False )
 
@@ -244,21 +250,21 @@ class CvPediaBuilding:
                 if (iPrereq >= 0):
                     screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
 
-                for k in range(gc.getNUM_BUILDING_PREREQ_OR_BONUSES()):
+                for k in xrange(gc.getNUM_BUILDING_PREREQ_OR_BONUSES()):
                     iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqOrBonuses(k)
                     if (iPrereq >= 0):
                         screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
 
                 iCorporation = gc.getBuildingInfo(self.iBuilding).getFoundsCorporation()
-                bFirst = true
+                bFirst = True
                 if (iCorporation >= 0):
-                    for k in range(gc.getNUM_CORPORATION_PREREQ_BONUSES()):
+                    for k in xrange(gc.getNUM_CORPORATION_PREREQ_BONUSES()):
                         iPrereq = gc.getCorporationInfo(iCorporation).getPrereqBonus(k)
                         if (iPrereq >= 0):
                             if not bFirst:
                                 screen.attachLabel(panelName, "", localText.getText("TXT_KEY_OR", ()))
                             else:
-                                bFirst = false
+                                bFirst = False
                             screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
 
                 # add religion button
@@ -278,7 +284,7 @@ class CvPediaBuilding:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", true, false,
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False,
                                  self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 listName = self.top.getNextWidgetName()
@@ -287,7 +293,7 @@ class CvPediaBuilding:
 
                 # PAE - Part of Victory type
                 iBuildingClassType = gc.getBuildingInfo(self.iBuilding).getBuildingClassType()
-                for iLoopVC in range(gc.getNumVictoryInfos()):
+                for iLoopVC in xrange(gc.getNumVictoryInfos()):
                     victory = gc.getVictoryInfo(iLoopVC)
                     if (gc.getBuildingClassInfo(iBuildingClassType).getVictoryThreshold(iLoopVC) > 0):
                       szSpecialText = localText.getText("TXT_KEY_BUILDING_PART_OF_VICTORY", (victory.getDescription(),)) + localText.getText("[NEWLINE]", ())
@@ -334,20 +340,20 @@ class CvPediaBuilding:
                 iSelected = 0
                 i = 0
                 A = ""
-                for iI in range(len(listSorted)):
+                for iI in xrange(len(listSorted)):
                   if (not gc.getBuildingInfo(listSorted[iI][1]).isGraphicalOnly()):
                     if (not gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") or not gc.getGame().isFinalInitialized() or gc.getGame().isBuildingEverActive(listSorted[iI][1])):
-                      
+
                       # Buchstabe
                       B = listSorted[iI][0][:1]
                       if A != B:
                         A = B
                         i += 1 # Zeile in der linken Navi
                         # Buchstabe anzeigen
-                        if bRedraw: 
+                        if bRedraw:
                           screen.appendListBoxStringNoUpdate( self.top.LIST_ID, u"<font=2>[" + A + u"]</font>", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_CENTER_JUSTIFY )
-                      
-                      
+
+
                       # Name anzeigen
                       if bRedraw:
                           screen.appendListBoxStringNoUpdate(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
@@ -372,7 +378,8 @@ class CvPediaBuilding:
 
                 # Special Building
                 lBuildingClasses = self.getStandardBuildings()
-                if iBuilding not in lBuildingClasses: return 3
+                if iBuilding not in lBuildingClasses:
+                    return 3
 
                 # Regular building
                 return 0
@@ -385,7 +392,7 @@ class CvPediaBuilding:
                 lBuildingClasses = []
                 if iTyp == 0 or iTyp == 3: lBuildingClasses = self.getStandardBuildings()
 
-                for iBuilding in range(gc.getNumBuildingInfos()):
+                for iBuilding in xrange(gc.getNumBuildingInfos()):
                         if not gc.getBuildingInfo(iBuilding).isGraphicalOnly() and gc.getBuildingInfo(iBuilding).getArtDefineTag() != "ART_DEF_BUILDING_FAKE":
                            if iTyp == 0 and self.getBuildingType(iBuilding) == 0 and iBuilding in lBuildingClasses or \
                               iTyp == 1 and self.getBuildingType(iBuilding) == 1 or \
@@ -405,7 +412,7 @@ class CvPediaBuilding:
 
         def getStandardBuildings(self):
             list = []
-            for i in range(gc.getNumBuildingClassInfos()):
+            for i in xrange(gc.getNumBuildingClassInfos()):
                 iBuilding = gc.getBuildingClassInfo(i).getDefaultBuildingIndex()
                 if iBuilding != -1 and gc.getBuildingInfo(iBuilding).getProductionCost() > 0:
                    list.append(iBuilding)

@@ -7,11 +7,14 @@
 # Created:     09/01/2009
 #-------------------------------------------------------------------------------
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, PlotLandscapeLayers,
+                                CyGInterfaceScreen, PopupStates,
+                                WidgetTypes, PanelStyles, PlotStyles,
+                                NotifyCode, InterfaceModeTypes, CyInterface)
 import BugUtil
 import CvStrategyOverlay
-import CvUtil
-import sys
+#import CvUtil
+#import sys
 
 X, Y = 0, 1    # used in point tuples instead of creating a new class
 
@@ -54,8 +57,8 @@ class CvDotMapOverlayScreen:
         self.DOT_STYLE = PlotStyles.PLOT_STYLE_DOT_TARGET
         self.NO_DOT_STYLE = PlotStyles.PLOT_STYLE_NONE
         self.BFC_OFFSETS = []
-        for x in range(-2, 3):
-            for y in range(-2, 3):
+        for x in xrange(-2, 3):
+            for y in xrange(-2, 3):
                 if abs(x) != 2 or abs(y) != 2:
                     self.BFC_OFFSETS.append((x, y))
         #---------------------------------------------------------------------------
@@ -75,7 +78,7 @@ class CvDotMapOverlayScreen:
         """
         global g_DotMap
         g_DotMap = CvStrategyOverlay.getDotMap()
-        for index in range(len(CvStrategyOverlay.COLOR_KEYS)):
+        for index in xrange(len(CvStrategyOverlay.COLOR_KEYS)):
             self.COLOR_WIDGET_IDS.append(self.COLOR_WIDGET_PREFIX + str(index))
 
     def isOpen(self):

@@ -1,11 +1,11 @@
-## BUG File stuff
+## Mod BUG File stuff
 
 import codecs
 import os
 import os.path
-import string
+# import string
 import BugCore
-import BugOptions
+# import BugOptions
 import BugPath
 import BugConfigTracker
 

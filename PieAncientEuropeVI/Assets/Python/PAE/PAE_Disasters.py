@@ -56,7 +56,7 @@ def doGenerateDisaster(iGameTurn):
         iBuilding1 = gc.getInfoTypeForString("BUILDINGCLASS_ORACLE")
         iBuilding2 = gc.getInfoTypeForString("BUILDINGCLASS_ORACLE2")
         iRange = gc.getMAX_PLAYERS()
-        for i in range(iRange):
+        for i in xrange(iRange):
             loopPlayer = gc.getPlayer(i)
             if loopPlayer.isHuman():
                 iChance = 0
@@ -111,8 +111,8 @@ def doSandsturm():
 
     lDesert = []
     # Schritt 1: DesertPlots raussuchen
-    for x in range(iMapW):
-        for y in range(iMapH):
+    for x in xrange(iMapW):
+        for y in xrange(iMapH):
             loopPlot = gc.getMap().plot(x, y)
             if loopPlot is not None and not loopPlot.isNone():
                 if loopPlot.getFeatureType() == iDarkIce:
@@ -140,15 +140,15 @@ def doSandsturm():
       #  4 = WORLDSIZE_LARGE
       #  5 = WORLDSIZE_HUGE
       iMaxEffect = max(1, gc.getMap().getWorldSize() - 1)
-      for _ in range(iMaxEffect):
+      for _ in xrange(iMaxEffect):
         if len(lDesert):
           iRand = CvUtil.myRandom(len(lDesert), "doSandsturmGetRandomXCoord")
           iPlotX = lDesert[iRand]
 
           # Sandsturm 3 breit
           # entlang der x-Koordinate auf allen y Plots
-          for x in range(3):
-            for y in range(iMapH):
+          for x in xrange(3):
+            for y in xrange(iMapH):
               loopPlot = plotXY(iPlotX, y, x, 0)
               if loopPlot is not None and not loopPlot.isNone():
                 if loopPlot.getFeatureType() == iDarkIce: continue
@@ -164,7 +164,7 @@ def doSandsturm():
                     OwnerArray.append(loopPlot.getOwner())
 
           # Remove x-Koordinaten 3 Felder breit
-          for i in range(-3,4):
+          for i in xrange(-3,4):
             j = iPlotX + i
             if j in lDesert:
               lDesert.remove(j)
@@ -172,7 +172,7 @@ def doSandsturm():
 
       # Sturmmeldung an die Plot-Besitzer
       iRange = len(OwnerArray)
-      for i in range(iRange):
+      for i in xrange(iRange):
         if OwnerArray[i] != -1:
           if gc.getPlayer(OwnerArray[i]).isHuman():
             CyInterface().addMessage(gc.getPlayer(OwnerArray[i]).getID(), True, 12, CyTranslator().getText("TXT_KEY_DISASTER_DESERTSTORM", ("", )), None, 2, gc.getFeatureInfo(feat_desertstorm).getButton(), ColorTypes(7), -1, -1, False, False)
@@ -215,7 +215,7 @@ def doGrasshopper():
         iMax = 4
 
     # 10 Versuche max. 4 Heuschreckenplagen zu kreieren
-    for _ in range(10):
+    for _ in xrange(10):
 
         iRandX = CvUtil.myRandom(iMapW, "doGrasshopper1")
         iRandY = CvUtil.myRandom(iMapH, "doGrasshopper2")
@@ -226,8 +226,8 @@ def doGrasshopper():
             if pPlot.getFeatureType() == -1 and not pPlot.isPeak() and pPlot.getTerrainType() in lTerrain:
                 OwnerArray = []
                 iMaxEffect += 1
-                for i in range(3):
-                    for j in range(5):
+                for i in xrange(3):
+                    for j in xrange(5):
                         # An den aeusseren Grenzen etwas auflockern
                         if j == 0 or j == 4:
                             iSetStorm = CvUtil.myRandom(2, "doGrasshopper3")
@@ -248,7 +248,7 @@ def doGrasshopper():
 
                 # Sturmmeldung an die Plot-Besitzer
                 iRange = len(OwnerArray)
-                for i in range(iRange):
+                for i in xrange(iRange):
                     if gc.getPlayer(OwnerArray[i]).isHuman():
                         CyInterface().addMessage(gc.getPlayer(OwnerArray[i]).getID(), True, 12, CyTranslator().getText("TXT_KEY_DISASTER_GRASSHOPPERS", ("",)), None, 2, gc.getFeatureInfo(feat_grasshopper).getButton(), ColorTypes(7), iRandX, iRandY, True, True)
 
@@ -286,7 +286,7 @@ def doNebel():
         iMax = 3
 
     # 10 Versuche max. iMax Nebel zu kreieren
-    for _ in range(10):
+    for _ in xrange(10):
         iRandX = CvUtil.myRandom(iMapW, "doNebel1")
         iRandY = CvUtil.myRandom(iMapH, "doNebel2")
 
@@ -296,8 +296,8 @@ def doNebel():
             if pPlot.getTerrainType() in lOceans:
                 OwnerArray = []
                 iMaxEffect += 1
-                for i in range(10):
-                    for j in range(7):
+                for i in xrange(10):
+                    for j in xrange(7):
                         # An den aeusseren Grenzen etwas auflockern
                         if i == 0 or i == 9 or j == 0 or j == 6:
                             iSetStorm = CvUtil.myRandom(3, "doNebel3")
@@ -316,7 +316,7 @@ def doNebel():
 
                                     # Nebel Variationen
                                     num_remove = CyGame().getMapRandNum(8,"Nebelvariation")
-                                    for r in range (num_remove):
+                                    for r in xrange (num_remove):
                                       plane_name = "Plane%02d" % (CyGame().getMapRandNum(16,"Nebelvariation")+1)
                                       loopPlot.setFeatureDummyVisibility(plane_name, False)
                                     # tiefste Texturen (Kante an Meeresoberfläche)
@@ -330,7 +330,7 @@ def doNebel():
 
                 # Sturmmeldung an die Plot-Besitzer
                 iRange = len(OwnerArray)
-                for i in range(iRange):
+                for i in xrange(iRange):
                     if gc.getPlayer(OwnerArray[i]).isHuman():
                         CyInterface().addMessage(gc.getPlayer(OwnerArray[i]).getID(), True, 12, CyTranslator().getText("TXT_KEY_DISASTER_NEBEL", ("",)), None, 2, gc.getFeatureInfo(feat_nebel).getButton(), ColorTypes(14), iRandX, iRandY, True, True)
 
@@ -374,7 +374,7 @@ def doSeesturm():
     #  else: iMax = 5
 
     # 20 Versuche max. iMax Seestuerme zu kreieren
-    for _ in range(20):
+    for _ in xrange(20):
         # Maximal 5 Seestuerme
         if iMaxEffect == iMax:
             break
@@ -390,8 +390,8 @@ def doSeesturm():
             if pPlot.getTerrainType() in lOceans:
                 OwnerArray = []
                 iMaxEffect += 1
-                for i in range(8):
-                    for j in range(5):
+                for i in xrange(8):
+                    for j in xrange(5):
                         # An den aeusseren Grenzen etwas auflockern
                         if i == 0 or i == 7 or j == 0 or j == 4:
                             iSetStorm = CvUtil.myRandom(2, "doSeesturm3")
@@ -415,7 +415,7 @@ def doSeesturm():
 
                 # Sturmmeldung an die Plot-Besitzer
                 iRange = len(OwnerArray)
-                for i in range(iRange):
+                for i in xrange(iRange):
                     if gc.getPlayer(OwnerArray[i]).isHuman():
                         CyInterface().addMessage(gc.getPlayer(OwnerArray[i]).getID(), True, 12, CyTranslator().getText("TXT_KEY_DISASTER_SEESTURM", ("",)), None, 2, gc.getFeatureInfo(feat_seesturm).getButton(), ColorTypes(7), iRandX, iRandY, True, True)
 
@@ -450,7 +450,7 @@ def doTornado():
     #else: iMax = 7
 
     # 10 Versuche fuer max. iMax Tornados
-    for _ in range(10):
+    for _ in xrange(10):
 
         # Maximal iMax Effekte
         if iMaxEffect == iMax:
@@ -509,8 +509,8 @@ def doTornado():
                         PAE_City.doCheckCityState(pCity)
 
                 # rundherum Sturm kreieren
-                for i in range(3):
-                    for j in range(3):
+                for i in xrange(3):
+                    for j in xrange(3):
                         loopPlot = gc.getMap().plot(iRandX - 1 + i, iRandY - 1 + j)
                         if loopPlot is not None and not loopPlot.isNone():
                             if loopPlot.getFeatureType() == iDarkIce:
@@ -586,8 +586,8 @@ def doErdbeben(iX, iY):
                             popupInfo.addPopup(iPlayer)
                             CyInterface().addMessage(iPlayer, True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_EARTHQUAKE_6_OR_7", (iSkala, 0)), "AS2D_EARTHQUAKE", 2, gc.getFeatureInfo(feat_erdbeben).getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
 
-                    for i in range(3):
-                        for j in range(3):
+                    for i in xrange(3):
+                        for j in xrange(3):
                             loopPlot = gc.getMap().plot(iRandX - 1 + i, iRandY - 1 + j)
                             if loopPlot is not None and not loopPlot.isNone():
                                 if loopPlot.getFeatureType() == iDarkIce:
@@ -661,8 +661,8 @@ def doErdbeben(iX, iY):
                             # Message: Ein verheerendes Erdbeben der Staerke 8 erschuetterte ein fernes Land.
                             CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_EARTHQUAKE_8_FAR_AWAY", ("",)), None, 2, gc.getFeatureInfo(feat_erdbeben).getButton(), ColorTypes(12), pPlot.getX(), pPlot.getY(), True, True)
 
-                    for i in range(5):
-                        for j in range(5):
+                    for i in xrange(5):
+                        for j in xrange(5):
                             loopPlot = gc.getMap().plot(iRandX - 2 + i, iRandY - 2 + j)
                             if loopPlot is not None and not loopPlot.isNone():
                                 if loopPlot.getFeatureType() == iDarkIce:
@@ -739,8 +739,8 @@ def doErdbeben(iX, iY):
                             # Message: Ein verheerendes Erdbeben der Staerke 8 erschuetterte ein fernes Land.
                             CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_EARTHQUAKE_9_FAR_AWAY", ("",)), None, 2, gc.getFeatureInfo(feat_erdbeben).getButton(), ColorTypes(12), pPlot.getX(), pPlot.getY(), True, True)
 
-                    for i in range(7):
-                        for j in range(7):
+                    for i in xrange(7):
+                        for j in xrange(7):
                             loopPlot = gc.getMap().plot(iRandX - 3 + i, iRandY - 3 + j)
                             if loopPlot is not None and not loopPlot.isNone():
                                 if loopPlot.getFeatureType() == iDarkIce:
@@ -857,8 +857,8 @@ def doErdbeben(iX, iY):
 
                 # Testen ob es ein Ozean ist
                 iNumWaterTiles = 0
-                for i in range(5):
-                    for j in range(5):
+                for i in xrange(5):
+                    for j in xrange(5):
                         loopPlot = gc.getMap().plot(iRandX - 2 + i, iRandY - 2 + j)
                         if loopPlot is not None and not loopPlot.isNone():
                             if loopPlot.getFeatureType() == iDarkIce:
@@ -883,7 +883,7 @@ def doVulkan(iX, iY, iSkala):
         iMapH = gc.getMap().getGridHeight()
 
         # 10 Versuche einen Berg ausfindig zu machen
-        for _ in range(10):
+        for _ in xrange(10):
             # Plot soll nicht ganz am Rand sein (Flunky: alle 4 Raender ausnehmen)
             iRandX = 3 + CvUtil.myRandom(iMapW - 6, "doVulkan2")
             iRandY = 3 + CvUtil.myRandom(iMapH - 6, "doVulkan3")
@@ -978,8 +978,8 @@ def doVulkan(iX, iY, iSkala):
 
         # Staerke 1
         if iSkala == 8:
-            for i in range(3):
-                for j in range(3):
+            for i in xrange(3):
+                for j in xrange(3):
                     loopPlot = gc.getMap().plot(iRandX - 1 + i, iRandY - 1 + j)
                     if loopPlot is not None and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce:
@@ -1046,8 +1046,8 @@ def doVulkan(iX, iY, iSkala):
                             doEraseBonusFromDisaster(loopPlot)
 
             # Sauerer Regen
-            for i in range(7):
-                for j in range(7):
+            for i in xrange(7):
+                for j in xrange(7):
                     loopPlot = gc.getMap().plot(iRandX - 3 + i, iRandY - 3 + j)
                     if loopPlot is not None and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce:
@@ -1060,8 +1060,8 @@ def doVulkan(iX, iY, iSkala):
 
         # Staerke 2
         else:
-            for i in range(5):
-                for j in range(5):
+            for i in xrange(5):
+                for j in xrange(5):
                     loopPlot = gc.getMap().plot(iRandX - 2 + i, iRandY - 2 + j)
                     if loopPlot is not None and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce:
@@ -1143,8 +1143,8 @@ def doVulkan(iX, iY, iSkala):
             # Sauerer Regen
             # Ellipse nach Osten oder Westen: 15 Plots
             iRand_W_O = CvUtil.myRandom(2, "doVulkan6")
-            for i in range(20):
-                for j in range(-5, 6):
+            for i in xrange(20):
+                for j in xrange(-5, 6):
                     if iRand_W_O == 1:
                         loopPlot = gc.getMap().plot(iRandX + i, iRandY + j)
                     else:
@@ -1186,7 +1186,7 @@ def doVulkan(iX, iY, iSkala):
             # Vulkan wird zu Wasser, wenn auf einer (Halb)Insel
             # Sprengt sich weg (somit keine Vulkan-Feature-Grafik notwendig)
             iNumWaterTiles = 0
-            for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+            for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                 loopPlot = plotDirection(iRandX, iRandY, DirectionTypes(iI))
                 if loopPlot is not None and not loopPlot.isNone():
                     if loopPlot.isWater() and loopPlot.getFeatureType() != iDarkIce:
@@ -1217,7 +1217,7 @@ def doVulkan(iX, iY, iSkala):
                 iBonus = bonus_obsidian
 
             if iBonus != -1:
-                for iLoopPlot in range(iRange):
+                for iLoopPlot in xrange(iRange):
                     iRand = CvUtil.myRandom(100, "doVulkan9")
                     if iRand < 100 / (iLoopPlot+1):
                         pLoopPlot = bonusPlotArray[iLoopPlot]
@@ -1235,8 +1235,8 @@ def undoVulkan():
     iMapW = gc.getMap().getGridWidth()
     iMapH = gc.getMap().getGridHeight()
 
-    for i in range(iMapW):
-        for j in range(iMapH):
+    for i in xrange(iMapW):
+        for j in xrange(iMapH):
             pPlot = gc.getMap().plot(i, j)
 
             if pPlot.getFeatureType() == feat_vulkan:
@@ -1281,15 +1281,15 @@ def doTsunami(iX, iY):
     # Plot 4: Nur Modernisierungen
     # Stadtmauer 50%, Palisade 100% und Hohe Mauer 20% weg
 
-    for iHimmelsrichtung in range(4):
+    for iHimmelsrichtung in xrange(4):
         iDamageMaxPlots = 4
         bEffectDone = False
         bDoTsunami = False
 
         # 3 Plots dicke Flutkatastrophe
-        for d in range(3):
+        for d in xrange(3):
             # Checken ob innerhalb von 10 Feldern Land ist
-            for i in range(10):
+            for i in xrange(10):
                 if iHimmelsrichtung == 0:
                     loopPlot = CyMap().plot(iX - 1 + d, iY + i) # Norden
                 elif iHimmelsrichtung == 1:
@@ -1307,7 +1307,7 @@ def doTsunami(iX, iY):
         if not bDoTsunami:
             return
 
-        for d in range(3):
+        for d in xrange(3):
             iDamagePlots = 0
 
             if iHimmelsrichtung == 0:
@@ -1319,7 +1319,7 @@ def doTsunami(iX, iY):
             elif iHimmelsrichtung == 3:
                 iRange = iX
 
-            for i in range(iRange):
+            for i in xrange(iRange):
 
                 if iHimmelsrichtung == 0:
                     loopPlot = CyMap().plot(iX - 1 + d, iY + i)
@@ -1480,7 +1480,7 @@ def doMeteorites():
         # iMax = 12
 
     # 20 Chancen fuer max. iMax Meteorstrikes
-    for _ in range(20):
+    for _ in xrange(20):
         # Maximal iMax Effekte
         if iMaxEffect == iMax:
             break
@@ -1540,8 +1540,8 @@ def doMeteorites():
                 PAE_City.doCheckCityState(pCity)
 
             # rundherum Brand generieren und dabei 50:50 Modernis und Strassen entfernen
-            for i in range(3):
-                for j in range(3):
+            for i in xrange(3):
+                for j in xrange(3):
                     loopPlot = gc.getMap().plot(iRandX - 1 + i, iRandY - 1 + j)
                     if loopPlot is not None and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce: continue
@@ -1627,7 +1627,7 @@ def doComet():
         iMax = 3
 
     # iMax Kometen
-    for _ in range(iMax):
+    for _ in xrange(iMax):
         # Soll nicht ganz am Rand sein (Flunky: alle 4 Raender ausnehmen)
         iRandX = 3 + CvUtil.myRandom(iMapW - 6, "doComet1")
         iRandY = 3 + CvUtil.myRandom(iMapH - 6, "doComet2")
@@ -1667,7 +1667,7 @@ def doComet():
                     pCity.setFood(0)
 
                     # Messages
-                    for iPlayer2 in range(iRangeMaxPlayers):
+                    for iPlayer2 in xrange(iRangeMaxPlayers):
                         pSecondPlayer = gc.getPlayer(iPlayer2)
                         iSecondPlayer = pSecondPlayer.getID()
                         if pSecondPlayer.isHuman():
@@ -1691,8 +1691,8 @@ def doComet():
                     PAE_City.doCheckCityState(pCity)
 
                 # rundherum Brand generieren und dabei 50:50 Modernis und Strassen entfernen
-                for i in range(7):
-                    for j in range(7):
+                for i in xrange(7):
+                    for j in xrange(7):
                         loopPlot = gc.getMap().plot(iRandX - 3 + i, iRandY - 3 + j)
                         if loopPlot is not None and not loopPlot.isNone():
                             if loopPlot.getFeatureType() == iDarkIce:
@@ -1759,7 +1759,7 @@ def doDestroyCityBuildings(pCity, iChance):
         iOwner = pCity.getOwner()
         iRange = gc.getNumBuildingInfos()
         bDestroyed = False
-        for iBuilding in range(iRange):
+        for iBuilding in xrange(iRange):
             if pCity.getNumRealBuilding(iBuilding):
                 pBuilding = gc.getBuildingInfo(iBuilding)
                 if not isWorldWonderClass(pBuilding.getBuildingClassType()):
@@ -1786,7 +1786,7 @@ def doDestroyCityWonders(pCity, iChance, iFeatureType):
           gc.getInfoTypeForString("BUILDING_PYRAMID")
         ]
         iRange = gc.getNumBuildingInfos()
-        for iBuilding in range(iRange):
+        for iBuilding in xrange(iRange):
           if iBuilding not in LDoNotDestroy:
             pBuilding = gc.getBuildingInfo(iBuilding)
             if pCity.getNumBuilding(iBuilding) and isWorldWonderClass(pBuilding.getBuildingClassType()):
@@ -1796,7 +1796,7 @@ def doDestroyCityWonders(pCity, iChance, iFeatureType):
                     pOwner = gc.getPlayer(iOwner)
                     iOwnerTeam = pOwner.getTeam()
                     iRangeMaxPlayers = gc.getMAX_PLAYERS()
-                    for iAllPlayer in range(iRangeMaxPlayers):
+                    for iAllPlayer in xrange(iRangeMaxPlayers):
                         ThisPlayer = gc.getPlayer(iAllPlayer)
                         iThisPlayer = ThisPlayer.getID()
                         iThisTeam = ThisPlayer.getTeam()
@@ -1813,7 +1813,7 @@ def doDestroyCityWonders(pCity, iChance, iFeatureType):
   # iChance = Wahrscheinlichkeit, dass eine Unit gekillt wird
 def doKillUnits(pPlot, iChance):
     iRange = pPlot.getNumUnits()
-    for iUnit in range(iRange):
+    for iUnit in xrange(iRange):
         pUnit = pPlot.getUnit(iUnit)
         if pUnit is not None:
             iRand = CvUtil.myRandom(100, "doKillUnits")
@@ -1924,13 +1924,13 @@ def doEraseBonusFromDisaster(pPlot):
 def doOracleShowsDisaster(iX,iY):
     iBuilding = gc.getInfoTypeForString("BUILDINGCLASS_ORACLE")
     iRange = gc.getMAX_PLAYERS()
-    for i in range(iRange):
+    for i in xrange(iRange):
       pPlayer = gc.getPlayer(i)
       if pPlayer.isHuman():
         if pPlayer.getBuildingClassCount(iBuilding) > 0:
           iTeam = pPlayer.getTeam()
-          for x in range(-1, 2):
-            for y in range(-1, 2):
+          for x in xrange(-1, 2):
+            for y in xrange(-1, 2):
               loopPlot = plotXY(iX, iY, x, y)
               if loopPlot is not None and not loopPlot.isNone():
                 if not loopPlot.isVisible(iTeam, 0):

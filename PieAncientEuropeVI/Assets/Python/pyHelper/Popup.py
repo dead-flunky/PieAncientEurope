@@ -235,7 +235,7 @@ class PyPopup:
 		DDS  = 1
 		IMG  = 2
 		
-		for i in range(len(TitleList)):
+		for i in xrange(len(TitleList)):
 			titleType, titleName, titleSize = TitleList[i]
 				
 			# handle setting title size
@@ -262,8 +262,8 @@ class PyPopup:
 	def addTableData(self, TableData):
 		'Adds data to the table'
 		iLenTable = len(TableData)
-		for i in range(iLenTable):
+		for i in xrange(iLenTable):
 			loopRowData = TableData[i]
 			self.addTableCellText(i+1, 0, loopRowData[0])
-			for j in range(len(loopRowData[1])):
+			for j in xrange(len(loopRowData[1])):
 				self.addTableCellText(i+1, j+1, loopRowData[1][j])

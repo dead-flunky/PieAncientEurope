@@ -22,6 +22,8 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface, CyGame,
 gc = CyGlobalContext()
 
 # don't make this an event - Moose
+
+
 def init():
     # for PythonExtensions Help File
     PythonHelp = 0        # doesn't work on systems which haven't installed Python
@@ -29,15 +31,16 @@ def init():
     # dump Civ python module directory
     if PythonHelp:
         import CvPythonExtensions
-        helpFile=file("CvPythonExtensions.hlp.txt", "w") # noqa
-        sys.stdout=helpFile
+        helpFile = file("CvPythonExtensions.hlp.txt", "w")  # noqa
+        sys.stdout = helpFile
         import pydoc
         pydoc.help(CvPythonExtensions)
         helpFile.close()
 
-    sys.stderr=CvUtil.RedirectError()
+    sys.stderr = CvUtil.RedirectError()
     sys.excepthook = CvUtil.myExceptHook
-    sys.stdout=CvUtil.RedirectDebug()
+    sys.stdout = CvUtil.RedirectDebug()
+
 
 def onSave():
     'Here is your chance to save data.  This function should return a string'
@@ -45,16 +48,18 @@ def onSave():
     import pickle
     import CvEventInterface
     # if the tutorial is active, it will save out the Shown Messages list
-    saveDataStr = pickle.dumps( CvEventInterface.onEvent( ('OnSave',0,0,0,0,0 ) ) )
+    saveDataStr = pickle.dumps(CvEventInterface.onEvent(('OnSave', 0, 0, 0, 0, 0)))
     return saveDataStr
+
 
 def onLoad(argsList):
     'Called when a file is loaded'
     import pickle
     import CvEventInterface
-    loadDataStr=argsList[0]
+    loadDataStr = argsList[0]
     if len(loadDataStr):
-        CvEventInterface.onEvent( ('OnLoad',pickle.loads(loadDataStr),0,0,0,0,0 ) )
+        CvEventInterface.onEvent(('OnLoad', pickle.loads(loadDataStr), 0, 0, 0, 0, 0))
+
 
 def preGameStart():
     import CvScreensInterface
@@ -74,9 +79,13 @@ def preGameStart():
     NiTextOut("Loading main interface...")
     CvScreensInterface.showMainInterface()
 
+
 def onPbemSend(argsList):
     # import sys
-    import smtplib, MimeWriter, base64, StringIO
+    import smtplib
+    import MimeWriter
+    import base64
+    import StringIO
 
     szToAddr = argsList[0]
     szFromAddr = argsList[1]
@@ -126,15 +135,15 @@ def onPbemSend(argsList):
     try:
         smtp = smtplib.SMTP(szHost)
         # trying to get TLS to work...
-        #smtp.set_debuglevel(1)
-        #smtp.ehlo()
-        #smtp.starttls()
-        #smtp.ehlo()
+        # smtp.set_debuglevel(1)
+        # smtp.ehlo()
+        # smtp.starttls()
+        # smtp.ehlo()
         if len(szUser) > 0:
             smtp.login(szUser, szPassword)
         smtp.sendmail(szFromAddr, szToAddr, message.getvalue())
         smtp.quit()
-    except smtplib.SMTPAuthenticationError, e: # noqa
+    except smtplib.SMTPAuthenticationError, e:  # noqa
         CyInterface().addImmediateMessage("Authentication Error: The server didn't accept the username/password combination provided.", "")
         CyInterface().addImmediateMessage("Error %d: %s" % (e.smtp_code, e.smtp_error), "")
         return 1
@@ -167,23 +176,33 @@ def onPbemSend(argsList):
         return 1
     return 0
 
-#####################################33
-## INTERNAL USE ONLY
-#####################################33
+# 33
+# INTERNAL USE ONLY
+# 33
+
+
 def normalizePath(argsList):
-    CvUtil.pyPrint("PathName in = %s" %(argsList[0],))
-    pathOut=os.path.normpath(argsList[0])
-    CvUtil.pyPrint("PathName out = %s" %(pathOut,))
+    CvUtil.pyPrint("PathName in = %s" % (argsList[0],))
+    pathOut = os.path.normpath(argsList[0])
+    CvUtil.pyPrint("PathName out = %s" % (pathOut,))
     return pathOut
+
 
 def getConsoleMacro(argsList):
     'return a string macro that is used by the in-game python console, fxnKey goes from 1 to 10'
     fxnKey = argsList[0]
-    if (fxnKey==1): return "player = gc.getPlayer(0)"
-    if (fxnKey==2): return "import CvCameraControls"
-    if (fxnKey==3): return "CvCameraControls.g_CameraControls.resetCameraControls()"
-    if (fxnKey==4): return "CvCameraControls.g_CameraControls.doRotateCamera(360, 45.0)"
-    if (fxnKey==5): return "CvCameraControls.g_CameraControls.doZoomCamera(0.2, 0.5)"
-    if (fxnKey==6): return "CvCameraControls.g_CameraControls.doZoomCamera(0.5, 0.15)"
-    if (fxnKey==7): return "CvCameraControls.g_CameraControls.doPitchCamera(0.5, 0.5)"
+    if (fxnKey == 1):
+        return "player = gc.getPlayer(0)"
+    if (fxnKey == 2):
+        return "import CvCameraControls"
+    if (fxnKey == 3):
+        return "CvCameraControls.g_CameraControls.resetCameraControls()"
+    if (fxnKey == 4):
+        return "CvCameraControls.g_CameraControls.doRotateCamera(360, 45.0)"
+    if (fxnKey == 5):
+        return "CvCameraControls.g_CameraControls.doZoomCamera(0.2, 0.5)"
+    if (fxnKey == 6):
+        return "CvCameraControls.g_CameraControls.doZoomCamera(0.5, 0.15)"
+    if (fxnKey == 7):
+        return "CvCameraControls.g_CameraControls.doPitchCamera(0.5, 0.5)"
     return ""

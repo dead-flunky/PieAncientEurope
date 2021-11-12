@@ -1,105 +1,110 @@
-## BugEventManager
+# BugEventManager
 ##
-## Extended version of CvCustomEventManager by Gillmer J. Derge.
+# Extended version of CvCustomEventManager by Gillmer J. Derge.
 ##
-## Changes:
+# Changes:
 ##
-## You no longer need to modify this module in order to add your custom events.
-## Instead, add <event> and <events> tags to your mod's config XML or call
-## addEventHandler() from your mod's Python, preferably an <init> function.
+# You no longer need to modify this module in order to add your custom events.
+# Instead, add <event> and <events> tags to your mod's config XML or call
+# addEventHandler() from your mod's Python, preferably an <init> function.
 ##
-## * New public methods
+# * New public methods
 ##
 ##   - hasEvent(eventType)
-##       Returns True if eventType is defined
+# Returns True if eventType is defined
 ##
 ##   - addEvent(eventType)
-##       Adds a new event type with no default handler; you can also add a final True
-##       parameter to your call to addEventHandler() or use <event> and <events>
-##       in your mod's config XML to add your events and handlers.
+# Adds a new event type with no default handler; you can also add a final True
+# parameter to your call to addEventHandler() or use <event> and <events>
+# in your mod's config XML to add your events and handlers.
 ##
-##   - fireEvent(eventType, args...)
-##       Fires an event from Python, building an argList from the arguments passed in
+# - fireEvent(eventType, args...)
+# Fires an event from Python, building an argList from the arguments passed in
 ##
 ##   - setPopupHandler(eventType, handler)
-##       Sets the handler for the given popup event type
+# Sets the handler for the given popup event type
 ##
 ##   - setPopupHandlers(eventType, name, beginFunction, applyFunction)
-##       Calls setPopupHandler() with a composed handler tuple
+# Calls setPopupHandler() with a composed handler tuple
 ##
 ##   - removePopupHandler(eventType)
-##       Removes the handlers for a popup event (int)
+# Removes the handlers for a popup event (int)
 ##
 ##   - addShortcutHandler(keys, function)
-##       Adds a handler for the given keyboard shortcut(s)
+# Adds a handler for the given keyboard shortcut(s)
 ##
-## * New BUG events
+# * New BUG events
 ##
 ##   - BeginActivePlayerTurn(ePlayer, iGameTurn)
-##       Signifies the moment the active player can begin making their moves
-##       Fired from CvMainInterface.updateScreen()
+# Signifies the moment the active player can begin making their moves
+# Fired from CvMainInterface.updateScreen()
 ##
 ##   - SwitchHotSeatPlayer(ePlayer, iGameTurn)
-##       Signifies that the active player in a Hot Seat game has changed
+# Signifies that the active player in a Hot Seat game has changed
 ##
 ##   - LanguageChanged(iLanguage)
-##       Fired from CvOptionsScreenCallbackInterface.handleLanguagesDropdownBoxInput()
+# Fired from CvOptionsScreenCallbackInterface.handleLanguagesDropdownBoxInput()
 ##
 ##   - ResolutionChanged(iResolution)
-##       Fired from CvOptionsScreenCallbackInterface.handleResolutionDropdownInput()
+# Fired from CvOptionsScreenCallbackInterface.handleResolutionDropdownInput()
 ##
 ##   - PreGameStart
-##       Fired from CvAppInterface.preGameStart()
+# Fired from CvAppInterface.preGameStart()
 ##
 ##   - PythonReloaded
-##       Fired after Python modules have been reloaded while game is running
+# Fired after Python modules have been reloaded while game is running
 ##
-## * New BULL events
+# * New BULL events
 ##
 ##   - unitUpgraded(pOldUnit, pNewUnit, iPrice)
-##       Fired when a unit is upgraded
+# Fired when a unit is upgraded
 ##
 ##   - unitCaptured(eOwner, eUnitType, pNewUnit)
-##       Fired when a unit is captured
+# Fired when a unit is captured
 ##
 ##   - combatWithdrawal(pAttacker, pDefender)
-##       Fired when a unit withdraws from combat after doing maximum damage
+# Fired when a unit withdraws from combat after doing maximum damage
 ##
 ##   - combatRetreat(pAttacker, pDefender)
-##       Fired when a unit retreats from combat, escaping death
+# Fired when a unit retreats from combat, escaping death
 ##
 ##   - combatLogCollateral(pAttacker, pDefender, iDamage)
-##       Fired when a unit inflicts collateral damage to another unit
+# Fired when a unit inflicts collateral damage to another unit
 ##
 ##   - combatLogFlanking(pAttacker, pDefender, iDamage)
-##       Fired when a unit inflicts flanking damage to another unit
+# Fired when a unit inflicts flanking damage to another unit
 ##
 ##   - playerRevolution(ePlayer, iAnarchyTurns, leOldCivics, leNewCivics)
-##       Fired when a player begins revolution to new civics
+# Fired when a player begins revolution to new civics
 ##
-## * Fixed events
+# * Fixed events
 ##
 ##   - endTurnReady
-##       Signifies the first time the "End Turn" text is displayed on the screen
-##       Fired from CvMainInterface.updateScreen()
+# Signifies the first time the "End Turn" text is displayed on the screen
+# Fired from CvMainInterface.updateScreen()
 ##
-## * Events and their arguments are optionally logged.
+# * Events and their arguments are optionally logged.
 ##
-## * Added configure() to set the options.
+# * Added configure() to set the options.
 ##
-## * Calls BugInit.init() once before "OnLoad" or "PreGameStart" events
-##   are handled because CyGlobalContext is not ready during "Init" event.
-##   Both must do it because "OnLoad" happens before "PreGameStart", but
-##   the latter happens before "GameStart" (as expected).
+# * Calls BugInit.init() once before "OnLoad" or "PreGameStart" events
+# are handled because CyGlobalContext is not ready during "Init" event.
+# Both must do it because "OnLoad" happens before "PreGameStart", but
+# the latter happens before "GameStart" (as expected).
 ##
-## Based on CvCustomEventManager by Gillmer J. Derge
+# Based on CvCustomEventManager by Gillmer J. Derge
 ##
-## Copyright (c) 2008 The BUG Mod.
+# Copyright (c) 2008 The BUG Mod.
 ##
 ## Author: EmperorFool
 
 # import types
 # from CvPythonExtensions import *
+# --------- Better BTS AI mod (1/2) -------------
+import AIAutoPlay
+import ChangePlayer
+import Tester
+# --
 from CvPythonExtensions import (CyGame, CyGlobalContext, getChtLvl, CommerceTypes)
 # import CvCameraControls
 import CvEventManager
@@ -119,15 +124,10 @@ import BugUtil
 # other debugging features of Ramkhamhaeng
 
 CIV4_SHELL = False
-# --------- Better BTS AI mod (1/2) -------------
-import AIAutoPlay
-import ChangePlayer
-import Tester
-# --
 
-# BUG - Mac Support - start
+# Mod BUG - Mac Support - start
 BugUtil.fixSets(globals())
-# BUG - Mac Support - end
+# Mod BUG - Mac Support - end
 
 DEFAULT_LOGGING = True
 DEFAULT_NOLOG_EVENTS = set((
@@ -136,6 +136,7 @@ DEFAULT_NOLOG_EVENTS = set((
 
 gc = CyGlobalContext()
 g_eventManager = None
+
 
 class BugEventManager(CvEventManager.CvEventManager):
 
@@ -354,7 +355,6 @@ class BugEventManager(CvEventManager.CvEventManager):
                 # BugUtil.debug("BugEventManager - setting shortcut handler for %s", key)
                 # self.shortcuts[key] = handler
 
-
     def fireEvent(self, eventType, *args):
         """Fires the given event passing in all args as a list."""
         self._dispatchEvent(eventType, args)
@@ -429,7 +429,6 @@ class BugEventManager(CvEventManager.CvEventManager):
         BugInit.init()
         self._handleDefaultEvent(eventType, argsList)
 
-
     def resetActiveTurn(self, argsList=None):
         'resetActiveTurn'
         self.iActiveTurn = -1
@@ -457,7 +456,6 @@ class BugEventManager(CvEventManager.CvEventManager):
     def onResolutionChanged(self, argsList):
         """Called when the user changes their graphics resolution."""
         # iResolution = argsList[0]
-
 
     def onUnitUpgraded(self, argsList):
         """Called when a unit is upgraded."""
@@ -496,7 +494,6 @@ class BugEventManager(CvEventManager.CvEventManager):
         BugUtil.debug("%s flanks %s for %d HP",
                       pAttacker.getName(), pDefender.getName(), iDamage)
 
-
     def onPlayerRevolution(self, argsList):
         ePlayer, iAnarchyTurns, leOldCivics, leNewCivics = argsList
         civics = []
@@ -513,12 +510,12 @@ EVENT_FUNCTION_MAP = {
     "OnSave": BugEventManager._handleOnSaveEvent,
     "OnLoad": BugEventManager._handleInitBugEvent,
     "PreGameStart": BugEventManager._handleInitBugEvent,
-    #"GameStart": BugEventManager._handleInitBugEvent,
-    #"windowActivation": BugEventManager._handleInitBugEvent,
+    # "GameStart": BugEventManager._handleInitBugEvent,
+    # "windowActivation": BugEventManager._handleInitBugEvent,
 }
 
 
-## Initialization
+# Initialization
 
 def configure(logging=None, noLogEvents=None):
     # """Sets the global event manager's logging options."""
@@ -558,13 +555,16 @@ def configure(logging=None, noLogEvents=None):
     # g_eventManager.addEventHandler("gameUpdate", g_eventManager.onGameUpdate)
     # --
 
+
 def hookupPreGameStartEvent():
     'hookupPreGameStartEvent'
     BugUtil.extend(preGameStart, "CvAppInterface", "preGameStart")
+
 
 def preGameStart(originalFunc):
     'preGameStart'
     g_eventManager.fireEvent("PreGameStart")
     originalFunc()
+
 
 hookupPreGameStartEvent()

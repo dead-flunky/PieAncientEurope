@@ -4,9 +4,18 @@
 ## CvAdvisorUtils
 
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyTranslator, CyPopupInfo,
+                                PlayerOptionTypes, ButtonPopupTypes, CyGame,
+                                BuildingTypes, isLimitedWonderClass, YieldTypes,
+                                OrderTypes, CommerceTypes, UnitTypes, UnitAITypes,
+                                ReligionTypes, DomainTypes, isLimitedUnitClass,
+                                FeatTypes, BonusTypes, isNationalWonderClass)
 import PyHelpers
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 gc = CyGlobalContext()
 localText = CyTranslator()
@@ -390,7 +399,7 @@ def endTurnFeats(iPlayer):
 
         if (not gc.getPlayer(iPlayer).isFeatAccomplished(FeatTypes.FEAT_LUXURY_CONNECTED)):
 
-            for iI in range(gc.getNumBonusInfos()):
+            for iI in xrange(gc.getNumBonusInfos()):
                 if (gc.getBonusInfo(iI).getHappiness() > 0):
                     if (pCapitalCity.hasBonus(iI)):
                         gc.getPlayer(iPlayer).setFeatAccomplished(FeatTypes.FEAT_LUXURY_CONNECTED, True)
@@ -411,7 +420,7 @@ def endTurnFeats(iPlayer):
 
         if (not gc.getPlayer(iPlayer).isFeatAccomplished(FeatTypes.FEAT_FOOD_CONNECTED)):
 
-            for iI in range(gc.getNumBonusInfos()):
+            for iI in xrange(gc.getNumBonusInfos()):
                 if (gc.getBonusInfo(iI).getHealth() > 0):
                     if (pCapitalCity.hasBonus(iI)):
                         gc.getPlayer(iPlayer).setFeatAccomplished(FeatTypes.FEAT_FOOD_CONNECTED, True)
@@ -432,7 +441,7 @@ def endTurnFeats(iPlayer):
 
         if (not gc.getPlayer(iPlayer).isFeatAccomplished(FeatTypes.FEAT_CORPORATION_ENABLED)):
 
-            for iI in range(gc.getNumBuildingInfos()):
+            for iI in xrange(gc.getNumBuildingInfos()):
                 eCorporation = gc.getBuildingInfo(iI).getFoundsCorporation()
                 if eCorporation != -1 and not gc.getGame().isCorporationFounded(eCorporation):
                     bValid = True
@@ -440,7 +449,7 @@ def endTurnFeats(iPlayer):
                     if not gc.getTeam(eTeam).isHasTech(gc.getBuildingInfo(iI).getPrereqAndTech()):
                         bValid = False
                     if bValid:
-                        for iPrereq in range(gc.getDefineINT("NUM_BUILDING_AND_TECH_PREREQS")):
+                        for iPrereq in xrange(gc.getDefineINT("NUM_BUILDING_AND_TECH_PREREQS")):
                             if not gc.getTeam(eTeam).isHasTech(gc.getBuildingInfo(iI).getPrereqAndTechs(iPrereq)):
                                 bValid = False
                                 break
@@ -449,7 +458,7 @@ def endTurnFeats(iPlayer):
 
                         szBonusList = u""
                         bFirst = True
-                        for iPrereq in range(gc.getDefineINT("NUM_CORPORATION_PREREQ_BONUSES")):
+                        for iPrereq in xrange(gc.getDefineINT("NUM_CORPORATION_PREREQ_BONUSES")):
                             eBonus = gc.getCorporationInfo(eCorporation).getPrereqBonus(iPrereq)
                             if eBonus != -1:
                                 if bFirst:
@@ -459,7 +468,7 @@ def endTurnFeats(iPlayer):
                                 szBonusList += gc.getBonusInfo(eBonus).getDescription()
 
                         szFounder = u""
-                        for iUnit in range(gc.getNumUnitInfos()):
+                        for iUnit in xrange(gc.getNumUnitInfos()):
                             if gc.getUnitInfo(iUnit).getBuildings(iI) or gc.getUnitInfo(iUnit).getForceBuildings(iI):
                                 szFounder = gc.getUnitInfo(iUnit).getTextKey()
                                 break
@@ -536,7 +545,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestUnit = UnitTypes.NO_UNIT
 
-                        for iI in range(gc.getNumUnitClassInfos()):
+                        for iI in xrange(gc.getNumUnitClassInfos()):
 
                             if (not isLimitedUnitClass(iI)):
 
@@ -579,7 +588,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestUnit = UnitTypes.NO_UNIT
 
-                        for iI in range(gc.getNumUnitClassInfos()):
+                        for iI in xrange(gc.getNumUnitClassInfos()):
 
                             if (not isLimitedUnitClass(iI)):
 
@@ -622,7 +631,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestUnit = UnitTypes.NO_UNIT
 
-                        for iI in range(gc.getNumUnitClassInfos()):
+                        for iI in xrange(gc.getNumUnitClassInfos()):
 
                             if (not isLimitedUnitClass(iI)):
 
@@ -670,7 +679,7 @@ def cityAdvise(pCity, iPlayer):
                                 iBestValue = 0
                                 eBestUnit = UnitTypes.NO_UNIT
 
-                                for iI in range(gc.getNumUnitClassInfos()):
+                                for iI in xrange(gc.getNumUnitClassInfos()):
 
                                     eLoopUnit = gc.getCivilizationInfo(gc.getPlayer(iPlayer).getCivilizationType()).getCivilizationUnits(iI)
 
@@ -713,7 +722,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if (not isLimitedWonderClass(iI)):
 
@@ -754,7 +763,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if (not isLimitedWonderClass(iI)):
 
@@ -795,7 +804,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if (not isLimitedWonderClass(iI)):
 
@@ -836,7 +845,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if (not isLimitedWonderClass(iI)):
 
@@ -877,7 +886,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if (not isLimitedWonderClass(iI)):
 
@@ -919,7 +928,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if not isLimitedWonderClass(iI):
 
@@ -961,7 +970,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if (not isLimitedWonderClass(iI)):
 
@@ -1002,7 +1011,7 @@ def cityAdvise(pCity, iPlayer):
                         iBestValue = 0
                         eBestBuilding = BuildingTypes.NO_BUILDING
 
-                        for iI in range(gc.getNumBuildingClassInfos()):
+                        for iI in xrange(gc.getNumBuildingClassInfos()):
 
                             if (not isLimitedWonderClass(iI)):
 

@@ -1,10 +1,19 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyMap, DirectionTypes,
+                                CyFractal, PlotTypes, WorldSizeTypes,
+                                FeatureTypes, plotDirection, plotXY,
+                                TerrainTypes, NiTextOut)
 import CvUtil
-import random
-from math import sqrt
-import sys
+# import random
+# from math import sqrt
+# import sys
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 
 """
 NOTES ABOUT THE MAP UTILITIES
@@ -85,10 +94,10 @@ class FractalWorld:
 
     def shiftPlotTypesBy(self, xshift, yshift):
         if xshift > 0 or yshift > 0:
-            iWH = self.iNumPlotsX * self.iNumPlotsY
+            # iWH = self.iNumPlotsX * self.iNumPlotsY
             buf = self.plotTypes[:]
-            for iDestY in range(self.iNumPlotsY):
-                for iDestX in range(self.iNumPlotsX):
+            for iDestY in xrange(self.iNumPlotsY):
+                for iDestX in xrange(self.iNumPlotsX):
                     iDestI = self.iNumPlotsX*iDestY + iDestX
                     iSourceX = iDestX + xshift
                     iSourceY = iDestY + yshift
@@ -108,10 +117,10 @@ class FractalWorld:
         piLandWeights = self.calcWeights(stripRadius)
 
         scores = [0]*self.iNumPlotsY
-        for y in range(self.iNumPlotsY):
+        for y in xrange(self.iNumPlotsY):
             landScore = 0
             bFoundLand = False
-            for x in range(self.iNumPlotsX):
+            for x in xrange(self.iNumPlotsX):
                 i = y*self.iNumPlotsX + x
                 assert (i >= 0 and i < numPlots)
                 if self.plotTypes[i] == PlotTypes.PLOT_LAND:
@@ -120,7 +129,7 @@ class FractalWorld:
             if bFoundLand:
                 landScore += 30 # the first land is worth about 10 plots of land
 
-            for i in range(stripSize):
+            for i in xrange(stripSize):
                 yy = y + i - stripCenterIndex
                 yy %= self.iNumPlotsY
                 scores[yy] += landScore * piLandWeights[i]
@@ -138,10 +147,10 @@ class FractalWorld:
         piLandWeights = self.calcWeights(stripRadius)
 
         scores = [0]*self.iNumPlotsX
-        for x in range(self.iNumPlotsX):
+        for x in xrange(self.iNumPlotsX):
             landScore = 0
             bFoundLand = False
-            for y in range(self.iNumPlotsY):
+            for y in xrange(self.iNumPlotsY):
                 i = y*self.iNumPlotsX + x
                 assert (i >= 0 and i < numPlots)
                 if self.plotTypes[i] == PlotTypes.PLOT_LAND:
@@ -150,7 +159,7 @@ class FractalWorld:
             if bFoundLand:
                 landScore += 30 # the first land is worth about 10 plots of land
 
-            for i in range(stripSize):
+            for i in xrange(stripSize):
                 xx = x + i - stripCenterIndex
                 xx %= self.iNumPlotsX
                 scores[xx] += landScore * piLandWeights[i]
@@ -161,7 +170,7 @@ class FractalWorld:
     def calcWeights(self, stripRadius):
         stripSize = 2*stripRadius
         landWeights = [0]*stripSize
-        for i in range(stripSize):
+        for i in xrange(stripSize):
             distFromStart = i+1
             distFromEnd = stripSize-i
             distFromEdge = min(distFromStart, distFromEnd)
@@ -192,8 +201,8 @@ class FractalWorld:
         iHillsTop2 = self.hillsFrac.getHeightFromPercent(min((self.hillGroupTwoBase + self.hillGroupTwoRange), 100))
         iPeakThreshold = self.peaksFrac.getHeightFromPercent(self.peakPercent)
 
-        for x in range(self.iNumPlotsX):
-            for y in range(self.iNumPlotsY):
+        for x in xrange(self.iNumPlotsX):
+            for y in xrange(self.iNumPlotsY):
                 i = y*self.iNumPlotsX + x
                 val = self.continentsFrac.getHeight(x, y)
                 if val <= iWaterThreshold:
@@ -380,8 +389,8 @@ class HintedWorld(FractalWorld):
 
     def bestHintsSplitX(self):
         scores = [0]*self.w
-        for x in range(self.w):
-            for y in range(self.h):
+        for x in xrange(self.w):
+            for y in xrange(self.h):
                 if self.getValue(x, y) >= 192:
                     scores[x] += 1
                 if self.getValue(x-1, y) >= 192:
@@ -391,8 +400,8 @@ class HintedWorld(FractalWorld):
 
     def bestHintsSplitY(self):
         scores = [0]*self.h
-        for x in range(self.w):
-            for y in range(self.h):
+        for x in xrange(self.w):
+            for y in xrange(self.h):
                 if self.getValue(x, y) >= 192:
                     scores[y] += 1
                 if self.getValue(x, y-1) >= 192:
@@ -405,8 +414,8 @@ class HintedWorld(FractalWorld):
         if splitx != 0 or splity != 0:
             buf = self.data[:]
             # shift the values in self.data left by best_split
-            for x in range(self.w):
-                for y in range(self.h):
+            for x in xrange(self.w):
+                for y in xrange(self.h):
                     i = y*self.w + x
                     self.setValue(x-splitx, y-splity, buf[i])
 
@@ -424,7 +433,7 @@ class HintedWorld(FractalWorld):
         size = len(self.data)
         minExp = min(self.fracXExp, self.fracYExp)
         iGrain = None
-        for i in range(minExp):
+        for i in xrange(minExp):
             width = (1 << (self.fracXExp - minExp + i))
             height = (1 << (self.fracYExp - minExp + i))
             if not self.iFlags & CyFractal.FracVals.FRAC_WRAP_X:
@@ -446,8 +455,8 @@ class HintedWorld(FractalWorld):
         val = self.getValue(x, y)
         if val:
             return False
-        for dx in range(-1, 2):
-            for dy in range(-1, 2):
+        for dx in xrange(-1, 2):
+            for dy in xrange(-1, 2):
                 val = self.getValue(x+dx, y+dy)
                 if val and val >= 192 and ((not cont) or (x+dx, y+dy) not in cont.blocks):
                     return False
@@ -463,8 +472,8 @@ class HintedWorld(FractalWorld):
                 return foundx, foundy
 
         plots = []
-        for dx in range(-dist, dist+1):
-            for dy in range(-dist, dist+1):
+        for dx in xrange(-dist, dist+1):
+            for dy in xrange(-dist, dist+1):
                 if max(abs(dx), abs(dy)) == dist:
                     plots.append((x+dx, y+dy))
 
@@ -484,7 +493,7 @@ class HintedWorld(FractalWorld):
         return (0 <= x < self.w and 0 <= y < self.h)
 
     def generatePlotTypes(self, water_percent=-1, shift_plot_types=False):
-        for i in range(len(self.data)):
+        for i in xrange(len(self.data)):
             if self.data[i] == None:
                 self.data[i] = self.mapRand.get(48, "Generate Plot Types PYTHON")
 
@@ -506,7 +515,7 @@ def printMap(data, w, h, markerx=-1, markery=-1):
     hrange.reverse()
     for y in hrange:
         str = "|"
-        for x in range(w):
+        for x in xrange(w):
             val = data[y*w + x]
             if (x, y) == (markerx, markery):
                 str += "O"
@@ -670,10 +679,10 @@ class MultilayeredFractal:
 
     def shiftRegionPlotsBy(self, xshift, yshift, iRegionWidth, iRegionHeight):
         if xshift > 0 or yshift > 0:
-            iWH = iRegionWidth * iRegionHeight
+            # iWH = iRegionWidth * iRegionHeight
             buf = self.plotTypes[:]
-            for iDestY in range(iRegionHeight):
-                for iDestX in range(iRegionWidth):
+            for iDestY in xrange(iRegionHeight):
+                for iDestX in xrange(iRegionWidth):
                     iDestI = iRegionWidth*iDestY + iDestX
                     iSourceX = iDestX + xshift
                     iSourceY = iDestY + yshift
@@ -693,10 +702,10 @@ class MultilayeredFractal:
         piLandWeights = self.calcWeights(stripRadius)
 
         scores = [0]*iRegionHeight
-        for y in range(iRegionHeight):
+        for y in xrange(iRegionHeight):
             landScore = 0
             bFoundLand = False
-            for x in range(iRegionWidth):
+            for x in xrange(iRegionWidth):
                 i = y*iRegionWidth + x
                 assert (i >= 0 and i < numPlots)
                 if self.plotTypes[i] == PlotTypes.PLOT_LAND:
@@ -705,7 +714,7 @@ class MultilayeredFractal:
             if bFoundLand:
                 landScore += 30 # the first land is worth about 10 plots of land
 
-            for i in range(stripSize):
+            for i in xrange(stripSize):
                 yy = y + i - stripCenterIndex
                 yy %= iRegionHeight
                 scores[yy] += landScore * piLandWeights[i]
@@ -723,10 +732,10 @@ class MultilayeredFractal:
         piLandWeights = self.calcWeights(stripRadius)
 
         scores = [0]*iRegionWidth
-        for x in range(iRegionWidth):
+        for x in xrange(iRegionWidth):
             landScore = 0
             bFoundLand = False
-            for y in range(iRegionHeight):
+            for y in xrange(iRegionHeight):
                 i = y*iRegionWidth + x
                 assert (i >= 0 and i < numPlots)
                 if self.plotTypes[i] == PlotTypes.PLOT_LAND:
@@ -735,7 +744,7 @@ class MultilayeredFractal:
             if bFoundLand:
                 landScore += 30 # the first land is worth about 10 plots of land
 
-            for i in range(stripSize):
+            for i in xrange(stripSize):
                 xx = x + i - stripCenterIndex
                 xx %= iRegionWidth
                 scores[xx] += landScore * piLandWeights[i]
@@ -746,7 +755,7 @@ class MultilayeredFractal:
     def calcWeights(self, stripRadius):
         stripSize = 2*stripRadius
         landWeights = [0]*stripSize
-        for i in range(stripSize):
+        for i in xrange(stripSize):
             distFromStart = i+1
             distFromEnd = stripSize-i
             distFromEdge = min(distFromStart, distFromEnd)
@@ -795,8 +804,8 @@ class MultilayeredFractal:
         iPeakThreshold = regionPeaksFrac.getHeightFromPercent(self.gc.getClimateInfo(self.map.getClimate()).getPeakPercent())
 
         # Loop through the region's plots
-        for x in range(iRegionWidth):
-            for y in range(iRegionHeight):
+        for x in xrange(iRegionWidth):
+            for y in xrange(iRegionHeight):
                 i = y*iRegionWidth + x
                 val = regionContinentsFrac.getHeight(x, y)
                 if val <= iWaterThreshold:
@@ -824,9 +833,9 @@ class MultilayeredFractal:
         # create a subclass and override this function. Customize in your override.
         #
         # Apply the region's plots to the global plot array.
-        for x in range(iRegionWidth):
+        for x in xrange(iRegionWidth):
             wholeworldX = x + iWestX
-            for y in range(iRegionHeight):
+            for y in xrange(iRegionHeight):
                 i = y*iRegionWidth + x
                 if self.plotTypes[i] == PlotTypes.PLOT_OCEAN:
                     continue
@@ -885,17 +894,17 @@ class MultilayeredFractal:
         regiononeEastLon = 0.35
         regiononeNorthLat = 0.95
         regiononeSouthLat = 0.45
-        regiontwoWestLon = 0.45
-        regiontwoEastLon = 0.95
-        regiontwoNorthLat = 0.95
-        regiontwoSouthLat = 0.45
+        # regiontwoWestLon = 0.45
+        # regiontwoEastLon = 0.95
+        # regiontwoNorthLat = 0.95
+        # regiontwoSouthLat = 0.45
         subcontinentLargeHorz = 0.2
         subcontinentLargeVert = 0.32
-        subcontinentLargeNorthLat = 0.6
+        # subcontinentLargeNorthLat = 0.6
         subcontinentLargeSouthLat = 0.28
-        subcontinentSmallDimension = 0.125
-        subcontinentSmallNorthLat = 0.525
-        subcontinentSmallSouthLat = 0.4
+        # subcontinentSmallDimension = 0.125
+        # subcontinentSmallNorthLat = 0.525
+        # subcontinentSmallSouthLat = 0.4
         # You can then use these longitudes and latitudes crossed with grid sizes
         # to enable one definition to fit any map size, map width, map height.
 
@@ -932,8 +941,8 @@ class MultilayeredFractal:
         scLargeHeight = int(subcontinentLargeVert * self.iH)
         scRoll = self.dice.get((regiononeWidth - scLargeWidth), "Large Subcontinent Placement - Map_Script_Name PYTHON")
         scWestX = regiononeWestX + scRoll
-        scEastX = scWestX + scLargeWidth
-        scNorthY = int(self.iH * subcontinentLargeNorthLat)
+        # scEastX = scWestX + scLargeWidth
+        # scNorthY = int(self.iH * subcontinentLargeNorthLat)
         scSouthY = int(self.iH * subcontinentLargeSouthLat)
 
         # Clever use of dice rolls can inject some randomization in to definitions.
@@ -1102,8 +1111,8 @@ class TerrainGenerator:
 
     def generateTerrain(self):
         terrainData = [0]*(self.iWidth*self.iHeight)
-        for x in range(self.iWidth):
-            for y in range(self.iHeight):
+        for x in xrange(self.iWidth):
+            for y in xrange(self.iHeight):
                 iI = y*self.iWidth + x
                 terrain = self.generateTerrainAtPlot(x, y)
                 terrainData[iI] = terrain
@@ -1216,8 +1225,8 @@ class FeatureGenerator:
         self.terrainGrass = self.gc.getInfoTypeForString("TERRAIN_GRASS")
 
         "adds features to all plots as appropriate"
-        for iX in range(self.iGridW):
-            for iY in range(self.iGridH):
+        for iX in xrange(self.iGridW):
+            for iY in xrange(self.iGridH):
                 self.addFeaturesAtPlot(iX, iY)
 
                 # PAE: hier, weil die Fluesse bei, TerrainGenerator noch nicht gesetzt sind
@@ -1236,7 +1245,7 @@ class FeatureGenerator:
         lat = self.getLatitudeAtPlot(iX, iY)
         pPlot = self.map.sPlot(iX, iY)
 
-        for iI in range(self.gc.getNumFeatureInfos()):
+        for iI in xrange(self.gc.getNumFeatureInfos()):
             if pPlot.canHaveFeature(iI):
                 if self.mapRand.get(10000, "Add Feature PYTHON") < self.gc.getFeatureInfo(iI).getAppearanceProbability():
                     pPlot.setFeatureType(iI, -1)
@@ -1294,11 +1303,11 @@ class FeatureGenerator:
 
 def getAreas():
     "Returns a list of CyArea objects representing all the areas in the map (land and water)"
-    gc = CyGlobalContext()
+    # gc = CyGlobalContext()
     map = CyMap()
 
     areas = []
-    for i in range(map.getIndexAfterLastArea()):
+    for i in xrange(map.getIndexAfterLastArea()):
         area = map.getArea(i)
         if not area.isNone():
             areas.append(area)
@@ -1319,15 +1328,15 @@ def findStartingPlot(playerID, validFn = None):
         iBestValue = 0
         pBestPlot = None
 
-        for iX in range(map.getGridWidth()):
-            for iY in range(map.getGridHeight()):
+        for iX in xrange(map.getGridWidth()):
+            for iY in xrange(map.getGridHeight()):
                 if validFn and not validFn(playerID, iX, iY):
                     continue
                 pLoopPlot = map.plot(iX, iY)
                 val = pLoopPlot.getFoundValue(playerID)
                 if val > iBestValue:
                     valid = True
-                    for iI in range(gc.getMAX_CIV_PLAYERS()):
+                    for iI in xrange(gc.getMAX_CIV_PLAYERS()):
                         if (gc.getPlayer(iI).isAlive()):
                             if (iI != playerID):
                                 if gc.getPlayer(iI).startingPlotWithinRange(pLoopPlot, playerID, iRange, iPass):
@@ -1389,7 +1398,7 @@ class BonusBalancer:
                     return False
 
         if not bIgnoreAdjacent:
-            for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+            for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                 pLoopPlot = plotDirection(iX, iY, DirectionTypes(iI))
                 if not pLoopPlot.isNone():
                     if (pLoopPlot.getBonusType(-1) != -1) and (pLoopPlot.getBonusType(-1) != eBonus):
@@ -1397,8 +1406,8 @@ class BonusBalancer:
 
         if not bIgnoreUniqueRange:
             uniqueRange = self.gc.getBonusInfo(eBonus).getUniqueRange()
-            for iDX in range(-uniqueRange, uniqueRange+1):
-                for iDY in range(-uniqueRange, uniqueRange+1):
+            for iDX in xrange(-uniqueRange, uniqueRange+1):
+                for iDY in xrange(-uniqueRange, uniqueRange+1):
                     pLoopPlot = plotXY(iX, iY, iDX, iDY)
                     if not pLoopPlot.isNone() and pLoopPlot.getBonusType(-1) == eBonus:
                         return False
@@ -1407,26 +1416,26 @@ class BonusBalancer:
 
     def normalizeAddExtras(self):
 
-        for i in range(self.gc.getMAX_CIV_PLAYERS()):
+        for i in xrange(self.gc.getMAX_CIV_PLAYERS()):
             if (self.gc.getPlayer(i).isAlive()):
                 start_plot = self.gc.getPlayer(i).getStartingPlot() # returns a CyPlot
                 startx, starty = start_plot.getX(), start_plot.getY()
 
                 plots = []  # build a list of the plots near the starting plot
-                for dx in range(-5, 6):
-                    for dy in range(-5, 6):
+                for dx in xrange(-5, 6):
+                    for dy in xrange(-5, 6):
                         x, y = startx+dx, starty+dy
                         pLoopPlot = self.map.plot(x, y)
                         if not pLoopPlot.isNone():
                             plots.append(pLoopPlot)
 
                 resources_placed = []
-                for pass_num in range(4):
+                for pass_num in xrange(4):
                     bIgnoreUniqueRange = pass_num >= 1
                     bIgnoreOneArea = pass_num >= 2
                     bIgnoreAdjacent = pass_num >= 3
 
-                    for bonus in range(self.gc.getNumBonusInfos()):
+                    for bonus in xrange(self.gc.getNumBonusInfos()):
                         type_string = self.gc.getBonusInfo(bonus).getType()
                         if (type_string not in resources_placed) and (type_string in self.resourcesToBalance):
                             for (pLoopPlot) in plots:

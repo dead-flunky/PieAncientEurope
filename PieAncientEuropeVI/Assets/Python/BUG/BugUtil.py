@@ -759,7 +759,7 @@ def deferCall(function, delay=0.0):
     when = time.clock() + delay
     entry = (when, function)
     if deferredCallQueue:
-        for i in range(len(deferredCallQueue)):
+        for i in xrange(len(deferredCallQueue)):
             if when < deferredCallQueue[i][0]:
                 deferredCallQueue.insert(i, entry)
                 return

@@ -1,9 +1,13 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 ## Edited by pie (pierre@voak.at), Austria 2011
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CivilopediaPageTypes, TableStyles,
+                                WidgetTypes, PanelStyles, isPromotionValid,
+                                CyGameTextMgr, GenericButtonSizes, YieldTypes,
+                                CyGame, FontSymbols)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 # import PAE_Lists as L wird in der Hauptmenü-Pedia nicht geladen
 
@@ -93,15 +97,15 @@ class CvPediaUnit:
                 screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_UNIT, -1)
 
                 if self.top.iLastScreen != CvScreenEnums.PEDIA_UNIT or bNotActive:
-                        self.placeLinks(true)
+                        self.placeLinks(True)
                         self.top.iLastScreen = CvScreenEnums.PEDIA_UNIT
                 else:
-                        self.placeLinks(false)
+                        self.placeLinks(False)
 
                 # Icon
                 screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
                     self.X_UNIT_PANE, self.Y_UNIT_PANE, self.W_UNIT_PANE, self.H_UNIT_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-                screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+                screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
                     self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
                 szButton = gc.getUnitInfo(self.iUnit).getButton()
                 if self.top.iActivePlayer != -1:
@@ -148,21 +152,21 @@ class CvPediaUnit:
                 else:
                         iStrength = gc.getUnitInfo(self.iUnit).getCombat()
 
-                szName = self.top.getNextWidgetName()
+                # szName = self.top.getNextWidgetName()
                 szStrength = localText.getText("TXT_KEY_PEDIA_STRENGTH", ( iStrength, ) )
                 screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szStrength.upper() + u"%c" % CyGame().getSymbolID(FontSymbols.STRENGTH_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-                szName = self.top.getNextWidgetName()
+                # szName = self.top.getNextWidgetName()
                 szMovement = localText.getText("TXT_KEY_PEDIA_MOVEMENT", ( gc.getUnitInfo(self.iUnit).getMoves(), ) )
                 screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szMovement.upper() + u"%c" % CyGame().getSymbolID(FontSymbols.MOVES_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
-                
+
                 # PAE: not buildable units
                 if gc.getUnitInfo(self.iUnit).getProductionCost() == -1:
-                        szName = self.top.getNextWidgetName()
+                        # szName = self.top.getNextWidgetName()
                         szText = localText.getText("TXT_KEY_PEDIA_NOCOST", ())
                         screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
                 elif (gc.getUnitInfo(self.iUnit).getProductionCost() >= 0 and not gc.getUnitInfo(self.iUnit).isFound()):
-                        szName = self.top.getNextWidgetName()
+                        # szName = self.top.getNextWidgetName()
                         if self.top.iActivePlayer == -1:
                             iKosten = gc.getUnitInfo(self.iUnit).getProductionCost() * gc.getDefineINT("UNIT_PRODUCTION_PERCENT") / 100
                             #szCost = localText.getText("TXT_KEY_PEDIA_COST", ((gc.getUnitInfo(self.iUnit).getProductionCost() * gc.getDefineINT("UNIT_PRODUCTION_PERCENT"))/100,))
@@ -173,28 +177,28 @@ class CvPediaUnit:
                         szText = u"<font=3>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar()
                         if gc.getUnitInfo(self.iUnit).isMilitaryHappiness():
                             if self.iUnit == gc.getInfoTypeForString("UNIT_WARRIOR") or self.iUnit == gc.getInfoTypeForString("UNIT_HUNTER"): iKosten = 0
-                            szText += u" %d%c" % (iKosten / 2, gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar()) 
+                            szText += u" %d%c" % (iKosten / 2, gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar())
                         szText += u"</font>"
                         screen.appendListBoxStringNoUpdate(panelName, szText, WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
                 if (gc.getUnitInfo(self.iUnit).getAirRange() > 0):
-                        szName = self.top.getNextWidgetName()
+                        # szName = self.top.getNextWidgetName()
                         szRange = localText.getText("TXT_KEY_PEDIA_RANGE", ( gc.getUnitInfo(self.iUnit).getAirRange(), ) )
                         screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szRange.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
                 # PAE more infos
                 if gc.getUnitClassInfo(iUnitClass).getMaxPlayerInstances() != -1:
-                        szName = self.top.getNextWidgetName()
+                        # szName = self.top.getNextWidgetName()
                         szText = localText.getText("TXT_KEY_PEDIA_MAX_PLAYER", ( gc.getUnitClassInfo(iUnitClass).getMaxPlayerInstances(), ) )
                         screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
                 if gc.getUnitClassInfo(iUnitClass).getMaxGlobalInstances() != -1:
-                        szName = self.top.getNextWidgetName()
+                        # szName = self.top.getNextWidgetName()
                         szText = localText.getText("TXT_KEY_PEDIA_MAX_GLOBAL", ( gc.getUnitClassInfo(iUnitClass).getMaxGlobalInstances(), ) )
                         screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
                 if (gc.getUnitInfo(self.iUnit).getExtraCost() > 0):
-                        szName = self.top.getNextWidgetName()
+                        # szName = self.top.getNextWidgetName()
                         szText = localText.getText("TXT_KEY_UNIT_EXTRA_COST", ( gc.getUnitInfo(self.iUnit).getExtraCost(), ) )
                         screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
@@ -207,7 +211,7 @@ class CvPediaUnit:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", false, true, self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True, self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 screen.attachLabel(panelName, "", "  ")
 
@@ -219,7 +223,7 @@ class CvPediaUnit:
                 if (iPrereq >= 0):
                         screen.attachImageButton( panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, 1, False )
 
-                for j in range(gc.getDefineINT("NUM_UNIT_AND_TECH_PREREQS")):
+                for j in xrange(gc.getDefineINT("NUM_UNIT_AND_TECH_PREREQS")):
                         iPrereq = gc.getUnitInfo(self.iUnit).getPrereqAndTechs(j)
                         if (iPrereq >= 0):
                                 screen.attachImageButton( panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, -1, False )
@@ -248,7 +252,7 @@ class CvPediaUnit:
 
                 # count the number of OR resources
                 nOr = 0
-                for j in range(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
+                for j in xrange(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
                         if (gc.getUnitInfo(self.iUnit).getPrereqOrBonuses(j) > -1):
                                 nOr += 1
 
@@ -266,7 +270,7 @@ class CvPediaUnit:
                         screen.attachLabel(panelName, "", szLeftDelimeter)
 
                 bFirst = True
-                for j in range(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
+                for j in xrange(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
                         eBonus = gc.getUnitInfo(self.iUnit).getPrereqOrBonuses(j)
                         if (eBonus > -1):
                                 if (not bFirst):
@@ -285,11 +289,11 @@ class CvPediaUnit:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_UPGRADES_TO", ()), "", false, true, self.X_UPGRADES_TO_PANE, self.Y_UPGRADES_TO_PANE, self.W_UPGRADES_TO_PANE, self.H_UPGRADES_TO_PANE, PanelStyles.PANEL_STYLE_BLUE50)
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_UPGRADES_TO", ()), "", False, True, self.X_UPGRADES_TO_PANE, self.Y_UPGRADES_TO_PANE, self.W_UPGRADES_TO_PANE, self.H_UPGRADES_TO_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 
                 screen.attachLabel(panelName, "", "  ")
 
-                for k in range(gc.getNumUnitClassInfos()):
+                for k in xrange(gc.getNumUnitClassInfos()):
                         if self.top.iActivePlayer == -1:
                                 eLoopUnit = gc.getUnitClassInfo(k).getDefaultUnitIndex()
                         else:
@@ -307,7 +311,7 @@ class CvPediaUnit:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", true, false,
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False,
                                  self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 listName = self.top.getNextWidgetName()
@@ -341,16 +345,16 @@ class CvPediaUnit:
 
                 # add pane and text
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_PROMOTION", ()), "", true, true, self.X_PROMO_PANE, self.Y_PROMO_PANE, self.W_PROMO_PANE, self.H_PROMO_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
+                screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_PROMOTION", ()), "", True, True, self.X_PROMO_PANE, self.Y_PROMO_PANE, self.W_PROMO_PANE, self.H_PROMO_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 # add promotion buttons
                 rowListName = self.top.getNextWidgetName()
                 screen.addMultiListControlGFC(rowListName, "", self.X_PROMO_PANE+15, self.Y_PROMO_PANE+40, self.W_PROMO_PANE-20, self.H_PROMO_PANE-40, 1, self.PROMOTION_ICON_SIZE, self.PROMOTION_ICON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 
-                for k in range(gc.getNumPromotionInfos()):
-                  if (isPromotionValid(k, self.iUnit, false) and not gc.getPromotionInfo(k).isGraphicalOnly()):
+                for k in xrange(gc.getNumPromotionInfos()):
+                  if (isPromotionValid(k, self.iUnit, False) and not gc.getPromotionInfo(k).isGraphicalOnly()):
                     if "_FORM_" in gc.getPromotionInfo(k).getType(): break
-                    screen.appendMultiListButton( rowListName, gc.getPromotionInfo(k).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, k, -1, false )
+                    screen.appendMultiListButton( rowListName, gc.getPromotionInfo(k).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, k, -1, False )
 
         def placeLinks(self, bRedraw):
 
@@ -361,7 +365,7 @@ class CvPediaUnit:
 
                 # sort Units alphabetically
                 unitsList=[(0,0)]*gc.getNumUnitInfos()
-                for j in range(gc.getNumUnitInfos()):
+                for j in xrange(gc.getNumUnitInfos()):
                         unitsList[j] = (gc.getUnitInfo(j).getDescription(), j)
                 unitsList.sort()
 
@@ -370,8 +374,8 @@ class CvPediaUnit:
                 i = 0
                 iSelected = 0
                 A = ""
-                #for iI in range(gc.getNumUnitInfos()):
-                for iI in range(len(unitsList)):
+                #for iI in xrange(gc.getNumUnitInfos()):
+                for iI in xrange(len(unitsList)):
                   if (not gc.getUnitInfo(unitsList[iI][1]).isGraphicalOnly()):
                     if (not gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") or not gc.getGame().isFinalInitialized() or gc.getGame().isUnitEverActive(unitsList[iI][1])):
                       # Buchstabe
@@ -380,7 +384,7 @@ class CvPediaUnit:
                         A = B
                         i += 1 # Zeile in der linken Navi
                         # Buchstabe anzeigen
-                        if bRedraw: 
+                        if bRedraw:
                           screen.appendListBoxStringNoUpdate( self.top.LIST_ID, u"<font=2>[" + A + u"]</font>", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_CENTER_JUSTIFY )
                       # Name anzeigen
                       if bRedraw:
@@ -398,7 +402,7 @@ class CvPediaUnit:
 
         def getStandardUnits(self):
             list = []
-            for i in range(gc.getNumUnitClassInfos()):
+            for i in xrange(gc.getNumUnitClassInfos()):
                 iUnit = gc.getUnitClassInfo(i).getDefaultUnitIndex()
                 if iUnit != -1 and gc.getUnitInfo(iUnit).getProductionCost() > 0:
                    #and gc.getUnitClassInfo(i).getMaxPlayerInstances() == -1 \
@@ -425,7 +429,7 @@ class CvPediaUnit:
 
                 lStandardUnits = self.getStandardUnits()
 
-                for iUnit in range(gc.getNumUnitInfos()):
+                for iUnit in xrange(gc.getNumUnitInfos()):
                     if iType == 1 and iUnit not in lStandardUnits:
                        listUnits.append(iUnit)
                        iCount += 1

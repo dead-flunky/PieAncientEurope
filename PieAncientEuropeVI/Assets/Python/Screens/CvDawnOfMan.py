@@ -2,7 +2,13 @@
 ## Copyright Firaxis Games 2005
 
 import CvUtil
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CyGame, CyMap,
+                                CyGameTextMgr, WidgetTypes, PanelStyles,
+                                GenericButtonSizes, PopupStates,
+                                CyInterface, CyAudioGame,
+                                CyGInterfaceScreen,
+                                AttitudeTypes, ButtonStyles)
 
 ArtFileMgr = CyArtFileMgr()
 localText = CyTranslator()
@@ -87,30 +93,30 @@ class CvDawnOfMan:
                 screen.showScreen(PopupStates.POPUPSTATE_QUEUED, False)
                 screen.showWindowBackground( False )
                 screen.setDimensions(self.X_SCREEN, screen.centerY(self.Y_SCREEN), self.W_SCREEN, self.H_SCREEN)
-                screen.enableWorldSounds( false )
+                screen.enableWorldSounds( False )
 
                 # Create panels
 
                 # Main
                 szMainPanel = "DawnOfManMainPanel"
-                screen.addPanel( szMainPanel, "", "", true, true,
+                screen.addPanel( szMainPanel, "", "", True, True,
                         self.X_MAIN_PANEL, self.Y_MAIN_PANEL, self.W_MAIN_PANEL, self.H_MAIN_PANEL, PanelStyles.PANEL_STYLE_MAIN )
 
                 # Top
                 szHeaderPanel = "DawnOfManHeaderPanel"
-                screen.addPanel( szHeaderPanel, "", "", true, false,
+                screen.addPanel( szHeaderPanel, "", "", True, False,
                         self.X_HEADER_PANEL, self.Y_HEADER_PANEL, self.W_HEADER_PANEL, self.H_HEADER_PANEL, PanelStyles.PANEL_STYLE_DAWNTOP )
 
                 # Bottom
                 szTextPanel = "DawnOfManTextPanel"
-                screen.addPanel( szTextPanel, "", "", true, true,
+                screen.addPanel( szTextPanel, "", "", True, True,
                         self.X_TEXT_PANEL, self.Y_TEXT_PANEL, self.W_TEXT_PANEL, self.H_TEXT_PANEL, PanelStyles.PANEL_STYLE_DAWNBOTTOM )
 
                 # Add contents
 
                 # Leaderhead graphic
                 szLeaderPanel = "DawnOfManLeaderPanel"
-                screen.addPanel( szLeaderPanel, "", "", true, false,
+                screen.addPanel( szLeaderPanel, "", "", True, False,
                         self.X_LEADER_ICON - 3, self.Y_LEADER_ICON - 5, self.W_LEADER_ICON + 6, self.H_LEADER_ICON + 8, PanelStyles.PANEL_STYLE_DAWNTOP )
                 screen.addLeaderheadGFC("LeaderHead", self.player.getLeaderType(), AttitudeTypes.ATTITUDE_PLEASED,
                         self.X_LEADER_ICON + 5, self.Y_LEADER_ICON + 5, self.W_LEADER_ICON - 10, self.H_LEADER_ICON - 10, WidgetTypes.WIDGET_GENERAL, -1, -1)
@@ -127,10 +133,10 @@ class CvDawnOfMan:
 
                 screen.addMultilineText( "HeaderText2", localText.getText("TXT_KEY_FREE_TECHS", ()) + ":", self.X_STATS_TEXT, self.Y_STATS_TEXT+15, self.W_STATS_TEXT, self.H_STATS_TEXT, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
-                screen.addPanel( "HeaderText3", "", "", false, true,
+                screen.addPanel( "HeaderText3", "", "", False, True,
                                  self.X_STATS_TEXT, self.Y_STATS_TEXT+30, self.W_TECH, self.H_TECH, PanelStyles.PANEL_STYLE_EMPTY )
 
-                for iTech in range(gc.getNumTechInfos()):
+                for iTech in xrange(gc.getNumTechInfos()):
                         if (gc.getCivilizationInfo(self.player.getCivilizationType()).isCivilizationFreeTechs(iTech)):
                                 screen.attachImageButton( "HeaderText3", "", gc.getTechInfo(iTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iTech, 1, False )
 
@@ -210,7 +216,7 @@ class CvDawnOfMan:
                 szDawnTitle = u"<font=3>" + localText.getText(szDawnText1, ()).upper() + u"</font>"
                 screen.setLabel("DawnTitle", "Background", szDawnTitle, CvUtil.FONT_CENTER_JUSTIFY,
                                 self.X_TEXT_PANEL + (self.W_TEXT_PANEL / 2), self.Y_TEXT_PANEL + 15, -2.0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-                bodyString = localText.getText(szDawnText2, (CyGameTextMgr().getTimeStr(gc.getGame().getGameTurn(), false), self.player.getCivilizationAdjectiveKey(), self.player.getNameKey()))
+                bodyString = localText.getText(szDawnText2, (CyGameTextMgr().getTimeStr(gc.getGame().getGameTurn(), False), self.player.getCivilizationAdjectiveKey(), self.player.getNameKey()))
                 screen.addMultilineText( "BodyText", bodyString, self.X_TEXT_PANEL + self.iMarginSpace, self.Y_TEXT_PANEL + self.iMarginSpace + self.iTEXT_PANEL_MARGIN, self.W_TEXT_PANEL - (self.iMarginSpace * 2), self.H_TEXT_PANEL - (self.iMarginSpace * 2) - 75, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
                 screen.setButtonGFC("Exit", self.EXIT_TEXT, "", self.X_EXIT, self.Y_EXIT, self.W_EXIT, self.H_EXIT, WidgetTypes.WIDGET_CLOSE_SCREEN, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
@@ -226,7 +232,7 @@ class CvDawnOfMan:
                 return
 
         def onClose(self):
-                CyInterface().setSoundSelectionReady(true)
+                CyInterface().setSoundSelectionReady(True)
                 return 0
 
         def calculateSizesAndPositions(self):

@@ -28,6 +28,11 @@ import BugUtil
 import PlayerUtil
 import TradeUtil
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 MAX_TRADE_DATA = 50  # avoid an infinite loop
 
 gc = CyGlobalContext()
@@ -259,7 +264,7 @@ def onHelpDemanded(argsList):
     #BugUtil.debug("DiplomacyUtil::onHelpDemanded %s" %(str(argsList)))
     eDemandPlayer, eTargetPlayer, pTrade = argsList
     szItems = ""
-    for i in range(pTrade.getCount()):
+    for i in xrange(pTrade.getCount()):
         szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i))
     BugUtil.debug("DiplomacyUtil - %s requests help (%s) from %s",
             PlayerUtil.getPlayer(eDemandPlayer).getName(),
@@ -270,7 +275,7 @@ def onHelpAccepted(argsList):
     #BugUtil.debug("DiplomacyUtil::onHelpAccepted %s" %(str(argsList)))
     eTargetPlayer, eDemandPlayer, pTrade = argsList
     szItems = ""
-    for i in range(pTrade.getCount()):
+    for i in xrange(pTrade.getCount()):
         szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i))
     BugUtil.debug("DiplomacyUtil - %s agrees to give help (%s) to %s",
             PlayerUtil.getPlayer(eTargetPlayer).getName(),
@@ -281,7 +286,7 @@ def onHelpRejected(argsList):
     #BugUtil.debug("DiplomacyUtil::onHelpRejected %s" %(str(argsList)))
     eTargetPlayer, eDemandPlayer, pTrade = argsList
     szItems = ""
-    for i in range(pTrade.getCount()):
+    for i in xrange(pTrade.getCount()):
         szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i))
     BugUtil.debug("DiplomacyUtil - %s refuses to give help (%s) to %s",
             PlayerUtil.getPlayer(eTargetPlayer).getName(),
@@ -293,7 +298,7 @@ def onTributeDemanded(argsList):
     #BugUtil.debug("DiplomacyUtil::onTributeDemanded %s" %(str(argsList)))
     eDemandPlayer, eTargetPlayer, pTrade = argsList
     szItems = ""
-    for i in range(pTrade.getCount()):
+    for i in xrange(pTrade.getCount()):
         szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i))
     BugUtil.debug("DiplomacyUtil - %s demands a tribute (%s) from %s",
             PlayerUtil.getPlayer(eDemandPlayer).getName(),
@@ -304,7 +309,7 @@ def onTributeAccepted(argsList):
     #BugUtil.debug("DiplomacyUtil::onTributeAccepted %s" %(str(argsList)))
     eTargetPlayer, eDemandPlayer, pTrade = argsList
     szItems = ""
-    for i in range(pTrade.getCount()):
+    for i in xrange(pTrade.getCount()):
         szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i))
     BugUtil.debug("DiplomacyUtil - %s agrees to give tribute (%s) to %s",
             PlayerUtil.getPlayer(eTargetPlayer).getName(),
@@ -315,7 +320,7 @@ def onTributeRejected(argsList):
     #BugUtil.debug("DiplomacyUtil::onTributeRejected %s" %(str(argsList)))
     eTargetPlayer, eDemandPlayer, pTrade = argsList
     szItems = ""
-    for i in range(pTrade.getCount()):
+    for i in xrange(pTrade.getCount()):
         szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i))
     BugUtil.debug("DiplomacyUtil - %s refuses to give tribute (%s) to %s",
             PlayerUtil.getPlayer(eTargetPlayer).getName(),
@@ -434,7 +439,7 @@ def getProposedTrade():
     return trade
 
 def getProposedTradeData(getFunc, addFunc):
-    for index in range(MAX_TRADE_DATA):
+    for index in xrange(MAX_TRADE_DATA):
         data = getFunc(index)
         if data:
             addFunc(data)

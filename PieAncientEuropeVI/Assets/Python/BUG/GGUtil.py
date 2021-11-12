@@ -9,7 +9,7 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, FontSymbols)
 import BugUtil
 import FontUtil
 

@@ -2,8 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import CvUtil
-from CvPythonExtensions import *
-import CvEventInterface
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyTranslator,
+                                ColorTypes, CyGame, PlotTypes, YieldTypes,
+                                CyUserProfile, PlayerOptionTypes)
+# import CvEventInterface
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 # globals
 gc = CyGlobalContext()
@@ -533,8 +540,8 @@ def initRiverTiles(bAddFeatures=False):
     RIVER_FEATURES = [
         gc.getInfoTypeForString("FEATURE_RIVER"),
         gc.getInfoTypeForString("FEATURE_RIVER_FORD")]
-    for x in range(iMapW):
-        for y in range(iMapH):
+    for x in xrange(iMapW):
+        for y in xrange(iMapH):
             loopPlot = gc.getMap().plot(x, y)
             """
             if loopPlot.getTerrainType() in RIVER_TERRAINS:
@@ -571,8 +578,8 @@ def addGoldNearbyRiverTiles():
     neighbours_indizies = [
         (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     goldYield = 2
-    for x in range(iMapW):
-        for y in range(iMapH):
+    for x in xrange(iMapW):
+        for y in xrange(iMapH):
             loopPlot = gc.getMap().plot(x, y)
             if(loopPlot.isRiver() or
                loopPlot.getPlotType() is not PlotTypes.PLOT_LAND):

@@ -1,10 +1,13 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CivilopediaPageTypes, YieldTypes,
+                                WidgetTypes, PanelStyles, TableStyles,
+                                CyGameTextMgr, GenericButtonSizes)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
-import string
+# import string
 
 # globals
 gc = CyGlobalContext()
@@ -42,8 +45,8 @@ class CvPediaBonus:
         self.W_STATS_PANE = 240
         self.H_STATS_PANE = 200
 
-        iWidthBuffer = 20
-        iHeightBuffer = 0
+        # iWidthBuffer = 20
+        # iHeightBuffer = 0
 
         self.X_IMPROVEMENTS_PANE = 10
         self.Y_IMPROVEMENTS_PANE = 237
@@ -97,15 +100,15 @@ class CvPediaBonus:
         screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_BONUS, -1)
 
         if self.top.iLastScreen != CvScreenEnums.PEDIA_BONUS or bNotActive:
-            self.placeLinks(true)
+            self.placeLinks(True)
             self.top.iLastScreen = CvScreenEnums.PEDIA_BONUS
         else:
-            self.placeLinks(false)
+            self.placeLinks(False)
 
         # Icon
         screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
             self.X_BONUS_PANE, self.Y_BONUS_PANE, self.W_BONUS_PANE, self.H_BONUS_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-        screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+        screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
             self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
         screen.addDDSGFC(self.top.getNextWidgetName(), gc.getBonusInfo(self.iBonus).getButton(),
             self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -117,16 +120,16 @@ class CvPediaBonus:
         self.placeStats()
 
         # PAE
-        list = [
-            gc.getInfoTypeForString("BONUSCLASS_GRAIN"),
-            gc.getInfoTypeForString("BONUSCLASS_LIVESTOCK"),
-            gc.getInfoTypeForString("BONUSCLASS_PLANTATION"),
-            gc.getInfoTypeForString("BONUSCLASS_MISC"),
-            gc.getInfoTypeForString("BONUSCLASS_RARITY"),
-            gc.getInfoTypeForString("BONUSCLASS_GENERAL"),
-            gc.getInfoTypeForString("BONUSCLASS_MERCENARY"),
-            gc.getInfoTypeForString("BONUSCLASS_LUXURY")
-        ]
+        # list = [
+        #     gc.getInfoTypeForString("BONUSCLASS_GRAIN"),
+        #     gc.getInfoTypeForString("BONUSCLASS_LIVESTOCK"),
+        #     gc.getInfoTypeForString("BONUSCLASS_PLANTATION"),
+        #     gc.getInfoTypeForString("BONUSCLASS_MISC"),
+        #     gc.getInfoTypeForString("BONUSCLASS_RARITY"),
+        #     gc.getInfoTypeForString("BONUSCLASS_GENERAL"),
+        #     gc.getInfoTypeForString("BONUSCLASS_MERCENARY"),
+        #     gc.getInfoTypeForString("BONUSCLASS_LUXURY")
+        # ]
         #if gc.getBonusInfo(self.iBonus).getBonusClassType() in list:
         self.placeTerrain()
         # ----
@@ -151,7 +154,7 @@ class CvPediaBonus:
         screen.enableSelect(panelName, False)
 
         szYield = ""
-        for k in range(YieldTypes.NUM_YIELD_TYPES):
+        for k in xrange(YieldTypes.NUM_YIELD_TYPES):
             iYieldChange = gc.getBonusInfo(self.iBonus).getYieldChange(k)
             if iYieldChange != 0:
                 if iYieldChange > 0:
@@ -176,7 +179,7 @@ class CvPediaBonus:
         y = 30
         a = 0
         # Terrain
-        for iI in range(gc.getNumTerrainInfos()):
+        for iI in xrange(gc.getNumTerrainInfos()):
             if not gc.getTerrainInfo(iI).isGraphicalOnly():
                 if gc.getBonusInfo(self.iBonus).isTerrain(iI):
                     screen.addDDSGFC(self.top.getNextWidgetName(), gc.getTerrainInfo(iI).getButton(),
@@ -185,7 +188,7 @@ class CvPediaBonus:
                     a += 1
 
         # Feature
-        for iI in range(gc.getNumFeatureInfos()):
+        for iI in xrange(gc.getNumFeatureInfos()):
             if not gc.getFeatureInfo(iI).isGraphicalOnly():
                 if gc.getBonusInfo(self.iBonus).isFeature(iI):
                     if a >= 5:
@@ -197,7 +200,7 @@ class CvPediaBonus:
                     x += 52
         # Feature + Terrain
         bPlus = True
-        for iI in range(gc.getNumTerrainInfos()):
+        for iI in xrange(gc.getNumTerrainInfos()):
             if not gc.getTerrainInfo(iI).isGraphicalOnly():
                 if gc.getBonusInfo(self.iBonus).isFeatureTerrain(iI) and not gc.getBonusInfo(self.iBonus).isTerrain(iI):
                     if bPlus:
@@ -220,16 +223,16 @@ class CvPediaBonus:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_IMPROVEMENT", ()), "", true, true,
+        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_IMPROVEMENT", ()), "", True, True,
                         self.X_IMPROVEMENTS_PANE, self.Y_IMPROVEMENTS_PANE, self.W_IMPROVEMENTS_PANE, self.H_IMPROVEMENTS_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
-        bonusInfo = gc.getBonusInfo(self.iBonus)
+        # bonusInfo = gc.getBonusInfo(self.iBonus)
 
-        for j in range(gc.getNumImprovementInfos()):
+        for j in xrange(gc.getNumImprovementInfos()):
             bFirst = True
             szYield = u""
             bEffect = False
-            for k in range(YieldTypes.NUM_YIELD_TYPES):
+            for k in xrange(YieldTypes.NUM_YIELD_TYPES):
                 iYieldChange = gc.getImprovementInfo(j).getImprovementBonusYield(self.iBonus, k)
                 # PAE: and Bonus makes valid
                 if iYieldChange != 0 or gc.getImprovementInfo(j).isImprovementBonusMakesValid(self.iBonus):
@@ -260,7 +263,7 @@ class CvPediaBonus:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_EFFECTS", ()), "", true, false,
+        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_EFFECTS", ()), "", True, False,
                         self.X_EFFECTS_PANE, self.Y_EFFECTS_PANE, self.W_EFFECTS_PANE, self.H_EFFECTS_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
         listName = self.top.getNextWidgetName()
@@ -283,7 +286,7 @@ class CvPediaBonus:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", false, true,
+        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True,
                         self.X_REQUIRES, self.Y_REQUIRES, self.W_REQUIRES, self.H_REQUIRES, PanelStyles.PANEL_STYLE_BLUE50 )
 
         screen.attachLabel(panelName, "", "  ")
@@ -317,18 +320,18 @@ class CvPediaBonus:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_BUILDING", ()), "", false, true, self.X_BUILDINGS, self.Y_BUILDINGS, self.W_BUILDINGS, self.H_BUILDINGS, PanelStyles.PANEL_STYLE_BLUE50 )
+        screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_BUILDING", ()), "", False, True, self.X_BUILDINGS, self.Y_BUILDINGS, self.W_BUILDINGS, self.H_BUILDINGS, PanelStyles.PANEL_STYLE_BLUE50 )
 
         screen.attachLabel(panelName, "", "  ")
 
-        for iBuilding in range(gc.getNumBuildingInfos()):
+        for iBuilding in xrange(gc.getNumBuildingInfos()):
             pBuildingInfo = gc.getBuildingInfo(iBuilding)
             # BTS Standard
             if pBuildingInfo.getFreeBonus() == self.iBonus:
                 screen.attachImageButton( panelName, "", pBuildingInfo.getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iBuilding, 1, False )
 
             # PAE: Buildings that give yield Bonus for that resource
-            for iYield in range(3):
+            for iYield in xrange(3):
                 if pBuildingInfo.getBonusYieldModifier(self.iBonus, iYield):
                     screen.attachImageButton( panelName, "", pBuildingInfo.getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iBuilding, 1, False )
 
@@ -341,13 +344,13 @@ class CvPediaBonus:
         screen = self.top.getScreen()
 
         panelName = self.top.getNextWidgetName()
-        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_ALLOWS", ()), "", false, true,
+        screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_ALLOWS", ()), "", False, True,
                         self.X_ALLOWS_PANE, self.Y_ALLOWS_PANE, self.W_ALLOWS_PANE, self.H_ALLOWS_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
         screen.attachLabel(panelName, "", "  ")
 
         # add unit buttons
-        for eLoopUnit in range(gc.getNumUnitInfos()):
+        for eLoopUnit in xrange(gc.getNumUnitInfos()):
             bFound = False
             if eLoopUnit >= 0:
                 if gc.getUnitInfo(eLoopUnit).getPrereqAndBonus() == self.iBonus:
@@ -364,7 +367,7 @@ class CvPediaBonus:
                     szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
                 screen.attachImageButton(panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False)
 
-        for eLoopBuilding in range(gc.getNumBuildingInfos()):
+        for eLoopBuilding in xrange(gc.getNumBuildingInfos()):
             bFound = False
             if gc.getBuildingInfo(eLoopBuilding).getPrereqAndBonus() == self.iBonus:
                 bFound = True
@@ -378,7 +381,7 @@ class CvPediaBonus:
                 screen.attachImageButton( panelName, "", gc.getBuildingInfo(eLoopBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoopBuilding, 1, False )
 
         # PAE Kulte
-        for eLoopBuilding in range(gc.getNumCorporationInfos()):
+        for eLoopBuilding in xrange(gc.getNumCorporationInfos()):
             bFound = False
             j = 0
             while not bFound and j < gc. getNUM_CORPORATION_PREREQ_BONUSES():
@@ -397,13 +400,13 @@ class CvPediaBonus:
 
         # sort resources alphabetically
         rowListName=[(0,0)]*gc.getNumBonusInfos()
-        for j in range(gc.getNumBonusInfos()):
+        for j in xrange(gc.getNumBonusInfos()):
             rowListName[j] = (gc.getBonusInfo(j).getDescription(), j)
         rowListName.sort()
 
         iSelected = 0
         i = 0
-        for iI in range(gc.getNumBonusInfos()):
+        for iI in xrange(gc.getNumBonusInfos()):
             if not gc.getBonusInfo(rowListName[iI][1]).isGraphicalOnly():
                 if bRedraw:
                     screen.appendListBoxString(self.top.LIST_ID, rowListName[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, rowListName[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
@@ -416,4 +419,3 @@ class CvPediaBonus:
     # Will handle the input for this screen...
     def handleInput (self, inputClass):
         return 0
-

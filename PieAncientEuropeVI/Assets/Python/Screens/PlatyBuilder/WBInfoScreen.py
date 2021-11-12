@@ -136,8 +136,8 @@ class WBInfoScreen:
         screen.setMinimapMap(self.replayInfo, iX, iX + iWidth, iY, iY + iHeight, -2.3)
         screen.updateMinimapSection(True, False)
         screen.setMinimapMode(MinimapModeTypes.MINIMAPMODE_REPLAY)
-        for iX in range(self.replayInfo.getMapWidth()):
-            for iY in range(self.replayInfo.getMapHeight()):
+        for iX in xrange(self.replayInfo.getMapWidth()):
+            for iY in xrange(self.replayInfo.getMapHeight()):
                 pPlot = CyMap().plot(iX, iY)
                 if pPlot.isNone(): continue
                 iColor = gc.getInfoTypeForString("COLOR_CLEAR")

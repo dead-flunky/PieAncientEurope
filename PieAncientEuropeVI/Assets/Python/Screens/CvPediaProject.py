@@ -1,8 +1,13 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, YieldTypes,
+                                CyGameTextMgr, WidgetTypes, PanelStyles,
+                                GenericButtonSizes,
+                                TableStyles, CivilopediaPageTypes,
+                                isTeamProject, isWorldProject)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 
 # globals
@@ -71,15 +76,15 @@ class CvPediaProject:
                 screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_PROJECT, -1)
 
                 if self.top.iLastScreen        != CvScreenEnums.PEDIA_PROJECT or bNotActive:
-                        self.placeLinks(true)
+                        self.placeLinks(True)
                         self.top.iLastScreen = CvScreenEnums.PEDIA_PROJECT
                 else:
-                        self.placeLinks(false)
+                        self.placeLinks(False)
 
                 # Icon
                 screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
                     self.X_MAIN_PANE, self.Y_MAIN_PANE, self.W_MAIN_PANE, self.H_MAIN_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-                screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+                screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
                     self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
                 screen.addDDSGFC(self.top.getNextWidgetName(), gc.getProjectInfo(self.iProject).getButton(),
                     self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -134,7 +139,7 @@ class CvPediaProject:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", false, true,
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True,
                                  self.X_REQUIRES, self.Y_REQUIRES, self.W_REQUIRES, self.H_REQUIRES, PanelStyles.PANEL_STYLE_BLUE50 )
                 screen.enableSelect(panelName, False)
                 screen.attachLabel(panelName, "", "  ")
@@ -150,7 +155,7 @@ class CvPediaProject:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_EFFECTS", ()), "", true, false,
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_EFFECTS", ()), "", True, False,
                                  self.X_SPECIAL, self.Y_SPECIAL, self.W_SPECIAL, self.H_SPECIAL, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 listName = self.top.getNextWidgetName()
@@ -163,7 +168,7 @@ class CvPediaProject:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, "", "", true, true,
+                screen.addPanel( panelName, "", "", True, True,
                                  self.X_TEXT, self.Y_TEXT, self.W_TEXT, self.H_TEXT, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 # PAE Upgrade: Strategy Text in Pedia
@@ -188,7 +193,7 @@ class CvPediaProject:
 
                 iSelected = 0
                 i = 0
-                for iI in range(len(listSorted)):
+                for iI in xrange(len(listSorted)):
                         if (not gc.getProjectInfo(listSorted[iI][1]).isGraphicalOnly()):
                                 if bRedraw:
                                         screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY)
@@ -210,10 +215,10 @@ class CvPediaProject:
 
         def getProjectSortedList(self):
                 listOfAllTypes = []
-                for iBuildingType in range(4):
+                for iBuildingType in xrange(4):
                         listBuildings = []
                         iCount = 0
-                        for iBuilding in range(gc.getNumProjectInfos()):
+                        for iBuilding in xrange(gc.getNumProjectInfos()):
                                 if (self.getProjectType(iBuilding) == iBuildingType and not gc.getProjectInfo(iBuilding).isGraphicalOnly()):
                                         listBuildings.append(iBuilding)
                                         iCount += 1
@@ -224,7 +229,7 @@ class CvPediaProject:
                                 listSorted[iI] = (gc.getProjectInfo(iBuilding).getDescription(), iBuilding)
                                 iI += 1
                         listSorted.sort()
-                        for i in range(len(listSorted)):
+                        for i in xrange(len(listSorted)):
                                 listOfAllTypes.append(listSorted[i])
                 return listOfAllTypes
 

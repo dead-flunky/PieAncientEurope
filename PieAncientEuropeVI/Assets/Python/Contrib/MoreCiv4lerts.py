@@ -198,12 +198,12 @@ class MoreCiv4lertsEvent( AbstractMoreCiv4lertsEvent):
 			teamPlayerList = []
 			teamPlayerList = PyGame.getCivTeamList(PyGame.getActiveTeam())
 			teamPlayerList.append(PyPlayer(iActivePlayer))
-			for loopPlayer in range(len(teamPlayerList)):
+			for loopPlayer in xrange(len(teamPlayerList)):
 				lCity = []
 				# EF: This looks very wrong. Above the list of players will not be 0, 1, ...
 				#     but here it uses loopPlayer which is 0, 1, ...
 				lCity = PyPlayer(loopPlayer).getCityList()
-				for loopCity in range(len(lCity)):
+				for loopCity in xrange(len(lCity)):
 					city = gc.getPlayer(loopPlayer).getCity(loopCity)
 					if (city.getFoodTurnsLeft() == 1 and not city.isFoodProduction()) and not city.AI_isEmphasize(5):
 						popGrowthCount = popGrowthCount + 1
@@ -296,7 +296,7 @@ class MoreCiv4lertsEvent( AbstractMoreCiv4lertsEvent):
 		# tech trades
 		if (BeginTurn and self.getCheckForTechs()):
 			researchTechs = set()
-			for iTech in range(gc.getNumTechInfos()):
+			for iTech in xrange(gc.getNumTechInfos()):
 				if (activePlayer.canResearch(iTech, True)):
 					researchTechs.add(iTech)
 			techsByPlayer = self.getTechTrades(activePlayer, activeTeam)
@@ -432,7 +432,7 @@ class MoreCiv4lertsEvent( AbstractMoreCiv4lertsEvent):
 		techsByPlayer = {}
 		for loopPlayer in TradeUtil.getTechTradePartners(player):
 			techsToTrade = set()
-			for iLoopTech in range(gc.getNumTechInfos()):
+			for iLoopTech in xrange(gc.getNumTechInfos()):
 				tradeData.iData = iLoopTech
 				if (loopPlayer.canTradeItem(iPlayerID, tradeData, False)):
 					if (loopPlayer.getTradeDenial(iPlayerID, tradeData) == DenialTypes.NO_DENIAL): # will trade

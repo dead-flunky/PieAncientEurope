@@ -1,12 +1,13 @@
-## BugCityScreenOptionsTab
+# BugCityScreenOptionsTab
 ##
-## Tab for the BUG City Screen Options.
+# Tab for the BUG City Screen Options.
 ##
-## Copyright (c) 2007-2008 The BUG Mod.
+# Copyright (c) 2007-2008 The BUG Mod.
 ##
 ## Author: EmperorFool
 
 import BugOptionsTab
+
 
 class BugCityScreenOptionsTab(BugOptionsTab.BugOptionsTab):
     "BUG City Screen Options Screen Tab"
@@ -15,7 +16,7 @@ class BugCityScreenOptionsTab(BugOptionsTab.BugOptionsTab):
         BugOptionsTab.BugOptionsTab.__init__(self, "CityScreen", "City Screen")
 
     def create(self, screen):
-        tab = self.createTab(screen)
+        _ = self.createTab(screen)
         panel = self.createMainPanel(screen)
         column = self.addOneColumnLayout(screen, panel)
 
@@ -84,7 +85,7 @@ class BugCityScreenOptionsTab(BugOptionsTab.BugOptionsTab):
         self.addIntDropdown(screen, None, right, "CityScreen__ProductionDecayHoverUnitThreshold")
         self.addIntDropdown(screen, None, right, "CityScreen__ProductionDecayHoverBuildingThreshold")
 
-    #def createCityBarPanel(self, screen, panel):
+    # def createCityBarPanel(self, screen, panel):
         #self.addLabel(screen, panel, "CitybarHover", "City Bar Hover:")
         #left, right = self.addTwoColumnLayout(screen, panel, "CityBarHover", False)
 

@@ -139,7 +139,7 @@ class SevoPediaUnit:
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqAndTech()
 		if (iPrereq >= 0):
 			screen.attachImageButton(panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, 1, False)
-		for j in range(gc.getDefineINT("NUM_UNIT_AND_TECH_PREREQS")):
+		for j in xrange(gc.getDefineINT("NUM_UNIT_AND_TECH_PREREQS")):
 			iPrereq = gc.getUnitInfo(self.iUnit).getPrereqAndTechs(j)
 			if (iPrereq >= 0):
 				screen.attachImageButton(panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, -1, False)
@@ -149,7 +149,7 @@ class SevoPediaUnit:
 			bFirst = False
 			screen.attachImageButton(panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False)
 		nOr = 0
-		for j in range(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
+		for j in xrange(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
 			if (gc.getUnitInfo(self.iUnit).getPrereqOrBonuses(j) > -1):
 				nOr += 1
 		szLeftDelimeter = ""
@@ -163,7 +163,7 @@ class SevoPediaUnit:
 		if len(szLeftDelimeter) > 0:
 			screen.attachLabel(panelName, "", szLeftDelimeter)
 		bFirst = True
-		for j in range(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
+		for j in xrange(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
 			eBonus = gc.getUnitInfo(self.iUnit).getPrereqOrBonuses(j)
 			if (eBonus > -1):
 				if (not bFirst):
@@ -187,7 +187,7 @@ class SevoPediaUnit:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_UPGRADES_TO", ()), "", False, True, self.X_UPGRADES_TO_PANE, self.Y_UPGRADES_TO_PANE, self.W_UPGRADES_TO_PANE, self.H_UPGRADES_TO_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
-		for k in range(gc.getNumUnitClassInfos()):
+		for k in xrange(gc.getNumUnitClassInfos()):
 			if self.top.iActivePlayer == -1:
 				eLoopUnit = gc.getUnitClassInfo(k).getDefaultUnitIndex()
 			else:
@@ -229,7 +229,7 @@ class SevoPediaUnit:
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_PROMOTION", ()), "", True, True, self.X_PROMO_PANE, self.Y_PROMO_PANE, self.W_PROMO_PANE, self.H_PROMO_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		rowListName = self.top.getNextWidgetName()
 		screen.addMultiListControlGFC(rowListName, "", self.X_PROMO_PANE+15, self.Y_PROMO_PANE+40, self.W_PROMO_PANE-20, self.H_PROMO_PANE-40, 1, self.PROMOTION_ICON_SIZE, self.PROMOTION_ICON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
-		for k in range(gc.getNumPromotionInfos()):
+		for k in xrange(gc.getNumPromotionInfos()):
 			if (isPromotionValid(k, self.iUnit, False) and not gc.getPromotionInfo(k).isGraphicalOnly()):
 				screen.appendMultiListButton(rowListName, gc.getPromotionInfo(k).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, k, -1, False)
 

@@ -1,10 +1,15 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 ## edited by Pie (06.02.2013)
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                CyGInterfaceScreen, PopupStates, FontTypes,
+                                WidgetTypes, PanelStyles, ButtonStyles,
+                                NotifyCode, CyGameTextMgr, InputTypes,
+                                MinimapModeTypes, CyMap, TableStyles,
+                                InfoBarTypes, CyInterface, InterfaceVisibility)
 import CvUtil
-import ScreenInput
-import time
+# import ScreenInput
+# import time
 import PyHelpers
 import re
 
@@ -152,11 +157,11 @@ class CvMilitaryAdvisor:
 
         self.drawCombatExperience()
 
-        self.refresh(true)
+        self.refresh(True)
 
     def drawCombatExperience(self):
 
-        if gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true) > 0:
+        if gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(True) > 0:
 
             iExperience = gc.getPlayer(self.iActivePlayer).getCombatExperience()
 
@@ -166,7 +171,7 @@ class CvMilitaryAdvisor:
             screen.setStackedBarColors(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_RATE"))
             screen.setStackedBarColors(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY"))
             screen.setStackedBarColors(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY"))
-            screen.setBarPercentage(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_STORED, float(iExperience) / float(gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true)))
+            screen.setBarPercentage(self.GREAT_GENERAL_BAR_ID, InfoBarTypes.INFOBAR_STORED, float(iExperience) / float(gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(True)))
             screen.setLabel(self.GREAT_GENERAL_LABEL_ID, "", localText.getText("TXT_KEY_MISC_COMBAT_EXPERIENCE", ()), CvUtil.FONT_CENTER_JUSTIFY, self.X_GREAT_GENERAL_BAR + self.W_GREAT_GENERAL_BAR/2, self.Y_GREAT_GENERAL_BAR + 6, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GREAT_GENERAL, -1, -1)
 
 
@@ -178,8 +183,8 @@ class CvMilitaryAdvisor:
 
     def resetMinimapColor(self):
         screen = self.getScreen()
-        for iX in range(gc.getMap().getGridWidth()):
-            for iY in range(gc.getMap().getGridHeight()):
+        for iX in xrange(gc.getMap().getGridWidth()):
+            for iY in xrange(gc.getMap().getGridHeight()):
                 screen.setMinimapColor(MinimapModeTypes.MINIMAPMODE_MILITARY, iX, iY, -1, 0.6)
 
     # handle the input for this screen...
@@ -248,7 +253,7 @@ class CvMilitaryAdvisor:
             self.selectedGroupList.remove(iSelected)
         else:
             self.selectedGroupList.append(iSelected)
-        self.refreshUnitSelection(false)
+        self.refreshUnitSelection(False)
 
     def refreshSelectedUnit(self, iPlayer, iUnitId):
         selectedUnit = (iPlayer, iUnitId)
@@ -256,7 +261,7 @@ class CvMilitaryAdvisor:
             self.selectedUnitList.remove(selectedUnit)
         else:
             self.selectedUnitList.append(selectedUnit)
-        self.refreshUnitSelection(false)
+        self.refreshUnitSelection(False)
 
     def refreshUnitSelection(self, bReload):
         screen = self.getScreen()
@@ -279,10 +284,10 @@ class CvMilitaryAdvisor:
         if bReload:
             # PAE - Sum of all units (globality necessary)
             self.iPAESum = 0
-            for iUnit in range(gc.getNumUnitInfos()):
+            for iUnit in xrange(gc.getNumUnitInfos()):
                 self.unitsList[iUnit] = (gc.getUnitInfo(iUnit).getUnitCombatType(), iUnit, [], 0)
 
-            for iPlayer in range(gc.getMAX_PLAYERS()):
+            for iPlayer in xrange(gc.getMAX_PLAYERS()):
                 player = PyPlayer(iPlayer)
                 if player.isAlive():
                     unitList = player.getUnitList()
@@ -326,14 +331,14 @@ class CvMilitaryAdvisor:
 
         iPrevUnitCombat = -2
         iItem = 1
-        for iUnit in range(gc.getNumUnitInfos()):
+        for iUnit in xrange(gc.getNumUnitInfos()):
             if self.unitsList[iUnit][2]:
                 if iPrevUnitCombat != self.unitsList[iUnit][0] and self.unitsList[iUnit][0] != -1:
                     iPrevUnitCombat = self.unitsList[iUnit][0]
 
                     # PAE - Sum of Units of this type (locality suffices)
                     iPAESumTypes = 0
-                    for n in range(gc.getNumUnitInfos()):
+                    for n in xrange(gc.getNumUnitInfos()):
                         if self.unitsList[n][2]:
                             if iPrevUnitCombat == self.unitsList[n][0]:
                                 #iPAESum += self.unitsList[n][3]
@@ -368,7 +373,7 @@ class CvMilitaryAdvisor:
                 for loopUnit in self.unitsList[iUnit][2]:
 
                     if self.bUnitDetails:
-                        szDescription = CyGameTextMgr().getSpecificUnitHelp(loopUnit, true, false)
+                        szDescription = CyGameTextMgr().getSpecificUnitHelp(loopUnit, True, False)
 
                         listMatches = re.findall("<.*?color.*?>", szDescription)
                         for szMatch in listMatches:
@@ -422,7 +427,7 @@ class CvMilitaryAdvisor:
             screen.addPanel(self.LEADER_PANEL_ID, "", "", False, True, self.X_LEADERS, self.Y_LEADERS, self.W_LEADERS, self.H_LEADERS, PanelStyles.PANEL_STYLE_MAIN)
 
         listLeaders = []
-        for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
             player = gc.getPlayer(iLoopPlayer)
             if (player.isAlive() and (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(self.iActivePlayer).getTeam()) or gc.getGame().isDebugMode())):
                 listLeaders.append(iLoopPlayer)
@@ -436,7 +441,7 @@ class CvMilitaryAdvisor:
         iColumns = int(self.W_LEADERS / (iButtonSize + self.LEADER_MARGIN))
 
         # loop through all players and display leaderheads
-        for iIndex in range(iNumLeaders):
+        for iIndex in xrange(iNumLeaders):
             iLoopPlayer = listLeaders[iIndex]
             player = gc.getPlayer(iLoopPlayer)
 

@@ -1,12 +1,13 @@
-## BugAdvisorOptionsTab
+# BugAdvisorOptionsTab
 ##
-## Tab for the BUG Advisor Options.
+# Tab for the BUG Advisor Options.
 ##
-## Copyright (c) 2007-2008 The BUG Mod.
+# Copyright (c) 2007-2008 The BUG Mod.
 ##
 ## Author: EmperorFool
 
 import BugOptionsTab
+
 
 class BugAdvisorOptionsTab(BugOptionsTab.BugOptionsTab):
     "BUG General Options Screen Tab"
@@ -15,7 +16,7 @@ class BugAdvisorOptionsTab(BugOptionsTab.BugOptionsTab):
         BugOptionsTab.BugOptionsTab.__init__(self, "Advisors", "Advisors")
 
     def create(self, screen):
-        tab = self.createTab(screen)
+        _ = self.createTab(screen)
         panel = self.createMainPanel(screen)
         left, right = self.addTwoColumnLayout(screen, panel, panel, True)
 
@@ -32,11 +33,10 @@ class BugAdvisorOptionsTab(BugOptionsTab.BugOptionsTab):
         self.addLabel(screen, left, "Military_Advisor", "Military [F5]:")
         self.addCheckbox(screen, left, "Advisors__BugMA")
 
-
         self.addLabel(screen, left, "Technology_Advisor", "Technology [F6]:")
         self.addCheckbox(screen, left, "Advisors__GPTechPrefs")
         #self.addCheckbox(screen, center, "MiscHover__SpedUpTechs")
-        
+
         # Flunky PAE hide tech screen options (enabled)
         # self.addCheckbox(screen, center, "Advisors__WideTechScreen")
         # self.addCheckbox(screen, center, "Advisors__ShowTechEra")
@@ -54,10 +54,9 @@ class BugAdvisorOptionsTab(BugOptionsTab.BugOptionsTab):
         self.addCheckbox(screen, right, "Advisors__BugGraphsTab")
         self.addCheckbox(screen, right, "Advisors__BugGraphsLogScale")
         self.addCheckbox(screen, right, "Advisors__BugStatsTab")
-        self.addCheckbox(screen, right, "Advisors__NonZeroStatsOnly") # K-Mod
+        self.addCheckbox(screen, right, "Advisors__NonZeroStatsOnly")  # K-Mod
         self.addCheckbox(screen, right, "Advisors__BugInfoWonders")
         self.addCheckbox(screen, right, "Advisors__BugInfoWondersPlayerColor", True)
-
 
         self.addLabel(screen, right, "Sevopedia", "Sevopedia [F12]:")
         self.addCheckbox(screen, right, "Advisors__Sevopedia")

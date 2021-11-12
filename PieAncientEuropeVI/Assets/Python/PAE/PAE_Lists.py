@@ -1190,7 +1190,7 @@ def init():
     LBonusRarity = []
     LBonusUntradeable = []
     LBonus4Units = []
-    for eBonus in range(iNumBonuses):
+    for eBonus in xrange(iNumBonuses):
         pBonusInfo = gc.getBonusInfo(eBonus)
         iClass = pBonusInfo.getBonusClassType()
         if iClass == eGrain:

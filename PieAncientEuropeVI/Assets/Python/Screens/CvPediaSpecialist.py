@@ -1,8 +1,11 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CivilopediaPageTypes,
+                                WidgetTypes, PanelStyles,
+                                CyGameTextMgr, TableStyles)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 import string
 
@@ -61,19 +64,19 @@ class CvPediaSpecialist:
                 screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_SPECIALIST, -1)
 
                 if self.top.iLastScreen        != CvScreenEnums.PEDIA_SPECIALIST or bNotActive:
-                        self.placeLinks(true)
+                        self.placeLinks(True)
                         self.top.iLastScreen = CvScreenEnums.PEDIA_SPECIALIST
                 else:
-                        self.placeLinks(false)
+                        self.placeLinks(False)
 
                 # Icon
                 screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
                     self.X_MAIN_PANEL, self.Y_MAIN_PANEL, self.W_MAIN_PANEL, self.H_MAIN_PANEL, PanelStyles.PANEL_STYLE_BLUE50)
-                screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+                screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
                     self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
                 screen.addDDSGFC(self.top.getNextWidgetName(), gc.getSpecialistInfo(self.iSpecialist).getButton(),
                     self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-#                screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+#                screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
 #                    self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_BLUE50)
 #                screen.addDDSGFC(self.top.getNextWidgetName(), gc.getSpecialistInfo(self.iSpecialist).getButton(),
 #                    self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -86,7 +89,7 @@ class CvPediaSpecialist:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_YIELDS", ()), "", true, false,
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_YIELDS", ()), "", True, False,
                                  self.X_SPECIAL, self.Y_SPECIAL, self.W_SPECIAL, self.H_SPECIAL, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 listName = self.top.getNextWidgetName()
@@ -100,7 +103,7 @@ class CvPediaSpecialist:
                    szText = gc.getUnitClassInfo(iGreatPersonClass).getDescription()
                    szSpecialText += " (" + szText + ")"
 ### ----------------------------------
-                splitText = string.split( szSpecialText, "\n" )
+                splitText = string.split(szSpecialText, "\n")
                 for special in splitText:
                         if len( special ) != 0:
                                 screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
@@ -110,7 +113,7 @@ class CvPediaSpecialist:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, "", "", true, true,
+                screen.addPanel( panelName, "", "", True, True,
                                  self.X_TEXT, self.Y_TEXT, self.W_TEXT, self.H_TEXT, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 # PAE Upgrade: Strategy Text in Pedia
@@ -135,13 +138,13 @@ class CvPediaSpecialist:
 
                 # sort Improvements alphabetically
                 listSorted=[(0,0)]*gc.getNumSpecialistInfos()
-                for j in range(gc.getNumSpecialistInfos()):
+                for j in xrange(gc.getNumSpecialistInfos()):
                         listSorted[j] = (gc.getSpecialistInfo(j).getDescription(), j)
                 listSorted.sort()
 
                 i = 0
                 iSelected = 0
-                for iI in range(gc.getNumSpecialistInfos()):
+                for iI in xrange(gc.getNumSpecialistInfos()):
                         if (not gc.getSpecialistInfo(iI).isGraphicalOnly()):
                                 if bRedraw:
                                         screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_SPECIALIST, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )

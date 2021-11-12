@@ -29,7 +29,7 @@ def onEndPlayerTurn(iPlayer, iGameTurn):
 
                 # Meldungen an die Spieler
                 iRange = gc.getMAX_PLAYERS()
-                for iLoopPlayer in range(iRange):
+                for iLoopPlayer in xrange(iRange):
                     pPlayer = gc.getPlayer(iLoopPlayer)
                     if pPlayer.isHuman():
                         # Meldung Karthago Human

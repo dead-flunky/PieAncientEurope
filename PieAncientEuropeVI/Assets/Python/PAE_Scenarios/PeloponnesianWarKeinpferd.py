@@ -57,7 +57,7 @@ def onBeginPlayerTurn(iGameTurn, pPlayer):
             ePantodapoi = gc.getInfoTypeForString("UNIT_AUXILIAR_MACEDON")
             iRange = CvUtil.myRandom(3, "num ePantodapoi")
             # Korinth erhaelt 0 - 2 zusaetzliche makedonische Hilfstrupps in Poteidaia
-            for _ in range(iRange):
+            for _ in xrange(iRange):
                 pKorinth.initUnit(ePantodapoi, 56, 46, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
             CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 15, CyTranslator().getText("TXT_KEY_EVENT_POTEIDAIA_KRIEG_WORLDNEWS", ()), None, 2, None, ColorTypes(11), 0, 0, False, False)
             if pPlayer.isHuman():
@@ -184,7 +184,7 @@ def onBeginPlayerTurn(iGameTurn, pPlayer):
         for iPlayer in lPlayer:
             pPlayer = gc.getPlayer(iPlayer)
             iNumCities = pPlayer.getNumCities()
-            for iCity in range(iNumCities):
+            for iCity in xrange(iNumCities):
                 pCity = pPlayer.getCity(iCity)
                 if pCity is not None and not pCity.isNone():
                     if pCity.isHasBuilding(eHafen):
@@ -222,7 +222,7 @@ def onEndPlayerTurn(iPlayer, iGameTurn):
 
                 # Meldungen an die Spieler
                 iRange = gc.getMAX_PLAYERS()
-                for iLoopPlayer in range(iRange):
+                for iLoopPlayer in xrange(iRange):
                     pLoopPlayer = gc.getPlayer(iLoopPlayer)
                     if pLoopPlayer.isHuman():
                         # Meldung Korkyra Human
@@ -272,7 +272,7 @@ def Poteidaia1(argsList):
               popupInfo.addPopup(iAthen)
         elif iButtonId == 1:
             pCityPoteidaia.changeOccupationTimer(6)
-            for i in range(gc.getMAX_PLAYERS()):
+            for i in xrange(gc.getMAX_PLAYERS()):
                 if i != iKorinth:
                     pPlotPoteidaia.setCulture(i, 0, True)
             gc.getPlayer(iKorinth).AI_changeAttitudeExtra(iAthen,-3)
@@ -318,9 +318,9 @@ def Poteidaia2(argsList):
         eSupply = gc.getInfoTypeForString("UNIT_SUPPLY_WAGON")
         eSkirmish = gc.getInfoTypeForString("UNIT_SKIRMISHER")
         eTrireme = gc.getInfoTypeForString("UNIT_TRIREME")
-        for _ in range(2):
+        for _ in xrange(2):
             pAthen.initUnit(eTrireme, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-        for i in range(3):
+        for i in xrange(3):
             pUnit = pAthen.initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
             if i == 0:
                 pUnit.setName("Pausanias")
@@ -333,7 +333,7 @@ def Poteidaia2(argsList):
         # 500 Gold pro Hoplit+Trireme, 2 Triremen erhaelt man immer -> iPay beginnt bei 1000 und man benoetigt mind. 1500, um mehr zu erhalten
         # Maximal 10 Triremen
         iPay = 1000
-        for i in range(8):
+        for i in xrange(8):
             iPay += 500
             if iPay > iGold:
                 break
@@ -405,7 +405,7 @@ def Poteidaia3(argsList):
         # 250 Gold pro Hoplit+Skirmisher, jeweils 1 erhaelt man immer -> iPay beginnt bei 250 und man benoetigt mind. 500, um mehr zu erhalten
         # Maximal 8 Hopliten und Skirmisher (insgesamt)
         iPay = 250
-        for _ in range(7):
+        for _ in xrange(7):
             iPay += 250
             if iPay > iGold:
                 break
@@ -442,9 +442,9 @@ def Poteidaia3(argsList):
         eSupply = gc.getInfoTypeForString("UNIT_SUPPLY_WAGON")
         eGeneral = gc.getInfoTypeForString("UNIT_GREAT_GENERAL")
         eTrireme = gc.getInfoTypeForString("UNIT_TRIREME")
-        for _ in range(2):
+        for _ in xrange(2):
             pKorinth.initUnit(eTrireme, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-        for _ in range(2):
+        for _ in xrange(2):
             pKorinth.initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
         pKorinth.initUnit(eProdromoi, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
         pKorinth.initUnit(eSkirmish, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
@@ -489,7 +489,7 @@ def Megara1(argsList):
         for iPlayer in lPlayer:
             pPlayer = gc.getPlayer(iPlayer)
             iNumCities = pPlayer.getNumCities()
-            for iCity in range(iNumCities):
+            for iCity in xrange(iNumCities):
                 pCity = pPlayer.getCity(iCity)
                 if pCity and not pCity.isNone():
                     if pCity.isHasBuilding(eHafen):
@@ -707,9 +707,9 @@ def Plataiai1(argsList):
                 gc.getPlayer(iAthen).initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 eSkirmisher = gc.getInfoTypeForString("UNIT_SKIRMISHER")
                 eHorseman = gc.getInfoTypeForString("UNIT_HORSEMAN")
-                for _ in range(5):
+                for _ in xrange(5):
                     pTheben.initUnit(eHoplit, iX-1, iY-1, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                for _ in range(3):
+                for _ in xrange(3):
                     pTheben.initUnit(eSkirmisher, iX-1, iY-1, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 pTheben.initUnit(eHorseman, iX-1, iY-1, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 if bIsHuman:
@@ -732,13 +732,13 @@ def Plataiai1(argsList):
                 eHoplit = gc.getInfoTypeForString("UNIT_HOPLIT")
                 eSupply = gc.getInfoTypeForString("UNIT_SUPPLY_WAGON")
                 eGeneral = gc.getInfoTypeForString("UNIT_GREAT_GENERAL")
-                for _ in range(10):
+                for _ in xrange(10):
                     pTheben.initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                for _ in range(5):
+                for _ in xrange(5):
                     pTheben.initUnit(eSkirmisher, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                for _ in range(4):
+                for _ in xrange(4):
                     pTheben.initUnit(eHorseman, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                for _ in range(2):
+                for _ in xrange(2):
                     pTheben.initUnit(eGeneral, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 pUnit = pTheben.initUnit(eSupply, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 PAE_Unit.setSupply(pUnit,200)
@@ -854,9 +854,9 @@ def Syra1(argsList):
             else:
                 pAthen.changeGold(-5000)
             # Einheiten, die man immer erhaelt
-            for _ in range(12):
+            for _ in xrange(12):
                 pAthen.initUnit(eTrireme, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(1):
+            for _ in xrange(1):
                 pUnit = pAthen.initUnit(eHippeus, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 pUnit.setHasPromotion(eRang1, True)
                 pUnit.setHasPromotion(eRang2, True)
@@ -866,42 +866,42 @@ def Syra1(argsList):
                 pUnit.setHasPromotion(eHero, True)
                 pUnit.setHasPromotion(eCityRaid1, True)
                 pUnit.setName("Nikias")
-            for _ in range(8):
+            for _ in xrange(8):
                 pUnit = pAthen.initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 pUnit.setHasPromotion(eRang1, True)
                 pUnit.setHasPromotion(eRang2, True)
                 pUnit.setHasPromotion(eRang3, True)
-            for _ in range(8):
+            for _ in xrange(8):
                 pAthen.initUnit(eArcher, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(12):
+            for _ in xrange(12):
                 pAthen.initUnit(eRam, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(4):
+            for _ in xrange(4):
                 pUnit = pAthen.initUnit(eSupply, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 PAE_Unit.setSupply(pUnit,200)
-            for _ in range(2):
+            for _ in xrange(2):
                 pUnit = pAthen.initUnit(eHorseman, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 pUnit.setHasPromotion(eFlank1, True)
                 pUnit.setHasPromotion(eFlank2, True)
-            for _ in range(1):
+            for _ in xrange(1):
                 pAthen.initUnit(eSpy, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
             # Ab 2500 zusaetzliche Einheiten fuer je 500 Gold (max. 5000 Gold)
             iPay = 2500
-            for _ in range(5):
+            for _ in xrange(5):
                 iPay += 500
                 if iPay > iGold:
                     break
-                for _ in range(2):
+                for _ in xrange(2):
                     pAthen.initUnit(eTrireme, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                for _ in range(1):
+                for _ in xrange(1):
                     pAthen.initUnit(eBireme, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                for _ in range(3):
+                for _ in xrange(3):
                     pAthen.initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                     pUnit.setHasPromotion(eRang1, True)
                     pUnit.setHasPromotion(eRang2, True)
                     pUnit.setHasPromotion(eRang3, True)
-                for _ in range(2):
+                for _ in xrange(2):
                     pAthen.initUnit(eArcher, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-                for _ in range(1):
+                for _ in xrange(1):
                     pUnit = pAthen.initUnit(eHorseman, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                     pUnit.setHasPromotion(eFlank1, True)
                     pUnit.setHasPromotion(eFlank2, True)
@@ -917,24 +917,24 @@ def Syra1(argsList):
                 popupInfo.addPopup(iAthen)
         elif iButtonId == 1:
             pAthen.changeGold(-2000)
-            for _ in range(9):
+            for _ in xrange(9):
                     pAthen.initUnit(eTrireme, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(8):
+            for _ in xrange(8):
                     pUnit = pAthen.initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                     pUnit.setHasPromotion(eRang1, True)
                     pUnit.setHasPromotion(eRang2, True)
-            for _ in range(8):
+            for _ in xrange(8):
                     pAthen.initUnit(eArcher, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(6):
+            for _ in xrange(6):
                     pAthen.initUnit(eRam, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(2):
+            for _ in xrange(2):
                     pUnit = pAthen.initUnit(eSupply, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                     PAE_Unit.setSupply(pUnit,200)
-            for _ in range(2):
+            for _ in xrange(2):
                     pUnit = pAthen.initUnit(eHorseman, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                     pUnit.setHasPromotion(eFlank1, True)
                     pUnit.setHasPromotion(eFlank2, True)
-            for _ in range (1):
+            for _ in xrange (1):
                     pAthen.initUnit(eSpy, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
             if bIsHuman:
                 popupInfo = CyPopupInfo()
@@ -943,16 +943,16 @@ def Syra1(argsList):
                 popupInfo.addPopup(iAthen)
         elif iButtonId == 2:
             pAthen.changeGold(-1000)
-            for _ in range(4):
+            for _ in xrange(4):
                 pAthen.initUnit(eTrireme, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(5):
+            for _ in xrange(5):
                 pUnit = pAthen.initUnit(eHoplit, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 pUnit.setHasPromotion(eRang1, True)
-            for _ in range(4):
+            for _ in xrange(4):
                 pAthen.initUnit(eArcher, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(2):
+            for _ in xrange(2):
                 pAthen.initUnit(eRam, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-            for _ in range(1):
+            for _ in xrange(1):
                 pUnit = pAthen.initUnit(eSupply, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 PAE_Unit.setSupply(pUnit,200)
             if bIsHuman:

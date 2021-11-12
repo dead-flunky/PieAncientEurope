@@ -106,7 +106,7 @@ class SevoPediaBonus:
 		panelName = self.top.getNextWidgetName()
 		screen.addListBoxGFC(panelName, "", self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, TableStyles.TABLE_STYLE_EMPTY)
 		screen.enableSelect(panelName, False)
-		for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getBonusInfo(self.iBonus).getYieldChange(k)
 			if (iYieldChange != 0):
 				if (iYieldChange > 0):
@@ -123,11 +123,11 @@ class SevoPediaBonus:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_IMPROVEMENT", ()), "", True, True, self.X_IMPROVEMENTS_PANE, self.Y_IMPROVEMENTS_PANE, self.W_IMPROVEMENTS_PANE, self.H_IMPROVEMENTS_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		bonusInfo = gc.getBonusInfo(self.iBonus)
-		for j in range(gc.getNumImprovementInfos()):
+		for j in xrange(gc.getNumImprovementInfos()):
 			bFirst = True
 			szYield = u""
 			bEffect = False
-			for k in range(YieldTypes.NUM_YIELD_TYPES):
+			for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 				iYieldChange = gc.getImprovementInfo(j).getImprovementBonusYield(self.iBonus, k)
 				if (iYieldChange != 0):
 					bEffect = True
@@ -197,14 +197,14 @@ class SevoPediaBonus:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_BUILDING", ()), "", False, True, self.X_BUILDINGS, self.Y_BUILDINGS, self.W_BUILDINGS, self.H_BUILDINGS, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
-		for iBuilding in range(gc.getNumBuildingInfos()):
+		for iBuilding in xrange(gc.getNumBuildingInfos()):
 			info = gc.getBuildingInfo(iBuilding)
 			bShow = (info.getFreeBonus() == self.iBonus
 					or info.getBonusHealthChanges(self.iBonus) > 0
 					or info.getBonusHappinessChanges(self.iBonus) > 0
 					or info.getBonusProductionModifier(self.iBonus) > 0)
 			if (not bShow):
-				for eYield in range(YieldTypes.NUM_YIELD_TYPES):
+				for eYield in xrange(YieldTypes.NUM_YIELD_TYPES):
 					if (info.getBonusYieldModifier(self.iBonus, eYield) > 0):
 						bShow = True
 						break
@@ -218,7 +218,7 @@ class SevoPediaBonus:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_ALLOWS", ()), "", False, True, self.X_ALLOWS_PANE, self.Y_ALLOWS_PANE, self.W_ALLOWS_PANE, self.H_ALLOWS_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
-		for eLoopUnit in range(gc.getNumUnitInfos()):
+		for eLoopUnit in xrange(gc.getNumUnitInfos()):
 			bFound = False
 			if (eLoopUnit >= 0):
 				if (gc.getUnitInfo(eLoopUnit).getPrereqAndBonus() == self.iBonus):
@@ -232,7 +232,7 @@ class SevoPediaBonus:
 			if bFound:
 				screen.attachImageButton( panelName, "", gc.getUnitInfo(eLoopUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False )
 
-		for eLoopBuilding in range(gc.getNumBuildingInfos()):
+		for eLoopBuilding in xrange(gc.getNumBuildingInfos()):
 			bFound = False
 			if (gc.getBuildingInfo(eLoopBuilding).getPrereqAndBonus() == self.iBonus):
 				bFound = True

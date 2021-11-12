@@ -18,7 +18,7 @@ def onGameStart():
     eUnitBoot = gc.getInfoTypeForString("UNIT_WORKBOAT")
     
     iRange = gc.getMAX_PLAYERS()
-    for iPlayer in range(iRange):
+    for iPlayer in xrange(iRange):
     
         iResearchBoost = 0
         pPlayer = gc.getPlayer(iPlayer)

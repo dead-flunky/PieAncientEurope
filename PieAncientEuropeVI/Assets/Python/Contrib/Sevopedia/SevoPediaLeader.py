@@ -77,7 +77,7 @@ class SevoPediaLeader:
 
     def placeCiv(self):
         screen = self.top.getScreen()
-        for iCiv in range(gc.getNumCivilizationInfos()):
+        for iCiv in xrange(gc.getNumCivilizationInfos()):
             civ = gc.getCivilizationInfo(iCiv)
             if civ.isLeaders(self.iLeader):
                 screen.setImageButton(self.top.getNextWidgetName(), civ.getButton(), self.X_CIV, self.Y_CIV, self.W_CIV, self.H_CIV, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, iCiv, 1)
@@ -91,7 +91,7 @@ class SevoPediaLeader:
         listName = self.top.getNextWidgetName()
         iNumCivs = 0
         iLeaderCiv = -1
-        for iCiv in range(gc.getNumCivilizationInfos()):
+        for iCiv in xrange(gc.getNumCivilizationInfos()):
             civ = gc.getCivilizationInfo(iCiv)
             if civ.isLeaders(self.iLeader):
                 iNumCivs += 1

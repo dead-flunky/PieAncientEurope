@@ -2,9 +2,16 @@
 ## Copyright Firaxis Games 2005
 
 import math
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, NotifyCode, ButtonStyles,
+                                WidgetTypes, PanelStyles, CyGame,
+                                CyGameTextMgr, InputTypes, TableStyles,
+                                MouseFlags, CyInterface, InterfaceDirtyBits,
+                                TradeData, TradeableItems, DenialTypes,
+                                FontSymbols, GenericButtonSizes,
+                                CyGInterfaceScreen, PopupStates)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 
 # globals
@@ -131,7 +138,7 @@ class CvForeignAdvisor:
         if CyGame().isDebugMode():
             self.szDropdownName = self.getWidgetName(self.DEBUG_DROPDOWN_ID)
             screen.addDropDownBoxGFC(self.szDropdownName, 22, 12, 300, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for j in range(gc.getMAX_PLAYERS()):
+            for j in xrange(gc.getMAX_PLAYERS()):
                 if gc.getPlayer(j).isAlive():
                     screen.addPullDownString(self.szDropdownName, gc.getPlayer(j).getName(), j, j, False )
 
@@ -195,7 +202,7 @@ class CvForeignAdvisor:
         screen = self.getScreen()
 
         # Get the Players
-        playerActive = gc.getPlayer(self.iActiveLeader)
+        # playerActive = gc.getPlayer(self.iActiveLeader)
 
         # Put everything inside a main panel, so we get vertical scrolling
         mainPanelName = self.getNextWidgetName()
@@ -213,7 +220,7 @@ class CvForeignAdvisor:
         # END Ramk 4 HeymlicH, mark cancelable Deals
 
         # loop through all players and display leaderheads
-        for j in range (nNumPLayers):
+        for j in xrange (nNumPLayers):
             iLoopPlayer = listPlayers[j][1]
 
             # Ramks PB Mod, Do not display players without active trades
@@ -236,7 +243,7 @@ class CvForeignAdvisor:
             screen.enableSelect(dealPanelName, False)
 
             iRow = 0
-            for i in range(gc.getGame().getIndexAfterLastDeal()):
+            for i in xrange(gc.getGame().getIndexAfterLastDeal()):
                 deal = gc.getGame().getDeal(i)
 
                 if (deal.getFirstPlayer() == iLoopPlayer and deal.getSecondPlayer() == self.iActiveLeader and not deal.isNone()) or (deal.getSecondPlayer() == iLoopPlayer and deal.getFirstPlayer() == self.iActiveLeader):
@@ -284,12 +291,12 @@ class CvForeignAdvisor:
         if self.iScreen == FOREIGN_BONUS_SCREEN:
             tradeData = TradeData()
             tradeData.ItemType = TradeableItems.TRADE_RESOURCES
-            for iLoopBonus in range(gc.getNumBonusInfos()):
+            for iLoopBonus in xrange(gc.getNumBonusInfos()):
                 tradeData.iData = iLoopBonus
                 bTradeable = False
                 if (self.iSelectedLeader == self.iActiveLeader):
                     # loop through all players and display resources that are available to trade to at least one leader
-                    for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+                    for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
                         if (gc.getPlayer(iLoopPlayer).isAlive() and not gc.getPlayer(iLoopPlayer).isBarbarian() and not gc.getPlayer(iLoopPlayer).isMinorCiv() and gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasMet(gc.getPlayer(self.iActiveLeader).getTeam())):
                             if (iLoopPlayer != self.iActiveLeader and gc.getPlayer(self.iActiveLeader).canTradeItem(iLoopPlayer, tradeData, False)):
                                 bTradeable = True
@@ -299,18 +306,18 @@ class CvForeignAdvisor:
                     bTradeable = gc.getPlayer(self.iActiveLeader).canTradeItem(self.iSelectedLeader, tradeData, False)
 
                 if bTradeable:
-                    for _ in range(playerActive.getNumTradeableBonuses(iLoopBonus)):
+                    for _ in xrange(playerActive.getNumTradeableBonuses(iLoopBonus)):
                         screen.appendMultiListButton("Child" + activePlayerPanelName, gc.getBonusInfo(iLoopBonus).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iLoopBonus, -1, False)
 
         elif self.iScreen == FOREIGN_TECH_SCREEN:
             tradeData = TradeData()
             tradeData.ItemType = TradeableItems.TRADE_TECHNOLOGIES
-            for iLoopTech in range(gc.getNumTechInfos()):
+            for iLoopTech in xrange(gc.getNumTechInfos()):
                 bTradeable = False
                 tradeData.iData = iLoopTech
                 if self.iSelectedLeader == self.iActiveLeader:
                     # loop through all players and display techs that are available to trade to at least one leader
-                    for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+                    for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
                         if (gc.getPlayer(iLoopPlayer).isAlive() and not gc.getPlayer(iLoopPlayer).isBarbarian() and not gc.getPlayer(iLoopPlayer).isMinorCiv() and gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasMet(gc.getPlayer(self.iActiveLeader).getTeam())):
                             if (iLoopPlayer != self.iActiveLeader and gc.getPlayer(self.iActiveLeader).canTradeItem(iLoopPlayer, tradeData, False)):
                                 bTradeable = True
@@ -333,7 +340,7 @@ class CvForeignAdvisor:
             screen.setState(szName, False)
 
         # Their leaderheads
-        for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
             if gc.getPlayer(iLoopPlayer).isAlive() and iLoopPlayer != self.iActiveLeader and (gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasMet(gc.getPlayer(self.iActiveLeader).getTeam()) or gc.getGame().isDebugMode()) and not gc.getPlayer(iLoopPlayer).isBarbarian() and not gc.getPlayer(iLoopPlayer).isMinorCiv():
 
                 currentPlayerPanelName = self.getNextWidgetName()
@@ -360,7 +367,7 @@ class CvForeignAdvisor:
                         listUntradeable = []
                         tradeData = TradeData()
                         tradeData.ItemType = TradeableItems.TRADE_RESOURCES
-                        for iLoopBonus in range(gc.getNumBonusInfos()):
+                        for iLoopBonus in xrange(gc.getNumBonusInfos()):
                             tradeData.iData = iLoopBonus
                             if (gc.getPlayer(iLoopPlayer).canTradeItem(self.iActiveLeader, tradeData, False)):
                                 if (gc.getPlayer(iLoopPlayer).getTradeDenial(self.iActiveLeader, tradeData) == DenialTypes.NO_DENIAL):
@@ -392,7 +399,7 @@ class CvForeignAdvisor:
                         listTradeNotAllowed = []
                         tradeData = TradeData()
                         tradeData.ItemType = TradeableItems.TRADE_TECHNOLOGIES
-                        for iLoopTech in range(gc.getNumTechInfos()):
+                        for iLoopTech in xrange(gc.getNumTechInfos()):
                             tradeData.iData = iLoopTech
                             if gc.getPlayer(iLoopPlayer).canTradeItem(self.iActiveLeader, tradeData, False):
                                 if gc.getPlayer(iLoopPlayer).getTradeDenial(self.iActiveLeader, tradeData) == DenialTypes.NO_DENIAL:
@@ -435,7 +442,7 @@ class CvForeignAdvisor:
         iCount = 0
         leaderMap = { }
         # Count all other leaders
-        for iPlayer in range(gc.getMAX_PLAYERS()):
+        for iPlayer in xrange(gc.getMAX_PLAYERS()):
             player = gc.getPlayer(iPlayer)
             if player.isAlive() and iPlayer != self.iActiveLeader and (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(self.iActiveLeader).getTeam()) or gc.getGame().isDebugMode()) and not player.isBarbarian() and not player.isMinorCiv():
                 leaderMap[iPlayer] = iCount
@@ -468,13 +475,13 @@ class CvForeignAdvisor:
         if iPlayer == -1:
             iPlayer = CyGame().getActivePlayer()
 
-        for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
             if gc.getPlayer(iLoopPlayer).isAlive() and iLoopPlayer != iPlayer and not gc.getPlayer(iLoopPlayer).isBarbarian() and  not gc.getPlayer(iLoopPlayer).isMinorCiv():
                 #if not gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasMet(gc.getPlayer(self.iActiveLeader).getTeam()):
                 #   continue
                 if gc.getTeam(gc.getPlayer(iLoopPlayer).getTeam()).isHasMet(gc.getPlayer(iPlayer).getTeam()) or gc.getGame().isDebugMode():
                     nDeals = 0
-                    for i in range(gc.getGame().getIndexAfterLastDeal()):
+                    for i in xrange(gc.getGame().getIndexAfterLastDeal()):
                         deal = gc.getGame().getDeal(i)
                         if (deal.getFirstPlayer() == iLoopPlayer and deal.getSecondPlayer() == iPlayer) or (deal.getSecondPlayer() == iLoopPlayer and deal.getFirstPlayer() == iPlayer):
                             nDeals += 1
@@ -487,7 +494,7 @@ class CvForeignAdvisor:
         if iSelectedLeader == -1:
             iSelectedLeader = self.iActiveLeader
         selectedPlayer = gc.getPlayer(iSelectedLeader)
-        for iPlayer in range(gc.getMAX_PLAYERS()):
+        for iPlayer in xrange(gc.getMAX_PLAYERS()):
             player = gc.getPlayer(iPlayer)
             if (iSelectedLeader != iPlayer):
                 if (player.getTeam() == selectedPlayer.getTeam()):
@@ -732,7 +739,7 @@ class CvForeignAdvisor:
             screen.setLabel(szName, "", szText, CvUtil.FONT_CENTER_JUSTIFY, fX + iLeaderWidth/2, fY + iLeaderHeight + 25, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
         # draw lines
-        for iSelectedLeader in range(gc.getMAX_PLAYERS()):
+        for iSelectedLeader in xrange(gc.getMAX_PLAYERS()):
             bDisplayed = (not gc.getPlayer(iSelectedLeader).isBarbarian() and not gc.getPlayer(iSelectedLeader).isMinorCiv() and gc.getPlayer(iSelectedLeader).isAlive() and (gc.getGame().isDebugMode() or gc.getTeam(playerActive.getTeam()).isHasMet(gc.getPlayer(iSelectedLeader).getTeam())))
             if (iSelectedLeader in self.listSelectedLeaders or bNoLeadersSelected) and bDisplayed:
                 # get selected player and location
@@ -908,7 +915,7 @@ class CvForeignAdvisor:
         screen = self.getScreen()
         nLines = self.nLineCount
         self.nLineCount = 0
-        for _ in range(nLines):
+        for _ in xrange(nLines):
             screen.removeLineGFC(self.BACKGROUND_ID, self.getNextLineName())
         self.nLineCount = 0
 

@@ -173,7 +173,7 @@ class BugOptionsTab:
 
         columns = []
         first = True
-        for i in range(count):
+        for i in xrange(count):
             if separator and not first:
                 sep = panel + "Sep%d" % i
                 screen.attachVSeparator(hbox, sep)

@@ -85,7 +85,7 @@ def updateCurrentSigns ():
 	""" Updates gCurrentSigns global with all current signs on map. Remember to clear when done."""
 	global gCurrentSigns
 	gCurrentSigns = MapSigns()
-	for iSign in range(engine.getNumSigns()):
+	for iSign in xrange(engine.getNumSigns()):
 		pSign = engine.getSignByIndex(iSign)
 		pPlot = pSign.getPlot()
 		ePlayer = pSign.getPlayerType()
@@ -112,7 +112,7 @@ def clearSignsAndLandmarks(pPlot):
 	will only place the sign/landmark on a plot if there isn't already one there.
 	If I could resolve that issue, this function would actually be used. ;)
 	"""
-	for iPlayer in range(gc.getMAX_PLAYERS()):
+	for iPlayer in xrange(gc.getMAX_PLAYERS()):
 		engine.removeSign(pPlot, iPlayer)
 	engine.removeLandmark(pPlot)
 	# Don't even know what this does; it was the last of my failed attempts to force the signs to show.
@@ -414,7 +414,7 @@ class PlotSigns:
 
 	def setSign(self, ePlayer, szCaption):
 		""" Sets Caption for a given player on this plot. """
-		if ePlayer in ([-1] + range(gc.getMAX_PLAYERS())):
+		if ePlayer in xrange(-1, gc.getMAX_PLAYERS()):
 			self.signDict[ePlayer] = szCaption
 		else:
 			BugUtil.warn("EventSigns PlotSigns.setSign() was passed an invalid Player ID %s at Plot (%d,%d)" % (str(ePlayer), self.iX, self.iY))
@@ -487,7 +487,7 @@ class EventSignsEventHandler:
 		#BugUtil.debug("EventSignsEventHandler.onPlotRevealed(pPlot = %s, eTeam = %s)" % (str(pPlot), str(eTeam)))
 		if (g_bShowSigns):
 			if (gSavedSigns):
-				for ePlayer in range(gc.getMAX_PLAYERS()):
+				for ePlayer in xrange(gc.getMAX_PLAYERS()):
 					pPlayer = gc.getPlayer(ePlayer)
 					if pPlayer.getTeam() == eTeam:
 						gSavedSigns.displaySign(pPlot, ePlayer)

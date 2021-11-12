@@ -138,8 +138,8 @@ def doPlotFeatures():
     iMapW = gc.getMap().getGridWidth()
     iMapH = gc.getMap().getGridHeight()
 
-    for x in range(iMapW):
-        for y in range(iMapH):
+    for x in xrange(iMapW):
+        for y in xrange(iMapH):
             loopPlot = gc.getMap().plot(x, y)
             if loopPlot and not loopPlot.isNone():
 
@@ -303,7 +303,7 @@ def doPlotFeatures():
                                 PAE_Barbaren.setFortDefence(loopPlot)
                             elif loopPlot.getNumUnits() > 4:
                                 iNum = loopPlot.getNumUnits() - 4
-                                for k in range(iNum):
+                                for k in xrange(iNum):
                                     loopPlot.getUnit(k).kill(True, -1)
                             elif pBarbPlayer.getCurrentEra() > 0:
                                 if bRageBarbs:
@@ -362,7 +362,7 @@ def doPlotFeatures():
             if CvUtil.myRandom(33, "setFlotsam") == 1:
                 iUnit = gc.getInfoTypeForString("UNIT_TREIBGUT")
                 iNum = gc.getMap().getWorldSize() + 1
-                for i in range(iNum):
+                for i in xrange(iNum):
                     CvUtil.spawnUnit(iUnit, Ocean[CvUtil.myRandom(len(Ocean), "spawnFlotsam")], pBarbPlayer)
 
     # Tiere setzen --------------------
@@ -489,15 +489,15 @@ def setGoodies(eImprovement,eNum, plots):
 
         # Umkreis checken
         iRange = 3
-        for x in range(-iRange, iRange+1):
-            for y in range(-iRange, iRange+1):
+        for x in xrange(-iRange, iRange+1):
+            for y in xrange(-iRange, iRange+1):
                 loopPlot = plotXY(plot.getX(), plot.getY(), x, y)
                 if loopPlot and not loopPlot.isNone():
                     if loopPlot.getImprovementType() in lGoodies or loopPlot.getOwner() != -1:
                         bIgnore = True
                         # Umkreis des gefundenen Plots aus der Plotliste entfernen
-                        for x2 in range(-iRange, iRange+1):
-                            for y2 in range(-iRange, iRange+1):
+                        for x2 in xrange(-iRange, iRange+1):
+                            for y2 in xrange(-iRange, iRange+1):
                                 loopPlot = plotXY(plot.getX(), plot.getY(), x2, y2)
                                 if loopPlot and not loopPlot.isNone():
                                     if loopPlot in plots:
@@ -523,8 +523,8 @@ def setGoodies(eImprovement,eNum, plots):
 
         # Alle Plots im Umkreis von 4 Feldern aus der Liste entfernen
         iRange = 4
-        for x in range(-iRange, iRange+1):
-            for y in range(-iRange, iRange+1):
+        for x in xrange(-iRange, iRange+1):
+            for y in xrange(-iRange, iRange+1):
                 loopPlot = plotXY(plot.getX(), plot.getY(), x, y)
                 if loopPlot and not loopPlot.isNone():
                     if loopPlot in plots:
@@ -574,7 +574,7 @@ def doStrandgut():
             iX = pPlot.getX()
             iY = pPlot.getY()
             # iRange = 1
-            for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+            for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                 loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
                 if loopPlot and not loopPlot.isNone():
                     if not loopPlot.isWater():
@@ -613,8 +613,8 @@ def doSeewind():
     iMapH = gc.getMap().getGridHeight()
     # get all ocean plots
     OceanPlots = []
-    for i in range(iMapW):
-        for j in range(iMapH):
+    for i in xrange(iMapW):
+        for j in xrange(iMapH):
             loopPlot = gc.getMap().plot(i, j)
             if loopPlot and not loopPlot.isNone():
                 if loopPlot.getTerrainType() == terr_ocean or loopPlot.getTerrainType() == terr_ocean2:
@@ -630,7 +630,7 @@ def doSeewind():
     #  4 = WORLDSIZE_LARGE
     #  5 = WORLDSIZE_HUGE
     iMaxEffects = (gc.getMap().getWorldSize() + 1) * 2
-    for i in range(iMaxEffects):
+    for i in xrange(iMaxEffects):
         # get first ocean plot
         iRand = CvUtil.myRandom(len(OceanPlots), "doSeewind1")
         loopPlot = OceanPlots[iRand]
@@ -638,7 +638,7 @@ def doSeewind():
         iDirection = CvUtil.myRandom(iNumDirection, "doSeewind2")
 
         # Start Windplots
-        for j in range(iWindplots):
+        for j in xrange(iWindplots):
             if loopPlot and not loopPlot.isNone():
                 if loopPlot.getFeatureType() == iDarkIce:
                     continue
@@ -647,8 +647,8 @@ def doSeewind():
                     # Im Umkreis von 5 soll kein weiteres Windfeature sein
                 bSet = True
                 iRange = 2
-                for x in range(-iRange, iRange+1):
-                    for y in range(-iRange, iRange+1):
+                for x in xrange(-iRange, iRange+1):
+                    for y in xrange(-iRange, iRange+1):
                         pPlot2 = plotXY(loopPlot.getX(), loopPlot.getY(), x, y)
                         if pPlot2.getFeatureType() in L.LSeewind:
                             bSet = False
@@ -746,7 +746,7 @@ def doFogOfWar(iPlayer,iGameTurn):
         if bDontGoBlackAnymore:
             return
         iRange = CyMap().numPlots()
-        for iI in range(iRange):
+        for iI in xrange(iRange):
             pPlot = CyMap().plotByIndex(iI)
             if not pPlot.isVisible(iTeam, 0):
                 bGoBlack = True
@@ -790,8 +790,8 @@ def doMoveGrasshoppers(pPlot):
     lPlots = []
     # Umkreis checken
     iRange = 1
-    for x in range(-iRange, iRange+1):
-        for y in range(-iRange, iRange+1):
+    for x in xrange(-iRange, iRange+1):
+        for y in xrange(-iRange, iRange+1):
             loopPlot = plotXY(pPlot.getX(), pPlot.getY(), x, y)
             if loopPlot and not loopPlot.isNone():
                 if loopPlot.getFeatureType() == -1:
@@ -860,14 +860,14 @@ def doPlaceDeepOcean():
     iDeepOcean = gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN")
     iRange = 2
 
-    for i in range(iNumMapPlots):
+    for i in xrange(iNumMapPlots):
         pPlot = gc.getMap().plotByIndex(i)
         if pPlot and not pPlot.isNone() and pPlot.getTerrainType() == iOcean:
             iX = pPlot.getX()
             iY = pPlot.getY()
             bSet = True
-            for x in range(-iRange, iRange+1):
-                for y in range(-iRange, iRange+1):
+            for x in xrange(-iRange, iRange+1):
+                for y in xrange(-iRange, iRange+1):
                     pLoopPlot = plotXY(iX, iY, x, y)
                     if not pLoopPlot or pLoopPlot.isNone():
                         continue
@@ -918,7 +918,7 @@ def doOlympicGames():
 
         # Los gehts
         iNumPlayers = gc.getMAX_PLAYERS()
-        for iPlayer in range (iNumPlayers):
+        for iPlayer in xrange (iNumPlayers):
             pPlayer = gc.getPlayer(iPlayer)
             if pPlayer and not pPlayer.isNone() and pPlayer.isAlive(): # and not pPlayer.isBarbarian():
 
@@ -940,7 +940,7 @@ def doOlympicGames():
 
                 # Cities
                 iNumCities = pPlayer.getNumCities()
-                for iCity in range (iNumCities):
+                for iCity in xrange (iNumCities):
                     pCity = pPlayer.getCity(iCity)
                     if pCity and not pCity.isNone():
 
@@ -1060,7 +1060,7 @@ def doOlympicGames():
         # # wenn das Fort jemandem gehört
         # # wird gecheckt, ob der Besitzer noch eine Einheit drin stehen hat
         # if iPlotData != -1:
-            # for i in range(iNumUnits):
+            # for i in xrange(iNumUnits):
                 # if pPlot.getUnit(i).getOwner() == iPlotData:
                     # pPlot.setCulture(iPlotData, 1, True)
                     # pPlot.setOwner(iPlotData)
@@ -1069,7 +1069,7 @@ def doOlympicGames():
         # # wenn das Fort niemandem gehört oder der Besitzer nicht mehr drin ist,
         # # bekommts der mit den meisten Einheiten drin
         # dictPlayers = {}
-        # for i in range(iNumUnits):
+        # for i in xrange(iNumUnits):
             # iPlayer = pPlot.getUnit(i).getOwner()
             # if iPlayer not in dictPlayers:
                 # dictPlayers[iPlayer] = 1

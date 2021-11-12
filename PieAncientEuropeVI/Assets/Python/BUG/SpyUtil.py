@@ -6,7 +6,7 @@
 ##
 ## Author: EmperorFool, ruff_hi
 
-from CvPythonExtensions import *
+from CvPythonExtensions import CyGlobalContext
 import BugUtil
 import PlayerUtil
 import BugData

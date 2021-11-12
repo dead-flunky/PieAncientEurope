@@ -105,9 +105,14 @@ import GameUtil
 import PlayerUtil
 import CvUtil
 
-# BUG - Mac Support - start
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
+# Mod BUG - Mac Support - start
 BugUtil.fixSets(globals())
-# BUG - Mac Support - end
+# Mod BUG - Mac Support - end
 
 gc = CyGlobalContext()
 
@@ -282,7 +287,7 @@ def getDesiredBonuses(playerOrID):
     """
     player, team = PlayerUtil.getPlayerAndTeam(playerOrID)
     bonuses = set()
-    for eBonus in range(gc.getNumBonusInfos()):
+    for eBonus in xrange(gc.getNumBonusInfos()):
         if player.getNumAvailableBonuses(eBonus) == 0:
             eObsoleteTech = gc.getBonusInfo(eBonus).getTechObsolete()
             if eObsoleteTech == -1 or not team.isHasTech(eObsoleteTech):
@@ -306,10 +311,10 @@ def initCorporationBonuses():
     """
     Initializes the CORP_BONUSES dictionary that maps each corporation ID to the set of bonus IDs it uses.
     """
-    for eCorp in range(gc.getNumCorporationInfos()):
+    for eCorp in xrange(gc.getNumCorporationInfos()):
         corp = gc.getCorporationInfo(eCorp)
         bonuses = set()
-        for i in range(gc.getNUM_CORPORATION_PREREQ_BONUSES()):
+        for i in xrange(gc.getNUM_CORPORATION_PREREQ_BONUSES()):
             eBonus = corp.getPrereqBonus(i)
             if eBonus != -1:
                 bonuses.add(eBonus)
@@ -321,7 +326,7 @@ def getSurplusBonuses(playerOrID, minimum=1):
     """
     player = PlayerUtil.getPlayer(playerOrID)
     available = []
-    for eBonus in range(gc.getNumBonusInfos()):
+    for eBonus in xrange(gc.getNumBonusInfos()):
         if player.getNumTradeableBonuses(eBonus) >= minimum:
             available.append(eBonus)
     return available
@@ -339,7 +344,7 @@ def getTradeableBonuses(fromPlayerOrID, toPlayerOrID):
     wont = set()
     tradeData = TradeData()
     tradeData.ItemType = TradeableItems.TRADE_RESOURCES
-    for eBonus in range(gc.getNumBonusInfos()):
+    for eBonus in xrange(gc.getNumBonusInfos()):
         tradeData.iData = eBonus
         if fromPlayer.canTradeItem(eToPlayer, tradeData, False):
             if fromPlayerIsHuman or fromPlayer.canTradeItem(eToPlayer, tradeData, True):
@@ -378,7 +383,7 @@ def calculateTotalTradeRouteYield(city, yieldType):
     If Fractional Trade Routes is active, the total is rounded down and returned as a regular number.
     """
     trade = 0
-    for route in range(city.getTradeRoutes()):
+    for route in xrange(city.getTradeRoutes()):
         trade += calculateTradeRouteYield(city, route, yieldType)
     if isFractionalTrade():
         trade /= 100
@@ -398,7 +403,7 @@ def calculateTradeRoutes(playerOrID, withPlayerOrID=None):
     eTeam = PlayerUtil.getPlayerTeam(playerOrID)
     eWithPlayer = PlayerUtil.getPlayerID(withPlayerOrID)
     for city in PlayerUtil.playerCities(playerOrID):
-        for i in range(city.getTradeRoutes()):
+        for i in xrange(city.getTradeRoutes()):
             tradeCity = city.getTradeCity(i)
             if tradeCity and tradeCity.getOwner() >= 0 and (eWithPlayer == -1 or eWithPlayer == tradeCity.getOwner()):
                 trade = city.calculateTradeYield(YieldTypes.YIELD_COMMERCE, TRADE_PROFIT_FUNC(city, tradeCity))

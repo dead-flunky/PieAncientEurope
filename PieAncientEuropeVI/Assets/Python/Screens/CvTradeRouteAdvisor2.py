@@ -1,9 +1,13 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 ## Created by Pie, Austria
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CyGame, CyMap,
+                                WidgetTypes, PanelStyles, PopupStates,
+                                CyInterface, NotifyCode, CyMessageControl,
+                                CyGInterfaceScreen, CyCamera)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 
 # globals
@@ -103,7 +107,7 @@ class CvTradeRouteAdvisor2:
                     list2.append(unit)
 
             (unit, pIter) = pPlayer.nextUnit(pIter, False)
-        
+
         # Zeige zuerst Landeinheiten, danach Schiffe
         lHandelseinheiten = list1 + list2
 
@@ -115,7 +119,7 @@ class CvTradeRouteAdvisor2:
             szText = localText.getText("TXT_KEY_TRADE_ADVISOR_INFO2", ())
             screen.setLabel("Label1_"+str(i), "Background", u"<font=3>" + szText + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 100, iY+20, 0.0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
         else:
-            for j in range(iRange):
+            for j in xrange(iRange):
                 pUnit = lHandelseinheiten[j]
 
                 screen.addPanel( "PanelBG_"+str(i), u"", u"", True, False, 40, iY, 935, 51, PanelStyles.PANEL_STYLE_MAIN_BLACK25 )
@@ -167,12 +171,12 @@ class CvTradeRouteAdvisor2:
 
                 # Buttons Arrow to left
                 screen.setImageButton("L8_"+str(i), "Art/Interface/Buttons/arrow_left.tga", 580, iY+9, 32, 32, WidgetTypes.WIDGET_GENERAL, -1, -1)
-                
+
                 # Promotion Escort / Begleitschutz
                 iPromo = gc.getInfoTypeForString("PROMOTION_SCHUTZ")
                 if pUnit.isHasPromotion(iPromo):
                     screen.setImageButton("L14_"+str(i), gc.getPromotionInfo(iPromo).getButton(), 615, iY+9, 32, 32, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, iPromo, -1)
-                
+
                 # Button Arrow to right
                 screen.setImageButton("L9_"+str(i), "Art/Interface/Buttons/arrow_right.tga", 650, iY+9, 32, 32, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
@@ -187,8 +191,10 @@ class CvTradeRouteAdvisor2:
                 tmpPlot = CyMap().plot(iCityX,iCityY)
                 if tmpPlot and not tmpPlot.isNone() and tmpPlot.isCity():
                     szText = tmpPlot.getPlotCity().getName()
-                    if tmpPlot.getOwner() == CyGame().getActivePlayer(): iTmpX = 790
-                    else: iTmpX = 760                    
+                    if tmpPlot.getOwner() == CyGame().getActivePlayer():
+                        iTmpX = 790
+                    else:
+                        iTmpX = 760
                     screen.setLabel("L11_"+str(i), "Background", u"<font=3>" + szText + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, iTmpX, iY+5, 0.0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
                 if tmpPlot.getOwner() != -1:
                     iCiv = gc.getPlayer(tmpPlot.getOwner()).getCivilizationType()
@@ -200,18 +206,18 @@ class CvTradeRouteAdvisor2:
                       screen.setImageButton("L12_"+str(i), gc.getCivilizationInfo(iCiv).getButton(), 760, iY+24, 24, 24, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, iCiv, -1)
                     szText = gc.getPlayer(tmpPlot.getOwner()).getCivilizationDescription(0)
                     screen.setLabel("L13_"+str(i), "Background", u"<font=2>" + szText + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, 790, iY+28, 0.0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, iCiv, -1 )
-                
+
                 # Cancel Button
                 screen.setImageButton("L15_"+str(i), ArtFileMgr.getInterfaceArtInfo("INTERFACE_TRADE_AUTO_STOP").getPath(), 900, iY, BUTTON_SIZE, BUTTON_SIZE, WidgetTypes.WIDGET_GENERAL, 748, pUnit.getID())
-                
+
                 # ----
                 i += 1
                 iY += 60
 
     def refreshScreen(self):
         self.deleteAllWidgets()
-        if self.iTargetPlayer != -1:
-            screen = self.getScreen()
+        # if self.iTargetPlayer != -1:
+            # screen = self.getScreen()
         return 0
 
     # returns a unique ID for a widget in this screen
@@ -248,7 +254,7 @@ class CvTradeRouteAdvisor2:
 
     def update(self, fDelta):
         return
-        
+
     def hideScreen(self):
         screen = self.getScreen()
         screen.hideScreen()

@@ -382,7 +382,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 
 		if AutologOpt.isLogCityWhipStatus():
 			iPlayer = gc.getActivePlayer()
-			for i in range(0, iPlayer.getNumCities(), 1):
+			for i in xrange(0, iPlayer.getNumCities(), 1):
 				iCity = iPlayer.getCity(i)
 				iCurrentWhipCounter = iCity.getHurryAngerTimer()
 				iCurrentConstrictCounter = iCity.getConscriptAngerTimer()
@@ -441,7 +441,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 #				Logger.writeLog(message)
 				sMsgArray.append(message)
 
-				for iPlayer in range(gc.getMAX_PLAYERS()):
+				for iPlayer in xrange(gc.getMAX_PLAYERS()):
 					if gc.getPlayer(iPlayer).getTeam() == iHasMetTeamY:
 						sLeader = gc.getLeaderHeadInfo(gc.getPlayer(iPlayer).getLeaderType()).getDescription()
 						sCivName = gc.getPlayer(iPlayer).getCivilizationShortDescription(0)
@@ -454,7 +454,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 				if iLen == 2:
 					Logger.writeLog(sMsgArray[1], vColor="Brown")
 				else:
-					for i in range(iLen):
+					for i in xrange(iLen):
 						Logger.writeLog(sMsgArray[i], vColor="Brown")
 
 	def onCombatLogCalc(self, argsList):
@@ -572,15 +572,15 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			playerX = PyPlayer(zOwner)
 			zsLocn1 = BugUtil.getText("TXT_KEY_AUTOLOG_IN_TERRITORY", (playerX.getCivilizationAdjective(), ))
 
-		for iiX in range(iX-1, iX+2, 1):
-			for iiY in range(iY-1, iY+2, 1):
+		for iiX in xrange(iX-1, iX+2, 1):
+			for iiY in xrange(iY-1, iY+2, 1):
 				pPlot = CyMap().plot(iiX,iiY)
 				if (pPlot.isCity()):
 					zsCity = pPlot.getPlotCity()
 					return BugUtil.getText("TXT_KEY_AUTOLOG_IN_TERRITORY_AT", (zsLocn1, zsCity.getName()))
 
-		for iiX in range(iX-4, iX+5, 1):
-			for iiY in range(iY-4, iY+5, 1):
+		for iiX in xrange(iX-4, iX+5, 1):
+			for iiY in xrange(iY-4, iY+5, 1):
 				pPlot = CyMap().plot(iiX,iiY)
 				if (pPlot.isCity()):
 					zsCity = pPlot.getPlotCity()
@@ -891,8 +891,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		and pPlot.getOwner() == CyGame().getActivePlayer()):
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_IMPROVEMENT_BUILT", (PyInfo.ImprovementInfo(iImprovement).getDescription(), ))
 			zsLocn = ""
-			for iiX in range(iX-2, iX+3, 1):
-				for iiY in range(iY-2, iY+3, 1):
+			for iiX in xrange(iX-2, iX+3, 1):
+				for iiY in xrange(iY-2, iY+3, 1):
 					pPlot = CyMap().plot(iiX,iiY)
 					if (pPlot.isCity()):
 						zsCity = pPlot.getPlotCity()
@@ -914,8 +914,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		and pPlot.getOwner() == CyGame().getActivePlayer()):
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_IMPROVEMENT_DESTROYED", (PyInfo.ImprovementInfo(iImprovement).getDescription(), ))
 			zsLocn = ""
-			for iiX in range(iX-2, iX+3, 1):
-				for iiY in range(iY-2, iY+3, 1):
+			for iiX in xrange(iX-2, iX+3, 1):
+				for iiY in xrange(iY-2, iY+3, 1):
 					pPlot = CyMap().plot(iiX,iiY)
 					if (pPlot.isCity()):
 						zsCity = pPlot.getPlotCity()
@@ -941,8 +941,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			else:
 				message = BugUtil.getPlainText("TXT_KEY_AUTOLOG_IMPROVEMENT_UNKNOWN")
 			zsLocn = ""
-			for iiX in range(iX-2, iX+3, 1):
-				for iiY in range(iY-2, iY+3, 1):
+			for iiX in xrange(iX-2, iX+3, 1):
+				for iiY in xrange(iY-2, iY+3, 1):
 					pPlot = CyMap().plot(iiX,iiY)
 					if (pPlot.isCity()):
 						zsCity = pPlot.getPlotCity()
@@ -989,14 +989,14 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szTargetItems = ""
 			message = ""
 			if eOfferPlayer == pTrade.getPlayer():
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getTrade(i)) + ", "
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getOtherTrade(i)) + ", "
 			else:
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getOtherTrade(i)) + ", "
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
@@ -1027,10 +1027,10 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szOfferItems = ""
 			message = ""
 			if eOfferPlayer == pTrade.getPlayer():
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getTrade(i)) + ", "
 			else:
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getOtherTrade(i)) + ", "
 			szOfferItems = szOfferItems.rstrip(", ")
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_OFFER", 
@@ -1069,14 +1069,14 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szTargetItems = ""
 			message = ""
 			if eOfferPlayer == pTrade.getPlayer():
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getTrade(i)) + ", "
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getOtherTrade(i)) + ", "
 			else:
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getOtherTrade(i)) + ", "
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
@@ -1102,14 +1102,14 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szTargetItems = ""
 			message = ""
 			if eOfferPlayer == pTrade.getPlayer():
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getTrade(i)) + ", "
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getOtherTrade(i)) + ", "
 			else:
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getOtherTrade(i)) + ", "
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
@@ -1135,14 +1135,14 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szTargetItems = ""
 			message = ""
 			if eOfferPlayer == pTrade.getPlayer():
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getTrade(i)) + ", "
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getOtherTrade(i)) + ", "
 			else:
-				for i in range(pTrade.getOtherCount()):
+				for i in xrange(pTrade.getOtherCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getOtherTrade(i)) + ", "
-				for i in range(pTrade.getCount()):
+				for i in xrange(pTrade.getCount()):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
@@ -1166,7 +1166,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			szItems = ""
 			message = ""
-			for i in range(pTrade.getCount()):
+			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND", 
@@ -1182,7 +1182,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			szItems = ""
 			message = ""
-			for i in range(pTrade.getCount()):
+			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND", 
@@ -1199,7 +1199,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			szItems = ""
 			message = ""
-			for i in range(pTrade.getCount()):
+			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND", 
@@ -1216,7 +1216,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			szItems = ""
 			message = ""
-			for i in range(pTrade.getCount()):
+			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND", 
@@ -1232,7 +1232,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			szItems = ""
 			message = ""
-			for i in range(pTrade.getCount()):
+			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND", 
@@ -1249,7 +1249,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			szItems = ""
 			message = ""
-			for i in range(pTrade.getCount()):
+			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND", 
@@ -1421,12 +1421,12 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			self.initStuff()
 
 		# store civ state religion
-		for iCiv in range(0, ziMaxCiv, 1):
+		for iCiv in xrange(0, ziMaxCiv, 1):
 			self.CIVReligion[iCiv] = gc.getPlayer(iCiv).getStateReligion()
 
 		# store civ attitudes
-		for iCiv1 in range(0, ziMaxCiv, 1):
-			for iCiv2 in range(0, ziMaxCiv, 1):
+		for iCiv1 in xrange(0, ziMaxCiv, 1):
+			for iCiv2 in xrange(0, ziMaxCiv, 1):
 				# Don't try to get a civ's attitude with itself
 				if iCiv1 == iCiv2:
 					continue
@@ -1434,9 +1434,9 @@ class AutoLogEvent(AbstractAutoLogEvent):
 				self.CIVAttitude[zKey] = gc.getAttitudeInfo(gc.getPlayer(iCiv1).AI_getAttitude(iCiv2)).getDescription()
 
 		# store the civ's civics
-		for iCiv in range(0, ziMaxCiv, 1):
+		for iCiv in xrange(0, ziMaxCiv, 1):
 			if PyPlayer(iCiv).isAlive():
-				for iCivic in range(0, 5, 1):
+				for iCivic in xrange(0, 5, 1):
 					zKey = 5 * iCiv + iCivic
 					self.CIVCivics[zKey] = gc.getPlayer(iCiv).getCivics(iCivic)
 
@@ -1445,7 +1445,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 	def storeWhip(self):
 		# store the city whip counter
 		iPlayer = gc.getActivePlayer()
-		for i in range(0, iPlayer.getNumCities(), 1):
+		for i in xrange(0, iPlayer.getNumCities(), 1):
 			iCity = iPlayer.getCity(i)
 			self.CityWhipCounter[i] = iCity.getHurryAngerTimer()
 			self.CityConscriptCounter[i] = iCity.getConscriptAngerTimer()
@@ -1457,7 +1457,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 
 		# check if civ state religion has changed
 		if (AutologOpt.isLogReligion()):
-			for iCiv in range(0, ziMaxCiv, 1):
+			for iCiv in xrange(0, ziMaxCiv, 1):
 				if (gc.getTeam(gc.getPlayer(iCiv).getTeam()).isHasMet(gc.getActivePlayer().getTeam())
 				and self.CIVReligion[iCiv] != gc.getPlayer(iCiv).getStateReligion()
 				and PyPlayer(iCiv).isAlive()):
@@ -1475,8 +1475,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 
 		# check if the attitude has changed
 		if (AutologOpt.isLogAttitude()):
-			for iCiv1 in range(0, ziMaxCiv, 1):
-				for iCiv2 in range(0, ziMaxCiv, 1):
+			for iCiv1 in xrange(0, ziMaxCiv, 1):
+				for iCiv2 in xrange(0, ziMaxCiv, 1):
 					# Don't try to get a civ's attitude with itself
 					if iCiv1 == iCiv2:
 						continue
@@ -1496,11 +1496,11 @@ class AutoLogEvent(AbstractAutoLogEvent):
 
 		# check if the civ's civics have changed
 		if (AutologOpt.isLogCivics()):
-			for iCiv in range(0, ziMaxCiv, 1):
+			for iCiv in xrange(0, ziMaxCiv, 1):
 				zsCiv = gc.getPlayer(iCiv).getName() + "(" + gc.getPlayer(iCiv).getCivilizationShortDescription(0) + ")"
 				if (PyPlayer(iCiv).isAlive()
 				and gc.getTeam(gc.getPlayer(iCiv).getTeam()).isHasMet(gc.getActivePlayer().getTeam())):
-					for iCivic in range(0, 5, 1):
+					for iCivic in xrange(0, 5, 1):
 						zKey = 5 * iCiv + iCivic
 						if (self.CIVCivics[zKey] != gc.getPlayer(iCiv).getCivics(iCivic)):
 							zsOldCiv = gc.getCivicInfo(self.CIVCivics[zKey]).getDescription()
@@ -1519,7 +1519,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		Logger.writeLog("state religion")
 
 		# dump civ state religion
-		for iCiv in range(0, ziMaxCiv, 1):
+		for iCiv in xrange(0, ziMaxCiv, 1):
 			zsCiv = gc.getPlayer(iCiv).getCivilizationShortDescription(0)
 			message = "zsCiv %s, %i, %i" % (zsCiv, self.CIVReligion[iCiv], gc.getPlayer(iCiv).getStateReligion())
 			Logger.writeLog(message)
@@ -1528,8 +1528,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		Logger.writeLog("attitude")
 
 		# dump attitude
-		for iCiv1 in range(0, ziMaxCiv, 1):
-			for iCiv2 in range(0, ziMaxCiv, 1):
+		for iCiv1 in xrange(0, ziMaxCiv, 1):
+			for iCiv2 in xrange(0, ziMaxCiv, 1):
 				# Don't try to get a civ's attitude with itself
 				if iCiv1 == iCiv2:
 					continue
@@ -1544,9 +1544,9 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		Logger.writeLog("civics")
 
 		# dump civ's civics
-		for iCiv in range(0, ziMaxCiv, 1):
+		for iCiv in xrange(0, ziMaxCiv, 1):
 			zsCiv = gc.getPlayer(iCiv).getCivilizationShortDescription(0)
-			for iCivic in range(0, 5, 1):
+			for iCivic in xrange(0, 5, 1):
 				zKey = 5 * iCiv + iCivic
 				zsOldCiv = gc.getCivicInfo(self.CIVCivics[zKey]).getDescription()
 				zsNewCiv = gc.getCivicInfo(gc.getPlayer(iCiv).getCivics(iCivic)).getDescription()
@@ -1558,7 +1558,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 
 		# dump the city whip counter
 		iPlayer = gc.getActivePlayer()
-		for i in range(0, iPlayer.getNumCities(), 1):
+		for i in xrange(0, iPlayer.getNumCities(), 1):
 			iCity = iPlayer.getCity(i)
 			message = "Whip Counter, %s, %s, %s" % (iCity.getName(), self.CityWhipCounter[i], iCity.getHurryAngerTimer())
 			Logger.writeLog(message)
@@ -1572,7 +1572,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			return
 
 		pPlayer = gc.getPlayer(gc.getGame().getActivePlayer())
-		for iI in range( CommerceTypes.NUM_COMMERCE_TYPES ):
+		for iI in xrange( CommerceTypes.NUM_COMMERCE_TYPES ):
 			eCommerce = (iI + 1) % CommerceTypes.NUM_COMMERCE_TYPES
 
 			zDesc = gc.getCommerceInfo(CommerceTypes(eCommerce)).getDescription()

@@ -3,7 +3,12 @@ from sre_constants import BRANCH, SUBPATTERN
 from re import VERBOSE, MULTILINE, DOTALL
 import re
 import cgi
-import warnings
+# import warnings
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 _speedups = None
 
@@ -61,7 +66,7 @@ ESCAPE_DCT = {
     '\r': '\\r',
     '\t': '\\t',
 }
-for i in range(0x20):
+for i in xrange(0x20):
     ESCAPE_DCT.setdefault(chr(i), '\\u%04x' % (i,))
 
 # assume this produces an infinity on all machines (probably not guaranteed)
@@ -111,7 +116,7 @@ def encode_basestring_ascii(s):
                 s2 = 0xdc00 | (n & 0x3ff)
                 return '\\u%04x\\u%04x' % (s1, s2)
     return '"' + str(ESCAPE_ASCII.sub(replace, s)) + '"'
-        
+
 try:
     encode_basestring_ascii = _speedups.encode_basestring_ascii
     _need_utf8 = True
@@ -123,7 +128,7 @@ class JSONEncoder(object):
     Extensible JSON <http://json.org> encoder for Python data structures.
 
     Supports the following objects and types by default:
-    
+
     +-------------------+---------------+
     | Python            | JSON          |
     +===================+===============+
@@ -187,7 +192,7 @@ class JSONEncoder(object):
         representation you should specify (',', ':') to eliminate whitespace.
 
         If encoding is not None, then all input strings will be
-        transformed into unicode using that encoding prior to JSON-encoding. 
+        transformed into unicode using that encoding prior to JSON-encoding.
         The default is UTF-8.
         """
 
@@ -359,7 +364,7 @@ class JSONEncoder(object):
 
         For example, to support arbitrary iterators, you could
         implement default like this::
-            
+
             def default(self, o):
                 try:
                     iterable = pIter(o)
@@ -382,7 +387,7 @@ class JSONEncoder(object):
         if isinstance(o, basestring):
             if isinstance(o, str):
                 _encoding = self.encoding
-                if (_encoding is not None 
+                if (_encoding is not None
                         and not (_encoding == 'utf-8' and _need_utf8)):
                     o = o.decode(_encoding)
             return encode_basestring_ascii(o)
@@ -396,9 +401,9 @@ class JSONEncoder(object):
         """
         Encode the given object and yield each string
         representation as available.
-        
+
         For example::
-            
+
             for chunk in JSONEncoder().iterencode(bigobject):
                 mysocket.write(chunk)
         """
@@ -440,7 +445,7 @@ class Scanner(object):
         match = self.scanner.scanner(string, idx).match
         actions = self.actions
         lastend = idx
-        end = len(string)
+        # end = len(string)
         while True:
             m = match()
             if m is None:
@@ -457,7 +462,7 @@ class Scanner(object):
                     match = self.scanner.scanner(string, matchend).match
                 yield rval, matchend
             lastend = matchend
-            
+
 def pattern(pattern, flags=FLAGS):
     def decorator(fn):
         fn.pattern = pattern
@@ -616,7 +621,7 @@ def JSONObject(match, context, _w=WHITESPACE.match):
         pairs = object_hook(pairs)
     return pairs, end
 pattern(r'{')(JSONObject)
-            
+
 def JSONArray(match, context, _w=WHITESPACE.match):
     values = []
     s = match.string
@@ -642,7 +647,7 @@ def JSONArray(match, context, _w=WHITESPACE.match):
         end = _w(s, end).end()
     return values, end
 pattern(r'\[')(JSONArray)
- 
+
 ANYTHING = [
     JSONObject,
     JSONArray,
@@ -658,7 +663,7 @@ class JSONDecoder(object):
     Simple JSON <http://json.org> decoder
 
     Performs the following translations in decoding:
-    
+
     +---------------+-------------------+
     | JSON          | Python            |
     +===============+===================+
@@ -691,7 +696,7 @@ class JSONDecoder(object):
         ``encoding`` determines the encoding used to interpret any ``str``
         objects decoded by this instance (utf-8 by default).  It has no
         effect when decoding ``unicode`` objects.
-        
+
         Note that currently only encodings that are a superset of ASCII work,
         strings of other encodings should be passed in as ``unicode``.
 
@@ -753,7 +758,7 @@ def dump(obj, fp, skipkeys=False, ensure_ascii=True, check_circular=True,
 		``.write()``-supporting file-like object).
 
 		If ``skipkeys`` is ``True`` then ``dict`` keys that are not basic types
-		(``str``, ``unicode``, ``int``, ``long``, ``float``, ``bool``, ``None``) 
+		(``str``, ``unicode``, ``int``, ``long``, ``float``, ``bool``, ``None``)
 		will be skipped instead of raising a ``TypeError``.
 
 		If ``ensure_ascii`` is ``False``, then the some chunks written to ``fp``
@@ -810,7 +815,7 @@ def dumps(obj, skipkeys=False, ensure_ascii=True, check_circular=True,
 		Serialize ``obj`` to a JSON formatted ``str``.
 
 		If ``skipkeys`` is ``True`` then ``dict`` keys that are not basic types
-		(``str``, ``unicode``, ``int``, ``long``, ``float``, ``bool``, ``None``) 
+		(``str``, ``unicode``, ``int``, ``long``, ``float``, ``bool``, ``None``)
 		will be skipped instead of raising a ``TypeError``.
 
 		If ``ensure_ascii`` is ``False``, then the return value will be a
@@ -873,7 +878,7 @@ def load(fp, encoding=None, cls=None, object_hook=None, **kw):
 		result of any object literal decode (a ``dict``). The return value of
 		``object_hook`` will be used instead of the ``dict``. This feature
 		can be used to implement custom decoders (e.g. JSON-RPC class hinting).
-		
+
 		To use a custom ``JSONDecoder`` subclass, specify it with the ``cls``
 		kwarg.
 		"""
@@ -923,6 +928,3 @@ def write(obj):
 		warnings.warn("simplejson.dumps(s) should be used instead of write(s)",
 				DeprecationWarning)
 		return dumps(obj)
-
-
-

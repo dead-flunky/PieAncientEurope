@@ -39,7 +39,7 @@ def sdGameYearsInt():
 	else:
 		yearsBC = 0
 	yearsAD = 0
-	for i in range(gc.getGameSpeedInfo(gc.getGame().getGameSpeedType()).getNumTurnIncrements()):
+	for i in xrange(gc.getGameSpeedInfo(gc.getGame().getGameSpeedType()).getNumTurnIncrements()):
 		yearsAD += gc.getGameSpeedInfo(gc.getGame().getGameSpeedType()).getGameTurnInfo(i).iNumGameTurnsPerIncrement
 	yearsAD = sdGetTimeInt(yearsAD)
 	if (yearsAD < sdGetTimeInt(gc.getGame().getGameTurn())):

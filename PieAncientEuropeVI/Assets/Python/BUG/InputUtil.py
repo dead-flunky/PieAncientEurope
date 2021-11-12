@@ -6,11 +6,11 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
-import BugConfig
-import BugDll
+from CvPythonExtensions import InputTypes
+# import BugConfig
+# import BugDll
 import BugUtil
-import CvEventInterface
+# import CvEventInterface
 import types
 
 KEY_MAP = {

@@ -156,7 +156,7 @@ class WBTechScreen:
 						button = "Art/Interface/PlotPicker/Warning.dds"
 			
 			else:
-				for j in range(gc.getNUM_AND_TECH_PREREQS()):
+				for j in xrange(gc.getNUM_AND_TECH_PREREQS()):
 					eTech = gc.getTechInfo(item[1]).getPrereqAndTechs(j)
 					if (eTech > -1):
 						if gc.getTechInfo(eTech).getResearchCost() == -1:

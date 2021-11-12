@@ -8,13 +8,26 @@
 #
 # f1rpo (advc.056): Made some changes so that scenario files can be read that were created by a DLL with a smaller player limit than the current DLL
 
-from CvPythonExtensions import *
-import os
-import sys
-import CvUtil
-from array import *
+from CvPythonExtensions import (CyGlobalContext, CyTranslator, CyInterface,
+                                CommerceTypes, CyMap, getWBSaveExtension,
+                                TeamTypes, WarPlanTypes, PlayerTypes,
+                                ColorTypes, CyMapGenerator, BonusTypes,
+                                SeaLevelTypes, WorldSizeTypes, ClimateTypes,
+                                CyEngine, PlotTypes, CardinalDirectionTypes,
+                                ActivityTypes, LeaderHeadTypes, UnitAITypes,
+                                DomainTypes, YieldTypes, UnitTypes,
+                                BuildingTypes, OrderTypes, ProjectTypes,
+                                ProcessTypes, CivilizationTypes,
+                                HandicapTypes, DirectionTypes)
 
-from CvWBKeys import *
+
+
+import os
+# import sys
+import CvUtil
+# from array import *
+
+from CvWBKeys import (CivDescKeys, CivAdjectiveKeys, LeaderKeys)
 import CvPlatyBuilderScreen
 import StartingPointsUtil as sp
 
@@ -84,13 +97,6 @@ def filterPlayerIds2(list_of_ids, barb_id):
         return l
     else:
         return filter(lambda x: x[0] <= NUM_CIV_PLAYERS, list_of_ids)
-
-def init_filter():
-
-    global filterPlayerIds
-    global filterPlayerIds2
-    filterPlayerIds = _filterPlayerIds
-    filterPlayerIds2 = _filterPlayerIds2
 
 # Note that getText() returns "x:y:z:w" for civ adjectives.
 def findKey(keylist, value):
@@ -195,22 +201,22 @@ class CvGameDesc:
         f.write("\tCalendar=%s\n" %(gc.getCalendarInfo(gc.getGame().getCalendar()).getType(),))
 
         # write options
-        for i in range(gc.getNumGameOptionInfos()):
+        for i in xrange(gc.getNumGameOptionInfos()):
             if (gc.getGame().isOption(i)):
                 f.write("\tOption=%s\n" %(gc.getGameOptionInfo(i).getType()))
 
         # write mp options
-        for i in range(gc.getNumMPOptionInfos()):
+        for i in xrange(gc.getNumMPOptionInfos()):
             if (gc.getGame().isMPOption(i)):
                 f.write("\tMPOption=%s\n" %(gc.getMPOptionInfo(i).getType()))
 
         # write force controls
-        for i in range(gc.getNumForceControlInfos()):
+        for i in xrange(gc.getNumForceControlInfos()):
             if (gc.getGame().isForcedControl(i)):
                 f.write("\tForceControl=%s\n" %(gc.getForceControlInfo(i).getType()))
 
         # write victories
-        for i in range(gc.getNumVictoryInfos()):
+        for i in xrange(gc.getNumVictoryInfos()):
             if (gc.getGame().isVictoryValid(i)):
                 if (not gc.getVictoryInfo(i).isPermanent()):
                     f.write("\tVictory=%s\n" %(gc.getVictoryInfo(i).getType()))
@@ -372,11 +378,11 @@ class CvTeamDesc:
             f.write("\tTech=%s\n" %(gc.getTechInfo(i).getType()))
 
             if gc.getTechInfo(i).isRepeat():
-                for j in range(pTeam.getTechCount(i)):
+                for j in xrange(pTeam.getTechCount(i)):
                     f.write("\tTech=%s\n" %(gc.getTechInfo(i).getType()))
 
         # write Espionage against other teams
-        for i in range(gc.getMAX_TEAMS()):
+        for i in xrange(gc.getMAX_TEAMS()):
             if pTeam.getEspionagePointsAgainstTeam(i) > 0:
                 f.write("\tEspionageTeam=%d, EspionageAmount=%d\n" %(i, gc.getTeam(idx).getEspionagePointsAgainstTeam(i)))
 
@@ -384,7 +390,7 @@ class CvTeamDesc:
         if pTeam.getEspionagePointsEver() > 0:
             f.write("\tEspionageEverAmount=%d\n" %(gc.getTeam(idx).getEspionagePointsEver()))
     ## Platy Builder ##
-        for i in range(gc.getMAX_TEAMS()):
+        for i in xrange(gc.getMAX_TEAMS()):
             if i == idx:
                 continue
             if gc.getTeam(i).isBarbarian():
@@ -393,34 +399,34 @@ class CvTeamDesc:
                 f.write("\tContactWithTeam=%d\n" %(i))
     ## Platy Builder ##
         # write warring teams
-        for i in range(gc.getMAX_CIV_TEAMS()):
+        for i in xrange(gc.getMAX_CIV_TEAMS()):
             if gc.getTeam(i).isBarbarian():
                 continue
             if pTeam.isAtWar(i):
                 f.write("\tAtWar=%d\n" %(i))
 
         # write permanent war/peace teams
-        for i in range(gc.getMAX_CIV_TEAMS()):
+        for i in xrange(gc.getMAX_CIV_TEAMS()):
             if pTeam.isPermanentWarPeace(i):
                 f.write("\tPermanentWarPeace=%d\n" %(i))
 
         # write open borders other teams
-        for i in range(gc.getMAX_CIV_TEAMS()):
+        for i in xrange(gc.getMAX_CIV_TEAMS()):
             if pTeam.isOpenBorders(i):
                 f.write("\tOpenBordersWithTeam=%d\n" %(i))
 
         # write defensive pact other teams
-        for i in range(gc.getMAX_CIV_TEAMS()):
+        for i in xrange(gc.getMAX_CIV_TEAMS()):
             if pTeam.isDefensivePact(i):
                 f.write("\tDefensivePactWithTeam=%d\n" %(i))
 
         # write vassal state
-        for i in range(gc.getMAX_CIV_TEAMS()):
+        for i in xrange(gc.getMAX_CIV_TEAMS()):
             if pTeam.isVassal(i):
                 f.write("\tVassalOfTeam=%d\n" %(i))
 
-        for i in range(gc.getNumProjectInfos()):
-            for j in range(pTeam.getProjectCount(i)):
+        for i in xrange(gc.getNumProjectInfos()):
+            for j in xrange(pTeam.getProjectCount(i)):
                 f.write("\tProjectType=%s\n" %(gc.getProjectInfo(i).getType()))
 
         f.write("\tRevealMap=%d\n" %(0))
@@ -769,17 +775,17 @@ class CvPlayerDesc:
             f.write("\tRandomStartLocation=false\n")
 
             # write Civics
-            for iCivicOptionLoop in range(gc.getNumCivicOptionInfos()):
+            for iCivicOptionLoop in xrange(gc.getNumCivicOptionInfos()):
                 iCivic = pPlayer.getCivics(iCivicOptionLoop)
                 f.write("\tCivicOption=%s, Civic=%s\n" %(gc.getCivicOptionInfo(iCivicOptionLoop).getType(), gc.getCivicInfo(iCivic).getType()))
 
             # write Attitude Extra
-            for i in range(gc.getMAX_PLAYERS()):
+            for i in xrange(gc.getMAX_PLAYERS()):
                 if pPlayer.AI_getAttitudeExtra(i) != 0:
                     f.write("\tAttitudePlayer=%d, AttitudeExtra=%d\n" %(i, pPlayer.AI_getAttitudeExtra(i)))
 
             # write City List
-            for i in range(pPlayer.getNumCityNames()):
+            for i in xrange(pPlayer.getNumCityNames()):
                 f.write("\tCityList=%s\n" %(pPlayer.getCityName(i)))
 
         if pPlayer.getHandicapType() == HandicapTypes.NO_HANDICAP:
@@ -1297,27 +1303,27 @@ class CvCityDesc:
         for iI in buildings:
             f.write("\t\tBuildingType=%s\n" %(gc.getBuildingInfo(iI).getType()))
 
-        for iI in range(gc.getNumReligionInfos()):
+        for iI in xrange(gc.getNumReligionInfos()):
             if city.isHasReligion(iI):
                 f.write("\t\tReligionType=%s\n" %(gc.getReligionInfo(iI).getType()))
             if (city.isHolyCityByType(iI)):
                 f.write("\t\tHolyCityReligionType=%s\n" %(gc.getReligionInfo(iI).getType()))
 
-        for iI in range(gc.getNumCorporationInfos()):
+        for iI in xrange(gc.getNumCorporationInfos()):
             if city.isHasCorporation(iI):
                 f.write("\t\tCorporationType=%s\n" %(gc.getCorporationInfo(iI).getType()))
             if (city.isHeadquartersByType(iI)):
                 f.write("\t\tHeadquarterCorporationType=%s\n" %(gc.getCorporationInfo(iI).getType()))
 
-        for iI in range(gc.getNumSpecialistInfos()):
-            for iJ in range(city.getAddedFreeSpecialistCount(iI)):
+        for iI in xrange(gc.getNumSpecialistInfos()):
+            for iJ in xrange(city.getAddedFreeSpecialistCount(iI)):
                 f.write("\t\tFreeSpecialistType=%s\n" %(gc.getSpecialistInfo(iI).getType()))
 
         if city.getScriptData():
             f.write("\t\tScriptData=%s\n" %city.getScriptData())
 
         # Player culture
-        for iPlayerLoop in range(gc.getMAX_PLAYERS()):
+        for iPlayerLoop in xrange(gc.getMAX_PLAYERS()):
             iPlayerCulture = city.getCulture(iPlayerLoop)
             if (iPlayerCulture > 0):
                 f.write("\t\tPlayer%dCulture=%d\n" %(iPlayerLoop, iPlayerCulture))
@@ -1676,7 +1682,7 @@ class CvPlotDesc:
             f.write("\tPlotType=%d\n" %(int(plot.getPlotType()),))
 
         # units
-        for i in range(plot.getNumUnits()):
+        for i in xrange(plot.getNumUnits()):
             unit=plot.getUnit(i)
             if unit.getUnitType() == -1:
                 continue
@@ -1687,7 +1693,7 @@ class CvPlotDesc:
 
         # Fog of War
         bFirstReveal=True
-        for iTeamLoop in range(gc.getMAX_TEAMS()):
+        for iTeamLoop in xrange(gc.getMAX_TEAMS()):
             if gc.getTeam(iTeamLoop).isAlive():
                 if plot.isRevealed(iTeamLoop,0):
                     # Plot is revealed for this Team so write out the fact that it is; if not revealed don't write anything
@@ -2074,7 +2080,7 @@ class CvWBDesc:
         fileName,ext = os.path.splitext(fileName)
         CvUtil.pyPrint('saveDesc:%s, curDir:%s' %(fileName,os.getcwd()))
 
-        f = file(self.getDescFileName(fileName), "w")   # open text file
+        f = open(self.getDescFileName(fileName), "w")   # open text file
     ## Platy Builder ##
         f.write("%s\n" %("Platy Builder"))
     ## Platy Builder ##
@@ -2094,10 +2100,10 @@ class CvWBDesc:
         global bFirstWrite
         teamTechs = []
         cityBuildings = []
-        for i in range(gc.getMAX_TEAMS()):
+        for i in xrange(gc.getMAX_TEAMS()):
             pTeam = gc.getTeam(i)
             techs = []
-            for i in range(gc.getNumTechInfos()):
+            for i in xrange(gc.getNumTechInfos()):
                 if pTeam.isHasTech(i):
                     techs.append(i)
                     if not bFirstWrite:
@@ -2106,13 +2112,13 @@ class CvWBDesc:
 
         iGridW = CyMap().getGridWidth()
         iGridH = CyMap().getGridHeight()
-        for iX in range(iGridW):
-            for iY in range(iGridH):
+        for iX in xrange(iGridW):
+            for iY in xrange(iGridH):
                 plot = CyMap().plot(iX, iY)
                 if (plot.isCity()):
                     city = plot.getPlotCity()
                     buildings = []
-                    for iI in range(gc.getNumBuildingInfos()):
+                    for iI in xrange(gc.getNumBuildingInfos()):
                         if city.getNumRealBuilding(iI) > 0:
                             if not bFirstWrite:
                                 city.setNumRealBuilding(iI, 0)
@@ -2122,10 +2128,10 @@ class CvWBDesc:
                     cityBuildings.append(None)
         """ End of Prelude """
 
-        for i in range(gc.getMAX_TEAMS()):
+        for i in xrange(gc.getMAX_TEAMS()):
             CvTeamDesc().write(f, i)    # write team info
 
-        for i in range(gc.getMAX_PLAYERS()):
+        for i in xrange(gc.getMAX_PLAYERS()):
             CvPlayerDesc().write(f, i)    # write player info
 
         self.mapDesc.write(f) # write map info
@@ -2133,8 +2139,8 @@ class CvWBDesc:
         f.write("\n### Plot Info ###\n")
         iGridW = CyMap().getGridWidth()
         iGridH = CyMap().getGridHeight()
-        for iX in range(iGridW):
-            for iY in range(iGridH):
+        for iX in xrange(iGridW):
+            for iY in xrange(iGridH):
                 plot = CyMap().plot(iX, iY)
                 pDesc = CvPlotDesc()
                 if pDesc.needToWritePlot(plot):
@@ -2142,7 +2148,7 @@ class CvWBDesc:
 
         f.write("\n### Sign Info ###\n")
         iNumSigns = CyEngine().getNumSigns()
-        for i in range(iNumSigns):
+        for i in xrange(iNumSigns):
             sign = CyEngine().getSignByIndex(i)
             pDesc = CvSignDesc()
             pDesc.write(f, sign)
@@ -2153,8 +2159,8 @@ class CvWBDesc:
         if not bFirstWrite:
             iGridW = CyMap().getGridWidth()
             iGridH = CyMap().getGridHeight()
-            for iX in range(iGridW):
-                for iY in range(iGridH):
+            for iX in xrange(iGridW):
+                for iY in xrange(iGridH):
                     plot = CyMap().plot(iX, iY)
                     if (plot.isCity()):
                         city = plot.getPlotCity()
@@ -2164,7 +2170,7 @@ class CvWBDesc:
                         for iI in buildings:
                             city.setNumRealBuilding(iI, 1)
 
-            for i in range(gc.getMAX_TEAMS()):
+            for i in xrange(gc.getMAX_TEAMS()):
                 pTeam = gc.getTeam(i)
                 techs = teamTechs[i]
                 for i in techs:
@@ -2206,7 +2212,7 @@ class CvWBDesc:
 
         CvUtil.pyPrint("Randomize Resources")
         if self.mapDesc.bRandomizeResources != "false":
-            for iPlotLoop in range(CyMap().numPlots()):
+            for iPlotLoop in xrange(CyMap().numPlots()):
                 pPlot = CyMap().plotByIndex(iPlotLoop)
                 pPlot.setBonusType(BonusTypes.NO_BONUS)
             CyMapGenerator().addBonuses()
@@ -2217,8 +2223,8 @@ class CvWBDesc:
 ## Platy Builder ##
     def getAssignedStartingPlots(self):
         bStartingPoints = False
-        bPlaceBarbCities = False
-        AddPositionsToMap = True
+        # bPlaceBarbCities = False
+        # AddPositionsToMap = True
         Debugging = True
 
         if Debugging:
@@ -2243,6 +2249,7 @@ class CvWBDesc:
                     CvUtil.pyPrint("Scenario %s" %(sScenarioName))
                 break
         SpawnCivList = dict()
+        BarbCityList = []
         if sScenarioName in mapNames:
             bStartingPoints = True
             MyFile = open("Mods/PieAncientEuropeVI/Assets/XML/Misc/" + mapNames[sScenarioName])
@@ -2257,7 +2264,7 @@ class CvWBDesc:
                 elif "StartY" in CurString:
                     SpawnCivList[curCiv].SpawnY.append(int(sp.CutString(CurString)))
                 elif "BarbCityName" in CurString:
-                    bPlaceBarbCities = True
+                    # bPlaceBarbCities = True
                     BarbCityList.append(sp.BarbarianCity())
                     BarbCityList[-1].CityName = sp.CutString(CurString)
                 elif "BarbCityX" in CurString:
@@ -2268,7 +2275,7 @@ class CvWBDesc:
                     BarbCityList[-1].CityPopulation = int(sp.CutString(CurString))
                 elif "BarbCityNumDefenders" in CurString:
                     BarbCityList[-1].CityNumDefenders = int(sp.CutString(CurString))
-            
+
             if Debugging:
                 CvUtil.pyPrint("StartingPoints file %s" %(mapNames[sScenarioName]))
             MyFile.close()
@@ -2288,7 +2295,7 @@ class CvWBDesc:
 
         aPosUsed = []
         # loop detects occupied spots
-        for iLoopPlayer in range(gc.getMAX_CIV_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_CIV_PLAYERS()):
             pLoopPlayer = gc.getPlayer(iLoopPlayer)
             if pLoopPlayer:
                 pLoopPlot = pLoopPlayer.getStartingPlot()
@@ -2338,7 +2345,6 @@ class CvWBDesc:
                         bReplace = True
                         if Debugging:
                             CvUtil.pyPrint("Encountered invalid civ %s" %(pCiv.CivString))
-                            CyInterface().addMessage(iHumanPlayer, False, 15, "Encountered invalid civ "+str(pCiv.CivString), '', 0, 'Art/Interface/Buttons/General/warning_popup.dds', ColorTypes(gc.getInfoTypeForString("COLOR_RED")), 1, 1, True, True)
                     else:
                         bSpawn = True
                 else:
@@ -2357,7 +2363,7 @@ class CvWBDesc:
                         NumLeaders = CurCiv.getNumLeaders()
                         LeaderNum = gc.getGame().getMapRand().get(NumLeaders, "OracleSayMeTheLeader")
                         LeaderCounter = 0
-                        for iLoopLeader in range(gc.getNumLeaderHeadInfos()):
+                        for iLoopLeader in xrange(gc.getNumLeaderHeadInfos()):
                             if CurCiv.isLeaders(iLoopLeader):
                                 if NumLeaders == 1:
                                     iNewLeader = iLoopLeader
@@ -2412,13 +2418,13 @@ class CvWBDesc:
                     CvUtil.pyPrint("Player's starting plot")
                 aPosUsed.append((pWBPlayer.iStartingX, pWBPlayer.iStartingY))
                 pPlayer.setStartingPlot(CyMap().plot(pWBPlayer.iStartingX, pWBPlayer.iStartingY), True)
-                
-                    
+
+
         # if bPlaceBarbCities:
             # sp.PlaceBarbarianCities(BarbCityList, Debugging)
         # if AddPositionsToMap:
             # sp.AddCoordinateSignsToMap()
-            
+
         # sp.FlushVisibleArea()
 
         return 0  # ok
@@ -2574,7 +2580,7 @@ class CvWBDesc:
                 pTeam.setEspionagePointsEver(pWBTeam.iEspionageEver)
 
     ## Platy Builder ##
-        for iPlotLoop in range(self.mapDesc.numPlotsWritten):
+        for iPlotLoop in xrange(self.mapDesc.numPlotsWritten):
             pWBPlot = self.plotDesc[iPlotLoop]
             pWBPlot.lCulture = filterPlayerIds2(pWBPlot.lCulture, barb_idWB)
 
@@ -2583,7 +2589,7 @@ class CvWBDesc:
             for item in pWBPlot.lCulture:
                 pPlot.setCulture(item[0], item[1], True)
 
-        for iPlotLoop in range(self.mapDesc.numPlotsWritten):
+        for iPlotLoop in xrange(self.mapDesc.numPlotsWritten):
             pWBPlot = self.plotDesc[iPlotLoop]
             pWBPlot.abTeamPlotRevealed = filterPlayerIds(pWBPlot.abTeamPlotRevealed, barb_idWB)
             for iTeamLoop in pWBPlot.abTeamPlotRevealed:
@@ -2610,7 +2616,7 @@ class CvWBDesc:
             CvUtil.pyPrint("Error: file %s does not exist" %(fileName+ext,))
             return -1 # failed
 
-        f = file(fileName+ext, "r")   # open text file
+        f = open(fileName+ext, "r")   # open text file
 
         global barb_idWB
         ## Platy Builder ##
@@ -2637,7 +2643,7 @@ class CvWBDesc:
         CvUtil.pyPrint("Reading teams desc")
         filePos = f.tell() # f1rpo k-mod also in platy
         self.teamsDesc = []
-        for i in range(iNumTeamsDLL):
+        for i in xrange(iNumTeamsDLL):
             CvUtil.pyPrint("reading team %d" %(i))
             teamDesc = CvTeamDesc()
             if not teamDesc.read(f):  #k-mod   # read team info
@@ -2646,7 +2652,7 @@ class CvWBDesc:
             self.teamsDesc.append(teamDesc)
         # PAE, Extend to 52 entries regardless if they will be used
         # <f1rpo>
-        for i in range(len(self.teamsDesc), iNumTeamsDLL):
+        for i in xrange(len(self.teamsDesc), iNumTeamsDLL):
             self.teamsDesc.append(CvTeamDesc())
         # </f1rpo>
 
@@ -2677,7 +2683,7 @@ class CvWBDesc:
 
         # PAE Expand to 52 entries if extended DLL is used
         if numPlayersWB < iNumPlayersDLL:
-            for i in range(numPlayersWB, iNumPlayersDLL):
+            for i in xrange(numPlayersWB, iNumPlayersDLL):
                 CvUtil.pyPrint("append extra player %d" %(i))
                 # <f1rpo, Flunky>
                 deadPlayer = CvPlayerDesc()
@@ -2699,8 +2705,6 @@ class CvWBDesc:
                 self.playersDesc[iNumPlayersDLL-1] = self.playersDesc[barb_idWB]
                 self.playersDesc[barb_idWB] = CvPlayerDesc()
                 """
-
-        #init_filter()
 
         # PAE, Szenario with many players loaded without DLL.
         if barbarianDesc is not None:
@@ -2743,7 +2747,7 @@ class CvWBDesc:
 
         CvUtil.pyPrint("Reading/creating %d plot descs" %(self.mapDesc.numPlotsWritten,))
         self.plotDesc = []
-        for i in range(self.mapDesc.numPlotsWritten):
+        for i in xrange(self.mapDesc.numPlotsWritten):
             pDesc = CvPlotDesc()
             if pDesc.read(f):
                 self.plotDesc.append(pDesc)
@@ -2752,7 +2756,7 @@ class CvWBDesc:
 
         CvUtil.pyPrint("Reading/creating %d sign descs" %(self.mapDesc.numSignsWritten,))
         self.signDesc = []
-        for i in range(self.mapDesc.numSignsWritten):
+        for i in xrange(self.mapDesc.numSignsWritten):
             pDesc = CvSignDesc()
             if pDesc.read(f):
                 self.signDesc.append(pDesc)

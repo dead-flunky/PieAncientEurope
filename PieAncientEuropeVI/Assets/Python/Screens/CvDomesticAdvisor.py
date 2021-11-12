@@ -1,8 +1,14 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, NotifyCode,WidgetTypes, PanelStyles,
+                                CyInterface, InterfaceDirtyBits, CyGame,
+                                CyGInterfaceScreen, CommerceTypes,
+                                PopupStates, ButtonPopupTypes, CyPopupInfo,
+                                ButtonStyles, FontSymbols, ControlTypes,
+                                YieldTypes, TableStyles)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 import PAE_Cultivation
 
@@ -72,7 +78,7 @@ class CvDomesticAdvisor:
         while loopCity:
             if loopCity.getLiberationPlayer(False) != -1:
                 # UNOFFICIAL_PATCH begin
-                if not gc.getTeam(gc.getPlayer(loopCity.getLiberationPlayer(false)).getTeam()).isAtWar(CyGame().getActiveTeam()):
+                if not gc.getTeam(gc.getPlayer(loopCity.getLiberationPlayer(False)).getTeam()).isAtWar(CyGame().getActiveTeam()):
                     bCanLiberate = True
                     break
                 # UNOFFICIAL_PATCH end
@@ -207,15 +213,15 @@ class CvDomesticAdvisor:
         iBuildingCity = gc.getInfoTypeForString("BUILDING_STADT")
         iBuildingProvinz = gc.getInfoTypeForString("BUILDING_PROVINZ")
         iBuildingMetropole = gc.getInfoTypeForString("BUILDING_METROPOLE")
-        if pLoopCity.getNumRealBuilding(iBuildingMetropole): 
+        if pLoopCity.getNumRealBuilding(iBuildingMetropole):
             buttonCityStatus = gc.getBuildingInfo(iBuildingMetropole).getButton()
-        elif pLoopCity.getNumRealBuilding(iBuildingProvinz): 
+        elif pLoopCity.getNumRealBuilding(iBuildingProvinz):
             buttonCityStatus = gc.getBuildingInfo(iBuildingProvinz).getButton()
-        elif pLoopCity.getNumRealBuilding(iBuildingCity): 
+        elif pLoopCity.getNumRealBuilding(iBuildingCity):
             buttonCityStatus = gc.getBuildingInfo(iBuildingCity).getButton()
-        elif pLoopCity.getNumRealBuilding(iBuildingKolonie): 
+        elif pLoopCity.getNumRealBuilding(iBuildingKolonie):
             buttonCityStatus = gc.getBuildingInfo(iBuildingKolonie).getButton()
-        else: 
+        else:
             buttonCityStatus = gc.getBuildingInfo(iBuildingSiedlung).getButton()
 
         # BTS: buttonCityStatus = ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_CITYSELECTION").getPath()
@@ -232,14 +238,14 @@ class CvDomesticAdvisor:
         elif pLoopCity.isGovernmentCenter():
             szName += (u"%c" % CyGame().getSymbolID(FontSymbols.SILVER_STAR_CHAR))
 
-        for iReligion in range(gc.getNumReligionInfos()):
+        for iReligion in xrange(gc.getNumReligionInfos()):
             if pLoopCity.isHasReligion(iReligion):
                 if pLoopCity.isHolyCityByType(iReligion):
                     szName += (u"%c" % gc.getReligionInfo(iReligion).getHolyCityChar())
                 else:
                     szName += (u"%c" % gc.getReligionInfo(iReligion).getChar())
 
-        for iCorporation in range(gc.getNumCorporationInfos()):
+        for iCorporation in xrange(gc.getNumCorporationInfos()):
             if pLoopCity.isHeadquartersByType(iCorporation):
                 szName += (u"%c" % gc.getCorporationInfo(iCorporation).getHeadquarterChar())
             elif pLoopCity.isActiveCorporation(iCorporation):
@@ -350,7 +356,7 @@ class CvDomesticAdvisor:
         # Liberation
         if pLoopCity.getLiberationPlayer(False) != -1:
             # UNOFFICIAL_PATCH begin
-            if not gc.getTeam(gc.getPlayer(pLoopCity.getLiberationPlayer(false)).getTeam()).isAtWar(CyGame().getActiveTeam()) :
+            if not gc.getTeam(gc.getPlayer(pLoopCity.getLiberationPlayer(False)).getTeam()).isAtWar(CyGame().getActiveTeam()) :
                 screen.setTableText("CityListBackground", 19, i, "<font=2>" + (u"%c" % CyGame().getSymbolID(FontSymbols.OCCUPATION_CHAR)) + "</font>", "", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
             # UNOFFICIAL_PATCH end
 
@@ -370,7 +376,7 @@ class CvDomesticAdvisor:
     def drawSpecialists(self):
         screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
 
-        for i in range( gc.getNumSpecialistInfos() ):
+        for i in xrange( gc.getNumSpecialistInfos() ):
             if (gc.getSpecialistInfo(i).isVisible()):
                 szName = "SpecialistImage" + str(i)
                 screen.setImageButton( szName, gc.getSpecialistInfo(i).getTexture(), self.nFirstSpecialistX + (self.nSpecialistDistance * i), self.nSpecialistY, self.nSpecialistWidth, self.nSpecialistLength, WidgetTypes.WIDGET_CITIZEN, i, -1 )
@@ -390,7 +396,7 @@ class CvDomesticAdvisor:
 
     def hideSpecialists(self):
         screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
-        for i in range( gc.getNumSpecialistInfos() ):
+        for i in xrange( gc.getNumSpecialistInfos() ):
             if (gc.getSpecialistInfo(i).isVisible()):
                 screen.hide("SpecialistImage" + str(i))
                 screen.hide("SpecialistPlus" + str(i))
@@ -407,7 +413,7 @@ class CvDomesticAdvisor:
             nPopulation = city.getPopulation()
             nFreeSpecial = city.totalFreeSpecialists()
 
-            for i in range( gc.getNumSpecialistInfos() ):
+            for i in xrange( gc.getNumSpecialistInfos() ):
                 if (gc.getSpecialistInfo(i).isVisible()):
                     szName = "SpecialistImage" + str(i)
                     screen.show(szName)
@@ -463,7 +469,7 @@ class CvDomesticAdvisor:
         screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
         screen.updateAppropriateCitySelection( "CityListBackground", nCities, 1 )
         self.listSelectedCities = []
-        for i in range(nCities):
+        for i in xrange(nCities):
             if screen.isRowSelected("CityListBackground", i):
                 self.listSelectedCities.append(screen.getTableText("CityListBackground", 2, i))
 
@@ -471,7 +477,7 @@ class CvDomesticAdvisor:
         if (CyInterface().isDirty(InterfaceDirtyBits.Domestic_Advisor_DIRTY_BIT) == True):
             CyInterface().setDirty(InterfaceDirtyBits.Domestic_Advisor_DIRTY_BIT, False)
 
-            screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
+            # screen = CyGInterfaceScreen( "DomesticAdvisor", CvScreenEnums.DOMESTIC_ADVISOR )
             player = gc.getPlayer(CyGame().getActivePlayer())
 
             i = 0

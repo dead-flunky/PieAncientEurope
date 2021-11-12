@@ -20,6 +20,7 @@ import BugEventManager
 eventManager = BugEventManager.BugEventManager()
 # eventManager = CvEventManager.CvEventManager()
 
+
 def getEventManager():
     return eventManager
 
@@ -27,16 +28,20 @@ def getEventManager():
 # GJD modifications end here
 # **********************************
 
+
 def onEvent(argsList):
     """Called when a game event happens - return 1 if the event was consumed."""
     return getEventManager().handleEvent(argsList)
+
 
 def applyEvent(argsList):
     context, playerID, netUserData, popupReturn = argsList
     return getEventManager().applyEvent(argsList)
 
-def beginEvent(context, argsList = -1):
+
+def beginEvent(context, argsList=-1):
     return getEventManager().beginEvent(context, argsList)
+
 
 def initAfterReload():
     """
@@ -56,5 +61,6 @@ def initAfterReload():
             import BugUtil
             BugUtil.error("BugInit - failure rebuilding main interface after reloading Python modules")
         getEventManager().fireEvent("PythonReloaded")
+
 
 initAfterReload()

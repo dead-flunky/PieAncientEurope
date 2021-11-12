@@ -53,7 +53,7 @@ class Tester :
     def showStrandedPopup( self ) :
 
         bodStr = "Stranded units by player:\n"
-        for iPlayer in range(0,gc.getMAX_PLAYERS()) :
+        for iPlayer in xrange(0,gc.getMAX_PLAYERS()) :
             pPlayer = gc.getPlayer(iPlayer)
 
             if pPlayer.isAlive():

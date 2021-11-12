@@ -763,58 +763,58 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
         elif (szLink == "PEDIA_MAIN_SHORTCUTS"):
             return self.pediaJump(SevoScreenEnums.PEDIA_MAIN, SevoScreenEnums.PEDIA_SHORTCUTS, True, True)
 
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
             if (gc.getTechInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_TECHS, i, True, True)
-        for i in range(gc.getNumUnitInfos()):
+        for i in xrange(gc.getNumUnitInfos()):
             if (gc.getUnitInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_UNITS, i, True, True)
-        for i in range(gc.getNumUnitCombatInfos()):
+        for i in xrange(gc.getNumUnitCombatInfos()):
             if (gc.getUnitCombatInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_UNIT_CATEGORIES, i, True, True)
-        for i in range(gc.getNumPromotionInfos()):
+        for i in xrange(gc.getNumPromotionInfos()):
             if (gc.getPromotionInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_PROMOTIONS, i, True, True)
-        for i in range(gc.getNumBuildingInfos()):
+        for i in xrange(gc.getNumBuildingInfos()):
             if (gc.getBuildingInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_BUILDINGS, i, True, True)
-        for i in range(gc.getNumProjectInfos()):
+        for i in xrange(gc.getNumProjectInfos()):
             if (gc.getProjectInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_PROJECTS, i, True, True)
-        for i in range(gc.getNumSpecialistInfos()):
+        for i in xrange(gc.getNumSpecialistInfos()):
             if (gc.getSpecialistInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_SPECIALISTS, i, True, True)
-        for i in range(gc.getNumTerrainInfos()):
+        for i in xrange(gc.getNumTerrainInfos()):
             if (gc.getTerrainInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_TERRAINS, i, True, True)
-        for i in range(gc.getNumFeatureInfos()):
+        for i in xrange(gc.getNumFeatureInfos()):
             if (gc.getFeatureInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_FEATURES, i, True, True)
-        for i in range(gc.getNumBonusInfos()):
+        for i in xrange(gc.getNumBonusInfos()):
             if (gc.getBonusInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_BONUSES, i, True, True)
-        for i in range(gc.getNumImprovementInfos()):
+        for i in xrange(gc.getNumImprovementInfos()):
             if (gc.getImprovementInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_IMPROVEMENTS, i, True, True)
-        for i in range(gc.getNumCivilizationInfos()):
+        for i in xrange(gc.getNumCivilizationInfos()):
             if (gc.getCivilizationInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_CIVS, i, True, True)
-        for i in range(gc.getNumLeaderHeadInfos()):
+        for i in xrange(gc.getNumLeaderHeadInfos()):
             if (gc.getLeaderHeadInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_LEADERS, i, True, True)
-        for i in range(gc.getNumCivicInfos()):
+        for i in xrange(gc.getNumCivicInfos()):
             if (gc.getCivicInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_CIVICS, i, True, True)
-        for i in range(gc.getNumReligionInfos()):
+        for i in xrange(gc.getNumReligionInfos()):
             if (gc.getReligionInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_RELIGIONS, i, True, True)
-        for i in range(gc.getNumCorporationInfos()):
+        for i in xrange(gc.getNumCorporationInfos()):
             if (gc.getCorporationInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_CORPORATIONS, i, True, True)
-        for i in range(gc.getNumConceptInfos()):
+        for i in xrange(gc.getNumConceptInfos()):
             if (gc.getConceptInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_CONCEPTS, i, True, True)
-        for i in range(gc.getNumNewConceptInfos()):
+        for i in xrange(gc.getNumNewConceptInfos()):
             if (gc.getNewConceptInfo(i).isMatchForLink(szLink, False)):
                 return self.pediaJump(SevoScreenEnums.PEDIA_BTS_CONCEPTS, i, True, True)
 
@@ -839,7 +839,7 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
         screen = self.getScreen()
         iNumWidgets = self.nWidgetCount
         self.nWidgetCount = 0
-        for i in range(iNumWidgets):
+        for i in xrange(iNumWidgets):
             screen.deleteWidget(self.getNextWidgetName())
         self.nWidgetCount = 0
 
@@ -859,7 +859,7 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 
     def getSortedList(self, numInfos, getInfo, noSort=False):
         list = []
-        for i in range(numInfos):
+        for i in xrange(numInfos):
             item = getInfo(i)
             if item:
                 list.append((item.getDescription(), i))

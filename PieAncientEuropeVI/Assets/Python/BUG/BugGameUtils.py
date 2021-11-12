@@ -77,7 +77,7 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (UnitTypes, TechTypes, BuildingTypes)
 import BugDll
 import BugConfig
 import BugUtil

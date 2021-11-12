@@ -241,12 +241,12 @@ class CvTechSplashScreen:
         screen.setText(szAllowsTitleWidgetSIR, "", szAllowsTitleDescSIR, CvUtil.FONT_LEFT_JUSTIFY,
                    self.X_ALLOWS_PANELSIR+self.iMarginSpace, self.Y_ALLOWS_PANELSIR - 20, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
-        for j in range(CyGlobalContext().getNumTechInfos()):
-            for k in range(CyGlobalContext().getDefineINT("NUM_OR_TECH_PREREQS")):
+        for j in xrange(CyGlobalContext().getNumTechInfos()):
+            for k in xrange(CyGlobalContext().getDefineINT("NUM_OR_TECH_PREREQS")):
                 iPrereq = CyGlobalContext().getTechInfo(j).getPrereqOrTechs(k)
                 if (iPrereq == self.iTech):
                         screen.attachImageButton( panelNameSIR, "", CyGlobalContext().getTechInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_DERIVED_TECH, j, self.iTech, False )
-            for k in range(CyGlobalContext().getDefineINT("NUM_AND_TECH_PREREQS")):
+            for k in xrange(CyGlobalContext().getDefineINT("NUM_AND_TECH_PREREQS")):
                 iPrereq = CyGlobalContext().getTechInfo(j).getPrereqAndTechs(k)
                 if (iPrereq == self.iTech):
                         screen.attachImageButton( panelNameSIR, "", CyGlobalContext().getTechInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_DERIVED_TECH, j, self.iTech, False )
@@ -264,7 +264,7 @@ class CvTechSplashScreen:
         screen.setText(szUnitsTitleWidget, "", szUnitsTitleDesc, CvUtil.FONT_LEFT_JUSTIFY,
                    self.X_ALLOWS_PANEL + self.iMarginSpace, self.Y_ALLOWS_PANEL - 20, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
-        for j in range( CyGlobalContext().getNumUnitClassInfos() ):
+        for j in xrange( CyGlobalContext().getNumUnitClassInfos() ):
             eLoopUnit = CyGlobalContext().getCivilizationInfo(CyGlobalContext().getGame().getActiveCivilizationType()).getCivilizationUnits(j)
             if (eLoopUnit != -1):
                 if (isTechRequiredForUnit(self.iTech, eLoopUnit)):
@@ -277,7 +277,7 @@ class CvTechSplashScreen:
         screen.setText(szBuildingsTitleWidget, "", szBuildingsTitleDesc, CvUtil.FONT_LEFT_JUSTIFY,
                    self.X_ALLOWS_PANEL + self.iMarginSpace, self.Y_ALLOWS_PANEL2 - 20, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
-        for j in range(CyGlobalContext().getNumBuildingClassInfos()):
+        for j in xrange(CyGlobalContext().getNumBuildingClassInfos()):
             bTechFound = 0
             eLoopBuilding = CyGlobalContext().getCivilizationInfo(CyGlobalContext().getGame().getActiveCivilizationType()).getCivilizationBuildings(j)
             if (eLoopBuilding != -1):
@@ -291,13 +291,13 @@ class CvTechSplashScreen:
         screen.setText(szImprovesTitleWidget, "", szImprovesTitleDesc, CvUtil.FONT_LEFT_JUSTIFY,
                    self.X_ALLOWS_PANEL + self.iMarginSpace, self.Y_ALLOWS_PANEL3 - 20, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
-        for j in range(CyGlobalContext().getNumProjectInfos()):
+        for j in xrange(CyGlobalContext().getNumProjectInfos()):
             bTechFound = 0
             if (isTechRequiredForProject(self.iTech, j)):
                 screen.attachImageButton( panelName3, "", CyGlobalContext().getProjectInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
                               WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, j, 1, False )
 
-        for j in range(CyGlobalContext().getNumPromotionInfos()):
+        for j in xrange(CyGlobalContext().getNumPromotionInfos()):
             if (CyGlobalContext().getPromotionInfo(j).getTechPrereq() == self.iTech):
                 screen.attachImageButton( panelName3, "", CyGlobalContext().getPromotionInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
                               WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, j, 1, False )
@@ -305,11 +305,11 @@ class CvTechSplashScreen:
 #---Eingefügt START - kann komplett gelöscht werden --------------
 
         # Improvements
-        for j in range(CyGlobalContext().getNumBuildInfos()):
+        for j in xrange(CyGlobalContext().getNumBuildInfos()):
                 bTechFound = 0;
                 if (CyGlobalContext().getBuildInfo(j).getTechPrereq() == -1):
                     bTechFound = 0
-                    for k in range(CyGlobalContext().getNumFeatureInfos()):
+                    for k in xrange(CyGlobalContext().getNumFeatureInfos()):
                         if (CyGlobalContext().getBuildInfo(j).getFeatureTech(k) == self.iTech):
                             bTechFound = 1
                 else:
@@ -323,13 +323,13 @@ class CvTechSplashScreen:
                         screen.attachImageButton( panelName3, "", CyGlobalContext().getBuildInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_IMPROVEMENT, CyGlobalContext().getBuildInfo(j).getImprovement(), 1, False )
 
         # Bonuses
-        for j in range(CyGlobalContext().getNumBonusInfos()):
+        for j in xrange(CyGlobalContext().getNumBonusInfos()):
             if (CyGlobalContext().getBonusInfo(j).getTechReveal() == self.iTech):
                 screen.attachImageButton( panelName3, "", CyGlobalContext().getBonusInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
                               WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, j, 1, False )
 
         # Civic
-        for j in range(CyGlobalContext().getNumCivicInfos()):
+        for j in xrange(CyGlobalContext().getNumCivicInfos()):
             if (CyGlobalContext().getCivicInfo(j).getTechPrereq() == self.iTech):
                 screen.attachImageButton( panelName3, "", CyGlobalContext().getCivicInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM,
                               WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC, j, 1, False )

@@ -1,12 +1,13 @@
-## BugMapOptionsTab
+# BugMapOptionsTab
 ##
-## Tab for the BUG Map Options.
+# Tab for the BUG Map Options.
 ##
-## Copyright (c) 2009 The BUG Mod.
+# Copyright (c) 2009 The BUG Mod.
 ##
 ## Author: EmperorFool
 
 import BugOptionsTab
+
 
 class BugMapOptionsTab(BugOptionsTab.BugOptionsTab):
     "BUG Nap Options Screen Tab"
@@ -15,7 +16,7 @@ class BugMapOptionsTab(BugOptionsTab.BugOptionsTab):
         BugOptionsTab.BugOptionsTab.__init__(self, "Map", "Map")
 
     def create(self, screen):
-        tab = self.createTab(screen)
+        _ = self.createTab(screen)
         panel = self.createMainPanel(screen)
         column = self.addOneColumnLayout(screen, panel)
 
@@ -39,7 +40,6 @@ class BugMapOptionsTab(BugOptionsTab.BugOptionsTab):
         # self.addSlider(screen, leftL, leftR, "StrategyOverlay__DotMapBrightness", False, False, False, "up", 0, 100)
         # self.addSlider(screen, leftL, leftR, "StrategyOverlay__DotMapHighlightBrightness", False, False, False, "up", 0, 100)
 
-
         #self.addLabel(screen, center, "CityBar", "CityBar:")
         #self.addCheckbox(screen, center, "CityBar__AirportIcons")
         #self.addCheckbox(screen, center, "CityBar__StarvationTurns")
@@ -48,13 +48,11 @@ class BugMapOptionsTab(BugOptionsTab.BugOptionsTab):
         #self.addCheckbox(screen, center, "MiscHover__LatLongCoords")
         #self.addCheckbox(screen, center, "MiscHover__PartialBuilds")
 
-
         # self.addLabel(screen, right, "Misc", "Misc:")
         # self.addCheckbox(screen, right, "MainInterface__FieldOfView")
         # self.addCheckbox(screen, right, "MainInterface__FieldOfView_Remember", True)
         # self.addCheckbox(screen, right, "EventSigns__Enabled")
         #self.addCheckbox(screen, right, "Actions__IgnoreHarmlessBarbarians")
-
 
         # screen.attachHSeparator(column, column + "Sep1")
 

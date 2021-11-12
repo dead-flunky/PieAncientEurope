@@ -156,7 +156,7 @@ class SevoPediaIndex:
         self.tableName = self.top.getNextWidgetName()
         screen.addTableControlGFC(self.tableName, nColumns, self.X_INDEX, self.Y_INDEX, self.W_INDEX, self.H_INDEX, False, False, self.LIST_BUTTON_SIZE, self.LIST_BUTTON_SIZE, TableStyles.TABLE_STYLE_STANDARD);
         screen.enableSelect(self.tableName, False)
-        for i in range(nColumns):
+        for i in xrange(nColumns):
             screen.setTableColumnHeader(self.tableName, i, "", (self.W_INDEX - 10) / nColumns)
 
         iRow = -1

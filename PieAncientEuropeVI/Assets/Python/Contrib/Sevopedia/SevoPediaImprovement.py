@@ -91,7 +91,7 @@ class SevoPediaImprovement:
 		screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
 		screen.enableSelect(listName, False)
 		info = gc.getImprovementInfo(self.iImprovement)
-		for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getYieldChange(k)
 			if (iYieldChange != 0):
 				szYield = u""
@@ -102,43 +102,43 @@ class SevoPediaImprovement:
 				szYield += (u"%s: %s%i%c" % (gc.getYieldInfo(k).getDescription(), sign, iYieldChange, gc.getYieldInfo(k).getChar()))
 				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
-		for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getIrrigatedYieldChange(k)
 			if (iYieldChange != 0):
 				szYield = localText.getText("TXT_KEY_PEDIA_IRRIGATED_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar()))
 				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
-		for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getHillsYieldChange(k)
 			if (iYieldChange != 0):
 				szYield = localText.getText("TXT_KEY_PEDIA_HILLS_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar()))
 				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
-		for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 			szYield = u""
 			iYieldChange = gc.getImprovementInfo(self.iImprovement).getRiverSideYieldChange(k)
 			if (iYieldChange != 0):
 				szYield = localText.getText("TXT_KEY_PEDIA_RIVER_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar()))
 				screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
-		for iTech in range(gc.getNumTechInfos()):
-			for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for iTech in xrange(gc.getNumTechInfos()):
+			for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 				szYield = u""
 				iYieldChange = gc.getImprovementInfo(self.iImprovement).getTechYieldChanges(iTech, k)
 				if (iYieldChange != 0):
 					szYield = localText.getText("TXT_KEY_PEDIA_TECH_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getTechInfo(iTech).getDescription()))
 					screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
-		for iCivic in range(gc.getNumCivicInfos()):
-			for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for iCivic in xrange(gc.getNumCivicInfos()):
+			for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 				szYield = u""
 				iYieldChange = gc.getCivicInfo(iCivic).getImprovementYieldChanges(self.iImprovement, k)
 				if (iYieldChange != 0):
 					szYield = localText.getText("TXT_KEY_PEDIA_TECH_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getCivicInfo(iCivic).getDescription()))
 					screen.appendListBoxString( listName, szYield, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
-		for iRoute in range(gc.getNumRouteInfos()):
-			for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for iRoute in xrange(gc.getNumRouteInfos()):
+			for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 				iYieldChange = gc.getImprovementInfo(self.iImprovement).getRouteYieldChanges(iRoute, k)
 				if (iYieldChange != 0):										
 					szYield += localText.getText("TXT_KEY_PEDIA_ROUTE_YIELD", (gc.getYieldInfo(k).getTextKey(), iYieldChange, gc.getYieldInfo(k).getChar(), gc.getRouteInfo(iRoute).getTextKey())) + u"\n"
@@ -151,11 +151,11 @@ class SevoPediaImprovement:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_BONUS_YIELDS", ()), "", True, True, self.X_BONUS_YIELDS_PANE, self.Y_BONUS_YIELDS_PANE, self.W_BONUS_YIELDS_PANE, self.H_BONUS_YIELDS_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		info = gc.getImprovementInfo(self.iImprovement)
-		for j in range(gc.getNumBonusInfos()):
+		for j in xrange(gc.getNumBonusInfos()):
 			bFirst = True
 			szYield = u""
 			bEffect = False
-			for k in range(YieldTypes.NUM_YIELD_TYPES):
+			for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 				iYieldChange = info.getImprovementBonusYield(j, k)
 				if (iYieldChange != 0):
 					bEffect = True
@@ -184,7 +184,7 @@ class SevoPediaImprovement:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True, self.X_REQUIRES, self.Y_REQUIRES, self.W_REQUIRES, self.H_REQUIRES, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
-		for iBuild in range(gc.getNumBuildInfos()):
+		for iBuild in xrange(gc.getNumBuildInfos()):
 			if (gc.getBuildInfo(iBuild).getImprovement() == self.iImprovement):
 				iTech = gc.getBuildInfo(iBuild).getTechPrereq()
 				if (iTech > -1):

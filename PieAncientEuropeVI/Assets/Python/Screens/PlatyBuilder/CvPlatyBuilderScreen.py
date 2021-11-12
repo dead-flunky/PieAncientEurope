@@ -210,8 +210,8 @@ class CvWorldBuilderScreen:
     if self.m_pCurrentPlot == 0: return
     CyEngine().clearAreaBorderPlots(AreaBorderLayers.AREA_BORDER_LAYER_WORLD_BUILDER)
     Data = self.getMultiplePlotData()
-    for x in range(Data[0], Data[1]):
-      for y in range(Data[2], Data[3]):
+    for x in xrange(Data[0], Data[1]):
+      for y in xrange(Data[2], Data[3]):
         pPlot = CyMap().plot(x,y)
         if pPlot.isNone(): continue
         CyEngine().fillAreaBorderPlotAlt(pPlot.getX(), pPlot.getY(), AreaBorderLayers.AREA_BORDER_LAYER_WORLD_BUILDER, "COLOR_GREEN", 1)
@@ -825,8 +825,8 @@ class CvWorldBuilderScreen:
   def placeMultipleObjects(self):
     permCurrentPlot = self.m_pCurrentPlot
     Data = self.getMultiplePlotData()
-    for x in range(Data[0], Data[1]):
-        for y in range(Data[2], Data[3]):
+    for x in xrange(Data[0], Data[1]):
+        for y in xrange(Data[2], Data[3]):
             self.m_pCurrentPlot = CyMap().plot(x,y)
             if self.m_pCurrentPlot.isNone():
                 continue
@@ -865,8 +865,8 @@ class CvWorldBuilderScreen:
   def removeMultipleObjects(self):
     permCurrentPlot = self.m_pCurrentPlot
     Data = self.getMultiplePlotData()
-    for x in range(Data[0], Data[1]):
-        for y in range(Data[2], Data[3]):
+    for x in xrange(Data[0], Data[1]):
+        for y in xrange(Data[2], Data[3]):
             self.m_pCurrentPlot = CyMap().plot(x,y)
             if self.m_pCurrentPlot.isNone():
                 continue
@@ -893,8 +893,8 @@ class CvWorldBuilderScreen:
 
   def setMultipleReveal(self, bReveal):
     Data = self.getMultiplePlotData()
-    for x in range(Data[0], Data[1]):
-        for y in range(Data[2], Data[3]):
+    for x in xrange(Data[0], Data[1]):
+        for y in xrange(Data[2], Data[3]):
             pPlot = CyMap().plot(x,y)
             if pPlot.isNone():
                 continue
@@ -1243,12 +1243,12 @@ class CvWorldBuilderScreen:
             iX += iAdjust
             iWidth = (screen.getXResolution() - 8 - iX - 3)/2
             screen.addDropDownBoxGFC("BrushWidth", iX, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for i in range(1, 11):
+            for i in xrange(1, 11):
                 screen.addPullDownString("BrushWidth", "W: " + str(i), i, i, self.iBrushWidth == i)
             screen.addPullDownString("BrushWidth", "W: " + "--", -1, -1, self.iBrushWidth == -1)
             iX += iWidth
             screen.addDropDownBoxGFC("BrushHeight", iX, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for i in range(1, 11):
+            for i in xrange(1, 11):
                 screen.addPullDownString("BrushHeight", "H: " + str(i), i, i, self.iBrushHeight == i)
             screen.addPullDownString("BrushHeight", "H: " + "--", -1, -1, self.iBrushHeight == -1)
 
@@ -1275,12 +1275,12 @@ class CvWorldBuilderScreen:
             iX += iAdjust
             iWidth = (screen.getXResolution() - 8 - iX - 3)/2
             screen.addDropDownBoxGFC("BrushWidth", iX, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for i in range(1, 11):
+            for i in xrange(1, 11):
                 screen.addPullDownString("BrushWidth", "W: " + str(i), i, i, self.iBrushWidth == i)
             screen.addPullDownString("BrushWidth", "W: " + "--", -1, -1, self.iBrushWidth == -1)
             iX += iWidth
             screen.addDropDownBoxGFC("BrushHeight", iX, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for i in range(1, 11):
+            for i in xrange(1, 11):
                 screen.addPullDownString("BrushHeight", "H: " + str(i), i, i, self.iBrushHeight == i)
             screen.addPullDownString("BrushHeight", "H: " + "--", -1, -1, self.iBrushHeight == -1)
 
@@ -1290,12 +1290,12 @@ class CvWorldBuilderScreen:
             iX += iAdjust
             iWidth = (screen.getXResolution() - 8 - iX - 3)/2
             screen.addDropDownBoxGFC("BrushWidth", iX, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for i in range(1, 11):
+            for i in xrange(1, 11):
                 screen.addPullDownString("BrushWidth", "W: " + str(i), i, i, self.iBrushWidth == i)
             screen.addPullDownString("BrushWidth", "W: " + "--", -1, -1, self.iBrushWidth == -1)
             iX += iWidth
             screen.addDropDownBoxGFC("BrushHeight", iX, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for i in range(1, 11):
+            for i in xrange(1, 11):
                 screen.addPullDownString("BrushHeight", "H: " + str(i), i, i, self.iBrushHeight == i)
             screen.addPullDownString("BrushHeight", "H: " + "--", -1, -1, self.iBrushHeight == -1)
         else:

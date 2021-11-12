@@ -21,10 +21,15 @@
 ##         EmperorFool (Deployment and Strategic Advantages tabs)
 ##         Karadoc (General changes and reformating to better match the style of the other advisors)
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                CyGInterfaceScreen, PopupStates, FontTypes,
+                                WidgetTypes, CyGame, PanelStyles, ButtonStyles,
+                                NotifyCode, CyGameTextMgr, InputTypes,
+                                MinimapModeTypes, CyMap, MouseFlags, TableStyles,
+                                InfoBarTypes, CyInterface, InterfaceVisibility)
 import CvUtil
 import PyHelpers
-import time
+# import time
 import re
 
 import IconGrid_BUG
@@ -35,9 +40,9 @@ import PlayerUtil
 import UnitGrouper
 import UnitUtil
 
-# BUG - Mac Support - start
+# Mod BUG - Mac Support - start
 BugUtil.fixSets(globals())
-# BUG - Mac Support - end
+# Mod BUG - Mac Support - end
 
 PyPlayer = PyHelpers.PyPlayer
 
@@ -287,7 +292,7 @@ class CvMilitaryAdvisor:
         pDefPacts = [[]] * gc.getMAX_PLAYERS()
         bVassals = False
         bDefPacts = False
-        for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
             pPlayer = gc.getPlayer(iLoopPlayer)
 
             if (pPlayer.isAlive()
@@ -310,7 +315,7 @@ class CvMilitaryAdvisor:
         self.initIconGrid(screen, bVassals, bDefPacts)
         self.initPower()
 
-        activePlayer = gc.getPlayer(self.iActivePlayer)
+        # activePlayer = gc.getPlayer(self.iActivePlayer)
 
         # Assemble the panel.
         iPANEL_X = self.MIN_LEFT_RIGHT_SPACE / 2
@@ -325,7 +330,7 @@ class CvMilitaryAdvisor:
         self.iconGrid.clearData()
 
         iRow = 0
-        for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
             pPlayer = gc.getPlayer(iLoopPlayer)
 
             if (pPlayer.isAlive()
@@ -517,7 +522,7 @@ class CvMilitaryAdvisor:
 
         # see demographics?
         self.iDemographicsMission = -1
-        for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
+        for iMissionLoop in xrange(gc.getNumEspionageMissionInfos()):
             if (gc.getEspionageMissionInfo(iMissionLoop).isSeeDemographics()):
                 self.iDemographicsMission = iMissionLoop
                 break
@@ -536,7 +541,7 @@ class CvMilitaryAdvisor:
             return
 
         # initialize threat index
-        iThreat = 0
+        # iThreat = 0
 
         # add attitude threat value
         iRel = AttitudeUtil.getAttitudeCount(iPlayer, self.iActivePlayer)
@@ -913,7 +918,7 @@ class CvMilitaryAdvisor:
             screen.addPanel(szPanel_ID, "", "", False, True, self.X_LEADERS, self.Y_LEADERS, self.W_LEADERS, self.H_LEADERS, PanelStyles.PANEL_STYLE_MAIN)
 
             listLeaders = []
-            for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+            for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
                 player = gc.getPlayer(iLoopPlayer)
                 if player.isAlive() and (gc.getTeam(player.getTeam()).isHasMet(gc.getPlayer(self.iActivePlayer).getTeam()) or gc.getGame().isDebugMode()):
                     listLeaders.append(iLoopPlayer)
@@ -927,7 +932,7 @@ class CvMilitaryAdvisor:
             iColumns = int(self.W_LEADERS / (iButtonSize + self.LEADER_MARGIN))
 
             # loop through all players and display leaderheads
-            for iIndex in range(iNumLeaders):
+            for iIndex in xrange(iNumLeaders):
                 iLoopPlayer = listLeaders[iIndex]
                 player = gc.getPlayer(iLoopPlayer)
 
@@ -1049,7 +1054,7 @@ class CvMilitaryAdvisor:
                     loopUnit = unit.unit
                     bUnitSelected = self.isSelectedUnit(loopUnit.getOwner(), loopUnit.getID())
                     if self.bUnitDetails:
-                        szDescription = CyGameTextMgr().getSpecificUnitHelp(loopUnit, true, false)
+                        szDescription = CyGameTextMgr().getSpecificUnitHelp(loopUnit, True, False)
 
                         listMatches = re.findall("<.*?color.*?>", szDescription)
                         for szMatch in listMatches:
@@ -1125,7 +1130,7 @@ class CvMilitaryAdvisor:
 
     def drawCombatExperience(self):
 
-        if gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true) > 0:
+        if gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(True) > 0:
 
             screen = self.getScreen()
 
@@ -1142,7 +1147,7 @@ class CvMilitaryAdvisor:
             screen.setStackedBarColors(szGGBar_ID, InfoBarTypes.INFOBAR_RATE, gc.getInfoTypeForString("COLOR_GREAT_PEOPLE_RATE"))
             screen.setStackedBarColors(szGGBar_ID, InfoBarTypes.INFOBAR_RATE_EXTRA, gc.getInfoTypeForString("COLOR_EMPTY"))
             screen.setStackedBarColors(szGGBar_ID, InfoBarTypes.INFOBAR_EMPTY, gc.getInfoTypeForString("COLOR_EMPTY"))
-            screen.setBarPercentage(szGGBar_ID, InfoBarTypes.INFOBAR_STORED, float(iExperience) / float(gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(true)))
+            screen.setBarPercentage(szGGBar_ID, InfoBarTypes.INFOBAR_STORED, float(iExperience) / float(gc.getPlayer(self.iActivePlayer).greatPeopleThreshold(True)))
 
             screen.setLabel(szGGTxt_ID, "", localText.getText("TXT_KEY_MISC_COMBAT_EXPERIENCE", ()), CvUtil.FONT_CENTER_JUSTIFY, self.X_GREAT_GENERAL_BAR + self.W_GREAT_GENERAL_BAR/2, self.Y_GREAT_GENERAL_BAR + 6, 0, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GREAT_GENERAL, -1, -1)
 
@@ -1175,7 +1180,7 @@ class CvMilitaryAdvisor:
         screen.deleteWidget(self.UNIT_BUTTON_LABEL_ID)
         #screen.hide(self.MINIMAP_PANEL)
 
-        for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
             screen.deleteWidget(self.getLeaderButtonWidget(iLoopPlayer))
 
         # hide the mini-map

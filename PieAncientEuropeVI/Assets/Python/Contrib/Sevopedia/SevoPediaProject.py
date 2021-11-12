@@ -145,10 +145,10 @@ class SevoPediaProject:
 
 	def getProjectSortedList(self):
 		listOfAllTypes = []
-		for iBuildingType in range(4):
+		for iBuildingType in xrange(4):
 			listBuildings = []
 			iCount = 0
-			for iBuilding in range(gc.getNumProjectInfos()):
+			for iBuilding in xrange(gc.getNumProjectInfos()):
 				if (self.getProjectType(iBuilding) == iBuildingType and not gc.getProjectInfo(iBuilding).isGraphicalOnly()):
 					listBuildings.append(iBuilding)
 					iCount += 1
@@ -158,7 +158,7 @@ class SevoPediaProject:
 				listSorted[iI] = (gc.getProjectInfo(iBuilding).getDescription(), iBuilding)
 				iI += 1
 			listSorted.sort()
-			for i in range(len(listSorted)):
+			for i in xrange(len(listSorted)):
 				listOfAllTypes.append(listSorted[i])
 		return listOfAllTypes
 

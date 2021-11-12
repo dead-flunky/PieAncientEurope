@@ -67,7 +67,7 @@ class SevoPediaFeature:
 		panelName = self.top.getNextWidgetName()
 		screen.addListBoxGFC(panelName, "", self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, TableStyles.TABLE_STYLE_EMPTY)
 		screen.enableSelect(panelName, False)
-		for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 			iYieldChange = gc.getFeatureInfo(self.iFeature).getYieldChange(k)
 			if (iYieldChange != 0):
 				if (iYieldChange > 0):

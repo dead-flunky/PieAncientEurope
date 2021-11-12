@@ -1,10 +1,14 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                CyGInterfaceScreen, PopupStates, FontTypes,
+                                WidgetTypes, CyGame, PanelStyles, ButtonStyles,
+                                NotifyCode, CyGameTextMgr, CyMessageControl,
+                                MouseFlags)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
-import string
+# import string
 import CvScreensInterface
 
 # globals
@@ -89,7 +93,7 @@ class CvCivicsScreen:
         self.m_paeCurrentCivics = []
         self.m_paeDisplayCivics = []
         self.m_paeOriginalCivics = []
-        for i in range (gc.getNumCivicOptionInfos()):
+        for i in xrange (gc.getNumCivicOptionInfos()):
             self.m_paeCurrentCivics.append(activePlayer.getCivics(i));
             self.m_paeDisplayCivics.append(activePlayer.getCivics(i));
             self.m_paeOriginalCivics.append(activePlayer.getCivics(i));
@@ -118,7 +122,7 @@ class CvCivicsScreen:
         if CyGame().isDebugMode():
             self.szDropdownName = self.DEBUG_DROPDOWN_ID
             screen.addDropDownBoxGFC(self.szDropdownName, 22, 12, 300, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for j in range(gc.getMAX_PLAYERS()):
+            for j in xrange(gc.getMAX_PLAYERS()):
                 if (gc.getPlayer(j).isAlive()):
                     screen.addPullDownString(self.szDropdownName, gc.getPlayer(j).getName(), j, j, False )
 
@@ -146,7 +150,7 @@ class CvCivicsScreen:
         activePlayer = gc.getPlayer(self.iActivePlayer)
         screen = self.getScreen()
 
-        for j in range(gc.getNumCivicInfos()):
+        for j in xrange(gc.getNumCivicInfos()):
 
             if (gc.getCivicInfo(j).getCivicOptionType() == iCivicOption):
                 screen.setState(self.getCivicsButtonName(j), self.m_paeCurrentCivics[iCivicOption] == j)
@@ -163,7 +167,7 @@ class CvCivicsScreen:
     # Will draw the radio buttons (and revolution)
     def drawAllButtons(self):
 
-        for i in range(gc.getNumCivicOptionInfos()):
+        for i in xrange(gc.getNumCivicOptionInfos()):
 
             fX = self.HEADINGS_SPACING  + (self.HEADINGS_WIDTH + self.HEADINGS_SPACING) * i
             fY = self.HEADINGS_TOP
@@ -174,7 +178,7 @@ class CvCivicsScreen:
 
             fY += self.TEXT_MARGIN
 
-            for j in range(gc.getNumCivicInfos()):
+            for j in xrange(gc.getNumCivicInfos()):
                 if (gc.getCivicInfo(j).getCivicOptionType() == i):
                     fY += 2 * self.TEXT_MARGIN
                     screen.addCheckBoxGFC(self.getCivicsButtonName(j), gc.getCivicInfo(j).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(), fX + self.BUTTON_SIZE/2, fY, self.BUTTON_SIZE, self.BUTTON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1, ButtonStyles.BUTTON_STYLE_LABEL)
@@ -251,7 +255,7 @@ class CvCivicsScreen:
         activePlayer = gc.getPlayer(self.iActivePlayer)
         iCivic = self.m_paeDisplayCivics[iCivicOption]
 
-        szPaneID = "CivicsHelpTextBackground" + str(iCivicOption)
+        # szPaneID = "CivicsHelpTextBackground" + str(iCivicOption)
         screen = self.getScreen()
 
         szHelpText = u""
@@ -279,7 +283,7 @@ class CvCivicsScreen:
 
     # Will draw the help text
     def drawAllHelpText(self):
-        for i in range (gc.getNumCivicOptionInfos()):
+        for i in xrange (gc.getNumCivicOptionInfos()):
 
             fX = self.HEADINGS_SPACING  + (self.HEADINGS_WIDTH + self.HEADINGS_SPACING) * i
 
@@ -342,9 +346,9 @@ class CvCivicsScreen:
 
 
     def Cancel(self, inputClass):
-        screen = self.getScreen()
+        # screen = self.getScreen()
         if (inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED) :
-            for i in range (gc.getNumCivicOptionInfos()):
+            for i in xrange (gc.getNumCivicOptionInfos()):
                 self.m_paeCurrentCivics[i] = self.m_paeOriginalCivics[i]
                 self.m_paeDisplayCivics[i] = self.m_paeOriginalCivics[i]
 

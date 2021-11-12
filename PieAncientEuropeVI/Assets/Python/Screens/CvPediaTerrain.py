@@ -1,8 +1,11 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CivilopediaPageTypes,
+                                WidgetTypes, PanelStyles,
+                                CyGameTextMgr, TableStyles, YieldTypes)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 import string
 
@@ -61,15 +64,15 @@ class CvPediaTerrain:
     screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_TERRAIN, -1)
 
     if self.top.iLastScreen != CvScreenEnums.PEDIA_TERRAIN or bNotActive:
-      self.placeLinks(true)
+      self.placeLinks(True)
       self.top.iLastScreen = CvScreenEnums.PEDIA_TERRAIN
     else:
-      self.placeLinks(false)
+      self.placeLinks(False)
 
     # Icon
     screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
         self.X_ICON_PANE, self.Y_ICON_PANE, self.W_ICON_PANE, self.H_ICON_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-    screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+    screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
         self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
     screen.addDDSGFC(self.top.getNextWidgetName(), gc.getTerrainInfo(self.iTerrain).getButton(),
         self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -85,10 +88,10 @@ class CvPediaTerrain:
 
     panelName = self.top.getNextWidgetName()
     screen.addListBoxGFC(panelName, "", self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, TableStyles.TABLE_STYLE_EMPTY)
-#   screen.addPanel( panelName, "", "", true, true, self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, PanelStyles.PANEL_STYLE_EMPTY )
+#   screen.addPanel( panelName, "", "", True, True, self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, PanelStyles.PANEL_STYLE_EMPTY )
     screen.enableSelect(panelName, False)
 
-    for k in range(YieldTypes.NUM_YIELD_TYPES):
+    for k in xrange(YieldTypes.NUM_YIELD_TYPES):
       iYield = gc.getTerrainInfo(self.iTerrain).getYield(k)
       if (iYield != 0):
         szYield = (u"%s: %i" % (gc.getYieldInfo(k).getDescription().upper(), iYield))
@@ -101,7 +104,7 @@ class CvPediaTerrain:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", true, false, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
+    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
     listName = self.top.getNextWidgetName()
     screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
@@ -122,13 +125,13 @@ class CvPediaTerrain:
 
     # sort resources alphabetically
     listSorted=[(0,0)]*gc.getNumTerrainInfos()
-    for j in range(gc.getNumTerrainInfos()):
+    for j in xrange(gc.getNumTerrainInfos()):
       listSorted[j] = (gc.getTerrainInfo(j).getDescription(), j)
     listSorted.sort()
 
     iSelected = 0
     i = 0
-    for iI in range(gc.getNumTerrainInfos()):
+    for iI in xrange(gc.getNumTerrainInfos()):
       if (not gc.getTerrainInfo(listSorted[iI][1]).isGraphicalOnly()):
         if bRedraw:
           screen.appendListBoxString(self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_TERRAIN, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
@@ -142,5 +145,3 @@ class CvPediaTerrain:
   # Will handle the input for this screen...
   def handleInput (self, inputClass):
     return 0
-
-

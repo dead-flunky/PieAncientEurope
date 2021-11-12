@@ -129,7 +129,7 @@ class UnitNameEventManager:
         popup.launch(False, PopupStates.POPUPSTATE_IMMEDIATE)
 
 #               popup.createPythonCheckBoxes(3, 0)
-#               for i in range(3):
+#               for i in xrange(3):
 #                   strCheckboxText = "Checkbox " + str(i)
 #                   strCheckBoxHelp = "Checkbox Help Text " + str(i)
 #                   # set checkbox text of button i, group 0 to strCheckboxText
@@ -280,7 +280,7 @@ class BuildUnitName(AbstractBuildUnitName):
                     pCity = EmpireAsCity(pPlayer.getCivilizationAdjective(0))
                 lUnitReName = UnitReName()
                 zsEra = gc.getEraInfo(pPlayer.getCurrentEra()).getType()
-                for i in range(pPlot.getNumUnits()):
+                for i in xrange(pPlot.getNumUnits()):
                     pUnit = pPlot.getUnit(i)
                     if pUnit and not pUnit.isNone() and pUnit.getOwner() == iPlayer:
                         if pUnit.getNameNoDesc() == "":

@@ -1,8 +1,11 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, GenericButtonSizes,
+                                WidgetTypes, PanelStyles, TableStyles,
+                                CyGameTextMgr, CivilopediaPageTypes)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 import string
 
@@ -43,7 +46,7 @@ class CvPediaReligion:
     self.Y_TEXT = 340 #230
     self.W_TEXT = 743
     self.H_TEXT = 362 #472
-    
+
     # PAE: buildings pane
     self.X_BUILDING_PANE = 30
     self.Y_BUILDING_PANE = 230
@@ -72,15 +75,15 @@ class CvPediaReligion:
     screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_RELIGION, -1)
 
     if self.top.iLastScreen  != CvScreenEnums.PEDIA_RELIGION or bNotActive:
-      self.placeLinks(true)
+      self.placeLinks(True)
       self.top.iLastScreen = CvScreenEnums.PEDIA_RELIGION
     else:
-      self.placeLinks(false)
+      self.placeLinks(False)
 
     # Icon
     #screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
     #    self.X_MAIN_PANE, self.Y_MAIN_PANE, self.W_MAIN_PANE, self.H_MAIN_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-    screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+    screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
         self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
     screen.addDDSGFC(self.top.getNextWidgetName(), gc.getReligionInfo(self.iReligion).getButton(),
         self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -95,7 +98,7 @@ class CvPediaReligion:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", false, true,
+    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True,
          self.X_REQUIRES, self.Y_REQUIRES, self.W_REQUIRES, self.H_REQUIRES, PanelStyles.PANEL_STYLE_BLUE50 )
     screen.attachLabel(panelName, "", "  ")
 
@@ -108,7 +111,7 @@ class CvPediaReligion:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_EFFECTS", ()), "", true, false,
+    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_EFFECTS", ()), "", True, False,
          self.X_SPECIAL, self.Y_SPECIAL, self.W_SPECIAL, self.H_SPECIAL, PanelStyles.PANEL_STYLE_BLUE50 )
 
     listName = self.top.getNextWidgetName()
@@ -120,10 +123,10 @@ class CvPediaReligion:
     for special in splitText:
       if len( special ) != 0:
         screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
-        
+
     # Special Units
     if self.iReligion == gc.getInfoTypeForString("RELIGION_JUDAISM"):
-      iUnit = gc.getInfoTypeForString("UNIT_STADTWACHE_ISRAEL")      
+      iUnit = gc.getInfoTypeForString("UNIT_STADTWACHE_ISRAEL")
       special = localText.getText("TXT_KEY_PEDIA_REL_UNIT", ()) + " " + gc.getUnitInfo(iUnit).getDescription()
       screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUnit, 1, CvUtil.FONT_LEFT_JUSTIFY )
 
@@ -133,24 +136,24 @@ class CvPediaReligion:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_ALLOWS", ()), "", false, true, self.X_BUILDING_PANE, self.Y_BUILDING_PANE, self.W_BUILDING_PANE, self.H_BUILDING_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
+    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_ALLOWS", ()), "", False, True, self.X_BUILDING_PANE, self.Y_BUILDING_PANE, self.W_BUILDING_PANE, self.H_BUILDING_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
     screen.attachLabel(panelName, "", "  ")
 
     # Buildings
-    for eLoop in range(gc.getNumBuildingInfos()):
+    for eLoop in xrange(gc.getNumBuildingInfos()):
       if (eLoop != -1):
         if (gc.getBuildingInfo(eLoop).getPrereqReligion() == self.iReligion or gc.getBuildingInfo(eLoop).getHolyCity() == self.iReligion):
           screen.attachImageButton( panelName, "", gc.getBuildingInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoop, 1, False )
 
     # Units
-    for eLoop in range(gc.getNumUnitInfos()):
+    for eLoop in xrange(gc.getNumUnitInfos()):
       if (eLoop != -1):
         if (gc.getUnitInfo(eLoop).getPrereqReligion() == self.iReligion):
           screen.attachImageButton( panelName, "", gc.getUnitInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoop, 1, False )
 
     # Promotions
-    for eLoop in range(gc.getNumPromotionInfos()):
+    for eLoop in xrange(gc.getNumPromotionInfos()):
       if (eLoop != -1):
         if (gc.getPromotionInfo(eLoop).getStateReligionPrereq() == self.iReligion):
           screen.attachImageButton( panelName, "", gc.getPromotionInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, eLoop, 1, False )
@@ -160,7 +163,7 @@ class CvPediaReligion:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, "", "", true, true,
+    screen.addPanel( panelName, "", "", True, True,
          self.X_TEXT, self.Y_TEXT, self.W_TEXT, self.H_TEXT, PanelStyles.PANEL_STYLE_BLUE50 )
 
     szText = gc.getReligionInfo(self.iReligion).getCivilopedia()
@@ -175,13 +178,13 @@ class CvPediaReligion:
 
     # sort Improvements alphabetically
     listSorted=[(0,0)]*gc.getNumReligionInfos()
-    for j in range(gc.getNumReligionInfos()):
+    for j in xrange(gc.getNumReligionInfos()):
       listSorted[j] = (gc.getReligionInfo(j).getDescription(), j)
     listSorted.sort()
 
     iSelected = 0
     i = 0
-    for iI in range(gc.getNumReligionInfos()):
+    for iI in xrange(gc.getNumReligionInfos()):
       if (not gc.getReligionInfo(iI).isGraphicalOnly()):
         if bRedraw:
           screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
@@ -194,4 +197,3 @@ class CvPediaReligion:
   # Will handle the input for this screen...
   def handleInput (self, inputClass):
     return 0
-

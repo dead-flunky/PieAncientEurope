@@ -1,9 +1,14 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (PanelStyles, CyGInterfaceScreen, CyInterface,
+                                CyGlobalContext, CyArtFileMgr,
+                                CyUserProfile, CyTranslator, GraphicOptionTypes,
+                                WidgetTypes, CyGameTextMgr, NotifyCode,
+                                FontTypes, ButtonStyles, PopupStates,
+                                InterfaceDirtyBits)
 import PyHelpers
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 
 PyPlayer = PyHelpers.PyPlayer
@@ -29,7 +34,7 @@ class CvWonderMovieScreen:
         def __init__(self):
                 self.fDelay = -1.0
                 self.fTime = 0.0
-                self.bDone = false
+                self.bDone = False
 
         def interfaceScreen (self, iMovieItem, iCityId, iMovieType):
                 # iMovieItem is either the WonderID, the ReligionID, or the ProjectID, depending on iMovieType
@@ -65,7 +70,7 @@ class CvWonderMovieScreen:
                 self.iMovieType = iMovieType
                 self.fTime = 0.0
                 self.fDelay = 1.5
-                self.bDone = false
+                self.bDone = False
 
                 # not all projects have movies
                 self.szMovieFile = None
@@ -104,7 +109,7 @@ class CvWonderMovieScreen:
                 if (self.szMovieFile == None or len(self.szMovieFile) == 0):
                         return
 
-                player = PyPlayer(CyGame().getActivePlayer())
+                # player = PyPlayer(CyGame().getActivePlayer())
 
                 # move the camera and mark the interface camera as dirty so that it gets reset - JW
                 if self.iMovieType == MOVIE_SCREEN_WONDER:
@@ -115,14 +120,14 @@ class CvWonderMovieScreen:
                 CyInterface().setDirty(InterfaceDirtyBits.SelectionCamera_DIRTY_BIT, True)
 
                 screen = CyGInterfaceScreen( "WonderMovieScreen" + str(iMovieItem), CvScreenEnums.WONDER_MOVIE_SCREEN )
-                screen.addPanel("WonderMoviePanel", "", "", true, true,
+                screen.addPanel("WonderMoviePanel", "", "", True, True,
                         self.X_WINDOW, self.Y_WINDOW, self.W_WINDOW, self.H_WINDOW, PanelStyles.PANEL_STYLE_MAIN)
 
                 screen.showWindowBackground( True )
                 screen.setDimensions(screen.centerX(self.X_SCREEN), screen.centerY(self.Y_SCREEN), self.W_SCREEN, self.H_SCREEN)
                 screen.setRenderInterfaceOnly(False)
                 screen.showScreen(PopupStates.POPUPSTATE_IMMEDIATE, False)
-                screen.enableWorldSounds( false )
+                screen.enableWorldSounds( False )
 
                 # Header...
                 szHeaderId = "WonderTitleHeader" + str(iMovieItem)
@@ -168,9 +173,9 @@ class CvWonderMovieScreen:
                                         szHelp = ""
 
                                 if len(szHelp) > 0:
-                                        screen.addPanel("MonkeyPanel", "", "", true, true, self.X_WINDOW + self.X_MOVIE + self.W_MOVIE / 8 - 10, self.Y_WINDOW + self.Y_MOVIE + 90, 3 * self.W_MOVIE / 4 + 20, self.H_MOVIE - 180, PanelStyles.PANEL_STYLE_MAIN_BLACK50)
+                                        screen.addPanel("MonkeyPanel", "", "", True, True, self.X_WINDOW + self.X_MOVIE + self.W_MOVIE / 8 - 10, self.Y_WINDOW + self.Y_MOVIE + 90, 3 * self.W_MOVIE / 4 + 20, self.H_MOVIE - 180, PanelStyles.PANEL_STYLE_MAIN_BLACK50)
                                         screen.addMultilineText("MonkeyText", szHelp, self.X_WINDOW + self.X_MOVIE + self.W_MOVIE / 8, self.Y_WINDOW + self.Y_MOVIE + 100, 3 * self.W_MOVIE / 4, self.H_MOVIE - 200, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
-                                self.bDone = true
+                                self.bDone = True
 
                 return 0
 

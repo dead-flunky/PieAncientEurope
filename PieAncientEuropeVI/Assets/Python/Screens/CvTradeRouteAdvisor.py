@@ -1,7 +1,11 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 ## Created by Pie, Austria
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, TableStyles,
+                                WidgetTypes, PanelStyles,
+                                CyGame, FontSymbols,
+                                CyGInterfaceScreen, PopupStates)
 import CvUtil
 # import ScreenInput
 import CvScreenEnums
@@ -83,7 +87,7 @@ class CvTradeRouteAdvisor:
         # Cities with Special bonus order
         bMessageNoCities = True
         i = 0
-        for iPlayer in range(gc.getMAX_PLAYERS()):
+        for iPlayer in xrange(gc.getMAX_PLAYERS()):
             loopPlayer = gc.getPlayer(iPlayer)
             if loopPlayer.isAlive() and not loopPlayer.isHuman() and not loopPlayer.isBarbarian():
                 (pCity, pIter) = loopPlayer.firstCity(False)
@@ -181,17 +185,17 @@ class CvTradeRouteAdvisor:
         screen.addTableControlGFC("Table4", 1, 760, 340, 215, 310, False, True, 24,24, TableStyles.TABLE_STYLE_STANDARD)
 
         # Add bonus to tables
-        pPlayer = gc.getPlayer(self.iActivePlayer)
+        # pPlayer = gc.getPlayer(self.iActivePlayer)
         iCol1 = 0
         iCol2 = 0
         iCol3 = 0
         iCol4 = 0
         iNumBonus = gc.getNumBonusInfos()
-        for iLoop in range(iNumBonus):
+        for iLoop in xrange(iNumBonus):
             szName   = gc.getBonusInfo(iLoop).getDescription()
             szButton = gc.getBonusInfo(iLoop).getButton()
             iBonusClassType = gc.getBonusInfo(iLoop).getBonusClassType()
-            iBonusTechReveal = gc.getBonusInfo(iLoop).getTechReveal()
+            # iBonusTechReveal = gc.getBonusInfo(iLoop).getTechReveal()
             #bShow = False
             #if gc.getTeam(pPlayer.getTeam()).isHasTech(iBonusTechReveal):
             bShow = True
@@ -236,8 +240,8 @@ class CvTradeRouteAdvisor:
 
     def refreshScreen(self):
         self.deleteAllWidgets()
-        if self.iTargetPlayer != -1:
-            screen = self.getScreen()
+        # if self.iTargetPlayer != -1:
+            # screen = self.getScreen()
         return 0
 
     # returns a unique ID for a widget in this screen
@@ -257,7 +261,7 @@ class CvTradeRouteAdvisor:
 
     # Will handle the input for this screen...
     def handleInput (self, inputClass):
-        screen = self.getScreen()
+        # screen = self.getScreen()
         return 0
 
     def update(self, fDelta):

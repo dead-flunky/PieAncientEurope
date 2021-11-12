@@ -30,11 +30,11 @@ def setHolyCity():
     if pCity is None:
         lCities = []
         iNumPlayers = gc.getMAX_PLAYERS()
-        for i in range(iNumPlayers):
+        for i in xrange(iNumPlayers):
             loopPlayer = gc.getPlayer(i)
             if loopPlayer.isAlive():
                 iNumCities = loopPlayer.getNumCities()
-                for j in range(iNumCities):
+                for j in xrange(iNumCities):
                     loopCity = loopPlayer.getCity(j)
                     if loopCity is not None and not loopCity.isNone():
                         if loopCity.isHasReligion(iJudentum):
@@ -54,7 +54,7 @@ def setHolyCity():
         iPop = 0
 
         iNumPlayers = gc.getMAX_PLAYERS()
-        for i in range(iNumPlayers):
+        for i in xrange(iNumPlayers):
             loopPlayer = gc.getPlayer(i)
             if loopPlayer.isAlive():
                 loopCity = loopPlayer.getCapitalCity()
@@ -133,14 +133,14 @@ def removePagans(pCity):
     # Kult
     lCorp = []
     iRange = gc.getNumCorporationInfos()
-    for i in range(iRange):
+    for i in xrange(iRange):
         if pCity.isHasCorporation(i):
             lCorp.append(i)
 
     # Religion
     lReli = []
     iRange = gc.getNumReligionInfos()
-    for i in range(iRange):
+    for i in xrange(iRange):
         if pCity.isHasReligion(i) and i != iReligion:
             lReli.append(i)
 
@@ -155,7 +155,7 @@ def removePagans(pCity):
     if lCorp or bUndoCorp:
         iRand = CvUtil.myRandom(len(lCorp), "removePaganCult")
         iRange = gc.getNumBuildingInfos()
-        for iBuildingLoop in range(iRange):
+        for iBuildingLoop in xrange(iRange):
             if pCity.getNumBuilding(iBuildingLoop) > 0:
                 pBuilding = gc.getBuildingInfo(iBuildingLoop)
                 if pBuilding.getPrereqCorporation() == lCorp[iRand]:
@@ -176,7 +176,7 @@ def removePagans(pCity):
     elif lReli:
         iRand = CvUtil.myRandom(len(lReli), "removePaganReli")
         iRange = gc.getNumBuildingInfos()
-        for iBuildingLoop in range(iRange):
+        for iBuildingLoop in xrange(iRange):
             if pCity.isHasBuilding(iBuildingLoop):
                 pBuilding = gc.getBuildingInfo(iBuildingLoop)
                 if pBuilding.getPrereqReligion() == lReli[iRand]:

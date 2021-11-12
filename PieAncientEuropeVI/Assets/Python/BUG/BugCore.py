@@ -1,11 +1,11 @@
-## BugCore
+# BugCore
 ##
-## Provides a top-level Game that manages the Mods and their Options.
+# Provides a top-level Game that manages the Mods and their Options.
 ##
-## TODO
-##   - Fix syntax error in _createParameterizedAccessorPair()
+# TODO
+# - Fix syntax error in _createParameterizedAccessorPair()
 ##
-## Copyright (c) 2008 The BUG Mod.
+# Copyright (c) 2008 The BUG Mod.
 ##
 ## Author: EmperorFool
 
@@ -149,7 +149,6 @@ class Mod(object):
                     return lambda *ignored: False
         raise AttributeError(attr_id)
 
-
     def _createParameterizedAccessorPair(self, optionId, getter=None, setter=None, values=None):
         'createParameterizedAccessorPair'
         optionId = BugOptions.qualify(self._id, optionId)
@@ -177,6 +176,7 @@ class Mod(object):
 
 
 game = Game()
+
 
 def initDone():
     'initDone'

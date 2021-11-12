@@ -93,11 +93,15 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CommerceTypes)
 
 import BugUtil
 import FontUtil
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 ## Globals
 
@@ -134,19 +138,13 @@ def isValid(iReligion):
     """
     return iReligion > -1 and iReligion < gc.getNumReligionInfos()
 
-def getAllReligions():
-    """
-    Returns a tuple containing all valid religion IDs (0, 1, ..., NUM_RELIGIONS-1).
-    """
-    return range(gc.getNumReligionInfos())
-
 def getFoundedReligions():
     """
     Returns a list of religion IDs that have been founded.
     """
     religions = []
     game = gc.getGame()
-    for iReligion in range(gc.getNumReligionInfos()):
+    for iReligion in xrange(gc.getNumReligionInfos()):
         if game.getReligionGameTurnFounded(iReligion) >= 0:
             religions.append(iReligion)
     return religions
@@ -317,7 +315,7 @@ def getCityReligions(city):
     Returns a list of religion IDs that are present in <city>.
     """
     religions = []
-    for eReligion in range(gc.getNumReligionInfos()):
+    for eReligion in xrange(gc.getNumReligionInfos()):
         if city.isHasReligion(eReligion):
             religions.append(eReligion)
     return religions
@@ -327,7 +325,7 @@ def getCityHolyReligions(city):
     Returns a list of religion IDs for which <city> is the holy city.
     """
     religions = []
-    for eReligion in range(gc.getNumReligionInfos()):
+    for eReligion in xrange(gc.getNumReligionInfos()):
         if city.isHolyCityByType(eReligion):
             religions.append(eReligion)
     return religions
@@ -340,7 +338,7 @@ def getPlayerReligions(player):
     Returns a list of religion IDs that are present in at least one of <player>'s cities.
     """
     religions = []
-    for eReligion in range(gc.getNumReligionInfos()):
+    for eReligion in xrange(gc.getNumReligionInfos()):
         if player.getHasReligionCount(eReligion) > 0:
             religions.append(eReligion)
     return religions
@@ -350,7 +348,7 @@ def getPlayerHolyReligions(player):
     Returns a list of religion IDs for which <player> owns the holy city.
     """
     religions = []
-    for eReligion in range(gc.getNumReligionInfos()):
+    for eReligion in xrange(gc.getNumReligionInfos()):
         if player.hasHolyCity(eReligion):
             religions.append(eReligion)
     return religions
@@ -370,11 +368,11 @@ def init():
 # MOD: Add a BuildingType() call for each new religious unit type you define
 #   UnitType("Inquisitor", FontUtil.getChar("religion"), isInquisitor)
 
-    for iReligion in range(gc.getNumReligionInfos()):
+    for iReligion in xrange(gc.getNumReligionInfos()):
         BUILDINGS_BY_RELIGION.append([-1] * NUM_BUILDING_TYPES)
         UNITS_BY_RELIGION.append([-1] * NUM_UNIT_TYPES)
 
-    for iBldg in range(gc.getNumBuildingInfos()):
+    for iBldg in xrange(gc.getNumBuildingInfos()):
         bldg = gc.getBuildingInfo(iBldg)
         iReligion = getBuildingReligion(bldg)
         if iReligion >= 0:
@@ -385,7 +383,7 @@ def init():
                                 gc.getReligionInfo(iReligion).getDescription(), type.description, iBldg, bldg.getDescription())
                     break
 
-    for iUnit in range(gc.getNumUnitInfos()):
+    for iUnit in xrange(gc.getNumUnitInfos()):
         unit = gc.getUnitInfo(iUnit)
         iReligion = getUnitReligion(unit)
         if iReligion >= 0:

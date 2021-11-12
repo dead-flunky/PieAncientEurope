@@ -1,10 +1,14 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
 ## Improvements to this screen by Almightix - thanks
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                CyGInterfaceScreen, PopupStates, FontTypes,
+                                WidgetTypes, CyGame, PanelStyles, ButtonStyles,
+                                CyInterface, InterfaceDirtyBits, CommerceTypes,
+                                getEspionageModifier, TableStyles)
 from PyHelpers import PyPlayer
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 
 # globals
@@ -86,7 +90,7 @@ class CvEspionageAdvisor:
             self.iDebugDropdownID = 554
             self.szDropdownName = self.DEBUG_DROPDOWN_ID
             screen.addDropDownBoxGFC(self.szDropdownName, 22, 12, 300, WidgetTypes.WIDGET_GENERAL, self.iDebugDropdownID, -1, FontTypes.GAME_FONT)
-            for j in range(gc.getMAX_PLAYERS()):
+            for j in xrange(gc.getMAX_PLAYERS()):
                 if (gc.getPlayer(j).isAlive()):
                     screen.addPullDownString(self.szDropdownName, gc.getPlayer(j).getName(), j, j, False )
 
@@ -111,7 +115,7 @@ class CvEspionageAdvisor:
         self.H_LEFT_PANE = 620
 
         self.szLeftPaneWidget = "LeftPane"
-        screen.addPanel( self.szLeftPaneWidget, "", "", true, true,
+        screen.addPanel( self.szLeftPaneWidget, "", "", True, True,
             self.X_LEFT_PANE, self.Y_LEFT_PANE, self.W_LEFT_PANE, self.H_LEFT_PANE, PanelStyles.PANEL_STYLE_MAIN )
 
         self.X_SCROLL = self.X_LEFT_PANE + 20
@@ -120,14 +124,14 @@ class CvEspionageAdvisor:
         self.H_SCROLL= 580
 
         self.szScrollPanel = "ScrollPanel"
-        screen.addPanel( self.szScrollPanel, "", "", true, true,
+        screen.addPanel( self.szScrollPanel, "", "", True, True,
             self.X_SCROLL, self.Y_SCROLL, self.W_SCROLL, self.H_SCROLL, PanelStyles.PANEL_STYLE_EMPTY)
 
         self.aiKnownPlayers = []
         self.aiUnknownPlayers = []
         self.iNumEntries= 0
 
-        for iLoop in range(gc.getMAX_PLAYERS()):
+        for iLoop in xrange(gc.getMAX_PLAYERS()):
             pPlayer = gc.getPlayer(iLoop)
             if (pPlayer.getTeam() != pActivePlayer.getTeam() and not pPlayer.isBarbarian()):
                 if (pPlayer.isAlive()):
@@ -153,7 +157,7 @@ class CvEspionageAdvisor:
         self.H_TOTAL_PANE = 60
 
         self.szTotalPaneWidget = "TotalPane"
-        screen.addPanel( self.szTotalPaneWidget, "", "", true, true,
+        screen.addPanel( self.szTotalPaneWidget, "", "", True, True,
             self.X_TOTAL_PANE, self.Y_TOTAL_PANE, self.W_TOTAL_PANE, self.H_TOTAL_PANE, PanelStyles.PANEL_STYLE_MAIN )
 
         self.szMakingText = "MakingText"
@@ -172,7 +176,7 @@ class CvEspionageAdvisor:
         self.H_RIGHT_PANE = self.H_LEFT_PANE - self.H_TOTAL_PANE - 20
 
         self.szRightPaneWidget = "RightPane"
-        screen.addPanel( self.szRightPaneWidget, "", "", true, true,
+        screen.addPanel( self.szRightPaneWidget, "", "", True, True,
             self.X_RIGHT_PANE, self.Y_RIGHT_PANE, self.W_RIGHT_PANE, self.H_RIGHT_PANE, PanelStyles.PANEL_STYLE_MAIN )
 
         self.X_CITY_LIST = self.X_RIGHT_PANE + 40
@@ -264,7 +268,7 @@ class CvEspionageAdvisor:
                 screen.attachPanel(self.szScrollPanel, attach, "", "", True, False, PanelStyles.PANEL_STYLE_STANDARD)
 
                 szName = "LeaderImageA%d" %(iPlayerID)
-                screen.attachSeparator(attach, szName, true, 30)
+                screen.attachSeparator(attach, szName, True, 30)
 
                 self.iLeaderImagesID = 456
                 szName = "LeaderImage%d" %(iPlayerID)
@@ -273,11 +277,11 @@ class CvEspionageAdvisor:
                 screen.addCheckBoxGFCAt(attach, szName, gc.getLeaderHeadInfo(gc.getPlayer(iPlayerID).getLeaderType()).getButton(), ArtFileMgr.getInterfaceArtInfo("BUTTON_HILITE_SQUARE").getPath(),
                                         iX, iY - 14, 32, 32, WidgetTypes.WIDGET_GENERAL, self.iLeaderImagesID, iPlayerID, ButtonStyles.BUTTON_STYLE_LABEL, False)
                 if (self.iTargetPlayer == iPlayerID):
-                    screen.setState(szName, true)
+                    screen.setState(szName, True)
 
                 szName = "LeaderNamePanel%d" %(iPlayerID)
                 self.aszLeaderNamePanels.append(szName)
-                screen.attachPanelAt(attach, szName, "", "", true, false, PanelStyles.PANEL_STYLE_MAIN,
+                screen.attachPanelAt(attach, szName, "", "", True, False, PanelStyles.PANEL_STYLE_MAIN,
                                      iX + 5, iY-15, self.W_NAME_PANEL, self.H_NAME_PANEL, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
                 szName = "NameText%d" %(iPlayerID)
@@ -331,7 +335,7 @@ class CvEspionageAdvisor:
             for iPlayerID in self.aiUnknownPlayers:
                 attach = "EmptyLeaderContainer%d" % (iPlayerID)
                 screen.attachPanel(self.szScrollPanel, attach, "", "", True, False, PanelStyles.PANEL_STYLE_STANDARD)
-                screen.attachSeparator(attach, "EmptyLeaderImageA%d" %(iPlayerID), true, 30)
+                screen.attachSeparator(attach, "EmptyLeaderImageA%d" %(iPlayerID), True, 30)
 
     def getMultiplierAgainstTarget(self, iTargetPlayer=-1):
 
@@ -365,13 +369,13 @@ class CvEspionageAdvisor:
             screen = self.getScreen()
 
             pActivePlayer = gc.getPlayer(self.iActivePlayer)
-            pActiveTeam = gc.getTeam(pActivePlayer.getTeam())
+            # pActiveTeam = gc.getTeam(pActivePlayer.getTeam())
 
             iPlayerLoop = 0
 
             for iPlayerID in self.aiKnownPlayers:
 
-                iX = 0
+                # iX = 0
                 iY = 15 #+ (148 * iPlayerLoop)#(110 * iPlayerLoop)
 
                 pTargetPlayer = gc.getPlayer(iPlayerID)
@@ -428,7 +432,7 @@ class CvEspionageAdvisor:
 
                     pCity = pyCity.GetCy()
 
-                    if (pCity.isRevealed(pActivePlayer.getTeam(), false)):
+                    if (pCity.isRevealed(pActivePlayer.getTeam(), False)):
                         screen.appendListBoxString( self.szCityListBox, pCity.getName(), WidgetTypes.WIDGET_GENERAL, pCity.getID(), 0, CvUtil.FONT_LEFT_JUSTIFY )
 
                         if (self.iActiveCityID == -1 or pTargetPlayer.getCity(self.iActiveCityID).isNone()):
@@ -464,7 +468,7 @@ class CvEspionageAdvisor:
 
 
                 # Loop through all Missions
-                for iMissionLoop in range(gc.getNumEspionageMissionInfos()):
+                for iMissionLoop in xrange(gc.getNumEspionageMissionInfos()):
 
                     pMission = gc.getEspionageMissionInfo(iMissionLoop)
 
@@ -574,9 +578,9 @@ class CvEspionageAdvisor:
                 for iPlayerID in self.aiKnownPlayers:
                     szName = "LeaderImage%d" %(iPlayerID)
                     if (self.iTargetPlayer == iPlayerID):
-                        screen.setState(szName, true)
+                        screen.setState(szName, True)
                     else:
-                        screen.setState(szName, false)
+                        screen.setState(szName, False)
 
                     self.iActiveCityID = -1
 

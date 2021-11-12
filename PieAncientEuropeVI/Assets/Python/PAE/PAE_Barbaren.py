@@ -50,7 +50,7 @@ def setFortDefence(pPlot):
             break
     if iUnit != -1:
         # Einheit setzen / NO_UNITAI vs UNITAI_CITY_DEFENSE
-        for _ in range(iAnz):
+        for _ in xrange(iAnz):
             pUnit = pBarbPlayer.initUnit(iUnit, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_CITY_DEFENSE, DirectionTypes.DIRECTION_SOUTH)
             if pUnit.getMoves() > 1:
                 pUnit.setHasPromotion(iPromo2, True)
@@ -150,7 +150,7 @@ def createBarbUnit(pPlot):
         lUnits.append(gc.getInfoTypeForString("UNIT_LIGHT_SPEARMAN"))
 
     # Einheit setzen
-    for _ in range(iAnz):
+    for _ in xrange(iAnz):
         iUnit = lUnits[CvUtil.myRandom(iAnzUnits, "createBarbUnit")]
         iUnitAI = lUnitAIs[CvUtil.myRandom(len(lUnitAIs), "createBarbUnit_AI")]
         pUnit = pBarbPlayer.initUnit(iUnit, pPlot.getX(), pPlot.getY(), iUnitAI, DirectionTypes.DIRECTION_SOUTH)
@@ -261,7 +261,7 @@ def doSeevoelker():
     # Wenn es mehr Land als Wasser gibt
     if iLandPlots > iPlots / 2: iRange /= 2
 
-    for _ in range(iRange):
+    for _ in xrange(iRange):
         # Wird geaendert zu einem Mittelmeerstreifen: x: 5 bis (X-5), y: 5 bis letztes Drittel von Y
         iMapX = gc.getMap().getGridWidth() - 5
         iMapY = int(gc.getMap().getGridHeight() / 3 * 2)
@@ -285,7 +285,7 @@ def doSeevoelker():
                 #elif gc.getGame().getGameTurnYear() > -1200:
                 #  iAnz = 2
 
-                for _ in range(iAnz):
+                for _ in xrange(iAnz):
                     CvUtil.spawnUnit(iUnitTypeShip, loopPlot, pBarbPlayer)
                     CvUtil.spawnUnit(iUnitTypeWarrior1, loopPlot, pBarbPlayer)
                     CvUtil.spawnUnit(iUnitTypeWarrior2, loopPlot, pBarbPlayer)
@@ -293,7 +293,7 @@ def doSeevoelker():
 
     # Meldung PopUp
     if gc.getGame().getGameTurnYear() > -1400 and gc.getGame().getGameTurnYear() < -1380:
-        for iPlayer in range(gc.getMAX_PLAYERS()):
+        for iPlayer in xrange(gc.getMAX_PLAYERS()):
           pPlayer = gc.getPlayer(iPlayer)
           if pPlayer.isAlive() and pPlayer.isHuman():
             popupInfo = CyPopupInfo()
@@ -313,7 +313,7 @@ def doVikings():
     iMapH = gc.getMap().getGridHeight()
     bMeldung = False
 
-    for _ in range(4):
+    for _ in xrange(4):
         iRandX = CvUtil.myRandom(iMapW, "W")
         iRandY = iMapH - CvUtil.myRandom(5, "H")
         loopPlot = gc.getMap().plot(iRandX, iRandY)
@@ -324,12 +324,12 @@ def doVikings():
                 # Wikinger erstellen
                 bMeldung = True
                 CvUtil.spawnUnit(iUnitTypeShip, loopPlot, pBarbPlayer)
-                for _ in range(4):
+                for _ in xrange(4):
                     CvUtil.spawnUnit(iUnitTypeUnit, loopPlot, pBarbPlayer)
 
     if bMeldung:
         if gc.getGame().getGameTurnYear() == 400:
-            for iPlayer in range(gc.getMAX_PLAYERS()):
+            for iPlayer in xrange(gc.getMAX_PLAYERS()):
               pPlayer = gc.getPlayer(iPlayer)
               if pPlayer.isAlive() and pPlayer.isHuman():
                 popupInfo = CyPopupInfo()
@@ -357,7 +357,7 @@ def doHuns():
     bHunsAlive = False
 
     iMaxPlayers = gc.getMAX_PLAYERS()
-    for iPlayer in range(iMaxPlayers):
+    for iPlayer in xrange(iMaxPlayers):
         pPlayer = gc.getPlayer(iPlayer)
         # Hunnen sollen nur auftauchen, wenn es nicht bereits Hunnen gibt
         if pPlayer.getCivilizationType() == CivHuns and pPlayer.isAlive():
@@ -365,7 +365,7 @@ def doHuns():
             break
 
     if not bHunsAlive:
-        for iPlayer in range(iMaxPlayers):
+        for iPlayer in xrange(iMaxPlayers):
             pPlayer = gc.getPlayer(iPlayer)
 
             # Message PopUps
@@ -388,7 +388,7 @@ def doHuns():
 
         # 15 Versuche einen Plot zu finden
         bPlot = False
-        for _ in range(15):
+        for _ in xrange(15):
             # Diese Koordinaten entsprechen Nord-Osten
             iRandX = iMapW - 15 + CvUtil.myRandom(15, "W2")
             iRandY = iMapH - 15 + CvUtil.myRandom(15, "H2")
@@ -405,7 +405,7 @@ def doHuns():
         if iGameTurn >= 250 and gc.getGame().countCivPlayersAlive() < iMaxPlayers and False:
             # freie PlayerID herausfinden
             iHunsID = 0
-            for i in range(iMaxPlayers):
+            for i in xrange(iMaxPlayers):
                 j = iMaxPlayers-i-1
                 pPlayer = gc.getPlayer(j)
                 if not pPlayer.isAlive():
@@ -426,17 +426,17 @@ def doHuns():
             iUnitKeshik = gc.getInfoTypeForString("UNIT_MONGOL_KESHIK")
             iUnitArcher = gc.getInfoTypeForString("UNIT_REFLEX_ARCHER")
             iUnitHorse = gc.getInfoTypeForString("UNIT_HORSE")
-            for _ in range(3):
+            for _ in xrange(3):
                 CvUtil.spawnUnit(iUnitSettler, loopPlot, pPlayer)
-            for _ in range(4):
+            for _ in xrange(4):
                 CvUtil.spawnUnit(iUnitSpearman, loopPlot, pPlayer)
-            for _ in range(6):
+            for _ in xrange(6):
                 CvUtil.spawnUnit(iUnitWorker, loopPlot, pPlayer)
-            for _ in range(8):
+            for _ in xrange(8):
                 CvUtil.spawnUnit(iUnitKeshik, loopPlot, pPlayer)
-            for _ in range(9):
+            for _ in xrange(9):
                 CvUtil.spawnUnit(iUnitArcher, loopPlot, pPlayer)
-            for _ in range(9):
+            for _ in xrange(9):
                 CvUtil.spawnUnit(iUnitHorse, loopPlot, pPlayer)
 
             pPlayer.setCurrentEra(3)
@@ -447,7 +447,7 @@ def doHuns():
             pTeam = gc.getTeam(pPlayer.getTeam())
             iPlayerBestTechScore = -1
             iTechScore = 0
-            for i in range(iMaxPlayers):
+            for i in xrange(iMaxPlayers):
                 pSecondPlayer = gc.getPlayer(i)
                 # increases Anger for all AIs
                 if pSecondPlayer.getID() != pPlayer.getID() and pSecondPlayer.isAlive():
@@ -464,14 +464,14 @@ def doHuns():
             if iPlayerBestTechScore > -1:
                 xTeam = gc.getTeam(gc.getPlayer(iPlayerBestTechScore).getTeam())
                 iTechNum = gc.getNumTechInfos()
-                for iTech in range(iTechNum):
+                for iTech in xrange(iTechNum):
                     if gc.getTechInfo(iTech) is not None and xTeam.isHasTech(iTech) and not pTeam.isHasTech(iTech) and gc.getTechInfo(iTech).isTrade():
                         pTeam.setHasTech(iTech, 1, iHunsID, 0, 0)
 
         else:
             iUnitType = gc.getInfoTypeForString('UNIT_MONGOL_KESHIK')
             pBarbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
-            for _ in range(iHuns):
+            for _ in xrange(iHuns):
                 CvUtil.spawnUnit(iUnitType, loopPlot, pBarbPlayer)
 
 def doOnUnitMove(pUnit, pPlot, pOldPlot):
@@ -508,8 +508,8 @@ def doOnUnitMove(pUnit, pPlot, pOldPlot):
 def checkNearbyUnits(pPlot, iRange):
     iX = pPlot.getX()
     iY = pPlot.getY()
-    for x in range(-iRange, iRange+1):
-      for y in range(-iRange, iRange+1):
+    for x in xrange(-iRange, iRange+1):
+      for y in xrange(-iRange, iRange+1):
         loopPlot = plotXY(iX, iY, x, y)
         if loopPlot.getNumUnits() > 0: return True
     return False
@@ -518,8 +518,8 @@ def countNearbyUnits(pPlot, iRange, iPlayer):
     iAnz = 0
     iX = pPlot.getX()
     iY = pPlot.getY()
-    for x in range(-iRange, iRange+1):
-      for y in range(-iRange, iRange+1):
+    for x in xrange(-iRange, iRange+1):
+      for y in xrange(-iRange, iRange+1):
         loopPlot = plotXY(iX, iY, x, y)
         if loopPlot.getNumUnits() > 0 and loopPlot.getUnit(0).getOwner() == iPlayer:
           iAnz += loopPlot.getNumUnits()

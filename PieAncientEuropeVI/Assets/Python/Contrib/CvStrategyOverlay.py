@@ -43,7 +43,7 @@ def init(paletteWidth=3, paletteColors=None):
         PALETTE_WIDTH = 10  # override because it has 127 colors
         COLOR_KEYS = []
         try:
-            for index in range(200):
+            for index in xrange(200):
                 info = gc.getColorInfo(index)
                 COLOR_KEYS.append(info.getType())
         except:
@@ -265,8 +265,8 @@ class DotMapLayer(StrategyLayer):
         self.NO_DOT_STYLE = PlotStyles.PLOT_STYLE_NONE
         self.MAX_DOT_STYLE = PlotStyles.PLOT_STYLE_WAVES
         self.BFC_OFFSETS = []
-        for x in range(-2, 3):
-            for y in range(-2, 3):
+        for x in xrange(-2, 3):
+            for y in xrange(-2, 3):
                 if abs(x) != 2 or abs(y) != 2:
                     self.BFC_OFFSETS.append((x, y))
         # default options
@@ -585,7 +585,7 @@ class DotMapLayer(StrategyLayer):
         Erases all city crosses and dots.
         """
         self.clearHighlightCrossLayer()
-        for index in range(self.NUM_CROSS_LAYERS):
+        for index in xrange(self.NUM_CROSS_LAYERS):
             self.clearCrossLayer(index + self.FIRST_CROSS_LAYER)
         self.clearDotLayer()
 

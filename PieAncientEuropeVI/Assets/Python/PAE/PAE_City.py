@@ -271,7 +271,7 @@ def onModNetMessage(argsList):
                 pPlot = pCity.plot()
                 iNumUnits = pPlot.getNumUnits()
                 if iNumUnits > 0:
-                    for k in range(iNumUnits):
+                    for k in xrange(iNumUnits):
                         if iData3 == pPlot.getUnit(k).getOwner():
                             pPlot.getUnit(k).setImmobileTimer(iImmo)
 
@@ -575,7 +575,7 @@ def doInquisitorPersecution(pCity, pUnit):
         popupInfo.setData2(pCity.getID())
         popupInfo.setData3(pUnit.getID())
         popupInfo.setOnClickedPythonCallback("popupReliaustreibung") # EntryPoints/CvScreenInterface und CvGameUtils / 704
-        for iReligion in range(iNumReligions):
+        for iReligion in xrange(iNumReligions):
             if pCity.isHasReligion(iReligion) and iReligion != pPlayer.getStateReligion() and not pCity.isHolyCityByType(iReligion):
                 popupInfo.addPythonButton(gc.getReligionInfo(iReligion).getText(), gc.getReligionInfo(iReligion).getButton())
         popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_INQUISITION_CANCEL", ("", )), "Art/Interface/Buttons/General/button_alert_new.dds")
@@ -590,7 +590,7 @@ def doInquisitorPersecution2(iPlayer, iCity, iButton, iReligion, iUnit):
     iNumReligions = gc.getNumReligionInfos()
     # gets a list of all religions in the city except state religion
     lCityReligions = []
-    for iReligionLoop in range(iNumReligions):
+    for iReligionLoop in xrange(iNumReligions):
         if pCity.isHasReligion(iReligionLoop):
             if not pCity.isHolyCityByType(iReligionLoop) and iReligionLoop != iStateReligion:
                 lCityReligions.append(iReligionLoop)
@@ -618,7 +618,7 @@ def doInquisitorPersecution2(iPlayer, iCity, iButton, iReligion, iUnit):
 
             # remove its buildings
             iRange = gc.getNumBuildingInfos()
-            for iBuildingLoop in range(iRange):
+            for iBuildingLoop in xrange(iRange):
                 if pCity.isHasBuilding(iBuildingLoop):
                     pBuilding = gc.getBuildingInfo(iBuildingLoop)
                     if pBuilding.getPrereqReligion() == iReligion:
@@ -635,7 +635,7 @@ def doInquisitorPersecution2(iPlayer, iCity, iButton, iReligion, iUnit):
 
             # increasing Anger or Sympathy for an AI
             iRange = gc.getMAX_PLAYERS()
-            for iSecondPlayer in range(iRange):
+            for iSecondPlayer in xrange(iRange):
                 pSecondPlayer = gc.getPlayer(iSecondPlayer)
                 pReligion = gc.getReligionInfo(iReligion)
 
@@ -802,7 +802,7 @@ def doCityRevolt(pCity, iTurns):
 
     # Einheiten stilllegen
     iRange = pPlot.getNumUnits()
-    for iUnit in range(iRange):
+    for iUnit in xrange(iRange):
         pPlot.getUnit(iUnit).setDamage(30, -1)
         if CvUtil.myRandom(2, "cityRevolt") == 1:
             pPlot.getUnit(iUnit).setImmobileTimer(iTurns)
@@ -840,7 +840,7 @@ def doNextCityRevolt(iX, iY, iOwner, iAttacker):
             #~ if gc.getTeam(pOwner.getTeam()).isHasTech(gc.getInfoTypeForString('TECH_POLYARCHY')): iBuilding = gc.getInfoTypeForString('BUILDING_PRAEFECTUR')
             #~ else: iBuilding = gc.getInfoTypeForString('BUILDING_PROVINZPALAST')
             iRange = pOwner.getNumCities()
-            for i in range(iRange):
+            for i in xrange(iRange):
                 pLoopCity = pOwner.getCity(i)
                 if pLoopCity is not None and not pLoopCity.isNone():
                     if not pLoopCity.isCapital() and pLoopCity.getOccupationTimer() < 1 and not pLoopCity.isGovernmentCenter() and pLoopCity.getOwner() != iAttacker:
@@ -874,7 +874,7 @@ def doNextCityRevolt(iX, iY, iOwner, iAttacker):
 def doCityCheckRevoltEnd(pCity):
     pPlot = pCity.plot()
     iRange = pPlot.getNumUnits()
-    for iUnit in range(iRange):
+    for iUnit in xrange(iRange):
       pUnit = pPlot.getUnit(iUnit)
       # General oder Rhetoriker
       if pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RHETORIK")) or pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_LEADER")):
@@ -945,7 +945,7 @@ def doDesertification(pCity, pUnit):
             PlotArray6 = []
             PlotArrayX = []
 
-            for iI in range(gc.getNUM_CITY_PLOTS()):
+            for iI in xrange(gc.getNUM_CITY_PLOTS()):
                 pLoopPlot = pCity.getCityIndexPlot(iI)
                 if pLoopPlot is not None and not pLoopPlot.isNone():
                     iPlotFeature = pLoopPlot.getFeatureType()
@@ -1111,8 +1111,8 @@ def doSpreadPlague(pCity):
     # Umkreis von 5 Feldern
     iRange = 5
     iCityCheck = 0
-    for i in range(-iRange, iRange+1):
-        for j in range(-iRange, iRange+1):
+    for i in xrange(-iRange, iRange+1):
+        for j in xrange(-iRange, iRange+1):
             sPlot = plotXY(iX, iY, i, j)
             if sPlot.isCity():
                 sCity = sPlot.getPlotCity()
@@ -1128,7 +1128,7 @@ def doSpreadPlague(pCity):
     # Handelsstaedte dieser Stadt
     if not bSpread:
         iTradeRoutes = pCity.getTradeRoutes()
-        for i in range(iTradeRoutes):
+        for i in xrange(iTradeRoutes):
             sCity = pCity.getTradeCity(i)
             if not sCity.isHasBuilding(iBuildingPlague) and sCity.getPopulation() > 3:
                 PlagueCity = sCity
@@ -1154,7 +1154,7 @@ def doSpreadPlague(pCity):
 
         # message for all
         iRange = gc.getMAX_PLAYERS()
-        for iSecondPlayer in range(iRange):
+        for iSecondPlayer in xrange(iRange):
             pSecondPlayer = gc.getPlayer(iSecondPlayer)
             if pSecondPlayer.isHuman():
                 iSecTeam = pSecondPlayer.getTeam()
@@ -1196,7 +1196,7 @@ def doProvinceRebellion(pCity):
         # 3. Moeglichkeit: weitere Spieler mit Fremdkultur
         else:
             PlayerArray = []
-            for i in range(iMaxPlayers):
+            for i in xrange(iMaxPlayers):
                 if gc.getPlayer(i).isAlive():
                     if i != iPlayer and pCity.getCulture(i) > 0:
                         PlayerArray.append(i)
@@ -1211,8 +1211,8 @@ def doProvinceRebellion(pCity):
         iRange = 5
         iX = pCity.getX()
         iY = pCity.getY()
-        for i in range(-iRange, iRange+1):
-            for j in range(-iRange, iRange+1):
+        for i in xrange(-iRange, iRange+1):
+            for j in xrange(-iRange, iRange+1):
                 loopPlot = plotXY(iX, iY, i, j)
                 if loopPlot is not None and not loopPlot.isNone():
                     if loopPlot.isCity():
@@ -1221,8 +1221,8 @@ def doProvinceRebellion(pCity):
                             iLoopX = iX+i
                             iLoopY = iY+j
                             iChance = 100
-                            for i2 in range(-iRange, iRange+1):
-                                for j2 in range(-iRange, iRange+1):
+                            for i2 in xrange(-iRange, iRange+1):
+                                for j2 in xrange(-iRange, iRange+1):
                                     loopPlot2 = plotXY(iLoopX, iLoopY, i2, j2)
                                     if loopPlot2 is not None and not loopPlot2.isNone():
                                         if loopPlot2.isCity():
@@ -1266,11 +1266,11 @@ def doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer):
         iUnitAnzahl = 0
         iX = pLoserPlot.getX()
         iY = pLoserPlot.getY()
-        for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+        for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
             loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
             if loopPlot is not None and not loopPlot.isNone():
                 iRange = loopPlot.getNumUnits()
-                for iUnit in range(iRange):
+                for iUnit in xrange(iRange):
                     pLoopUnit = loopPlot.getUnit(iUnit)
                     if pLoopUnit.isMilitaryHappiness():
                         if pTeam.isAtWar(gc.getPlayer(pLoopUnit.getOwner()).getTeam()):
@@ -1281,7 +1281,7 @@ def doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer):
         iUnitCity = 0
         iChanceUnits = 0
         iRange = pLoserPlot.getNumUnits()
-        for iUnit in range(iRange):
+        for iUnit in xrange(iRange):
             pLoopUnit = pLoserPlot.getUnit(iUnit)
             if pLoopUnit.canFight():
                 iUnitCity += 1
@@ -1437,7 +1437,7 @@ def doRenegadeCity(pCity, iNewOwner, LoserUnit):
         iLoserID = -1
 
     iRange = pPlot.getNumUnits()
-    for iUnit in range(iRange):
+    for iUnit in xrange(iRange):
         pLoopUnit = pPlot.getUnit(iUnit)
         # Nicht die Einheit, die gerade gekillt wird killen, sonst Error
         if not pLoopUnit.isDead() and iLoserID != pLoopUnit.getID():
@@ -1536,7 +1536,7 @@ def doRenegadeCity(pCity, iNewOwner, LoserUnit):
         pNewOwner.initUnit(iPartisan, iX, iY, UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
 
     # Nochmaliger Check: Fremde Einheiten rauswerfen
-    for iUnit in range(pPlot.getNumUnits()):
+    for iUnit in xrange(pPlot.getNumUnits()):
         pLoopUnit = pPlot.getUnit(iUnit)
         # Nicht die Einheit, die gerade gekillt wird killen, sonst Error
         if not pLoopUnit.isDead() and pLoopUnit.getOwner() != iNewOwner and iLoserID != pLoopUnit.getID():
@@ -1576,13 +1576,13 @@ def AI_defendAndHire(pCity, iPlayer):
         iRange = 1
         iX = pCity.getX()
         iY = pCity.getY()
-        for x in range(-iRange, iRange+1):
-            for y in range(-iRange, iRange+1):
+        for x in xrange(-iRange, iRange+1):
+            for y in xrange(-iRange, iRange+1):
                 loopPlot = plotXY(iX, iY, x, y)
                 if loopPlot is not None and not loopPlot.isNone():
                     iNumUnits = loopPlot.getNumUnits()
                     if iNumUnits >= 4:
-                        for i in range(iNumUnits):
+                        for i in xrange(iNumUnits):
                             iOwner = loopPlot.getUnit(i).getOwner()
                             if pTeam.isAtWar(gc.getPlayer(iOwner).getTeam()):
                                 if not loopPlot.getUnit(i).isInvisible(pPlayer.getTeam(), 0):
@@ -1594,7 +1594,7 @@ def AI_defendAndHire(pCity, iPlayer):
             # Schleife fuer Stadteinheiten
             # Bombardement
             iNumUnits = pPlot.getNumUnits()
-            for i in range(iNumUnits):
+            for i in xrange(iNumUnits):
                 pUnit = pPlot.getUnit(i)
                 if pUnit.isRanged():
                     if pUnit.getOwner() == iPlayer:
@@ -1712,7 +1712,7 @@ def doUnitSupply(pCity, iPlayer):
         iExtraSupply = 0
         lUnitsAll = []
         iRange = pCityPlot.getNumUnits()
-        for i in range(iRange):
+        for i in xrange(iRange):
             pLoopUnit = pCityPlot.getUnit(i)
             if pLoopUnit.getUnitCombatType() != -1:
                 if pLoopUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
@@ -1815,7 +1815,7 @@ def doJewRevolt(pCity):
             CivIsrael = gc.getInfoTypeForString("CIVILIZATION_ISRAEL")
             bIsraelAlive = False
 
-            for i in range(iRangeMaxPlayers):
+            for i in xrange(iRangeMaxPlayers):
                 loopPlayer = gc.getPlayer(i)
                 # Israeliten sollen nur dann auftauchen, wenn es nicht bereits Israeliten gibt
                 if loopPlayer.getCivilizationType() == CivIsrael and loopPlayer.isAlive():
@@ -1827,21 +1827,21 @@ def doJewRevolt(pCity):
             if not bIsraelAlive:
                 if gc.getGame().countCivPlayersAlive() < iRangeMaxPlayers:
                     # nach einer bestehenden ISRAEL ID suchen
-                    for i in range(iRangeMaxPlayers):
+                    for i in xrange(iRangeMaxPlayers):
                         loopPlayer = gc.getPlayer(i)
                         if loopPlayer.getCivilizationType() == CivIsrael and loopPlayer.isEverAlive():
                             iCivID = i
                             break
                     # freie PlayerID herausfinden
                     if iCivID == -1:
-                        for i in range(iRangeMaxPlayers):
+                        for i in xrange(iRangeMaxPlayers):
                             loopPlayer = gc.getPlayer(i)
                             if not loopPlayer.isEverAlive():
                                 iCivID = i
                                 break
                     # wenn keine nagelneue ID frei ist, dann eine bestehende nehmen
                     if iCivID == -1:
-                        for i in range(iRangeMaxPlayers):
+                        for i in xrange(iRangeMaxPlayers):
                             loopPlayer = gc.getPlayer(i)
                             if not loopPlayer.isAlive():
                                 iCivID = i
@@ -1853,8 +1853,8 @@ def doJewRevolt(pCity):
             # Einen guenstigen Plot auswaehlen
             rebelPlotArray = []
             rebelPlotArrayB = []
-            for i in range(3):
-                for j in range(3):
+            for i in xrange(3):
+                for j in xrange(3):
                     loopPlot = gc.getMap().plot(pCity.getX() + i - 1, pCity.getY() + j - 1)
                     if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                         if loopPlot.getOwner() == iPlayer:
@@ -1880,7 +1880,7 @@ def doJewRevolt(pCity):
                     # Techs geben
                     xTeam = gc.getTeam(pPlayer.getTeam())
                     iTechNum = gc.getNumTechInfos()
-                    for iTech in range(iTechNum):
+                    for iTech in xrange(iTechNum):
                         if gc.getTechInfo(iTech) is not None:
                             if xTeam.isHasTech(iTech):
                                 if gc.getTechInfo(iTech).isTrade():
@@ -1917,12 +1917,12 @@ def doJewRevolt(pCity):
                     gc.getInfoTypeForString("UNIT_SPEARMAN"),
                     gc.getInfoTypeForString("UNIT_MACCABEE")
                 ]
-                for i in range(iNumRebels):
+                for i in xrange(iNumRebels):
                     iPlot = CvUtil.myRandom(len(rebelPlotArray), "doJewRevolt3")
                     iUnitType = CvUtil.myRandom(len(rebelTypeArray), "doJewRevolt4")
                     newPlayer.initUnit(rebelTypeArray[iUnitType], rebelPlotArray[iPlot].getX(), rebelPlotArray[iPlot].getY(), UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
 
-                for iAllPlayer in range(iRangeMaxPlayers):
+                for iAllPlayer in xrange(iRangeMaxPlayers):
                     ThisPlayer = gc.getPlayer(iAllPlayer)
                     iThisPlayer = ThisPlayer.getID()
                     iThisTeam = ThisPlayer.getTeam()
@@ -2247,7 +2247,7 @@ def bonusMissing(pCity, eBuilding):
             return eBonus
 
     eRequiredBonus = None
-    for iI in range(gc.getNUM_BUILDING_PREREQ_OR_BONUSES()):
+    for iI in xrange(gc.getNUM_BUILDING_PREREQ_OR_BONUSES()):
         eBonus = gc.getBuildingInfo(eBuilding).getPrereqOrBonuses(iI)
         if eBonus != -1:
             eRequiredBonus = eBonus
@@ -2259,7 +2259,7 @@ def bonusMissing(pCity, eBuilding):
 def bonusMissingCity(pCity, eBuilding):
     eBonus = gc.getBuildingInfo(eBuilding).getPrereqAndBonus()
     if eBonus != -1:
-        for iI in range(gc.getNUM_CITY_PLOTS()):
+        for iI in xrange(gc.getNUM_CITY_PLOTS()):
             loopPlot = pCity.getCityIndexPlot(iI)
             if loopPlot is not None and not loopPlot.isNone():
                 if loopPlot.getBonusType(-1) == eBonus:
@@ -2280,7 +2280,7 @@ def onEmigrantBuilt(city, unit):
     iRange = gc.getMAX_PLAYERS()
     iPlayerCulture = -1
     iValueCulture = -1
-    for i in range(iRange):
+    for i in xrange(iRange):
         if pPlot.getCulture(i) > iValueCulture:
             iValueCulture = pPlot.getCulture(i)
             iPlayerCulture = i
@@ -2318,7 +2318,7 @@ def doEmigrantSpawn(pCity):
     if iHappNonState < 0:
         iStateReligion = pPlayer.getStateReligion()
         iCurrentTurn = gc.getGame().getElapsedGameTurns()
-        for iRel in range(gc.getNumReligionInfos()):
+        for iRel in xrange(gc.getNumReligionInfos()):
             if pCity.isHasReligion(iRel):
                 if gc.getGame().getReligionGameTurnFounded(iRel) == iCurrentTurn and \
                    iRel != iStateReligion and \
@@ -2442,7 +2442,7 @@ def doSpawnPest(pCity):
 
             # message for all
             iRange = gc.getMAX_PLAYERS()
-            for iPlayer2 in range(iRange):
+            for iPlayer2 in xrange(iRange):
                 pSecondPlayer = gc.getPlayer(iPlayer2)
                 if pSecondPlayer.isHuman():
                     iSecTeam = pSecondPlayer.getTeam()
@@ -2478,7 +2478,7 @@ def doPlagueEffects(pCity):
     # Plots rundherum mit SeuchenFeature belasten
     if iHappiness == -5:
         feat_seuche = gc.getInfoTypeForString('FEATURE_SEUCHE')
-        for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+        for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
             loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
             if loopPlot is not None and not loopPlot.isNone():
                 if not loopPlot.isWater() and not loopPlot.isPeak() and loopPlot.getFeatureType() == -1:
@@ -2486,7 +2486,7 @@ def doPlagueEffects(pCity):
 
     # Downgrade Improvements
     if iHappiness == -4 or iHappiness == -2:
-        for iI in range(gc.getNUM_CITY_PLOTS()):
+        for iI in xrange(gc.getNUM_CITY_PLOTS()):
             loopPlot = pCity.getCityIndexPlot(iI)
             if loopPlot is not None and not loopPlot.isNone():
                 improv1 = gc.getInfoTypeForString('IMPROVEMENT_COTTAGE')
@@ -2570,11 +2570,11 @@ def doPlagueEffects(pCity):
 
     # Hurt and kill units
     lMessageOwners = []
-    for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+    for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
         loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
         if loopPlot is not None and not loopPlot.isNone():
             iRange = loopPlot.getNumUnits()
-            for iUnit in range(iRange):
+            for iUnit in xrange(iRange):
                 iRand = CvUtil.myRandom(30, "doPlagueEffects3") + 15
                 pLoopUnit = loopPlot.getUnit(iUnit)
                 if pLoopUnit is not None:
@@ -2644,7 +2644,7 @@ def doPartisans(pCity, iPreviousOwner):
     PartisanPlot2 = []
     iX = pCity.getX()
     iY = pCity.getY()
-    for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+    for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
         loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
         if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
             if not loopPlot.isWater() and not loopPlot.isImpassable() and not loopPlot.isCity():
@@ -2671,7 +2671,7 @@ def doPartisans(pCity, iPreviousOwner):
 
         # Number of Partisans
         iAnzahl = CvUtil.myRandom(pCity.getPopulation()/2, "doPartisans") + 1
-        for _ in range(iAnzahl):
+        for _ in xrange(iAnzahl):
             pPlot = rebelPlotArray[CvUtil.myRandom(len(rebelPlotArray), "doPartisansPlot")]
             pUnit = pPreviousOwner.initUnit(iUnitType, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
             iDamage = CvUtil.myRandom(50, "doPartisansDamage")
@@ -2680,7 +2680,7 @@ def doPartisans(pCity, iPreviousOwner):
         # PAE V: Reservisten
         iAnzahl = pCity.getFreeSpecialistCount(19)
         pCity.setFreeSpecialistCount(19, 0)
-        for _ in range(iAnzahl):
+        for _ in xrange(iAnzahl):
             pPlot = rebelPlotArray[CvUtil.myRandom(len(rebelPlotArray), "doPartisansReservists")]
             pUnit = pPreviousOwner.initUnit(iUnitType, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
             iDamage = CvUtil.myRandom(25, "doPartisansReservistsDamage")
@@ -2720,7 +2720,7 @@ def doCaptureSlaves(pCity, iNewOwner, iPreviousOwner):
 
         iUnit = gc.getInfoTypeForString("UNIT_SLAVE")
         pPlot = pCity.plot()
-        for _ in range(iSlaves):
+        for _ in xrange(iSlaves):
             CvUtil.spawnUnit(iUnit, pPlot, pPlayer)
 
         if pPlayer.isHuman():
@@ -2814,7 +2814,7 @@ def doSettledSlavesAndReservists(pCity):
             # PAE V: stehende Sklaven werden zugewiesen
             bErsatz = False
             iRangePlotUnits = pCityPlot.getNumUnits()
-            for iUnit in range(iRangePlotUnits):
+            for iUnit in xrange(iRangePlotUnits):
                 pLoopUnit = pCityPlot.getUnit(iUnit)
                 if pLoopUnit.getOwner() == iPlayer and pLoopUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SLAVE"):
                     # pLoopUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
@@ -2884,7 +2884,7 @@ def doSettledSlavesAndReservists(pCity):
         # Units that prevent a revolt
         iPromoHero = gc.getInfoTypeForString('PROMOTION_HERO')
         iRangePlotUnits = pCityPlot.getNumUnits()
-        for iUnit in range(iRangePlotUnits):
+        for iUnit in xrange(iRangePlotUnits):
             pLoopUnit = pCityPlot.getUnit(iUnit)
             if pLoopUnit.isHasPromotion(iPromoHero):
                 iChance -= 25
@@ -2918,8 +2918,8 @@ def doSettledSlavesAndReservists(pCity):
                 # Einen guenstigen Plot auswaehlen
                 rebelPlotArray = []
                 rebelPlotArrayB = []
-                for i in range(3):
-                    for j in range(3):
+                for i in xrange(3):
+                    for j in xrange(3):
                         loopPlot = gc.getMap().plot(pCity.getX() + i - 1, pCity.getY() + j - 1)
                         if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                             if loopPlot.getOwner() == iPlayer:
@@ -2947,7 +2947,7 @@ def doSettledSlavesAndReservists(pCity):
                         iNumRebels2 = CvUtil.myRandom(iCitySlaves2 - 1, "Unsettled slaves2") + 1
                         iDone = 0
                         iRangePlotUnits = pCityPlot.getNumUnits()
-                        for iUnit in range(iRangePlotUnits):
+                        for iUnit in xrange(iRangePlotUnits):
                             pLoopUnit = pCityPlot.getUnit(iUnit)
                             if iDone < iNumRebels2 and pLoopUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SLAVE"):
                                 # pLoopUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
@@ -2994,7 +2994,7 @@ def doSettledSlavesAndReservists(pCity):
                     iNumRebels += iNumRebels2
 
                     if iNumRebels:
-                        for _ in range(iNumRebels):
+                        for _ in xrange(iNumRebels):
                             iPlot = CvUtil.myRandom(len(rebelPlotArray), "rebelPlotArray")
                             NewUnit = barbPlayer.initUnit(iUnitType, rebelPlotArray[iPlot].getX(), rebelPlotArray[iPlot].getY(), UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
                             NewUnit.setImmobileTimer(1)
@@ -3005,7 +3005,7 @@ def doSettledSlavesAndReservists(pCity):
                         doCityRevolt(pCity, iNumRebels + 1)
 
                         iRangeMaxPlayers = gc.getMAX_PLAYERS()
-                        for iLoopPlayer in range(iRangeMaxPlayers):
+                        for iLoopPlayer in xrange(iRangeMaxPlayers):
                             pLoopPlayer = gc.getPlayer(iLoopPlayer)
                             iLoopTeam = pLoopPlayer.getTeam()
                             pLoopTeam = gc.getTeam(iLoopTeam)
@@ -3035,7 +3035,7 @@ def doSettledSlavesAndReservists(pCity):
                 bRevolt = True
                 # Message to players
                 iRangeMaxPlayers = gc.getMAX_PLAYERS()
-                for iLoopPlayer in range(iRangeMaxPlayers):
+                for iLoopPlayer in xrange(iRangeMaxPlayers):
                     pLoopPlayer = gc.getPlayer(iLoopPlayer)
                     iLoopTeam = pLoopPlayer.getTeam()
                     pLoopTeam = gc.getTeam(iLoopTeam)
@@ -3196,13 +3196,13 @@ def catchGreatPeople(pCity, iNewOwner, iPreviousOwner, bAssimilation):
         fleePlotArray = []
         iX = pCity.getX()
         iY = pCity.getY()
-        for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+        for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
             loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
             if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isCity():
                 if not loopPlot.isPeak() and not loopPlot.isWater():
                     if loopPlot.getNumUnits() > 0:
                         iRange = loopPlot.getNumUnits()
-                        for n in range(iRange):
+                        for n in xrange(iRange):
                             if loopPlot.getUnit(n).getOwner() == iPreviousOwner:
                                 fleePlotArray.append(loopPlot)
                                 break
@@ -3214,11 +3214,11 @@ def catchGreatPeople(pCity, iNewOwner, iPreviousOwner, bAssimilation):
     bText = pNewOwner.isHuman()
     iNumFleePlots = len(fleePlotArray)
     bAlive = pPreviousOwner.isAlive()
-    for i in range(numGPTypes):
+    for i in xrange(numGPTypes):
         iCityGP = lNumGP[i]
         lUnit = lUnits[i]
         iNewUnit = lUnit[0]
-        for _ in range(iCityGP):
+        for _ in xrange(iCityGP):
             iRand = CvUtil.myRandom(10, "catchGreatPeople")
             if iRand < 5:
                 CvUtil.spawnUnit(iNewUnit, pCityPlot, pNewOwner)
@@ -3248,7 +3248,7 @@ def correctCityBuildings(pCity, pPlayer, pPreviousOwner):
     if pCity.isHasBuilding(iBuilding):
         pCity.setNumRealBuilding(iBuilding, 0)
     # Spezialgebaeude muessen raus, weil nicht die Building_X erobert werden, sondern die BuildingClass_X !!!
-    for i in range(9):
+    for i in xrange(9):
         iBuilding = gc.getCivilizationInfo(pPlayer.getCivilizationType()).getCivilizationBuildings(gc.getInfoTypeForString("BUILDINGCLASS_SPECIAL"+str(i+1)))
         if iBuilding is not None and iBuilding != -1:
             if pCity.isHasBuilding(iBuilding):
@@ -3278,8 +3278,8 @@ def correctCityBuildings(pCity, pPlayer, pPreviousOwner):
     else:
       iX = pCity.plot().getX()
       iY = pCity.plot().getY()
-      for i in range(3):
-        for j in range(3):
+      for i in xrange(3):
+        for j in xrange(3):
           loopPlot = gc.getMap().plot(iX + i - 1, iY + j - 1)
           if not loopPlot.isNone():
             if loopPlot.getRouteType() == iTradeRoad:
@@ -3435,7 +3435,7 @@ def getTechOnConquer(pCity, iPreviousOwner, iNewOwner):
         bGetTech = False  # falls es keine Tech gibt, dann Forschungsbonus
 
         TechArray = []
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
             if pTeamOld.isHasTech(i) and not pTeamNew.isHasTech(i):
                 if gc.getTechInfo(i) is not None and gc.getTechInfo(i).isTrade():
                     TechArray.append(i)
@@ -3494,7 +3494,7 @@ def getGoldkarren(pCity, pPlayer):
     if iPop == 1: iBeute = 1
     else: iBeute = iPop * 2
     if iBeute > 0:
-        for _ in range(iBeute):
+        for _ in xrange(iBeute):
             CvUtil.spawnUnit(gc.getInfoTypeForString("UNIT_GOLDKARREN"), pCity.plot(), pPlayer)
 
 def doRefugeeToNeighborCity(pCity, iPreviousOwner, iNewOwner):
@@ -3502,8 +3502,8 @@ def doRefugeeToNeighborCity(pCity, iPreviousOwner, iNewOwner):
     # --- PAE V Patch4: ab Pop 3 (sonst exploit)
     iX = pCity.getX()
     iY = pCity.getY()
-    for x in range(-5, 6):
-        for y in range(-5, 6):
+    for x in xrange(-5, 6):
+        for y in xrange(-5, 6):
             loopPlot = plotXY(iX, iY, x, y)
             if loopPlot is not None and not loopPlot.isNone():
                 if loopPlot.isCity():
@@ -3535,8 +3535,8 @@ def removeSwamp(pCity, sText):
     terrain_grass = gc.getInfoTypeForString("TERRAIN_GRASS")
     iX = pCity.getX()
     iY = pCity.getY()
-    for x in range(-1, 2):
-      for y in range(-1, 2):
+    for x in xrange(-1, 2):
+      for y in xrange(-1, 2):
         loopPlot = plotXY(iX, iY, x, y)
         if loopPlot is not None and not loopPlot.isNone():
             if loopPlot.getTerrainType() == terrain_swamp:
@@ -3562,13 +3562,13 @@ def doCheckCapital(pCity):
 def doMessageWonderCapture(pCity):
     iOwner = pCity.getOwner()
     if pCity.getNumWorldWonders() > 0:
-        for i in range(gc.getNumBuildingInfos()):
+        for i in xrange(gc.getNumBuildingInfos()):
             eLoopBuilding = gc.getBuildingInfo(i)
             if pCity.isHasBuilding(i):
                 eBuildingClass = gc.getBuildingClassInfo(eLoopBuilding.getBuildingClassType())
                 if eBuildingClass.getMaxGlobalInstances() == 1:
                     pPlayer = gc.getPlayer(iOwner)
-                    for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+                    for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
                         pLoopPlayer = gc.getPlayer(iLoopPlayer)
                         pLoopTeam = gc.getTeam(pLoopPlayer.getTeam())
                         if pLoopTeam.isHasMet(pPlayer.getTeam()) and pLoopPlayer.isHuman():
@@ -3631,10 +3631,10 @@ def doCheckCityName(pCity):
           bRename = True
           # check cities
           iNumPlayers = gc.getMAX_PLAYERS()
-          for iPlayer in range (iNumPlayers):
+          for iPlayer in xrange (iNumPlayers):
             pPlayer = gc.getPlayer(iPlayer)
             iNumCities = pPlayer.getNumCities()
-            for iCity in range (iNumCities):
+            for iCity in xrange (iNumCities):
               if pPlayer.getCity(iCity).getName() == cityName:
                 bRename = False
                 break # for iCity
@@ -3660,7 +3660,7 @@ def getRangeCut(string):
             iDiff *= -1
         xyRange = []
         xyRange.append(iBegin)
-        for i in range(iDiff):
+        for i in xrange(iDiff):
             iBegin += 1
             xyRange.append(iBegin)
         return xyRange
@@ -3668,7 +3668,7 @@ def getRangeCut(string):
     # if "-" not in string:
     #     return [int(string)]
     # else:
-    #     for i in range(len(string)):
+    #     for i in xrange(len(string)):
     #         if string[i] == "-":
     #             iPos = i
     #             break
@@ -3679,7 +3679,7 @@ def getRangeCut(string):
     #         iDiff *= -1
     #     xyRange = []
     #     xyRange.append(iBegin)
-    #     for i in range (iDiff):
+    #     for i in xrange (iDiff):
     #         iBegin += 1
     #         xyRange.append(iBegin)
     #     return xyRange
@@ -3856,7 +3856,7 @@ def doCivilWarHarmUnits(pCity):
     pPlot = pCity.plot()
     lUnits = []
     # Einheiten verletzen
-    for i in range(pPlot.getNumUnits()):
+    for i in xrange(pPlot.getNumUnits()):
       pUnit = pPlot.getUnit(i)
       if pUnit.getOwner() == iPlayer and pUnit.isMilitaryHappiness():
 
@@ -3876,7 +3876,7 @@ def doPanhellenismus(iPlayer):
     pPlayer = gc.getPlayer(iPlayer)
     iCorp = gc.getInfoTypeForString("CORPORATION_7")
     iRange = pPlayer.getNumCities()
-    for _ in range(iRange):
+    for _ in xrange(iRange):
       pCity = pPlayer.getCity(_)
       if pCity is not None and not pCity.isNone():
         if not pCity.isHasCorporation(iCorp):
@@ -3885,14 +3885,14 @@ def doPanhellenismus(iPlayer):
     iHegemonTeam = pPlayer.getTeam()
     #pHegemonTeam = gc.getTeam(iHegemonTeam)
     iRange = gc.getMAX_PLAYERS()
-    for _ in range(iRange):
+    for _ in xrange(iRange):
       pLoopPlayer = gc.getPlayer(_)
       if pLoopPlayer.isAlive():
         iTeam = pLoopPlayer.getTeam()
         pTeam = gc.getTeam(iTeam)
         if pTeam.isVassal(iHegemonTeam):
           iRange = pLoopPlayer.getNumCities()
-          for _ in range(iRange):
+          for _ in xrange(iRange):
             pCity = pLoopPlayer.getCity(_)
             if pCity is not None and not pCity.isNone():
               if not pCity.isHasCorporation(iCorp):

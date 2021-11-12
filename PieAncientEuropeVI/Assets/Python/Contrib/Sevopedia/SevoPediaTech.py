@@ -107,7 +107,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_CIV", ()), "", False, True, self.X_CIVS, self.Y_CIVS, self.W_CIVS, self.H_CIVS, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
-		for iCiv in range(gc.getNumCivilizationInfos()):
+		for iCiv in xrange(gc.getNumCivilizationInfos()):
 			civ = gc.getCivilizationInfo(iCiv)
 			if civ.isCivilizationFreeTechs(self.iTech):
 				screen.attachImageButton(panelName, "", civ.getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, iCiv, 1, False)
@@ -121,12 +121,12 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		screen.addPanel(panelName, szLeadsTo, "", False, True, self.X_LEADS_TO_PANE, self.Y_LEADS_TO_PANE, self.W_LEADS_TO_PANE, self.H_LEADS_TO_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
 
-		for j in range(gc.getNumTechInfos()):
-			for k in range(gc.getNUM_OR_TECH_PREREQS()):
+		for j in xrange(gc.getNumTechInfos()):
+			for k in xrange(gc.getNUM_OR_TECH_PREREQS()):
 				iPrereq = gc.getTechInfo(j).getPrereqOrTechs(k)
 				if (iPrereq == self.iTech):
 					screen.attachImageButton(panelName, "", gc.getTechInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_DERIVED_TECH, j, self.iTech, False)
-			for k in range(gc.getNUM_AND_TECH_PREREQS()):
+			for k in xrange(gc.getNUM_AND_TECH_PREREQS()):
 				iPrereq = gc.getTechInfo(j).getPrereqAndTechs(k)
 				if (iPrereq == self.iTech):
 					screen.attachImageButton(panelName, "", gc.getTechInfo(j).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_DERIVED_TECH, j, self.iTech, False)
@@ -140,7 +140,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		screen.addPanel(panelName, szRequires, "", False, True, self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
 		bFirst = True
-		for j in range(gc.getNUM_AND_TECH_PREREQS()):
+		for j in xrange(gc.getNUM_AND_TECH_PREREQS()):
 			eTech = gc.getTechInfo(self.iTech).getPrereqAndTechs(j)
 			if (eTech > -1):
 				if (not bFirst):
@@ -149,7 +149,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 					bFirst = False
 				screen.attachImageButton(panelName, "", gc.getTechInfo(eTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_REQUIRED_TECH, eTech, j, False)
 		nOrTechs = 0
-		for j in range(gc.getNUM_OR_TECH_PREREQS()):
+		for j in xrange(gc.getNUM_OR_TECH_PREREQS()):
 			if (gc.getTechInfo(self.iTech).getPrereqOrTechs(j) > -1):
 				nOrTechs += 1
 		szLeftDelimeter = ""
@@ -165,7 +165,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		if len(szLeftDelimeter) > 0:
 			screen.attachLabel(panelName, "", szLeftDelimeter)
 		bFirst = True
-		for j in range(gc.getNUM_OR_TECH_PREREQS()):
+		for j in xrange(gc.getNUM_OR_TECH_PREREQS()):
 			eTech = gc.getTechInfo(self.iTech).getPrereqOrTechs(j)
 			if (eTech > -1):
 				if (not bFirst):
@@ -183,7 +183,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_UNITS_ENABLED", ()), "", False, True, self.X_UNIT_PANE, self.Y_UNIT_PANE, self.W_UNIT_PANE, self.H_UNIT_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
-		for eLoopUnit in range(gc.getNumUnitInfos()):
+		for eLoopUnit in xrange(gc.getNumUnitInfos()):
 			if (eLoopUnit != -1):
 				if (isTechRequiredForUnit(self.iTech, eLoopUnit)):
 					screen.attachImageButton(panelName, "", gc.getUnitInfo(eLoopUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False)
@@ -195,12 +195,12 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_BUILDINGS_ENABLED", ()), "", False, True, self.X_BUILDING_PANE, self.Y_BUILDING_PANE, self.W_BUILDING_PANE, self.H_BUILDING_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
-		for eLoopBuilding in range(gc.getNumBuildingInfos()):
+		for eLoopBuilding in xrange(gc.getNumBuildingInfos()):
 			if (eLoopBuilding != -1):
 				if (isTechRequiredForBuilding(self.iTech, eLoopBuilding)):
 						screen.attachImageButton(panelName, "", gc.getBuildingInfo(eLoopBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoopBuilding, 1, False)
 						
-		for eLoopProject in range(gc.getNumProjectInfos()):
+		for eLoopProject in xrange(gc.getNumProjectInfos()):
 			if (isTechRequiredForProject(self.iTech, eLoopProject)):
 				screen.attachImageButton(panelName, "", gc.getProjectInfo(eLoopProject).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, eLoopProject, 1, False)
 

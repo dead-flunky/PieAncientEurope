@@ -4,29 +4,63 @@
 # all changes have to be done in the CvEventManager.
 # This file just has to be in the same folder like the CvEventManager.py.
 
-from CvPythonExtensions import *
-import sys
-import CvUtil
+from CvPythonExtensions import (CyGlobalContext, CyMap,
+                                UnitAITypes, DirectionTypes,
+                                CyEngine)
+
+
+# import sys
+# import CvUtil
 gc = CyGlobalContext()
 SpawnCivList = []
 BarbCityList = []
 UsedValidCivList = []
 
-# place barbarian cities
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
+
 def PlaceBarbarianCities(BarbCityList, Debugging):
+    """
+    place barbarian cities
+
+    Parameters
+    ----------
+    BarbCityList : array-like
+        DESCRIPTION.
+    Debugging : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+
+    """
+
     pBarb = gc.getPlayer(gc.getBARBARIAN_PLAYER())
+    eWarrior = gc.getInfoTypeForString("UNIT_WARRIOR")
     for BarbCity in BarbCityList:
         iX = BarbCity.CityX
         iY = BarbCity.CityY
         pCity = pBarb.initCity(iX, iY)
         pCity.setName(BarbCity.CityName, 0)
         pCity.setPopulation(BarbCity.CityPopulation)
-        eWarrior = gc.getInfoTypeForString("UNIT_WARRIOR")
-        for i in range(BarbCity.CityNumDefenders):
+        for _ in xrange(BarbCity.CityNumDefenders):
             pBarb.initUnit(eWarrior, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
 
-# makes the old starting positions invisible for the teams
+
 def FlushVisibleArea():
+    """
+    makes the old starting positions invisible for the teams
+
+    Returns
+    -------
+    None.
+
+    """
+
     iMaxX = CyMap().getGridWidth()
     iMaxY = CyMap().getGridHeight()
     iMaxTeam = gc.getMAX_CIV_TEAMS()
@@ -37,28 +71,50 @@ def FlushVisibleArea():
                 if not pPlot.isVisible(iTeams, False):
                     pPlot.setRevealed(iTeams, False, False, iTeams)
 
-# adds signs with the coordinates to the map
-# so that potential starting positions can easier be modified
+
 def AddCoordinateSignsToMap():
-    iMaxX = CyMap().getGridWidth()
-    iMaxY = CyMap().getGridHeight()
-    iMaxPlayer = gc.getMAX_CIV_PLAYERS()
+    """
+    adds signs with the coordinates to the map so that potential starting positions can easier be modified
+
+    Returns
+    -------
+    None.
+
+    """
+
     iHumanPlayer = -1
-    for iCivs in xrange(iMaxPlayer):
+    for iCivs in xrange(gc.getMAX_CIV_PLAYERS()):
         pPlayer = gc.getPlayer(iCivs)
         if pPlayer.isHuman():
             iHumanPlayer = iCivs
             break
-    for iX in xrange(iMaxX):
-        for iY in xrange(iMaxY):
+    for iX in xrange(CyMap().getGridWidth()):
+        for iY in xrange(CyMap().getGridHeight()):
             pPlot = CyMap().plot(iX, iY)
             PrintString = "X = "+str(iX)+" Y = "+str(iY)
             CyEngine().addSign(pPlot, iHumanPlayer, PrintString)
 
-# generic string cutting function
-# first < and > at the end are cut of, then the other
-# > and < are searched, and what is between is used as value
+
 def CutString(string):
+    """
+    generic string cutting function
+    first < and > at the end are cut of, then the other
+    > and < are searched, and what is between is used as value
+
+    Parameters
+    ----------
+    string : string
+        String starting with < and ending with >.
+
+    Returns
+    -------
+    string
+        Part of the input string between the first pair of '<' and '>'
+        inside the outermost.
+
+    """
+    #
+
     string = str(string)
     string = string.strip()
     string = string[2:-1]
@@ -75,12 +131,14 @@ def CutString(string):
     NewString = string[BeginPos+1:EndPos]
     return str(NewString)
 
+
 class SpawningCiv:
     def __init__(self):
         self.CivString = 0
         self.SpawnX = []
         self.SpawnY = []
         self.timesUsed = 0
+
 
 class BarbarianCity:
     def __init__(self):

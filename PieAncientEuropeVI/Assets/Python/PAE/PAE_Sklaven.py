@@ -1,7 +1,7 @@
 # Trade and Cultivation feature
 # From Flunky
 
-### Imports
+# Imports
 from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
                                 CyTranslator, DirectionTypes, plotDirection,
                                 ColorTypes, UnitAITypes, CyPopupInfo,
@@ -11,13 +11,13 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
 import CvUtil
 import PAE_Lists as L
 
-### Defines
+# Defines
 gc = CyGlobalContext()
 localText = CyTranslator()
-### Globals
-bInitialised = False # Whether global variables are already initialised
+# Globals
+bInitialised = False  # Whether global variables are already initialised
 
-### Constants
+# Constants
 iSchoolResearch = 2
 iMaxSchoolResearch = 10
 iLibraryResearch = 2
@@ -28,8 +28,8 @@ iTheatreCulture = 2
 iMaxTheatreCulture = 10
 iManufakturProd = 1
 iMaxManufakturProd = 5
-iManufakturFood = 1 # disabled
-iMaxManufakturFood = 5 # disabled
+iManufakturFood = 1  # disabled
+iMaxManufakturFood = 5  # disabled
 iBrotmanufaktur = 1
 iMaxBrotmanufaktur = 3
 iPalaceCulture = 1
@@ -37,6 +37,7 @@ iTempleCulture = 1
 iTempleCultureKRE = 3
 iFeuerwehrHappy = 1
 iMaxFeuerwehrHappy = 3
+
 
 def onModNetMessage(iData1, iData2, iData3, iData4, iData5):
     pPlot = CyMap().plot(iData2, iData3)
@@ -146,6 +147,8 @@ def doSlave2Theatre(pCity, pUnit):
     return False
 
 # Slave -> Manufaktur , doProduction: 0 = Nahrung; 1 = Produktion
+
+
 def doSlave2Manufaktur(pCity, pUnit, doProduction):
     iBuilding = gc.getInfoTypeForString("BUILDING_CORP3")
     if pCity.isHasBuilding(iBuilding):
@@ -170,6 +173,8 @@ def doSlave2Manufaktur(pCity, pUnit, doProduction):
     return False
 
 # Slave -> Brotmanufaktur , gibt generell 2 Food. Slaves -> +1 food, max 5 food
+
+
 def doSlave2Brotmanufaktur(pCity, pUnit):
     iBuilding = gc.getInfoTypeForString("BUILDING_BROTMANUFAKTUR")
     if pCity.isHasBuilding(iBuilding):
@@ -189,6 +194,8 @@ def doSlave2Brotmanufaktur(pCity, pUnit):
     return False
 
 # Slave -> Palace
+
+
 def doSlave2Palace(pCity, pUnit):
     iBuilding = gc.getInfoTypeForString("BUILDING_PALACE")
     if pCity.isHasBuilding(iBuilding):
@@ -204,6 +211,8 @@ def doSlave2Palace(pCity, pUnit):
     return False
 
 # Slave -> Temple
+
+
 def doSlave2Temple(pCity, pUnit):
     TempleArray = []
     for iTemple in L.LTemples:
@@ -228,6 +237,8 @@ def doSlave2Temple(pCity, pUnit):
     return False
 
 # Slave -> Feuerwehr
+
+
 def doSlave2Feuerwehr(pCity, pUnit):
     iBuilding1 = gc.getInfoTypeForString("BUILDING_FEUERWEHR")
     if pCity.isHasBuilding(iBuilding1):
@@ -246,8 +257,10 @@ def dyingBuildingSlave(pCity):
     pPlayer = gc.getPlayer(iPlayer)
 
     iReduceChance = 0
-    if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_MEDICINE3")): iReduceChance += 2
-    if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_ANATOMIE")):  iReduceChance += 2
+    if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_MEDICINE3")):
+        iReduceChance += 2
+    if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_ANATOMIE")):
+        iReduceChance += 2
 
     # Bordell / House of pleasure / Freudenhaus
     iBuilding1 = gc.getInfoTypeForString("BUILDING_BORDELL")
@@ -261,7 +274,8 @@ def dyingBuildingSlave(pCity):
                 iCulture -= iBordellCulture
                 pCity.setBuildingCommerceChange(eBuildingClass, CommerceTypes.COMMERCE_CULTURE, iCulture)
                 if pPlayer.isHuman():
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_BORDELL_SLAVES", (pCity.getName(), "")), None, 2, "Art/Interface/Buttons/Builds/button_bordell.dds", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_BORDELL_SLAVES", (pCity.getName(), "")),
+                                             None, 2, "Art/Interface/Buttons/Builds/button_bordell.dds", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
                 # ***TEST***
                 #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Freudemaus verschwunden (Zeile 259)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -278,7 +292,8 @@ def dyingBuildingSlave(pCity):
                 iResearch -= iSchoolResearch
                 pCity.setBuildingCommerceChange(eBuildingClass, CommerceTypes.COMMERCE_RESEARCH, iResearch)
                 if pPlayer.isHuman():
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SCHULE_SLAVES", (pCity.getName(), "")), None, 2, "Art/Interface/Buttons/Builds/button_schule.dds", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SCHULE_SLAVES", (pCity.getName(), "")),
+                                             None, 2, "Art/Interface/Buttons/Builds/button_schule.dds", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
             # ***TEST***
             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Lehrer verschwunden (Zeile 276)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -292,10 +307,11 @@ def dyingBuildingSlave(pCity):
             # chance of losing a slave (8%)
             iChance = 8 - iReduceChance
             if iChance > CvUtil.myRandom(100, "dyingBuildingSlaveBUILDING_BROTMANUFAKTUR"):
-                    iFood -= iBrotmanufaktur
-                    pCity.setBuildingYieldChange(eBuildingClass, YieldTypes.YIELD_FOOD, iFood)
-                    if pPlayer.isHuman():
-                        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MANUFAKTUR_SLAVES_FOOD", (pCity.getName(), "Art/Interface/Buttons/Buildings/button_manufaktur_brot.dds")), None, 2, "", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                iFood -= iBrotmanufaktur
+                pCity.setBuildingYieldChange(eBuildingClass, YieldTypes.YIELD_FOOD, iFood)
+                if pPlayer.isHuman():
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MANUFAKTUR_SLAVES_FOOD", (pCity.getName(),
+                                                                                                                                  "Art/Interface/Buttons/Buildings/button_manufaktur_brot.dds")), None, 2, "", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
                 # ***TEST***
                 #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Brotmanufakturist draufgegangen (Zeile 293)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -314,12 +330,14 @@ def dyingBuildingSlave(pCity):
                     iProd -= iManufakturProd
                     pCity.setBuildingYieldChange(eBuildingClass, YieldTypes.YIELD_PRODUCTION, iProd)
                     if pPlayer.isHuman():
-                        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MANUFAKTUR_SLAVES_PROD", (pCity.getName(), "Art/Interface/Buttons/Corporations/button_manufaktur.dds")), None, 2, "", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MANUFAKTUR_SLAVES_PROD", (pCity.getName(),
+                                                                                                                                      "Art/Interface/Buttons/Corporations/button_manufaktur.dds")), None, 2, "", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
                 else:
                     iFood -= iManufakturFood
                     pCity.setBuildingYieldChange(eBuildingClass, YieldTypes.YIELD_FOOD, iFood)
                     if pPlayer.isHuman():
-                        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MANUFAKTUR_SLAVES_FOOD", (pCity.getName(), "Art/Interface/Buttons/Corporations/button_manufaktur.dds")), None, 2, "", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MANUFAKTUR_SLAVES_FOOD", (pCity.getName(),
+                                                                                                                                      "Art/Interface/Buttons/Corporations/button_manufaktur.dds")), None, 2, "", ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
                 # ***TEST***
                 #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Manufakturist draufgegangen (Zeile 317)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -336,7 +354,8 @@ def dyingBuildingSlave(pCity):
                 iCulture -= iPalaceCulture
                 pCity.setBuildingCommerceChange(eBuildingClass, CommerceTypes.COMMERCE_CULTURE, iCulture)
                 if pPlayer.isHuman():
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE2PALACE_LOST", (pCity.getName(), "")), None, 2, gc.getBuildingInfo(iBuilding).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE2PALACE_LOST", (pCity.getName(), "")),
+                                             None, 2, gc.getBuildingInfo(iBuilding).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
                 # ***TEST***
                 #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Palastsklave verschwunden (Zeile 334)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -356,19 +375,20 @@ def dyingBuildingSlave(pCity):
                 TempleArray.append(iTemple)
 
     if len(TempleArray):
-      # chance of losing a slave (8%)
-      iChance = 8 - iReduceChance
-      if iChance > CvUtil.myRandom(100, "dyingBuildingSlaveBUILDING_TEMPLE"):
-        iBuilding = TempleArray[CvUtil.myRandom(len(TempleArray), "which temple")]
-        eBuildingClass = gc.getBuildingInfo(iBuilding).getBuildingClassType()
-        iCulture = pCity.getBuildingCommerceChange(eBuildingClass, CommerceTypes.COMMERCE_CULTURE)
-        iCulture -= iCultureSlave
-        pCity.setBuildingCommerceChange(eBuildingClass, CommerceTypes.COMMERCE_CULTURE, iCulture)
-        if pPlayer.isHuman():
-            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE2TEMPLE_LOST", (pCity.getName(), "")), None, 2, gc.getBuildingInfo(iBuilding).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+        # chance of losing a slave (8%)
+        iChance = 8 - iReduceChance
+        if iChance > CvUtil.myRandom(100, "dyingBuildingSlaveBUILDING_TEMPLE"):
+            iBuilding = TempleArray[CvUtil.myRandom(len(TempleArray), "which temple")]
+            eBuildingClass = gc.getBuildingInfo(iBuilding).getBuildingClassType()
+            iCulture = pCity.getBuildingCommerceChange(eBuildingClass, CommerceTypes.COMMERCE_CULTURE)
+            iCulture -= iCultureSlave
+            pCity.setBuildingCommerceChange(eBuildingClass, CommerceTypes.COMMERCE_CULTURE, iCulture)
+            if pPlayer.isHuman():
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE2TEMPLE_LOST", (pCity.getName(), "")),
+                                         None, 2, gc.getBuildingInfo(iBuilding).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
-        # ***TEST***
-        #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Tempelsklave verschwunden (Zeile 361)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+            # ***TEST***
+            #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Tempelsklave verschwunden (Zeile 361)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
     # Feuerwehr
     iBuilding = gc.getInfoTypeForString("BUILDING_FEUERWEHR")
@@ -382,10 +402,12 @@ def dyingBuildingSlave(pCity):
                 iHappiness -= iFeuerwehrHappy
                 pCity.setBuildingHappyChange(eBuildingClass, iHappiness)
                 if pPlayer.isHuman():
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE2FEUERWEHR_LOST", (pCity.getName(), "")), None, 2, gc.getBuildingInfo(iBuilding).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE2FEUERWEHR_LOST", (pCity.getName(), "")),
+                                             None, 2, gc.getBuildingInfo(iBuilding).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
               # ***TEST***
               #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Palastsklave verschwunden (Zeile 377)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+
 
 def doReleaseSlaves(pPlayer, pCity, iData5):
     eSpecialistGlad = gc.getInfoTypeForString("SPECIALIST_GLADIATOR")
@@ -451,35 +473,39 @@ def doReleaseSlaves(pPlayer, pCity, iData5):
         NewUnit.finishMoves()
     # PopUp
     if iData5 != -1 or bPopUp:
-      # Dies soll doppelte Popups in PB-Spielen vermeiden.
-      if pCity.getOwner() == gc.getGame().getActivePlayer():
-        # PopUp
-        popupInfo = CyPopupInfo()
-        popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-        popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_RELEASE_SLAVES", (pCity.getName(), iCityGlads + iCitySlaves)))
-        popupInfo.setData1(pCity.getID()) # CityID
-        popupInfo.setData2(pCity.getOwner()) # iPlayer
-        popupInfo.setOnClickedPythonCallback("popupReleaseSlaves")
+        # Dies soll doppelte Popups in PB-Spielen vermeiden.
+        if pCity.getOwner() == gc.getGame().getActivePlayer():
+            # PopUp
+            popupInfo = CyPopupInfo()
+            popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
+            popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_RELEASE_SLAVES",
+                              (pCity.getName(), iCityGlads + iCitySlaves)))
+            popupInfo.setData1(pCity.getID())  # CityID
+            popupInfo.setData2(pCity.getOwner())  # iPlayer
+            popupInfo.setOnClickedPythonCallback("popupReleaseSlaves")
 
-        # Button 0: Gladiatoren
-        szText = localText.getText("TXT_KEY_UNIT_GLADIATOR", ()) + " (" + str(iCityGlads) + ")"
-        popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistGlad).getButton())
-        # Button 1: Haussklaven
-        szText = localText.getText("TXT_KEY_UNIT_SLAVE_HAUS", ()) + " (" + str(iCitySlavesHaus) + ")"
-        popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistHouse).getButton())
-        # Button 2: Feldsklaven
-        szText = localText.getText("TXT_KEY_UNIT_SLAVE_FOOD", ()) + " (" + str(iCitySlavesFood) + ")"
-        popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistFood).getButton())
-        # Button 3: Bergwerksklaven
-        szText = localText.getText("TXT_KEY_UNIT_SLAVE_PROD", ()) + " (" + str(iCitySlavesProd) + ")"
-        popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistProd).getButton())
+            # Button 0: Gladiatoren
+            szText = localText.getText("TXT_KEY_UNIT_GLADIATOR", ()) + " (" + str(iCityGlads) + ")"
+            popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistGlad).getButton())
+            # Button 1: Haussklaven
+            szText = localText.getText("TXT_KEY_UNIT_SLAVE_HAUS", ()) + " (" + str(iCitySlavesHaus) + ")"
+            popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistHouse).getButton())
+            # Button 2: Feldsklaven
+            szText = localText.getText("TXT_KEY_UNIT_SLAVE_FOOD", ()) + " (" + str(iCitySlavesFood) + ")"
+            popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistFood).getButton())
+            # Button 3: Bergwerksklaven
+            szText = localText.getText("TXT_KEY_UNIT_SLAVE_PROD", ()) + " (" + str(iCitySlavesProd) + ")"
+            popupInfo.addPythonButton(szText, gc.getSpecialistInfo(eSpecialistProd).getButton())
 
-        # Cancel button
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
-        popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
-        popupInfo.addPopup(pCity.getOwner())
+            # Cancel button
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                      "Art/Interface/Buttons/Actions/Cancel.dds")
+            popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
+            popupInfo.addPopup(pCity.getOwner())
 
 # Entferne Sklaven aus der Stadt / unset city slaves
+
+
 def doEnslaveCity(pCity):
     # temple slaves => 0
     for iTemple in L.LTemples:
@@ -513,6 +539,7 @@ def doEnslaveCity(pCity):
     pCity.setFreeSpecialistCount(14, 0)
     # -----------------
 
+
 def doSell(iPlayer, iUnit):
     pPlayer = gc.getPlayer(iPlayer)
     pUnit = pPlayer.getUnit(iUnit)
@@ -520,13 +547,15 @@ def doSell(iPlayer, iUnit):
     pPlayer.changeGold(iGold)
     gc.getPlayer(gc.getBARBARIAN_PLAYER()).changeGold(iGold)
     if pPlayer.isHuman():
-        CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_BUTTON_SELL_SLAVE_SOLD", (iGold,)), None, InterfaceMessageTypes.MESSAGE_TYPE_INFO, "Art/Interface/Buttons/Units/button_slave.dds", ColorTypes(8), pUnit.getX(), pUnit.getY(), True, True)
+        CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_BUTTON_SELL_SLAVE_SOLD", (iGold,)), None,
+                                 InterfaceMessageTypes.MESSAGE_TYPE_INFO, "Art/Interface/Buttons/Units/button_slave.dds", ColorTypes(8), pUnit.getX(), pUnit.getY(), True, True)
     pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
     # pUnit.kill(True, -1)  # RAMK_CTD
 
-
   ##############
 # AI: Release slaves when necessary (eg city shrinks)
+
+
 def doAIReleaseSlaves(pCity):
     # Inits
     iCityPop = pCity.getPopulation()
@@ -534,10 +563,10 @@ def doAIReleaseSlaves(pCity):
     eSpecialistHouse = gc.getInfoTypeForString("SPECIALIST_SLAVE")
     eSpecialistFood = gc.getInfoTypeForString("SPECIALIST_SLAVE_FOOD")
     eSpecialistProd = gc.getInfoTypeForString("SPECIALIST_SLAVE_PROD")
-    iCityGlads = pCity.getFreeSpecialistCount(eSpecialistGlad) # SPECIALIST_GLADIATOR
-    iCitySlavesHaus = pCity.getFreeSpecialistCount(eSpecialistHouse) # SPECIALIST_SLAVE
-    iCitySlavesFood = pCity.getFreeSpecialistCount(eSpecialistFood) # SPECIALIST_SLAVE_FOOD
-    iCitySlavesProd = pCity.getFreeSpecialistCount(eSpecialistProd) # SPECIALIST_SLAVE_PROD
+    iCityGlads = pCity.getFreeSpecialistCount(eSpecialistGlad)  # SPECIALIST_GLADIATOR
+    iCitySlavesHaus = pCity.getFreeSpecialistCount(eSpecialistHouse)  # SPECIALIST_SLAVE
+    iCitySlavesFood = pCity.getFreeSpecialistCount(eSpecialistFood)  # SPECIALIST_SLAVE_FOOD
+    iCitySlavesProd = pCity.getFreeSpecialistCount(eSpecialistProd)  # SPECIALIST_SLAVE_PROD
     iCitySlaves = iCitySlavesHaus + iCitySlavesFood + iCitySlavesProd + iCityGlads
 
     if iCityPop >= iCitySlaves:
@@ -563,7 +592,7 @@ def doAIReleaseSlaves(pCity):
             iSpezi = eSpecialistProd
             iCitySlavesProd -= 1
         # 3rd prio: food
-        else: #iCitySlavesFood > 0:
+        else:  # iCitySlavesFood > 0:
             iSpezi = eSpecialistFood
             iCitySlavesFood -= 1
 
@@ -571,7 +600,6 @@ def doAIReleaseSlaves(pCity):
         NewUnit.finishMoves()
         pCity.changeFreeSpecialistCount(iSpezi, -1)
         iCitySlaves -= 1
-
 
 
 # Feldsklaven und Minensklaven checken
@@ -591,17 +619,20 @@ def doCheckSlavesAfterPillage(pUnit, pPlot):
         bFarms = False
         bMines = False
 
-        for iI in range(gc.getNUM_CITY_PLOTS()):
+        for iI in xrange(gc.getNUM_CITY_PLOTS()):
             loopPlot = pCity.getCityIndexPlot(iI)
             # die beste position finden:
             if loopPlot is not None and not loopPlot.isNone():
                 if not loopPlot.isWater():
                     # Plot besetzt?
                     if pCity.canWork(loopPlot):
-                        if loopPlot.getImprovementType() in L.LFarms:   bFarms = True
-                        elif loopPlot.getImprovementType() in L.LMines: bMines = True
+                        if loopPlot.getImprovementType() in L.LFarms:
+                            bFarms = True
+                        elif loopPlot.getImprovementType() in L.LMines:
+                            bMines = True
                         # Schleife vorzeitig beenden
-                        if bFarms and bMines: break
+                        if bFarms and bMines:
+                            break
 
         iSlaves = 0
         # Feldsklaven checken
@@ -619,7 +650,7 @@ def doCheckSlavesAfterPillage(pUnit, pPlot):
             lFluchtPlots = []
             iX = pPlot.getX()
             iY = pPlot.getY()
-            for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+            for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                 loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
                 if loopPlot is not None and not loopPlot.isNone():
                     if not loopPlot.isWater() and not loopPlot.isPeak() and not loopPlot.isUnit():
@@ -628,7 +659,7 @@ def doCheckSlavesAfterPillage(pUnit, pPlot):
                 lFluchtPlots = [pCity]
 
             pBarbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
-            for _ in range(iSlaves):
+            for _ in xrange(iSlaves):
                 iRand = CvUtil.myRandom(len(lFluchtPlots), "flee_slaves")
                 # gc.getBARBARIAN_PLAYER() statt pCity.getOwner()
                 CvUtil.spawnUnit(iUnitSlave, lFluchtPlots[iRand], pBarbPlayer)
@@ -636,10 +667,13 @@ def doCheckSlavesAfterPillage(pUnit, pPlot):
             # Meldung
             if pUnit.getOwner() == gc.getGame().getActivePlayer() or pCity.getOwner() == gc.getGame().getActivePlayer():
                 szButton = ",Art/Interface/Buttons/Actions/Pillage.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,2"
-                CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_PILLAGE_SLAVES", (pCity.getName(),)), None, 2, szButton, ColorTypes(10), pPlot.getX(), pPlot.getY(), True, True)
+                CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_PILLAGE_SLAVES",
+                                                                                                          (pCity.getName(),)), None, 2, szButton, ColorTypes(10), pPlot.getX(), pPlot.getY(), True, True)
+
 
 def freeSlaves(pCity, pPlayer):
-    iCitySlaves = pCity.getFreeSpecialistCount(gc.getInfoTypeForString("SPECIALIST_SLAVE")) + pCity.getFreeSpecialistCount(gc.getInfoTypeForString("SPECIALIST_SLAVE_FOOD")) + pCity.getFreeSpecialistCount(gc.getInfoTypeForString("SPECIALIST_SLAVE_PROD"))
+    iCitySlaves = pCity.getFreeSpecialistCount(gc.getInfoTypeForString("SPECIALIST_SLAVE")) + pCity.getFreeSpecialistCount(
+        gc.getInfoTypeForString("SPECIALIST_SLAVE_FOOD")) + pCity.getFreeSpecialistCount(gc.getInfoTypeForString("SPECIALIST_SLAVE_PROD"))
     iCityGlads = pCity.getFreeSpecialistCount(gc.getInfoTypeForString("SPECIALIST_GLADIATOR"))
 
     iFreedSlaves = iCitySlaves + iCityGlads
@@ -653,58 +687,58 @@ def freeSlaves(pCity, pPlayer):
         # 4 = Late Antike
         lUnits = []
         if pPlayer.getCurrentEra() > 2:
-          lUnits = [
-            [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
-            [gc.getInfoTypeForString('UNIT_WARBAND'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_ARVERNER'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_SPARTA_1'), UnitAITypes.UNITAI_COUNTER],
-            [gc.getInfoTypeForString('UNIT_GEPANZERTER_ASSYRIA'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_PHILISTER'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_AXEMAN2'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_CELTIC_GALLIC_WARRIOR'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_HOPLIT'), UnitAITypes.UNITAI_COUNTER],
-            [gc.getInfoTypeForString('UNIT_HOPLIT_ILLYRIA'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_BELGIER'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_HYPASPIST'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_BERGKRIEGER'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_THRAKIEN_WARRIOR'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_MARS'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_SPEARMAN_GERMAN'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_REFLEX_ARCHER'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_ARCHER_KRETA'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_THRAKIEN_PELTAST'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_GERMANNE'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_UNSTERBLICH'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_SOLDURII'), UnitAITypes.UNITAI_ATTACK]
-          ]
+            lUnits = [
+                [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
+                [gc.getInfoTypeForString('UNIT_WARBAND'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_ARVERNER'), UnitAITypes.UNITAI_CITY_DEFENSE],
+                [gc.getInfoTypeForString('UNIT_SPARTA_1'), UnitAITypes.UNITAI_COUNTER],
+                [gc.getInfoTypeForString('UNIT_GEPANZERTER_ASSYRIA'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_PHILISTER'), UnitAITypes.UNITAI_CITY_DEFENSE],
+                [gc.getInfoTypeForString('UNIT_AXEMAN2'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_CELTIC_GALLIC_WARRIOR'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_HOPLIT'), UnitAITypes.UNITAI_COUNTER],
+                [gc.getInfoTypeForString('UNIT_HOPLIT_ILLYRIA'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_BELGIER'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_HYPASPIST'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_BERGKRIEGER'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_THRAKIEN_WARRIOR'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_MARS'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_SPEARMAN_GERMAN'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_REFLEX_ARCHER'), UnitAITypes.UNITAI_CITY_DEFENSE],
+                [gc.getInfoTypeForString('UNIT_ARCHER_KRETA'), UnitAITypes.UNITAI_CITY_DEFENSE],
+                [gc.getInfoTypeForString('UNIT_THRAKIEN_PELTAST'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_GERMANNE'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_UNSTERBLICH'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_SOLDURII'), UnitAITypes.UNITAI_ATTACK]
+            ]
         elif pPlayer.getCurrentEra() == 2:
-          lUnits = [
-            [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
-            [gc.getInfoTypeForString('UNIT_ARCHER_KRETA'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_LIBYAN_AMAZON'), UnitAITypes.UNITAI_COUNTER],
-            [gc.getInfoTypeForString('UNIT_AXEMAN2'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_ARCHER_NUBIA'), UnitAITypes.UNITAI_CITY_COUNTER],
-            [gc.getInfoTypeForString('UNIT_JAVELIN_GERMAN'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_COMPOSITE_ARCHER'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_PELTIST'), UnitAITypes.UNITAI_CITY_COUNTER],
-            [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK]
-          ]
+            lUnits = [
+                [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
+                [gc.getInfoTypeForString('UNIT_ARCHER_KRETA'), UnitAITypes.UNITAI_CITY_DEFENSE],
+                [gc.getInfoTypeForString('UNIT_LIBYAN_AMAZON'), UnitAITypes.UNITAI_COUNTER],
+                [gc.getInfoTypeForString('UNIT_AXEMAN2'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_ARCHER_NUBIA'), UnitAITypes.UNITAI_CITY_COUNTER],
+                [gc.getInfoTypeForString('UNIT_JAVELIN_GERMAN'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_COMPOSITE_ARCHER'), UnitAITypes.UNITAI_CITY_DEFENSE],
+                [gc.getInfoTypeForString('UNIT_PELTIST'), UnitAITypes.UNITAI_CITY_COUNTER],
+                [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK]
+            ]
         elif pPlayer.getCurrentEra() == 1:
-          lUnits = [
-            [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
-            [gc.getInfoTypeForString('UNIT_AMAZONE'), UnitAITypes.UNITAI_COUNTER],
-            [gc.getInfoTypeForString('UNIT_AXEMAN2'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_ARCHER_NUBIA'), UnitAITypes.UNITAI_CITY_COUNTER],
-            [gc.getInfoTypeForString('UNIT_JAVELIN_GERMAN'), UnitAITypes.UNITAI_ATTACK],
-            [gc.getInfoTypeForString('UNIT_COMPOSITE_ARCHER'), UnitAITypes.UNITAI_CITY_DEFENSE],
-            [gc.getInfoTypeForString('UNIT_PELTIST'), UnitAITypes.UNITAI_CITY_COUNTER],
-            [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK]
-          ]
+            lUnits = [
+                [gc.getInfoTypeForString('UNIT_SPY'), UnitAITypes.UNITAI_SPY],
+                [gc.getInfoTypeForString('UNIT_AMAZONE'), UnitAITypes.UNITAI_COUNTER],
+                [gc.getInfoTypeForString('UNIT_AXEMAN2'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_ARCHER_NUBIA'), UnitAITypes.UNITAI_CITY_COUNTER],
+                [gc.getInfoTypeForString('UNIT_JAVELIN_GERMAN'), UnitAITypes.UNITAI_ATTACK],
+                [gc.getInfoTypeForString('UNIT_COMPOSITE_ARCHER'), UnitAITypes.UNITAI_CITY_DEFENSE],
+                [gc.getInfoTypeForString('UNIT_PELTIST'), UnitAITypes.UNITAI_CITY_COUNTER],
+                [gc.getInfoTypeForString('UNIT_BALEAREN'), UnitAITypes.UNITAI_ATTACK]
+            ]
 
         if pPlayer.getCurrentEra() == 4:
-          lUnits.append([gc.getInfoTypeForString('UNIT_WURFAXT'), UnitAITypes.UNITAI_ATTACK])
-          lUnits.append([gc.getInfoTypeForString('UNIT_SWORDSMAN'), UnitAITypes.UNITAI_ATTACK])
+            lUnits.append([gc.getInfoTypeForString('UNIT_WURFAXT'), UnitAITypes.UNITAI_ATTACK])
+            lUnits.append([gc.getInfoTypeForString('UNIT_SWORDSMAN'), UnitAITypes.UNITAI_ATTACK])
 
         iPromoCombat1 = gc.getInfoTypeForString("PROMOTION_COMBAT1")
         iPromoCombat2 = gc.getInfoTypeForString("PROMOTION_COMBAT2")
@@ -712,7 +746,7 @@ def freeSlaves(pCity, pPlayer):
         iY = pCity.getY()
         iSumUnits = len(lUnits)
         bGetFreedSlave = False
-        for i in range(iFreedSlaves):
+        for i in xrange(iFreedSlaves):
             text = ""
             iRand = CvUtil.myRandom(iSumUnits * 3, "freedSlaveType")
             # Beim letzten Umlauf einen befreiten Sklaven bekommen (damit nur max 1 pro Stadt erobert werden kann)
@@ -732,9 +766,11 @@ def freeSlaves(pCity, pPlayer):
         # ***TEST***
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Stadtsklaven befreit (Zeile 3237)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
+
 def freeCitizen(pCity):
     # Fehler trat ohne dem getName == "" auf (04.06.2020)
-    if pCity is None or pCity.isNone() or pCity.getName() == "": return 0
+    if pCity is None or pCity.isNone() or pCity.getName() == "":
+        return 0
 
     # TEST
     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", (pCity.getName(), 0)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -782,6 +818,7 @@ def freeCitizen(pCity):
     """
     return iCitySlaves
 
+
 def freeCitizenGlad(pCity):
     iPlayer = pCity.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
@@ -805,31 +842,33 @@ def freeCitizenGlad(pCity):
                 pCity.changeFreeSpecialistCount(eSpecialistGlad, -1)
                 iCityGlads -= 1
                 if pPlayer.isHuman():
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_2_CITIZEN", (pCity.getName(), "")), None, 2, None, ColorTypes(14), pCity.getX(), pCity.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_2_CITIZEN",
+                                                                                       (pCity.getName(), "")), None, 2, None, ColorTypes(14), pCity.getX(), pCity.getY(), True, True)
 
             # ***TEST***
             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Gladiator zu Buerger (Zeile 3860)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
     return iCityGlads
 
+
 def spawnSlave(pCity, iCitySlaves):
     iPlayer = pCity.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
-    iChance = 20 # 2% Grundwert
+    iChance = 20  # 2% Grundwert
 
     # Doppelte Chance bei Staatsform
     if pPlayer.isCivic(gc.getInfoTypeForString("CIVIC_STANDRECHT")):
-        iChance = iChance * 2 # 4%
+        iChance = iChance * 2  # 4%
 
-    iChance += iCitySlaves # pro Sklave 0.1% dazu
+    iChance += iCitySlaves  # pro Sklave 0.1% dazu
 
     iChance = min(iChance, 35)
 
     # Christentum:
     iReligion = gc.getInfoTypeForString("RELIGION_CHRISTIANITY")
     if pCity.isHasReligion(iReligion):
-        iChance -= 10 # -1%
+        iChance -= 10  # -1%
     if pPlayer.getStateReligion() == iReligion:
-        iChance -= 10 # -1%
+        iChance -= 10  # -1%
 
     # For better AI
     if not pPlayer.isHuman():
@@ -839,10 +878,12 @@ def spawnSlave(pCity, iCitySlaves):
         iUnitType = gc.getInfoTypeForString("UNIT_SLAVE")
         CvUtil.spawnUnit(iUnitType, pCity.plot(), pPlayer)
         if pPlayer.isHuman():
-            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_SLAVE_BIRTH", (pCity.getName(), "")), None, 2, ",Art/Interface/Buttons/Civics/Slavery.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,2", ColorTypes(14), pCity.getX(), pCity.getY(), True, True)
+            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_SLAVE_BIRTH", (pCity.getName(), "")), None, 2,
+                                     ",Art/Interface/Buttons/Civics/Slavery.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,2", ColorTypes(14), pCity.getX(), pCity.getY(), True, True)
 
         # ***TEST***
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Neuer Sklave verfuegbar (Zeile 3841)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+
 
 def spawnGlad(pCity, iCityGlads):
     iPlayer = pCity.getOwner()
@@ -854,8 +895,10 @@ def spawnGlad(pCity, iCityGlads):
         pCity.changeFreeSpecialistCount(eSpecialistGlad, -1)
         iCityGlads -= 1
         if pPlayer.isHuman():
-            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_SLAVE_2_GLADIATOR", (pCity.getName(), "")), None, 2, None, ColorTypes(14), pCity.getX(), pCity.getY(), True, True)
+            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_SLAVE_2_GLADIATOR",
+                                                                               (pCity.getName(), "")), None, 2, None, ColorTypes(14), pCity.getX(), pCity.getY(), True, True)
     return iCityGlads
+
 
 def dyingGlad(pCity, iCityGlads, bTeamHasGladiators):
     iPlayer = pCity.getOwner()
@@ -869,7 +912,7 @@ def dyingGlad(pCity, iCityGlads, bTeamHasGladiators):
         # City Plot
         pCityPlot = pCity.plot()
         iRangeUnits = pCityPlot.getNumUnits()
-        for iUnit in range(iRangeUnits):
+        for iUnit in xrange(iRangeUnits):
             pLoopUnit = pCityPlot.getUnit(iUnit)
             if pLoopUnit.getOwner() == iPlayer and pLoopUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SLAVE"):
                 # pLoopUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
@@ -887,29 +930,39 @@ def dyingGlad(pCity, iCityGlads, bTeamHasGladiators):
             iRand = CvUtil.myRandom(3, "dyingGlad2")
             if iRand < 1 and pCity.isHasBuilding(iBuilding1):
                 iRand = 1 + CvUtil.myRandom(5, "dyingGlad3")
-                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_DEATH_COL_"+str(iRand), (pCity.getName(), "")), None, 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_DEATH_COL_"+str(iRand),
+                                                                                   (pCity.getName(), "")), None, 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
             elif iRand < 1 and pCity.isHasBuilding(iBuilding2):
                 iRand = 1 + CvUtil.myRandom(5, "dyingGlad4")
-                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_DEATH_HIP_"+str(iRand), (pCity.getName(), "")), None, 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_DEATH_HIP_"+str(iRand),
+                                                                                   (pCity.getName(), "")), None, 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
             else:
                 iRand = CvUtil.myRandom(14, "dyingGlad5")
-                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_DEATH_"+str(iRand), (pCity.getName(), "")), None, 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_GLADIATOR_DEATH_"+str(iRand),
+                                                                                   (pCity.getName(), "")), None, 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
             if bErsatz:
                 if bTeamHasGladiators:
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_GLADS_ERSATZ2", ("",)), None, 2, None, ColorTypes(8), pCity.getX(), pCity.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_GLADS_ERSATZ2", ("",)),
+                                             None, 2, None, ColorTypes(8), pCity.getX(), pCity.getY(), True, True)
                 else:
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_GLADS_ERSATZ", ("",)), None, 2, None, ColorTypes(8), pCity.getX(), pCity.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_GLADS_ERSATZ", ("",)),
+                                             None, 2, None, ColorTypes(8), pCity.getX(), pCity.getY(), True, True)
 
         # ***TEST***
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Gladiator stirbt (Zeile 3977)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
+
 def doUpgradeLatifundium(pPlot):
     # alte Version: Latifundien werden besser und blieben auf Stufe 5
-    #pPlot.changeUpgradeProgress(10)
+    # pPlot.changeUpgradeProgress(10)
 
     # ab PAE 6.6: Latifunden können nur von Sklaven auf eine Stufe erhöht werden und verlieren ihren Wert bis runter auf Stufe 1 (Boni wie normale Modernisierungen)
-    if pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM1"): pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM2"))
-    elif pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM2"): pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM3"))
-    elif pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM3"): pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM4"))
-    elif pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM4"): pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM5"))
+    if pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM1"):
+        pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM2"))
+    elif pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM2"):
+        pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM3"))
+    elif pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM3"):
+        pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM4"))
+    elif pPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM4"):
+        pPlot.setImprovementType(gc.getInfoTypeForString("IMPROVEMENT_LATIFUNDIUM5"))

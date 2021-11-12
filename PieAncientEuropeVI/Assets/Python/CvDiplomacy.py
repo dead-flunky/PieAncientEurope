@@ -1,8 +1,15 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyDiplomacy, DiploEventTypes,
+                                AttitudeTypes, DiplomacyPowerTypes, CyGame,
+                                TeamTypes, WarPlanTypes, LeaderheadAction)
 import CvUtil
 import PyHelpers
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 PyPlayer = PyHelpers.PyPlayer
 
@@ -150,7 +157,7 @@ class CvDiplomacy:
             # Exit option
             self.addUserComment("USER_DIPLOCOMMENT_NEVERMIND", -1, -1)
             self.addUserComment("USER_DIPLOCOMMENT_EXIT", -1, -1)
-            self.diploScreen.startTrade( eComment, true)
+            self.diploScreen.startTrade( eComment, True)
 
         # If we are trading or
         # If we are trying another proposal or
@@ -235,7 +242,7 @@ class CvDiplomacy:
             # Exit option
             self.addUserComment("USER_DIPLOCOMMENT_NEVERMIND", -1, -1)
             self.addUserComment("USER_DIPLOCOMMENT_EXIT", -1, -1)
-            self.diploScreen.startTrade( eComment, false )
+            self.diploScreen.startTrade( eComment, False )
 
         elif (self.isComment(eComment, "AI_DIPLOCOMMENT_SOMETHING_ELSE")):
             if (gc.getTeam(gc.getGame().getActiveTeam()).canDeclareWar(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam())):
@@ -258,10 +265,10 @@ class CvDiplomacy:
                     self.addUserComment("USER_DIPLOCOMMENT_TARGET", -1, -1)
 
             # K-Mod. Allow masters to tell their vassals to prepare for war
-            if gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAtWarCount(true) == 0 and \
+            if gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAtWarCount(True) == 0 and \
                 (gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isVassal(gc.getGame().getActiveTeam()) or \
                  gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() == gc.getGame().getActiveTeam()):
-                if gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAnyWarPlanCount(true) > 0:
+                if gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).getAnyWarPlanCount(True) > 0:
                     self.addUserComment("USER_DIPLOCOMMENT_WARPLAN_CANCEL", -1, -1)
                 else:
                     self.addUserComment("USER_DIPLOCOMMENT_WARPLAN", -1, -1)
@@ -271,7 +278,7 @@ class CvDiplomacy:
             self.addUserComment("USER_DIPLOCOMMENT_EXIT", -1, -1)
 
         elif (self.isComment(eComment, "AI_DIPLOCOMMENT_RESEARCH")):
-            for i in range(gc.getNumTechInfos()):
+            for i in xrange(gc.getNumTechInfos()):
                 if (gc.getPlayer(self.diploScreen.getWhoTradingWith()).canResearch(i, False)):
                     self.addUserComment("USER_DIPLOCOMMENT_RESEARCH_TECH", i, -1, gc.getTechInfo(i).getTextKey())
 
@@ -284,7 +291,7 @@ class CvDiplomacy:
                     self.isComment(eComment, "AI_DIPLOCOMMENT_ATTITUDE_PLAYER_CAUTIOUS") or
                     self.isComment(eComment, "AI_DIPLOCOMMENT_ATTITUDE_PLAYER_PLEASED") or
                     self.isComment(eComment, "AI_DIPLOCOMMENT_ATTITUDE_PLAYER_FRIENDLY")):
-            for i in range(gc.getMAX_CIV_PLAYERS()):
+            for i in xrange(gc.getMAX_CIV_PLAYERS()):
                 if (gc.getPlayer(i).isAlive()):
                     if ((i != gc.getGame().getActivePlayer()) and (i != self.diploScreen.getWhoTradingWith())):
                         if (gc.getTeam(gc.getGame().getActiveTeam()).isHasMet(gc.getPlayer(i).getTeam()) and gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isHasMet(gc.getPlayer(i).getTeam())):
@@ -294,7 +301,7 @@ class CvDiplomacy:
             self.addUserComment("USER_DIPLOCOMMENT_EXIT", -1, -1)
 
         elif (self.isComment(eComment, "AI_DIPLOCOMMENT_TARGET")):
-            for i in range(gc.getMAX_CIV_PLAYERS()):
+            for i in xrange(gc.getMAX_CIV_PLAYERS()):
                 if (gc.getPlayer(i).isAlive()):
                     if gc.getTeam(gc.getGame().getActiveTeam()).isAtWar(gc.getPlayer(i).getTeam()) and gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isAtWar(gc.getPlayer(i).getTeam()): # K-Mod
                         player = PyPlayer(i)
@@ -308,7 +315,7 @@ class CvDiplomacy:
 
         # K-Mod
         elif (self.isComment(eComment, "AI_DIPLOCOMMENT_WARPLAN")):
-            for i in range(gc.getMAX_CIV_TEAMS()):
+            for i in xrange(gc.getMAX_CIV_TEAMS()):
                 #if (gc.getTeam(i).isAlive() and i != gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam() and gc.getTeam(gc.getGame().getActiveTeam()).isHasMet(i) and gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isHasMet(i) and not gc.getTeam(i).isAtWar(gc.getGame().getActiveTeam()) and gc.getTeam(gc.getGame().getActiveTeam()).canEventuallyDeclareWar()):
                 if (gc.getTeam(i).isAlive() and gc.getTeam(gc.getGame().getActiveTeam()).isHasMet(i) and gc.getTeam(gc.getPlayer(self.diploScreen.getWhoTradingWith()).getTeam()).isHasMet(i)
                     and not gc.getTeam(i).isAtWar(gc.getGame().getActiveTeam()) and gc.getTeam(gc.getGame().getActiveTeam()).canEventuallyDeclareWar(i)):
@@ -448,11 +455,11 @@ class CvDiplomacy:
         return self.iLastResponseID
 
     def isUsed(self, var, i, num):
-        "returns true if any element in the var list is true"
-        for j in range(num):
+        "returns True if any element in the var list is True"
+        for j in xrange(num):
             if (var(i, j)):
-                return true
-        return false
+                return True
+        return False
 
     def filterUserResponse(self, diploInfo):
         "pick the user's response from a CvDiplomacyTextInfo, based on response conditions"
@@ -463,7 +470,7 @@ class CvDiplomacy:
         ourPlayer = gc.getActivePlayer()
         responses = []
 
-        for i in range(diploInfo.getNumResponses()):
+        for i in xrange(diploInfo.getNumResponses()):
 
             # check attitude of other player towards me
             if self.isUsed(diploInfo.getAttitudeTypes, i, AttitudeTypes.NUM_ATTITUDE_TYPES):
@@ -500,7 +507,7 @@ class CvDiplomacy:
                         continue
 
             # passed all tests, so add to response list
-            for j in range(diploInfo.getNumDiplomacyText(i)):
+            for j in xrange(diploInfo.getNumDiplomacyText(i)):
                 responses.append(diploInfo.getDiplomacyText(i, j))
 
         # pick a random response
@@ -769,7 +776,7 @@ class CvDiplomacy:
 
     def getCommentID(self, strComment):
         'int - ID for DiploCommentType'
-        for i in range(gc.getNumDiplomacyInfos()):
+        for i in xrange(gc.getNumDiplomacyInfos()):
             if ( gc.getDiplomacyInfo(i).getType() == strComment ):
                 return i
         return -1

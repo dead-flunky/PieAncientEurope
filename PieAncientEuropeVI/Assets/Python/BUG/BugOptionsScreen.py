@@ -11,7 +11,7 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGTabCtrl, CyGInterfaceScreen)
 import CvEventInterface
 import BugConfig
 import BugCore
@@ -137,7 +137,7 @@ class BugOptionsScreen:
         self.pTabControl.setModal(1)
         screen = CyGInterfaceScreen("MainInterface", CvScreenEnums.MAIN_INTERFACE)
         resolutionWidth = screen.getXResolution()
-        resolutionHeigth = screen.getYResolution()
+        # resolutionHeigth = screen.getYResolution()
         self.pTabControl.setSize(resolutionWidth-60, 750)
         # self.pTabControl.setSize(1000, 750)
         self.pTabControl.setControlsExpanding(False)

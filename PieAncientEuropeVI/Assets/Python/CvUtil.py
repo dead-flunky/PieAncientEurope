@@ -14,6 +14,12 @@ from CvPythonExtensions import (CyGlobalContext, CyTranslator, CyPythonMgr,
                                 UnitAITypes, FontSymbols, YieldTypes,
                                 CommerceTypes, shuffleList, DirectionTypes)
 
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 # For ScriptData dict
 import simplejson as json
 
@@ -289,7 +295,7 @@ def getInfo(strInfoType, strInfoName):  # returns info for InfoType
     # get the number of infos
     numInfos = infoDict['NUM']()
     # loop through each info
-    for i in range(numInfos):
+    for i in xrange(numInfos):
         loopInfo = infoDict['GET'](i)
 
         if loopInfo.getDescription() == strInfoName:
@@ -300,7 +306,7 @@ def AdjustBuilding(iAdd, bAll, BuildingIdx, pCity):  # adds/removes buildings fr
     "Function for toggling buildings in cities"
     if BuildingIdx != -1:
         if bAll:  # Add/Remove ALL
-            for i in range(BuildingIdx):
+            for i in xrange(BuildingIdx):
                 pCity.setNumRealBuildingIdx(i, iAdd)
         else:
             pCity.setNumRealBuildingIdx(BuildingIdx, iAdd)
@@ -500,17 +506,17 @@ def initDynamicFontIcons():
     info = ""
     desc = ""
     # add Commerce Icons
-    for i in range(CommerceTypes.NUM_COMMERCE_TYPES):
+    for i in xrange(CommerceTypes.NUM_COMMERCE_TYPES):
         info = gc.getCommerceInfo(i)
         desc = info.getDescription().lower()
         addIconToMap(info.getChar, desc)
     # add Yield Icons
-    for i in range(YieldTypes.NUM_YIELD_TYPES):
+    for i in xrange(YieldTypes.NUM_YIELD_TYPES):
         info = gc.getYieldInfo(i)
         desc = info.getDescription().lower()
         addIconToMap(info.getChar, desc)
     # add Religion & Holy City Icons
-    for i in range(gc.getNumReligionInfos()):
+    for i in xrange(gc.getNumReligionInfos()):
         info = gc.getReligionInfo(i)
         desc = info.getDescription().lower()
         addIconToMap(info.getChar, desc)

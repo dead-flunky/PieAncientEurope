@@ -66,7 +66,7 @@ def doUpdate ():
 		BugUtil.debug("FavoriteCivicDetector.doUpdate() START")
 		pActivePlayer = gc.getActivePlayer()
 		pActiveTeam = gc.getTeam(pActivePlayer.getTeam())
-		for iPlayer in range(gc.getMAX_PLAYERS()):
+		for iPlayer in xrange(gc.getMAX_PLAYERS()):
 			pPlayer = gc.getPlayer(iPlayer)
 			# Player we are updating must be a valid, living, non-human, full-fledged civ.
 			if ( pPlayer and (not pPlayer.isNone()) and pPlayer.isAlive() and (not pPlayer.isHuman())
@@ -83,14 +83,14 @@ def doUpdate ():
 				if not favorite.isKnown():
 					if PlayerUtil.isGivingFavoriteCivicDenial(pPlayer, pActivePlayer):
 						BugUtil.debug(" -- Player showing FAVORITE_CIVIC trade denial; must be running his/her favorite." )
-						for eCategory in range(gc.getNumCivicOptionInfos()):
+						for eCategory in xrange(gc.getNumCivicOptionInfos()):
 							eCivic = pPlayer.getCivics(eCategory)
 							for eOtherCivic in gCivicsByCategory[eCategory]:
 								if (eOtherCivic != eCivic):
 									favorite.removePossible(eOtherCivic)
 				# Now take Attitude survey (if necessary)
 				if not favorite.isKnown():
-					for iOtherPlayer in range(gc.getMAX_PLAYERS()):
+					for iOtherPlayer in xrange(gc.getMAX_PLAYERS()):
 						pOtherPlayer = gc.getPlayer(iOtherPlayer)
 						# Test attitude against other valid, living, full-fledged civs; these can be human
 						if ( pOtherPlayer and (iOtherPlayer != iPlayer) 
@@ -103,7 +103,7 @@ def doUpdate ():
 								continue
 							pAttitude = AttitudeUtil.Attitude(iPlayer, iOtherPlayer)
 							bFoundPossibleFavorite = pAttitude.hasModifier("TXT_KEY_MISC_ATTITUDE_FAVORITE_CIVIC")
-							for eCategory in range(gc.getNumCivicOptionInfos()):
+							for eCategory in xrange(gc.getNumCivicOptionInfos()):
 								eCivic = pPlayer.getCivics(eCategory)
 								if (eCivic == pOtherPlayer.getCivics(eCategory)):
 									if bFoundPossibleFavorite:
@@ -140,7 +140,7 @@ def initData ():
 		BugUtil.debug("FavoriteCivicDetector.initData() initializing gFavoriteByPlayer")
 		global gFavoriteByPlayer
 		gFavoriteByPlayer = {}
-		for iPlayer in range(gc.getMAX_PLAYERS()):
+		for iPlayer in xrange(gc.getMAX_PLAYERS()):
 			gFavoriteByPlayer[iPlayer] = FavoriteCivic(iPlayer)
 
 def initHelpers ():
@@ -164,9 +164,9 @@ def initHelpers ():
 		BugUtil.debug("FavoriteCivicDetector.initHelpers() initializing gCivicsByCategory")
 		global gCivicsByCategory
 		gCivicsByCategory = {}
-		for eCategory in range(gc.getNumCivicOptionInfos()):
+		for eCategory in xrange(gc.getNumCivicOptionInfos()):
 			gCivicsByCategory[eCategory] = set()
-		for eCivic in range(gc.getNumCivicInfos()):
+		for eCivic in xrange(gc.getNumCivicInfos()):
 			gCivicsByCategory[gc.getCivicInfo(eCivic).getCivicOptionType()].add(eCivic)
 
 def dump (*args):
@@ -212,7 +212,7 @@ class FavoriteCivic:
 				 and (not pPlayer.isBarbarian()) and (not pPlayer.isMinorCiv()) ):
 			# Initially rule out all "starter" civics
 			pCiv = gc.getCivilizationInfo(pPlayer.getCivilizationType())
-			for eCategory in range(gc.getNumCivicOptionInfos()):
+			for eCategory in xrange(gc.getNumCivicOptionInfos()):
 				self.possibles.remove(pCiv.getCivilizationInitialCivics(eCategory))
 
 	def isInitialState(self):
@@ -335,7 +335,7 @@ class FavoriteCivicDetector:
 		if gDetectionNecessary:
 			if (gFavoriteByPlayer):
 				bNeedToSave = False
-				for iPlayer in range(gc.getMAX_PLAYERS()):
+				for iPlayer in xrange(gc.getMAX_PLAYERS()):
 					if not gFavoriteByPlayer[iPlayer].isInitialState():
 						bNeedToSave = True
 						break

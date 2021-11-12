@@ -1,8 +1,15 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, NotifyCode, AdvancedStartActionTypes,
+                                CyMessageControl, WidgetTypes, PanelStyles,
+                                CyInterface, InterfaceDirtyBits, CyGame,
+                                CyGInterfaceScreen, CommerceTypes, UnitClassTypes,
+                                ActivationTypes, PopupStates, GameOptionTypes,
+                                ButtonStyles, DomainTypes, SpecialistTypes,
+                                YieldTypes)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 import CvScreensInterface
 import PAE_Lists as L
@@ -18,7 +25,7 @@ gc = CyGlobalContext()
 ArtFileMgr = CyArtFileMgr()
 localText = CyTranslator()
 
-# BUG - GP Tech Prefs - start
+# Mod BUG - GP Tech Prefs - start
 import TechPrefs
 import BugCore
 BugOpt = BugCore.game.Advisors
@@ -30,22 +37,22 @@ FLAVORS = [ TechPrefs.FLAVOR_PRODUCTION, TechPrefs.FLAVOR_GOLD, TechPrefs.FLAVOR
             TechPrefs.FLAVOR_CULTURE, TechPrefs.FLAVOR_RELIGION ]
 UNIT_CLASSES = [ "UNITCLASS_ENGINEER", "UNITCLASS_MERCHANT", "UNITCLASS_SCIENTIST",
                  "UNITCLASS_ARTIST", "UNITCLASS_PROPHET" ]
-# BUG - GP Tech Prefs - end
+# Mod BUG - GP Tech Prefs - end
 
-# BUG - 3.19 No Espionage - start
+# Mod BUG - 3.19 No Espionage - start
 import GameUtil
-# BUG - 3.19 No Espionage - end
+# Mod BUG - 3.19 No Espionage - end
 
-# BUG - Mac Support - start
+# Mod BUG - Mac Support - start
 BugUtil.fixSets(globals())
-# BUG - Mac Support - end
+# Mod BUG - Mac Support - end
 
-# BUG - Tech Era Colors - start
+# Mod BUG - Tech Era Colors - start
 def getEraDescription(eWidgetType, iData1, iData2, bOption):
     return gc.getEraInfo(iData1).getDescription()
-# BUG - Tech Era Colors - end
+# Mod BUG - Tech Era Colors - end
 
-# BUG - GP Tech Prefs - start
+# Mod BUG - GP Tech Prefs - start
 def resetTechPrefs(args=[]):
     CvScreensInterface.techChooser.resetTechPrefs()
 
@@ -59,7 +66,7 @@ def getCurrentTechPrefsHover(iFlavor):
 def getFutureTechPrefsHover(iFlavor):
     pPlayer = gc.getPlayer(CvScreensInterface.techChooser.iCivSelected)
     sTechs = set()
-    for i in range(gc.getNumTechInfos()):
+    for i in xrange(gc.getNumTechInfos()):
         if pPlayer.isResearchingTech(i):
             sTechs.add(CvScreensInterface.techChooser.pPrefs.getTech(i))
     return buildTechPrefsHover("TXT_KEY_BUG_TECH_PREFS_FUTURE", CvScreensInterface.techChooser.pPrefs.getCurrentWithFlavorTechs(iFlavor, sTechs))
@@ -74,7 +81,7 @@ def getFutureTechPrefsHover(iFlavor):
 # def getFutureTechPrefsHover(widgetType, iData1, iData2, bOption):
     # pPlayer = gc.getPlayer(CvScreensInterface.techChooser.iCivSelected)
     # sTechs = set()
-    # for i in range(gc.getNumTechInfos()):
+    # for i in xrange(gc.getNumTechInfos()):
         # if pPlayer.isResearchingTech(i):
             # sTechs.add(CvScreensInterface.techChooser.pPrefs.getTech(i))
     # return buildTechPrefsHover("TXT_KEY_BUG_TECH_PREFS_FUTURE", CvScreensInterface.techChooser.pPrefs.getCurrentWithFlavorTechs(iData1, sTechs))
@@ -84,7 +91,7 @@ def buildTechPrefsHover(key, lTechs):
     for pTech in lTechs:
         szText += "<img=%s size=24></img>" % pTech.getInfo().getButton().replace(" ", "_")
     return szText
-# BUG - GP Tech Prefs - end
+# Mod BUG - GP Tech Prefs - end
 
 class CvTechChooser:
     "Tech Chooser Screen"
@@ -97,14 +104,14 @@ class CvTechChooser:
 
         # Advanced Start
         self.m_iSelectedTech = -1
-        self.m_bSelectedTechDirty = false
-        self.m_bTechRecordsDirty = false
+        self.m_bSelectedTechDirty = False
+        self.m_bTechRecordsDirty = False
 
-# BUG - GP Tech Prefs - start
+# Mod BUG - GP Tech Prefs - start
         self.bPrefsShowing = False
         self.resetTechPrefs()
-# BUG - GP Tech Prefs - end
-        
+# Mod BUG - GP Tech Prefs - end
+
         self.sTechSelectTab = self.getNextWidgetName("TechSelectTab")
         self.sTechTradeTab = self.getNextWidgetName("TechTradeTab")
         self.sTechTabID = self.sTechSelectTab
@@ -151,21 +158,21 @@ class CvTechChooser:
         screen.hide("ASPointsLabel")
         screen.hide("SelectedTechLabel")
 
-# BUG - GP Tech Prefs - start
+# Mod BUG - GP Tech Prefs - start
         self.NO_TECH_ART = ArtFileMgr.getInterfaceArtInfo("INTERFACE_BUTTONS_CANCEL").getPath()
-# BUG - GP Tech Prefs - end
+# Mod BUG - GP Tech Prefs - end
 
         if CyGame().isDebugMode():
             screen.addDropDownBoxGFC( "CivDropDown", 22, 12, 192, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.SMALL_FONT )
             screen.setActivation( "CivDropDown", ActivationTypes.ACTIVATE_MIMICPARENTFOCUS )
-            for j in range(gc.getMAX_PLAYERS()):
+            for j in xrange(gc.getMAX_PLAYERS()):
                 if (gc.getPlayer(j).isAlive()):
                     screen.addPullDownString( "CivDropDown", gc.getPlayer(j).getName(), j, j, False )
         else:
             screen.hide( "CivDropDown" )
 
         if screen.isPersistent() and self.iCivSelected == gc.getGame().getActivePlayer():
-            self.updateTechRecords(false)
+            self.updateTechRecords(False)
             return
 
         self.nWidgetCount = 0
@@ -178,7 +185,7 @@ class CvTechChooser:
         # Advanced Start
         if gc.getPlayer(self.iCivSelected).getAdvancedStartPoints() >= 0:
 
-            self.m_bSelectedTechDirty = true
+            self.m_bSelectedTechDirty = True
 
             self.X_ADD_TECH_BUTTON = 10
             self.Y_ADD_TECH_BUTTON = 731
@@ -190,7 +197,7 @@ class CvTechChooser:
             screen.setButtonGFC( "AddTechButton", szText, "", self.X_ADD_TECH_BUTTON, self.Y_ADD_TECH_BUTTON, self.W_ADD_TECH_BUTTON, self.H_ADD_TECH_BUTTON, WidgetTypes.WIDGET_GENERAL, -1, -1, ButtonStyles.BUTTON_STYLE_STANDARD )
             screen.hide("AddTechButton")
 
-# BUG - Tech Screen Resolution - start
+# Mod BUG - Tech Screen Resolution - start
         if screen.getXResolution() > 1024:
             xPanelWidth = screen.getXResolution() - 60
         else:
@@ -200,7 +207,7 @@ class CvTechChooser:
         # Here we set the background widget and exit button, and we show the screen
         screen.showWindowBackground(False)
         screen.setDimensions((screen.getXResolution() - xPanelWidth) / 2, screen.centerY(0), xPanelWidth, yPanelHeight)
-# BUG - Tech Screen Resolution - end
+# Mod BUG - Tech Screen Resolution - end
 
         screen.addPanel( "TechTopPanel", u"", u"", True, False, 0, 0, xPanelWidth, 55, PanelStyles.PANEL_STYLE_TOPBAR )
         screen.addDDSGFC("TechBG", ArtFileMgr.getInterfaceArtInfo("SCREEN_BG_OPAQUE").getPath(), 0, 48, xPanelWidth, yPanelHeight - 96, WidgetTypes.WIDGET_GENERAL, -1, -1) # kmod 51 statt 48
@@ -229,10 +236,10 @@ class CvTechChooser:
         screen.addScrollPanel(self.TabPanels[1], u"", 80, 64, xPanelWidth - 80, yPanelHeight - 142, PanelStyles.PANEL_STYLE_EXTERNAL)
         screen.setActivation(self.TabPanels[1], ActivationTypes.ACTIVATE_NORMAL)
 
-# BUG - GP Tech Prefs - start
+# Mod BUG - GP Tech Prefs - start
         if BugOpt.isShowGPTechPrefs():
             screen.addPanel("GPTechPref", u"", u"", True, False, 0, 51, 80, yPanelHeight - 95, PanelStyles.PANEL_STYLE_MAIN_WHITE)
-# BUG - GP Tech Prefs - end
+# Mod BUG - GP Tech Prefs - end
 
 
         self.X_SELECT_TAB = 30
@@ -318,7 +325,7 @@ class CvTechChooser:
             return
 
         # Go through all the techs
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
 
             # Create and place a tech in its proper location
             iX = 30 + ((gc.getTechInfo(i).getGridX() - 1) * ((self.BOX_INCREMENT_X_SPACING + self.BOX_INCREMENT_WIDTH) * self.PIXEL_INCREMENT))
@@ -407,9 +414,9 @@ class CvTechChooser:
           gc.getInfoTypeForString("UNIT_HORSE_PERSIA_NOBLE1"),
           gc.getInfoTypeForString("UNIT_HORSE_PERSIA_NOBLE2")
         ]
-    
+
         # Unlockable units...
-        for j in range(gc.getNumUnitClassInfos()):
+        for j in xrange(gc.getNumUnitClassInfos()):
             eLoopUnit = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationUnits(j)
             if eLoopUnit != -1 and eLoopUnit not in LDontShowTheseUnits:
                 if gc.getUnitInfo(eLoopUnit).getPrereqAndTech() == i:
@@ -418,7 +425,7 @@ class CvTechChooser:
                     fX += self.X_INCREMENT
 
         # Unlockable Buildings...
-        for j in range(gc.getNumBuildingClassInfos()):
+        for j in xrange(gc.getNumBuildingClassInfos()):
             bTechFound = 0
             eLoopBuilding = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationBuildings(j)
 
@@ -435,7 +442,7 @@ class CvTechChooser:
                         fX += self.X_INCREMENT
 
         # Obsolete Buildings...
-        for j in range(gc.getNumBuildingClassInfos()):
+        for j in xrange(gc.getNumBuildingClassInfos()):
             eLoopBuilding = gc.getCivilizationInfo(gc.getPlayer(self.iCivSelected).getCivilizationType()).getCivilizationBuildings(j)
 
             if eLoopBuilding != -1:
@@ -448,7 +455,7 @@ class CvTechChooser:
                     fX += self.X_INCREMENT
 
         # Obsolete Bonuses...
-        for j in range(gc.getNumBonusInfos()):
+        for j in xrange(gc.getNumBonusInfos()):
             if gc.getBonusInfo(j).getTechObsolete() == i:
                 # Add obsolete picture here...
                 szObsoleteButton = self.getNextWidgetName("ObsoleteBonus")
@@ -458,7 +465,7 @@ class CvTechChooser:
                 fX += self.X_INCREMENT
 
         # Obsolete Monastaries...
-        for j in range (gc.getNumSpecialBuildingInfos()):
+        for j in xrange (gc.getNumSpecialBuildingInfos()):
             if gc.getSpecialBuildingInfo(j).getObsoleteTech() == i:
                     # Add obsolete picture here...
                     szObsoleteSpecialButton = self.getNextWidgetName("ObsoleteSpecial")
@@ -468,14 +475,14 @@ class CvTechChooser:
                     fX += self.X_INCREMENT
 
         # Route movement change
-        for j in range(gc.getNumRouteInfos()):
+        for j in xrange(gc.getNumRouteInfos()):
             if gc.getRouteInfo(j).getTechMovementChange(i) != 0:
                 szMoveButton = self.getNextWidgetName("Move")
                 screen.addDDSGFCAt( szMoveButton, szTechRecord, ArtFileMgr.getInterfaceArtInfo("INTERFACE_TECH_MOVE_BONUS").getPath(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_MOVE_BONUS, i, -1, False )
                 fX += self.X_INCREMENT
 
         # Promotion Info
-        for j in range(gc.getNumPromotionInfos()):
+        for j in xrange(gc.getNumPromotionInfos()):
             if gc.getPromotionInfo(j).getTechPrereq() == i:
                 szPromotionButton = self.getNextWidgetName("Promotion")
                 screen.addDDSGFCAt( szPromotionButton, szTechRecord, gc.getPromotionInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, j, -1, False )
@@ -486,10 +493,10 @@ class CvTechChooser:
             szFreeUnitButton = self.getNextWidgetName("FreeUnit")
             eLoopUnit = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationUnits(gc.getTechInfo(i).getFirstFreeUnitClass())
             if eLoopUnit != -1:
-# BUG - 3.19 No Espionage - start
+# Mod BUG - 3.19 No Espionage - start
                 # CvUnitInfo.getEspionagePoints() was added in 319
                 if GameUtil.getVersion() < 319 or gc.getUnitInfo(eLoopUnit).getEspionagePoints() == 0 or not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
-# BUG - 3.19 No Espionage - end
+# Mod BUG - 3.19 No Espionage - end
                     screen.addDDSGFCAt( szFreeUnitButton, szTechRecord, gc.getPlayer(gc.getGame().getActivePlayer()).getUnitButton(eLoopUnit), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FREE_UNIT, eLoopUnit, i, False )
                     fX += self.X_INCREMENT
 
@@ -635,14 +642,14 @@ class CvTechChooser:
         lBuildInfos.append(gc.getInfoTypeForString("BUILD_LIMES2_8"))
         lBuildInfos.append(gc.getInfoTypeForString("BUILD_LIMES2_9"))
 
-        for j in range(gc.getNumBuildInfos()):
+        for j in xrange(gc.getNumBuildInfos()):
             if j in lBuildInfos:
                 continue
             bTechFound = False
 
             if gc.getBuildInfo(j).getTechPrereq() == -1:
                 bTechFound = False
-                for k in range(gc.getNumFeatureInfos()):
+                for k in xrange(gc.getNumFeatureInfos()):
                     if gc.getBuildInfo(j).getFeatureTech(k) == i:
                         bTechFound = True
             elif gc.getBuildInfo(j).getTechPrereq() == i:
@@ -654,21 +661,21 @@ class CvTechChooser:
                 fX += self.X_INCREMENT
 
         # Domain Extra Moves
-        for j in range(DomainTypes.NUM_DOMAIN_TYPES):
+        for j in xrange(DomainTypes.NUM_DOMAIN_TYPES):
             if gc.getTechInfo(i).getDomainExtraMoves(j) != 0:
                 szDomainExtraMovesButton = self.getNextWidgetName("DomainExtraMoves")
                 screen.addDDSGFCAt(szDomainExtraMovesButton, szTechRecord, ArtFileMgr.getInterfaceArtInfo("INTERFACE_TECH_WATERMOVES").getPath(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_DOMAIN_EXTRA_MOVES, i, j, False)
                 fX += self.X_INCREMENT
 
         # K-Mod. Commerce modifiers
-        for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
+        for j in xrange(CommerceTypes.NUM_COMMERCE_TYPES):
             if gc.getTechInfo(i).getCommerceModifier(j) > 0:
                 szCommerceModifierButton = self.getNextWidgetName("CommerceModifierButton")
                 screen.addDDSGFCAt(szCommerceModifierButton, szTechRecord, gc.getCommerceInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_GLOBAL_COMMERCE_MODIFIER, i, j, False)
                 fX += self.X_INCREMENT
 
         # K-Mod. Extra specialist commerce
-        for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
+        for j in xrange(CommerceTypes.NUM_COMMERCE_TYPES):
             if gc.getTechInfo(i).getSpecialistExtraCommerce(j) > 0:
                 if gc.getDefineINT("DEFAULT_SPECIALIST") != SpecialistTypes.NO_SPECIALIST:
                     szSpecialistCommerceButtonButton = self.getNextWidgetName("SpecialistCommerceButton")
@@ -679,7 +686,7 @@ class CvTechChooser:
         # K-Mod end.
 
         # Adjustments
-        for j in range(CommerceTypes.NUM_COMMERCE_TYPES):
+        for j in xrange(CommerceTypes.NUM_COMMERCE_TYPES):
             if gc.getTechInfo(i).isCommerceFlexible(j) and not (gc.getTeam(gc.getPlayer(self.iCivSelected).getTeam()).isCommerceFlexible(j)):
                 szAdjustButton = self.getNextWidgetName("AdjustButton")
                 if j == CommerceTypes.COMMERCE_CULTURE:
@@ -692,7 +699,7 @@ class CvTechChooser:
                 fX += self.X_INCREMENT
 
         # Terrain opens up as a trade route
-        for j in range(gc.getNumTerrainInfos()):
+        for j in xrange(gc.getNumTerrainInfos()):
             if gc.getTechInfo(i).isTerrainTrade(j) and not (gc.getTeam(gc.getPlayer(self.iCivSelected).getTeam()).isTerrainTrade(j)):
                 szTerrainTradeButton = self.getNextWidgetName("TerrainTradeButton")
                 screen.addDDSGFCAt( szTerrainTradeButton, szTechRecord, ArtFileMgr.getInterfaceArtInfo("INTERFACE_TECH_WATERTRADE").getPath(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_TERRAIN_TRADE, i, j, False )
@@ -705,16 +712,16 @@ class CvTechChooser:
             fX += self.X_INCREMENT
 
         # Special buildings like monestaries...
-        for j in range(gc.getNumSpecialBuildingInfos()):
+        for j in xrange(gc.getNumSpecialBuildingInfos()):
             if gc.getSpecialBuildingInfo(j).getTechPrereq() == i:
                 szSpecialBuilding = self.getNextWidgetName("SpecialBuildingButton")
                 screen.addDDSGFCAt( szSpecialBuilding, szTechRecord, gc.getSpecialBuildingInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_SPECIAL_BUILDING, i, j, False )
                 fX += self.X_INCREMENT
 
         # Yield change
-        for j in range(gc.getNumImprovementInfos()):
+        for j in xrange(gc.getNumImprovementInfos()):
             bFound = False
-            for k in range(YieldTypes.NUM_YIELD_TYPES):
+            for k in xrange(YieldTypes.NUM_YIELD_TYPES):
                 if gc.getImprovementInfo(j).getTechYieldChanges(i, k):
                     if not bFound:
                         szYieldChange = self.getNextWidgetName("YieldChangeButton")
@@ -723,35 +730,35 @@ class CvTechChooser:
                         bFound = True
 
         # Bonuses revealed
-        for j in range(gc.getNumBonusInfos()):
+        for j in xrange(gc.getNumBonusInfos()):
             if gc.getBonusInfo(j).getTechReveal() == i:
                 szBonusReveal = self.getNextWidgetName("BonusRevealButton")
                 screen.addDDSGFCAt( szBonusReveal, szTechRecord, gc.getBonusInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_BONUS_REVEAL, i, j, False )
                 fX += self.X_INCREMENT
 
         # Civic options
-        for j in range(gc.getNumCivicInfos()):
+        for j in xrange(gc.getNumCivicInfos()):
             if gc.getCivicInfo(j).getTechPrereq() == i:
                 szCivicReveal = self.getNextWidgetName("CivicRevealButton")
                 screen.addDDSGFCAt( szCivicReveal, szTechRecord, gc.getCivicInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_CIVIC_REVEAL, i, j, False )
                 fX += self.X_INCREMENT
 
         # Projects possible
-        for j in range(gc.getNumProjectInfos()):
+        for j in xrange(gc.getNumProjectInfos()):
             if gc.getProjectInfo(j).getTechPrereq() == i:
                 szProjectInfo = self.getNextWidgetName("ProjectInfoButton")
                 screen.addDDSGFCAt( szProjectInfo, szTechRecord, gc.getProjectInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, j, 1, False )
                 fX += self.X_INCREMENT
 
         # Processes possible
-        for j in range(gc.getNumProcessInfos()):
+        for j in xrange(gc.getNumProcessInfos()):
             if gc.getProcessInfo(j).getTechPrereq() == i:
                 szProcessInfo = self.getNextWidgetName("ProcessInfoButton")
                 screen.addDDSGFCAt( szProcessInfo, szTechRecord, gc.getProcessInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_PROCESS_INFO, i, j, False )
                 fX += self.X_INCREMENT
 
         # Religions unlocked
-        for j in range(gc.getNumReligionInfos()):
+        for j in xrange(gc.getNumReligionInfos()):
             if gc.getReligionInfo(j).getTechPrereq() == i:
                 szFoundReligion = self.getNextWidgetName("FoundReligionButton")
                 if gc.getGame().isOption(GameOptionTypes.GAMEOPTION_PICK_RELIGION):
@@ -762,7 +769,7 @@ class CvTechChooser:
                 fX += self.X_INCREMENT
 
         # PAE: Kulte/Cults
-        for j in range(gc.getNumCorporationInfos()):
+        for j in xrange(gc.getNumCorporationInfos()):
             if gc.getCorporationInfo(j).getTechPrereq() == i:
                 szFoundCorporation = self.getNextWidgetName("FoundCorporationButton")
                 screen.addDDSGFCAt( szFoundCorporation, szTechRecord, gc.getCorporationInfo(j).getButton(), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FOUND_CORPORATION, i, j, False )
@@ -1045,7 +1052,7 @@ class CvTechChooser:
         ### End -----------
 
         # PAE: Espionage Missions
-        for j in range(gc.getNumEspionageMissionInfos()):
+        for j in xrange(gc.getNumEspionageMissionInfos()):
             if gc.getEspionageMissionInfo(j).getTechPrereq() == i:
                 szFoundEspionage = "FoundEspionageButton" + str( ( i * 1000 ) + j )
                 szButton = ArtFileMgr.getInterfaceArtInfo("ESPIONAGE_BUTTON2").getPath()
@@ -1077,7 +1084,7 @@ class CvTechChooser:
         bAnyChanged = 0
 
         # Go through all the techs
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
 
             abChanged.append(0)
 
@@ -1107,7 +1114,7 @@ class CvTechChooser:
                     abChanged[i] = 1
                     bAnyChanged = 1
 
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
             if abChanged[i] or bForce or (bAnyChanged and gc.getPlayer(self.iCivSelected).isResearchingTech(i)):
                 # Create and place a tech in its proper location
                 szTechRecord = "TechRecord" + str(i)
@@ -1145,11 +1152,11 @@ class CvTechChooser:
                 else:
                     screen.setPanelColor(szTechRecord, 206, 65, 69)
 
-# BUG - GP Tech Prefs - start
+# Mod BUG - GP Tech Prefs - start
         self.updateTechPrefs()
-# BUG - GP Tech Prefs - end
+# Mod BUG - GP Tech Prefs - end
 
-# BUG - Tech Era Colors - start
+# Mod BUG - Tech Era Colors - start
     def setTechPanelShadowColor(self, screen, sPanel, iEra):
         szEra = gc.getEraInfo(iEra).getType()
         iColor = ClockOpt.getEraColor(szEra)
@@ -1159,12 +1166,12 @@ class CvTechChooser:
                 rgb = color.getColor() # NiColorA object
                 if rgb:
                     screen.setPanelColor(sPanel, int(255 * rgb.r), int(255 * rgb.g), int(255 * rgb.b))
-# BUG - Tech Era Colors - end
+# Mod BUG - Tech Era Colors - end
 
     # Will draw the arrows
     def drawArrows(self, screen, sPanel, bANDPreReq, bORPreReq):
 
-        iLoop = 0
+        # iLoop = 0
 
         ARROW_X = ArtFileMgr.getInterfaceArtInfo("ARROW_X").getPath()
         ARROW_Y = ArtFileMgr.getInterfaceArtInfo("ARROW_Y").getPath()
@@ -1174,12 +1181,12 @@ class CvTechChooser:
         ARROW_XMY = ArtFileMgr.getInterfaceArtInfo("ARROW_XMY").getPath()
         ARROW_HEAD = ArtFileMgr.getInterfaceArtInfo("ARROW_HEAD").getPath()
 
-        for i in range(gc.getNumTechInfos()):
-            bFirst = 1
+        for i in xrange(gc.getNumTechInfos()):
+            # bFirst = 1
             fX = (self.BOX_INCREMENT_WIDTH * self.PIXEL_INCREMENT) - 10  # - 8
 
             if bANDPreReq:
-                for j in range(gc.getNUM_AND_TECH_PREREQS()):
+                for j in xrange(gc.getNUM_AND_TECH_PREREQS()):
                     eTech = gc.getTechInfo(i).getPrereqAndTechs(j)
                     if eTech > -1:
                         fX = fX - self.X_INCREMENT
@@ -1191,7 +1198,7 @@ class CvTechChooser:
 
 
             if bORPreReq:
-                for j in range(gc.getNUM_OR_TECH_PREREQS()):
+                for j in xrange(gc.getNUM_OR_TECH_PREREQS()):
                     eTech = gc.getTechInfo(i).getPrereqOrTechs(j)
                     if eTech > -1:
                         iX = 24 + ((gc.getTechInfo(eTech).getGridX() - 1) * ((self.BOX_INCREMENT_X_SPACING + self.BOX_INCREMENT_WIDTH) * self.PIXEL_INCREMENT))
@@ -1249,7 +1256,7 @@ class CvTechChooser:
                                 screen.addDDSGFCAt( self.getNextWidgetName("TechArrow"), sPanel, ARROW_X, iX + 8 + self.getXStart() + ( self.getWidth(xDiff) / 2 ), iY + self.getYStart(4) + self.getHeight(yDiff, 3), ( self.getWidth(xDiff) / 2 ) - 8, 8, WidgetTypes.WIDGET_GENERAL, -1, -1, False )
                                 screen.addDDSGFCAt( self.getNextWidgetName("TechArrow"), sPanel, ARROW_HEAD, iX + self.getXStart() + self.getWidth(xDiff), iY + self.getYStart(4) + self.getHeight(yDiff, 3), 8, 8, WidgetTypes.WIDGET_GENERAL, -1, -1, False )
 
-# BUG - GP Tech Prefs - start
+# Mod BUG - GP Tech Prefs - start
     def resetTechPrefs (self):
         self.pPrefs = TechPrefs.TechPrefs()
 
@@ -1308,7 +1315,7 @@ class CvTechChooser:
 
         # Add all techs in research queue to set of soon-to-be-known techs
         sTechs = set()
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
             if pPlayer.isResearchingTech(i):
                 sTechs.add(self.pPrefs.getTech(i))
 
@@ -1342,7 +1349,7 @@ class CvTechChooser:
                 screen.addDDSGFC(szButtonName, self.NO_TECH_ART, iX, iY, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_GENERAL, 769, f)
                 # screen.addDDSGFC(szButtonName, self.NO_TECH_ART, iX, iY, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_TECH_PREFS_FUTURE, f, -1)
             screen.show(szButtonName)
-# BUG - GP Tech Prefs - end
+# Mod BUG - GP Tech Prefs - end
 
     def TechRecord (self, inputClass):
         return 0
@@ -1356,13 +1363,13 @@ class CvTechChooser:
             screen = self.getScreen()
             iIndex = screen.getSelectedPullDownID("CivDropDown")
             self.iCivSelected = screen.getPullDownData("CivDropDown", iIndex)
-            self.updateTechRecords(false)
+            self.updateTechRecords(False)
 
     # Will handle the input for this screen...
     def handleInput (self, inputClass):
 
         # Get the screen
-        screen = self.getScreen()
+        # screen = self.getScreen()
 
         szWidgetName = inputClass.getFunctionName() + str(inputClass.getID())
 
@@ -1371,10 +1378,10 @@ class CvTechChooser:
         if pPlayer.getAdvancedStartPoints() >= 0:
             # Add tech button
             if inputClass.getFunctionName() == "AddTechButton":
-                if pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, true) != -1:
-                    CyMessageControl().sendAdvancedStartAction(AdvancedStartActionTypes.ADVANCEDSTARTACTION_TECH, self.iCivSelected, -1, -1, self.m_iSelectedTech, true)    #Action, Player, X, Y, Data, bAdd
-                    self.m_bTechRecordsDirty = true
-                    self.m_bSelectedTechDirty = true
+                if pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, True) != -1:
+                    CyMessageControl().sendAdvancedStartAction(AdvancedStartActionTypes.ADVANCEDSTARTACTION_TECH, self.iCivSelected, -1, -1, self.m_iSelectedTech, True)    #Action, Player, X, Y, Data, bAdd
+                    self.m_bTechRecordsDirty = True
+                    self.m_bSelectedTechDirty = True
 
             # Tech clicked on
             elif inputClass.getNotifyCode() == NotifyCode.NOTIFY_CLICKED:
@@ -1433,15 +1440,15 @@ class CvTechChooser:
 
     def update(self, fDelta):
         if CyInterface().isDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT):
-            CyInterface().setDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT, false)
+            CyInterface().setDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT, False)
 
             if self.m_bSelectedTechDirty:
-                self.m_bSelectedTechDirty = false
+                self.m_bSelectedTechDirty = False
                 self.updateSelectedTech()
 
             if self.m_bTechRecordsDirty:
-                self.m_bTechRecordsDirty = false
-                self.updateTechRecords(true)
+                self.m_bTechRecordsDirty = False
+                self.updateTechRecords(True)
 
             if gc.getPlayer(self.iCivSelected).getAdvancedStartPoints() < 0:
                 # hide the screen
@@ -1463,7 +1470,7 @@ class CvTechChooser:
 
         if self.m_iSelectedTech != -1:
             szName = gc.getTechInfo(self.m_iSelectedTech).getDescription()
-            iCost = gc.getPlayer(CyGame().getActivePlayer()).getAdvancedStartTechCost(self.m_iSelectedTech, true)
+            iCost = gc.getPlayer(CyGame().getActivePlayer()).getAdvancedStartTechCost(self.m_iSelectedTech, True)
 
         if iCost > 0:
             szText = u"<font=4>" + localText.getText("TXT_KEY_WB_AS_SELECTED_TECH_COST", (iCost, pPlayer.getAdvancedStartPoints())) + u"</font>"
@@ -1477,7 +1484,7 @@ class CvTechChooser:
         screen.setLabel( "SelectedTechLabel", "Background", szText, CvUtil.FONT_LEFT_JUSTIFY, self.X_ADVANCED_START_TEXT + 250, self.Y_ADD_TECH_BUTTON + 3, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 
         # Want to add
-        if pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, true) != -1:
+        if pPlayer.getAdvancedStartTechCost(self.m_iSelectedTech, True) != -1:
             screen.show("AddTechButton")
         else:
             screen.hide("AddTechButton")
@@ -1485,7 +1492,7 @@ class CvTechChooser:
     def onClose(self):
         pPlayer = gc.getPlayer(self.iCivSelected)
         if pPlayer.getAdvancedStartPoints() >= 0:
-            CyInterface().setDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT, true)
+            CyInterface().setDirty(InterfaceDirtyBits.Advanced_Start_DIRTY_BIT, True)
         return 0
 
 class TechChooserMaps:

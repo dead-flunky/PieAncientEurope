@@ -2,11 +2,14 @@
 ## Copyright Firaxis Games 2005
 ##
 ## Alex Mantzaris / Jesse Smith 09-2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CivilopediaPageTypes, NotifyCode,
+                                WidgetTypes, PanelStyles, AttitudeTypes,
+                                CyGameTextMgr, InputTypes, LeaderheadAction)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
-import random
+# import random
 
 # globals
 gc = CyGlobalContext()
@@ -72,14 +75,14 @@ class CvPediaLeader:
     screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_LEADER, -1)
 
     if self.top.iLastScreen  != CvScreenEnums.PEDIA_LEADER or bNotActive:
-      self.placeLinks(true)
+      self.placeLinks(True)
       self.top.iLastScreen = CvScreenEnums.PEDIA_LEADER
     else:
-      self.placeLinks(false)
+      self.placeLinks(False)
 
     # Leaderhead
     leaderPanelWidget = self.top.getNextWidgetName()
-    screen.addPanel( leaderPanelWidget, "", "", true, true,
+    screen.addPanel( leaderPanelWidget, "", "", True, True,
                     self.X_LEADERHEAD_PANE, self.Y_LEADERHEAD_PANE, self.W_LEADERHEAD_PANE, self.H_LEADERHEAD_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
     self.leaderWidget = self.top.getNextWidgetName()
     screen.addLeaderheadGFC(self.leaderWidget, self.iLeader, AttitudeTypes.ATTITUDE_PLEASED,
@@ -93,7 +96,7 @@ class CvPediaLeader:
   def placeCiv(self):
     screen = self.top.getScreen()
 
-    for iCiv in range(gc.getNumCivilizationInfos()):
+    for iCiv in xrange(gc.getNumCivilizationInfos()):
       civ = gc.getCivilizationInfo(iCiv)
       if civ.isLeaders(self.iLeader):
         screen.setImageButton(self.top.getNextWidgetName(), civ.getButton(), self.X_CIV, self.Y_CIV, self.W_CIV, self.H_CIV, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, iCiv, 1)
@@ -102,14 +105,14 @@ class CvPediaLeader:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_TRAITS", ()), "", true, false,
+    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_TRAITS", ()), "", True, False,
                                  self.X_TRAITS, self.Y_TRAITS, self.W_TRAITS, self.H_TRAITS, PanelStyles.PANEL_STYLE_BLUE50 )
 
     listName = self.top.getNextWidgetName()
 
     iNumCivs = 0
     iLeaderCiv = -1
-    for iCiv in range(gc.getNumCivilizationInfos()):
+    for iCiv in xrange(gc.getNumCivilizationInfos()):
       civ = gc.getCivilizationInfo(iCiv)
       if civ.isLeaders(self.iLeader):
         iNumCivs += 1
@@ -126,7 +129,7 @@ class CvPediaLeader:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_FAV_CIVIC", ()), "", true, true,
+    screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_FAV_CIVIC", ()), "", True, True,
                                  self.X_CIVIC, self.Y_CIVIC, self.W_CIVIC, self.H_CIVIC, PanelStyles.PANEL_STYLE_BLUE50 )
 
     iCivic = gc.getLeaderHeadInfo(self.iLeader).getFavoriteCivic()
@@ -144,7 +147,7 @@ class CvPediaLeader:
     screen = self.top.getScreen()
 
     panelName = self.top.getNextWidgetName()
-    screen.addPanel( panelName, "", "", true, true,
+    screen.addPanel( panelName, "", "", True, True,
       self.X_HISTORY, self.Y_HISTORY, self.W_HISTORY, self.H_HISTORY, PanelStyles.PANEL_STYLE_BLUE50 )
 
     historyTextName = self.top.getNextWidgetName()
@@ -162,13 +165,13 @@ class CvPediaLeader:
 
     # sort leaders alphabetically
     rowListName=[(0,0)]*gc.getNumLeaderHeadInfos()
-    for j in range(gc.getNumLeaderHeadInfos()):
+    for j in xrange(gc.getNumLeaderHeadInfos()):
       rowListName[j] = (gc.getLeaderHeadInfo(j).getDescription(), j)
     rowListName.sort()
 
     i = 0
     iSelected = 0
-    for iI in range(gc.getNumLeaderHeadInfos()):
+    for iI in xrange(gc.getNumLeaderHeadInfos()):
       if (rowListName[iI][1] != gc.getDefineINT("BARBARIAN_LEADER") and not gc.getLeaderHeadInfo(rowListName[iI][1]).isGraphicalOnly()):
         if (not gc.getDefineINT("CIVILOPEDIA_SHOW_ACTIVE_CIVS_ONLY") or not gc.getGame().isFinalInitialized() or gc.getGame().isLeaderEverActive(rowListName[iI][1])):
           if bRedraw:

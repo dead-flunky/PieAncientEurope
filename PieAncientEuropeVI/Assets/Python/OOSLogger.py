@@ -2,8 +2,15 @@
 # Updates by Pie:
 # for all languages (the game crashed due to unicode encode erros if game language was not english)
 # added Techs
-import os
-from CvPythonExtensions import *
+# import os
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyGame, CyMap,
+                                CommerceTypes, YieldTypes, UnitAITypes)
+
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 gc = CyGlobalContext()
 
@@ -65,7 +72,7 @@ def writeLog():
     # Player data
     #
     iPlayer = 0
-    for iPlayer in range(gc.getMAX_PLAYERS()):
+    for iPlayer in xrange(gc.getMAX_PLAYERS()):
         pPlayer = gc.getPlayer(iPlayer)
         pTeam = gc.getTeam(pPlayer.getTeam())
         if (pPlayer.isEverAlive()):
@@ -96,21 +103,21 @@ def writeLog():
 
             pFile.write("Yields:\n")
             pFile.write("-------\n")
-            for iYield in range(int(YieldTypes.NUM_YIELD_TYPES)):
+            for iYield in xrange(int(YieldTypes.NUM_YIELD_TYPES)):
                 pFile.write("Player %d %s Total Yield: %d\n" % (iPlayer, gc.getYieldInfo(iYield).getDescription().encode('utf-8'), pPlayer.calculateTotalYield(iYield)))
 
             pFile.write("\n\n")
 
             pFile.write("Commerce:\n")
             pFile.write("---------\n")
-            for iCommerce in range(int(CommerceTypes.NUM_COMMERCE_TYPES)):
+            for iCommerce in xrange(int(CommerceTypes.NUM_COMMERCE_TYPES)):
                 pFile.write("Player %d %s Total Commerce: %d\n" % (iPlayer, gc.getCommerceInfo(iCommerce).getDescription().encode('utf-8'), pPlayer.getCommerceRate(CommerceTypes(iCommerce))))
 
             pFile.write("\n\n")
 
             pFile.write("Bonus Info:\n")
             pFile.write("-----------\n")
-            for iBonus in range(gc.getNumBonusInfos()):
+            for iBonus in xrange(gc.getNumBonusInfos()):
                 pFile.write("Player %d, %s, Number Available: %d\n" % (iPlayer, gc.getBonusInfo(iBonus).getDescription().encode('utf-8'), pPlayer.getNumAvailableBonuses(iBonus)))
                 pFile.write("Player %d, %s, Import: %d\n" % (iPlayer, gc.getBonusInfo(iBonus).getDescription().encode('utf-8'), pPlayer.getBonusImport(iBonus)))
                 pFile.write("Player %d, %s, Export: %d\n" % (iPlayer, gc.getBonusInfo(iBonus).getDescription().encode('utf-8'), pPlayer.getBonusExport(iBonus)))
@@ -120,35 +127,35 @@ def writeLog():
 
             pFile.write("Improvement Info:\n")
             pFile.write("-----------------\n")
-            for iImprovement in range(gc.getNumImprovementInfos()):
+            for iImprovement in xrange(gc.getNumImprovementInfos()):
                 pFile.write("Player %d, %s, Improvement count: %d\n" % (iPlayer, gc.getImprovementInfo(iImprovement).getDescription().encode('utf-8'), pPlayer.getImprovementCount(iImprovement)))
 
             pFile.write("\n\n")
 
             pFile.write("Building Class Info:\n")
             pFile.write("--------------------\n")
-            for iBuildingClass in range(gc.getNumBuildingClassInfos()):
+            for iBuildingClass in xrange(gc.getNumBuildingClassInfos()):
                 pFile.write("Player %d, %s, Building class count plus building: %d\n" % (iPlayer, gc.getBuildingClassInfo(iBuildingClass).getDescription().encode('utf-8'), pPlayer.getBuildingClassCountPlusMaking(iBuildingClass)))
 
             pFile.write("\n\n")
 
             pFile.write("Unit Class Info:\n")
             pFile.write("--------------------\n")
-            for iUnitClass in range(gc.getNumUnitClassInfos()):
+            for iUnitClass in xrange(gc.getNumUnitClassInfos()):
                 pFile.write("Player %d, %s, Unit class count plus training: %d\n" % (iPlayer, gc.getUnitClassInfo(iUnitClass).getDescription().encode('utf-8'), pPlayer.getUnitClassCountPlusMaking(iUnitClass)))
 
             pFile.write("\n\n")
 
             pFile.write("UnitAI Types Info:\n")
             pFile.write("------------------\n")
-            for iUnitAIType in range(int(UnitAITypes.NUM_UNITAI_TYPES)):
+            for iUnitAIType in xrange(int(UnitAITypes.NUM_UNITAI_TYPES)):
                 pFile.write("Player %d, %s, Unit AI Type count: %d\n" % (iPlayer, gc.getUnitAIInfo(iUnitAIType).getDescription().encode('utf-8'), pPlayer.AI_totalUnitAIs(UnitAITypes(iUnitAIType))))
 
             pFile.write("\n\n")
 
             pFile.write("Technologies:\n")
             pFile.write("------------------\n")
-            for iTech in range(gc.getNumTechInfos()):
+            for iTech in xrange(gc.getNumTechInfos()):
                 if pTeam.isHasTech(iTech):
                     szTech = "Yes"
                 else:

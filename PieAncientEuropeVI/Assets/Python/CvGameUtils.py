@@ -36,6 +36,11 @@ PyInfo = PyHelpers.PyInfo
 PyCity = PyHelpers.PyCity
 PyGame = PyHelpers.PyGame
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 
 class CvGameUtils:
     "Miscellaneous game functions"
@@ -57,7 +62,7 @@ class CvGameUtils:
         # --- PAE: Automated trade routes (Boggy, Flunky, Pie)
         # --- PAE: AI Generals with Rhetorik adds morale to all units they move through
         iRange = gc.getMAX_PLAYERS()
-        for i in range(iRange):
+        for i in xrange(iRange):
             pPlayer = gc.getPlayer(i)
             #if pPlayer.isHuman():
             (pLoopUnit, pIter) = pPlayer.firstUnit(False)
@@ -147,8 +152,8 @@ class CvGameUtils:
         # Worker, Arbeitstrupp oder Sklave, Slave
         if iUnitType == gc.getInfoTypeForString("UNIT_WORKER") or iUnitType == gc.getInfoTypeForString("UNIT_SLAVE") or iUnitType == gc.getInfoTypeForString("UNIT_WORK_ELEPHANT"):
             iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
-            for x in range(gc.getMap().getGridWidth()):
-                for y in range(gc.getMap().getGridHeight()):
+            for x in xrange(gc.getMap().getGridWidth()):
+                for y in xrange(gc.getMap().getGridHeight()):
                     loopPlot = gc.getMap().plot(x, y)
                     if loopPlot and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce:
@@ -181,8 +186,8 @@ class CvGameUtils:
         # Workboat, Arbeitsboot
         if iUnitType == gc.getInfoTypeForString("UNIT_WORKBOAT"):
             iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
-            for x in range(gc.getMap().getGridWidth()):
-                for y in range(gc.getMap().getGridHeight()):
+            for x in xrange(gc.getMap().getGridWidth()):
+                for y in xrange(gc.getMap().getGridHeight()):
                     loopPlot = gc.getMap().plot(x, y)
                     if loopPlot and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce:
@@ -208,7 +213,7 @@ class CvGameUtils:
                     while loopCity:
                         #loopCity = pHeadSelectedUnit.plot().getWorkingCity()
                         if not loopCity.isNone() and loopCity.getOwner() == pPlayer.getID():
-                            for iI in range(gc.getNUM_CITY_PLOTS()):
+                            for iI in xrange(gc.getNUM_CITY_PLOTS()):
                                 pLoopPlot = loopCity.getCityIndexPlot(iI)
                                 if pLoopPlot and not pLoopPlot.isNone():
                                     if PAE_Cultivation.isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, False, loopCity):
@@ -251,8 +256,8 @@ class CvGameUtils:
         # Handelskarren, Karawanen
         if iUnitType in L.LTradeUnits and pHeadSelectedUnit.getDomainType() == DomainTypes.DOMAIN_LAND:
             iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
-            for x in range(gc.getMap().getGridWidth()):
-                for y in range(gc.getMap().getGridHeight()):
+            for x in xrange(gc.getMap().getGridWidth()):
+                for y in xrange(gc.getMap().getGridHeight()):
                     loopPlot = gc.getMap().plot(x, y)
                     if loopPlot and not loopPlot.isNone():
                         if loopPlot.getFeatureType() == iDarkIce:
@@ -337,7 +342,7 @@ class CvGameUtils:
                     (loopCity, pIter) = pPlayer.nextCity(pIter, False)
                 # Cities of vassals
                 iPlayerTeam = pPlayer.getTeam()
-                for iVassal in range(gc.getMAX_PLAYERS()):
+                for iVassal in xrange(gc.getMAX_PLAYERS()):
                     pVassal = gc.getPlayer(iVassal)
                     if pVassal.isAlive():
                         iVassalTeam = pVassal.getTeam()
@@ -359,7 +364,7 @@ class CvGameUtils:
                 # Cities of vassals
                 iPlayerTeam = pPlayer.getTeam()
                 iRange = gc.getMAX_PLAYERS()
-                for iVassal in range(iRange):
+                for iVassal in xrange(iRange):
                     pVassal = gc.getPlayer(iVassal)
                     if pVassal.isAlive():
                         iVassalTeam = pVassal.getTeam()
@@ -427,8 +432,8 @@ class CvGameUtils:
             if pTeam.isHasTech(gc.getInfoTypeForString("TECH_RESERVISTEN")):
                 iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
                 iBuild = gc.getInfoTypeForString("BUILD_LATIFUNDIUM")
-                for x in range(gc.getMap().getGridWidth()):
-                    for y in range(gc.getMap().getGridHeight()):
+                for x in xrange(gc.getMap().getGridWidth()):
+                    for y in xrange(gc.getMap().getGridHeight()):
                         loopPlot = gc.getMap().plot(x, y)
                         if loopPlot and not loopPlot.isNone():
                             if loopPlot.getFeatureType() == iDarkIce:
@@ -576,7 +581,7 @@ class CvGameUtils:
     def cannotResearch(self, argsList):
         ePlayer = argsList[0]
         eTech = argsList[1]
-        bTrade = argsList[2]
+        # bTrade = argsList[2]
 
         # city states / Stadtstaaten
         if eTech == gc.getInfoTypeForString("TECH_COLONIZATION"):
@@ -688,7 +693,7 @@ class CvGameUtils:
             eBonus = gc.getBuildingInfo(eBuilding).getPrereqAndBonus()
             # lPlots = PAE_Cultivation.getCityCultivatedPlots(pCity, eBonus)
 
-            for i in range(gc.getNUM_CITY_PLOTS()):
+            for i in xrange(gc.getNUM_CITY_PLOTS()):
                 pPlot = pCity.getCityIndexPlot(i)
                 if pPlot and not pPlot.isNone():
                     if pPlot.getBonusType(-1) == eBonus and pPlot.getOwner() == pCity.getOwner():
@@ -708,7 +713,7 @@ class CvGameUtils:
             eBonus2 = gc.getInfoTypeForString("BONUS_IVORY")
 
             # Stadtradius
-            #for i in range(gc.getNUM_CITY_PLOTS()):
+            #for i in xrange(gc.getNUM_CITY_PLOTS()):
             #  loopPlot = pCity.getCityIndexPlot(i)
             #  if loopPlot is not None and not loopPlot.isNone():
             #    if eBonus1 == loopPlot.getBonusType(-1) or eBonus2 == loopPlot.getBonusType(-1):
@@ -718,8 +723,8 @@ class CvGameUtils:
             iRange = 3
             iX = pCity.getX()
             iY = pCity.getY()
-            for i in range(-iRange, iRange+1):
-                for j in range(-iRange, iRange+1):
+            for i in xrange(-iRange, iRange+1):
+                for j in xrange(-iRange, iRange+1):
                     loopPlot = plotXY(iX, iY, i, j)
                     if loopPlot and not loopPlot.isNone():
                         if eBonus1 == loopPlot.getBonusType(-1) or eBonus2 == loopPlot.getBonusType(-1):
@@ -737,8 +742,8 @@ class CvGameUtils:
 
             iX = pCity.getX()
             iY = pCity.getY()
-            for i in range(-iRange, iRange+1):
-                for j in range(-iRange, iRange+1):
+            for i in xrange(-iRange, iRange+1):
+                for j in xrange(-iRange, iRange+1):
                     loopPlot = plotXY(iX, iY, i, j)
                     if loopPlot and not loopPlot.isNone():
                         if loopPlot.isHills():
@@ -1431,8 +1436,8 @@ class CvGameUtils:
                 lUnit = []
                 # Inselstadt soll nur Handelsschiffe bauen
                 Plots = 0
-                for i in range(3):
-                    for j in range(3):
+                for i in xrange(3):
+                    for j in xrange(3):
                         loopPlot = gc.getMap().plot(pCity.getX() + i - 1, pCity.getY() + j - 1)
                         if loopPlot is not None and not loopPlot.isNone():
                             if not loopPlot.isWater():
@@ -1966,7 +1971,7 @@ class CvGameUtils:
                     if bSearchPlot:
                         UnitHorse = gc.getInfoTypeForString("UNIT_HORSE")
                         iRange = pPlot.getNumUnits()
-                        for i in range(iRange):
+                        for i in xrange(iRange):
                             pLoopUnit = pPlot.getUnit(i)
                             if pLoopUnit.getUnitType() == UnitHorse and pLoopUnit.getOwner() == iOwner:
                                 # Create a new unit
@@ -2276,7 +2281,7 @@ class CvGameUtils:
                 iX = pUnit.getX()
                 iY = pUnit.getY()
 
-                for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+                for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                     loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
                     if loopPlot and not loopPlot.isNone():
                         if loopPlot.isCity():
@@ -2334,7 +2339,7 @@ class CvGameUtils:
                 iUnitSlave = gc.getInfoTypeForString("UNIT_SLAVE")
                 iPromo = gc.getInfoTypeForString("PROMOTION_MORALE")
 
-                for iUnit in range(pPlot.getNumUnits()):
+                for iUnit in xrange(pPlot.getNumUnits()):
                     loopUnit = pPlot.getUnit(iUnit)
                     if loopUnit.getOwner() == iOwner:
                         if loopUnit.getUnitType() == iUnitSlave:
@@ -2477,7 +2482,7 @@ class CvGameUtils:
         iTech = gc.getInfoTypeForString("TECH_LIBERALISM")
         bTech = False
         iRange = gc.getMAX_PLAYERS()
-        for i in range(iRange):
+        for i in xrange(iRange):
             pTeam = gc.getTeam(gc.getPlayer(i).getTeam())
             if pTeam.isHasTech(iTech):
                 bTech = True
@@ -2794,13 +2799,13 @@ class CvGameUtils:
                     sTemp = ""
                     if pCity.isConnectedToCapital(iPlayer):
                         sTemp += CyTranslator().getText("[ICON_TRADE]", ())
-                    for i in range(gc.getNumReligionInfos()):
+                    for i in xrange(gc.getNumReligionInfos()):
                         if pCity.isHolyCityByType(i):
                             sTemp += u"%c" % (gc.getReligionInfo(i).getHolyCityChar())
                         elif pCity.isHasReligion(i):
                             sTemp += u"%c" % (gc.getReligionInfo(i).getChar())
 
-                    for i in range(gc.getNumCorporationInfos()):
+                    for i in xrange(gc.getNumCorporationInfos()):
                         if pCity.isHeadquartersByType(i):
                             sTemp += u"%c" % (gc.getCorporationInfo(i).getHeadquarterChar())
                         elif pCity.isHasCorporation(i):
@@ -2838,7 +2843,7 @@ class CvGameUtils:
                     sText += u"\n%s: %d/%d (%s)" % (CyTranslator().getText("[ICON_CULTURE]", ()), pCity.getCulture(iPlayer), pCity.getCultureThreshold(), gc.getCultureLevelInfo(pCity.getCultureLevel()).getDescription())
 
                     lTemp = []
-                    for i in range(CommerceTypes.NUM_COMMERCE_TYPES):
+                    for i in xrange(CommerceTypes.NUM_COMMERCE_TYPES):
                         iAmount = pCity.getCommerceRateTimes100(i)
                         if iAmount <= 0:
                             continue
@@ -2855,7 +2860,7 @@ class CvGameUtils:
 
                     lBuildings = []
                     lWonders = []
-                    for i in range(gc.getNumBuildingInfos()):
+                    for i in xrange(gc.getNumBuildingInfos()):
                         if pCity.isHasBuilding(i):
                             Info = gc.getBuildingInfo(i)
                             if isLimitedWonderClass(Info.getBuildingClassType()):
@@ -3652,7 +3657,7 @@ class CvGameUtils:
             return False
 
         # nur im Friedensfall
-        for iPlayer in range(gc.getMAX_CIV_PLAYERS()):
+        for iPlayer in xrange(gc.getMAX_CIV_PLAYERS()):
             if gc.getPlayer(iPlayer).isAlive():
                 iTeam = gc.getPlayer(iPlayer).getTeam()
                 if pThisTeam.isAtWar(iTeam):
@@ -3713,7 +3718,7 @@ class CvGameUtils:
     # Religion des Missionars herausfinden
     def getUnitReligion(self, iUnitType):
 
-        for iI in range(gc.getNumCorporationInfos()):
+        for iI in xrange(gc.getNumCorporationInfos()):
             if gc.getUnitInfo(iUnitType).getReligionSpreads(iI) > 0:
                 return iI
         # if iUnitType == gc.getInfoTypeForString("UNIT_CELTIC_MISSIONARY"): return 0
@@ -3733,7 +3738,7 @@ class CvGameUtils:
 
     # Kult eines Kultisten herausfinden
     def getUnitKult(self, iUnitType):
-        for iI in range(gc.getNumCorporationInfos()):
+        for iI in xrange(gc.getNumCorporationInfos()):
             if gc.getUnitInfo(iUnitType).getCorporationSpreads(iI) > 0:
                 return iI
         # if iUnitType   == gc.getInfoTypeForString("UNIT_EXECUTIVE_1"): return 0
@@ -3770,7 +3775,7 @@ class CvGameUtils:
             (loopCity, pIter) = pPlayer.nextCity(pIter, False)
         # Cities of vassals
         iPlayerTeam = pPlayer.getTeam()
-        for iVassal in range(gc.getMAX_CIV_PLAYERS()):
+        for iVassal in xrange(gc.getMAX_CIV_PLAYERS()):
             pVassal = gc.getPlayer(iVassal)
             if pVassal.isAlive() and \
                gc.getTeam(pVassal.getTeam()).isVassal(iPlayerTeam):

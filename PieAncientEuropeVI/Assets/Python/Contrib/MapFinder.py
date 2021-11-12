@@ -319,7 +319,7 @@ def matchRules():
 				iX = iMaxX + iX
 			else:
 				iX = 0
-		for i in range(1, lMax + 1):
+		for i in xrange(1, lMax + 1):
 			lX[i] = iX
 			iX = iX + 1
 			if iX > iMaxX: 0
@@ -331,7 +331,7 @@ def matchRules():
 				iY = iMaxY + iY
 			else:
 				iY = 0
-		for i in range(1, lMax + 1):
+		for i in xrange(1, lMax + 1):
 			lY[i] = iY
 ## HOF MOD V1.61.005
 ##			iy = iX + 1
@@ -342,8 +342,8 @@ def matchRules():
 			
 ##	displayMsg(str(lX.values()) + "\n" + str(lY.values()))
 
-	for iY in range(0, iMaxY):
-		for iX in range(0, iMaxX):
+	for iY in xrange(0, iMaxY):
+		for iX in xrange(0, iMaxX):
 
 			if (Rules['Range'] != 999):
 ## HOF MOD V1.61.005
@@ -460,7 +460,7 @@ def matchRules():
 
 		lPF.append(grp)
 
-	for i in range(len(lPF)):
+	for i in xrange(len(lPF)):
 		if (lPF[i]):
 			return True
 	return False

@@ -20,10 +20,15 @@
 ##
 ## Author: EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyInterface, CyGame,
+                                YieldTypes, FontSymbols)
 import BugUtil
 import FontUtil
 import PlayerUtil
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 gc = CyGlobalContext()
 
@@ -180,7 +185,7 @@ def calcPercentages(city):
     percents = []
     if iTotal > 0:
         iLeftover = 100
-        for iUnit in range(gc.getNumUnitInfos()):
+        for iUnit in xrange(gc.getNumUnitInfos()):
 #           iUnit = getUnitType(gpType)
             iProgress = city.getGreatPeopleUnitProgress(iUnit)
             if iProgress > 0:

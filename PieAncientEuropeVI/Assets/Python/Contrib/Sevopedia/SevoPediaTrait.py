@@ -75,11 +75,11 @@ class SevoPediaTrait:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_CONCEPT_LEADERS", ()), "", False, True, self.X_LEADERS, self.Y_LEADERS, self.W_LEADERS, self.H_LEADERS, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
-		for iLeader in range(gc.getNumLeaderHeadInfos()):
+		for iLeader in xrange(gc.getNumLeaderHeadInfos()):
 			leader = gc.getLeaderHeadInfo(iLeader)
 			if leader.hasTrait(self.iTrait):
 				self.iLeader = iLeader
-				for iCiv in range(gc.getNumCivilizationInfos()):
+				for iCiv in xrange(gc.getNumCivilizationInfos()):
 					if gc.getCivilizationInfo(iCiv).isLeaders(iLeader):
 						screen.attachImageButton(panelName, "", gc.getLeaderHeadInfo(iLeader).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_LEADER, iLeader, iCiv, False)
 						break

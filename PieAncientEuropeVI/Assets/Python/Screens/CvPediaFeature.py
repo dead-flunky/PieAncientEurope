@@ -1,8 +1,11 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+                                FontTypes, CivilopediaPageTypes, YieldTypes,
+                                WidgetTypes, PanelStyles, TableStyles,
+                                CyGameTextMgr)
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import CvScreenEnums
 import string
 
@@ -61,15 +64,15 @@ class CvPediaFeature:
                 screen.setText(self.top.getNextWidgetName(), "Background", self.top.MENU_TEXT, CvUtil.FONT_LEFT_JUSTIFY, self.top.X_MENU, self.top.Y_MENU, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_MAIN, CivilopediaPageTypes.CIVILOPEDIA_PAGE_FEATURE, -1)
 
                 if self.top.iLastScreen        != CvScreenEnums.PEDIA_FEATURE or bNotActive:
-                        self.placeLinks(true)
+                        self.placeLinks(True)
                         self.top.iLastScreen = CvScreenEnums.PEDIA_FEATURE
                 else:
-                        self.placeLinks(false)
+                        self.placeLinks(False)
 
                 # Icon
                 screen.addPanel( self.top.getNextWidgetName(), "", "", False, False,
                     self.X_ICON_PANE, self.Y_ICON_PANE, self.W_ICON_PANE, self.H_ICON_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-                screen.addPanel(self.top.getNextWidgetName(), "", "", false, false,
+                screen.addPanel(self.top.getNextWidgetName(), "", "", False, False,
                     self.X_ICON, self.Y_ICON, self.W_ICON, self.H_ICON, PanelStyles.PANEL_STYLE_MAIN)
                 screen.addDDSGFC(self.top.getNextWidgetName(), gc.getFeatureInfo(self.iFeature).getButton(),
                     self.X_ICON + self.W_ICON/2 - self.ICON_SIZE/2, self.Y_ICON + self.H_ICON/2 - self.ICON_SIZE/2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
@@ -87,10 +90,10 @@ class CvPediaFeature:
 
                 panelName = self.top.getNextWidgetName()
                 screen.addListBoxGFC(panelName, "", self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, TableStyles.TABLE_STYLE_EMPTY)
-#                screen.addPanel( panelName, "", "", true, true, self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, PanelStyles.PANEL_STYLE_EMPTY )
+#                screen.addPanel( panelName, "", "", True, True, self.X_STATS_PANE, self.Y_STATS_PANE, self.W_STATS_PANE, self.H_STATS_PANE, PanelStyles.PANEL_STYLE_EMPTY )
                 screen.enableSelect(panelName, False)
 
-                for k in range(YieldTypes.NUM_YIELD_TYPES):
+                for k in xrange(YieldTypes.NUM_YIELD_TYPES):
                         iYieldChange = gc.getFeatureInfo(self.iFeature).getYieldChange(k)
                         if (iYieldChange != 0):
                                 if (iYieldChange > 0):
@@ -108,10 +111,10 @@ class CvPediaFeature:
                 screen = self.top.getScreen()
 
                 panelName = self.top.getNextWidgetName()
-                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", true, false, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
+                screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 
                 listName = self.top.getNextWidgetName()
-                screen.attachListBoxGFC( panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY )
+                screen.attachListBoxGFC(panelName, listName, "", TableStyles.TABLE_STYLE_EMPTY)
                 screen.enableSelect(listName, False)
 
                 szSpecialText = CyGameTextMgr().getFeatureHelp(self.iFeature, True)
@@ -129,13 +132,13 @@ class CvPediaFeature:
 
                 # sort resources alphabetically
                 listSorted=[(0,0)]*gc.getNumFeatureInfos()
-                for j in range(gc.getNumFeatureInfos()):
+                for j in xrange(gc.getNumFeatureInfos()):
                         listSorted[j] = (gc.getFeatureInfo(j).getDescription(), j)
                 listSorted.sort()
 
                 iSelected = 0
                 i = 0
-                for iI in range(gc.getNumFeatureInfos()):
+                for iI in xrange(gc.getNumFeatureInfos()):
                         if (not gc.getFeatureInfo(listSorted[iI][1]).isGraphicalOnly()):
                                 if bRedraw:
                                         screen.appendListBoxString( self.top.LIST_ID, listSorted[iI][0], WidgetTypes.WIDGET_PEDIA_JUMP_TO_FEATURE, listSorted[iI][1], 0, CvUtil.FONT_LEFT_JUSTIFY )
@@ -148,4 +151,3 @@ class CvPediaFeature:
         # Will handle the input for this screen...
         def handleInput (self, inputClass):
                 return 0
-

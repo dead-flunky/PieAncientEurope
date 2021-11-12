@@ -119,7 +119,7 @@ class SevoPediaBuilding:
 				szCost = localText.getText("TXT_KEY_PEDIA_COST", (gc.getPlayer(self.top.iActivePlayer).getBuildingProductionNeeded(self.iBuilding),))
 			screen.appendListBoxStringNoUpdate(panelName, u"<font=4>" + szCost.upper() + u"%c" % gc.getYieldInfo(YieldTypes.YIELD_PRODUCTION).getChar() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-		for k in range(YieldTypes.NUM_YIELD_TYPES):
+		for k in xrange(YieldTypes.NUM_YIELD_TYPES):
 			if (buildingInfo.getYieldChange(k) != 0):
 				if (buildingInfo.getYieldChange(k) > 0):
 					szSign = "+"
@@ -130,7 +130,7 @@ class SevoPediaBuilding:
 				szText2 = szText1 + (u"%c" % (gc.getYieldInfo(k).getChar()))
 				screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText2 + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-		for k in range(CommerceTypes.NUM_COMMERCE_TYPES):
+		for k in xrange(CommerceTypes.NUM_COMMERCE_TYPES):
 			iTotalCommerce = buildingInfo.getObsoleteSafeCommerceChange(k) + buildingInfo.getCommerceChange(k)
 			if (iTotalCommerce != 0):
 				if (iTotalCommerce > 0):
@@ -180,7 +180,7 @@ class SevoPediaBuilding:
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True, self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
 
-		for iPrereq in range(gc.getNumTechInfos()):
+		for iPrereq in xrange(gc.getNumTechInfos()):
 			if isTechRequiredForBuilding(iPrereq, self.iBuilding):
 				screen.attachImageButton( panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, 1, False )
 
@@ -188,7 +188,7 @@ class SevoPediaBuilding:
 		if (iPrereq >= 0):
 			screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
 
-		for k in range(gc.getNUM_BUILDING_PREREQ_OR_BONUSES()):
+		for k in xrange(gc.getNUM_BUILDING_PREREQ_OR_BONUSES()):
 			iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqOrBonuses(k)
 			if (iPrereq >= 0):
 				screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
@@ -196,7 +196,7 @@ class SevoPediaBuilding:
 		iCorporation = gc.getBuildingInfo(self.iBuilding).getFoundsCorporation()
 		bFirst = True
 		if (iCorporation >= 0):
-			for k in range(gc.getNUM_CORPORATION_PREREQ_BONUSES()):
+			for k in xrange(gc.getNUM_CORPORATION_PREREQ_BONUSES()):
 				iPrereq = gc.getCorporationInfo(iCorporation).getPrereqBonus(k)
 				if (iPrereq >= 0):
 					if not bFirst:
@@ -250,7 +250,7 @@ class SevoPediaBuilding:
 	def getBuildingSortedList(self, iBuildingType):
 		list1 = []
 		numInfos = 0
-		for iBuilding in range(gc.getNumBuildingInfos()):
+		for iBuilding in xrange(gc.getNumBuildingInfos()):
 			if (self.getBuildingType(iBuilding) == iBuildingType):
 				list1.append(iBuilding)
 				numInfos += 1

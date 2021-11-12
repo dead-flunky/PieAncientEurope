@@ -173,7 +173,7 @@ class AIAutoPlay :
             popup.addSeparator()
 
             popup.createPythonPullDown(localText.getText("TXT_KEY_AIAUTOPLAY_TAKE_CONTROL_CIV", ()), 1)
-            for i in range(0,gc.getMAX_CIV_PLAYERS()) :
+            for i in xrange(0,gc.getMAX_CIV_PLAYERS()) :
                 player = PyPlayer(i)
                 if( not player.isNone() and not i == pPlayer.getID() ) :
                     if( player.isAlive() ) :
@@ -202,7 +202,7 @@ class AIAutoPlay :
             game.setActivePlayer(pPlayer.getID(), False)
             pPlayer.setIsHuman(True)
 
-        #for idx in range(0,gc.getMAX_CIV_TEAMS()) :
+        #for idx in xrange(0,gc.getMAX_CIV_TEAMS()) :
         #    pPlayer.setEspionageSpendingWeightAgainstTeam(idx, pPlayer.getEspionageSpendingWeightAgainstTeam(idx)/10)
 
 
@@ -302,7 +302,7 @@ def doRefortify(iPlayer) :
     
     CvUtil.pyPrint("Refortifying units for player %d"%(iPlayer))
 
-    for groupID in range(0,pPlayer.getNumSelectionGroups()):
+    for groupID in xrange(0,pPlayer.getNumSelectionGroups()):
         pGroup = pPlayer.getSelectionGroup(groupID)
         if pGroup.getNumUnits() > 0:
 

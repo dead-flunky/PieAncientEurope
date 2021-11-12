@@ -1,7 +1,7 @@
 # Mercenary feature
 # adapted into this file by Flunky
 
-### Imports
+# Imports
 from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
                                 CyTranslator, DirectionTypes, AttitudeTypes,
                                 ColorTypes, UnitAITypes, CyPopupInfo,
@@ -10,13 +10,13 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
 # import CvEventInterface
 import CvUtil
 
-### Defines
+# Defines
 gc = CyGlobalContext()
 localText = CyTranslator()
 
-### Globals
-PAEInstanceHiringModifier = {} # Soeldner werden teurer innerhalb einer Runde
-PAEMercComission = {} # Soelnder koennen nur 1x pro Runde beauftragt werden
+# Globals
+PAEInstanceHiringModifier = {}  # Soeldner werden teurer innerhalb einer Runde
+PAEMercComission = {}  # Soelnder koennen nur 1x pro Runde beauftragt werden
 
 # Reminder: How to use ScriptData: CvUtil.getScriptData(pUnit, ["b"], -1), CvUtil.addScriptData(pUnit, "b", eBonus) (add uses string, get list of strings)
 # getScriptData returns string => cast might be necessary
@@ -26,6 +26,7 @@ PAEMercComission = {} # Soelnder koennen nur 1x pro Runde beauftragt werden
 # "x"/"y": coordinates of plots where bonus was picked up (merchants)
 # "b": index of bonus stored in merchant/cultivation unit (only one at a time)
 # "originCiv": original owner of the bonus stored in merchant (owner of the city where it was bought)
+
 
 def onModNetMessage(argsList):
     # Hire or Commission Mercenary Menu
@@ -41,17 +42,21 @@ def onModNetMessage(argsList):
         popupInfo = CyPopupInfo()
         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
         popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_MAIN" + iRandStr, (pCity.getName(),)))
-        popupInfo.setData1(iCity) # CityID
+        popupInfo.setData1(iCity)  # CityID
         popupInfo.setData2(iPlayer)
-        popupInfo.setOnClickedPythonCallback("popupMercenariesMain") # EntryPoints/CvScreenInterface und CvGameUtils -> 708, 709 usw
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_HIRE", ("", )), "Art/Interface/Buttons/Actions/button_action_mercenary_hire.dds")
+        # EntryPoints/CvScreenInterface und CvGameUtils -> 708, 709 usw
+        popupInfo.setOnClickedPythonCallback("popupMercenariesMain")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_HIRE", ("", )),
+                                  "Art/Interface/Buttons/Actions/button_action_mercenary_hire.dds")
 
         # do this only once per turn
         PAEMercComission.setdefault(iPlayer, 0)
         if PAEMercComission[iPlayer] == 0:
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN", ("", )), "Art/Interface/Buttons/Actions/button_action_mercenary_assign.dds")
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN", ("", )),
+                                      "Art/Interface/Buttons/Actions/button_action_mercenary_assign.dds")
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                  "Art/Interface/Buttons/Actions/Cancel.dds")
         popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
         # Dies soll doppelte Popups in PB-Spielen vermeiden.
         if iPlayer == gc.getGame().getActivePlayer():
@@ -78,13 +83,12 @@ def onModNetMessage(argsList):
         # Check neighbours
         lNeighbors = []
         iRange = gc.getMAX_PLAYERS()
-        for iLoopPlayer in range(iRange):
+        for iLoopPlayer in xrange(iRange):
             pLoopPlayer = gc.getPlayer(iLoopPlayer)
             if iLoopPlayer != gc.getBARBARIAN_PLAYER() and iLoopPlayer != iPlayer:
                 if pLoopPlayer.isAlive():
                     if gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
                         lNeighbors.append(iLoopPlayer)
-
 
         if iData1 != -1 and iData1 < len(lNeighbors):
             iData0 = 710
@@ -95,7 +99,7 @@ def onModNetMessage(argsList):
             popupInfo = CyPopupInfo()
             popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
             popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN1", ("",)))
-            popupInfo.setOnClickedPythonCallback("popupMercenariesAssign1") # EntryPoints/CvScreenInterface -> 709
+            popupInfo.setOnClickedPythonCallback("popupMercenariesAssign1")  # EntryPoints/CvScreenInterface -> 709
             popupInfo.setData3(iPlayer)
 
             # List neighbors ---------
@@ -131,15 +135,16 @@ def onModNetMessage(argsList):
                         szBuffer = "<color=255,0,0,255>"
 
                     szBuffer = szBuffer + " (" + localText.getText("TXT_KEY_"+str(eAtt), ()) + ")"
-                    popupInfo.addPythonButton(pLoopPlayer.getCivilizationShortDescription(0) + szBuffer, gc.getCivilizationInfo(pLoopPlayer.getCivilizationType()).getButton())
+                    popupInfo.addPythonButton(pLoopPlayer.getCivilizationShortDescription(0) + szBuffer,
+                                              gc.getCivilizationInfo(pLoopPlayer.getCivilizationType()).getButton())
                     #popupInfo.addPythonButton(gc.getCivilizationInfo(pLoopPlayer.getCivilizationType()).getText(), gc.getCivilizationInfo(pLoopPlayer.getCivilizationType()).getButton())
 
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                      "Art/Interface/Buttons/Actions/Cancel.dds")
             popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
             # Dies soll doppelte Popups in PB-Spielen vermeiden.
             if iPlayer == gc.getGame().getActivePlayer():
                 popupInfo.addPopup(iPlayer)
-
 
     # Commission Mercenaries (Inter/national mercenaries)
     # on-site
@@ -154,17 +159,22 @@ def onModNetMessage(argsList):
         popupInfo = CyPopupInfo()
         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
         popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2", ("",)))
-        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign2") # EntryPoints/CvScreenInterface -> 711
-        popupInfo.setData1(iData1) # iTargetPlayer
-        popupInfo.setData3(iPlayer) # iPlayer
+        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign2")  # EntryPoints/CvScreenInterface -> 711
+        popupInfo.setData1(iData1)  # iTargetPlayer
+        popupInfo.setData3(iPlayer)  # iPlayer
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_1", ("", )), gc.getCivilizationInfo(gc.getPlayer(iData1).getCivilizationType()).getButton())
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_2", ("", )), gc.getCivilizationInfo(pPlayer.getCivilizationType()).getButton())
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_3", ("", )), "Art/Interface/Buttons/Actions/button_action_merc_international.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_1", ("", )),
+                                  gc.getCivilizationInfo(gc.getPlayer(iData1).getCivilizationType()).getButton())
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_2", ("", )),
+                                  gc.getCivilizationInfo(pPlayer.getCivilizationType()).getButton())
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_3", ("", )),
+                                  "Art/Interface/Buttons/Actions/button_action_merc_international.dds")
         if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_BANKWESEN")):
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_4", ("", )), "Art/Interface/Buttons/Actions/button_action_merc_elite.dds")
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN2_4",
+                                      ("", )), "Art/Interface/Buttons/Actions/button_action_merc_elite.dds")
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                  "Art/Interface/Buttons/Actions/Cancel.dds")
         popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
         # Dies soll doppelte Popups in PB-Spielen vermeiden.
         if iPlayer == gc.getGame().getActivePlayer():
@@ -189,18 +199,23 @@ def onModNetMessage(argsList):
         popupInfo = CyPopupInfo()
         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
         popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3", ("", )))
-        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign3") # EntryPoints/CvScreenInterface -> 712
-        popupInfo.setData1(iData1) # iTargetPlayer
-        popupInfo.setData2(iData2) # iFaktor
-        popupInfo.setData3(iPlayer) # iPlayer
+        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign3")  # EntryPoints/CvScreenInterface -> 712
+        popupInfo.setData1(iData1)  # iTargetPlayer
+        popupInfo.setData2(iData2)  # iFaktor
+        popupInfo.setData3(iPlayer)  # iPlayer
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_1", ("", )), "Art/Interface/Buttons/Actions/button_action_mercenaries1.dds")
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_2", ("", )), "Art/Interface/Buttons/Actions/button_action_mercenaries2.dds")
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_3", ("", )), "Art/Interface/Buttons/Actions/button_action_mercenaries3.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_1", ("", )),
+                                  "Art/Interface/Buttons/Actions/button_action_mercenaries1.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_2", ("", )),
+                                  "Art/Interface/Buttons/Actions/button_action_mercenaries2.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_3", ("", )),
+                                  "Art/Interface/Buttons/Actions/button_action_mercenaries3.dds")
         if iData2 != 4:
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_4", ("", )), "Art/Interface/Buttons/Actions/button_action_mercenaries4.dds")
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN3_4", ("", )),
+                                      "Art/Interface/Buttons/Actions/button_action_mercenaries4.dds")
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                  "Art/Interface/Buttons/Actions/Cancel.dds")
         popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
         # Dies soll doppelte Popups in PB-Spielen vermeiden.
         if iPlayer == gc.getGame().getActivePlayer():
@@ -225,18 +240,24 @@ def onModNetMessage(argsList):
         popupInfo = CyPopupInfo()
         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
         popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4", ("", )))
-        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign4") # EntryPoints/CvScreenInterface -> 713
-        popupInfo.setData1(iData1) # iTargetPlayer
-        popupInfo.setData2(iData2) # iFaktor
-        popupInfo.setData3(iPlayer) # iPlayer
+        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign4")  # EntryPoints/CvScreenInterface -> 713
+        popupInfo.setData1(iData1)  # iTargetPlayer
+        popupInfo.setData2(iData2)  # iFaktor
+        popupInfo.setData3(iPlayer)  # iPlayer
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_1", ("", )), "Art/Interface/Buttons/Promotions/tarnung.dds")
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_2", ("", )), ",Art/Interface/Buttons/Promotions/Cover.dds,Art/Interface/Buttons/Promotions_Atlas.dds,2,5")
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_3", ("", )), ",Art/Interface/Buttons/Promotions/Shock.dds,Art/Interface/Buttons/Promotions_Atlas.dds,4,5")
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_4", ("", )), ",Art/Interface/Buttons/Promotions/CityRaider1.dds,Art/Interface/Buttons/Promotions_Atlas.dds,5,2")
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_UNITCOMBAT_NAVAL", ("", )), ",Art/Interface/Buttons/Promotions/Naval_Units.dds,Art/Interface/Buttons/Promotions_Atlas.dds,3,7")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_1",
+                                  ("", )), "Art/Interface/Buttons/Promotions/tarnung.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_2", ("", )),
+                                  ",Art/Interface/Buttons/Promotions/Cover.dds,Art/Interface/Buttons/Promotions_Atlas.dds,2,5")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_3", ("", )),
+                                  ",Art/Interface/Buttons/Promotions/Shock.dds,Art/Interface/Buttons/Promotions_Atlas.dds,4,5")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN4_4", ("", )),
+                                  ",Art/Interface/Buttons/Promotions/CityRaider1.dds,Art/Interface/Buttons/Promotions_Atlas.dds,5,2")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_UNITCOMBAT_NAVAL", ("", )),
+                                  ",Art/Interface/Buttons/Promotions/Naval_Units.dds,Art/Interface/Buttons/Promotions_Atlas.dds,3,7")
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                  "Art/Interface/Buttons/Actions/Cancel.dds")
         popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
         # Dies soll doppelte Popups in PB-Spielen vermeiden.
         if iPlayer == gc.getGame().getActivePlayer():
@@ -258,10 +279,10 @@ def onModNetMessage(argsList):
         popupInfo = CyPopupInfo()
         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
         popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5", ("", )))
-        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign5") # EntryPoints/CvScreenInterface -> 714
-        popupInfo.setData1(iData1) # iTargetPlayer
-        popupInfo.setData2(iData2) # iFaktor
-        popupInfo.setData3(iPlayer) # iPlayer
+        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign5")  # EntryPoints/CvScreenInterface -> 714
+        popupInfo.setData1(iData1)  # iTargetPlayer
+        popupInfo.setData2(iData2)  # iFaktor
+        popupInfo.setData3(iPlayer)  # iPlayer
 
         if gc.getGame().countKnownTechNumTeams(gc.getInfoTypeForString("TECH_MECHANIK")) > 0:
             iUnit = gc.getInfoTypeForString("UNIT_BATTERING_RAM2")
@@ -275,13 +296,18 @@ def onModNetMessage(argsList):
         else:
             iUnit = -1
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_1", ("", )), ",Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_1", ("", )),
+                                  ",Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5")
         if iUnit != -1:
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_2", (szName, 2, 50)), gc.getUnitInfo(iUnit).getButton())
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_2", (szName, 4, 90)), gc.getUnitInfo(iUnit).getButton())
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_2", (szName, 6, 120)), gc.getUnitInfo(iUnit).getButton())
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_2",
+                                      (szName, 2, 50)), gc.getUnitInfo(iUnit).getButton())
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_2",
+                                      (szName, 4, 90)), gc.getUnitInfo(iUnit).getButton())
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN5_2",
+                                      (szName, 6, 120)), gc.getUnitInfo(iUnit).getButton())
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                  "Art/Interface/Buttons/Actions/Cancel.dds")
         popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
         # Dies soll doppelte Popups in PB-Spielen vermeiden.
         if iPlayer == gc.getGame().getActivePlayer():
@@ -334,15 +360,18 @@ def onModNetMessage(argsList):
 
         popupInfo = CyPopupInfo()
         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-        popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN6", (gc.getPlayer(iData1).getCivilizationShortDescription(0), iCost, szText)))
-        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign6") # EntryPoints/CvScreenInterface -> 715
-        popupInfo.setData1(iData1) # iTargetPlayer
-        popupInfo.setData2(iData2) # iFaktor
-        popupInfo.setData3(iPlayer) # iPlayer
+        popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN6",
+                          (gc.getPlayer(iData1).getCivilizationShortDescription(0), iCost, szText)))
+        popupInfo.setOnClickedPythonCallback("popupMercenariesAssign6")  # EntryPoints/CvScreenInterface -> 715
+        popupInfo.setData1(iData1)  # iTargetPlayer
+        popupInfo.setData2(iData2)  # iFaktor
+        popupInfo.setData3(iPlayer)  # iPlayer
 
         # Confirm
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN6_" + str(1 + CvUtil.myRandom(13, "TXT_KEY_POPUP_MERCENARIES_ASSIGN6_")), ("", )), ",Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5")
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARIES_ASSIGN6_" + str(1 + CvUtil.myRandom(
+            13, "TXT_KEY_POPUP_MERCENARIES_ASSIGN6_")), ("", )), ",Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                  "Art/Interface/Buttons/Actions/Cancel.dds")
         # Dies soll doppelte Popups in PB-Spielen vermeiden.
         if iPlayer == gc.getGame().getActivePlayer():
             popupInfo.addPopup(iPlayer)
@@ -366,7 +395,8 @@ def onModNetMessage(argsList):
 
         if pPlayer.getGold() < iCosts:
             if gc.getPlayer(iPlayer).isHuman():
-                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText(
+                    "TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
                 popupInfo = CyPopupInfo()
                 popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
                 popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("", )))
@@ -381,7 +411,7 @@ def onModNetMessage(argsList):
                 # Check neighbours
                 lNeighbors = []
                 iRange = gc.getMAX_PLAYERS()
-                for iLoopPlayer in range(iRange):
+                for iLoopPlayer in xrange(iRange):
                     pLoopPlayer = gc.getPlayer(iLoopPlayer)
                     if iLoopPlayer != gc.getBARBARIAN_PLAYER():
                         if pLoopPlayer.isAlive():
@@ -402,10 +432,10 @@ def onModNetMessage(argsList):
                 # ATTITUDE_ANNOYED
                 # ATTITUDE_FURIOUS
                 for iLoopPlayer in lNeighbors:
-                    #keldath fix
+                    # keldath fix
                     if iPlayer == iLoopPlayer:
                         continue
-                    #keldath fix
+                    # keldath fix
 
                     pLoopPlayer = gc.getPlayer(iLoopPlayer)
                     eAtt = pLoopPlayer.AI_getAttitude(iPlayer)
@@ -420,23 +450,26 @@ def onModNetMessage(argsList):
                     elif eAtt == AttitudeTypes.ATTITUDE_FURIOUS:
                         szBuffer = "<color=255,0,0,255>"
 
-                    szText = szText + localText.getText("[NEWLINE][ICON_STAR] <color=255,255,255,255>", ()) + pLoopPlayer.getCivilizationShortDescription(0) + szBuffer + " (" + localText.getText("TXT_KEY_"+str(eAtt), ()) + ")"
+                    szText = szText + localText.getText("[NEWLINE][ICON_STAR] <color=255,255,255,255>", ()) + pLoopPlayer.getCivilizationShortDescription(
+                        0) + szBuffer + " (" + localText.getText("TXT_KEY_"+str(eAtt), ()) + ")"
 
-                szText = szText + localText.getText("[NEWLINE][NEWLINE]<color=255,255,255,255>", ()) + CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE2_1", ("", ))
+                szText = szText + localText.getText("[NEWLINE][NEWLINE]<color=255,255,255,255>", ()) + \
+                    CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE2_1", ("", ))
                 popupInfo = CyPopupInfo()
                 popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
                 popupInfo.setText(szText)
-                popupInfo.setData1(iMercenaryCiv) # iMercenaryCiv
-                popupInfo.setData2(iPlayer) # iPlayer
-                popupInfo.setOnClickedPythonCallback("popupMercenaryTorture2") # EntryPoints/CvScreenInterface und CvGameUtils -> 717
+                popupInfo.setData1(iMercenaryCiv)  # iMercenaryCiv
+                popupInfo.setData2(iPlayer)  # iPlayer
+                # EntryPoints/CvScreenInterface und CvGameUtils -> 717
+                popupInfo.setOnClickedPythonCallback("popupMercenaryTorture2")
                 popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE_YES1", (iCosts/4*3, 50)), "")
                 popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE_YES2", (iCosts/2, 25)), "")
                 popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE_YES3", (iCosts/4, 10)), "")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                          "Art/Interface/Buttons/Actions/Cancel.dds")
                 # Dies soll doppelte Popups in PB-Spielen vermeiden.
                 if iPlayer == gc.getGame().getActivePlayer():
                     popupInfo.addPopup(iPlayer)
-
 
     # Mercenaries Torture 2
     elif iData0 == 717:
@@ -459,7 +492,8 @@ def onModNetMessage(argsList):
 
         if pPlayer.getGold() < iGold:
             if gc.getPlayer(iPlayer).isHuman():
-                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText(
+                    "TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
                 popupInfo = CyPopupInfo()
                 popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
                 popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("", )))
@@ -472,15 +506,18 @@ def onModNetMessage(argsList):
                 doFailedMercenaryTortureMessage(iPlayer)
             else:
                 if iPlayer != iMercenaryCiv:
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE3_1", (gc.getPlayer(iMercenaryCiv).getCivilizationShortDescription(0),)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE3_1",
+                                                                                       (gc.getPlayer(iMercenaryCiv).getCivilizationShortDescription(0),)), None, 2, None, ColorTypes(8), 0, 0, False, False)
                     popupInfo = CyPopupInfo()
                     popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
-                    popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE3_1", (gc.getPlayer(iMercenaryCiv).getCivilizationShortDescription(0), )))
+                    popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE3_1",
+                                      (gc.getPlayer(iMercenaryCiv).getCivilizationShortDescription(0), )))
                     # Dies soll doppelte Popups in PB-Spielen vermeiden.
                     if iPlayer == gc.getGame().getActivePlayer():
                         popupInfo.addPopup(iPlayer)
                 else:
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE3_2", ("",)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText(
+                        "TXT_KEY_POPUP_MERCENARY_TORTURE3_2", ("",)), None, 2, None, ColorTypes(8), 0, 0, False, False)
                     popupInfo = CyPopupInfo()
                     popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
                     popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE3_2", ("", )))
@@ -489,6 +526,8 @@ def onModNetMessage(argsList):
                         popupInfo.addPopup(iPlayer)
 
 # Test for actually required techs and bonusses
+
+
 def getAvailableUnits(lNeighbors, lTestUnits):
     lUnits = []
     for pNeighbor in lNeighbors:
@@ -500,6 +539,7 @@ def getAvailableUnits(lNeighbors, lTestUnits):
                     lUnits.append(eLoopUnit)
     return lUnits
 
+
 def getCost(eUnit, iMultiplier, bCivicSoeldner, iExtraMultiplier=1):
     iCost = gc.getUnitInfo(eUnit).getProductionCost() * iExtraMultiplier
     iCost += (iCost / 10) * 2 * iMultiplier
@@ -508,6 +548,8 @@ def getCost(eUnit, iMultiplier, bCivicSoeldner, iExtraMultiplier=1):
     return int(iCost)
 
 # Einheiten einen Zufallsrang vergeben (max. Elite)
+
+
 def doMercenaryRanking(pUnit, iMinRang, iMaxRang):
     lRang = [
         gc.getInfoTypeForString("PROMOTION_COMBAT1"),
@@ -521,10 +563,11 @@ def doMercenaryRanking(pUnit, iMinRang, iMaxRang):
     iRang = max(iMinRang, iRang)
     iRang = min(4, iRang)
 
-    for iI in range(iRang):
+    for iI in xrange(iRang):
         #CyInterface().addMessage(pUnit.getOwner(), True, 10, str(lRang[iI]), None, 2, gc.getUnitInfo(eUnit).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
         pUnit.setHasPromotion(lRang[iI], True)
         pUnit.setLevel(iRang+1)
+
 
 def doHireMercenary(iPlayer, eUnit, iMultiplier, bCivicSoeldner, pCity, iTimer, iExtraMultiplier=1):
     iMinRanking = 1
@@ -534,12 +577,14 @@ def doHireMercenary(iPlayer, eUnit, iMultiplier, bCivicSoeldner, pCity, iTimer, 
     pPlayer = gc.getPlayer(iPlayer)
     iCost = getCost(eUnit, iMultiplier, bCivicSoeldner, iExtraMultiplier)
     if pPlayer.getGold() < iCost:
-        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText(
+            "TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
         return False
     else:
         if iPlayer == gc.getGame().getActivePlayer():
             CyAudioGame().Play2DSound("AS2D_COINS")
-            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_UNIT_HIRED", (pCity.getName(), gc.getUnitInfo(eUnit).getDescriptionForm(0))), None, 2, gc.getUnitInfo(eUnit).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
+            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_UNIT_HIRED", (pCity.getName(), gc.getUnitInfo(
+                eUnit).getDescriptionForm(0))), None, 2, gc.getUnitInfo(eUnit).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
         pPlayer.changeGold(-iCost)
         gc.getPlayer(gc.getBARBARIAN_PLAYER()).changeGold(iCost)
         pNewUnit = pPlayer.initUnit(eUnit, pCity.getX(), pCity.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
@@ -556,11 +601,10 @@ def doHireMercenary(iPlayer, eUnit, iMultiplier, bCivicSoeldner, pCity, iTimer, 
 def canTrain(eUnit, pPlayer):
     if not gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getUnitInfo(eUnit).getPrereqAndTech()):
         return False
-    for iI in range(gc.getNUM_UNIT_AND_TECH_PREREQS()):
+    for iI in xrange(gc.getNUM_UNIT_AND_TECH_PREREQS()):
         if gc.getUnitInfo(eUnit).getPrereqAndTechs(iI) != TechTypes.NO_TECH:
             if not gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getUnitInfo(eUnit).getPrereqAndTechs(iI)):
                 return False
-
 
     if gc.getUnitInfo(eUnit).getPrereqAndBonus() != BonusTypes.NO_BONUS:
         if not pPlayer.hasBonus(gc.getUnitInfo(eUnit).getPrereqAndBonus()):
@@ -569,7 +613,7 @@ def canTrain(eUnit, pPlayer):
     bRequiresBonus = False
     bNeedsBonus = True
 
-    for iI in range(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
+    for iI in xrange(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
         if gc.getUnitInfo(eUnit).getPrereqOrBonuses(iI) != BonusTypes.NO_BONUS:
             bRequiresBonus = True
             if pPlayer.hasBonus(gc.getUnitInfo(eUnit).getPrereqOrBonuses(iI)):
@@ -580,6 +624,7 @@ def canTrain(eUnit, pPlayer):
         return False
 
     return True
+
 
 def startMercTorture(pLoser, iWinnerPlayer):
     pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
@@ -594,28 +639,36 @@ def startMercTorture(pLoser, iWinnerPlayer):
                     doAIMercTorture(iWinnerPlayer, iMercenaryCiv)
             else:
                 szText = CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE", ("",))
-                szText = szText + localText.getText("[NEWLINE][NEWLINE][ICON_STAR] ", ()) + CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE1", ("",))
+                szText = szText + localText.getText("[NEWLINE][NEWLINE][ICON_STAR] ", ()) + \
+                    CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE1", ("",))
                 iCosts = getTortureCosts(iWinnerPlayer)
                 popupInfo = CyPopupInfo()
                 popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
                 popupInfo.setText(szText)
                 popupInfo.setData1(iMercenaryCiv)  # iMercenaryCiv
                 popupInfo.setData2(iWinnerPlayer)  # iPlayer
-                popupInfo.setOnClickedPythonCallback("popupMercenaryTorture")  # EntryPoints/CvScreenInterface und CvGameUtils -> 716
+                # EntryPoints/CvScreenInterface und CvGameUtils -> 716
+                popupInfo.setOnClickedPythonCallback("popupMercenaryTorture")
                 popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE_YES", (iCosts, 50)), "")
-                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+                popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                                          "Art/Interface/Buttons/Actions/Cancel.dds")
                 popupInfo.addPopup(iWinnerPlayer)
 
 # Failed Mercenary Torture (from 716 and 717)
+
+
 def doFailedMercenaryTortureMessage(iPlayer):
     iRand = CvUtil.myRandom(8, "TXT_KEY_POPUP_MERCENARY_TORTURE_FAILED_") + 1
-    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE_FAILED_0", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText(
+        "TXT_KEY_POPUP_MERCENARY_TORTURE_FAILED_0", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
     popupInfo = CyPopupInfo()
     popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
     popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_MERCENARY_TORTURE_FAILED_" + str(iRand), ("", )))
     popupInfo.addPopup(iPlayer)
 
 # AI Torture Mercenary Commission
+
+
 def doAIMercTorture(iPlayer, iMercenaryCiv):
     pPlayer = gc.getPlayer(iPlayer)
     iGold = pPlayer.getGold()
@@ -643,7 +696,7 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
     # ATTITUDE_FURIOUS
     lNeighbors = []
     if iTargetPlayer == -1:
-        for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+        for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
             if iLoopPlayer == iPlayer or iLoopPlayer == gc.getBARBARIAN_PLAYER():
                 continue
             pLoopPlayer = gc.getPlayer(iLoopPlayer)
@@ -656,7 +709,7 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
                         iCoastalCities = 0
                         iLandCities = 0
                         iNumCities = pLoopPlayer.getNumCities()
-                        for i in range(iNumCities):
+                        for i in xrange(iNumCities):
                             if pLoopPlayer.getCity(i).isCoastal(20):
                                 iCoastalCities += 1
                             else:
@@ -677,27 +730,27 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
     # ---- inter/national
     # urban 200+    iFaktor: +1
     # own 300+      iFaktor: +2
-    #internat 400+  iFaktor: +3
-    #elite 500+     iFaktor: +4
+    # internat 400+  iFaktor: +3
+    # elite 500+     iFaktor: +4
 
     # ---- size
-    #small +0      iFaktor: +10
-    #medium +150   iFaktor: +20
-    #big +300      iFaktor: +30
-    #huge +400     iFaktor: +40
+    # small +0      iFaktor: +10
+    # medium +150   iFaktor: +20
+    # big +300      iFaktor: +30
+    # huge +400     iFaktor: +40
 
     # ---- type
-    #defense      iFaktor: +100
-    #ranged       iFaktor: +200
-    #offense      iFaktor: +300
-    #city         iFaktor: +400
-    #naval        iFaktor: +500
+    # defense      iFaktor: +100
+    # ranged       iFaktor: +200
+    # offense      iFaktor: +300
+    # city         iFaktor: +400
+    # naval        iFaktor: +500
 
     # ---- siege
-    #0           iFaktor: +1000
-    #2 +50       iFaktor: +2000
-    #4 +90       iFaktor: +3000
-    #6 +120      iFaktor: +4000
+    # 0           iFaktor: +1000
+    # 2 +50       iFaktor: +2000
+    # 4 +90       iFaktor: +3000
+    # 6 +120      iFaktor: +4000
 
     if lNeighbors or iTargetPlayer != -1:
         if iTargetPlayer != -1:
@@ -790,7 +843,7 @@ def doAIPlanAssignMercenaries(iPlayer, iTargetPlayer):
         if iTargetPlayer != -1:
             doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer)
     else:
-      return -1
+        return -1
 
     return iTargetPlayer
 
@@ -843,7 +896,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
     if pPlayer.getGold() < iCost:
         if gc.getPlayer(iPlayer).isHuman():
-            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText(
+                "TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
             popupInfo = CyPopupInfo()
             popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
             popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_NOT_ENOUGH_MONEY", ("", )))
@@ -882,7 +936,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
         # international or elite
         elif sFaktor[3] == "3" or sFaktor[3] == "4":
             iRange = gc.getMAX_PLAYERS()
-            for iLoopPlayer in range(iRange):
+            for iLoopPlayer in xrange(iRange):
                 pLoopPlayer = gc.getPlayer(iLoopPlayer)
                 # Nachbarn inkludieren
                 if pLoopPlayer.isAlive() and gc.getTeam(pLoopPlayer.getTeam()).isHasMet(pPlayer.getTeam()):
@@ -924,8 +978,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                 iAnzArcher = 2
                 iAnzSlinger = 0
             elif sFaktor[1] == "5":
-                iAnzShip1 = 1 # weak
-                iAnzShip2 = 1 # strong
+                iAnzShip1 = 1  # weak
+                iAnzShip2 = 1  # strong
 
         elif sFaktor[2] == "2":
             if sFaktor[1] == "1":
@@ -1057,7 +1111,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                         gc.getInfoTypeForString("UNIT_QUINQUEREME"),
                         gc.getInfoTypeForString("UNIT_ROME_DECAREME")
                     ]
-                    iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KONTERE")) # Gaulos
+                    iUnit = kNeighborCiv.getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KONTERE"))  # Gaulos
                     if iUnit == -1:
                         iUnit = gc.getInfoTypeForString("UNIT_KONTERE")
                     lNeighborUnits.append(iUnit)
@@ -1093,15 +1147,15 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
                 for iUnitElite in lNeighborUnits:
                     if iUnitElite is not None and iUnitElite != -1:
-                      if gc.getUnitInfo(iUnitElite).isMilitaryHappiness():
-                        # Naval units
-                        if sFaktor[1] == "5" and gc.getUnitInfo(iUnitElite).getDomainType() == DomainTypes.DOMAIN_SEA:
-                            if NeighborCapital.canTrain(iUnitElite, 0, 0):
-                                lEliteUnits.append(iUnitElite)
-                        # Land units
-                        elif gc.getUnitInfo(iUnitElite).getDomainType() != DomainTypes.DOMAIN_SEA:
-                            if NeighborCapital.canTrain(iUnitElite, 0, 0):
-                                lEliteUnits.append(iUnitElite)
+                        if gc.getUnitInfo(iUnitElite).isMilitaryHappiness():
+                            # Naval units
+                            if sFaktor[1] == "5" and gc.getUnitInfo(iUnitElite).getDomainType() == DomainTypes.DOMAIN_SEA:
+                                if NeighborCapital.canTrain(iUnitElite, 0, 0):
+                                    lEliteUnits.append(iUnitElite)
+                            # Land units
+                            elif gc.getUnitInfo(iUnitElite).getDomainType() != DomainTypes.DOMAIN_SEA:
+                                if NeighborCapital.canTrain(iUnitElite, 0, 0):
+                                    lEliteUnits.append(iUnitElite)
 
             # normal units
             # else: Falls es keine Elite gibt, sollen normale Einheiten einspringen
@@ -1131,7 +1185,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
             # Land units
             # PAE V Patch 3: nun auch fuer Besatzung der Schiffe
-            #else:
+            # else:
             #if gc.getTeam(pNeighbor.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_ARCHERY3")): iUnitArcher = gc.getInfoTypeForString("UNIT_COMPOSITE_ARCHER")
             if pNeighbor.hasBonus(iBonus1) or pNeighbor.hasBonus(iBonus2):
                 if pNeighborTeam.isHasTech(gc.getInfoTypeForString("TECH_ARMOR")):
@@ -1172,7 +1226,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
         CivPlots = []
         iRange = CyMap().numPlots()
-        for iI in range(iRange):
+        for iI in xrange(iRange):
             pPlot = CyMap().plotByIndex(iI)
             iX = pPlot.getX()
             iY = pPlot.getY()
@@ -1189,8 +1243,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                     elif not pPlot.isWater():
                         # Nicht auf Inseln
                         iLandPlots = 0
-                        for x2 in range(3):
-                            for y2 in range(3):
+                        for x2 in xrange(3):
+                            for y2 in xrange(3):
                                 loopPlot2 = gc.getMap().plot(iX - 1 + x2, iY - 1 + y2)
                                 if loopPlot2 and not loopPlot2.isNone():
                                     if not loopPlot2.isWater():
@@ -1206,7 +1260,6 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                                 break
                             elif x2 == 2 and iLandPlots <= 2:
                                 break
-
 
         # Big stacks and elite only on border plots
         if sFaktor[2] == "4" or sFaktor[3] == "4":
@@ -1243,7 +1296,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                         if loopPlot2 and not loopPlot2.isNone():
                             if loopPlot2.getNumUnits() > 0:
                                 iRange = loopPlot2.getNumUnits()
-                                for iUnit in range(iRange):
+                                for iUnit in xrange(iRange):
                                     if loopPlot2.getUnit(iUnit).getOwner() == iPlayer:
                                         CivPlots.remove(loopPlot)
                                         bDone = True
@@ -1259,7 +1312,7 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
             # Loyality disabled for elite units
             iPromo2 = gc.getInfoTypeForString("PROMOTION_LOYALITAT")
             iMinRanking = 0
-            iMaxRanking = 4 # 4 = Veteran
+            iMaxRanking = 4  # 4 = Veteran
 
             # instead of UnitAITypes.NO_UNITAI
             if sFaktor[1] == "4":
@@ -1298,9 +1351,10 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                     else:
                         iAnz = 12
 
-                for _ in range(iAnz):
+                for _ in xrange(iAnz):
                     iRand = CvUtil.myRandom(len(lEliteUnits), "doCommissionMercenaries2")
-                    NewUnit = pBarbPlayer.initUnit(lEliteUnits[iRand], CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                    NewUnit = pBarbPlayer.initUnit(lEliteUnits[iRand], CivPlots[iPlot].getX(
+                    ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                     NewUnit.setHasPromotion(iPromo, True)
                     NewUnit.setHasPromotion(iPromo2, False)
                     # Unit Rang / Unit ranking
@@ -1317,46 +1371,52 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
             # standard units
             else:
                 if iAnzSpear > 0:
-                    for _ in range(iAnzSpear):
-                        NewUnit = pBarbPlayer.initUnit(iUnitSpear, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzSpear):
+                        NewUnit = pBarbPlayer.initUnit(iUnitSpear, CivPlots[iPlot].getX(
+                        ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                         NewUnit.setHasPromotion(iPromo, True)
                         # Unit Rang / Unit ranking
                         doMercenaryRanking(NewUnit, iMinRanking, iMaxRanking)
                         NewUnit.setImmobileTimer(2)
                         ScriptUnit.append(NewUnit)
                 if iAnzAxe > 0:
-                    for _ in range(iAnzAxe):
-                        NewUnit = pBarbPlayer.initUnit(iUnitAxe, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzAxe):
+                        NewUnit = pBarbPlayer.initUnit(iUnitAxe, CivPlots[iPlot].getX(
+                        ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                         NewUnit.setHasPromotion(iPromo, True)
                         # Unit Rang / Unit ranking
                         doMercenaryRanking(NewUnit, iMinRanking, iMaxRanking)
                         NewUnit.setImmobileTimer(2)
                         ScriptUnit.append(NewUnit)
                 if iAnzSword > 0 and iUnitSword != -1:
-                    for _ in range(iAnzSword):
-                        NewUnit = pBarbPlayer.initUnit(iUnitSword, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzSword):
+                        NewUnit = pBarbPlayer.initUnit(iUnitSword, CivPlots[iPlot].getX(
+                        ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                         NewUnit.setHasPromotion(iPromo, True)
                         # Unit Rang / Unit ranking
                         doMercenaryRanking(NewUnit, iMinRanking, iMaxRanking)
                         NewUnit.setImmobileTimer(2)
                         ScriptUnit.append(NewUnit)
                 if iAnzArcher > 0:
-                    for _ in range(iAnzArcher):
-                        NewUnit = pBarbPlayer.initUnit(iUnitArcher, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzArcher):
+                        NewUnit = pBarbPlayer.initUnit(iUnitArcher, CivPlots[iPlot].getX(
+                        ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                         NewUnit.setHasPromotion(iPromo, True)
                         # Unit Rang / Unit ranking
                         doMercenaryRanking(NewUnit, iMinRanking, iMaxRanking)
                         NewUnit.setImmobileTimer(2)
                 if iAnzSlinger > 0:
-                    for _ in range(iAnzSlinger):
-                        NewUnit = pBarbPlayer.initUnit(iUnitSlinger, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzSlinger):
+                        NewUnit = pBarbPlayer.initUnit(iUnitSlinger, CivPlots[iPlot].getX(
+                        ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                         NewUnit.setHasPromotion(iPromo, True)
                         # Unit Rang / Unit ranking
                         doMercenaryRanking(NewUnit, iMinRanking, iMaxRanking)
                         NewUnit.setImmobileTimer(2)
                 if iAnzSiege > 0 and iUnitSiege != -1:
-                    for _ in range(iAnzSiege):
-                        NewUnit = pBarbPlayer.initUnit(iUnitSiege, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAITypes.UNITAI_ATTACK_CITY, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzSiege):
+                        NewUnit = pBarbPlayer.initUnit(iUnitSiege, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(
+                        ), UnitAITypes.UNITAI_ATTACK_CITY, DirectionTypes.DIRECTION_SOUTH)
                         # Unit Rang / Unit ranking
                         doMercenaryRanking(NewUnit, iMinRanking, iMaxRanking)
                         NewUnit.setImmobileTimer(2)
@@ -1370,8 +1430,9 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                         lUnit.append(iUnitSword)
 
                 if iAnzShip1 > 0 and iShip1 != -1:
-                    for _ in range(iAnzShip1):
-                        NewUnit = pBarbPlayer.initUnit(iShip1, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAITypes.UNITAI_ATTACK_SEA, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzShip1):
+                        NewUnit = pBarbPlayer.initUnit(iShip1, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(
+                        ), UnitAITypes.UNITAI_ATTACK_SEA, DirectionTypes.DIRECTION_SOUTH)
                         NewUnit.setHasPromotion(iPromo, True)
                         # Unit Rang / Unit ranking
                         doMercenaryRanking(NewUnit, iMinRanking, iMaxRanking)
@@ -1379,12 +1440,14 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
                         # Cargo
                         iRand = CvUtil.myRandom(len(lUnit), "doCommissionMercenaries3")
-                        NewLandUnit = pBarbPlayer.initUnit(lUnit[iRand], CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                        NewLandUnit = pBarbPlayer.initUnit(lUnit[iRand], CivPlots[iPlot].getX(
+                        ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                         NewLandUnit.setTransportUnit(NewUnit)
 
                 if iAnzShip2 > 0 and iShip2 != -1:
-                    for _ in range(iAnzShip2):
-                        NewUnit = pBarbPlayer.initUnit(iShip2, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAITypes.UNITAI_ATTACK_SEA, DirectionTypes.DIRECTION_SOUTH)
+                    for _ in xrange(iAnzShip2):
+                        NewUnit = pBarbPlayer.initUnit(iShip2, CivPlots[iPlot].getX(), CivPlots[iPlot].getY(
+                        ), UnitAITypes.UNITAI_ATTACK_SEA, DirectionTypes.DIRECTION_SOUTH)
                         if not NewUnit.isHasPromotion(iPromo):
                             NewUnit.setHasPromotion(iPromo, True)
                         # Unit Rang / Unit ranking
@@ -1393,7 +1456,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
                         # Cargo
                         iRand = CvUtil.myRandom(len(lUnit), "doCommissionMercenaries4")
-                        NewLandUnit = pBarbPlayer.initUnit(lUnit[iRand], CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
+                        NewLandUnit = pBarbPlayer.initUnit(lUnit[iRand], CivPlots[iPlot].getX(
+                        ), CivPlots[iPlot].getY(), UnitAI_Type, DirectionTypes.DIRECTION_SOUTH)
                         NewLandUnit.setTransportUnit(NewUnit)
 
                 # Goldkarren bei Landeinheiten
@@ -1427,7 +1491,8 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
                     szText = CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_DONE_4", ("",))
                 else:
                     szText = CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_DONE_2", ("",))
-                CyInterface().addMessage(iTargetPlayer, True, 15, szText, "AS2D_THEIRDECLAREWAR", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), True, True)
+                CyInterface().addMessage(iTargetPlayer, True, 15, szText, "AS2D_THEIRDECLAREWAR", 2,
+                                         "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), CivPlots[iPlot].getX(), CivPlots[iPlot].getY(), True, True)
                 popupInfo = CyPopupInfo()
                 popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
                 popupInfo.setText(szText)
@@ -1439,71 +1504,72 @@ def doCommissionMercenaries(iTargetPlayer, iFaktor, iPlayer):
 
 # 2) Mercenaries
 # PAE Better AI: AI has no cost malus when hiring units
+
+
 def AI_doHireMercenaries(iPlayer, pCity, iMaintainUnits, iCityUnits, iEnemyUnits):
     pPlayer = gc.getPlayer(iPlayer)
     # Units amount 1:3
     iMultiplikator = 3
     if iMaintainUnits > 0 and iCityUnits * iMultiplikator <= iEnemyUnits and pPlayer.getGold() > 200:
         if pCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_SOELDNERPOSTEN")):
-          if not pCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_CIVIL_WAR")):
-            # Check neighbours
-            lNeighbors = []
-            iRange = gc.getMAX_PLAYERS()
-            for iLoopPlayer in range(iRange):
-                if pCity.isConnectedToCapital(iLoopPlayer):
-                    lNeighbors.append(gc.getPlayer(iLoopPlayer))
-            if lNeighbors:
-                lUnits = doHireMercenariesINIT(pPlayer, lNeighbors)
+            if not pCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_CIVIL_WAR")):
+                # Check neighbours
+                lNeighbors = []
+                iRange = gc.getMAX_PLAYERS()
+                for iLoopPlayer in xrange(iRange):
+                    if pCity.isConnectedToCapital(iLoopPlayer):
+                        lNeighbors.append(gc.getPlayer(iLoopPlayer))
+                if lNeighbors:
+                    lUnits = doHireMercenariesINIT(pPlayer, lNeighbors)
 
-                # KI zahlt die Haelfte und kein HiringModifierPerTurn
-                iExtraMultiplier = 0.5
-                bCivicSoeldner = pPlayer.isCivic(gc.getInfoTypeForString("CIVIC_SOELDNERTUM"))
+                    # KI zahlt die Haelfte und kein HiringModifierPerTurn
+                    iExtraMultiplier = 0.5
+                    bCivicSoeldner = pPlayer.isCivic(gc.getInfoTypeForString("CIVIC_SOELDNERTUM"))
 
-                lArchers = lUnits[0]
-                lList = []
-                iMinCost = -1
-                for eUnit in lArchers:
-                    iCost = getCost(eUnit, 0, bCivicSoeldner, iExtraMultiplier)
-                    if iCost < iMinCost or iMinCost == -1:
-                        iMinCost = iCost
-                    lList.append([eUnit, iCost])
-                lArchers = lList
+                    lArchers = lUnits[0]
+                    lList = []
+                    iMinCost = -1
+                    for eUnit in lArchers:
+                        iCost = getCost(eUnit, 0, bCivicSoeldner, iExtraMultiplier)
+                        if iCost < iMinCost or iMinCost == -1:
+                            iMinCost = iCost
+                        lList.append([eUnit, iCost])
+                    lArchers = lList
 
-                lOtherUnits = lUnits[1]+lUnits[2]+lUnits[3]
-                lList = []
-                for eUnit in lOtherUnits:
-                    iCost = getCost(eUnit, 0, bCivicSoeldner, iExtraMultiplier)
-                    if iCost < iMinCost or iMinCost == -1:
-                        iMinCost = iCost
-                    lList.append([eUnit, iCost])
-                lOtherUnits = lList
+                    lOtherUnits = lUnits[1]+lUnits[2]+lUnits[3]
+                    lList = []
+                    for eUnit in lOtherUnits:
+                        iCost = getCost(eUnit, 0, bCivicSoeldner, iExtraMultiplier)
+                        if iCost < iMinCost or iMinCost == -1:
+                            iMinCost = iCost
+                        lList.append([eUnit, iCost])
+                    lOtherUnits = lList
 
-                # choose units
-                # iPromo = gc.getInfoTypeForString("PROMOTION_MERCENARY")
-                # AI hires max 2 - 4 units per city and turn
-                iHiredUnits = 0
-                iHiredUnitsMax = 2 + CvUtil.myRandom(3, "AI_doHireMercenaries1")
-                while iMaintainUnits > 0 and pPlayer.getGold() > 50 and pPlayer.getGold() > iMinCost and iHiredUnits < iHiredUnitsMax and iCityUnits * iMultiplikator < iEnemyUnits:
-                    eUnit = -1
-                    iGold = pPlayer.getGold()
+                    # choose units
+                    # iPromo = gc.getInfoTypeForString("PROMOTION_MERCENARY")
+                    # AI hires max 2 - 4 units per city and turn
+                    iHiredUnits = 0
+                    iHiredUnitsMax = 2 + CvUtil.myRandom(3, "AI_doHireMercenaries1")
+                    while iMaintainUnits > 0 and pPlayer.getGold() > 50 and pPlayer.getGold() > iMinCost and iHiredUnits < iHiredUnitsMax and iCityUnits * iMultiplikator < iEnemyUnits:
+                        eUnit = -1
+                        iGold = pPlayer.getGold()
 
-                    iTry = 0
-                    while iTry < 3:
-                        if CvUtil.myRandom(10, "AI_doHireMercenaries2") < 7:
-                            eUnit, iCost = lArchers[CvUtil.myRandom(len(lArchers), "AI_doHireMercenaries3")]
-                        else:
-                            eUnit, iCost = lOtherUnits[CvUtil.myRandom(len(lOtherUnits), "AI_doHireMercenaries4")]
-                        if iCost <= 0:
-                            iCost = 50
-                        if iCost <= iGold:
-                            if doHireMercenary(iPlayer, eUnit, 0, bCivicSoeldner, pCity, 1, iExtraMultiplier):
-                                iMaintainUnits -= 1
-                                iCityUnits += 1
-                                iHiredUnits += 1
-                            break
-                        else:
-                            iTry += 1
-
+                        iTry = 0
+                        while iTry < 3:
+                            if CvUtil.myRandom(10, "AI_doHireMercenaries2") < 7:
+                                eUnit, iCost = lArchers[CvUtil.myRandom(len(lArchers), "AI_doHireMercenaries3")]
+                            else:
+                                eUnit, iCost = lOtherUnits[CvUtil.myRandom(len(lOtherUnits), "AI_doHireMercenaries4")]
+                            if iCost <= 0:
+                                iCost = 50
+                            if iCost <= iGold:
+                                if doHireMercenary(iPlayer, eUnit, 0, bCivicSoeldner, pCity, 1, iExtraMultiplier):
+                                    iMaintainUnits -= 1
+                                    iCityUnits += 1
+                                    iHiredUnits += 1
+                                break
+                            else:
+                                iTry += 1
 
 
 def doHireMercenariesPopup(iCity, iTypeButton, iUnitButton, iPlayer):
@@ -1519,7 +1585,7 @@ def doHireMercenariesPopup(iCity, iTypeButton, iUnitButton, iPlayer):
 
     # Check neighbours
     lNeighbors = []
-    for iLoopPlayer in range(gc.getMAX_PLAYERS()):
+    for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
         if pCity.isConnectedToCapital(iLoopPlayer):
             lNeighbors.append(gc.getPlayer(iLoopPlayer))
 
@@ -1546,11 +1612,11 @@ def doHireMercenariesPopup(iCity, iTypeButton, iUnitButton, iPlayer):
             popupInfo.addPopup(iPlayer)
         else:
             popupInfo.setOnClickedPythonCallback("popupMercenariesHire")
-            for i in range(len(lUCI)):
+            for i in xrange(len(lUCI)):
                 if lUnits[i]:
                     popupInfo.addPythonButton(lUCI[i].getDescription(), lUCI[i].getButton())
 
-        #popupInfo.setData2(-1)
+        # popupInfo.setData2(-1)
     else:
         popupInfo.setOnClickedPythonCallback("popupMercenariesHireUnits")
         popupInfo.setData2(iTypeButton)
@@ -1576,13 +1642,17 @@ def doHireMercenariesPopup(iCity, iTypeButton, iUnitButton, iPlayer):
         # redraw the list with new prices
         for eUnit in lTypeUnits:
             iCost = getCost(eUnit, iMultiplier, bCivicSoeldner, iExtraMultiplier)
-            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_UNIT_COST", (gc.getUnitInfo(eUnit).getDescriptionForm(0), iCost)), gc.getUnitInfo(eUnit).getButton())
+            popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_MESSAGE_MERCENARIES_UNIT_COST",
+                                      (gc.getUnitInfo(eUnit).getDescriptionForm(0), iCost)), gc.getUnitInfo(eUnit).getButton())
 
-        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_MAIN_MENU_GO_BACK", ("", )), ",Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5")
+        popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_MAIN_MENU_GO_BACK", ("", )),
+                                  ",Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5")
 
-    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                              "Art/Interface/Buttons/Actions/Cancel.dds")
     popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
     popupInfo.addPopup(iPlayer)
+
 
 def doHireMercenariesINIT(pPlayer, lNeighbors):
     lArchers = [
@@ -1598,7 +1668,8 @@ def doHireMercenariesINIT(pPlayer, lNeighbors):
         gc.getInfoTypeForString("UNIT_SCHILDTRAEGER"),
         gc.getInfoTypeForString("UNIT_SPEARMAN"),
     ]
-    iUnit = gc.getCivilizationInfo(pPlayer.getCivilizationType()).getCivilizationUnits(gc.getInfoTypeForString("UNITCLASS_KURZSCHWERT"))
+    iUnit = gc.getCivilizationInfo(pPlayer.getCivilizationType()).getCivilizationUnits(
+        gc.getInfoTypeForString("UNITCLASS_KURZSCHWERT"))
     if iUnit == -1:
         iUnit = gc.getInfoTypeForString("UNIT_KURZSCHWERT")
     lEarlyInfantry.append(iUnit)
@@ -1638,7 +1709,7 @@ def doHireMercenariesINIT(pPlayer, lNeighbors):
 
     # Archers: Peltist (Steinschleuderer?) geht immer
     lTemp = lArchers[:1]+getAvailableUnits(lNeighbors, lArchers[1:])
-    ## ab Plaenkler duerfen alle Kompositbogis
+    # ab Plaenkler duerfen alle Kompositbogis
     if lArchers[3] not in lTemp:
         for pNeighbor in lNeighbors:
             if gc.getTeam(pNeighbor.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_SKIRMISH_TACTICS")):
@@ -1656,6 +1727,7 @@ def doHireMercenariesINIT(pPlayer, lNeighbors):
     ]
 
     return lUnits
+
 
 def getTortureCosts(iPlayer):
     iEra = gc.getPlayer(iPlayer).getCurrentEra()

@@ -1,12 +1,13 @@
-## BugGeneralOptionsTab
+# BugGeneralOptionsTab
 ##
-## Tab for the BUG General Options (Main and City Screens).
+# Tab for the BUG General Options (Main and City Screens).
 ##
-## Copyright (c) 2007-2008 The BUG Mod.
+# Copyright (c) 2007-2008 The BUG Mod.
 ##
 ## Author: EmperorFool
 
 import BugOptionsTab
+
 
 class BugGeneralOptionsTab(BugOptionsTab.BugOptionsTab):
     "BUG General Options Screen Tab"
@@ -15,7 +16,7 @@ class BugGeneralOptionsTab(BugOptionsTab.BugOptionsTab):
         BugOptionsTab.BugOptionsTab.__init__(self, "General", "General")
 
     def create(self, screen):
-        tab = self.createTab(screen)
+        _ = self.createTab(screen)
         panel = self.createMainPanel(screen)
         column = self.addOneColumnLayout(screen, panel)
 

@@ -81,7 +81,7 @@ def changeCivPopup( ) :
     #popup.createPythonEditBox( '10', 'Number of turns to turn over to AI', 0)
 
     popup.createPythonPullDown( 'Switch this civ ...', 1 )
-    for i in range(0,gc.getMAX_PLAYERS()) :
+    for i in xrange(0,gc.getMAX_PLAYERS()) :
         player = PyPlayer(i)
         if( not player.isNone() ) :
             if( player.isAlive() ) :
@@ -91,14 +91,14 @@ def changeCivPopup( ) :
     popup.popup.setSelectedPulldownID( activePlayer.getID(), 1 )
 
     popup.createPythonPullDown( ' ... to this civ', 2 )
-    for i in range(0,gc.getNumCivilizationInfos()) :
+    for i in xrange(0,gc.getNumCivilizationInfos()) :
         newCivInfo = gc.getCivilizationInfo(i)
         popup.addPullDownString( "%s Empire"%(newCivInfo.getAdjective(0)), i, 2 )
 
     popup.popup.setSelectedPulldownID( activePlayer.getCivilizationType(), 2 )
 
     popup.createPythonPullDown( ' ... with this leader', 3 )
-    for i in range(0,gc.getNumLeaderHeadInfos()) :
+    for i in xrange(0,gc.getNumLeaderHeadInfos()) :
         newLeaderInfo = gc.getLeaderHeadInfo(i)
         leaderName = newLeaderInfo.getDescription()
 ##            leaderName = newLeaderInfo.getLeaderHead()  # this is the full path of the head animation
@@ -114,7 +114,7 @@ def changeCivPopup( ) :
 
     popup.createPythonPullDown( ' ... on this team', 4 )
     popup.addPullDownString( "Keep current team", -1, 4 )  # Team idx of -1 maintains current team setting
-    for i in range(0,gc.getMAX_PLAYERS()) :
+    for i in xrange(0,gc.getMAX_PLAYERS()) :
         player = PyPlayer(i)
         if( not player.isNone() ) :
             if( player.isAlive() ) :
@@ -164,7 +164,7 @@ def updateGraphics( ) :
     iHuman = game.getActivePlayer()
     
     iSwitchTo = -1
-    for i in range(0,gc.getMAX_CIV_PLAYERS()) :
+    for i in xrange(0,gc.getMAX_CIV_PLAYERS()) :
         player = PyPlayer(i)
         if( not player.isNone() ) :
             if( not player.isAlive() ) :
@@ -194,7 +194,7 @@ def changeHumanPopup( bDied = False ) :
     #popup.createPythonEditBox( '10', 'Number of turns to turn over to AI', 0)
 
     popup.createPythonPullDown( 'Take control of this civ ...', 1 )
-    for i in range(0,gc.getMAX_PLAYERS()) :
+    for i in xrange(0,gc.getMAX_PLAYERS()) :
         player = PyPlayer(i)
         if( not player.isNone() ) :
             if( player.isAlive() ) :
@@ -233,7 +233,7 @@ def changeHumanHandler( playerID, netUserData, popupReturn ) :
     if( success ) :
         if( LOG_DEBUG ) : CvUtil.pyPrint( "   CP : Number of human players is now %d"%(game.getNumHumanPlayers()) )
         if( LOG_DEBUG ) : CvUtil.pyPrint( "   CP : Active player is now %d"%(game.getActivePlayer()) )
-##            for i in range(0,gc.getMAX_CIV_PLAYERS()) :
+##            for i in xrange(0,gc.getMAX_CIV_PLAYERS()) :
 ##                if( LOG_DEBUG ) : CvUtil.pyPrint( "   CP : Player %d is human %d"%(i,gc.getPlayer(i).isHuman()))
         CyInterface().addImmediateMessage("You now control the %s"%(newPlayer.getCivilizationDescription(0)),"")
     else :
@@ -266,11 +266,11 @@ def changePersonality( playerIdx, newPersonality = -1 ) :
         iBestValue = 0
         newPersonality = -1
 
-        for iI in range(0,gc.getNumLeaderHeadInfos()) :
+        for iI in xrange(0,gc.getNumLeaderHeadInfos()) :
             if (not iI == gc.getDefineINT("BARBARIAN_LEADER")) :
                 iValue = (1 + game.getSorenRandNum(10000, "Choosing Personality"))
 
-                for iJ in range(0,gc.getMAX_CIV_PLAYERS()) :
+                for iJ in xrange(0,gc.getMAX_CIV_PLAYERS()) :
                     if (gc.getPlayer(iJ).isEverAlive()) :
                         if (gc.getPlayer(iJ).getPersonalityType() == iI) :
                             iValue /= 2
@@ -298,7 +298,7 @@ def doRefortify( iPlayer ) :
     
     CvUtil.pyPrint( "Refortifying units for player %d"%(iPlayer))
 
-    for groupID in range(0,pPlayer.getNumSelectionGroups()) :
+    for groupID in xrange(0,pPlayer.getNumSelectionGroups()) :
         pGroup = pPlayer.getSelectionGroup(groupID)
         if( pGroup.getNumUnits() > 0 ) :
 

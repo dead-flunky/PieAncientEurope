@@ -126,7 +126,7 @@ class UnitUpgradesGraph:
 
 	def getGraphEdges(self, graph):
 		for unitA in graph.iterkeys():
-			for numB in range(gc.getNumUnitClassInfos()):
+			for numB in xrange(gc.getNumUnitClassInfos()):
 				unitB = self.getUnitNumber(numB)
 				if gc.getUnitInfo(unitA).getUpgradeUnitClass(numB):
 					self.addUpgradePath(graph, unitA, unitB)
@@ -182,7 +182,7 @@ class UnitUpgradesGraph:
 		self.mGraphs.append(MGraph())
 		graph = self.mGraphs[0].graph
 		
-		for k in range(self.getNumberOfUnits()):
+		for k in xrange(self.getNumberOfUnits()):
 			unit = self.getUnitNumber(k)
 			if (unit == -1):
 				continue
@@ -211,8 +211,8 @@ class UnitUpgradesGraph:
 			mGraph.graph[unit].x = 0
 			map = {}
 			map[0] = set([unit])
-			for iterlimit in range(10):
-				for level in range(min(map.keys()), max(map.keys())+1):
+			for iterlimit in xrange(10):
+				for level in xrange(min(map.keys()), max(map.keys())+1):
 					for unit in map[level].copy():
 						node = mGraph.graph[unit]
 						if (node.x != level):
@@ -221,7 +221,7 @@ class UnitUpgradesGraph:
 							continue
 						for u in node.upgradesTo:
 							if (not mGraph.graph.has_key(u)):
-								for i in range(mGraphIndex - 1, -1, -1):
+								for i in xrange(mGraphIndex - 1, -1, -1):
 									if (self.mGraphs[i].graph.has_key(u)):
 										mGraph.graph[u] = Node()
 										mGraph.graph[u].upgradesFrom = self.mGraphs[i].graph[u].upgradesFrom.copy()
@@ -232,7 +232,7 @@ class UnitUpgradesGraph:
 							if (not map.has_key(nodeB.x)):
 								map[nodeB.x] = set()
 							map[nodeB.x].add(u)
-				for level in range (max(map.keys()), min(map.keys()) - 1, -1):
+				for level in xrange (max(map.keys()), min(map.keys()) - 1, -1):
 					for unit in map[level].copy():
 						node = mGraph.graph[unit]
 						if (node.x != level):
@@ -241,7 +241,7 @@ class UnitUpgradesGraph:
 							continue
 						for u in node.upgradesFrom:
 							if (not mGraph.graph.has_key(u)):
-								for i in range(mGraphIndex - 1, -1, -1):
+								for i in xrange(mGraphIndex - 1, -1, -1):
 									if (self.mGraphs[i].graph.has_key(u)):
 										mGraph.graph[u] = Node()
 										mGraph.graph[u].upgradesFrom = self.mGraphs[i].graph[u].upgradesFrom.copy()
@@ -342,11 +342,11 @@ class UnitUpgradesGraph:
 					if (dir == -1):
 						start = mGraph.depth - 2
 						end = -1
-					for x in range(start, end, dir):
+					for x in xrange(start, end, dir):
 						doneB = False
 						while (not doneB):
 							doneB = True
-							for y in range(mGraph.width - 1, 0, -1):
+							for y in xrange(mGraph.width - 1, 0, -1):
 								medA = -1.0
 								medB = -1.0
 								unitA = mGraph.matrix[x][y-1]
@@ -385,7 +385,7 @@ class UnitUpgradesGraph:
 						doneB = False
 						while (not doneB):
 							doneB = True
-							for y in range(1, mGraph.width):
+							for y in xrange(1, mGraph.width):
 								unitA = mGraph.matrix[x][y-1]
 								unitB = mGraph.matrix[x][y]
 								if (unitA == "E" or unitB == "E"):
@@ -417,7 +417,7 @@ class UnitUpgradesGraph:
 						if (mGraph.matrix[x][-1] == "E"):
 							sum = 0.0
 							num = 0.0
-							for y in range(mGraph.width - 1):
+							for y in xrange(mGraph.width - 1):
 								unit = mGraph.matrix[x][y]
 								if (unit != "E"):
 									node = mGraph.graph[unit]
@@ -427,7 +427,7 @@ class UnitUpgradesGraph:
 									sum += y - self.getMedianY(mGraph, seto)
 									num += 1
 							if (num > 0 and sum / num < -0.5):
-								for y in range(mGraph.width - 1, 0, -1):
+								for y in xrange(mGraph.width - 1, 0, -1):
 									unit = mGraph.matrix[x][y-1]
 									mGraph.matrix[x][y] = unit
 									if (unit != "E"):
@@ -440,7 +440,7 @@ class UnitUpgradesGraph:
 		done = False
 		while (done == False):
 			done = True
-			for i in range(1, len(self.mGraphs)):
+			for i in xrange(1, len(self.mGraphs)):
 				if (len(self.mGraphs[i-1].graph) < len(self.mGraphs[i].graph)):
 					done = False
 					temp = self.mGraphs[i]
@@ -461,8 +461,8 @@ class UnitUpgradesGraph:
 		for mGraph in self.mGraphs:
 			#draw arrows first so they'll go under the buttons if there is overlap
 			self.drawGraphArrows(mGraph, offset)
-			for x in range(mGraph.depth):
-				for y in range (mGraph.width):
+			for x in xrange(mGraph.depth):
+				for y in xrange (mGraph.width):
 					unit = mGraph.matrix[x][y]
 					(xPos, yPos) = self.getPosition(x, y, offset)
 					if unit != "E" and unit > -1:
@@ -473,8 +473,8 @@ class UnitUpgradesGraph:
 	
 	def drawGraphArrows(self, mGraph, offset):
 		matrix = mGraph.matrix
-		for x in range(len(matrix) - 1, -1, -1):
-			for y in range(len(matrix[x])):
+		for x in xrange(len(matrix) - 1, -1, -1):
+			for y in xrange(len(matrix[x])):
 				unit = matrix[x][y]
 				if unit != "E":
 					self.drawUnitArrows(mGraph, offset, unit)
@@ -521,7 +521,7 @@ class UnitUpgradesGraph:
 			line = LINE_TLBR
 			if (yDiff < 0):
 				line = LINE_BLTR
-			for i in range(iterations):
+			for i in xrange(iterations):
 				xF = int((xDiff / iterations) * max(i-0.1, 0)) + xFrom
 				yF = int((yDiff / iterations) * max(i-0.1, 0)) + yFrom
 				xT = int((xDiff / iterations) * (i + 1)) + xFrom

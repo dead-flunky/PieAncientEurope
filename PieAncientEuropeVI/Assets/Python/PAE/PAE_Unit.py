@@ -1,4 +1,4 @@
-### Imports
+# Imports
 import re
 from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
                                 CyTranslator, DirectionTypes, CommerceTypes,
@@ -11,12 +11,13 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
 import CvUtil
 import PAE_City
 import PAE_Lists as L
-### Defines
+# Defines
 gc = CyGlobalContext()
 
 # PAE - InstanceChanceModifier for units in getting Fighting-Promotions (per turn)
 # [PlayerID, UnitID]
 PAEInstanceFightingModifier = []
+
 
 def onUnitMoveOnSea(pUnit):
     pPlot = pUnit.plot()
@@ -59,7 +60,8 @@ def onUnitMoveOnSea(pUnit):
     # -- end Wind
 
     # Handelsschiffe von allen Schaden ausnehmen
-    if pUnit.getUnitType() in L.LTradeUnits: return
+    if pUnit.getUnitType() in L.LTradeUnits:
+        return
 
     # ------ Verletzte Schiffe
     iDamage = pUnit.getDamage()
@@ -67,7 +69,7 @@ def onUnitMoveOnSea(pUnit):
         pUnit.changeMoves(iDamage*2)
     # Beladene Schiffe (nicht mehr ab Patch 4)
     #iCargo = pUnit.getCargo()
-    #if iCargo > 0:
+    # if iCargo > 0:
     #    pUnit.changeMoves(iCargo*10)
 
     # Workboats sink in unknown terrain (neutral or from other team): Chance 1:6
@@ -75,7 +77,8 @@ def onUnitMoveOnSea(pUnit):
         if pPlot.getOwner() != pUnit.getOwner():
             if CvUtil.myRandom(6, "WorkboatSink") == 1:
                 if gc.getPlayer(pUnit.getOwner()).isHuman():
-                    CyInterface().addMessage(pUnit.getOwner(), True, 15, CyTranslator().getText("TXT_KEY_MESSAGE_SINKING_SHIP", (pUnit.getName(),)), "AS2D_SINKING_W0RKBOAT", 2, pUnit.getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
+                    CyInterface().addMessage(pUnit.getOwner(), True, 15, CyTranslator().getText("TXT_KEY_MESSAGE_SINKING_SHIP", (pUnit.getName(),)),
+                                             "AS2D_SINKING_W0RKBOAT", 2, pUnit.getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
                 # COMMAND_DELETE can cause CtD if used in onUnitMove()
                 # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
                 pUnit.kill(True, -1)
@@ -83,42 +86,55 @@ def onUnitMoveOnSea(pUnit):
 
     # Schiffe auf Hoher See erleiden Sturmschaden
     elif pPlot.isWater() and pPlot.getFeatureType() == -1 and not pPlot.isCity():
-      if pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_OCEAN") or pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN"):
-        # Damage (100=tot)
-        iSchaden = 20
-        # iDamage von oben
-        if iDamage <= 90 - iSchaden:
-            # Chance auf Schaden: 1:10 + Worldsize * x
-            # Worldsize: 0 (Duell) - 5 (Huge)
-            iChance = 10 + gc.getMap().getWorldSize() * 3
-            if pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN"): iChance = 10 # immer 10% bei tiefem Ozean
-            if CvUtil.myRandom(iChance, "Sturmschaden") == 1:
-                iDamage += iSchaden
-                pUnit.setDamage(iDamage, -1)
-                # Types of Damage (Messages)
-                # 0 = Storm
-                iRand = CvUtil.myRandom(6, "SturmschadenTyp")
-                if iRand == 0:
-                    pPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_SEESTURM"), 0)
-                    if gc.getPlayer(pUnit.getOwner()).isHuman():
-                        CyInterface().addMessage(pUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DAMAGE_SHIP_STORM", (pUnit.getName(), iSchaden)), "AS2D_UNIT_BUILD_GALLEY", 2, pUnit.getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
-                elif gc.getPlayer(pUnit.getOwner()).isHuman():
-                    CyInterface().addMessage(pUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DAMAGE_SHIP_"+str(iRand), (pUnit.getName(), iSchaden)), "AS2D_UNIT_BUILD_GALLEY", 2, pUnit.getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
+        if pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_OCEAN") or pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN"):
+            # Damage (100=tot)
+            iSchaden = 20
+            # iDamage von oben
+            if iDamage <= 90 - iSchaden:
+                # Chance auf Schaden: 1:10 + Worldsize * x
+                # Worldsize: 0 (Duell) - 5 (Huge)
+                iChance = 10 + gc.getMap().getWorldSize() * 3
+                if pPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DEEP_OCEAN"):
+                    iChance = 10  # immer 10% bei tiefem Ozean
+                if CvUtil.myRandom(iChance, "Sturmschaden") == 1:
+                    iDamage += iSchaden
+                    pUnit.setDamage(iDamage, -1)
+                    # Types of Damage (Messages)
+                    # 0 = Storm
+                    iRand = CvUtil.myRandom(6, "SturmschadenTyp")
+                    if iRand == 0:
+                        pPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_SEESTURM"), 0)
+                        if gc.getPlayer(pUnit.getOwner()).isHuman():
+                            CyInterface().addMessage(pUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DAMAGE_SHIP_STORM", (pUnit.getName(),
+                                                                                                                                              iSchaden)), "AS2D_UNIT_BUILD_GALLEY", 2, pUnit.getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
+                    elif gc.getPlayer(pUnit.getOwner()).isHuman():
+                        CyInterface().addMessage(pUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_DAMAGE_SHIP_"+str(iRand),
+                                                                                                    (pUnit.getName(), iSchaden)), "AS2D_UNIT_BUILD_GALLEY", 2, pUnit.getButton(), ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
 
     return
+
 
 def getStackLimit():
     # Handicap: 0 (Settler) - 8 (Deity) ; 5 = King
     iHandicap = gc.getGame().getHandicapType()
-    if iHandicap == 0: return 20
-    elif iHandicap == 1: return 20
-    elif iHandicap == 2: return 15
-    elif iHandicap == 3: return 10
-    elif iHandicap == 4: return 10
-    elif iHandicap == 5: return 10
-    elif iHandicap == 6: return 15
-    elif iHandicap == 7: return 20
-    else: return 20
+    if iHandicap == 0:
+        return 20
+    elif iHandicap == 1:
+        return 20
+    elif iHandicap == 2:
+        return 15
+    elif iHandicap == 3:
+        return 10
+    elif iHandicap == 4:
+        return 10
+    elif iHandicap == 5:
+        return 10
+    elif iHandicap == 6:
+        return 15
+    elif iHandicap == 7:
+        return 20
+    else:
+        return 20
 
 
 def stackDoTurn(iPlayer, iGameTurn):
@@ -139,14 +155,14 @@ def stackDoTurn(iPlayer, iGameTurn):
     iPromoFort2 = gc.getInfoTypeForString("PROMOTION_FORM_FORTRESS2")
 
     # Plots herausfinden
-    #if iPlayer != gc.getBARBARIAN_PLAYER():
+    # if iPlayer != gc.getBARBARIAN_PLAYER():
     # iPlayer > -1: wegen einrueckung!
     # PAE Better AI:
     # HI: 20 : 40 Units
     # AI: 30 : 50 Units
 
     iStackLimit1 = getStackLimit()
-    iStackLimit2 = iStackLimit1 * 2 # Rebellionschance
+    iStackLimit2 = iStackLimit1 * 2  # Rebellionschance
     if not pPlayer.isHuman():
         iStackLimit1 += 10
         iStackLimit2 += 10
@@ -157,7 +173,7 @@ def stackDoTurn(iPlayer, iGameTurn):
         tmpA = [sUnit.getX(), sUnit.getY()]
         tmpPlot = sUnit.plot()
         if not tmpPlot.isWater():
-            #if sUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
+            # if sUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
             if sUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SUPPLY_WAGON"):
                 if tmpA not in lHealerPlots:
                     lHealerPlots.append(tmpA)
@@ -179,7 +195,7 @@ def stackDoTurn(iPlayer, iGameTurn):
                             PlotArraySupply.append(tmpA)
                             # 2. Instanz - Rebellionsgefahr auf Land
                             # wird weiter unten in PlotArraySuppy neu berechnet
-                            #if tmpAnz > iStackLimit2:
+                            # if tmpAnz > iStackLimit2:
                             #    PlotArrayRebellion.append(tmpA)
                             # ***TEST***
                             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Stack (Zeile 3377)", tmpPlot.getNumDefenders(iPlayer))), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -209,8 +225,8 @@ def stackDoTurn(iPlayer, iGameTurn):
     # AI Stacks vor einer gegnerischen Stadt ---------------------------------------
     for h in PlotArrayStackAI:
         pPlotEnemyCity = None
-        for x in range(3):
-            for y in range(3):
+        for x in xrange(3):
+            for y in xrange(3):
                 loopPlot = gc.getMap().plot(h[0]-1+x, h[1]-1+y)
                 if loopPlot and not loopPlot.isNone():
                     iLoopPlotOwner = loopPlot.getOwner()
@@ -226,7 +242,7 @@ def stackDoTurn(iPlayer, iGameTurn):
             # Bombardement
             pStackPlot = gc.getMap().plot(h[0], h[1])
 
-            for i in range(pStackPlot.getNumUnits()):
+            for i in xrange(pStackPlot.getNumUnits()):
                 pUnit = pStackPlot.getUnit(i)
                 if pUnit.getOwner() == iPlayer:
                     if pUnit.isRanged():
@@ -238,7 +254,6 @@ def stackDoTurn(iPlayer, iGameTurn):
                                 pUnit.rangeStrike(pPlotEnemyCity.getX(), pPlotEnemyCity.getY())
                             else:
                                 break
-
 
     # +++++ Aufladen der Versorger UNIT_SUPPLY_WAGON ---------------------------------------
     lImpFood = [
@@ -257,10 +272,10 @@ def stackDoTurn(iPlayer, iGameTurn):
 
         # Units calc
         iRange = loopPlot.getNumUnits()
-        for iUnit in range(iRange):
+        for iUnit in xrange(iRange):
             pLoopUnit = loopPlot.getUnit(iUnit)
             if pLoopUnit.getOwner() == iPlayer:
-                #if pLoopUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
+                # if pLoopUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
                 if pLoopUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SUPPLY_WAGON"):
                     if getSupply(pLoopUnit) < getMaxSupply(pLoopUnit):
                         lHealer.append(pLoopUnit)
@@ -280,7 +295,7 @@ def stackDoTurn(iPlayer, iGameTurn):
                         iSupplyChange += pCity.getYieldRate(0) - loopPlot.getNumDefenders(iPlayer)
                    # PAE IV
                    #if pCity.happyLevel() - pCity.unhappyLevel(0) == 0 or pCity.goodHealth() - pCity.badHealth(False) == 0: iSupplyChange += 25
-                   #elif pCity.happyLevel() - pCity.unhappyLevel(0) > 0 and pCity.goodHealth() - pCity.badHealth(False) > 0: iSupplyChange += 50
+                   # elif pCity.happyLevel() - pCity.unhappyLevel(0) > 0 and pCity.goodHealth() - pCity.badHealth(False) > 0: iSupplyChange += 50
                 else:
                     eImprovement = loopPlot.getImprovementType()
                     if eImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT"):
@@ -290,7 +305,7 @@ def stackDoTurn(iPlayer, iGameTurn):
                     elif eImprovement == gc.getInfoTypeForString("IMPROVEMENT_HANDELSPOSTEN"):
                         iSupplyChange += 25
                 # PAE V: deaktiviert (weil Einheitengrenze sowieso vom Verbrauch abgezogen wird)
-                #else: iSupplyChange += 20
+                # else: iSupplyChange += 20
             # Fremdes Terrain
             elif iLoopOwner != -1:
                 pLoopOwner = gc.getPlayer(iLoopOwner)
@@ -309,7 +324,8 @@ def stackDoTurn(iPlayer, iGameTurn):
                     elif CvUtil.myRandom(10, "Versorger_1") < 2:
                         iSupplyChange += 20
                     if pPlayer.isHuman() and iSupplyChange > 0:
-                        CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_1", (pLoopOwner.getCivilizationAdjective(3), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
+                        CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_1",
+                                                                                          (pLoopOwner.getCivilizationAdjective(3), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
 
                 # Versorger auf freundlichem Terrain - Aufladechance 30%, 20% oder 10%
                 elif not pTeam.isAtWar(iTeamPlot):
@@ -339,8 +355,8 @@ def stackDoTurn(iPlayer, iGameTurn):
                         else:
                             iSupplyChange += 20
                         if pPlayer.isHuman() and iSupplyChange > 0:
-                            CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_2", (pLoopOwner.getCivilizationAdjectiveKey(), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
-
+                            CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_SUPPLY_RELOAD_2",
+                                                                                              (pLoopOwner.getCivilizationAdjectiveKey(), 0)), None, 2, lHealer[0].getButton(), ColorTypes(8), iX, iY, True, True)
 
                 # Versorger steht auf feindlichem Terrain
                 else:
@@ -364,7 +380,6 @@ def stackDoTurn(iPlayer, iGameTurn):
                     break
                 iSupplyChange = fillSupply(loopUnit, iSupplyChange)
 
-
     # +++++ Versorgung der Armee - supply wagon ---------------------------------------
     if PlotArraySupply:
         # gc.getInfoTypeForString("UNIT_SUPPLY_WAGON") # Tickets: 200
@@ -384,17 +399,19 @@ def stackDoTurn(iPlayer, iGameTurn):
             iNumUnits = loopPlot.getNumUnits()
             # PAE V: Stack Limit mit iStackLimit1 einbeziehen
             if loopPlot.getNumDefenders(iPlayer) - iStackLimit1 > 0:
-              # Units calc
-              for i in range(iNumUnits):
-                pLoopUnit = loopPlot.getUnit(i)
-                if pLoopUnit.getOwner() == iPlayer:
-                    iUnitType = pLoopUnit.getUnitCombatType()
-                    #if iUnitType == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
-                    if pLoopUnit.getUnitType() == iUnitSupplyWagon:
-                        lHealer.append(pLoopUnit)
-                    else:
-                        if iUnitType in L.LMountedSupplyCombats: iMounted += 1
-                        elif iUnitType in L.LMeleeSupplyCombats: iMelee += 1
+                # Units calc
+                for i in xrange(iNumUnits):
+                    pLoopUnit = loopPlot.getUnit(i)
+                    if pLoopUnit.getOwner() == iPlayer:
+                        iUnitType = pLoopUnit.getUnitCombatType()
+                        # if iUnitType == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
+                        if pLoopUnit.getUnitType() == iUnitSupplyWagon:
+                            lHealer.append(pLoopUnit)
+                        else:
+                            if iUnitType in L.LMountedSupplyCombats:
+                                iMounted += 1
+                            elif iUnitType in L.LMeleeSupplyCombats:
+                                iMelee += 1
 
             # ***TEST***
             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("UNITCOMBAT_MELEE", iMelee)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -451,7 +468,7 @@ def stackDoTurn(iPlayer, iGameTurn):
 
             if iSum > 0 and iSum > iStackLimit1:
                 iRange = loopPlot.getNumUnits()
-                for iUnit in range(iRange):
+                for iUnit in xrange(iRange):
                     if iSum <= 0:
                         break
                     xUnit = loopPlot.getUnit(iUnit)
@@ -461,31 +478,33 @@ def stackDoTurn(iPlayer, iGameTurn):
                     if xDamage > 60 and not pPlayer.isHuman():
                         pCity = getNearestCity(xUnit)
                         if pCity != None:
-                          xUnit.getGroup().pushMoveToMission(pCity.getX(), pCity.getY())
-                          iSum -= 1
-                          continue
+                            xUnit.getGroup().pushMoveToMission(pCity.getX(), pCity.getY())
+                            iSum -= 1
+                            continue
 
                     if xUnit.getUnitCombatType() in L.LMountedSupplyCombats:
                         if xDamage + 25 < 100:
                             xUnit.changeDamage(15, False)
                             if gc.getPlayer(xUnit.getOwner()).isHuman():
-                                CyInterface().addMessage(xUnit.getOwner(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_NOSUPPLY_PLOT", (xUnit.getName(), 15)), None, 2, None, ColorTypes(12), loopPlot.getX(), loopPlot.getY(), True, True)
+                                CyInterface().addMessage(xUnit.getOwner(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_NOSUPPLY_PLOT",
+                                                                                                           (xUnit.getName(), 15)), None, 2, None, ColorTypes(12), loopPlot.getX(), loopPlot.getY(), True, True)
                                 xUnit.getGroup().pushMission(MissionTypes.MISSION_IDLE, 0, 0, 0, False, False, MissionAITypes.NO_MISSIONAI, xUnit.plot(), xUnit)
                             iSum -= 1
                     elif xUnit.getUnitCombatType() in L.LMeleeSupplyCombats:
                         if xDamage + 30 < 100:
                             xUnit.changeDamage(20, False)
                             if gc.getPlayer(xUnit.getOwner()).isHuman():
-                                CyInterface().addMessage(xUnit.getOwner(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_NOSUPPLY_PLOT", (xUnit.getName(), 20)), None, 2, None, ColorTypes(12), loopPlot.getX(), loopPlot.getY(), True, True)
+                                CyInterface().addMessage(xUnit.getOwner(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_NOSUPPLY_PLOT",
+                                                                                                           (xUnit.getName(), 20)), None, 2, None, ColorTypes(12), loopPlot.getX(), loopPlot.getY(), True, True)
                                 xUnit.getGroup().pushMission(MissionTypes.MISSION_IDLE, 0, 0, 0, False, False, MissionAITypes.NO_MISSIONAI, xUnit.plot(), xUnit)
                             iSum -= 1
-
 
     # +++++ Rebellious STACKs ---------------
     # Stack can become independent / rebellious
     # per Unit 0.5%, pro Runde 25% check chance
     if PlotArrayRebellion and CvUtil.myRandom(4, "StackRebellion") == 1:
         doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2)
+
 
 def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
     if iPlayer == -1:
@@ -494,7 +513,7 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
     pPlayer = gc.getPlayer(iPlayer)
     bAtWar = False
     iRange = gc.getMAX_PLAYERS()
-    for i in range(iRange):
+    for i in xrange(iRange):
         if gc.getPlayer(i).isAlive():
             if gc.getTeam(pPlayer.getTeam()).isAtWar(gc.getPlayer(i).getTeam()):
                 bAtWar = True
@@ -507,10 +526,10 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
 
     # h is nun ein Object (PAE 6.5.2)
     for h in PlotArrayRebellion:
-        sPlot = h #gc.getMap().plot(h[0], h[1])
+        sPlot = h  # gc.getMap().plot(h[0], h[1])
         iNumUnits = sPlot.getNumUnits()
-        iX = sPlot.getX() #h[0]
-        iY = sPlot.getY() #h[1]
+        iX = sPlot.getX()  # h[0]
+        iY = sPlot.getY()  # h[1]
         iPlotOwner = sPlot.getOwner()
 
         # (Inaktiv: 30 / 5 = 4. Daher ziehe ich 5 ab, damit es bei 1% beginnt)
@@ -524,7 +543,7 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
         # for each general who accompanies the stack: -10%
         iCombatSiege = gc.getInfoTypeForString("UNITCOMBAT_SIEGE")
         iCombatUnits = 0
-        for i in range(iNumUnits):
+        for i in xrange(iNumUnits):
             pLoopUnit = sPlot.getUnit(i)
             if pLoopUnit.getOwner() == iPlayer:
                 if pLoopUnit.isMilitaryHappiness():
@@ -548,12 +567,11 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
         #if sPlot.getUnit(i).isHasPromotion(iPromoLoyal): fPercent -= 0.1
         # auf eigenem Terrain -2, auf feindlichem +2, auf neutralem 0
         #if iPlotOwner == iPlayer: iPercent -= 1
-        #elif iPlotOwner != -1: iPercent += 1
+        # elif iPlotOwner != -1: iPercent += 1
 
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("iPlayer", iPlayer)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Units", iNumUnits)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("iPercent", iPercent)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-
 
         if iPercent > 0:
             iBarbarianPlayer = gc.getBARBARIAN_PLAYER()
@@ -574,8 +592,8 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
                     # Einen guenstigen Plot auswaehlen
                     rebelPlotArray = []
                     rebelPlotArrayB = []
-                    for i in range(3):
-                        for j in range(3):
+                    for i in xrange(3):
+                        for j in xrange(3):
                             loopPlot = gc.getMap().plot(sPlot.getX() + i - 1, sPlot.getY() + j - 1)
                             if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                                 if loopPlot.isHills():
@@ -590,7 +608,7 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
                     if rebelPlotArray:
                         iRebelPlot = CvUtil.myRandom(len(rebelPlotArray), "STACKs_3")
                         pRebelPlot = rebelPlotArray[iRebelPlot]
-                        #Anzahl der rebellierenden Einheiten
+                        # Anzahl der rebellierenden Einheiten
                         iNumRebels = CvUtil.myRandom(iNumUnits, "STACKs_4")
                         if iNumRebels < 10:
                             iNumRebels = 9
@@ -599,20 +617,24 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
                         if iNumRebels * 2 < iNumUnits:
                             text = CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_1", ("Units", iNumUnits))
                             if pPlayer.isHuman():
-                                CyInterface().addMessage(iPlayer, True, 5, text, "AS2D_THEIRDECLAREWAR", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
+                                CyInterface().addMessage(iPlayer, True, 5, text, "AS2D_THEIRDECLAREWAR", 2,
+                                                         "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
                             PAE_City.doNextCityRevolt(iX, iY, iPlayer, gc.getBARBARIAN_PLAYER())
 
                         # grosse Rebellion (+ Generalseinheit)
                         else:
                             if pPlayer.isHuman():
                                 text = CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_2", ("Units", iNumUnits))
-                                CyInterface().addMessage(iPlayer, True, 5, text, "AS2D_THEIRDECLAREWAR", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
+                                CyInterface().addMessage(iPlayer, True, 5, text, "AS2D_THEIRDECLAREWAR", 2,
+                                                         "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
 
-                            listNamesStandard = ["Adiantunnus", "Divico", "Albion", "Malorix", "Inguiomer", "Archelaos", "Dorimachos", "Helenos", "Kerkidas", "Mikythos", "Philopoimen", "Pnytagoras", "Sophainetos", "Theopomopos", "Gylippos", "Proxenos", "Theseus", "Balakros", "Bar Kochba", "Julian ben Sabar", "Justasas", "Patricius", "Schimon bar Giora", "Artaphernes", "Harpagos", "Atropates", "Bahram Chobin", "Datis", "Schahin", "Egnatius", "Curius Aentatus", "Antiochos II", "Spartacus", "Herodes I", "Calgacus", "Suebonius Paulinus", "Maxentus", "Sapor II", "Alatheus", "Saphrax", "Honorius", "Aetius", "Achilles", "Herodes", "Heros", "Odysseus", "Anytos"]
+                            listNamesStandard = ["Adiantunnus", "Divico", "Albion", "Malorix", "Inguiomer", "Archelaos", "Dorimachos", "Helenos", "Kerkidas", "Mikythos", "Philopoimen", "Pnytagoras", "Sophainetos", "Theopomopos", "Gylippos", "Proxenos", "Theseus", "Balakros", "Bar Kochba", "Julian ben Sabar", "Justasas", "Patricius", "Schimon bar Giora",
+                                                 "Artaphernes", "Harpagos", "Atropates", "Bahram Chobin", "Datis", "Schahin", "Egnatius", "Curius Aentatus", "Antiochos II", "Spartacus", "Herodes I", "Calgacus", "Suebonius Paulinus", "Maxentus", "Sapor II", "Alatheus", "Saphrax", "Honorius", "Aetius", "Achilles", "Herodes", "Heros", "Odysseus", "Anytos"]
                             iName = CvUtil.myRandom(len(listNamesStandard), "GG_name")
 
                             iUnitType = gc.getInfoTypeForString("UNIT_GREAT_GENERAL")
-                            unit = pBarbarianPlayer.initUnit(iUnitType, pRebelPlot.getX(), pRebelPlot.getY(), UnitAITypes.UNITAI_GENERAL, DirectionTypes.DIRECTION_SOUTH)
+                            unit = pBarbarianPlayer.initUnit(iUnitType, pRebelPlot.getX(), pRebelPlot.getY(
+                            ), UnitAITypes.UNITAI_GENERAL, DirectionTypes.DIRECTION_SOUTH)
                             unit.setName(listNamesStandard[iName])
                             PAE_City.doNextCityRevolt(iX, iY, iPlayer, iBarbarianPlayer)
                             PAE_City.doNextCityRevolt(iX, iY, iPlayer, iBarbarianPlayer)
@@ -628,10 +650,10 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
                         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Stack Rebellion (Zeile 2028)", iPlayer)), None, 2, None, ColorTypes(10), sPlot.getX(), sPlot.getY(), True, True)
 
                         # Units become rebels
-                        for i in range(iNumRebels):
+                        for i in xrange(iNumRebels):
                             # Zufallsunit, getnumunits muss jedesmal neu ausgerechnet werden, da ja die rebell. units auf diesem plot wegfallen
                             iRand = CvUtil.myRandom(sPlot.getNumDefenders(iPlayer), "rebels")
-                            #Unit kopieren
+                            # Unit kopieren
                             pRandUnit = sPlot.getUnit(iRand)
                             if pRandUnit.getOwner() == iPlayer:
                                 rebell(pRandUnit, pBarbarianPlayer, pRebelPlot)
@@ -639,31 +661,31 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
                         # Meldung an den Spieler auf dem Territorium einer dritten Partei
                         if iPlotOwner != -1:
                             if iPlotOwner != iPlayer and gc.getPlayer(iPlotOwner).isHuman():
-                                CyInterface().addMessage(iPlotOwner, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_4", (pPlayer.getCivilizationAdjective(1),)), "AS2D_REBELLION", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
+                                CyInterface().addMessage(iPlotOwner, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_4", (pPlayer.getCivilizationAdjective(1),)),
+                                                         "AS2D_REBELLION", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
 
                         # ***TEST***
                         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Rebellisches Stack (Zeile 1557)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-
-
                 # ne kleine Warnung ausschicken
                 else:
                     if pPlayer.isHuman():
-                        CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_0", ("",)), "AS2D_REBELLION", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
+                        CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_0", ("",)),
+                                                 "AS2D_REBELLION", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
                     else:
                         # AI kills a weak unit to prevent a rebellion
                         #iST = seekUnit = seekST = 0
-                        #for i in range(iNumUnits):
+                        # for i in xrange(iNumUnits):
                         #  iST = sPlot.getUnit(i).baseCombatStr()
                         #  if iST < seekST and iST > 0 or seekST == 0:
                         #   seekUnit = i
                         #   seekST = iST
                         #pUnit = sPlot.getUnit(seekUnit)
                         ## pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
-                        #pUnit.kill(True, -1)  # RAMK_CTD
+                        # pUnit.kill(True, -1)  # RAMK_CTD
 
                         # AI teilt Stack (jede 4. Einheit)
-                        for i in range(iNumUnits):
+                        for i in xrange(iNumUnits):
                             if i % 4 == 1:
                                 pLoopUnit = sPlot.getUnit(i)
                                 if pLoopUnit.getOwner() == iPlayer:
@@ -672,7 +694,8 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
                         # Meldung an den Spieler auf dem Territorium einer dritten Partei
                         if iPlotOwner != -1:
                             if iPlotOwner != iPlayer and gc.getPlayer(iPlotOwner).isHuman():
-                                CyInterface().addMessage(iPlotOwner, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_3", (pPlayer.getCivilizationAdjective(1),)), "AS2D_REBELLION", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
+                                CyInterface().addMessage(iPlotOwner, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_STACK_REBELS_3", (pPlayer.getCivilizationAdjective(1),)),
+                                                         "AS2D_REBELLION", 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), iX, iY, True, True)
 
 
 # +++++ Rebellious Stack -- end ---------------------------------------------
@@ -684,16 +707,19 @@ def doStackRebellion(iPlayer, PlotArrayRebellion, iStackLimit2):
 # - im eigenen Territorium
 #pUnit.doCommand (CommandTypes.COMMAND_UPGRADE, gc.getInfoTypeForString("UNIT_TRIARII"), 0)
 def doUpgradeVeteran(pUnit, iNewUnit, bChangeCombatPromo):
-    if iNewUnit == -1: return
-    if not iNewUnit in range(gc.getNumUnitInfos()):
+    if iNewUnit == -1:
+        return
+    if not iNewUnit in xrange(gc.getNumUnitInfos()):
         # ***TEST***
-        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Upgrade Veteran: Invalid New Unit Type", iNewUnit)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",
+                                                                                                  ("Upgrade Veteran: Invalid New Unit Type", iNewUnit)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         return
     if pUnit is not None and not pUnit.isNone():
         pUnitOwner = gc.getPlayer(pUnit.getOwner())
         if pUnitOwner is not None and not pUnitOwner.isNone():
 
-            NewUnit = pUnitOwner.initUnit(iNewUnit, pUnit.getX(), pUnit.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+            NewUnit = pUnitOwner.initUnit(iNewUnit, pUnit.getX(), pUnit.getY(),
+                                          UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
 
             forbiddenPromos = []
             if pUnit.getUnitCombatType() != gc.getInfoTypeForString("UNITCOMBAT_ARCHER"):
@@ -707,9 +733,9 @@ def doUpgradeVeteran(pUnit, iNewUnit, bChangeCombatPromo):
                 forbiddenPromos.extend(L.LVeteranForbiddenPromos4)
 
             iRange = gc.getNumPromotionInfos()
-            for j in range(iRange):
+            for j in xrange(iRange):
                 if "_FORM_" in gc.getPromotionInfo(j).getType():
-                  continue
+                    continue
                 if j not in forbiddenPromos:
                     if pUnit.isHasPromotion(j):
                         NewUnit.setHasPromotion(j, True)
@@ -721,10 +747,14 @@ def doUpgradeVeteran(pUnit, iNewUnit, bChangeCombatPromo):
             iPromoCombat5 = gc.getInfoTypeForString("PROMOTION_COMBAT5")
             iPromoCombat6 = gc.getInfoTypeForString("PROMOTION_COMBAT6")
             if bChangeCombatPromo:
-                if NewUnit.isHasPromotion(iPromoCombat6): NewUnit.setHasPromotion(iPromoCombat6, False)
-                if NewUnit.isHasPromotion(iPromoCombat5): NewUnit.setHasPromotion(iPromoCombat5, False)
-                if NewUnit.isHasPromotion(iPromoCombat4): NewUnit.setHasPromotion(iPromoCombat4, False)
-                if NewUnit.isHasPromotion(iPromoCombat3): NewUnit.setHasPromotion(iPromoCombat3, False)
+                if NewUnit.isHasPromotion(iPromoCombat6):
+                    NewUnit.setHasPromotion(iPromoCombat6, False)
+                if NewUnit.isHasPromotion(iPromoCombat5):
+                    NewUnit.setHasPromotion(iPromoCombat5, False)
+                if NewUnit.isHasPromotion(iPromoCombat4):
+                    NewUnit.setHasPromotion(iPromoCombat4, False)
+                if NewUnit.isHasPromotion(iPromoCombat3):
+                    NewUnit.setHasPromotion(iPromoCombat3, False)
 
             NewUnit.setExperience(pUnit.getExperience(), -1)
             NewUnit.setLevel(pUnit.getLevel())
@@ -734,7 +764,7 @@ def doUpgradeVeteran(pUnit, iNewUnit, bChangeCombatPromo):
             # if unit was a general  (PROMOTION_LEADER)
             if pUnit.getLeaderUnitType() > -1:
                 NewUnit.setLeaderUnitType(pUnit.getLeaderUnitType())
-                pUnit.setLeaderUnitType(-1) # avoids ingame message "GG died in combat"
+                pUnit.setLeaderUnitType(-1)  # avoids ingame message "GG died in combat"
 
             NewUnit.setDamage(pUnit.getDamage(), -1)
             NewUnit.setImmobileTimer(1)
@@ -744,6 +774,8 @@ def doUpgradeVeteran(pUnit, iNewUnit, bChangeCombatPromo):
 
 # Unit Rang/Rank Promos (PAE, ModMessage:751)
 # PromoUp
+
+
 def doUpgradeRang(iPlayer, iUnit):
     pPlayer = gc.getPlayer(iPlayer)
     pUnit = pPlayer.getUnit(iUnit)
@@ -766,7 +798,8 @@ def doUpgradeRang(iPlayer, iUnit):
         if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
             iNewUnit = gc.getInfoTypeForString("UNIT_LEGION_TRIBUN")
             setLegionName(pUnit)
-        else: bInfoBonus = True
+        else:
+            bInfoBonus = True
     elif iUnitType == gc.getInfoTypeForString("UNIT_EQUITES") or iUnitType == gc.getInfoTypeForString("UNIT_HORSEMAN_EQUITES2"):
         iNewUnit = gc.getInfoTypeForString("UNIT_HORSEMAN_DECURIO")
     elif iUnitType == gc.getInfoTypeForString("UNIT_HORSEMAN_DECURIO"):
@@ -784,7 +817,8 @@ def doUpgradeRang(iPlayer, iUnit):
     elif iUnitType == gc.getInfoTypeForString("UNIT_ELITE_HOPLIT"):
         if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
             iNewUnit = gc.getInfoTypeForString("UNIT_GREEK_STRATEGOS")
-        else: bInfoBonus = True
+        else:
+            bInfoBonus = True
     # Sparta
     elif iUnitType == gc.getInfoTypeForString("UNIT_SPARTA_1"):
         iNewUnit = gc.getInfoTypeForString("UNIT_SPARTA_2")
@@ -806,8 +840,10 @@ def doUpgradeRang(iPlayer, iUnit):
         if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
             if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
                 iNewUnit = gc.getInfoTypeForString("UNIT_PERSIA_AZADAN")
-            else: iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
-        else: bInfoBonus = True
+            else:
+                iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
+        else:
+            bInfoBonus = True
     elif iUnitType == gc.getInfoTypeForString("UNIT_HORSEMAN_PERSIA"):
         iNewUnit = gc.getInfoTypeForString("UNIT_HORSE_PERSIA_NOBLE1")
     elif iUnitType == gc.getInfoTypeForString("UNIT_HORSE_PERSIA_NOBLE1"):
@@ -817,13 +853,15 @@ def doUpgradeRang(iPlayer, iUnit):
     # Egypt, Nubia
     elif iCivType == gc.getInfoTypeForString("CIVILIZATION_EGYPT") or iCivType == gc.getInfoTypeForString("CIVILIZATION_NUBIA"):
         if iUnitType == gc.getInfoTypeForString("UNIT_STATTHALTER_EGYPT"):
-          if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
-              if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
-                  iNewUnit = gc.getInfoTypeForString("UNIT_WAR_CHARIOT")
-              else: iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
-          else: bInfoBonus = True
+            if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
+                if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
+                    iNewUnit = gc.getInfoTypeForString("UNIT_WAR_CHARIOT")
+                else:
+                    iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
+            else:
+                bInfoBonus = True
         else:
-          iNewUnit = gc.getInfoTypeForString("UNIT_STATTHALTER_EGYPT")
+            iNewUnit = gc.getInfoTypeForString("UNIT_STATTHALTER_EGYPT")
     # Karthago
     elif iUnitType == gc.getInfoTypeForString("UNIT_CARTH_SACRED_BAND_SWORD") or iUnitType == gc.getInfoTypeForString("UNIT_CARTH_SACRED_BAND_HOPLIT"):
         iNewUnit = gc.getInfoTypeForString("UNIT_CARTH_SACRED_BAND_HOPLIT2")
@@ -834,23 +872,27 @@ def doUpgradeRang(iPlayer, iUnit):
         if iUnitType == gc.getInfoTypeForString("UNIT_ASSUR_RANG1"):
             iNewUnit = gc.getInfoTypeForString("UNIT_ASSUR_RANG2")
         elif iUnitType == gc.getInfoTypeForString("UNIT_ASSUR_RANG2"):
-          if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
-              if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
-                  iNewUnit = gc.getInfoTypeForString("UNIT_ASSUR_RANG3")
-              else: iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
-          else: bInfoBonus = True
+            if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
+                if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
+                    iNewUnit = gc.getInfoTypeForString("UNIT_ASSUR_RANG3")
+                else:
+                    iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
+            else:
+                bInfoBonus = True
         else:
-          iNewUnit = gc.getInfoTypeForString("UNIT_ASSUR_RANG1")
+            iNewUnit = gc.getInfoTypeForString("UNIT_ASSUR_RANG1")
     # Sumerer
     elif iCivType == gc.getInfoTypeForString("CIVILIZATION_SUMERIA"):
         if iUnitType == gc.getInfoTypeForString("UNIT_SUMER_RANG1"):
-          if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
-              if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
-                  iNewUnit = gc.getInfoTypeForString("UNIT_SUMER_RANG2")
-              else: iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
-          else: bInfoBonus = True
+            if pPlayer.hasBonus(gc.getInfoTypeForString("BONUS_HORSE")):
+                if gc.getTeam(pPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
+                    iNewUnit = gc.getInfoTypeForString("UNIT_SUMER_RANG2")
+                else:
+                    iInfoTech = gc.getInfoTypeForString("TECH_THE_WHEEL3")
+            else:
+                bInfoBonus = True
         else:
-          iNewUnit = gc.getInfoTypeForString("UNIT_SUMER_RANG1")
+            iNewUnit = gc.getInfoTypeForString("UNIT_SUMER_RANG1")
     # Germanen, Vandalen, Hunnen
     elif iNewUnit == -1:
         if iCivType in L.LCivGermanen:
@@ -858,12 +900,13 @@ def doUpgradeRang(iPlayer, iUnit):
         elif iCivType == gc.getInfoTypeForString("CIVILIZATION_HUNNEN"):
             iNewUnit = gc.getInfoTypeForString("UNIT_HEAVY_HORSEMAN_HUN")
 
-
     # Meldung no bonus
     if bInfoBonus and iPlayer == gc.getGame().getActivePlayer():
-        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_RANK_BONUS_INFO", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText(
+            "TXT_KEY_MESSAGE_RANK_BONUS_INFO", ("",)), None, 2, None, ColorTypes(7), 0, 0, False, False)
     elif iInfoTech != -1 and iPlayer == gc.getGame().getActivePlayer():
-        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_RANK_TECH_INFO", (gc.getTechInfo(iInfoTech).getDescription(),)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_RANK_TECH_INFO",
+                                                                           (gc.getTechInfo(iInfoTech).getDescription(),)), None, 2, None, ColorTypes(7), 0, 0, False, False)
 
     # Neue Einheit
     if iNewUnit != -1:
@@ -873,14 +916,17 @@ def doUpgradeRang(iPlayer, iUnit):
         if pPlayer.isHuman():
             pPlayer.changeGold(-50)
             if iPlayer == gc.getGame().getActivePlayer():
-              CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_RANK_PROMOTED", (gc.getUnitInfo(iUnitType).getDescription(), gc.getUnitInfo(iNewUnit).getDescription())), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_RANK_PROMOTED", (gc.getUnitInfo(
+                    iUnitType).getDescription(), gc.getUnitInfo(iNewUnit).getDescription())), None, 2, None, ColorTypes(8), 0, 0, False, False)
         return True
     else:
-        #***TEST***
+        # ***TEST***
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Upgrade Rang: not possible (wrong unit, horse or tech)", iUnitType)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         return False
 
 # Legion in Ausbildung (PAE, ModMessage:756)
+
+
 def doKastell(iPlayer, iUnit):
     pPlayer = gc.getPlayer(iPlayer)
     pUnit = pPlayer.getUnit(iUnit)
@@ -892,7 +938,6 @@ def doKastell(iPlayer, iUnit):
 
     pUnit.finishMoves()
     doGoToNextUnit(pUnit)
-
 
 
 # PAE UNIT FORMATIONS ------------------------------
@@ -912,8 +957,8 @@ def canDoFormation(pUnit, iFormation):
             if iFormation == gc.getInfoTypeForString("PROMOTION_FORM_NAVAL_KEIL") or iFormation == gc.getInfoTypeForString("PROMOTION_FORM_NAVAL_ZANGE"):
                 if pTeam.isHasTech(gc.getInfoTypeForString("TECH_LOGIK")):
                     bCanDo = True
-            else: bCanDo = True
-
+            else:
+                bCanDo = True
 
     # Mounted mit Fernangriff
     elif iUnitCombatType == gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"):
@@ -1039,6 +1084,8 @@ def canDoFormation(pUnit, iFormation):
   # can do Formationen / Formations End ------
 
 # PAE UNIT FORMATIONS ------------------------------
+
+
 def doUnitFormation(pUnit, iNewFormation):
     pPlayer = gc.getPlayer(pUnit.getOwner())
 
@@ -1047,14 +1094,14 @@ def doUnitFormation(pUnit, iNewFormation):
         # Fuer alle Einheiten dieser Gruppe
         unitGroup = pUnit.getGroup()
         iNumUnits = unitGroup.getNumUnits()
-        for i in range(iNumUnits):
+        for i in xrange(iNumUnits):
             loopUnit = unitGroup.getUnitAt(i)
             # Formation geben
             if iNewFormation != -1:
                 if canDoFormation(loopUnit, iNewFormation):
                     # Formationen auf NULL setzen
                     for j in L.LFormationen:
-                        #if loopUnit.isHasPromotion(j):
+                        # if loopUnit.isHasPromotion(j):
                         loopUnit.setHasPromotion(j, False)
                     # Formation geben
                     loopUnit.setHasPromotion(iNewFormation, True)
@@ -1062,17 +1109,18 @@ def doUnitFormation(pUnit, iNewFormation):
             else:
                 # Formationen auf NULL setzen
                 for j in L.LFormationen:
-                    #if loopUnit.isHasPromotion(j):
+                    # if loopUnit.isHasPromotion(j):
                     loopUnit.setHasPromotion(j, False)
     # AI
     else:
         # Formationen auf NULL setzen
         for j in L.LFormationen:
-            #if loopUnit.isHasPromotion(j):
+            # if loopUnit.isHasPromotion(j):
             pUnit.setHasPromotion(j, False)
         # Formation geben
         if iNewFormation != -1:
             pUnit.setHasPromotion(iNewFormation, True)
+
 
 def doAIPlotFormations(pPlot, iPlayer):
     # bContinue = False
@@ -1101,8 +1149,8 @@ def doAIPlotFormations(pPlot, iPlayer):
     iRange = 1
     iX = pPlot.getX()
     iY = pPlot.getY()
-    for x in range(-iRange, iRange+1):
-        for y in range(-iRange, iRange+1):
+    for x in xrange(-iRange, iRange+1):
+        for y in xrange(-iRange, iRange+1):
             loopPlot = plotXY(iX, iY, x, y)
             if loopPlot is not None and not loopPlot.isNone():
                 if loopPlot.isCity():
@@ -1112,7 +1160,7 @@ def doAIPlotFormations(pPlot, iPlayer):
                             bCity = True
 
     lUnitTypes = [
-        #gc.getInfoTypeForString("UNITCOMBAT_MELEE"),
+        # gc.getInfoTypeForString("UNITCOMBAT_MELEE"),
         gc.getInfoTypeForString("UNITCOMBAT_AXEMAN"),
         gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN"),
         gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN"),
@@ -1123,7 +1171,7 @@ def doAIPlotFormations(pPlot, iPlayer):
     ]
     # Init Units
     iRange = pPlot.getNumUnits()
-    for i in range(iRange):
+    for i in xrange(iRange):
         if pPlot.getUnit(i).getOwner() == iPlayer:
             if pPlot.getUnit(i).getUnitCombatType() in lUnitTypes:
                 lPlayerUnits.append(pPlot.getUnit(i))
@@ -1294,7 +1342,8 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
 
     iDivisor = 1
     # PAEInstanceFightingModifier for wins in the same turn
-    if (iPlayer, pUnitTarget.getID()) in PAEInstanceFightingModifier: iDivisor = 5
+    if (iPlayer, pUnitTarget.getID()) in PAEInstanceFightingModifier:
+        iDivisor = 5
 
     # Chances --- Inits -------------
     iChanceCityDefense = 10 / iDivisor
@@ -1304,14 +1353,13 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
     iChanceTerrain2 = 5 / iDivisor
     # -------------------------------
 
-
     # 1. chance: Either City or Open Field
     # City
     if bCity:
         iRand = CvUtil.myRandom(100, "cityPromo")
         if iChanceCityDefense > iRand:
             if bMadeAttack:
-            # Attacker
+                # Attacker
                 if not pUnitTarget.isHasPromotion(gc.getInfoTypeForString("PROMOTION_CITY_RAIDER5")):
                     for iPromo in L.LCityRaider:
                         if not pUnitTarget.isHasPromotion(iPromo):
@@ -1319,7 +1367,7 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
                             break
                     iChanceUnitType = iChanceUnitType / 2
                     # Trait Conquereror / Eroberer: Automatische Heilung bei Stadtangriffs-Promo / auto-healing when receiving city raider promo
-                    #if pPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_EROBERER")):
+                    # if pPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_EROBERER")):
                     #    pUnitTarget.setDamage(0, -1)
             # Defender
             else:
@@ -1330,7 +1378,7 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
                             break
                     iChanceUnitType = iChanceUnitType / 2
                     # Trait Protective: Automatische Heilung bei Stadtverteidigungs-Promo / auto-healing when receiving city garrison promo
-                    #if pPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_PROTECTIVE")):
+                    # if pPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_PROTECTIVE")):
                     #    pUnitTarget.setDamage(0, -1)
 
     # on open field
@@ -1355,7 +1403,7 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
                             lTerrain.append("River")
 
             # old source code
-            #if pPlot.isRiverSide() and bMadeAttack:
+            # if pPlot.isRiverSide() and bMadeAttack:
             #  if not pUnitTarget.isHasPromotion(gc.getInfoTypeForString("PROMOTION_AMPHIBIOUS")):
             #    if pUnitTarget.isHasPromotion(gc.getInfoTypeForString("PROMOTION_COMBAT3")):
             #      lTerrain.append("River")
@@ -1414,7 +1462,8 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
             pUnitTarget.setHasPromotion(iNewPromo, True)
             PAEInstanceFightingModifier.append((pUnitTarget.getOwner(), pUnitTarget.getID()))
             if gc.getPlayer(pUnitTarget.getOwner()).isHuman():
-                CyInterface().addMessage(pUnitTarget.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION", (pUnitTarget.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnitTarget.getX(), pUnitTarget.getY(), True, True)
+                CyInterface().addMessage(pUnitTarget.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION", (pUnitTarget.getName(), gc.getPromotionInfo(
+                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnitTarget.getX(), pUnitTarget.getY(), True, True)
 
     # 2. chance: enemy combat type
     iNewPromo = -1
@@ -1436,7 +1485,7 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
             elif not pUnitTarget.isHasPromotion(gc.getInfoTypeForString("PROMOTION_PARADE_SKIRM1")):
                 iNewPromo = gc.getInfoTypeForString("PROMOTION_PARADE_SKIRM1")
 
-        #elif pUnitSource.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MELEE"):
+        # elif pUnitSource.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MELEE"):
         #  if not pUnitTarget.isHasPromotion(gc.getInfoTypeForString("PROMOTION_SHOCK2")):  iNewPromo = gc.getInfoTypeForString("PROMOTION_SHOCK2")
         #  elif not pUnitTarget.isHasPromotion(gc.getInfoTypeForString("PROMOTION_SHOCK")): iNewPromo = gc.getInfoTypeForString("PROMOTION_SHOCK")
 
@@ -1481,9 +1530,11 @@ def doUnitGetsPromo(pUnitTarget, pUnitSource, pPlot, bMadeAttack, bOpponentAnima
             pUnitTarget.setHasPromotion(iNewPromo, True)
             PAEInstanceFightingModifier.append((iPlayer, pUnitTarget.getID()))
             if pPlayer.isHuman():
-                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION", (pUnitTarget.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnitTarget.getX(), pUnitTarget.getY(), True, True)
+                CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION", (pUnitTarget.getName(), gc.getPromotionInfo(
+                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnitTarget.getX(), pUnitTarget.getY(), True, True)
             return True
     return False
+
 
 def doRetireVeteran(pUnit):
     lPromos = [
@@ -1505,19 +1556,19 @@ def doRetireVeteran(pUnit):
     # Reduce XP
     pUnit.setExperience(pUnit.getExperience() / 2, -1)
     # Reduce Lvl: deactivated
-    #if pUnit.getLevel() > 3:
+    # if pUnit.getLevel() > 3:
     #  pUnit.setLevel(pUnit.getLevel() - 3)
-    #else:
+    # else:
     #  pUnit.setLevel(1)
 
 
 def doMobiliseFortifiedArmy(pCity):
     if not pCity:
         return
-    #PAE V ab Patch 3: Wenn Hauptstadt angegriffen wird, sollen alle Einheiten in Festungen remobilisiert werden (Promo FORTRESS)
-    #PAE 6.6: auch bei normalen Städten, wenn im Umkreis eine Festung ist
+    # PAE V ab Patch 3: Wenn Hauptstadt angegriffen wird, sollen alle Einheiten in Festungen remobilisiert werden (Promo FORTRESS)
+    # PAE 6.6: auch bei normalen Städten, wenn im Umkreis eine Festung ist
 
-    #PAE 6.6: ausser Barbaren
+    # PAE 6.6: ausser Barbaren
     if pCity.getOwner() == gc.getBARBARIAN_PLAYER():
         return
 
@@ -1537,25 +1588,27 @@ def doMobiliseFortifiedArmy(pCity):
             (pUnit, pIter) = pPlayer.nextUnit(pIter, False)
     else:
         iCityOwner = pCity.getOwner()
-        iRange = 4 # Radius
-        for x in range(-iRange, iRange+1):
-            for y in range(-iRange, iRange+1):
+        iRange = 4  # Radius
+        for x in xrange(-iRange, iRange+1):
+            for y in xrange(-iRange, iRange+1):
                 loopPlot = plotXY(iX, iY, x, y)
                 if loopPlot.getImprovementType() in L.LImprFortSentry:
-                    for iLoopUnit in range(loopPlot.getNumUnits()):
-                          pUnit = loopPlot.getUnit(iLoopUnit)
-                          if pUnit and pUnit.getOwner() == iCityOwner:
-                              pUnit.setHasPromotion(iPromoFort, False)
-                              pUnit.setHasPromotion(iPromoFort2, False)
-                              pUnit.getGroup().pushMission(MissionTypes.MISSION_MOVE_TO, iX, iY, 0, False, False, MissionAITypes.NO_MISSIONAI, pUnit.plot(), pUnit)
+                    for iLoopUnit in xrange(loopPlot.getNumUnits()):
+                        pUnit = loopPlot.getUnit(iLoopUnit)
+                        if pUnit and pUnit.getOwner() == iCityOwner:
+                            pUnit.setHasPromotion(iPromoFort, False)
+                            pUnit.setHasPromotion(iPromoFort2, False)
+                            pUnit.getGroup().pushMission(MissionTypes.MISSION_MOVE_TO, iX, iY, 0, False, False, MissionAITypes.NO_MISSIONAI, pUnit.plot(), pUnit)
 
 # Handelsposten errichten (soll kein Gold kosten ab PAE 6.5.2)
 # Grund: Strassen kosten Geld, Einheit kostet Geld (indirekt beim Bau, pro Runde)
+
+
 def doBuildHandelsposten(pUnit):
     #iPrice = 25
     iPlayer = pUnit.getOwner()
     #pPlayer = gc.getPlayer(iPlayer)
-    #if pPlayer.getGold() < iPrice:
+    # if pPlayer.getGold() < iPrice:
     #    # TODO: eigener Text
     #    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TRADE_COLLECT_NO_GOODS", ("",)), None, 2, "Art/Interface/PlotPicker/Warning.dds", ColorTypes(7), pUnit.getX(), pUnit.getY(), True, True)
     #    return
@@ -1565,7 +1618,7 @@ def doBuildHandelsposten(pUnit):
     CvUtil.addScriptData(pPlot, "p", iPlayer)
     pPlot.setCulture(iPlayer, 1, True)
     pPlot.setOwner(iPlayer)
-    #pPlayer.changeGold(-iPrice)
+    # pPlayer.changeGold(-iPrice)
     # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
     pUnit.kill(True, -1)  # RAMK_CTD
 
@@ -1579,10 +1632,12 @@ def doBuildHandelsposten(pUnit):
 # isRiverSide: PROMOTION_AMPHIBIOUS
 
 # PAE CITY builds UNIT -> auto promotions (land units)
+
+
 def doCityUnitPromotions(pCity, pUnit):
     initChanceCity = 1  # ab Stadt: Chance * City Pop
     initChance = 2      # Chance * Plots
-    #initChanceRiver = 2 # for PROMOTION_AMPHIBIOUS only
+    # initChanceRiver = 2 # for PROMOTION_AMPHIBIOUS only
     # --------------
     # iCityAttack = 0
     # iCityDefense = 0
@@ -1593,7 +1648,7 @@ def doCityUnitPromotions(pCity, pUnit):
     iDesert = 0
     # iRiver = 0
 
-    iMinAnz = 2 # Mindestanzahl an Plots notwendig
+    iMinAnz = 2  # Mindestanzahl an Plots notwendig
 
     if pCity.isHasBuilding(gc.getInfoTypeForString("BUILDING_STADT")):
         if pCity.getPopulation() * initChanceCity > CvUtil.myRandom(100, "doCityUnitPromotions1"):
@@ -1614,27 +1669,35 @@ def doCityUnitPromotions(pCity, pUnit):
         gc.getInfoTypeForString("UNIT_BATTERING_RAM"),
         gc.getInfoTypeForString("UNIT_BATTERING_RAM2")
     ]
-    if pUnit.getUnitType() in lRams: return
+    if pUnit.getUnitType() in lRams:
+        return
 
     # Start seeking plots for promos. Nur umliegende Plots!
-    #for i in range(3):
-    #  for j in range(3):
+    # for i in xrange(3):
+    #  for j in xrange(3):
     #    pLoopPlot = gc.getMap().plot(pCity.getX() + i - 1, pCity.getY() + j - 1)
     iRange = gc.getNUM_CITY_PLOTS() - 12
-    for iI in range(iRange):
+    for iI in xrange(iRange):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
-            if pLoopPlot.isPeak(): continue
-            if pLoopPlot.isHills(): iHills += 1
+            if pLoopPlot.isPeak():
+                continue
+            if pLoopPlot.isHills():
+                iHills += 1
             #if pLoopPlot.isRiverSide(): iRiver += 1
-            if pLoopPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DESERT"): iDesert += 1
-            elif pLoopPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_SWAMP"): iSwamp += 1
-            if pLoopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_FOREST"): iForest += 1
-            elif pLoopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_DICHTERWALD"): iForest += 1
-            elif pLoopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_JUNGLE"): iJungle += 1
+            if pLoopPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_DESERT"):
+                iDesert += 1
+            elif pLoopPlot.getTerrainType() == gc.getInfoTypeForString("TERRAIN_SWAMP"):
+                iSwamp += 1
+            if pLoopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_FOREST"):
+                iForest += 1
+            elif pLoopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_DICHTERWALD"):
+                iForest += 1
+            elif pLoopPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_JUNGLE"):
+                iJungle += 1
 
     # River - deactivated
-    #if iRiver > 0:
+    # if iRiver > 0:
     #  iRand = CvUtil.myRandom(100, "doCityUnitPromotions2")
     #  if iRiver * initChanceRiver > iRand:
     #    if not pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_AMPHIBIOUS")): doGiveUnitPromo(pUnit, gc.getInfoTypeForString("PROMOTION_AMPHIBIOUS"), pCity)
@@ -1645,42 +1708,48 @@ def doCityUnitPromotions(pCity, pUnit):
     # Hills
     iPromoHills = gc.getInfoTypeForString("PROMOTION_GUERILLA1")
     if iHills >= iMinAnz and iHills * initChance > CvUtil.myRandom(100, "doCityUnitPromotions3"):
-        if not pUnit.isHasPromotion(iPromoHills): lPossiblePromos.append(iPromoHills)
+        if not pUnit.isHasPromotion(iPromoHills):
+            lPossiblePromos.append(iPromoHills)
 
     # Desert
     iPromoDesert = gc.getInfoTypeForString("PROMOTION_DESERT1")
     if iDesert >= iMinAnz and iDesert * initChance > CvUtil.myRandom(100, "doCityUnitPromotions4"):
-        if not pUnit.isHasPromotion(iPromoDesert): lPossiblePromos.append(iPromoDesert)
+        if not pUnit.isHasPromotion(iPromoDesert):
+            lPossiblePromos.append(iPromoDesert)
 
     # Forest
     iPromoForest = gc.getInfoTypeForString("PROMOTION_WOODSMAN1")
     if iForest >= iMinAnz and iForest * initChance > CvUtil.myRandom(100, "doCityUnitPromotions5"):
-        if not pUnit.isHasPromotion(iPromoForest): lPossiblePromos.append(iPromoForest)
+        if not pUnit.isHasPromotion(iPromoForest):
+            lPossiblePromos.append(iPromoForest)
 
     # Swamp
     iPromoSumpf = gc.getInfoTypeForString("PROMOTION_SUMPF1")
     if iSwamp >= iMinAnz and iSwamp * initChance > CvUtil.myRandom(100, "doCityUnitPromotions6"):
-        if not pUnit.isHasPromotion(iPromoSumpf): lPossiblePromos.append(iPromoSumpf)
+        if not pUnit.isHasPromotion(iPromoSumpf):
+            lPossiblePromos.append(iPromoSumpf)
 
     # Jungle
     iPromoJungle = gc.getInfoTypeForString("PROMOTION_JUNGLE1")
     if iJungle >= iMinAnz and iJungle * initChance > CvUtil.myRandom(100, "doCityUnitPromotions7"):
-        if not pUnit.isHasPromotion(iPromoJungle): lPossiblePromos.append(iPromoJungle)
+        if not pUnit.isHasPromotion(iPromoJungle):
+            lPossiblePromos.append(iPromoJungle)
 
     # only 1 of the pot
     if lPossiblePromos:
         iPromo = lPossiblePromos[CvUtil.myRandom(len(lPossiblePromos), "doCityUnitPromotions8")]
         doGiveUnitPromo(pUnit, iPromo, pCity)
 
-
   # PAE CITY builds UNIT -> auto promotions (ships)
+
+
 def doCityUnitPromotions4Ships(pCity, pUnit):
     initChance = 2
     iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
 
     iWater = 0
     # Start seeking plots for promos
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             if pLoopPlot.getFeatureType() == iDarkIce:
@@ -1701,12 +1770,16 @@ def doGiveUnitPromo(pUnit, iNewPromo, pCity):
     iPlayer = pUnit.getOwner()
     if gc.getPlayer(iPlayer).isHuman():
         if iNewPromo == gc.getInfoTypeForString("PROMOTION_CITY_GARRISON1") or iNewPromo == gc.getInfoTypeForString("PROMOTION_CITY_RAIDER1"):
-            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION_3", (pUnit.getName(), gc.getPromotionInfo(iNewPromo).getDescription(), pCity.getName())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnit.getX(), pUnit.getY(), True, True)
+            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION_3", (pUnit.getName(), gc.getPromotionInfo(
+                iNewPromo).getDescription(), pCity.getName())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnit.getX(), pUnit.getY(), True, True)
         else:
-            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION_2", (pUnit.getName(), gc.getPromotionInfo(iNewPromo).getDescription(), pCity.getName())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnit.getX(), pUnit.getY(), True, True)
+            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_PROMOTION_2", (pUnit.getName(), gc.getPromotionInfo(
+                iNewPromo).getDescription(), pCity.getName())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pUnit.getX(), pUnit.getY(), True, True)
 
 # ++++++++ Names for Legions +++++++++++++++++
 # Reusing names of fallen Legions
+
+
 def setLegionName(pUnit):
     pPlayer = gc.getPlayer(pUnit.getOwner())
 
@@ -1724,6 +1797,8 @@ def setLegionName(pUnit):
             break
 
 # 752, iData2 = 0
+
+
 def doBlessUnits(pUnit):
     pPlayer = gc.getPlayer(pUnit.getOwner())
     iPromo = gc.getInfoTypeForString("PROMOTION_BLESSED")
@@ -1732,7 +1807,7 @@ def doBlessUnits(pUnit):
     # Fuer alle Einheiten dieser Gruppe
     unitGroup = pUnit.getGroup()
     iNumUnits = unitGroup.getNumUnits()
-    for i in range(iNumUnits):
+    for i in xrange(iNumUnits):
         if pPlayer.getGold() < iCost:
             break
 
@@ -1745,6 +1820,8 @@ def doBlessUnits(pUnit):
             loopUnit.finishMoves()
 
 # onModNetMessage 759, iTyp (1: Rhetorik, 2: Sklavenopfer)
+
+
 def doMoralUnits(pUnit, iTyp):
     pPlayer = gc.getPlayer(pUnit.getOwner())
     iPromo = gc.getInfoTypeForString("PROMOTION_MORALE")
@@ -1752,141 +1829,156 @@ def doMoralUnits(pUnit, iTyp):
     iAnz = 0
     pPlot = pUnit.plot()
     iNumUnits = pPlot.getNumUnits()
-    for iUnit in range(iNumUnits):
-      loopUnit = pPlot.getUnit(iUnit)
-      if loopUnit != pUnit:
-        if loopUnit.getOwner() == pUnit.getOwner():
-          if not loopUnit.isHasPromotion(iPromo):
-            if loopUnit.isMilitaryHappiness():
-              if pUnit.getID() != loopUnit.getID():
-                iUnits += 1
-                # Promo geben: Chance 1:4
-                if CvUtil.myRandom(4, "doMoralUnits") == 1 or iTyp == 2:
-                  doMoralUnit(loopUnit)
-                  iAnz += 1
-                loopUnit.finishMoves()
+    for iUnit in xrange(iNumUnits):
+        loopUnit = pPlot.getUnit(iUnit)
+        if loopUnit != pUnit:
+            if loopUnit.getOwner() == pUnit.getOwner():
+                if not loopUnit.isHasPromotion(iPromo):
+                    if loopUnit.isMilitaryHappiness():
+                        if pUnit.getID() != loopUnit.getID():
+                            iUnits += 1
+                            # Promo geben: Chance 1:4
+                            if CvUtil.myRandom(4, "doMoralUnits") == 1 or iTyp == 2:
+                                doMoralUnit(loopUnit)
+                                iAnz += 1
+                            loopUnit.finishMoves()
 
     if pPlayer.isHuman():
-      if iTyp == 2: txt = CyTranslator().getText("TXT_KEY_MESSAGE_DRUIDE_SACRIFICE_MORALE", ())
-      else: txt = CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_MORALE", (iAnz, iUnits))
-      CyInterface().addMessage(pUnit.getOwner(), True, 8, txt, "", 2, "", ColorTypes(8), -1, -1, False, False)
+        if iTyp == 2:
+            txt = CyTranslator().getText("TXT_KEY_MESSAGE_DRUIDE_SACRIFICE_MORALE", ())
+        else:
+            txt = CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_MORALE", (iAnz, iUnits))
+        CyInterface().addMessage(pUnit.getOwner(), True, 8, txt, "", 2, "", ColorTypes(8), -1, -1, False, False)
 
 
 # onModNetMessage 760, doMoralUnits
 # onModNetMessage 752, iData2 = 1
 def doMoralUnit(pUnit):
     if pUnit != None:
-      if pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG5")):
-        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG5"), False)
-      elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG4")):
-          pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG4"), False)
-      elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG3")):
-          pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG3"), False)
-      elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG2")):
-          pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG2"), False)
-      elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG1")):
-          pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG1"), False)
-      elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_ANGST")):
-          pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_ANGST"), False)
-      else:
-        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORALE"), True)
+        if pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG5")):
+            pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG5"), False)
+        elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG4")):
+            pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG4"), False)
+        elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG3")):
+            pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG3"), False)
+        elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG2")):
+            pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG2"), False)
+        elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG1")):
+            pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG1"), False)
+        elif pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_ANGST")):
+            pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_ANGST"), False)
+        else:
+            pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORALE"), True)
+
 
 def doMoralUnitsAI(pUnit):
     #pPlayer = gc.getPlayer(pUnit.getOwner())
     iPromo = gc.getInfoTypeForString("PROMOTION_MORALE")
     pPlot = pUnit.plot()
     iNumUnits = pPlot.getNumUnits()
-    for iUnit in range(iNumUnits):
-      loopUnit = pPlot.getUnit(iUnit)
-      if loopUnit != pUnit:
-        if loopUnit.getOwner() == pUnit.getOwner():
-          if not loopUnit.isHasPromotion(iPromo):
-            if loopUnit.isMilitaryHappiness():
-              doMoralUnitAI(loopUnit)
+    for iUnit in xrange(iNumUnits):
+        loopUnit = pPlot.getUnit(iUnit)
+        if loopUnit != pUnit:
+            if loopUnit.getOwner() == pUnit.getOwner():
+                if not loopUnit.isHasPromotion(iPromo):
+                    if loopUnit.isMilitaryHappiness():
+                        doMoralUnitAI(loopUnit)
+
 
 def doMoralUnitAI(pUnit):
     if pUnit != None:
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG5"), False)
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG4"), False)
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG3"), False)
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG2"), False)
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG1"), False)
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_ANGST"), False)
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORALE"), True)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG5"), False)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG4"), False)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG3"), False)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG2"), False)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORAL_NEG1"), False)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_ANGST"), False)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_MORALE"), True)
 
 # PAE Angst - EventManager: onCombatResult
+
+
 def doCheckAngst(pWinnerUnit, pLoserUnit):
     #pWinnerPlot = pWinnerUnit.plot()
     #pLoserPlot = pLoserUnit.plot()
 
-    bW = pWinnerUnit.getUnitCombatType() in L.LAngstUnits # if winner is Angst Unit
-    bL = pLoserUnit.getUnitCombatType() in L.LAngstUnits # if Loser is Angst Unit
-    #bWG = isPlotHasAngstUnits(pWinnerUnit) # winner's group/stack
-    bLG = isPlotHasAngstUnits(pLoserUnit) # loser's group/stack
-
+    bW = pWinnerUnit.getUnitCombatType() in L.LAngstUnits  # if winner is Angst Unit
+    bL = pLoserUnit.getUnitCombatType() in L.LAngstUnits  # if Loser is Angst Unit
+    # bWG = isPlotHasAngstUnits(pWinnerUnit) # winner's group/stack
+    bLG = isPlotHasAngstUnits(pLoserUnit)  # loser's group/stack
 
     if bW or not bW and bL:
 
-      # unset Angst
-      if doSetAngst(pWinnerUnit, False):
-        if gc.getPlayer(pWinnerUnit.getOwner()).isHuman():
-          # Der Sieg der Einheit %s hat unseren Truppen die Angst genommen.
-          CyInterface().addMessage(pWinnerUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_3", (pWinnerUnit.getName(),)), "AS2D_WELOVEKING", 2, gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(8), pWinnerUnit.getX(), pWinnerUnit.getY(), True, True)
-        elif gc.getPlayer(pLoserUnit.getOwner()).isHuman():
-          # Der Sieg der Einheit %s hat den gegnerischen Truppen die Angst genommen.
-          CyInterface().addMessage(pLoserUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_4", (pWinnerUnit.getName(),)), "AS2D_CITY_REVOLT", 2, gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(7), pWinnerUnit.getX(), pWinnerUnit.getY(), True, True)
+        # unset Angst
+        if doSetAngst(pWinnerUnit, False):
+            if gc.getPlayer(pWinnerUnit.getOwner()).isHuman():
+                # Der Sieg der Einheit %s hat unseren Truppen die Angst genommen.
+                CyInterface().addMessage(pWinnerUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_3", (pWinnerUnit.getName(),)), "AS2D_WELOVEKING",
+                                         2, gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(8), pWinnerUnit.getX(), pWinnerUnit.getY(), True, True)
+            elif gc.getPlayer(pLoserUnit.getOwner()).isHuman():
+                # Der Sieg der Einheit %s hat den gegnerischen Truppen die Angst genommen.
+                CyInterface().addMessage(pLoserUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_4", (pWinnerUnit.getName(),)), "AS2D_CITY_REVOLT",
+                                         2, gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(7), pWinnerUnit.getX(), pWinnerUnit.getY(), True, True)
 
-      # set Angst
-      if bW and not bLG:
-        if doSetAngst(pLoserUnit, True):
-          if gc.getPlayer(pLoserUnit.getOwner()).isHuman():
-            # Die Art der gegnerischen Kriegsführung jagt unseren Truppen Angst ein!
-            CyInterface().addMessage(pLoserUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_1", ("",)), "AS2D_WELOVEKING", 2, gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(7), pLoserUnit.getX(), pLoserUnit.getY(), True, True)
-          elif gc.getPlayer(pWinnerUnit.getOwner()).isHuman():
-            # Die Art unserer Kriegsführung jagt den gegnerischen Truppen Angst ein!
-            CyInterface().addMessage(pWinnerUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_2", ("",)), "AS2D_CITY_REVOLT", 2, gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(8), pLoserUnit.getX(), pLoserUnit.getY(), True, True)
+        # set Angst
+        if bW and not bLG:
+            if doSetAngst(pLoserUnit, True):
+                if gc.getPlayer(pLoserUnit.getOwner()).isHuman():
+                    # Die Art der gegnerischen Kriegsführung jagt unseren Truppen Angst ein!
+                    CyInterface().addMessage(pLoserUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_1", ("",)), "AS2D_WELOVEKING", 2,
+                                             gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(7), pLoserUnit.getX(), pLoserUnit.getY(), True, True)
+                elif gc.getPlayer(pWinnerUnit.getOwner()).isHuman():
+                    # Die Art unserer Kriegsführung jagt den gegnerischen Truppen Angst ein!
+                    CyInterface().addMessage(pWinnerUnit.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_ANGST_2", ("",)), "AS2D_CITY_REVOLT", 2,
+                                             gc.getPromotionInfo(gc.getInfoTypeForString("PROMOTION_ANGST")).getButton(), ColorTypes(8), pLoserUnit.getX(), pLoserUnit.getY(), True, True)
+
 
 def isPlotHasAngstUnits(pUnit):
     pPlot = pUnit.plot()
     iNumUnits = pPlot.getNumUnits()
     if iNumUnits > 1:
-      for iUnit in range(iNumUnits):
-        loopUnit = pPlot.getUnit(iUnit)
-        if loopUnit.isMilitaryHappiness():
-          if loopUnit.getUnitCombatType() in L.LAngstUnits:
-            if loopUnit.getID() != pUnit.getID():
-              return True
+        for iUnit in xrange(iNumUnits):
+            loopUnit = pPlot.getUnit(iUnit)
+            if loopUnit.isMilitaryHappiness():
+                if loopUnit.getUnitCombatType() in L.LAngstUnits:
+                    if loopUnit.getID() != pUnit.getID():
+                        return True
     return False
+
 
 def doSetAngst(pUnit, bSet):
     bInfo = False
     iPromo = gc.getInfoTypeForString("PROMOTION_ANGST")
     pPlot = pUnit.plot()
     iNumUnits = pPlot.getNumUnits()
-    for iUnit in range(iNumUnits):
-      loopUnit = pPlot.getUnit(iUnit)
-      if loopUnit.getOwner() == pUnit.getOwner():
-        if loopUnit.isMilitaryHappiness():
-          if not loopUnit.isDead():
-            if (bSet and not loopUnit.isHasPromotion(iPromo) or not bSet and loopUnit.isHasPromotion(iPromo)):
-              loopUnit.setHasPromotion(iPromo, bSet)
-              bInfo = True
+    for iUnit in xrange(iNumUnits):
+        loopUnit = pPlot.getUnit(iUnit)
+        if loopUnit.getOwner() == pUnit.getOwner():
+            if loopUnit.isMilitaryHappiness():
+                if not loopUnit.isDead():
+                    if (bSet and not loopUnit.isHasPromotion(iPromo) or not bSet and loopUnit.isHasPromotion(iPromo)):
+                        loopUnit.setHasPromotion(iPromo, bSet)
+                        bInfo = True
     return bInfo
 # PAE Angst Ende --------------------
 
 # onModNetMessage 760, doGetXPbySlave
+
+
 def doKillSlaveFromPlot(pUnit):
     iUnitOwner = pUnit.getOwner()
     iUnitSlave = gc.getInfoTypeForString("UNIT_SLAVE")
     pPlot = pUnit.plot()
     iRange = pPlot.getNumUnits()
-    for iUnit in range(iRange):
-      loopUnit = pPlot.getUnit(iUnit)
-      if loopUnit.getUnitType() == iUnitSlave and loopUnit.getOwner() == iUnitOwner:
-          loopUnit.kill(True, -1)
-          break
+    for iUnit in xrange(iRange):
+        loopUnit = pPlot.getUnit(iUnit)
+        if loopUnit.getUnitType() == iUnitSlave and loopUnit.getOwner() == iUnitOwner:
+            loopUnit.kill(True, -1)
+            break
 
 # onModNetMessage 761
+
+
 def doGetXPbySlave(pUnit):
     # Sklave killen
     doKillSlaveFromPlot(pUnit)
@@ -1924,12 +2016,15 @@ def doUnitGetsHero(pWinner, pLoser):
         if pWinnerPlayer.isHuman():
             if pLoser.isHasPromotion(iPromoLeader):
                 txtPopUpHero = CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_HERO_3", (pWinner.getName(), pLoser.getName()))
-                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2, pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
+                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2,
+                                         pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
             else:
                 txtPopUpHero = CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_HERO_4", (pWinner.getName(), 0))
-                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2, pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
+                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2,
+                                         pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
         return True
     return False
+
 
 def getExperienceForLeader(pWinner, pLoser, bPromoHero):
     iWinnerPlayer = pWinner.getOwner()
@@ -1939,7 +2034,7 @@ def getExperienceForLeader(pWinner, pLoser, bPromoHero):
     bLeaderAnwesend = False
     pWinnerPlot = pWinner.plot()
     iNumUnits = pWinnerPlot.getNumUnits()
-    for i in range(iNumUnits):
+    for i in xrange(iNumUnits):
         pLoopUnit = pWinnerPlot.getUnit(i)
         if pLoopUnit.getOwner() == iWinnerPlayer:
             if pLoopUnit.isHasPromotion(iPromoLeader):
@@ -1955,10 +2050,12 @@ def getExperienceForLeader(pWinner, pLoser, bPromoHero):
                         if pWinnerPlayer.isHuman():
                             if pLoser.isHasPromotion(iPromoLeader):
                                 txtPopUpHero = CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_HERO_1", (pLoopUnit.getName(), pLoser.getName()))
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2, pLoopUnit.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2,
+                                                         pLoopUnit.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
                             else:
                                 txtPopUpHero = CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_HERO_2", (pLoopUnit.getName(), 0))
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2, pLoopUnit.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2,
+                                                         pLoopUnit.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
     return bLeaderAnwesend
 
 
@@ -1970,7 +2067,9 @@ def removeMercenaryPromo(pWinner):
         if CvUtil.myRandom(20, "PROMOTION_MERCENARY") == 0:
             pWinner.setHasPromotion(iPromoMercenary, False)
             if pWinnerPlayer.isHuman():
-                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_HERO_6", (pWinner.getName(),)), "AS2D_WELOVEKING", 2, pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
+                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_HERO_6", (pWinner.getName(),)),
+                                         "AS2D_WELOVEKING", 2, pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
+
 
 def doHunterHero(pWinner, pLoser):
     iWinnerPlayer = pWinner.getOwner()
@@ -1984,7 +2083,8 @@ def doHunterHero(pWinner, pLoser):
                     pWinner.changeExperience(3, -1, 1, 0, 0)
                     if pWinnerPlayer.isHuman():
                         txtPopUpHero = CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_GETS_HERO_5", (pWinner.getName(), pLoser.getName()))
-                        CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2, pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
+                        CyInterface().addMessage(iWinnerPlayer, True, 10, txtPopUpHero, "AS2D_WELOVEKING", 2,
+                                                 pWinner.getButton(), ColorTypes(8), pWinner.getX(), pWinner.getY(), True, True)
 
                         popupInfo = CyPopupInfo()
                         popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)  # Text PopUp only!
@@ -1992,6 +2092,8 @@ def doHunterHero(pWinner, pLoser):
                         popupInfo.addPopup(iWinnerPlayer)
 
 # Unit rang / Dienstgrade / unit ranking / rang promo / promo rang
+
+
 def doRankPromo(pWinner):
     iWinnerPlayer = pWinner.getOwner()
     pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
@@ -2002,17 +2104,19 @@ def doRankPromo(pWinner):
     #CyInterface().addMessage(iHumanPlayer, True, 10, "Player: " + str(iWinnerPlayer) + " Unit: " + pWinner.getName(), None, 2, None, ColorTypes(10), pWinner.getX(), pWinner.getY(), True, True)
 
     # kann keine Stufe aufsteigen, wenn eine Belobigung ansteht
-    if CvUtil.getScriptData(pWinner, ["P", "t"]) == "RangPromoUp": return
+    if CvUtil.getScriptData(pWinner, ["P", "t"]) == "RangPromoUp":
+        return
 
     # Manche units sollen keinen Rang bekommen
-    if pWinner.getUnitType() in L.LNoRankUnits: return
+    if pWinner.getUnitType() in L.LNoRankUnits:
+        return
 
     # ROM Pedes
     if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_1")):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_15")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in range(iNumPromos, 0, -1):
+            for iPromo in xrange(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_TRAIT_" in iPromoType:
                     break
@@ -2030,39 +2134,41 @@ def doRankPromo(pWinner):
                             pWinner.setHasPromotion(iNewPromo, True)
                             # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
                             if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
                         break
                     else:
                         iNewPromo = iPromo
     # ROM Eques
     elif pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_EQUES_1")):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_EQUES_5")):
-                # Chance: 1:4
-                #if CvUtil.myRandom(4, "RangEques") == 1:
-                iNumPromos = gc.getNumPromotionInfos() - 1
-                for iPromo in range(iNumPromos, -1, -1): #-1 als zweites Argument, damit es bis 0 runterzaehlt.
-                    iPromoType = gc.getPromotionInfo(iPromo).getType()
-                    if "_TRAIT_" in iPromoType:
-                        break
-                    if "_RANG_ROM_EQUES" in iPromoType:
-                        if pWinner.isHasPromotion(iPromo):
-                            if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ROM_EQUES_3"):
-                                CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                            else:
-                                pWinner.setHasPromotion(iNewPromo, True)
-                                # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-                                if pWinnerPlayer.isHuman():
-                                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                            break
-
+            # Chance: 1:4
+            # if CvUtil.myRandom(4, "RangEques") == 1:
+            iNumPromos = gc.getNumPromotionInfos() - 1
+            for iPromo in xrange(iNumPromos, -1, -1):  # -1 als zweites Argument, damit es bis 0 runterzaehlt.
+                iPromoType = gc.getPromotionInfo(iPromo).getType()
+                if "_TRAIT_" in iPromoType:
+                    break
+                if "_RANG_ROM_EQUES" in iPromoType:
+                    if pWinner.isHasPromotion(iPromo):
+                        if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ROM_EQUES_3"):
+                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
                         else:
-                            iNewPromo = iPromo
+                            pWinner.setHasPromotion(iNewPromo, True)
+                            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                            if pWinnerPlayer.isHuman():
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                        break
+
+                    else:
+                        iNewPromo = iPromo
     # ROM Late Antike
     elif pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_LATE_1")):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ROM_LATE_15")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in range(iNumPromos, 0, -1):
+            for iPromo in xrange(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_TRAIT_" in iPromoType:
                     break
@@ -2074,7 +2180,8 @@ def doRankPromo(pWinner):
                             pWinner.setHasPromotion(iNewPromo, True)
                             # Der Kommandant Eurer Einheit (%s1) hat nun den Rang eines %s2!
                             if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
                         break
 
                     else:
@@ -2084,7 +2191,7 @@ def doRankPromo(pWinner):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_GREEK_12")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in range(iNumPromos, 0, -1):
+            for iPromo in xrange(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_ROM_" in iPromoType:
                     break
@@ -2098,7 +2205,8 @@ def doRankPromo(pWinner):
                             pWinner.setHasPromotion(iNewPromo, True)
                             # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
                             if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
                         break
                     else:
                         iNewPromo = iPromo
@@ -2107,7 +2215,7 @@ def doRankPromo(pWinner):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_SPARTA_10")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in range(iNumPromos, 0, -1):
+            for iPromo in xrange(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_GREEK_" in iPromoType:
                     break
@@ -2119,79 +2227,85 @@ def doRankPromo(pWinner):
                             pWinner.setHasPromotion(iNewPromo, True)
                             # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
                             if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
                         break
                     else:
                         iNewPromo = iPromo
     # Makedonen
     elif pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_MACEDONIA"):
-      if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_10")): return
-      if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_PHALANX2")):
-        if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN"):
-          iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_1")
-          if pWinner.isHasPromotion(iNewPromo):
-            iNumPromos = gc.getNumPromotionInfos()-1
-            iPromo = iNumPromos
-            iNewPromo = -1
-            for iPromo in range(iNumPromos, 0, -1):
-                iPromoType = gc.getPromotionInfo(iPromo).getType()
-                if "_RANG_SPARTA_" in iPromoType:
-                    break
-                if "_RANG_MACEDON_" in iPromoType:
-                    if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
-                        if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_4") or iPromo == gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_7") or iPromo == gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_9"):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        else:
-                            pWinner.setHasPromotion(iNewPromo, True)
-                            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-                            if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                        break
-                    else:
-                        iNewPromo = iPromo
-          else:
-            pWinner.setHasPromotion(iNewPromo, True)
-            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-            if pWinnerPlayer.isHuman():
-              CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+        if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_10")):
+            return
+        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_PHALANX2")):
+            if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN"):
+                iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_1")
+                if pWinner.isHasPromotion(iNewPromo):
+                    iNumPromos = gc.getNumPromotionInfos()-1
+                    iPromo = iNumPromos
+                    iNewPromo = -1
+                    for iPromo in xrange(iNumPromos, 0, -1):
+                        iPromoType = gc.getPromotionInfo(iPromo).getType()
+                        if "_RANG_SPARTA_" in iPromoType:
+                            break
+                        if "_RANG_MACEDON_" in iPromoType:
+                            if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
+                                if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_4") or iPromo == gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_7") or iPromo == gc.getInfoTypeForString("PROMOTION_RANG_MACEDON_9"):
+                                    CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                                else:
+                                    pWinner.setHasPromotion(iNewPromo, True)
+                                    # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                                    if pWinnerPlayer.isHuman():
+                                        CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                            iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                break
+                            else:
+                                iNewPromo = iPromo
+                else:
+                    pWinner.setHasPromotion(iNewPromo, True)
+                    # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                    if pWinnerPlayer.isHuman():
+                        CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                            iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
 
     # Perser Fusstrupps
     elif pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_PERSIA"):
-      if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_SKIRMISH_TACTICS")):
-        iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_1")
-        if pWinner.isHasPromotion(iNewPromo):
-          if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_10")):
-            iNewPromo = -1
-            iNumPromos = gc.getNumPromotionInfos()-1
-            iPromo = iNumPromos
-            for iPromo in range(iNumPromos, 0, -1):
-                iPromoType = gc.getPromotionInfo(iPromo).getType()
-                if "_RANG_MACEDON_" in iPromoType:
-                    break
-                if "_RANG_PERSIA_" in iPromoType:
-                    if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
-                        if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_5") or iPromo == gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_7"):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        else:
-                            pWinner.setHasPromotion(iNewPromo, True)
-                            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-                            if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                        break
-                    else:
-                        iNewPromo = iPromo
-        else:
-          pWinner.setHasPromotion(iNewPromo, True)
-          # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-          if pWinnerPlayer.isHuman():
-              CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_SKIRMISH_TACTICS")):
+            iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_1")
+            if pWinner.isHasPromotion(iNewPromo):
+                if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_10")):
+                    iNewPromo = -1
+                    iNumPromos = gc.getNumPromotionInfos()-1
+                    iPromo = iNumPromos
+                    for iPromo in xrange(iNumPromos, 0, -1):
+                        iPromoType = gc.getPromotionInfo(iPromo).getType()
+                        if "_RANG_MACEDON_" in iPromoType:
+                            break
+                        if "_RANG_PERSIA_" in iPromoType:
+                            if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
+                                if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_5") or iPromo == gc.getInfoTypeForString("PROMOTION_RANG_PERSIA_7"):
+                                    CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                                else:
+                                    pWinner.setHasPromotion(iNewPromo, True)
+                                    # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                                    if pWinnerPlayer.isHuman():
+                                        CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                            iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                break
+                            else:
+                                iNewPromo = iPromo
+            else:
+                pWinner.setHasPromotion(iNewPromo, True)
+                # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                if pWinnerPlayer.isHuman():
+                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                        iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
 
     # Perser Reiter
     elif pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_PERSIA2_1")):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_PERSIA2_15")):
             iNumPromos = gc.getNumPromotionInfos()-1
             iPromo = iNumPromos
-            for iPromo in range(iNumPromos, 0, -1):
+            for iPromo in xrange(iNumPromos, 0, -1):
                 iPromoType = gc.getPromotionInfo(iPromo).getType()
                 if "_RANG_PERSIA_" in iPromoType:
                     break
@@ -2200,200 +2314,212 @@ def doRankPromo(pWinner):
                         if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_PERSIA2_5"):
                             CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
                         elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_PERSIA2_7"):
-                          if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_HORSE_ARMOR")):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                            if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_HORSE_ARMOR")):
+                                CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
                         elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_PERSIA2_11"):
                             CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
                         else:
                             pWinner.setHasPromotion(iNewPromo, True)
                             # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
                             if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
                         break
                     else:
                         iNewPromo = iPromo
 
     # Egypt, Nubia
     elif pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_EGYPT") or pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_NUBIA"):
-      if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_10")): return
-      if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_BEWAFFNUNG3")):
-        if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or \
-           pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN") or \
-           pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_AXEMAN"):
-          iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_1")
-          if pWinner.isHasPromotion(iNewPromo):
-            iRand = CvUtil.myRandom(2, "PROMOTION_RANG_EGYPT")
-            if iRand == 1:
-              iNumPromos = gc.getNumPromotionInfos()-1
-              iPromo = iNumPromos
-              iNewPromo = -1
-              for iPromo in range(iNumPromos, 0, -1):
-                iPromoType = gc.getPromotionInfo(iPromo).getType()
-                if "_RANG_PERSIA2_" in iPromoType:
-                    break
-                if "_RANG_EGYPT_" in iPromoType:
-                    if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
-                        if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_5"):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_10"):
-                          if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+        if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_10")):
+            return
+        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_BEWAFFNUNG3")):
+            if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or \
+               pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN") or \
+               pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_AXEMAN"):
+                iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_1")
+                if pWinner.isHasPromotion(iNewPromo):
+                    iRand = CvUtil.myRandom(2, "PROMOTION_RANG_EGYPT")
+                    if iRand == 1:
+                        iNumPromos = gc.getNumPromotionInfos()-1
+                        iPromo = iNumPromos
+                        iNewPromo = -1
+                        for iPromo in xrange(iNumPromos, 0, -1):
+                            iPromoType = gc.getPromotionInfo(iPromo).getType()
+                            if "_RANG_PERSIA2_" in iPromoType:
+                                break
+                            if "_RANG_EGYPT_" in iPromoType:
+                                if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
+                                    if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_5"):
+                                        CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                                    elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_EGYPT_10"):
+                                        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
+                                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
 
-                        else:
-                            pWinner.setHasPromotion(iNewPromo, True)
-                            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-                            if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                        break
-                    else:
-                        iNewPromo = iPromo
-          else:
-            pWinner.setHasPromotion(iNewPromo, True)
-            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-            if pWinnerPlayer.isHuman():
-              CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                    else:
+                                        pWinner.setHasPromotion(iNewPromo, True)
+                                        # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                                        if pWinnerPlayer.isHuman():
+                                            CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                                iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                    break
+                                else:
+                                    iNewPromo = iPromo
+                else:
+                    pWinner.setHasPromotion(iNewPromo, True)
+                    # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                    if pWinnerPlayer.isHuman():
+                        CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                            iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
 
     # Karthago
     elif pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_CARTHAGE_1")):
         if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_CARTHAGE_6")):
-          iRand = CvUtil.myRandom(3, "PROMOTION_RANG_CARTHAGE")
-          if iRand == 1:
-            iNumPromos = gc.getNumPromotionInfos()-1
-            iPromo = iNumPromos
-            for iPromo in range(iNumPromos, 0, -1):
-                iPromoType = gc.getPromotionInfo(iPromo).getType()
-                if "_RANG_EGYPT_" in iPromoType:
-                    break
-                if "_RANG_CARTHAGE_" in iPromoType:
-                    if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
-                        if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_CARTHAGE_2"):
-                          if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_KETTENPANZER")):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_CARTHAGE_4"):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        else:
-                            pWinner.setHasPromotion(iNewPromo, True)
-                            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-                            if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+            iRand = CvUtil.myRandom(3, "PROMOTION_RANG_CARTHAGE")
+            if iRand == 1:
+                iNumPromos = gc.getNumPromotionInfos()-1
+                iPromo = iNumPromos
+                for iPromo in xrange(iNumPromos, 0, -1):
+                    iPromoType = gc.getPromotionInfo(iPromo).getType()
+                    if "_RANG_EGYPT_" in iPromoType:
                         break
-                    else:
-                        iNewPromo = iPromo
+                    if "_RANG_CARTHAGE_" in iPromoType:
+                        if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
+                            if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_CARTHAGE_2"):
+                                if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_KETTENPANZER")):
+                                    CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                            elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_CARTHAGE_4"):
+                                CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                            else:
+                                pWinner.setHasPromotion(iNewPromo, True)
+                                # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                                if pWinnerPlayer.isHuman():
+                                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                        iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                            break
+                        else:
+                            iNewPromo = iPromo
 
     # Assur, Babylon
     elif pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_ASSYRIA") or pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_BABYLON"):
-      if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_12")):
-        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_BUERGERSOLDATEN")):
-          if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or \
-             pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN") or \
-             pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_AXEMAN"):
-            iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_1")
-            if pWinner.isHasPromotion(iNewPromo):
-              iNumPromos = gc.getNumPromotionInfos()-1
-              iPromo = iNumPromos
-              iNewPromo = -1
-              for iPromo in range(iNumPromos, 0, -1):
-                iPromoType = gc.getPromotionInfo(iPromo).getType()
-                if "_RANG_CARTHAGE_" in iPromoType:
-                    break
-                if "_RANG_ASSUR_" in iPromoType:
-                    if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
-                        if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_3"):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_6"):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_10"):
-                          if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+        if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_12")):
+            if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_BUERGERSOLDATEN")):
+                if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or \
+                   pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN") or \
+                   pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_AXEMAN"):
+                    iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_1")
+                    if pWinner.isHasPromotion(iNewPromo):
+                        iNumPromos = gc.getNumPromotionInfos()-1
+                        iPromo = iNumPromos
+                        iNewPromo = -1
+                        for iPromo in xrange(iNumPromos, 0, -1):
+                            iPromoType = gc.getPromotionInfo(iPromo).getType()
+                            if "_RANG_CARTHAGE_" in iPromoType:
+                                break
+                            if "_RANG_ASSUR_" in iPromoType:
+                                if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
+                                    if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_3"):
+                                        CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                                    elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_6"):
+                                        CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                                    elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_ASSUR_10"):
+                                        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
+                                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
 
-                        else:
-                            pWinner.setHasPromotion(iNewPromo, True)
-                            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-                            if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                        break
+                                    else:
+                                        pWinner.setHasPromotion(iNewPromo, True)
+                                        # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                                        if pWinnerPlayer.isHuman():
+                                            CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                                iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                    break
+                                else:
+                                    iNewPromo = iPromo
                     else:
-                        iNewPromo = iPromo
-            else:
-              pWinner.setHasPromotion(iNewPromo, True)
-              # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-              if pWinnerPlayer.isHuman():
-                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                        pWinner.setHasPromotion(iNewPromo, True)
+                        # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                        if pWinnerPlayer.isHuman():
+                            CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
 
     # Sumer
     elif pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_SUMERIA"):
-       if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_SUMER_10")): return
-       if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_BUERGERSOLDATEN")):
-        if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or \
-           pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN") or \
-           pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_AXEMAN"):
-          iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_SUMER_1")
-          if pWinner.isHasPromotion(iNewPromo):
-            iRand = CvUtil.myRandom(2, "PROMOTION_RANG_SUMER")
-            if iRand == 1:
-              iNumPromos = gc.getNumPromotionInfos()-1
-              iPromo = iNumPromos
-              iNewPromo = -1
-              for iPromo in range(iNumPromos, 0, -1):
-                iPromoType = gc.getPromotionInfo(iPromo).getType()
-                if "_RANG_ASSUR_" in iPromoType:
-                    break
-                if "_RANG_SUMER_" in iPromoType:
-                    if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
-                        if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_SUMER_4"):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-                        elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_SUMER_9"):
-                          if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
-                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+        if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_SUMER_10")):
+            return
+        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_BUERGERSOLDATEN")):
+            if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SWORDSMAN") or \
+               pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_SPEARMAN") or \
+               pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_AXEMAN"):
+                iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_SUMER_1")
+                if pWinner.isHasPromotion(iNewPromo):
+                    iRand = CvUtil.myRandom(2, "PROMOTION_RANG_SUMER")
+                    if iRand == 1:
+                        iNumPromos = gc.getNumPromotionInfos()-1
+                        iPromo = iNumPromos
+                        iNewPromo = -1
+                        for iPromo in xrange(iNumPromos, 0, -1):
+                            iPromoType = gc.getPromotionInfo(iPromo).getType()
+                            if "_RANG_ASSUR_" in iPromoType:
+                                break
+                            if "_RANG_SUMER_" in iPromoType:
+                                if pWinner.isHasPromotion(iPromo) and iNewPromo != -1:
+                                    if iPromo == gc.getInfoTypeForString("PROMOTION_RANG_SUMER_4"):
+                                        CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                                    elif iPromo == gc.getInfoTypeForString("PROMOTION_RANG_SUMER_9"):
+                                        if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_THE_WHEEL3")):
+                                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
 
-                        else:
-                            pWinner.setHasPromotion(iNewPromo, True)
-                            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-                            if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                        break
-                    else:
-                        iNewPromo = iPromo
-          else:
-            pWinner.setHasPromotion(iNewPromo, True)
-            # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
-            if pWinnerPlayer.isHuman():
-              CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-
+                                    else:
+                                        pWinner.setHasPromotion(iNewPromo, True)
+                                        # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                                        if pWinnerPlayer.isHuman():
+                                            CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                                iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                                    break
+                                else:
+                                    iNewPromo = iPromo
+                else:
+                    pWinner.setHasPromotion(iNewPromo, True)
+                    # Der Kommandant Eurer Einheit (%s1) hat nun den Rang: %s2!
+                    if pWinnerPlayer.isHuman():
+                        CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                            iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
 
     # Ab Kriegerethos : kampferfahren
     if gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_KRIEGERETHOS")):
-      if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_COMBAT3")):
-        if pWinner.getUnitType() not in L.LUnitsHeadRang:
-            if pWinnerPlayer.getCivilizationType() in L.LCivGermanen:
-                if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_GER_3")):
-                    iRand = CvUtil.myRandom(4, "PROMOTION_RANG_GER_3")
-                    if iRand == 1:
-                        iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_GER_1")
-                        if pWinner.isHasPromotion(iNewPromo):
-                            iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_GER_2")
-                        if pWinner.isHasPromotion(iNewPromo):
-                            iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_GER_3")
-                        pWinner.setHasPromotion(iNewPromo, True)
-                        if pWinnerPlayer.isHuman():
-                            CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                else:
-                    CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
-            # Hunnen
-            if pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_HUNNEN"):
-                if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"):
-                    if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_HUN")):
-                        iRand = CvUtil.myRandom(15, "PROMOTION_RANG_HUN")
+        if pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_COMBAT3")):
+            if pWinner.getUnitType() not in L.LUnitsHeadRang:
+                if pWinnerPlayer.getCivilizationType() in L.LCivGermanen:
+                    if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_GER_3")):
+                        iRand = CvUtil.myRandom(4, "PROMOTION_RANG_GER_3")
                         if iRand == 1:
-                            iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_HUN")
+                            iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_GER_1")
+                            if pWinner.isHasPromotion(iNewPromo):
+                                iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_GER_2")
+                            if pWinner.isHasPromotion(iNewPromo):
+                                iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_GER_3")
                             pWinner.setHasPromotion(iNewPromo, True)
                             if pWinnerPlayer.isHuman():
-                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
-                    # Geissel Gottes ab Panzerreiter (nur als Kaghan)
-                    elif gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_PANZERREITER")):
+                                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                    iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                    else:
                         CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
+                # Hunnen
+                if pWinnerPlayer.getCivilizationType() == gc.getInfoTypeForString("CIVILIZATION_HUNNEN"):
+                    if pWinner.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"):
+                        if not pWinner.isHasPromotion(gc.getInfoTypeForString("PROMOTION_RANG_HUN")):
+                            iRand = CvUtil.myRandom(15, "PROMOTION_RANG_HUN")
+                            if iRand == 1:
+                                iNewPromo = gc.getInfoTypeForString("PROMOTION_RANG_HUN")
+                                pWinner.setHasPromotion(iNewPromo, True)
+                                if pWinnerPlayer.isHuman():
+                                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_CIV_RANG", (pWinner.getName(), gc.getPromotionInfo(
+                                        iNewPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iNewPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                        # Geissel Gottes ab Panzerreiter (nur als Kaghan)
+                        elif gc.getTeam(pWinnerPlayer.getTeam()).isHasTech(gc.getInfoTypeForString("TECH_PANZERREITER")):
+                            CvUtil.addScriptData(pWinner, "P", "RangPromoUp")
 
 # Flunky - moved to DLL
+
 
 def flee(pLoser, pWinner, iWinnerDamage):
     """
@@ -2410,9 +2536,9 @@ def flee(pLoser, pWinner, iWinnerDamage):
     bUnitFlucht = False
     NewUnit = None
 
-    iMaxHealth = 10 # Standard: max 10% Gesundheit
-    iChance = 20 # Standard Fluchtchance: 20%
-    iChanceShipsAndRiders = 30 # Standard: 30%
+    iMaxHealth = 10  # Standard: max 10% Gesundheit
+    iChance = 20  # Standard Fluchtchance: 20%
+    iChanceShipsAndRiders = 30  # Standard: 30%
 
     iGeneralForm = gc.getInfoTypeForString("PROMOTION_FORM_LEADER_POSITION")
     bGeneralForm = False
@@ -2469,11 +2595,10 @@ def flee(pLoser, pWinner, iWinnerDamage):
         elif pLoser.isHasPromotion(gc.getInfoTypeForString("PROMOTION_FLUCHT1")):
             iChance = 40
         elif (pLoserPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_VILLAGE")
-          or pLoserPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL")):
+              or pLoserPlot.getImprovementType() == gc.getInfoTypeForString("IMPROVEMENT_VILLAGE_HILL")):
             bIsVillage = True
             iChance = 30
             iMaxHealth = 12
-
 
         # Bei Schiffen eine Extra-Berechnung
         if pLoser.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL"):
@@ -2501,7 +2626,8 @@ def flee(pLoser, pWinner, iWinnerDamage):
             # Create a new unit
             #pPlot = pLoser.plot()
             #if pPlot.getNumUnits() == 1: pLoser.jumpToNearestValidPlot()
-            NewUnit = pLoserPlayer.initUnit(pLoser.getUnitType(), pLoser.getX(), pLoser.getY(), UnitAITypes(pLoser.getUnitAIType()), DirectionTypes.DIRECTION_SOUTH)
+            NewUnit = pLoserPlayer.initUnit(pLoser.getUnitType(), pLoser.getX(), pLoser.getY(),
+                                            UnitAITypes(pLoser.getUnitAIType()), DirectionTypes.DIRECTION_SOUTH)
             if pLoser.isMadeAttack():
                 NewUnit.finishMoves()
 
@@ -2509,17 +2635,16 @@ def flee(pLoser, pWinner, iWinnerDamage):
 
                 if not bGeneralForm:
                     iRandHealth = 1 + CvUtil.myRandom(iMaxHealth, "EscapeHealth")
-                    NewUnit.setDamage(100 - iRandHealth, -1) # Max Health
+                    NewUnit.setDamage(100 - iRandHealth, -1)  # Max Health
                 NewUnit.setExperience(pLoser.getExperience(), -1)
                 NewUnit.setLevel(pLoser.getLevel())
 
                 # Check its promotions
                 iRange = gc.getNumPromotionInfos()
-                for iPromotion in range(iRange):
+                for iPromotion in xrange(iRange):
                     # init all promotions the unit had
                     if pLoser.isHasPromotion(iPromotion):
                         NewUnit.setHasPromotion(iPromotion, True)
-
 
                 if bGeneralForm:
                     NewUnit.setHasPromotion(iGeneralForm, False)
@@ -2531,31 +2656,36 @@ def flee(pLoser, pWinner, iWinnerDamage):
                 iX = pLoserPlot.getX()
                 iY = pLoserPlot.getY()
                 plots = []
-                for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
-                  loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
-                  if loopPlot is not None and not loopPlot.isNone() and pLoser.canMoveInto(loopPlot, 0, 0, 1):
-                    plots.append(loopPlot)
+                for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
+                    loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
+                    if loopPlot is not None and not loopPlot.isNone() and pLoser.canMoveInto(loopPlot, 0, 0, 1):
+                        plots.append(loopPlot)
                 if len(plots) == 0:
-                  NewUnit.jumpToNearestValidPlot()
+                    NewUnit.jumpToNearestValidPlot()
                 else:
-                  iPlot = CvUtil.myRandom(len(plots), "PAE_Unit_FluchtPlot")
-                  NewUnit.setXY (plots[iPlot].getX(), plots[iPlot].getY(), False, True, True)
-
+                    iPlot = CvUtil.myRandom(len(plots), "PAE_Unit_FluchtPlot")
+                    NewUnit.setXY(plots[iPlot].getX(), plots[iPlot].getY(), False, True, True)
 
             if pLoserPlayer.isHuman():
-              if bIsVillage:
-                CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_4", (NewUnit.getName(),)), None, 2, None, ColorTypes(8), 0, 0, False, False)
-              elif bIsCity:
-                CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_3", (NewUnit.getName(),)), None, 2, None, ColorTypes(8), 0, 0, False, False)
-              else:
-                CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", (NewUnit.getName(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                if bIsVillage:
+                    CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText(
+                        "TXT_KEY_MESSAGE_UNIT_ESCAPE_4", (NewUnit.getName(),)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                elif bIsCity:
+                    CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText(
+                        "TXT_KEY_MESSAGE_UNIT_ESCAPE_3", (NewUnit.getName(),)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                else:
+                    CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE",
+                                                                                           (NewUnit.getName(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
             if pWinnerPlayer.isHuman():
-              if bIsVillage:
-                CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_4", (NewUnit.getName(), 0)), None, 2, None, ColorTypes(13), 0, 0, False, False)
-              elif bIsCity:
-                CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_3", (NewUnit.getName(), 0)), None, 2, None, ColorTypes(13), 0, 0, False, False)
-              else:
-                CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", (NewUnit.getName(),)), None, 2, None, ColorTypes(13), 0, 0, False, False)
+                if bIsVillage:
+                    CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_4",
+                                                                                            (NewUnit.getName(), 0)), None, 2, None, ColorTypes(13), 0, 0, False, False)
+                elif bIsCity:
+                    CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_3",
+                                                                                            (NewUnit.getName(), 0)), None, 2, None, ColorTypes(13), 0, 0, False, False)
+                else:
+                    CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText(
+                        "TXT_KEY_MESSAGE_UNIT_ESCAPE_2", (NewUnit.getName(),)), None, 2, None, ColorTypes(13), 0, 0, False, False)
 
             # if Unit was a leader (PROMOTION_LEADER)
             if pLoser.getLeaderUnitType() > -1:
@@ -2565,6 +2695,7 @@ def flee(pLoser, pWinner, iWinnerDamage):
             # ***TEST***
             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Einheit fluechtet (Zeile 2774)", iChance)), None, 2, None, ColorTypes(10), 0, 0, False, False)
     return bUnitFlucht, NewUnit
+
 
 def doAutomatedRanking(pWinner, pLoser):
     """
@@ -2589,35 +2720,41 @@ def doAutomatedRanking(pWinner, pLoser):
         (gc.getInfoTypeForString('PROMOTION_MORAL_NEG4'), 50),
         (gc.getInfoTypeForString('PROMOTION_MORAL_NEG5'), 60)
     ]
-    if (pLoser.isMilitaryHappiness() \
-            or pLoser.getUnitAIType() in [UnitAITypes.UNITAI_ANIMAL, UnitAITypes.UNITAI_EXPLORE] \
+    if (pLoser.isMilitaryHappiness()
+            or pLoser.getUnitAIType() in [UnitAITypes.UNITAI_ANIMAL, UnitAITypes.UNITAI_EXPLORE]
             or pLoser.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_NAVAL")):
         iPlayer = pWinner.getOwner()
 
         # PAE V: Old veterans needs more time to get fit again (elite needs longer)
         # Better AI: HI only
         if gc.getPlayer(iPlayer).isHuman():
-            if pWinner.isHasPromotion(LPromo[5][0]) and pWinner.getDamage() < 50: pWinner.setDamage(50, -1)
-            elif pWinner.isHasPromotion(LPromo[4][0]) and pWinner.getDamage() < 70: pWinner.setDamage(30, -1)
-            #elif pWinner.isHasPromotion(LPromo[3][0]) and pWinner.getDamage() < 20: pWinner.setDamage(20, -1)
+            if pWinner.isHasPromotion(LPromo[5][0]) and pWinner.getDamage() < 50:
+                pWinner.setDamage(50, -1)
+            elif pWinner.isHasPromotion(LPromo[4][0]) and pWinner.getDamage() < 70:
+                pWinner.setDamage(30, -1)
+            # elif pWinner.isHasPromotion(LPromo[3][0]) and pWinner.getDamage() < 20: pWinner.setDamage(20, -1)
 
-        if pWinner.isHasPromotion(LPromo[2][0]) and pLoser.getOwner() == gc.getBARBARIAN_PLAYER(): return False
+        if pWinner.isHasPromotion(LPromo[2][0]) and pLoser.getOwner() == gc.getBARBARIAN_PLAYER():
+            return False
 
         if not pWinner.isHasPromotion(LPromo[-1][0]):
             for iPromo, iChance in LPromo:
-                if not pWinner.isHasPromotion(iPromo): break
+                if not pWinner.isHasPromotion(iPromo):
+                    break
 
             if iPromo == LPromo[0][0] or iPromo == LPromo[1][0] or pLoser.getUnitAIType() != UnitAITypes.UNITAI_ANIMAL or pLoser.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE:
 
                 # PAE for better AI: min 50%
-                if not gc.getPlayer(iPlayer).isHuman() and iChance < 50: iChance = 50
+                if not gc.getPlayer(iPlayer).isHuman() and iChance < 50:
+                    iChance = 50
 
                 if CvUtil.myRandom(100, "automatedRanking") < iChance:
                     if (iPlayer, pWinner.getID()) not in PAEInstanceFightingModifier:
                         PAEInstanceFightingModifier.append((iPlayer, pWinner.getID()))
                         pWinner.setHasPromotion(iPromo, True)
                         if gc.getPlayer(iPlayer).isHuman():
-                            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_RANKING", (pWinner.getName(), gc.getPromotionInfo(iPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                            CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_RANKING", (pWinner.getName(), gc.getPromotionInfo(
+                                iPromo).getDescription())), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iPromo).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
                         return True
                 # War weariness parallel ab Elite
                 elif pWinner.isHasPromotion(LPromo[4][0]) and not pWinner.isHasPromotion(LPromoNegative[-1][0]):
@@ -2628,7 +2765,8 @@ def doAutomatedRanking(pWinner, pLoser):
                                     PAEInstanceFightingModifier.append((iPlayer, pWinner.getID()))
                                     pWinner.setHasPromotion(iPromo, True)
                                     if gc.getPlayer(iPlayer).isHuman():
-                                        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_WAR_WEARINESS", (pWinner.getName(), gc.getPromotionInfo(iPromo).getDescription())), "AS2D_REBELLION", 2, gc.getPromotionInfo(iPromo).getButton(), ColorTypes(12), pWinner.getX(), pWinner.getY(), True, True)
+                                        CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_WAR_WEARINESS", (pWinner.getName(), gc.getPromotionInfo(
+                                            iPromo).getDescription())), "AS2D_REBELLION", 2, gc.getPromotionInfo(iPromo).getButton(), ColorTypes(12), pWinner.getX(), pWinner.getY(), True, True)
                                     return True
                                 break
 
@@ -2640,19 +2778,25 @@ def doAutomatedRanking(pWinner, pLoser):
                 iPromoLeader = gc.getInfoTypeForString("PROMOTION_LEADER")
                 iPromoLeadership = gc.getInfoTypeForString("PROMOTION_LEADERSHIP")
 
-                if pWinner.isHasPromotion(iPromoLoyal) or pWinner.isHasPromotion(iPromoLeader) or pWinner.isHasPromotion(iPromoLeadership): iChance = 2 #50%
-                else: iChance = 4 #25%
-            else: iChance = 2 # Better AI: always 50%
+                if pWinner.isHasPromotion(iPromoLoyal) or pWinner.isHasPromotion(iPromoLeader) or pWinner.isHasPromotion(iPromoLeadership):
+                    iChance = 2  # 50%
+                else:
+                    iChance = 4  # 25%
+            else:
+                iChance = 2  # Better AI: always 50%
 
             if CvUtil.myRandom(iChance, "remove Mercenary promo") == 1:
                 pWinner.setHasPromotion(iPromoMercenary, False)
                 if gc.getPlayer(iPlayer).isHuman():
-                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_UNDO_PROMO_MERCENARY", (pWinner.getName(), )), "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iPromoMercenary).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
+                    CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_UNDO_PROMO_MERCENARY", (pWinner.getName(), )),
+                                             "AS2D_IF_LEVELUP", 2, gc.getPromotionInfo(iPromoMercenary).getButton(), ColorTypes(13), pWinner.getX(), pWinner.getY(), True, True)
                 return True
 
     return False
 
 # Horse down 666
+
+
 def doHorseDown(pUnit):
     iUnitType = pUnit.getUnitType()
     # iOwner = pUnit.getOwner()
@@ -2667,11 +2811,13 @@ def doHorseDown(pUnit):
 
     if iNewUnitType != -1:
         # Create horse unit
-        NewUnit = gc.getPlayer(pUnit.getOwner()).initUnit(gc.getInfoTypeForString("UNIT_HORSE"), iX, iY, UnitAITypes.UNITAI_RESERVE, DirectionTypes.DIRECTION_SOUTH)
+        NewUnit = gc.getPlayer(pUnit.getOwner()).initUnit(gc.getInfoTypeForString("UNIT_HORSE"),
+                                                          iX, iY, UnitAITypes.UNITAI_RESERVE, DirectionTypes.DIRECTION_SOUTH)
         NewUnit.finishMoves()
 
         # Create a new unit
-        NewUnit = gc.getPlayer(pUnit.getOwner()).initUnit(iNewUnitType, iX, iY, UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
+        NewUnit = gc.getPlayer(pUnit.getOwner()).initUnit(iNewUnitType, iX, iY,
+                                                          UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
         NewUnit.setExperience(pUnit.getExperience(), -1)
         NewUnit.setLevel(pUnit.getLevel())
         NewUnit.setDamage(pUnit.getDamage(), -1)
@@ -2681,7 +2827,7 @@ def doHorseDown(pUnit):
             NewUnit.setName(UnitName)
         # Check its promotions
         iRange = gc.getNumPromotionInfos()
-        for iPromotion in range(iRange):
+        for iPromotion in xrange(iRange):
             # init all promotions the unit had
             if pUnit.isHasPromotion(iPromotion):
                 NewUnit.setHasPromotion(iPromotion, True)
@@ -2701,6 +2847,8 @@ def doHorseDown(pUnit):
   # end Horse down
 
 # Horse up 667
+
+
 def doHorseUp(pPlot, pUnit):
     iUnitType = pUnit.getUnitType()
     # iOwner = pUnit.getOwner()
@@ -2711,7 +2859,7 @@ def doHorseUp(pPlot, pUnit):
     # Pferd suchen und killen
     UnitHorse = gc.getInfoTypeForString("UNIT_HORSE")
     iRange = pPlot.getNumUnits()
-    for iUnit in range(iRange):
+    for iUnit in xrange(iRange):
         pLoopUnit = pPlot.getUnit(iUnit)
         if pLoopUnit.getUnitType() == UnitHorse:
             # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
@@ -2725,7 +2873,8 @@ def doHorseUp(pPlot, pUnit):
 
     if iNewUnitType != -1:
         # Create a new unit
-        NewUnit = gc.getPlayer(pUnit.getOwner()).initUnit(iNewUnitType, iX, iY, UnitAITypes.UNITAI_RESERVE, DirectionTypes.DIRECTION_SOUTH)
+        NewUnit = gc.getPlayer(pUnit.getOwner()).initUnit(iNewUnitType, iX, iY,
+                                                          UnitAITypes.UNITAI_RESERVE, DirectionTypes.DIRECTION_SOUTH)
         NewUnit.setExperience(pUnit.getExperience(), -1)
         NewUnit.setLevel(pUnit.getLevel())
         NewUnit.changeMoves(-60)
@@ -2736,7 +2885,7 @@ def doHorseUp(pPlot, pUnit):
             NewUnit.setName(UnitName)
         # Check its promotions
         iRange = gc.getNumPromotionInfos()
-        for iPromotion in range(iRange):
+        for iPromotion in xrange(iRange):
             # init all promotions the unit had
             if pUnit.isHasPromotion(iPromotion):
                 NewUnit.setHasPromotion(iPromotion, True)
@@ -2755,6 +2904,8 @@ def doHorseUp(pPlot, pUnit):
   # end Horse up
 
 # Trojanisches Pferd
+
+
 def doTrojanHorse(pCity, pUnit):
     iCityPlayer = pCity.getOwner()
     iUnitPlayer = pUnit.getOwner()
@@ -2775,7 +2926,8 @@ def doTrojanHorse(pCity, pUnit):
                 ColorTypes(11), pCity.getX(), pCity.getY(), True, True)
             popupInfo = CyPopupInfo()
             popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
-            popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_TROJAN_HORSE_CITY", (pCity.getName(), pUnitPlayer.getCivilizationAdjective(1))))
+            popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_TROJAN_HORSE_CITY",
+                              (pCity.getName(), pUnitPlayer.getCivilizationAdjective(1))))
             popupInfo.addPopup(iCityPlayer)
         if pUnitPlayer.isHuman():
             CyInterface().addMessage(
@@ -2792,7 +2944,7 @@ def doTrojanHorse(pCity, pUnit):
                 (pCity.getName(), pCityPlayer.getCivilizationAdjective(1))))
             popupInfo.addPopup(iUnitPlayer)
 
-        #if iCityPlayer == gc.getGame().getActivePlayer() or iUnitPlayer == gc.getGame().getActivePlayer():
+        # if iCityPlayer == gc.getGame().getActivePlayer() or iUnitPlayer == gc.getGame().getActivePlayer():
         #    CyAudioGame().Play2DSound("AS2D_THEIRDECLAREWAR")
 
         # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
@@ -2802,6 +2954,8 @@ def doTrojanHorse(pCity, pUnit):
     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Trojanisches Pferd (Zeile 9497)", 0)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
 # PAE Feature: Auswirkungen, wenn ein General stirbt
+
+
 def doDyingGeneral(pUnit, iWinnerPlayer=-1):
 
     if pUnit.getLeaderUnitType() == -1:
@@ -2829,7 +2983,7 @@ def doDyingGeneral(pUnit, iWinnerPlayer=-1):
     iNumUnits = pPlot.getNumUnits()
     # 1. Check Generals im Stack
     iNumLeadersOnPlot = 0
-    for i in range(iNumUnits):
+    for i in xrange(iNumUnits):
         pLoopUnit = pPlot.getUnit(i)
         if pLoopUnit.getOwner() == iPlayer:
             if pLoopUnit.getLeaderUnitType() > -1:
@@ -2837,7 +2991,7 @@ def doDyingGeneral(pUnit, iWinnerPlayer=-1):
 
     # 2. Vergabe der Promo
     iPromoMercenary = gc.getInfoTypeForString("PROMOTION_MERCENARY")
-    for i in range(iNumUnits):
+    for i in xrange(iNumUnits):
         pLoopUnit = pPlot.getUnit(i)
         if pLoopUnit.getOwner() == iPlayer:
             if i % iNumLeadersOnPlot == 0:
@@ -2847,19 +3001,19 @@ def doDyingGeneral(pUnit, iWinnerPlayer=-1):
     (loopCity, pIter) = pPlayer.firstCity(False)
     while loopCity:
         cityOwner = loopCity.getOwner()
-        if not loopCity.isNone() and cityOwner == iPlayer: #only valid cities
+        if not loopCity.isNone() and cityOwner == iPlayer:  # only valid cities
             if CvUtil.myRandom(iLeader, "Stadtaufruhr1") == 0:
                 # 2 bis 4 Runden Aufstand!
                 #iRand = 2 + CvUtil.myRandom(2, "Stadtaufruhr2")
 
                 # in Abhaengigkeit von HURRY_ANGER_DIVISOR (GlobalDefines.xml) und iHurryConscriptAngerPercent (GameSpeedInfo.xml)
                 #iRand = loopCity.flatHurryAngerLength()
-                #loopCity.changeHurryAngerTimer(iRand)
+                # loopCity.changeHurryAngerTimer(iRand)
 
                 # Stadt ohne Kulturgrenzen
                 #iRand = 2 + CvUtil.myRandom(3, "Stadtaufruhr3")
                 #loopCity.setOccupationTimer (iRand)
-                #if pPlayer.isHuman():
+                # if pPlayer.isHuman():
                 #    CyInterface().addMessage(iPlayer, True, 5, CyTranslator().getText("TXT_KEY_MAIN_CITY_RIOT", (loopCity.getName(),)), "AS2D_REVOLTSTART", 2, ",Art/Interface/Buttons/Promotions/Combat5.dds,Art/Interface/Buttons/Warlords_Atlas_1.dds,5,10", ColorTypes(7), loopCity.getX(), loopCity.getY(), True, True)
 
                 # Civil War (ab PAE 6.3.2)
@@ -2870,7 +3024,7 @@ def doDyingGeneral(pUnit, iWinnerPlayer=-1):
     # PopUp
     if pPlayer.isHuman():
         popupInfo = CyPopupInfo()
-        popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT) # Text PopUp only!
+        popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)  # Text PopUp only!
         popupInfo.setText(CyTranslator().getText(
             "TXT_KEY_POPUP_GENERALSTOD", (pUnit.getName(),)))
         popupInfo.addPopup(iPlayer)
@@ -2908,7 +3062,7 @@ def unsettledSlaves(iPlayer):
     eUnitSlave = gc.getInfoTypeForString("UNIT_SLAVE")
     (loopUnit, pIter) = pPlayer.firstUnit(False)
     while loopUnit:
-        if not loopUnit.isDead(): #is the unit alive and valid?
+        if not loopUnit.isDead():  # is the unit alive and valid?
             if loopUnit.getUnitType() == eUnitSlave and loopUnit.getMoves() > 0:
                 lSlaves.append(loopUnit)
         (loopUnit, pIter) = pPlayer.nextUnit(pIter, False)
@@ -2931,9 +3085,11 @@ def unsettledSlaves(iPlayer):
                 iReligion = gc.getInfoTypeForString("RELIGION_CHRISTIANITY")
                 if gc.getGame().isReligionFounded(iReligion) and CvUtil.myRandom(4, "Stehende Sklaven Christ") == 1:
                     iUnitType = gc.getInfoTypeForString("UNIT_CHRISTIAN_MISSIONARY")
-                    pPlayer.initUnit(iUnitType, pUnit.getX(), pUnit.getY(), UnitAITypes.UNITAI_MISSIONARY, DirectionTypes.DIRECTION_SOUTH)
+                    pPlayer.initUnit(iUnitType, pUnit.getX(), pUnit.getY(),
+                                     UnitAITypes.UNITAI_MISSIONARY, DirectionTypes.DIRECTION_SOUTH)
                     if pPlayer.isHuman():
-                        CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE_2_CHRIST", (0,)), None, 2, "Art/Interface/Buttons/Actions/button_kreuz.dds", ColorTypes(14), pUnit.getX(), pUnit.getY(), True, True)
+                        CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE_2_CHRIST", (0,)), None, 2,
+                                                 "Art/Interface/Buttons/Actions/button_kreuz.dds", ColorTypes(14), pUnit.getX(), pUnit.getY(), True, True)
                     # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
                     pUnit.kill(True, -1)  # RAMK_CTD
 
@@ -2945,15 +3101,16 @@ def unsettledSlaves(iPlayer):
                     if pPlot.getOwner() != pUnit.getOwner():
                         if pPlayer.isHuman():
                             iRand = 1 + CvUtil.myRandom(4, "FluchtversuchText")
-                            CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE_LOST_"+str(iRand), (0, "")), None, 2, "Art/Interface/Buttons/Units/button_slave.dds", ColorTypes(7), pUnit.getX(), pUnit.getY(), True, True)
+                            CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE_LOST_"+str(iRand), (0, "")),
+                                                     None, 2, "Art/Interface/Buttons/Units/button_slave.dds", ColorTypes(7), pUnit.getX(), pUnit.getY(), True, True)
                         # Barbareneinheit erschaffen
                         if CvUtil.myRandom(2, "Fluchtversuch") == 1:
                             # Einen guenstigen Plot auswaehlen
                             rebelPlotArray = []
                             iX = pUnit.getX()
                             iY = pUnit.getY()
-                            for i in range(3):
-                                for j in range(3):
+                            for i in xrange(3):
+                                for j in xrange(3):
                                     loopPlot = gc.getMap().plot(iX + i - 1, iY + j - 1)
                                     if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                                         if not loopPlot.isImpassable() and not loopPlot.isWater() and not loopPlot.isPeak():
@@ -2974,8 +3131,8 @@ def unsettledSlaves(iPlayer):
                         rebelPlotArrayB = []
                         iX = pUnit.getX()
                         iY = pUnit.getY()
-                        for i in range(3):
-                            for j in range(3):
+                        for i in xrange(3):
+                            for j in xrange(3):
                                 loopPlot = gc.getMap().plot(iX + i - 1, iY + j - 1)
                                 if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                                     if loopPlot.getOwner() == iPlayer:
@@ -2993,31 +3150,38 @@ def unsettledSlaves(iPlayer):
                             iUnitType = gc.getInfoTypeForString("UNIT_REBELL")
                             CvUtil.spawnUnit(iUnitType, pPlot, gc.getPlayer(gc.getBARBARIAN_PLAYER()))
                             if pPlayer.isHuman():
-                                CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE_2_REBELL", (0,)), None, 2, "Art/Interface/Buttons/Units/button_rebell.dds", ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
+                                CyInterface().addMessage(iPlayer, True, 8, CyTranslator().getText("TXT_KEY_MESSAGE_SLAVE_2_REBELL", (0,)), None, 2,
+                                                         "Art/Interface/Buttons/Units/button_rebell.dds", ColorTypes(7), pPlot.getX(), pPlot.getY(), True, True)
                             # pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
                             pUnit.kill(True, -1)  # RAMK_CTD
                             # ***TEST***
                             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Sklave zu Rebell (Zeile 1327)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
 # Next Unit after NetMessage
+
+
 def doGoToNextUnit(pUnit):
     # go to and select next Unit
     pUnit.getGroup().pushMission(MissionTypes.MISSION_SKIP, 0, 0, 0, False, False, MissionAITypes.NO_MISSIONAI, pUnit.plot(), pUnit)
+
 
 def copyName(NewUnit, iUnitType, sUnitName):
     if sUnitName != gc.getUnitInfo(iUnitType).getText():
         sUnitName = re.sub(r" \(.*?\)", "", sUnitName)
         NewUnit.setName(sUnitName)
 
+
 def copyPromotions(OldUnit, NewUnit):
     iRange = gc.getNumPromotionInfos()
-    for iPromo in range(iRange):
+    for iPromo in xrange(iRange):
         if OldUnit.isHasPromotion(iPromo):
             NewUnit.setHasPromotion(iPromo, True)
+
 
 def initSupply(pUnit):
     iMaxSupply = getMaxSupply(pUnit)
     setSupply(pUnit, iMaxSupply)
+
 
 def fillSupply(pUnit, iChange):
     iMaxSupply = getMaxSupply(pUnit)
@@ -3033,8 +3197,10 @@ def fillSupply(pUnit, iChange):
     setSupply(pUnit, iCurrentSupply)
     return iChange
 
+
 def setSupply(pUnit, iValue):
     CvUtil.addScriptData(pUnit, "s", iValue)
+
 
 def getSupply(pUnit):
     iMaxSupply = getMaxSupply(pUnit)
@@ -3042,23 +3208,26 @@ def getSupply(pUnit):
     # kein Eintrag == fabriksneu
     iCurrentSupply = CvUtil.getScriptData(pUnit, ["s"], iMaxSupply)
     if iCurrentSupply > iMaxSupply:
-        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Current Supply is bogus", iCurrentSupply)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+        CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",
+                                                                                                  ("Current Supply is bogus", iCurrentSupply)), None, 2, None, ColorTypes(10), 0, 0, False, False)
         setSupply(pUnit, iMaxSupply)
         iCurrentSupply = iMaxSupply
     return iCurrentSupply
 
+
 def getMaxSupply(pUnit):
     #eDruide = gc.getInfoTypeForString("UNIT_DRUIDE")
     #eBrahmane = gc.getInfoTypeForString("UNIT_BRAHMANE")
-    ## Maximalwert herausfinden
-    #if pUnit.getUnitType() == eDruide or pUnit.getUnitType() == eBrahmane:
+    # Maximalwert herausfinden
+    # if pUnit.getUnitType() == eDruide or pUnit.getUnitType() == eBrahmane:
     #    iMaxSupply = 100
-    #else:
+    # else:
     iMaxSupply = 200
     # Trait Strategist / Stratege: +50% Kapazitaet / +50% capacity
     if gc.getPlayer(pUnit.getOwner()).hasTrait(gc.getInfoTypeForString("TRAIT_STRATEGE")):
         iMaxSupply += int(iMaxSupply/2)
     return iMaxSupply
+
 
 def getHeldendenkmal(pUnit):
     return CvUtil.getScriptData(pUnit, ["hd"], -1)
@@ -3110,7 +3279,7 @@ def renegade(pWinner, pLoser):
         bUnitRenegades = False
     elif pLoser.isHasPromotion(gc.getInfoTypeForString("PROMOTION_HERO")) or pLoser.isHasPromotion(gc.getInfoTypeForString("PROMOTION_LEADERSHIP")):
         bUnitRenegades = False
-    #elif pLoser.hasCargo() and pLoser.canAttack():
+    # elif pLoser.hasCargo() and pLoser.canAttack():
     #    bUnitRenegades = False
     elif pLoserPlot.getNumUnits() == 1 and pLoser.getCaptureUnitType(pLoser.getCivilizationType()) != -1:
         bUnitRenegades = False
@@ -3120,7 +3289,7 @@ def renegade(pWinner, pLoser):
             iNumCargoSpace = 0
             iNumCargoUnits = 0
             iRange = pWinnerPlot.getNumUnits()
-            for i in range(iRange):
+            for i in xrange(iRange):
                 pLoopUnit = pWinnerPlot.getUnit(i)
                 if pLoopUnit.getOwner() == iWinnerPlayer:
                     iNumCargoSpace += pLoopUnit.cargoSpace()
@@ -3184,7 +3353,7 @@ def doNavalOnCombatResult(pWinner, pLoser, bWinnerIsDead):
             SeaPlots = []
             iX = pLoser.getX()
             iY = pLoser.getY()
-            for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+            for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                 loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
                 if loopPlot is not None and not loopPlot.isNone():
                     if loopPlot.getFeatureType() == iDarkIce or loopPlot.getFeatureType() == iIce:
@@ -3201,16 +3370,18 @@ def doNavalOnCombatResult(pWinner, pLoser, bWinnerIsDead):
                     iMaxTreibgut = 1
                 barbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
 
-                for _ in range(iMaxTreibgut):
+                for _ in xrange(iMaxTreibgut):
                     if not SeaPlots:
                         break
                     iRand = CvUtil.myRandom(len(SeaPlots), "SeaPlots")
                     loopPlot = SeaPlots[iRand]
                     # Treibgut erzeugen
-                    NewUnit = barbPlayer.initUnit(iUnitTreibgut, loopPlot.getX(), loopPlot.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
-                    #NewUnit.setImmobileTimer(2)
+                    NewUnit = barbPlayer.initUnit(iUnitTreibgut, loopPlot.getX(), loopPlot.getY(),
+                                                  UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
+                    # NewUnit.setImmobileTimer(2)
                     if pWinnerPlayer.isHuman():
-                        CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_UNIT_ERSTELLT", (gc.getUnitInfo(iUnitTreibgut).getDescription(),)), None, 2, gc.getUnitInfo(iUnitTreibgut).getButton(), ColorTypes(11), loopPlot.getX(), loopPlot.getY(), True, True)
+                        CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_UNIT_ERSTELLT", (gc.getUnitInfo(iUnitTreibgut).getDescription(),)),
+                                                 None, 2, gc.getUnitInfo(iUnitTreibgut).getButton(), ColorTypes(11), loopPlot.getX(), loopPlot.getY(), True, True)
                     # Plot aus der Liste entfernen
                     SeaPlots.remove(loopPlot)
 
@@ -3224,16 +3395,19 @@ def doNavalOnCombatResult(pWinner, pLoser, bWinnerIsDead):
             iRand = CvUtil.myRandom(3, "Treibgut einfangen")
             if iRand == 0:
                 iUnit = gc.getInfoTypeForString("UNIT_SLAVE")
-                NewUnit = pWinnerPlayer.initUnit(iUnit, pWinner.getX(), pWinner.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+                NewUnit = pWinnerPlayer.initUnit(iUnit, pWinner.getX(), pWinner.getY(),
+                                                 UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 NewUnit.setTransportUnit(pWinner)
                 NewUnit.finishMoves()
                 if pWinnerPlayer.isHuman():
-                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_UNIT_TREIBGUT_SLAVE", ("",)), None, 2, gc.getUnitInfo(iUnit).getButton(), ColorTypes(8), pLoser.getX(), pLoser.getY(), True, True)
+                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_UNIT_TREIBGUT_SLAVE", ("",)),
+                                             None, 2, gc.getUnitInfo(iUnit).getButton(), ColorTypes(8), pLoser.getX(), pLoser.getY(), True, True)
             elif iRand == 1:
                 iRand = 11 + CvUtil.myRandom(20, "Treibgut einfangen3")
                 pWinnerPlayer.changeGold(iRand)
                 if pWinnerPlayer.isHuman():
-                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MONEY_UNIT_KILLED", ("", iRand)), None, 2, gc.getUnitInfo(iUnitTreibgut).getButton(), ColorTypes(8), pLoser.getX(), pLoser.getY(), True, True)
+                    CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MONEY_UNIT_KILLED", ("", iRand)),
+                                             None, 2, gc.getUnitInfo(iUnitTreibgut).getButton(), ColorTypes(8), pLoser.getX(), pLoser.getY(), True, True)
             # Treibgut nicht eingefangen
             else:
                 # Einheit Treibgut neu erzeugen
@@ -3241,13 +3415,15 @@ def doNavalOnCombatResult(pWinner, pLoser, bWinnerIsDead):
                 if pWinnerPlayer.isHuman():
                     iRand = 1 + CvUtil.myRandom(9, "Treibgut einfangen4")
                     szText = CyTranslator().getText("TXT_KEY_UNIT_TREIBGUT_CATCHME"+str(iRand), ())
-                    CyInterface().addMessage(iWinnerPlayer, True, 10, szText, None, 2, gc.getUnitInfo(iUnitTreibgut).getButton(), ColorTypes(11), pLoser.getX(), pLoser.getY(), True, True)
+                    CyInterface().addMessage(iWinnerPlayer, True, 10, szText, None, 2, gc.getUnitInfo(
+                        iUnitTreibgut).getButton(), ColorTypes(11), pLoser.getX(), pLoser.getY(), True, True)
         # Cargo voll
         else:
             # Einheit Treibgut neu erzeugen
             bMove2NextPlot = True
             if pWinnerPlayer.isHuman():
-                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_UNIT_TREIBGUT_NOSPACE", ("",)), None, 2, gc.getUnitInfo(iUnitTreibgut).getButton(), ColorTypes(11), pLoser.getX(), pLoser.getY(), True, True)
+                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_UNIT_TREIBGUT_NOSPACE", ("",)), None,
+                                         2, gc.getUnitInfo(iUnitTreibgut).getButton(), ColorTypes(11), pLoser.getX(), pLoser.getY(), True, True)
 
         # Treibgut soll nicht ausserhalb der Kulturgrenze wiederauftauchen (jumpToNearestValidPlot), sondern gleich 1 Plot daneben (sofern frei)
         if bMove2NextPlot:
@@ -3255,7 +3431,7 @@ def doNavalOnCombatResult(pWinner, pLoser, bWinnerIsDead):
             iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
             iX = pLoser.getX()
             iY = pLoser.getY()
-            for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+            for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                 loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
                 if loopPlot is not None and not loopPlot.isNone():
                     if loopPlot.getFeatureType() != iDarkIce:
@@ -3272,6 +3448,7 @@ def doNavalOnCombatResult(pWinner, pLoser, bWinnerIsDead):
                 # Create unit
                 CvUtil.spawnUnit(iUnitTreibgut, pJumpPlot, gc.getPlayer(gc.getBARBARIAN_PLAYER()))
     return bUnitDone
+
 
 def doLoserLoseHorse(pLoser, iWinnerPlayer):
     iLoserPlayer = pLoser.getOwner()
@@ -3299,22 +3476,25 @@ def doLoserLoseHorse(pLoser, iWinnerPlayer):
         iRand = CvUtil.myRandom(10, "mountedToMelee")
         if iRand == 0 and iNewUnitType != -1:
             # Create a new unit
-            NewUnit = pLoserPlayer.initUnit(iNewUnitType, pLoser.getX(), pLoser.getY(), UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
+            NewUnit = pLoserPlayer.initUnit(iNewUnitType, pLoser.getX(), pLoser.getY(),
+                                            UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
             NewUnit.setExperience(pLoser.getExperience(), -1)
             NewUnit.setLevel(pLoser.getLevel())
             NewUnit.finishMoves()
             NewUnit.setDamage(50, -1)
             # Check its promotions
             iRange = gc.getNumPromotionInfos()
-            for iPromotion in range(iRange):
+            for iPromotion in xrange(iRange):
                 # init all promotions the unit had
                 if pLoser.isHasPromotion(iPromotion):
                     NewUnit.setHasPromotion(iPromotion, True)
 
             if pWinnerPlayer.isHuman():
-                CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_LOST_HORSE_1", (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(7), 0, 0, False, False)
+                CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_LOST_HORSE_1",
+                                                                                        (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(7), 0, 0, False, False)
             if pLoserPlayer.isHuman():
-                CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_LOST_HORSE_2", (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
+                CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_LOST_HORSE_2",
+                                                                                       (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
             return True
         if iRand <= 2:
             # Create horse unit
@@ -3323,7 +3503,7 @@ def doLoserLoseHorse(pLoser, iWinnerPlayer):
             rebelPlotArray = []
             iX = pLoser.getX()
             iY = pLoser.getY()
-            for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+            for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
                 loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
                 if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                     if not loopPlot.isWater() and not loopPlot.isImpassable() and not loopPlot.isCity():
@@ -3337,9 +3517,11 @@ def doLoserLoseHorse(pLoser, iWinnerPlayer):
             else:
                 CvUtil.spawnUnit(iUnitType, pLoserPlot, pLoserPlayer)
             if pLoserPlayer.isHuman():
-                CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_ONLY_HORSE_LEFT", (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(6), 0, 0, False, False)
+                CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_ONLY_HORSE_LEFT",
+                                                                                       (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(6), 0, 0, False, False)
             return True
     return False
+
 
 def huntingResult(pLoser, pWinner):
     iWinnerPlayer = pWinner.getOwner()
@@ -3371,15 +3553,18 @@ def huntingResult(pLoser, pWinner):
             iCity = CvUtil.myRandom(len(CityArray), "HuntCity")
             CityArray[iCity].changeFood(iFoodAdd)
             if pWinnerPlayer.isHuman():
-                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_ADD_FOOD", (pWinner.getName(), CityArray[iCity].getName(), iFoodAdd)), None, 2, pLoser.getButton(), ColorTypes(13), pLoser.getX(), pLoser.getY(), True, True)
+                CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_ADD_FOOD", (pWinner.getName(),
+                                                                                                                           CityArray[iCity].getName(), iFoodAdd)), None, 2, pLoser.getButton(), ColorTypes(13), pLoser.getX(), pLoser.getY(), True, True)
+
 
 def huntingDistance(pPlot1, pPlot2):
     if pPlot1 and not pPlot1.isNone() and pPlot2 and not pPlot2.isNone():
-        #if pPlot1.getArea() == pPlot2.getArea():
+        # if pPlot1.getArea() == pPlot2.getArea():
         #iDist = gc.getMap().calculatePathDistance(pPlot1, pPlot2)
         iDist = plotDistance(pPlot1.getX(), pPlot1.getY(), pPlot2.getX(), pPlot2.getY())
         return iDist > -1 and iDist <= 4
     return False
+
 
 def convertToPirate(city, unit):
     """unused due to possible OOS with to many pirates"""
@@ -3392,11 +3577,14 @@ def convertToPirate(city, unit):
                 iNewUnitType = L.DCaptureByPirate[iUnitType]
                 # unit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
                 unit.kill(True, -1)  # RAMK_CTD
-                unit = pPlayer.initUnit(iNewUnitType, city.getX(), city.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+                unit = pPlayer.initUnit(iNewUnitType, city.getX(), city.getY(),
+                                        UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+
 
 def rebell(pOldUnit, pNewPlayer, pPlot):
     iUnitType = pOldUnit.getUnitType()
-    pNewUnit = pNewPlayer.initUnit(iUnitType, pPlot.getX(), pPlot.getY(), UnitAITypes(pOldUnit.getUnitAIType()), DirectionTypes.DIRECTION_SOUTH)
+    pNewUnit = pNewPlayer.initUnit(iUnitType, pPlot.getX(), pPlot.getY(), UnitAITypes(
+        pOldUnit.getUnitAIType()), DirectionTypes.DIRECTION_SOUTH)
     initUnitFromUnit(pOldUnit, pNewUnit)
     pNewUnit.setDamage(pOldUnit.getDamage(), -1)
     # Original unit killen
@@ -3414,7 +3602,8 @@ def doRenegadeUnit(pLoser, pWinner, pLoserPlayer, pWinnerPlayer):
 
         #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("UnitType zum Ueberlaufen: ", iNewUnitType)), None, 2, None, ColorTypes(14), pWinner.getX(), pWinner.getY(), False, False)
         # Create a new unit
-        NewUnit = pWinnerPlayer.initUnit(iNewUnitType, pWinner.getX(), pWinner.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+        NewUnit = pWinnerPlayer.initUnit(iNewUnitType, pWinner.getX(), pWinner.getY(),
+                                         UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
         NewUnit.finishMoves()
 
         if pLoser.getUnitCombatType() != -1:
@@ -3441,9 +3630,11 @@ def doRenegadeUnit(pLoser, pWinner, pLoserPlayer, pWinnerPlayer):
                     NewUnit.setHasPromotion(iPromo, False)
 
         if pWinnerPlayer.isHuman():
-            CyInterface().addMessage(pWinnerPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_DESERTION_1", (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(14), pWinner.getX(), pWinner.getY(), False, False)
+            CyInterface().addMessage(pWinnerPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_DESERTION_1",
+                                                                                            (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(14), pWinner.getX(), pWinner.getY(), False, False)
         if pLoserPlayer.isHuman():
-            CyInterface().addMessage(pLoserPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_DESERTION_2", (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(12), pWinner.getX(), pWinner.getY(), False, False)
+            CyInterface().addMessage(pLoserPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_DESERTION_2",
+                                                                                           (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(12), pWinner.getX(), pWinner.getY(), False, False)
         bUnitDone = True
 
         # ***TEST***
@@ -3458,24 +3649,29 @@ def doRenegadeUnit(pLoser, pWinner, pLoserPlayer, pWinnerPlayer):
             team = gc.getTeam(iThisTeam)
             if team.isHasTech(iTechEnslavement):
                 # Create a slave unit
-                NewUnit = pWinnerPlayer.initUnit(gc.getInfoTypeForString("UNIT_SLAVE"), pWinner.getX(), pWinner.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+                NewUnit = pWinnerPlayer.initUnit(gc.getInfoTypeForString("UNIT_SLAVE"), pWinner.getX(
+                ), pWinner.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
                 NewUnit.finishMoves()
                 if pWinnerPlayer.isHuman():
-                    CyInterface().addMessage(pWinnerPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_SLAVERY_1", (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(14), 0, 0, False, False)
+                    CyInterface().addMessage(pWinnerPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_SLAVERY_1",
+                                                                                                    (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(14), 0, 0, False, False)
                 if pLoserPlayer.isHuman():
-                    CyInterface().addMessage(pLoserPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_SLAVERY_2", (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(12), 0, 0, False, False)
+                    CyInterface().addMessage(pLoserPlayer.getID(), True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_SLAVERY_2",
+                                                                                                   (gc.getUnitInfo(iLoserUnitType).getDescription(), 0)), None, 2, None, ColorTypes(12), 0, 0, False, False)
                 bUnitDone = True
                 # ***TEST***
                 #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST", ("Gewinner bekommt Sklave (Zeile 2627)", 1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
     return bUnitDone
 
+
 def convert(pOldUnit, iNewUnit, pPlayer):
-    pNewUnit = pPlayer.initUnit(iNewUnit, pOldUnit.getX(), pOldUnit.getY(), UnitAITypes.NO_UNITAI, DirectionTypes(pOldUnit.getFacingDirection()))
+    pNewUnit = pPlayer.initUnit(iNewUnit, pOldUnit.getX(), pOldUnit.getY(), UnitAITypes.NO_UNITAI,
+                                DirectionTypes(pOldUnit.getFacingDirection()))
     pNewUnit = initUnitFromUnit(pOldUnit, pNewUnit)
     pNewUnit.setDamage(pOldUnit.getDamage(), -1)
     # 1 Bewegungspunkt Verlust
     pNewUnit.changeMoves(pOldUnit.getMoves() + 60)
-    ## extra fuer Piraten
+    # extra fuer Piraten
     # Veteran und Mercenary Promo checken
     # Veteran ohne Mercenary bleibt ohne Mercenary
     iPromoMercenary = gc.getInfoTypeForString("PROMOTION_MERCENARY")
@@ -3487,9 +3683,12 @@ def convert(pOldUnit, iNewUnit, pPlayer):
     # Original unit killen
     pOldUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
 
+
 def initUnitFromUnit(pOldUnit, pNewUnit):
-    if pOldUnit is None or pOldUnit.isNone(): return pNewUnit
-    if pNewUnit is None or pNewUnit.isNone(): return pNewUnit
+    if pOldUnit is None or pOldUnit.isNone():
+        return pNewUnit
+    if pNewUnit is None or pNewUnit.isNone():
+        return pNewUnit
     pNewUnit.setExperience(pOldUnit.getExperience(), -1)
     pNewUnit.setLevel(pOldUnit.getLevel())
     copyName(pNewUnit, pOldUnit.getUnitType(), pOldUnit.getName())
@@ -3497,18 +3696,19 @@ def initUnitFromUnit(pOldUnit, pNewUnit):
     # Check its promotions
     if pNewUnit.canAcquirePromotionAny():
         iRange = gc.getNumPromotionInfos()
-        for j in range(iRange):
+        for j in xrange(iRange):
             if "_FORM_" in gc.getPromotionInfo(j).getType():
-                  continue
+                continue
             if pOldUnit.isHasPromotion(j):
                 pNewUnit.setHasPromotion(j, True)
     return pNewUnit
+
 
 def TrojanHorsePossible(g_pSelectedUnit):
     iX = g_pSelectedUnit.getX()
     iY = g_pSelectedUnit.getY()
     iUnitOwner = g_pSelectedUnit.getOwner()
-    for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+    for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
         loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
         if loopPlot is not None and not loopPlot.isNone():
             if loopPlot.isCity():
@@ -3521,18 +3721,20 @@ def TrojanHorsePossible(g_pSelectedUnit):
                             return True
     return False
 
+
 def InquisitionPossible(pCity, iUnitOwner):
     pCityPlayer = gc.getPlayer(pCity.getOwner())
     if pCity.getOwner() == iUnitOwner or gc.getTeam(pCityPlayer.getTeam()).isVassal(gc.getPlayer(iUnitOwner).getTeam()):
         iStateReligion = gc.getPlayer(iUnitOwner).getStateReligion()
         if iStateReligion != -1:
             if pCity.isHasReligion(iStateReligion):
-                for iReligion in range(gc.getNumReligionInfos()):
+                for iReligion in xrange(gc.getNumReligionInfos()):
                     if pCity.isHasReligion(iReligion):
                         if pCity.isHolyCityByType(iReligion) == 0:
                             if iReligion != iStateReligion:
                                 return True
     return False
+
 
 def getNearestCity(pUnit):
     pUnitPlot = pUnit.plot()
@@ -3550,6 +3752,7 @@ def getNearestCity(pUnit):
         (loopCity, pIter) = pPlayer.nextCity(pIter, False)
     return pCity
 
+
 def getGovCenter(pUnit):
     iPlayer = pUnit.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
@@ -3565,6 +3768,7 @@ def getGovCenter(pUnit):
                     return True
         (loopCity, pIter) = pPlayer.nextCity(pIter, False)
     return False
+
 
 def move2GovCenter(pUnit):
     iPlayer = pUnit.getOwner()
@@ -3597,24 +3801,27 @@ def move2GovCenter(pUnit):
         if pCity != None:
             pUnit.getGroup().pushMoveToMission(pCity.getX(), pCity.getY())
             return True
-    #doGoToNextUnit(pUnit)
+    # doGoToNextUnit(pUnit)
 
 # Governor | Statthalter ---------------------------------------------
 # Werte des Statthalters / governor
-#--- 0: philosophisch: +5 Wissen
-#--- 1: spirituell: +5 Kultur
-#--- 2: finanziell: +5 Gold
-#--- 3: industriell: +5 Hammer
-#--- 4: kreativ: +5 Kommerz
-#--- 5: imperialistisch: +5 Spio
-#--- 6: organisiert: +2 Happy
-#--- 7: expansiv: +2 Health
+# --- 0: philosophisch: +5 Wissen
+# --- 1: spirituell: +5 Kultur
+# --- 2: finanziell: +5 Gold
+# --- 3: industriell: +5 Hammer
+# --- 4: kreativ: +5 Kommerz
+# --- 5: imperialistisch: +5 Spio
+# --- 6: organisiert: +2 Happy
+# --- 7: expansiv: +2 Health
 # Eventmanager: onUnitBuilt
+
+
 def initStatthalter(pUnit):
     iRand = CvUtil.myRandom(8, "initStatthalter")
     CvUtil.addScriptData(pUnit, "typ", iRand)
 
-def doSettleStatthalter(pUnit,pCity):
+
+def doSettleStatthalter(pUnit, pCity):
     #pPlayer = gc.getPlayer(pUnit.getOwner())
     iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
     iBuildingClass = gc.getBuildingInfo(iBuilding).getBuildingClassType()
@@ -3661,6 +3868,7 @@ def doSettleStatthalter(pUnit,pCity):
     # Unit killen
     pUnit.kill(True, -1)
 
+
 def doStatthalterTurn_AI(pUnit):
 
     return
@@ -3670,7 +3878,7 @@ def doStatthalterTurn_AI(pUnit):
     #iCityStatus = gc.getInfoTypeForString("BUILDING_STADT")
 
     #(loopCity, pIter) = pPlayer.firstCity(False)
-    #while loopCity:
+    # while loopCity:
     #    if loopCity is not None and not loopCity.isNone():
     #        if loopCity.isHasBuilding(iCityStatus):
     #            if not loopCity.isHasBuilding(iBuilding):
@@ -3682,21 +3890,25 @@ def doStatthalterTurn_AI(pUnit):
     #                break
     #    (loopCity, pIter) = pPlayer.nextCity(pIter, False)
     #pUnit.getGroup().pushMission(MissionTypes.MISSION_SKIP, 0, 0, 0, False, False, MissionAITypes.NO_MISSIONAI, pUnit.plot(), pUnit)
-    #doGoToNextUnit(pUnit)
+    # doGoToNextUnit(pUnit)
 # ------------------------------------------------------
 
 # Heldendenkmal / Siegesdenkmal ------------------------
 # Creates popup with all possible cultivation bonuses of the plot or city
+
+
 def doPopupChooseHeldendenkmal(pUnit):
     # Unit check
-    if pUnit is None or pUnit.isNone(): return False
+    if pUnit is None or pUnit.isNone():
+        return False
 
     pPlot = pUnit.plot()
     iPlayer = pUnit.getOwner()
 
     # City check
     pCity = pPlot.getPlotCity()
-    if pCity is None or pCity.isNone(): return False
+    if pCity is None or pCity.isNone():
+        return False
 
     popupInfo = CyPopupInfo()
     popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
@@ -3709,13 +3921,17 @@ def doPopupChooseHeldendenkmal(pUnit):
         if pCity.isHasBuilding(iBuilding):
             popupInfo.addPythonButton(gc.getBuildingInfo(iBuilding).getDescription(), gc.getBuildingInfo(iBuilding).getButton())
 
-    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )), "Art/Interface/Buttons/Actions/Cancel.dds")
+    popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_ACTION_CANCEL", ("", )),
+                              "Art/Interface/Buttons/Actions/Cancel.dds")
     popupInfo.setFlags(popupInfo.getNumPythonButtons()-1)
     popupInfo.addPopup(iPlayer)
 
+
 def doCollectHeldendenkmal(pUnit, iBuilding):
-    if pUnit is None or pUnit.isNone(): return False
-    if iBuilding == -1: return False
+    if pUnit is None or pUnit.isNone():
+        return False
+    if iBuilding == -1:
+        return False
 
     pCity = CyMap().plot(pUnit.getX(), pUnit.getY()).getPlotCity()
     pCity.setNumRealBuilding(iBuilding, 0)
@@ -3724,10 +3940,13 @@ def doCollectHeldendenkmal(pUnit, iBuilding):
     pUnit.finishMoves()
     doGoToNextUnit(pUnit)
 
+
 def doSetHeldendenkmal(pUnit):
-    if pUnit is None or pUnit.isNone(): return False
+    if pUnit is None or pUnit.isNone():
+        return False
     iBuilding = int(CvUtil.getScriptData(pUnit, ["hd"], -1))
-    if iBuilding == -1: return False
+    if iBuilding == -1:
+        return False
 
     pCity = CyMap().plot(pUnit.getX(), pUnit.getY()).getPlotCity()
     pCity.setNumRealBuilding(iBuilding, 1)
@@ -3738,16 +3957,18 @@ def doSetHeldendenkmal(pUnit):
     doGoToNextUnit(pUnit)
 # -------------------------------------------------
 
-def doBuyEscort (pUnit, iCost):
+
+def doBuyEscort(pUnit, iCost):
     iPlayer = pUnit.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
 
     if (pPlayer.getGold() >= iCost):
-      pPlayer.changeGold(-iCost)
-      pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_SCHUTZ"), True)
-      #pUnit.finishMoves()
-      if int(CvUtil.getScriptData(pUnit, ["autA", "t"], 0)) != 0:
-        doGoToNextUnit(pUnit)
+        pPlayer.changeGold(-iCost)
+        pUnit.setHasPromotion(gc.getInfoTypeForString("PROMOTION_SCHUTZ"), True)
+        # pUnit.finishMoves()
+        if int(CvUtil.getScriptData(pUnit, ["autA", "t"], 0)) != 0:
+            doGoToNextUnit(pUnit)
+
 
 def getUnitSupplyFood():
     # 0 = GAMESPEED_MARATHON
@@ -3756,39 +3977,45 @@ def getUnitSupplyFood():
     # 3 = GAMESPEED_QUICK
     iSpeed = gc.getGame().getGameSpeedType()
     if iSpeed < 2:
-      return 75 - (iSpeed * 25)
+        return 75 - (iSpeed * 25)
     else:
-      return 25
+        return 25
 
 # PAE unit costs some food from storage
+
+
 def doDecreaseFoodOnUnitBuilt(pCity, pUnit):
     # Civic Bauernmiliz
-    if gc.getPlayer(pUnit.getOwner()).isCivic(gc.getInfoTypeForString("CIVIC_BAUERNMILIZ")): return
+    if gc.getPlayer(pUnit.getOwner()).isCivic(gc.getInfoTypeForString("CIVIC_BAUERNMILIZ")):
+        return
 
     if pUnit.isMilitaryHappiness():
-      if pUnit.getUnitType() not in L.LUnitsNoFoodCosts:
+        if pUnit.getUnitType() not in L.LUnitsNoFoodCosts:
 
-        # 50% der Produktionskosten werden vom Nahrungslager abgezogen
-        # pro Getreidesorte gibts 10% Erm. dazu (TXT_KEY_BONUS_GRAIN_HELP anpassen)
-        iFaktor = 50
-        for i in L.LBonusGetreide:
-          if pCity.hasBonus(i):
-            iFaktor -= 10
+            # 50% der Produktionskosten werden vom Nahrungslager abgezogen
+            # pro Getreidesorte gibts 10% Erm. dazu (TXT_KEY_BONUS_GRAIN_HELP anpassen)
+            iFaktor = 50
+            for i in L.LBonusGetreide:
+                if pCity.hasBonus(i):
+                    iFaktor -= 10
 
-        # PAE 6.2: KI nochmal 50% weniger Kosten
-        if not gc.getPlayer(pUnit.getOwner()).isHuman(): iFaktor /= 2
+            # PAE 6.2: KI nochmal 50% weniger Kosten
+            if not gc.getPlayer(pUnit.getOwner()).isHuman():
+                iFaktor /= 2
 
-        if iFaktor > 0:
-          iCostFood = min(int(gc.getUnitInfo(pUnit.getUnitType()).getProductionCost() * iFaktor / 100), pCity.getFood())
-          if iCostFood > 0:
-            pCity.changeFood(-iCostFood)
+            if iFaktor > 0:
+                iCostFood = min(int(gc.getUnitInfo(pUnit.getUnitType()).getProductionCost() * iFaktor / 100), pCity.getFood())
+                if iCostFood > 0:
+                    pCity.changeFood(-iCostFood)
 
-            if gc.getPlayer(pUnit.getOwner()).isHuman():
-              # TXT_KEY_INFO_UNIT_FOOD: Die Einheit %s1_unit in %s2_city verbrauchte %d3% der [ICON_PRODUCTION]-Kosten: %d4[ICON_FOOD]
-              text = CyTranslator().getText("TXT_KEY_INFO_UNIT_FOOD", (pUnit.getName(), pCity.getName(), iFaktor, iCostFood))
-              CyInterface().addMessage(pUnit.getOwner(), True, 5, text , None, 2, None, ColorTypes(14), -1, -1, False, False)
+                    if gc.getPlayer(pUnit.getOwner()).isHuman():
+                        # TXT_KEY_INFO_UNIT_FOOD: Die Einheit %s1_unit in %s2_city verbrauchte %d3% der [ICON_PRODUCTION]-Kosten: %d4[ICON_FOOD]
+                        text = CyTranslator().getText("TXT_KEY_INFO_UNIT_FOOD", (pUnit.getName(), pCity.getName(), iFaktor, iCostFood))
+                        CyInterface().addMessage(pUnit.getOwner(), True, 5, text, None, 2, None, ColorTypes(14), -1, -1, False, False)
 
 # PAE supply wagon UNIT_SUPPLY_WAGON
+
+
 def getSupplyFromPlot(iPlayer, pPlot):
     # Init
     iTeam = gc.getPlayer(iPlayer).getTeam()
@@ -3806,19 +4033,19 @@ def getSupplyFromPlot(iPlayer, pPlot):
 
     # Eigenes Terrain
     if iLoopOwner == iPlayer:
-      if pPlot.isCity():
-        pCity = pPlot.getPlotCity()
-        # PAE V
-        if pCity.getYieldRate(0) - pPlot.getNumDefenders(iPlayer) > 0:
-            iSupplyChange += pCity.getYieldRate(0) - pPlot.getNumDefenders(iPlayer)
-      else:
-        eImprovement = pPlot.getImprovementType()
-        if eImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT"):
-            iSupplyChange += 35
-        elif eImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT2"):
-            iSupplyChange += 35
-        elif eImprovement == gc.getInfoTypeForString("IMPROVEMENT_HANDELSPOSTEN"):
-            iSupplyChange += 25
+        if pPlot.isCity():
+            pCity = pPlot.getPlotCity()
+            # PAE V
+            if pCity.getYieldRate(0) - pPlot.getNumDefenders(iPlayer) > 0:
+                iSupplyChange += pCity.getYieldRate(0) - pPlot.getNumDefenders(iPlayer)
+        else:
+            eImprovement = pPlot.getImprovementType()
+            if eImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT"):
+                iSupplyChange += 35
+            elif eImprovement == gc.getInfoTypeForString("IMPROVEMENT_FORT2"):
+                iSupplyChange += 35
+            elif eImprovement == gc.getInfoTypeForString("IMPROVEMENT_HANDELSPOSTEN"):
+                iSupplyChange += 25
     # Fremdes Terrain
     else:
         if iLoopOwner != -1:
@@ -3840,9 +4067,11 @@ def getSupplyFromPlot(iPlayer, pPlot):
                 iSupplyChange += 10
 
     # Neutrales Terrain
-    if pPlot.getImprovementType() in lImpFood: iSupplyChange += 10
+    if pPlot.getImprovementType() in lImpFood:
+        iSupplyChange += 10
     # Oase
-    if pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_OASIS"): iSupplyChange += 10
+    if pPlot.getFeatureType() == gc.getInfoTypeForString("FEATURE_OASIS"):
+        iSupplyChange += 10
     # Fluss oder fresh water
     if pPlot.isRiver() or pPlot.isFreshWater():
         iSupplyChange += 10
@@ -3853,6 +4082,8 @@ def getSupplyFromPlot(iPlayer, pPlot):
     return iSupplyChange
 
 # PAE supply wagon UNIT_SUPPLY_WAGON
+
+
 def getPlotSupplyCost(iPlayer, pPlot):
     # Init
     iMounted = 0
@@ -3863,28 +4094,31 @@ def getPlotSupplyCost(iPlayer, pPlot):
 
     # PAE V: Stack Limit mit iStackLimit1 einbeziehen
     if pPlot.getNumDefenders(iPlayer) - iStackLimit1 <= 0:
-      return 0
+        return 0
 
     # Units calc
     iNumUnits = pPlot.getNumUnits()
-    for i in range(iNumUnits):
-      pLoopUnit = pPlot.getUnit(i)
-      if pLoopUnit.getOwner() == iPlayer:
-        iUnitType = pLoopUnit.getUnitCombatType()
-        if iUnitType in L.LMountedSupplyCombats:
-          if bDesert: iMounted += 2
-          else: iMounted += 1
-        elif iUnitType in L.LMeleeSupplyCombats:
-          iMelee += 1
+    for i in xrange(iNumUnits):
+        pLoopUnit = pPlot.getUnit(i)
+        if pLoopUnit.getOwner() == iPlayer:
+            iUnitType = pLoopUnit.getUnitCombatType()
+            if iUnitType in L.LMountedSupplyCombats:
+                if bDesert:
+                    iMounted += 2
+                else:
+                    iMounted += 1
+            elif iUnitType in L.LMeleeSupplyCombats:
+                iMelee += 1
 
     return iMounted + iMelee
+
 
 def move2nextPlot(pUnit, bWater):
     lNewPlot = []
     iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
     iX = pUnit.getX()
     iY = pUnit.getY()
-    for iI in range(DirectionTypes.NUM_DIRECTION_TYPES):
+    for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
         loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
         if loopPlot is not None and not loopPlot.isNone():
             if loopPlot.getFeatureType() != iDarkIce:
@@ -3898,15 +4132,17 @@ def move2nextPlot(pUnit, bWater):
         # move unit: setXY (INT iX, INT iY, BOOL bGroup, BOOL bUpdate, BOOL bShow)
         pUnit.setXY(pJumpPlot.getX(), pJumpPlot.getY(), True, True, True)
     else:
-      pUnit.finishMoves()
+        pUnit.finishMoves()
     return
 
 # Wald niederbrennen
+
+
 def doBurnDownForest(pUnit):
     pPlot = pUnit.plot()
     # Verbrannten Wald erzeugen
     pPlot.setFeatureType(gc.getInfoTypeForString("FEATURE_FOREST_BURNT"), 0)
     # Modernisierung entfernen
     pPlot.setImprovementType(-1)
-    pUnit.getGroup().setActivityType(-1) # to reload the map!
+    pUnit.getGroup().setActivityType(-1)  # to reload the map!
     pUnit.finishMoves()

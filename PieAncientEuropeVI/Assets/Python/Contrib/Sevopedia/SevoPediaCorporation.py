@@ -77,12 +77,12 @@ class SevoPediaCorporation:
 		iTech = gc.getCorporationInfo(self.iCorporation).getTechPrereq()
 		if (iTech > -1):
 			screen.attachImageButton(panelName, "", gc.getTechInfo(iTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iTech, 1, False)
-		for iBuilding in range(gc.getNumBuildingInfos()):
+		for iBuilding in xrange(gc.getNumBuildingInfos()):
 			if (gc.getBuildingInfo(iBuilding).getFoundsCorporation() == self.iCorporation):
 				screen.attachImageButton(panelName, "", gc.getBuildingInfo(iBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iBuilding, 1, False)
-		for iUnit in range(gc.getNumUnitInfos()):
+		for iUnit in xrange(gc.getNumUnitInfos()):
 			bRequired = False
-			for iBuilding in range(gc.getNumBuildingInfos()):
+			for iBuilding in xrange(gc.getNumBuildingInfos()):
 				if (gc.getBuildingInfo(iBuilding).getFoundsCorporation() == self.iCorporation):
 					if gc.getUnitInfo(iUnit).getBuildings(iBuilding) or gc.getUnitInfo(iUnit).getForceBuildings(iBuilding):
 						bRequired = True

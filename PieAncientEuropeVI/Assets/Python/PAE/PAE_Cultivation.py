@@ -24,8 +24,8 @@ def _getCitiesInRange(pPlot, iPlayer):
     iY = pPlot.getY()
     lCities = []
     iRange = 2
-    for x in range(-iRange, iRange+1):
-        for y in range(-iRange, iRange+1):
+    for x in xrange(-iRange, iRange+1):
+        for y in xrange(-iRange, iRange+1):
             # Ecken weglassen
             if (x == -2 or x == 2) and (y == -2 or y == 2):
                 continue
@@ -55,7 +55,7 @@ def getCityCultivatedBonuses(pCity, iTyp):
     if iTyp == 1: List = L.LBonusStratCultivatable
     else: List = L.LBonusCultivatable
     iAnz = 0
-    for i in range(gc.getNUM_CITY_PLOTS()):
+    for i in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(i)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             iLoopBonus = pLoopPlot.getBonusType(-1)
@@ -69,7 +69,7 @@ def getCityCultivatedPlots(pCity, eBonus):
     if iTyp == 1: List = L.LBonusStratCultivatable
     else: List = L.LBonusCultivatable
     plots = []
-    for i in range(gc.getNUM_CITY_PLOTS()):
+    for i in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(i)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             bonus = pLoopPlot.getBonusType(-1)
@@ -79,7 +79,7 @@ def getCityCultivatedPlots(pCity, eBonus):
 
 def getCityCultivatablePlots(pCity, eBonus):
     plots = []
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             ePlotBonus = pLoopPlot.getBonusType(-1)
@@ -89,7 +89,7 @@ def getCityCultivatablePlots(pCity, eBonus):
     return plots
 
 def isCityHasBonus(pCity, eBonus):
-    for i in range(gc.getNUM_CITY_PLOTS()):
+    for i in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(i)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             if pLoopPlot.getBonusType(-1) == eBonus or pLoopPlot.getBonusType(pLoopPlot.getTeam()) == eBonus:
@@ -149,7 +149,7 @@ def isBonusCultivationChance(iPlayer, pPlot, eBonus, bVisibleOnly=True, pCity=No
             #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, pCity.getName() + " true " + str(iTyp) + " | " + str(len(lCities)), None, 2, None, ColorTypes(10), 0, 0, False, False)
             return True
 
-    #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "no city in range has capacity " + str(iTyp), None, 2, None, ColorTypes(10), 0, 0, False, False)
+    #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "no city in xrange has capacity " + str(iTyp), None, 2, None, ColorTypes(10), 0, 0, False, False)
     return False
 
 def canHaveBonus(pPlot, eBonus, bIgnoreLatitude):
@@ -271,7 +271,7 @@ def getCityCultivationPlot(pCity, eBonus):
     lPrio4Imps = [gc.getInfoTypeForString("IMPROVEMENT_QUARRY"),gc.getInfoTypeForString("IMPROVEMENT_MINE")]
     lPrio5 = [] # gc.getImprovementInfo(iImprovement).getDefenseModifier(): villages, forts
 
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             ePlotBonus = pLoopPlot.getBonusType(-1)
@@ -315,7 +315,7 @@ def isBonusCultivatable(pUnit):
 # Returns True if eBonus can be (principally) cultivated by iPlayer from pCity
 # Independent from cultivation unit, only checks fertility conditions
 def _bonusIsCultivatableFromCity(iPlayer, pCity, eBonus, bVisibleOnly=True):
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             ePlotBonus = pLoopPlot.getBonusType(-1)
@@ -329,8 +329,8 @@ def _bonusIsCultivatableFromCity(iPlayer, pCity, eBonus, bVisibleOnly=True):
 def AI_bestCultivation(pCity, iSkipN=-1, eBonus=-1):
     iPlayer = pCity.getOwner()
     if eBonus != -1:
-        for iPass in range(2):
-            for iI in range(gc.getNUM_CITY_PLOTS()):
+        for iPass in xrange(2):
+            for iI in xrange(gc.getNUM_CITY_PLOTS()):
                 pLoopPlot = pCity.getCityIndexPlot(iI)
                 if pLoopPlot is not None and not pLoopPlot.isNone():
                     ePlotBonus = pLoopPlot.getBonusType(pLoopPlot.getTeam())
@@ -399,7 +399,7 @@ def doCultivation_AI(pUnit):
 
     #CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "doCultivation_AI: Cities: " + str(len(lSortedCities)), None, 2, None, ColorTypes(2), 0, 0, False, False)
 
-    for iTry in range(2):
+    for iTry in xrange(2):
         for tTuple in lSortedCities:
             pLoopCity = tTuple[1]
             if eBonusOnBoard != -1:
@@ -550,7 +550,7 @@ def _calculateBonusBuyingPrice4Cultivation(eBonus, iBuyer, pPlot):
         return -1
 
     # Bonus in city radius: regional price
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         pLoopPlot = pCity.getCityIndexPlot(iI)
         if pLoopPlot is not None and not pLoopPlot.isNone():
             if pLoopPlot.getBonusType(pLoopPlot.getTeam()) == eBonus:
@@ -558,7 +558,7 @@ def _calculateBonusBuyingPrice4Cultivation(eBonus, iBuyer, pPlot):
 
     # Bonus in realm: national price
     iRange = gc.getMap().numPlots()
-    for iI in range(iRange):
+    for iI in xrange(iRange):
         pLoopPlot = gc.getMap().plotByIndex(iI)
         if pLoopPlot.getOwner() == iBuyer:
             if pLoopPlot.getBonusType(pLoopPlot.getTeam()) == eBonus:
@@ -639,7 +639,7 @@ def _isBonusCultivableInRealm(iPlayer,eBonus):
     (loopCity, pIter) = pPlayer.firstCity(False)
     while loopCity:
         if loopCity is not None and not loopCity.isNone() and loopCity.getOwner() == pPlayer.getID():
-            for iI in range(gc.getNUM_CITY_PLOTS()):
+            for iI in xrange(gc.getNUM_CITY_PLOTS()):
                 pLoopPlot = loopCity.getCityIndexPlot(iI)
                 if pLoopPlot is not None and not pLoopPlot.isNone():
                     if isBonusCultivationChance(iPlayer, pLoopPlot, eBonus, True, loopCity):
@@ -669,9 +669,9 @@ def wine(pCity):
     iSecondBlock = len(lImprovements)
 
     # lPlotPrio = [[],[],[],[],[],[],[],[],[]]
-    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 1)]
+    lPlotPrio = [[] for x in xrange(iFirstBlock + iSecondBlock + 1)]
 
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
@@ -686,7 +686,7 @@ def wine(pCity):
                         if _canBuildingCultivate(loopPlot, iPlayer):
                             if loopPlot.getImprovementType() == -1:
                                 if loopPlot.isHills():
-                                    for iJ in range(iFirstBlock):
+                                    for iJ in xrange(iFirstBlock):
                                         if loopPlot.getTerrainType() == lTerrains[iJ]:
                                             lPlotPrio[iJ].append(loopPlot)
                                 # 3. irgendeinen passenden ohne Improvement
@@ -694,7 +694,7 @@ def wine(pCity):
                                     lPlotPrio[iFirstBlock].append(loopPlot)
                             # 4. nach Improvements selektieren
                             else:
-                                for iJ in range(iSecondBlock):
+                                for iJ in xrange(iSecondBlock):
                                     if loopPlot.getImprovementType() == lImprovements[iJ]:
                                         lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
                                         break
@@ -731,10 +731,10 @@ def horse(pCity, bPrioPlotOnly):
     iSecondBlock = len(lImprovements)
 
     # lPlotPrio = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
-    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 1)]
+    lPlotPrio = [[] for x in xrange(iFirstBlock + iSecondBlock + 1)]
     lAllPossiblePlots = []
 
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
@@ -747,7 +747,7 @@ def horse(pCity, bPrioPlotOnly):
                         if _canBuildingCultivate(loopPlot, iPlayer):
                             lAllPossiblePlots.append(loopPlot)
                             if loopPlot.getImprovementType() == -1:
-                                for iJ in range(iFirstBlock):
+                                for iJ in xrange(iFirstBlock):
                                     if loopPlot.getTerrainType() == lTerrains[iJ]:
                                         if loopPlot.getFeatureType() == -1:
                                           lPlotPrio[0].append(loopPlot)
@@ -756,7 +756,7 @@ def horse(pCity, bPrioPlotOnly):
                                         break
                             # nach Improvements selektieren
                             elif not bIsHuman:
-                                for iJ in range(iSecondBlock):
+                                for iJ in xrange(iSecondBlock):
                                     if loopPlot.getImprovementType() == lImprovements[iJ]:
                                         lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
     if bPrioPlotOnly: return trimPlots(lPlotPrio)
@@ -780,10 +780,10 @@ def camel(pCity, bPrioPlotOnly):
     iFirstBlock = len(lTerrains)
 
     # lPlotPrio = [[],[],[],[],[]]
-    lPlotPrio = [[] for x in range(iFirstBlock + 3)]
+    lPlotPrio = [[] for x in xrange(iFirstBlock + 3)]
     lAllPossiblePlots = []
 
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
@@ -800,7 +800,7 @@ def camel(pCity, bPrioPlotOnly):
                                 if loopPlot.getImprovementType() == iImpType1:
                                     lPlotPrio[0].append(loopPlot)
                                 elif loopPlot.getImprovementType() == -1:
-                                    for iJ in range(iFirstBlock):
+                                    for iJ in xrange(iFirstBlock):
                                         if loopPlot.getTerrainType() == lTerrains[iJ]:
                                             lPlotPrio[iJ+1].append(loopPlot)
                                             break
@@ -833,10 +833,10 @@ def elephant(pCity, bPrioPlotOnly):
     iImpCamp = gc.getInfoTypeForString("IMPROVEMENT_CAMP")
 
     # lPlotPrio = [[],[],[],[],[],[],[]]
-    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 3)]
+    lPlotPrio = [[] for x in xrange(iFirstBlock + iSecondBlock + 3)]
     lAllPossiblePlots = []
 
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
@@ -856,7 +856,7 @@ def elephant(pCity, bPrioPlotOnly):
                                     else:
                                         # 2. grass, unworked
                                         # 3. plains, unworked
-                                        for iJ in range(iSecondBlock):
+                                        for iJ in xrange(iSecondBlock):
                                             if loopPlot.getTerrainType() == lTerrains[iJ]:
                                                 lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
                                                 break
@@ -901,10 +901,10 @@ def dog(pCity, bPrioPlotOnly):
     iSecondBlock = len(lImprovements)
 
 
-    lPlotPrio = [[] for x in range(iFirstBlock + iSecondBlock + 1)]
+    lPlotPrio = [[] for x in xrange(iFirstBlock + iSecondBlock + 1)]
     lAllPossiblePlots = []
 
-    for iI in range(gc.getNUM_CITY_PLOTS()):
+    for iI in xrange(gc.getNUM_CITY_PLOTS()):
         loopPlot = pCity.getCityIndexPlot(iI)
         # die beste position finden:
         if loopPlot is not None and not loopPlot.isNone():
@@ -918,7 +918,7 @@ def dog(pCity, bPrioPlotOnly):
                             # unworked
                             if loopPlot.getImprovementType() == -1:
                                 if not loopPlot.isHills():
-                                    for iJ in range(iFirstBlock):
+                                    for iJ in xrange(iFirstBlock):
                                         if loopPlot.getTerrainType() == lTerrains[iJ]:
                                             lPlotPrio[iJ].append(loopPlot)
                                             break
@@ -927,7 +927,7 @@ def dog(pCity, bPrioPlotOnly):
                                     lPlotPrio[iFirstBlock].append(loopPlot)
                             # 4. nach Improvements selektieren
                             else:
-                                for iJ in range(iSecondBlock):
+                                for iJ in xrange(iSecondBlock):
                                     if loopPlot.getImprovementType() == lImprovements[iJ]:
                                         lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
     if bPrioPlotOnly: return trimPlots(lPlotPrio)
@@ -1037,8 +1037,8 @@ def seekBonusOnOwnedPlots(iBonus, iPlayer):
     iMapH = gc.getMap().getGridHeight()
     iDarkIce = gc.getInfoTypeForString("FEATURE_DARK_ICE")
 
-    for x in range(iMapW):
-      for y in range(iMapH):
+    for x in xrange(iMapW):
+      for y in xrange(iMapH):
         loopPlot = gc.getMap().plot(x, y)
         if loopPlot is not None and not loopPlot.isNone():
           if loopPlot.getFeatureType() == iDarkIce:

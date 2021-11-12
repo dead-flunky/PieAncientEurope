@@ -563,7 +563,7 @@ class WBDiplomacyScreen:
 
 	def RelationshipStatus(self, iTeam1, iTeam2):
 		if gc.getTeam(iTeam1).isVassal(iTeam2):
-			for i in range(CyGame().getIndexAfterLastDeal()):
+			for i in xrange(CyGame().getIndexAfterLastDeal()):
 				pDeal = CyGame().getDeal(i)
 				iPlayer1 = pDeal.getFirstPlayer()
 				iPlayer2 = pDeal.getSecondPlayer()

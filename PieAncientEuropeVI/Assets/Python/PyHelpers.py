@@ -1,9 +1,19 @@
 ## Sid Meier's Civilization 4
 ## Copyright Firaxis Games 2005
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyGame, YieldTypes, DomainTypes,
+                                CommerceTypes, CyArtFileMgr, CyMap,
+                                TechTypes, UnitAITypes, DirectionTypes,
+                                BonusTypes, ImprovementTypes, CyCamera,
+                                CyEngine)
 #import Info as PyInfo
 import CvUtil
 gc = CyGlobalContext()
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 
 class PyPlayer:
     ' CyPlayer Helper Functions - Requires Player ID to initialize instance '
@@ -14,11 +24,11 @@ class PyPlayer:
             self.player = gc.getPlayer(iPlayer)
         else:
             self.player = gc.getPlayer(0)
-            
+
     def GetCy(self):
         ' used to get the CyUnit instance for quick calls '
         return self.player
-        
+
     def CyGet(self):
         ' used to get the CyUnit instance for quick calls '
         return self.player
@@ -129,7 +139,7 @@ class PyPlayer:
     def getResearchedTechList(self):
         ' intlist - list of researched techs '
         lTechs = []
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
             if self.hasResearchedTech(i):
                 lTechs.append(i)
         return lTechs
@@ -218,7 +228,7 @@ class PyPlayer:
     def getTraitList(self):
         ' intList - Trait List '
         lTrait = []
-        for i in range( gc.getNumTraitInfos() ):
+        for i in xrange( gc.getNumTraitInfos() ):
             if ( self.getLeaderHeadInfo().hasTrait(i) ):
                 lTrait.append(i)
         return lTrait
@@ -238,14 +248,14 @@ class PyPlayer:
     def getCurrentCivicList(self):
         ' intList - list of current Civic IDs '
         lCivics = []
-        for i in range( CyGlobalContext().getNumCivicOptionInfos() ):
+        for i in xrange( CyGlobalContext().getNumCivicOptionInfos() ):
             lCivics.append( self.player.getCivics( i ) )
         return lCivics
 
     def getCurrentCivicDescriptions(self):
         ' strList - description list of current civics '
         lCivics = self.getCurrentCivicList()
-        for i in range( len(lCivics) ):
+        for i in xrange( len(lCivics) ):
             lCivics[i] = CyGlobalContext().getCivicInfo( lCivics[i] ).getDescription()
         return lCivics
 
@@ -257,11 +267,11 @@ class PyPlayer:
     def getUnitList(self):
         ' UnitList - All of the players alive units '
         lUnit = []
-        (loopUnit, pIter) = self.player.firstUnit(false)
+        (loopUnit, pIter) = self.player.firstUnit(False)
         while( loopUnit ):
             if ( not loopUnit.isDead() ): #is the unit alive and valid?
                 lUnit.append(loopUnit) #add unit instance to list
-            (loopUnit, pIter) = self.player.nextUnit(pIter, false)
+            (loopUnit, pIter) = self.player.nextUnit(pIter, False)
         return lUnit
 
     def getNumUnits(self):
@@ -281,7 +291,7 @@ class PyPlayer:
     def initUnit(self, unitID, X, Y, iNum = 1):
         "none - spawns unitIdx at X, Y - ALWAYS use default UnitAIType"
         if (iNum > 1): #multiple units
-            for i in range(iNum):
+            for i in xrange(iNum):
                 self.player.initUnit(unitID, X, Y, UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
         else:
             return self.player.initUnit(unitID, X, Y, UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
@@ -315,7 +325,7 @@ class PyPlayer:
     def getCityList(self):
         ' PyCitylist - list of PyCity player owns '
         lCity = []
-        (loopCity, pIter) = self.player.firstCity(false)
+        (loopCity, pIter) = self.player.firstCity(False)
         while(loopCity):
             if not loopCity.isNone() and loopCity.getOwner() == self.getID(): #only valid cities
                 city = PyCity( self.getID(), loopCity.getID() )
@@ -352,7 +362,7 @@ class PyPlayer:
         ' plotList - player plots '
         lPlots = []
         for iIndex in self.getPlotIDList():
-            lPlots.append( CyMap().plotByIndex(i) )
+            lPlots.append( CyMap().plotByIndex(iIndex) )
         return lPlots
 
     def getTotalLand(self):
@@ -436,7 +446,7 @@ class PyCity:
 
     def getOwner(self):
         return self.city.getOwner()
-        
+
     def getOriginalOwner(self):
         return self.city.getOriginalOwner()
 
@@ -445,7 +455,7 @@ class PyCity:
 
     def setName(self, newName):
         "none - Set Cities Name"
-        return self.city.setName(newName, false)
+        return self.city.setName(newName, False)
 
     def getPopulation(self):
         "int - City Population"
@@ -473,13 +483,13 @@ class PyCity:
 
     def changeHappinessTimer(self, iChange):
         return self.city.changeHappinessTimer(iChange)
-        
+
     def getYieldRate(self, iYield):
         return self.city.getYieldRate(iYield)
 
     def getFreeSpecialistCount(self, iSpecialist):
         return self.city.getFreeSpecialistCount(iSpecialist)
-        
+
     def changeFreeSpecialistCount(self, iSpecialist, iChange):
         return self.city.changeFreeSpecialistCount(iSpecialist, iChange)
 
@@ -633,14 +643,14 @@ class PyCity:
 
     def getHolyCity(self):
         lHolyCity = []
-        for i in range(gc.getNumReligionInfos()):
+        for i in xrange(gc.getNumReligionInfos()):
             if self.city.isHolyCityByType(i):
                 lHolyCity.append(i)
         return lHolyCity
 
     def getReligions(self):
         lReligions = []
-        for i in range(gc.getNumReligionInfos()):
+        for i in xrange(gc.getNumReligionInfos()):
             if self.hasReligion(i):
                 lReligions.append(i)
         return lReligions
@@ -653,14 +663,14 @@ class PyCity:
 
     def getHeadquarters(self):
         lHeadquarters = []
-        for i in range(gc.getNumCorporationInfos()):
+        for i in xrange(gc.getNumCorporationInfos()):
             if self.city.isHeadquartersByType(i):
                 lHeadquarters.append(i)
         return lHeadquarters
 
     def getCorporations(self):
         lCorporations = []
-        for i in range(gc.getNumCorporationInfos()):
+        for i in xrange(gc.getNumCorporationInfos()):
             if self.hasCorporation(i):
                 lCorporations.append(i)
         return lCorporations
@@ -682,12 +692,12 @@ class PyCity:
         engine = CyEngine()
         plot = self.plot()
         if plot:
-            engine.LookAt(plot.getPoint(), true)
+            engine.LookAt(plot.getPoint(), True)
 
     def setNumRealBuilding(self, buildingIdx, iNum):
         "none - Add or Remove (bAdd) by buildingIdx"
         return self.city.setNumRealBuilding(buildingIdx, iNum)
-        
+
     def setNumRealBuildingIdx(self, buildingIdx, iNum):
         "none - Add or Remove (bAdd) by buildingIdx"
         return self.city.setNumRealBuilding(buildingIdx, iNum)
@@ -698,21 +708,21 @@ class PyCity:
         numBuildingInfos = gc.getNumBuildingInfos()
         buildingList=[]
 
-        for buildingIdx in range(numBuildingInfos):
+        for buildingIdx in xrange(numBuildingInfos):
             if (self.getNumBuildingIdx( buildingIdx )):
                 buildingList.append( buildingIdx )
         return buildingList
-        
+
     def hasBonus(self, iBonus):
         return self.city.hasBonus(iBonus)
-        
+
     def hasBonusIdx(self, iBonus):
         return self.city.hasBonus(iBonus)
 
     def getBonusList(self):
         "intList - all bonuses connected to city"
         lBonus = []
-        for i in range(gc.getNumBonusInfos()):
+        for i in xrange(gc.getNumBonusInfos()):
             if self.hasBonusIdx( i ):
                 lBonus.append(i)
         return lBonus
@@ -721,7 +731,7 @@ class PyCity:
         lBonus = self.getBonusList()
         lBonusFound = []
         lBonusString = ""
-        for i in range(len(lBonus)):
+        for i in xrange(len(lBonus)):
             loopBonus = lBonus[i]
             if loopBonus in lBonusFound:
                 continue
@@ -737,7 +747,7 @@ class PyCity:
         return self.city.getReligionInfluence(iReligion)
 
     def isRevealed(self, iTeam):
-        return self.city.isRevealed(iTeam, false)
+        return self.city.isRevealed(iTeam, False)
 
     def isCoastal(self, iMinWaterSize):
         return self.city.isCoastal(iMinWaterSize)
@@ -759,7 +769,7 @@ class PyGame:
     def getCivPlayerList(self):
         "objlist - List of valid and Alive players"
         playerList = []
-        for i in range(gc.getMAX_CIV_PLAYERS()):
+        for i in xrange(gc.getMAX_CIV_PLAYERS()):
             if gc.getPlayer(i).isAlive():
                 loopPlayer = PyPlayer(gc.getPlayer(i).getID())
                 if (loopPlayer.isNone() or not loopPlayer.isAlive()):
@@ -781,9 +791,10 @@ class PyGame:
         playersTeam1 = self.getCivTeamList(team1ID)
         playersTeam2 = self.getCivTeamList(team2ID)
 
-        for i in range(len(playersTeam2)):
-            if playersTeam1[i].canTradeNetworkWith(playersTeam2[i].getID()):
-                return True
+        for player1 in playersTeam1:
+            for player2 in playersTeam2:
+                if player1.canTradeNetworkWith(player2.getID()):
+                    return True
 
     def getActivePlayer(self):
         return gc.getPlayer(self.game.getActivePlayer())
@@ -815,7 +826,7 @@ class PyGame:
     def getEraTechList(self, era):
         "listObj -  returns a list of technology infos for a particular era"
         listTechs = []
-        for i in range(gc.getNumTechInfos()):
+        for i in xrange(gc.getNumTechInfos()):
             loopInfo = PyInfo.TechnologyInfo(i)
             if loopInfo.getiEra() == era:
                 listTechs.append(loopInfo)
@@ -824,14 +835,14 @@ class PyGame:
     def getListUniqueUnits(self):
         lUniqueUnits = self.getListUniqueUnitID()
         lUnitInfos = []
-        for i in range(len(lUniqueUnits)):
+        for i in xrange(len(lUniqueUnits)):
             lUnitInfos.append(PyInfo.UnitInfo(lUniqueUnits[i]))
         return lUnitInfos
 
     def getListUniqueUnitID(self):
         listUU = []
         unitClass = []
-        for i in range(gc.getNumUnitInfos()):
+        for i in xrange(gc.getNumUnitInfos()):
             iUnitClass = PyInfo.UnitInfo(i).getUnitClassType()
             if iUnitClass in unitClass:
                 listUU.append(i)
@@ -841,7 +852,7 @@ class PyGame:
 
     def getListAnimalUnits(self):
         listUnits = []
-        for i in range(gc.getNumUnitInfos()):
+        for i in xrange(gc.getNumUnitInfos()):
             loopUnit = PyInfo.UnitInfo(i)
             if loopUnit.isAnimal():
                 listUnits.append(loopUnit)
@@ -849,11 +860,11 @@ class PyGame:
 
     def getListUnitCombatTypes(self, combatType, bUnique):
         "listObj - list of unit infos of a particular combat type"
-        CombatTypes = {0:(0,'Neutral'),1:(1,'Recon'),2:(2,'Archery'),3:(3,'Mounted'),4:(4,'Melee'),5:(5,'Siege'),6:(6,'Gunpowder')}
+        # CombatTypes = {0:(0,'Neutral'),1:(1,'Recon'),2:(2,'Archery'),3:(3,'Mounted'),4:(4,'Melee'),5:(5,'Siege'),6:(6,'Gunpowder')}
         listUnits = []
         if bUnique:
             UUidList = self.getListUniqueUnitID()
-        for i in range(gc.getNumUnitInfos()):
+        for i in xrange(gc.getNumUnitInfos()):
             if bUnique:
                 if i in UUidList:
                     continue
@@ -864,7 +875,7 @@ class PyGame:
 
     def getListSeaUnits(self):
         listUnits = []
-        for i in range(gc.getNumUnitInfos()):
+        for i in xrange(gc.getNumUnitInfos()):
             loopUnit = PyInfo.UnitInfo(i)
             domain = loopUnit.getDomainType()
             if domain == DomainTypes.DOMAIN_SEA:
@@ -873,7 +884,7 @@ class PyGame:
 
     def getListAirUnits(self):
         listUnits = []
-        for i in range(gc.getNumUnitInfos()):
+        for i in xrange(gc.getNumUnitInfos()):
             loopUnit = PyInfo.UnitInfo(i)
             domain = loopUnit.getDomainType()
             if domain == DomainTypes.DOMAIN_AIR or domain == DomainTypes.DOMAIN_HELICOPTER:
@@ -993,7 +1004,7 @@ class PyInfo:
         #get the number of infos
         numInfos = infoDict['NUM']()
         #loop through each info
-        for i in range(numInfos):
+        for i in xrange(numInfos):
             loopInfo = infoDict['GET'](i)
 
             if loopInfo.getDescription() == strInfoName:
@@ -1034,7 +1045,7 @@ class PyInfo:
 
         def getPrereqImprovementID(self):
             lImprovements = []
-            for i in range(gc.getNumImprovementInfos()):
+            for i in xrange(gc.getNumImprovementInfos()):
                 if self.ID in ImprovementInfo(i).getAffectedBonusIDList():
                     lImprovements.append(i)
             return lImprovements
@@ -1046,7 +1057,7 @@ class PyInfo:
         def getPrereqImprovementTechPrereqID(self):
             rTech = []
             reqImprovement = self.getPrereqImprovementID()
-            for i in range(len(reqImprovement)):
+            for i in xrange(len(reqImprovement)):
                 info = ImprovementInfo(reqImprovement[i])
                 rTech.append(info.getTechPrereq())
             return rTech
@@ -1149,7 +1160,7 @@ class PyInfo:
             "int-list of terrainID's the bonus will spawn on"
             bonusTerrainList = []
             numTerrain = gc.getNumTerrainInfos()
-            for i in range(numTerrain):
+            for i in xrange(numTerrain):
                 if self.info.isTerrain(i):
                     bonusTerrainList.append(i)
             return bonusTerrainList
@@ -1166,7 +1177,7 @@ class PyInfo:
             "int-list of featureID's the bonus will spawn on"
             featureTerrainList = []
             numFeature = gc.getNumFeatureInfos()
-            for i in range(numFeature):
+            for i in xrange(numFeature):
                 if self.info.isFeature(i):
                     featureTerrainList.append(i)
             return featureTerrainList
@@ -1178,7 +1189,7 @@ class PyInfo:
         def getImprovementChangeList(self):
             "int-list of ImprovementID's the bonus affects"
             ImprovementList = []
-            for i in range(gc.getNumImprovementInfos()):
+            for i in xrange(gc.getNumImprovementInfos()):
                 loopInfo = ImprovementInfo(i)
                 if self.ID in loopInfo.getAffectedBonusIDList():
                     ImprovementList.append(loopInfo)
@@ -1186,7 +1197,7 @@ class PyInfo:
 
         def getImprovementChangeIDList(self):
             iList = []
-            for i in range(gc.getNumImprovementInfos()):
+            for i in xrange(gc.getNumImprovementInfos()):
                 loopInfo = ImprovementInfo(i)
                 idList = loopInfo.getAffectedBonusIDList()
                 if self.ID in idList:
@@ -1200,7 +1211,7 @@ class PyInfo:
             iImprovement = self.getAPrereqImprovementID()
             info = ImprovementInfo(iImprovement)
             lEffects = []
-            for i in range(YieldTypes.NUM_YIELD_TYPES):
+            for i in xrange(YieldTypes.NUM_YIELD_TYPES):
                 iResult = info.getImprovementBonusYield(self.ID, i)
                 lEffects.append((i, iResult))
             return lEffects
@@ -1223,7 +1234,7 @@ class PyInfo:
         def getListImprovementButtons(self):
             lButtons = []
             lImprovements = self.getImprovementChangeList()
-            for i in range(len(lImprovements)):
+            for i in xrange(len(lImprovements)):
                 lButtons.append(lImprovements[i].getButton())
             return lButtons
 
@@ -1295,7 +1306,7 @@ class PyInfo:
         def getListUnitClassID(self):
             "intList - id list of all unit infos that match combat type with current unit"
             lUnitClassID = []
-            for i in range(gc.getNumUnitInfos()):
+            for i in xrange(gc.getNumUnitInfos()):
                 if UnitInfo(i).getUnitClassType() == self.getUnitClassType():
                     lUnitClassID.append(i)
             return lUnitClassID
@@ -1307,7 +1318,7 @@ class PyInfo:
         def getUnitAITypes(self, AIType):
             "objlist - list of units of AIType"
             UnitAIList=[]
-            for i in range(UnitAITypes.NUM_UNITAI_TYPES):
+            for i in xrange(UnitAITypes.NUM_UNITAI_TYPES):
                 if self.info.getUnitAITypes(i) == AIType:
                     UnitAIList.append(i)
             return UnitAIList
@@ -1324,7 +1335,7 @@ class PyInfo:
             pTechOr = self.getPrereqOrTechIDList()
             if pTechOr:
                 pTechOr = pTechOr.sort()
-                for i in range(len(pTechOr)):
+                for i in xrange(len(pTechOr)):
                     if techID < pTechOr[i]:
                         return True
             return False
@@ -1351,7 +1362,7 @@ class PyInfo:
         def getPrereqOrTechIDList(self):
             "intList - IDList of multiple tech requirements"
             pTechIDList = []
-            for i in range(gc.getDefineINT("NUM_UNIT_OR_TECH_PREREQS")):
+            for i in xrange(gc.getDefineINT("NUM_UNIT_OR_TECH_PREREQS")):
                 iResult = self.info.getPrereqOrTechs(i)
                 if iResult >= 0:
                     pTechIDList.append(iResult)
@@ -1361,7 +1372,7 @@ class PyInfo:
             "objList - Info list of IDList items"
             pTechIDList = self.getPrereqOrTechIDList()
             pTechInfos = []
-            for i in range(len(pTechIDList)):
+            for i in xrange(len(pTechIDList)):
                 pTechInfos.append(UnitInfo(pTechIDList[i]))
             return pTechInfos
 
@@ -1387,7 +1398,7 @@ class PyInfo:
         def getPrereqBonusIDList(self):
             "intList - ID list of multiple bonus requirements"
             preqBonusIDList = []
-            for i in range(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
+            for i in xrange(gc.getNUM_UNIT_PREREQ_OR_BONUSES()):
                 iResult = self.info.getPrereqOrBonuses(i)
                 if iResult >=0:
                     preqBonusIDList.append(iResult)
@@ -1405,7 +1416,7 @@ class PyInfo:
             "str - string with all required bonuses"
             bonusIcons = ""
             pBonuses = self.getPrereqBonusIDList()
-            for i in range(len(pBonuses)):
+            for i in xrange(len(pBonuses)):
                 loopID = pBonuses[i]
                 loopIcon = BonusInfo(loopID).getSymbol()
                 bonusIcons+= loopIcon
@@ -1457,7 +1468,7 @@ class PyInfo:
         def getRequiredBuildingID(self):
             "int - Required Buildings XML ID"
             numBuildings = gc.getNumBuildingInfos()
-            for i in range(numBuildings):
+            for i in xrange(numBuildings):
                 buildingInfo = gc.getBuildingInfo(i)
                 if ( buildingInfo and buildingInfo.iSpecialist == self.specialistID ):
                     return i
@@ -1517,16 +1528,16 @@ class PyInfo:
 
         def createPrereqDictionary(self):
             pDict = {}
-            for i in range(gc.getNumTechInfos()):
+            for i in xrange(gc.getNumTechInfos()):
                 TechInfo = TechnologyInfo(i)
                 pDict[i]=(i,"%s" %(TechInfo.getDescription()), TechInfo.getTechPreqIdxList())
             return pDict
 
         def createNamePrereqDictionary(self):
-            pDict = {}
-            f = file('TechPrereq.txt', "w")
+            # pDict = {}
+            f = open('TechPrereq.txt', "w")
             f.write("### CIV Tech Prereq List ###\n\n")
-            for i in range(gc.getNumTechInfos()):
+            for i in xrange(gc.getNumTechInfos()):
                 lInfo = TechnologyInfo(i)
                 f.write("\n   (%d)%s - %s" %(i, lInfo.getDescription(), lInfo.getTechPreqDescList()))
             f.close()
@@ -1536,8 +1547,8 @@ class PyInfo:
             techInfo = self.info
             preqList = []
             info = ()
-            for i in range(4):
-                for j in range(4):
+            for i in xrange(4):
+                for j in xrange(4):
                     result = techInfo.getTechPrereqs(i,j)
                     if not result == -1:
                         info = info + (result,)
@@ -1552,10 +1563,10 @@ class PyInfo:
             lPrereqID=self.getTechPreqIdxList()
             lPrereqDesc = []
             lInfo = []
-            for i in range(len(lPrereqID)):
+            for i in xrange(len(lPrereqID)):
                 lGroup = lPrereqID[i]
                 if len(lGroup) > 0:
-                    for j in range(len(lPrereqID[i])):
+                    for j in xrange(len(lPrereqID[i])):
                         lGroup2 = lPrereqID[i][j]
                         lInfo.append(TechnologyInfo(lGroup2).getDescription())
                 lPrereqDesc.append(lInfo)
@@ -1568,9 +1579,9 @@ class PyInfo:
             infoList = []
             infoGroup = ()
             if preqList:
-                for i in range(len(preqList)):
+                for i in xrange(len(preqList)):
                     loopGroup = preqList[i]
-                    for j in range(len(loopGroup)):
+                    for j in xrange(len(loopGroup)):
                         loopID = loopGroup[j]
                         loopInfo = TechnologyInfo(loopID)
                         if loopInfo:
@@ -1627,7 +1638,7 @@ class PyInfo:
             "intList - IDList of unlocked Buildings"
             buildingList=[]
             numBuilding = gc.getNumBuildingInfos()
-            for i in range(numBuilding):
+            for i in xrange(numBuilding):
                 loopBuilding = gc.getBuildingInfo(i)
                 if loopBuilding.getPrereqAndTech() == self.techID:
                     buildingList.append(i)
@@ -1637,14 +1648,14 @@ class PyInfo:
             "objList - info list of unlocked buildings"
             idList = self.getUnlockedBuildingIdxList()
             buildingList = []
-            for i in range(len(idList)):
+            for i in xrange(len(idList)):
                 buildingList.append(BuildingInfo(idList[i]))
             return buildingList
 
         def getUnlockedUnitIdxList(self):
             "intList - IDList of unlocked Units"
             unitList=[]
-            for i in range(gc.getNumUnitInfos()):
+            for i in xrange(gc.getNumUnitInfos()):
                 loopUnit = UnitInfo(i)
                 if loopUnit.isTechPrereq(self.techID):
                     unitList.append(i)
@@ -1654,7 +1665,7 @@ class PyInfo:
             lUniqueUnits = PyGame.PyGame().getListUniqueUnitID()
             lAllUnits = self.getUnlockedUnitIdxList()
             lUnits = []
-            for i in range(len(lAllUnits)):
+            for i in xrange(len(lAllUnits)):
                 loopUnit = lAllUnits[i]
                 if loopUnit in lUniqueUnits:
                     continue
@@ -1664,8 +1675,9 @@ class PyInfo:
 
         def getListUnlockedUnitInfos(self):
             "objList - info list of unlocked units"
+            idList = self.getUnlockedUnitIdxList()
             unitList = []
-            for i in range(len(self.getUnlockedUnitIdxList())):
+            for i in xrange(len(idList)):
                 unitList.append(UnitInfo(idList[i]))
             return unitList
 
@@ -1677,22 +1689,22 @@ class PyInfo:
 
         def getUnlockedReligionIdxList(self):
             "intList - IDList of unlocked Religions"
-            religionlist = []
-            for i in range(gc.getNumReligionInfos()):
+            religionList = []
+            for i in xrange(gc.getNumReligionInfos()):
                 if ( gc.getReligionInfo(i).getTechPrereq() == self.techID ):
                     religionList.append(i)
             return religionList
 
         def getReligionButton(self):
             "str - religion icon"
-            for i in range(gc.getNumReligionInfos()):
+            for i in xrange(gc.getNumReligionInfos()):
                 if ( gc.getReligionInfo(i).getTechPrereq() == self.techID ):
                     return "%c" %(gc.getReligionInfo(i).getChar(),)
             return 0
 
         def isBuildTech(self):
             "bool - unlocks build"
-            for i in range(gc.getNumBuildInfos()):
+            for i in xrange(gc.getNumBuildInfos()):
                 if ( BuildInfo(i).getTechPrereq() == self.techID ):
                     return True
             return False
@@ -1700,14 +1712,14 @@ class PyInfo:
         def getUnlockedBuildInfos(self):
             "objList - list of build infos the tech unlocks"
             lBuilds = []
-            for i in range(gc.getNumBuildInfos()):
+            for i in xrange(gc.getNumBuildInfos()):
                 if ( BuildInfo(i).getTechPrereq() == self.techID ):
                     lBuilds.append(BuildInfo(i))
             return lBuilds
 
         def isCivicTech(self):
             "bool - tech unlocks Civic?"
-            for i in range(gc.getNumCivicInfos()):
+            for i in xrange(gc.getNumCivicInfos()):
                 if ( gc.getCivicInfo(i).getTechPrereq() == self.techID ):
                     return True
             return False
@@ -1715,7 +1727,7 @@ class PyInfo:
         def getUnlockedCivicInfos(self):
             "objList - list of civic infos the tech unlocks"
             lCivics=[]
-            for i in range(gc.getNumCivicInfos()):
+            for i in xrange(gc.getNumCivicInfos()):
                 if ( gc.getCivicInfo(i).getTechPrereq() == self.techID ):
                     lCivics.append(i)
             return lCivics
@@ -1792,7 +1804,7 @@ class PyInfo:
             return self.info.getImprovementBonusYield(i, j)
 
         def getBuildInfo(self):
-            for i in range(gc.getNumBuildInfos()):
+            for i in xrange(gc.getNumBuildInfos()):
                 if gc.getBuildInfo(i).iImprovement == self.ID:
                     return gc.getBuildInfo(i)
 
@@ -1802,7 +1814,7 @@ class PyInfo:
         def getValidTerrainIDList(self):
             "intList - terrain ID's the improvement can be built on"
             lTerrain = []
-            for i in range(gc.getNumTerrainInfos()):
+            for i in xrange(gc.getNumTerrainInfos()):
                 if self.canTerrain(i):
                     lTerrain.append(i)
             return lTerrain
@@ -1811,14 +1823,14 @@ class PyInfo:
             "objList - terrain infos"
             lTerrain = self.getValidTerrainIDList()
             if lTerrain > 0:
-                for i in range(len(lTerrain)):
+                for i in xrange(len(lTerrain)):
                     lTerrain[i] = gc.getTerrainInfo(i)
                 return lTerrain
 
         def getValidFeatureIDList(self):
             "intList - feature ID's the improvement can be built on"
             lFeature = []
-            for i in range(gc.getNumFeatureInfos()):
+            for i in xrange(gc.getNumFeatureInfos()):
                 if self.canFeature(i):
                     lFeature.append(i)
             return lFeature
@@ -1827,15 +1839,15 @@ class PyInfo:
             "objList - features info"
             lFeature = self.getValidFeatureIDList()
             if lFeature > 0:
-                for i in range(len(lFeature)):
+                for i in xrange(len(lFeature)):
                     lFeature[i] = gc.getFeatureInfo(i)
                 return lFeature
 
         def getBonusList(self):
             "loops through all of the bonuses and determines the effect this improvement has on it"
             lBonus = []
-            for i in range(gc.getNumBonusInfos()):
-                for j in range(YieldTypes.NUM_YIELD_TYPES):
+            for i in xrange(gc.getNumBonusInfos()):
+                for j in xrange(YieldTypes.NUM_YIELD_TYPES):
                     iResult = self.getImprovementBonusYield(i, j)
                     if iResult:
                         item = (i, j, iResult)
@@ -1847,7 +1859,7 @@ class PyInfo:
             lBonus = self.getBonusList()
             lBonusID = []
             if lBonus:
-                for i in range(len(lBonus)):
+                for i in xrange(len(lBonus)):
                     loopEntry = lBonus[i]
                     lBonusID.append(loopEntry[0])
             return lBonusID
@@ -1858,7 +1870,7 @@ class PyInfo:
             lBonus=[]
             lBonusTrack = []
             if lBonusID:
-                for i in range(len(lBonusID)):
+                for i in xrange(len(lBonusID)):
                     loopID = lBonusID[i]
                     if loopID in lBonusTrack: #dont need multiple infos for the same bonus
                         continue
@@ -1870,7 +1882,7 @@ class PyInfo:
             lBonus = self.getBonusList()
             nlBonus = []
             if lBonus:
-                for i in range(len(lBonus)):
+                for i in xrange(len(lBonus)):
                     loopEntry = lBonus[i]
                     loopBonus = BonusInfo(loopEntry[0])
                     loopYield = gc.getYieldInfo(loopEntry[1])
@@ -1883,7 +1895,7 @@ class PyInfo:
             lBonus = self.getAffectedBonusInfoList()
             lIcons = ""
             if lBonus:
-                for i in range(len(lBonus)):
+                for i in xrange(len(lBonus)):
                     lIcons += lBonus[i].getSymbol()
             return lIcons
 
@@ -1998,7 +2010,7 @@ class PyInfo:
 
         def getFeatureDefenseIDList(self):
             lFeatures = []
-            for i in range(gc.getNumFeatureInfos()):
+            for i in xrange(gc.getNumFeatureInfos()):
                 if self.getFeatureDefensePercent(i):
                     lFeatures.append(i)
             return lFeatures
@@ -2006,13 +2018,13 @@ class PyInfo:
         def getFeatureDefenseInfoList(self):
             lFeatures = self.getFeatureDefenseIDList()
             lInfo = []
-            for i in range(len(lFeatures)):
+            for i in xrange(len(lFeatures)):
                 lInfo.append(gc.getFeatureInfo(lFeatures[i]))
             return lInfo
 
         def getTerrainDefenseIDList(self):
             lTerrain = []
-            for i in range(gc.getNumTerrainInfos()):
+            for i in xrange(gc.getNumTerrainInfos()):
                 if self.getTerrainDefensePercent(i):
                     lTerrain.append(i)
             return lTerrain
@@ -2020,7 +2032,7 @@ class PyInfo:
         def getTerrainDefenseInfoList(self):
             lTerrain = self.getTerrainDefenseIDList()
             lInfo = []
-            for i in range(len(lTerrain)):
+            for i in xrange(len(lTerrain)):
                 lInfo.append(gc.getTerrainInfo(lTerrain[i]))
             return lInfo
 
@@ -2087,7 +2099,7 @@ class PyInfo:
         def getFeatureTerrainList(self, terrainList):
             featureTerrainList = []
             numTerrain = gc.getNumTerrainInfos()
-            for i in range(numTerrain):
+            for i in xrange(numTerrain):
                 if self.info.isTerrain(i):
                     featureTerrainList.append()
             return featureTerrainList
@@ -2183,5 +2195,3 @@ class PyInfo:
         'terrain': {'NUM': gc.getNumTerrainInfos, 'GET': gc.getTerrainInfo},
         'trait': {'NUM': gc.getNumTraitInfos, 'GET': gc.getTraitInfo},
         }
-
-

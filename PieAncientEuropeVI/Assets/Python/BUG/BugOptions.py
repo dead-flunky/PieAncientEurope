@@ -1,89 +1,89 @@
-## BugOptions
+# BugOptions
 ##
-## Provides classes for defining and using options (user preferences)
-## within a game. Mod code accesses the settings through the singleton
-## Options object, acquired with getOptions().
+# Provides classes for defining and using options (user preferences)
+# within a game. Mod code accesses the settings through the singleton
+# Options object, acquired with getOptions().
 ##
-## Object diagram (how object instances relate to each other):
+# Object diagram (how object instances relate to each other):
 ##
-##        /----------------------------\
-##        |                            |
-##        |                            v *
-##     Options ----> Option <---- LinkedOption
-##        |       *    |    *
-##        |            | *
-##        v *          |
-##     IniFile <-------/
-##        |
-##        |
-##        v
-##    ConfigObj ---> File
+# /----------------------------\
+# |                            |
+# |                            v *
+# Options ----> Option <---- LinkedOption
+# |       *    |    *
+# |            | *
+# v *          |
+# IniFile <-------/
+# |
+# |
+# v
+# ConfigObj ---> File
 ##
-## Class diagram (the Option class hierarchy):
+# Class diagram (the Option class hierarchy):
 ##
-##                                     AbstractOption
-##                                           |
-##                           /---------------+---------------\
-##                           |                               |
-##                           |                               |
-##    UnsavedMixin      BaseOption        IniMixin      LinkedOption
-##      |  |             |  |  |             |  |            |
-##      |  \------+------/  |  \------+------/  |            |
-##      |         |         |         |         |            |
-##      |   UnsavedOption   |     IniOption     |     LinkedListOption
-##      |                   |                   |
-##      |                   |                   |
-##      |                   |                   |
-##      |             BaseListOption            |
-##      |                 |   |                 |
-##      \--------+--------/   \--------+--------/
-##               |                     |
-##       UnsavedListOption       IniListOption
+# AbstractOption
+# |
+# /---------------+---------------\
+# |                               |
+# |                               |
+# UnsavedMixin      BaseOption        IniMixin      LinkedOption
+# |  |             |  |  |             |  |            |
+# |  \------+------/  |  \------+------/  |            |
+# |         |         |         |         |            |
+# |   UnsavedOption   |     IniOption     |     LinkedListOption
+# |                   |                   |
+# |                   |                   |
+# |                   |                   |
+# |             BaseListOption            |
+# |                 |   |                 |
+# \--------+--------/   \--------+--------/
+# |                     |
+# UnsavedListOption       IniListOption
 ##
 ## AbstractOption, BaseOption, BaseListOption, UnsavedMixin and IniMixin
-## are abstract classes (cannot be instantiated as-is).
-## Use <option>.createLinkedOption() for linking options rather than
-## instantiating LinkedOption and LinkedListOption yourself.
+# are abstract classes (cannot be instantiated as-is).
+# Use <option>.createLinkedOption() for linking options rather than
+# instantiating LinkedOption and LinkedListOption yourself.
 ##
-## Unsaved options store their value only while the game is running and do not
-## write it to disk. These are good for values that track non-permanent game state,
-## for example whether or not the game is being logged. These allow you to link
-## them with other options.
+# Unsaved options store their value only while the game is running and do not
+# write it to disk. These are good for values that track non-permanent game state,
+# for example whether or not the game is being logged. These allow you to link
+# them with other options.
 ##
-## TODO:
+# TODO:
 ##
-##  ? Create property-like Option accessors on Mod
-##    - <Option.ID>: property(Option.getValue, Option.setValue)
-##                     or
+# ? Create property-like Option accessors on Mod
+# - <Option.ID>: property(Option.getValue, Option.setValue)
+# or
 ##                   property(lambda: option, Option.setValue)
-##                     Requires Option.__nonzero__()
-##                     Can be used in if-test or with () to get its value)
-##                     e.g. if Logging.Enabled: ...
+# Requires Option.__nonzero__()
+# Can be used in if-test or with () to get its value)
+# e.g. if Logging.Enabled: ...
 ##                          if pop >= Civ4lerts.DomPopMinimum(): ...
-##                     Might be confusing to new coders
+# Might be confusing to new coders
 ##      e.g. setattr(mod, option.id, property(Option.getValue, Option.setValue))
 ##
-##  * Remove Mod ID from Option ID but keep in Options dictionary keys
-##  ? Drop Base from BaseOption and BaseListOption
+# * Remove Mod ID from Option ID but keep in Options dictionary keys
+# ? Drop Base from BaseOption and BaseListOption
 ##
-##  * Add fail-over ability to Option
-##    If Option/value doesn't exist, uses another Option instead of a default value
-##    Most useful for parameterized Options, but for normal Options allows the
-##      default for Option X to be Option Y's actual value (or default if no value)
-##    e.g.
-##      Parameterized:
-##        ERA_ANCIENT__WARRIOR -> WARRIOR
-##        ERA_ANCIENT__MELEE -> MELEE
-##        (This can be accomplished in Python of course)
-##      Normal:
-##        BetterEspionage.GoodColor -> BetterEspionage.DefaultColor
-##        (This way the default for GoodColor is whatever DefaultColor is)
+# * Add fail-over ability to Option
+# If Option/value doesn't exist, uses another Option instead of a default value
+# Most useful for parameterized Options, but for normal Options allows the
+# default for Option X to be Option Y's actual value (or default if no value)
+# e.g.
+# Parameterized:
+# ERA_ANCIENT__WARRIOR -> WARRIOR
+# ERA_ANCIENT__MELEE -> MELEE
+# (This can be accomplished in Python of course)
+# Normal:
+# BetterEspionage.GoodColor -> BetterEspionage.DefaultColor
+# (This way the default for GoodColor is whatever DefaultColor is)
 ##
-## FIXME:
-##  * BaseListOption: addGetter() stores index, but createGetter() will need value
-##    for int/float lists and color for color lists
+# FIXME:
+# * BaseListOption: addGetter() stores index, but createGetter() will need value
+# for int/float lists and color for color lists
 ##
-## Copyright (c) 2008 The BUG Mod.
+# Copyright (c) 2008 The BUG Mod.
 ##
 ## Author: EmperorFool
 
@@ -125,6 +125,7 @@ RE_DLL_START_END_TAGS = re.compile(r"\[/?DLL[= ]?[0-9]*\]")
 RE_DLL_MSG_TAG = re.compile(r"\[DLLMSG\]")
 RE_DLL_CAPTURE_VERSION_MESSAGE = re.compile(r"\[DLL[= ]([0-9]+)\](.*)\[/DLL\]", re.DOTALL)
 
+
 class Options(object):
     """Manages maps of Options and IniFiles, each indexed by a unique string ID."""
 
@@ -165,7 +166,6 @@ class Options(object):
             for file in self.files.itervalues():
                 file.write()
 
-
     def findOption(self, id):
         """Returns the Option with the given ID or returns None of not found."""
         if (id in self.options):
@@ -198,7 +198,6 @@ class Options(object):
         for option in self.options.itervalues():
             option.resetValue()
 
-
     def createFileGetter(self, file):
         """Creates a getter for the given IniFile."""
         def get():
@@ -211,25 +210,32 @@ class Options(object):
 # The singleton Options object that holds all Option and IniFile objects.
 
 g_options = Options()
+
+
 def getOptions(fileID=None):
-#   import BugInit
-#   BugInit.init()
+    #   import BugInit
+    #   BugInit.init()
     if fileID is None:
         return g_options
     else:
         return g_options.getFile(fileID)
 
+
 def findOption(id):
     return g_options.findOption(id)
+
 
 def getOption(id):
     return g_options.getOption(id)
 
+
 def clearAllTranslations(argsList=None):
     g_options.clearAllTranslations()
 
+
 def read():
     g_options.read()
+
 
 def write():
     g_options.write()
@@ -324,7 +330,6 @@ class IniFile(object):
         else:
             BugUtil.warn("BugOptions - INI file '%s' was never read", self.name)
 
-
     def exists(self, section, key=None):
         return self.config and section in self.config and (key is None or key in self.config[section])
 
@@ -358,7 +363,6 @@ class IniFile(object):
             return self.getSection(section).as_float(key)
         return default
 
-
     def setString(self, section, key, value):
         return self.setValue(section, key, str(value))
 
@@ -383,32 +387,33 @@ class IniFile(object):
                 sect[key] = value
                 self.dirty = True
                 BugUtil.debug("BugOptions - option %s.%s changed from %s to %s",
-                        section, key, str(old), str(value))
+                              section, key, str(old), str(value))
                 return True
         #BugUtil.debug("BugOptions - option %s.%s not changed", section, key)
         return False
 
 
 NONE_TYPE = "none"
-TYPE_REPLACE = { "bool": "boolean",
-                 "bit": "boolean",
-                 "str": "string",
-                 "integer": "int",
-                 "long": "int",
-                 "number": "int",
-                 "real": "float",
-                 "double": "float",
-                 "decimal": "float" }
-TYPE_DEFAULT = { "boolean": False,
-                 "string": "",
-                 "int": 0,
-                 "float": 0.0,
-                 "color": "COLOR_WHITE" }
-TYPE_MAP = { "boolean": lambda x: bool(isinstance(x, types.StringTypes) and x.lower() in ('true', 't', 'yes', 'y', 'on', '1')) or bool(isinstance(x, bool) and x) or bool(isinstance(x, int) and x),
-             "string": str,
-             "int": int,
-             "float": float,
-             "color": str }
+TYPE_REPLACE = {"bool": "boolean",
+                "bit": "boolean",
+                "str": "string",
+                "integer": "int",
+                "long": "int",
+                "number": "int",
+                "real": "float",
+                "double": "float",
+                "decimal": "float"}
+TYPE_DEFAULT = {"boolean": False,
+                "string": "",
+                "int": 0,
+                "float": 0.0,
+                "color": "COLOR_WHITE"}
+TYPE_MAP = {"boolean": lambda x: bool(isinstance(x, types.StringTypes) and x.lower() in ('true', 't', 'yes', 'y', 'on', '1')) or bool(isinstance(x, bool) and x) or bool(isinstance(x, int) and x),
+            "string": str,
+            "int": int,
+            "float": float,
+            "color": str}
+
 
 class AbstractOption(object):
     """Provides a basic interface and minimal abstract implementation for an option."""
@@ -480,6 +485,7 @@ class AbstractOption(object):
 #   def getType(self):
 #       return NONE_TYPE
 
+
     def isBoolean(self):
         return self.getType() == "boolean"
 
@@ -500,7 +506,6 @@ class AbstractOption(object):
 
     def __str__(self):
         return "<%s %s [%s]>" % (self.id, self.getType(), str(self.getDefault()))
-
 
     def createAccessorPair(self, getter=None, setter=None):
         """Creates a pair of plain accessors (getter and setter) for this Option."""
@@ -551,6 +556,7 @@ class AbstractOption(object):
                     return contains
             else:
                 value = self.asType(values)
+
                 def equals(*args):
                     return self.getValue(*args) == value
                 return equals
@@ -569,6 +575,7 @@ class AbstractOption(object):
                     return contains
             else:
                 value = self.asType(values)
+
                 def equals(*args):
                     return self.getColor(*args) == value
                 return equals
@@ -599,7 +606,6 @@ class AbstractOption(object):
 
     def bindAccessor(self, name, function):
         setattr(self.mod, name, function)
-
 
     def hasValue(self, *args):
         return self.getRawValue() is not None
@@ -726,13 +732,11 @@ class BaseOption(AbstractOption):
         if dirty:
             self.addDirty(dirty)
 
-
     def getType(self):
         return self.type
 
     def getDefault(self):
         return self.default
-
 
     def getTitle(self):
         if (not self.translated):
@@ -767,6 +771,7 @@ class BaseOption(AbstractOption):
                 self.tooltip = RE_DLL_MSG_TAG.sub(BugUtil.getPlainText("TXT_KEY_BULL_REQUIRED"), self.tooltip)
             else:
                 dllText = BugUtil.getPlainText("TXT_KEY_BULL_REQUIRED_NEWER")
+
                 def repl(matchobj):
                     try:
                         if BugDll.isVersion(int(matchobj.group(1))):
@@ -782,7 +787,6 @@ class BaseOption(AbstractOption):
     def clearTranslation(self):
         "Marks this option so that it will be translated again the next time it is accessed"
         self.translated = False
-
 
     def onChanged(self, *args):
         if not BugInit.g_initRunning:
@@ -830,14 +834,15 @@ class BaseOption(AbstractOption):
 
 
 LIST_TYPES = ("string", "int", "float", "color")
-TYPE_DEFAULT_LIST_TYPE = { "int": "int",
-                           "float": "float",
-                           "string": "color",
-                           "color": "color" }
-LIST_TYPE_DEFAULT_TYPE = { "string": "int",
-                           "int": "int",
-                           "float": "float",
-                           "color": "color" }
+TYPE_DEFAULT_LIST_TYPE = {"int": "int",
+                          "float": "float",
+                          "string": "color",
+                          "color": "color"}
+LIST_TYPE_DEFAULT_TYPE = {"string": "int",
+                          "int": "int",
+                          "float": "float",
+                          "color": "color"}
+
 
 class BaseListOption(BaseOption):
     """
@@ -892,7 +897,6 @@ class BaseListOption(BaseOption):
     def __str__(self):
         return "<%s %s [%s] list (%d %ss)>" % (self.id, self.type, str(self.default), len(self.values), self.listType)
 
-
     def getValues(self):
         return self.values
 
@@ -946,7 +950,6 @@ class BaseListOption(BaseOption):
                 # Munge values based on type or create different comparator functions
                 self.createComparer(name, values)
 
-
     def getFormat(self):
         return self.format
 
@@ -988,7 +991,6 @@ class BaseListOption(BaseOption):
                 self.displayValues = self.values
         super(BaseListOption, self).translate()
 
-
     def isValid(self, value):
         return value in self.values
 
@@ -1020,7 +1022,7 @@ class BaseListOption(BaseOption):
             self.setValue(self.values[index], *args)
 
 
-## ------ UNSAVED OPTIONS -----------------------------------------------------
+# ------ UNSAVED OPTIONS -----------------------------------------------------
 
 class UnsavedMixin(object):
     """
@@ -1040,12 +1042,14 @@ class UnsavedMixin(object):
         self.value = value
         return True
 
+
 class UnsavedOption(UnsavedMixin, BaseOption):
 
     def __init__(self, mod, id, type, default=None, andId=None, dll=None,
                  title=None, tooltip=None, dirty=None):
         BaseOption.__init__(self, mod, id, type, default, andId, dll, title, tooltip, dirty)
         UnsavedMixin.__init__(self, self.default)
+
 
 class UnsavedListOption(UnsavedMixin, BaseListOption):
 
@@ -1056,18 +1060,19 @@ class UnsavedListOption(UnsavedMixin, BaseListOption):
         UnsavedMixin.__init__(self, self.default)
 
 
-## ------ INI FILE OPTIONS ----------------------------------------------------
+# ------ INI FILE OPTIONS ----------------------------------------------------
 
-TYPE_GETTER_MAP = { "boolean": IniFile.getBoolean,
-                    "string": IniFile.getString,
-                    "int": IniFile.getInt,
-                    "float": IniFile.getFloat,
-                    "color": IniFile.getString }
-TYPE_SETTER_MAP = { "boolean": IniFile.setBoolean,
-                    "string": IniFile.setString,
-                    "int": IniFile.setInt,
-                    "float": IniFile.setFloat,
-                    "color": IniFile.setString }
+TYPE_GETTER_MAP = {"boolean": IniFile.getBoolean,
+                   "string": IniFile.getString,
+                   "int": IniFile.getInt,
+                   "float": IniFile.getFloat,
+                   "color": IniFile.getString}
+TYPE_SETTER_MAP = {"boolean": IniFile.setBoolean,
+                   "string": IniFile.setString,
+                   "int": IniFile.setInt,
+                   "float": IniFile.setFloat,
+                   "color": IniFile.setString}
+
 
 class IniMixin(object):
     """
@@ -1119,12 +1124,14 @@ class IniMixin(object):
         else:
             return TYPE_SETTER_MAP[self.type](self.file, self.section, self.key, value)
 
+
 class IniOption(IniMixin, BaseOption):
 
     def __init__(self, mod, id, file, section, key, type, default=None, andId=None, dll=None,
                  title=None, tooltip=None, dirty=None):
         BaseOption.__init__(self, mod, id, type, default, andId, dll, title, tooltip, dirty)
         IniMixin.__init__(self, file, section, key)
+
 
 class IniListOption(IniMixin, BaseListOption):
 
@@ -1135,7 +1142,7 @@ class IniListOption(IniMixin, BaseListOption):
         IniMixin.__init__(self, file, section, key)
 
 
-## ------ LINKED OPTIONS ------------------------------------------------------
+# ------ LINKED OPTIONS ------------------------------------------------------
 
 class LinkedOption(AbstractOption):
 
@@ -1252,9 +1259,10 @@ class LinkedListOption(LinkedOption):
         self.option.setIndex(index, *args)
 
 
-## Option IDs
+# Option IDs
 
 MOD_OPTION_SEP = "__"
+
 
 def qualify(modId, optionId):
     """
@@ -1264,6 +1272,7 @@ def qualify(modId, optionId):
         if optionId.find(MOD_OPTION_SEP) == -1:
             return modId + MOD_OPTION_SEP + optionId
     return optionId
+
 
 def unqualify(optionId):
     """
@@ -1276,7 +1285,7 @@ def unqualify(optionId):
     return optionId
 
 
-## Configuration
+# Configuration
 
 class OptionsHandler(Handler):
 
@@ -1341,7 +1350,8 @@ class BaseOptionHandler(Handler):
             else:
                 section = element.getState("ini-section")
                 if not section:
-                    BugUtil.warn("BugConfig - <option> %s inside <options> element must be inside a <section> element; making it unsaved", id)
+                    BugUtil.warn(
+                        "BugConfig - <option> %s inside <options> element must be inside a <section> element; making it unsaved", id)
                 else:
                     option = IniOption(mod, id, ini, section, key, type, default, andId, dll, title, tooltip, dirtyBit)
         if option is None:
@@ -1365,7 +1375,8 @@ class BaseOptionHandler(Handler):
                 if not section:
                     BugUtil.warn("BugConfig - <list> %s inside <options> element must be inside a <section> element; making it unsaved", id)
                 else:
-                    option = IniListOption(mod, id, ini, section, key, type, default, andId, dll, listType, values, format, title, tooltip, dirtyBit)
+                    option = IniListOption(mod, id, ini, section, key, type, default, andId, dll,
+                                           listType, values, format, title, tooltip, dirtyBit)
         if option is None:
             option = UnsavedListOption(mod, id, type, default, andId, dll, listType, values, format, title, tooltip, dirtyBit)
         self.addOption(mod, option, getter, setter)
@@ -1378,7 +1389,8 @@ class OptionHandler(BaseOptionHandler):
     TAG = "option"
 
     def __init__(self):
-        BaseOptionHandler.__init__(self, self.TAG, "id type key default and dll title label tooltip help dirty dirtyBit get set args", ())
+        BaseOptionHandler.__init__(
+            self, self.TAG, "id type key default and dll title label tooltip help dirty dirtyBit get set args", ())
         self.addAttribute("type", True)
         self.addAttribute("key")
         self.addAttribute("default")
@@ -1403,7 +1415,8 @@ class ListOptionHandler(BaseOptionHandler):
     TAG = "list"
 
     def __init__(self):
-        BaseOptionHandler.__init__(self, self.TAG, "id type key default and dll title label tooltip help dirty dirtyBit get set args listType values format", ())
+        BaseOptionHandler.__init__(
+            self, self.TAG, "id type key default and dll title label tooltip help dirty dirtyBit get set args listType values format", ())
         self.addAttribute("type")
         self.addAttribute("key")
         self.addAttribute("default")
@@ -1423,7 +1436,8 @@ class ListOptionHandler(BaseOptionHandler):
         self.addAttribute("format")
 
     def handle(self, element, id, type, key, default, andId, dll, label, help, dirtyBit, getter, setter, listType, values, format):
-        self.createListOption(element, id, type, key, default, andId, dll, label, help, dirtyBit, getter, setter, listType, values, format)
+        self.createListOption(element, id, type, key, default, andId, dll, label,
+                              help, dirtyBit, getter, setter, listType, values, format)
 
     def complete(self, element):
         element.getState("option").createComparers()

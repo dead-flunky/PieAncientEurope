@@ -756,9 +756,9 @@ class GoldTrade(AbstractStatefulAlert):
 
 	def _reset(self):
 		self.maxGoldTrade = {}
-		for player in range(gc.getMAX_PLAYERS()):
+		for player in xrange(gc.getMAX_PLAYERS()):
 			self.maxGoldTrade[player] = {}
-			for rival in range(gc.getMAX_PLAYERS()):
+			for rival in xrange(gc.getMAX_PLAYERS()):
 				self._setMaxGoldTrade(player, rival, 0)
 
 	def _getMaxGoldTrade(self, player, rival):
@@ -795,9 +795,9 @@ class GoldPerTurnTrade(AbstractStatefulAlert):
 
 	def _reset(self):
 		self.maxGoldPerTurnTrade = {}
-		for player in range(gc.getMAX_PLAYERS()):
+		for player in xrange(gc.getMAX_PLAYERS()):
 			self.maxGoldPerTurnTrade[player] = {}
-			for rival in range(gc.getMAX_PLAYERS()):
+			for rival in xrange(gc.getMAX_PLAYERS()):
 				self._setMaxGoldPerTurnTrade(player, rival, 0)
 
 	def _getMaxGoldPerTurnTrade(self, player, rival):

@@ -19,7 +19,7 @@ def onEndPlayerTurn(iPlayer, iGameTurn):
         
         # Meldung an die Spieler
         iRange = gc.getMAX_PLAYERS()
-        for iLoopPlayer in range(iRange):
+        for iLoopPlayer in xrange(iRange):
             pPlayer = gc.getPlayer(iLoopPlayer)
             if pPlayer.isHuman():
                 popupInfo = CyPopupInfo()
@@ -35,7 +35,7 @@ def onEndPlayerTurn(iPlayer, iGameTurn):
         
         # Meldung an die Spieler
         iRange = gc.getMAX_PLAYERS()
-        for iLoopPlayer in range(iRange):
+        for iLoopPlayer in xrange(iRange):
             pPlayer = gc.getPlayer(iLoopPlayer)
             if pPlayer.isHuman():
                 popupInfo = CyPopupInfo()
