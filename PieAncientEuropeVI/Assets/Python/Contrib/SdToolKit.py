@@ -9,9 +9,14 @@
 ## Rewritten to use BugData by EmperorFool
 
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyGameTextMgr)
 import BugUtil
 import BugData
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 GLOBALS_KEY = 'Global'
 
@@ -26,7 +31,7 @@ def sdEcho( echoString ):
 	return 0
 
 def sdGetTimeInt( turn ):
-	TurnTable = CyGameTextMgr().getTimeStr(turn, false).split(' ')
+	TurnTable = CyGameTextMgr().getTimeStr(turn, False).split(' ')
 	TurnInt   = int(TurnTable[0])
 	if (TurnTable[1] == 'BC'):
 		TurnInt = 0 - TurnInt

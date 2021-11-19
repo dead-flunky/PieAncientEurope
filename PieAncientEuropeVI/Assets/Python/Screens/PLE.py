@@ -21,9 +21,15 @@ PyPlayer = PyHelpers.PyPlayer
 
 import BugUtil
 import BugCore
+# import BugUnitPlot
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 PleOpt = BugCore.game.PLE
 
-# import BugUnitPlot
 
 # globals
 gc = CyGlobalContext()

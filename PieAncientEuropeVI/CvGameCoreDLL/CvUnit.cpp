@@ -1,6 +1,5 @@
 // unit.cpp
 
-//#include <algorithm>
 #include "CvGameCoreDLL.h"
 #include "CvUnit.h"
 #include "CvArea.h"
@@ -643,10 +642,10 @@ void CvUnit::kill(bool bDelay, PlayerTypes ePlayer)
 	CvEventReporter::getInstance().unitLost(this);
 
 	GET_PLAYER(getOwnerINLINE()).deleteUnit(getID());
-	
+
 	if ((eCapturingPlayer != NO_PLAYER) && (eCaptureUnitType != NO_UNIT) && !(GET_PLAYER(eCapturingPlayer).isBarbarian()))
-	/* Flunky PAE Domestication*/
 	{
+		/* Flunky PAE Domestication*/
 		TechTypes eTech = (TechTypes) GC.getUnitInfo(eCaptureUnitType).getPrereqCaptureTech();
 		if (eTech == NO_TECH || GET_TEAM(GET_PLAYER(eCapturingPlayer).getTeam()).isHasTech(eTech))
 		{
@@ -707,7 +706,7 @@ void CvUnit::doTurn()
 	FAssertMsg(getGroup() != NULL, "getGroup() is not expected to be equal with NULL");
 
 	testPromotionReady();
-	
+	// Flunky PAE reset flight status at end of the turn
 	setFlight(false);
 
 	if (isBlockading())
@@ -1187,7 +1186,7 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 		pyArgsCD.add(getCombatOdds(this, pDefender));
 		CvEventReporter::getInstance().genericEvent("combatLogCalc", pyArgsCD.makeFunctionArgs());
 	}
-	
+
 # ifdef UNCONDITIONAL_FLANKING_STRIKE
 	// Flunky: moved up by special wish of Pie. flankingStrikeCombat should happen regardless of whether the attacker survives/flees.
 	flankingStrikeCombat(pPlot, iAttackerStrength, iAttackerFirepower, iAttackerKillOdds, iDefenderDamage, pDefender);
@@ -1209,22 +1208,22 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 					changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
 					combat_log.push_back(0); // K-Mod
 					break;
-					}
+				}
 # ifdef ATTACKER_FLIGHT
-					// Flunky: attacker flees from battle
+				// Flunky: attacker flees from battle
 				else if (getDamage() + iAttackerDamage >= maxHitPoints() && GC.getGameINLINE().getSorenRandNum(100, "AttackerFlight") < flightProbability(pDefender->getDamage()))
 				{
 					pDefender->changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !isBarbarian());
 					// after flight, be at least as hurt as before --> new health at most as high as before, or less if the circumstances of your flight demand that. 
-					int iMaxHealth = std::min(GC.getMAX_HIT_POINTS()-getDamage(), flightMaxHealth());
+					int iMaxHealth = std::min(maxHitPoints()-getDamage(), flightMaxHealth());
 					// remaining health uniformly distributed between 1 and max
 					int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "AttackerFlightDamage"));
 					// damage to be set is full minus remaining health
-					int iAttackerFlightDamage = GC.getMAX_HIT_POINTS()-iHealth;
+					int iAttackerFlightDamage = maxHitPoints()-iHealth;
 					setDamage(iAttackerFlightDamage, pDefender->getOwnerINLINE());
 					setFlight(true);
 					combat_log.push_back(-(iAttackerFlightDamage - getDamage()));
-						
+
 					cdAttackerDetails.iCurrHitPoints = currHitPoints();
 					if (isHuman() || pDefender->isHuman())
 					{
@@ -1316,9 +1315,9 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 
 					if (bFlightValid){
 						changeExperience(GC.getDefineINT("EXPERIENCE_FROM_WITHDRAWL"), pDefender->maxXPValue(), true, pPlot->getOwnerINLINE() == getOwnerINLINE(), !pDefender->isBarbarian());
-						int iMaxHealth = std::max(GC.getMAX_HIT_POINTS()-pDefender->getDamage(), pDefender->flightMaxHealth());
+						int iMaxHealth = std::max(pDefender->maxHitPoints()-pDefender->getDamage(), pDefender->flightMaxHealth());
 						int iHealth = std::min(1, GC.getGameINLINE().getSorenRandNum(iMaxHealth, "DefenderFlightDamage"));
-						int iDefenderFlightDamage = GC.getMAX_HIT_POINTS()-iHealth;
+						int iDefenderFlightDamage = pDefender->maxHitPoints()-iHealth;
 
 						combat_log.push_back(iDefenderFlightDamage - pDefender->getDamage());
 						pDefender->setDamage(iDefenderFlightDamage, getOwnerINLINE());
@@ -2297,7 +2296,6 @@ bool CvUnit::isBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttack
 	return (iOurDefense > iTheirDefense);
 }
 
-
 bool CvUnit::canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible, bool bTestBusy)
 {
 	CvUnit* pUnit;
@@ -2854,12 +2852,13 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		//super forts improvement check - prefer animals cant enter / attack forts owned.
 		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pPlot->getImprovementType() != NO_IMPROVEMENT)
 		{
+			// TODO change to isFort?
 			if (GC.getImprovementInfo(pPlot->getImprovementType()).isActsAsCity() && GC.getImprovementInfo(pPlot->getImprovementType()).getDefenseModifier() >= iMinDefenseForAnimals && pPlot->isOwned())
 			{
 				return false;
 			}
 		}
-		//keldath for PAE - animals can get into owned tiles - end		
+		//keldath for PAE - animals can get into owned tiles - end
 		// Flunky for PAE - animals can get onto BONUS and IMPROVEMENT tiles 
 		// Flunky PAE allow stacking
 		/*if (!bAttack)
@@ -2892,7 +2891,8 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 		} */
 		// K-Mod. Don't let noCapture units attack defenceless cities. (eg. cities with a worker in them)
 		/*super forts keldath adjustment so attacks wont stop on forts -isEnemycity also checks for improvements so i added a specific imp check*/
-		if (pPlot->isEnemyCity(*this) || (!pPlot->isFortImprovement() && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS)))
+		if (pPlot->isEnemyCity(*this)
+			|| (!pPlot->isFortImprovement() && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS)))
 		{
 			if (!bAttack || !pPlot->isVisibleEnemyDefender(this))
 				return false;
@@ -2939,41 +2939,83 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 /* UNOFFICIAL_PATCH                        END                                                  */
 /************************************************************************************************/
 
-	// Flunky PAE - no domain_air
-	//if (getDomainType() == DOMAIN_AIR)
-	//{
-	//	if (bAttack)
-	//	{
-	//		if (!canAirStrike(pPlot))
-	//		{
-	//			return false;
-	//		}
-	//	}
-	//}
-	//else
-	//{
-	if (canAttack())
+	if (getDomainType() == DOMAIN_AIR)
 	{
-		if (bAttack || !canCoexistWithEnemyUnit(NO_TEAM))
+		if (bAttack)
 		{
-			//if (!isHuman() || (pPlot->isVisible(getTeam(), false)))
-			if (bAssumeVisible || pPlot->isVisible(getTeam(), false))
+			if (!canAirStrike(pPlot))
 			{
-				if (pPlot->isVisibleEnemyUnit(this) != bAttack)
+				return false;
+			}
+		}
+	}
+	else
+	{
+		if (canAttack())
+		{
+			if (bAttack || !canCoexistWithEnemyUnit(NO_TEAM))
+			{
+				//if (!isHuman() || (pPlot->isVisible(getTeam(), false)))
+				if (bAssumeVisible || pPlot->isVisible(getTeam(), false))
 				{
-					//FAssertMsg(isHuman() || (!bDeclareWar || (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack)), "hopefully not an issue, but tracking how often this is the case when we dont want to really declare war");
-					// Flunky PAE - if Keldath is not sure what he's doing, leave original bts code
-					if (!bDeclareWar || (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack && !(bAttack && pPlot->getPlotCity() && !isNoCapture())))
-					/* refactored
-					if (!bDeclareWar 
-						|| pPlot->isVisibleOtherUnit(getOwnerINLINE()) && !bAttack 
-						|| !pPlot->isVisibleOtherUnit(getOwnerINLINE()) && bAttack && (!pPlot->getPlotCity() || isNoCapture())						
-					) */
-					// K-Mod. I'm not entirely sure I understand what they were trying to do here. But I'm pretty sure it's wrong.
-					// I think the rule should be that bAttack means we have to actually fight an enemy unit. Capturing an undefended city doesn't not count.
-					// (there is no "isVisiblePotentialEnemyUnit" function, so I just wrote the code directly.)
-					/* if (!bDeclareWar || !bAttack || !pPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE())) */
-					// K-Mod end
+					if (pPlot->isVisibleEnemyUnit(this) != bAttack)
+					{
+						//FAssertMsg(isHuman() || (!bDeclareWar || (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack)), "hopefully not an issue, but tracking how often this is the case when we dont want to really declare war");
+						// Flunky PAE - if Keldath is not sure what he's doing, leave original bts code
+						if (!bDeclareWar 
+							|| (pPlot->isVisibleOtherUnit(getOwnerINLINE()) != bAttack 
+								&& !(bAttack && pPlot->getPlotCity() && !isNoCapture())))
+						/* refactored
+						if (!bDeclareWar 
+							|| pPlot->isVisibleOtherUnit(getOwnerINLINE()) && !bAttack 
+							|| !pPlot->isVisibleOtherUnit(getOwnerINLINE()) && bAttack && (!pPlot->getPlotCity() || isNoCapture())
+						) */
+						// K-Mod. I'm not entirely sure I understand what they were trying to do here. But I'm pretty sure it's wrong.
+						// I think the rule should be that bAttack means we have to actually fight an enemy unit. Capturing an undefended city doesn't not count.
+						// (there is no "isVisiblePotentialEnemyUnit" function, so I just wrote the code directly.)
+						/* if (!bDeclareWar || !bAttack || !pPlot->isVisiblePotentialEnemyUnit(getOwnerINLINE())) */
+						// K-Mod end
+						{
+							return false;
+						}
+					}
+				}
+			}
+
+			if (bAttack)
+			{
+				/* CvUnit* pDefender = pPlot->getBestDefender(NO_PLAYER, getOwnerINLINE(), this, true);
+				if (NULL != pDefender)
+				{
+					if (!canAttack(*pDefender))
+					{
+						return false;
+					}
+				} */
+				// K-Mod. (this is much faster.)
+				if (!pPlot->hasDefender(true, NO_PLAYER, getOwnerINLINE(), this, true))
+					return false;
+				// K-Mod end
+			}
+		}
+		else
+		{
+			if (bAttack)
+			{
+				return false;
+			}
+
+			if (!canCoexistWithEnemyUnit(NO_TEAM))
+			{
+				//if (!isHuman() || pPlot->isVisible(getTeam(), false))
+				if (bAssumeVisible || pPlot->isVisible(getTeam(), false)) // K-Mod
+				{
+					if (pPlot->isEnemyCity(*this))
+					{
+						return false;
+					}
+
+					if (pPlot->isVisibleEnemyUnit(this))
 					{
 						return false;
 					}
@@ -2981,100 +3023,59 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 			}
 		}
 
-		if (bAttack)
+		if (isHuman()) // (should this be !bAssumeVisible? It's a bit different to the other isHuman() checks)
 		{
-			/* CvUnit* pDefender = pPlot->getBestDefender(NO_PLAYER, getOwnerINLINE(), this, true);
-			if (NULL != pDefender)
-			{
-				if (!canAttack(*pDefender))
-				{
-					return false;
-				}
-			} */
-			// K-Mod. (this is much faster.)
-			if (!pPlot->hasDefender(true, NO_PLAYER, getOwnerINLINE(), this, true))
-				return false;
-			// K-Mod end
-		}
-	}
-	else
-	{
-		if (bAttack)
-		{
-			return false;
+			ePlotTeam = pPlot->getRevealedTeam(getTeam(), false);
+			bCanEnterArea = canEnterArea(ePlotTeam, pPlotArea);
 		}
 
-		if (!canCoexistWithEnemyUnit(NO_TEAM))
+		if (!bCanEnterArea)
 		{
-			//if (!isHuman() || pPlot->isVisible(getTeam(), false))
-			if (bAssumeVisible || pPlot->isVisible(getTeam(), false)) // K-Mod
-			{
-				if (pPlot->isEnemyCity(*this))
-				{
-					return false;
-				}
+			FAssert(ePlotTeam != NO_TEAM);
 
-				if (pPlot->isVisibleEnemyUnit(this))
-				{
-					return false;
-				}
-			}
-		}
-	}
-
-	if (isHuman()) // (should this be !bAssumeVisible? It's a bit different to the other isHuman() checks)
-	{
-		ePlotTeam = pPlot->getRevealedTeam(getTeam(), false);
-		bCanEnterArea = canEnterArea(ePlotTeam, pPlotArea);
-	}
-
-	if (!bCanEnterArea)
-	{
-		FAssert(ePlotTeam != NO_TEAM);
-
-		if (!(GET_TEAM(getTeam()).canDeclareWar(ePlotTeam)))
-		{
-			return false;
-		}
-
-		/* original bts code
-		if (isHuman())
-		{
-			if (!bDeclareWar)
+			if (!(GET_TEAM(getTeam()).canDeclareWar(ePlotTeam)))
 			{
 				return false;
 			}
-		}
-		else
-		{
-			if (GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam))
+
+			/* original bts code
+			if (isHuman())
 			{
-				if (!(getGroup()->AI_isDeclareWar(pPlot)))
+				if (!bDeclareWar)
 				{
 					return false;
 				}
 			}
 			else
 			{
-				return false;
-			}
-		} */
-		// K-Mod. Rather than allowing the AI to move in forbidden territory when it is planning war.
-		// I'm going to disallow it from doing so when _not_ planning war.
-		if (!bDeclareWar)
-		{
-			return false;
-		}
-		else if (!isHuman())
-		{
-			if (!GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam) || !getGroup()->AI_isDeclareWar(pPlot))
+				if (GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam))
+				{
+					if (!(getGroup()->AI_isDeclareWar(pPlot)))
+					{
+						return false;
+					}
+				}
+				else
+				{
+					return false;
+				}
+			} */
+			// K-Mod. Rather than allowing the AI to move in forbidden territory when it is planning war.
+			// I'm going to disallow it from doing so when _not_ planning war.
+			if (!bDeclareWar)
 			{
 				return false;
 			}
+			else if (!isHuman())
+			{
+				if (!GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam) || !getGroup()->AI_isDeclareWar(pPlot))
+				{
+					return false;
+				}
+			}
+			// K-Mod end
 		}
-		// K-Mod end
 	}
-	//} // Flunky PAE - no domain air - end
 
 	if (GC.getUSE_UNIT_CANNOT_MOVE_INTO_CALLBACK())
 	{
@@ -5119,7 +5120,7 @@ but thats not needed there now.
 		else
 		return false;
 	}
-// Super Forts doto end	
+// Super Forts doto end
 	return true;
 }
 
@@ -14370,7 +14371,6 @@ int CvUnit::LFBgetDefenderCombatOdds(const CvUnit* pAttacker) const
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
 
-// Flunky PAE Flight
 
 // Flunky PAE - Flight
 int CvUnit::flightMaxHealth(){
@@ -14416,7 +14416,6 @@ int CvUnit::flightMaxHealth(){
 }
 
 // Flunky PAE - Flight
-
 int CvUnit::flightProbability(int iWinnerDamage){
 	if (getDomainType() == DOMAIN_LAND && plot()->isWater())
 	{

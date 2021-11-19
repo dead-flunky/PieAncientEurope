@@ -9,6 +9,11 @@
 import BugOptions
 import BugUtil
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 ## Constants
 
 CHECKBOX_INDENT = 2

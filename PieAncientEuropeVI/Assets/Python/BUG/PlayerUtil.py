@@ -56,10 +56,10 @@
 ## Author: EmperorFool
 
 from CvPythonExtensions import (CyGlobalContext, TradeData, TradeableItems,
-                                DenialTypes, DirectionTypes,
+                                DenialTypes, DirectionTypes, GameOptionTypes,
                                 plotDirection, CivicTypes, CyTeam, CyPlayer)
 import TradeUtil
-import GameUtil
+# import GameUtil
 
 gc = CyGlobalContext()
 
@@ -353,7 +353,9 @@ def canContact(playerOrID, toPlayerOrID):
         return False
     if not getPlayerTeam(player).isHasMet(toPlayer.getTeam()):
         return False
-    if getPlayerTeam(player).isAtWar(toPlayer.getTeam()) and (GameUtil.isAlwaysWar() or GameUtil.isPermanentWarPeace()):
+    if (getPlayerTeam(player).isAtWar(toPlayer.getTeam())
+        and (gc.getGame().isOption(GameOptionTypes.GAMEOPTION_ALWAYS_WAR)
+             or gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_CHANGING_WAR_PEACE))):
         return False
     return True
 
@@ -538,7 +540,6 @@ def isGivingFavoriteCivicDenial(playerOrID, askingPlayerOrID):
 
 
 ## Cities
-
 def canSeeCityList(playerOrID):
     """
     Returns True if the active player can see the list of <player>'s cities.
@@ -547,11 +548,7 @@ def canSeeCityList(playerOrID):
     is not a vassal of a rival. They must be able to contact (trade with)
     <player>, and OCC must be disabled. You can always see a teammate's cities.
     """
-    # In K-Mod, the city list is only visible when at war. - Also, human players will only show their city list if they are willing to talk!
-    # Rather than risk getting this wrong..
-    return False
-    # done. (old code follows, but does nothing.)
-    if GameUtil.isOCC():
+    if gc.getGame().isOption(GameOptionTypes.GAMEOPTION_ONE_CITY_CHALLENGE):
         return False
     askedPlayer, askedTeam = getPlayerAndTeam(playerOrID)
     askingPlayer, askingTeam = getActivePlayerAndTeam()

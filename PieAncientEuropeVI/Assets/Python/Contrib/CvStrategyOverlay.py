@@ -11,13 +11,19 @@
 # Created:     11/12/2008
 #-------------------------------------------------------------------------------
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, NiColorA, PlotLandscapeLayers,
+                                PlotStyles, CyMessageControl, CyEngine)
 import BugCore
 import BugPath
 import BugUtil
 import CvOverlayScreenUtils
 import PlayerUtil
 import SdToolKit
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 COLOR_KEYS = None
 PALETTE_WIDTH = None

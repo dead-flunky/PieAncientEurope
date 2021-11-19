@@ -1296,10 +1296,10 @@ int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvali
 // Flunky PAE disabled *choke* *canal* for bug search
 // Super Forts begin *canal* *choke*
 	// 1 must be added because 0 is already being used as the default value for iInfo in GeneratePath()
-	/*if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
 	{
-		iInvalidPlot =  (pInvalidPlot == NULL) ? 0 : GC.getMapINLINE().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
-	}*/
+		iInvalidPlot = (pInvalidPlot == NULL)? 0: GC.getMapINLINE().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
+	}
 // Super Forts end
 	if (gDLL->getFAStarIFace()->GeneratePath(&GC.getStepFinder(), pSource->getX_INLINE(), 
 // Super Forts start

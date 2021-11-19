@@ -4,7 +4,7 @@
 ## contains variables to turn on and off various extra log messages
 ## Alt+E is always on
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext)
 import BugConfigTracker
 import BugCore
 import BugOptions
@@ -35,10 +35,10 @@ class autologInstance:
 			BugOptions.write()
 		self.LogFileName = LogFileName
 		self.updateLogFile()
-		
+
 	def getLogFileName(self):
 		return self.LogFileName
-	
+
 	def setLogFilePath(self, LogFilePath, bSaveToOptions=False):
 		if (bSaveToOptions):
 			AutologOpt.setFilePath(LogFilePath)
@@ -47,10 +47,10 @@ class autologInstance:
 			LogFilePath = BugPath.findOrMakeDir("Autolog")
 		self.LogFilePath = LogFilePath
 		self.updateLogFile()
-		
+
 	def getLogFilePath(self):
 		return self.LogFilePath
-	
+
 	def updateLogFile(self):
 		if self.LogFileName and self.LogFilePath:
 			self.bStarted = False
@@ -59,7 +59,7 @@ class autologInstance:
 
 	def isLogging(self):
 		return AutologOpt.isLoggingOn()
-	
+
 	def start(self):
 		self.writeMsg("")
 		self.writeMsg("Logging by " + CvModName.getDisplayNameAndVersion() + " (" + CvModName.getCivNameAndVersion() + ")")

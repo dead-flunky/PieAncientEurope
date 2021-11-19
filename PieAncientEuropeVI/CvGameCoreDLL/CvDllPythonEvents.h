@@ -24,8 +24,8 @@ public:
 	void reportBeginPlayerTurn(int iGameTurn, PlayerTypes);
 	void reportEndPlayerTurn(int iGameTurn, PlayerTypes);
 
-	void reportFirstContact(TeamTypes iTeamID1, TeamTypes iTeamID2);						
-	void reportCombatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner, bool bSuicide, bool bCapture);					
+	void reportFirstContact(TeamTypes iTeamID1, TeamTypes iTeamID2);
+	void reportCombatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner, bool bSuicide, bool bCapture);
 	void reportImprovementBuilt(int iImprovementType, int iX, int iY);	
 	void reportImprovementDestroyed(int iImprovementType, int iPlayer, int iX, int iY);	
 	void reportRouteBuilt(int iRouteType, int iX, int iY);	

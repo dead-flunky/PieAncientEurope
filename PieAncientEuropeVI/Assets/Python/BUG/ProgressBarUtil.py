@@ -1,4 +1,4 @@
-# Progress Bar Utilities
+# ProgressBarUtil
 ##
 # Holds the information used to display tick marks on progress bars
 # Also draws the tick marks

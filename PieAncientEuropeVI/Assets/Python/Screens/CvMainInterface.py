@@ -61,7 +61,7 @@ import TradeUtil
 # import BugUnitPlot
 
 # Mod BUG - 3.17 No Espionage - start
-import GameUtil
+# import GameUtil
 # Mod BUG - 3.17 No Espionage - end
 
 # Mod BUG - Reminders - start
@@ -84,6 +84,10 @@ import ProgressBarUtil
 # import PLE
 import MonkeyTools as mt
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 # globals
 gc = CyGlobalContext()
@@ -573,7 +577,7 @@ class CvMainInterface:
         screen.hide("InfoAdvisorButton")
 
 # Mod BUG - 3.17 No Espionage - start
-        if GameUtil.isEspionage():
+        if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
             iBtnX += iBtnAdvance + 3
             screen.setImageButton("EspionageAdvisorButton", "", iBtnX, iBtnY, iBtnWidth, iBtnWidth, WidgetTypes.WIDGET_ACTION, gc.getControlInfo(ControlTypes.CONTROL_ESPIONAGE_SCREEN).getActionInfoIndex(), -1)
             screen.setStyle("EspionageAdvisorButton", "Button_HUDAdvisorEspionage_Style")
@@ -7275,7 +7279,7 @@ class CvMainInterface:
                                 szTempBuffer = u"%c" %(CyGame().getSymbolID(FontSymbols.DEFENSIVE_PACT_CHAR))
                                 szBuffer = szBuffer + szTempBuffer
 
-                            if GameUtil.isEspionage() and gc.getTeam(eTeam).getEspionagePointsAgainstTeam(gc.getGame().getActiveTeam()) < gc.getTeam(gc.getGame().getActiveTeam()).getEspionagePointsAgainstTeam(eTeam):
+                            if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE) and gc.getTeam(eTeam).getEspionagePointsAgainstTeam(gc.getGame().getActiveTeam()) < gc.getTeam(gc.getGame().getActiveTeam()).getEspionagePointsAgainstTeam(eTeam):
                                 szTempBuffer = u"%c" %(gc.getCommerceInfo(CommerceTypes.COMMERCE_ESPIONAGE).getChar())
                                 szBuffer = szBuffer + szTempBuffer
 

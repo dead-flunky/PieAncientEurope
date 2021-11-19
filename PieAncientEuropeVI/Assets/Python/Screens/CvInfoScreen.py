@@ -18,7 +18,7 @@ from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
                                 CyGInterfaceScreen, CyCamera, InputTypes,
                                 ImprovementTypes, AttitudeTypes, CommerceTypes,
                                 isNationalWonderClass, isTeamWonderClass,
-                                isWorldWonderClass, ButtonStyles)
+                                isWorldWonderClass, ButtonStyles, GameOptionTypes)
 # import CvScreenEnums
 import CvUtil
 # import ScreenInput
@@ -26,7 +26,7 @@ import CvUtil
 from PyHelpers import PyPlayer
 
 # Mod BUG - 3.17 No Espionage - start
-import GameUtil
+# import GameUtil
 # Mod BUG - 3.17 No Espionage - end
 
 # Mod BUG: Change Graphs - start
@@ -35,6 +35,12 @@ import BugUtil
 AdvisorOpt = BugCore.game.Advisors
 ScoreOpt = BugCore.game.Scores
 # Mod BUG: Change Graphs - end
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 
 # globals
 gc = CyGlobalContext()
@@ -653,7 +659,7 @@ class CvInfoScreen:
 
         self.iInvestigateCityMission = -1
         # See if Espionage allows graph to be shown for each player
-        if GameUtil.isEspionage():
+        if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
             for iMissionLoop in xrange(gc.getNumEspionageMissionInfos()):
                 if gc.getEspionageMissionInfo(iMissionLoop).isInvestigateCity():
                     self.iInvestigateCityMission = iMissionLoop
@@ -794,7 +800,7 @@ class CvInfoScreen:
         screen.addPullDownString(self.szGraphDropdownWidget, self.TEXT_POWER, 4, 4, self.iGraphTabID == self.POWER_SCORE)
         screen.addPullDownString(self.szGraphDropdownWidget, self.TEXT_CULTURE, 5, 5, self.iGraphTabID == self.CULTURE_SCORE)
 # Mod BUG - 3.17 No Espionage - start
-        if GameUtil.isEspionage():
+        if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
             screen.addPullDownString(self.szGraphDropdownWidget, self.TEXT_ESPIONAGE,
                                      6, 6, self.iGraphTabID == self.ESPIONAGE_SCORE)
 # Mod BUG - 3.17 No Espionage - end
@@ -1027,7 +1033,7 @@ class CvInfoScreen:
 
                 iY = self.Y_MARGIN - 30
                 for i in xrange(7):
-                    if i == 7 and not GameUtil.isEspionage():
+                    if i == 7 and gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
                         continue
 
                     iX = self.X_GRAPH_TEXT[i]
@@ -1041,7 +1047,7 @@ class CvInfoScreen:
 
             elif self.Graph_Status_Current == self.Graph_Status_7in1:
                 for i in xrange(7):
-                    if i == 7 and not GameUtil.isEspionage():
+                    if i == 7 and gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
                         continue
 
                     screen.hide(self.sGraphTextBannerWidget[i])
@@ -1053,7 +1059,7 @@ class CvInfoScreen:
                     screen.hide(self.sGraphTextBannerWidget[i])
 
                 for i in xrange(3):
-                    if i == 7 and not GameUtil.isEspionage():
+                    if i == 7 and gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
                         continue
 
                     self.drawGraph(i)

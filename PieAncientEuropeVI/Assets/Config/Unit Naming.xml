@@ -56,8 +56,8 @@
 		</section>
 	</options>
 	
-	<events module="UnitNameEventManager">
+	<!-- <events module="UnitNameEventManager"> -->
 		<!--arg type="key" value="Alt Ctrl N"/-->
-	</events>
+	<!-- </events> -->
 	
 </mod>

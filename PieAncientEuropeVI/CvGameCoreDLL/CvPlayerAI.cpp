@@ -24422,10 +24422,10 @@ int CvPlayerAI::AI_getPlotAirbaseValue(CvPlot* pPlot) const
 //			return 0;
 //		}
 //	}
-	
+
 // Flunky PAE disabled *choke* *canal* for bug search
 // Super Forts begin *canal* *choke*
-	/*if (superForts)
+	if (superForts)
 	{
 		if (iMinOtherCityPlot != NULL)
 		{
@@ -24438,7 +24438,7 @@ int CvPlayerAI::AI_getPlotAirbaseValue(CvPlot* pPlot) const
 				}
 			}
 		}
-	}	*/	
+	}
 // Super Forts end
 
 //	if (iMinOtherCityPlot != NULL)
@@ -24483,9 +24483,9 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 	FAssert(pPlot != NULL);
 // Super Forts begin *canal*
 	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
-	
+
 // Flunky PAE disabled *choke* *canal* for bug search
-	int iCanalValue = /*superForts ? pPlot->getCanalValue() :*/ 1;
+	int iCanalValue = superForts ? pPlot->getCanalValue() : 1;
 						/*Doto - the value 1 is for the check below to be true - 
 						so original code will kick in */ 
 	
@@ -24535,10 +24535,10 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 					// Decrease value when within radius of a city
 // Super Forts begin *canal*
 // Flunky PAE disabled *choke* *canal* for bug search
-					/*if (superForts)
+					if (superForts)
 					{
 						iCanalValue -= 5;
-					}*/
+					}
 					
 				}
 			}
@@ -24553,27 +24553,27 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 			{
 // Super Forts begin 
 // Flunky PAE disabled *choke* *canal* for bug search
-				//if 	(pLoopPlot->getCanalValue() > 0 && superForts)
-				//{
-				//// Decrease value when adjacent to a city or fort with a canal value
-				//	iCanalValue -= 10;
-				//}
-				//else
-				//{
-				return 0;//original part
-			//}
+				if 	(pLoopPlot->getCanalValue() > 0 && superForts)
+				{
+				// Decrease value when adjacent to a city or fort with a canal value
+					iCanalValue -= 10;
+				}
+				else
+				{
+					return 0;//original part
+				}
 // Super Forts begin 
 			}
 		}
-		
+
 // Flunky PAE disabled *choke* *canal* for bug search
-		//if (superForts)
-		//{
-		//	iCanalValue *= 10;
-		//	// Favor plots with higher defense
-		//	int iDefenseModifier = pPlot->defenseModifier(getTeam(), false);
-		//	iCanalValue += iDefenseModifier;
-		//}
+		if (superForts)
+		{
+			iCanalValue *= 10;
+			// Favor plots with higher defense
+			int iDefenseModifier = pPlot->defenseModifier(getTeam(), false);
+			iCanalValue += iDefenseModifier;
+		}
 	}
 	
 	CvArea* pSecondWaterArea = pPlot->secondWaterArea();

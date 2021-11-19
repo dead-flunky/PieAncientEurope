@@ -3,12 +3,12 @@ from CvPythonExtensions import (CyGInterfaceScreen, CyGlobalContext,
                                 CyArtFileMgr, CyTranslator, CyMap,
                                 CyMessageControl, DirectionTypes,
                                 PlayerTypes, FeatureTypes, WidgetTypes,
-                                FontTypes, ColorTypes, PlotTypes, UnitAITypes,
+                                FontTypes, PlotTypes, UnitAITypes,
                                 AdvancedStartActionTypes, EventContextTypes,
                                 CardinalDirectionTypes, PlotLandscapeLayers,
                                 AreaBorderLayers, PlotStyles, ButtonStyles,
                                 PanelStyles, TableStyles, PopupStates,
-                                addWBAdvancedStartControlTabs,
+                                addWBAdvancedStartControlTabs, ColorTypes,
                                 getWBToolAdvancedStartTabCtrl,
                                 initWBToolAdvancedStartControl,
                                 isWorldWonderClass, isTeamWonderClass,
@@ -45,6 +45,11 @@ import WBInfoScreen
 import WBTradeScreen
 import CvEventManager
 import Popup
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 gc = CyGlobalContext()
 iChange = 1
@@ -218,14 +223,14 @@ class CvWorldBuilderScreen:
 
   def refreshReveal(self) :
     CyEngine().clearAreaBorderPlots(AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS)
-    for i in xrange(CyMap().numPlots()): # noqa
+    for i in xrange(CyMap().numPlots()):
       pPlot = CyMap().plotByIndex(i)
       if pPlot.isNone(): continue
       self.showRevealed(pPlot)
 
   def refreshStartingPlots(self) :
     CyEngine().clearAreaBorderPlots(AreaBorderLayers.AREA_BORDER_LAYER_REVEALED_PLOTS)
-    for iPlayerX in xrange(gc.getMAX_PLAYERS()): # noqa
+    for iPlayerX in xrange(gc.getMAX_PLAYERS()):
       pPlayerX = gc.getPlayer(iPlayerX)
       pPlot = pPlayerX.getStartingPlot()
       if pPlot:
@@ -421,11 +426,11 @@ class CvWorldBuilderScreen:
     if self.iPlayerAddMode == "EraseAll":
         self.m_pCurrentPlot.erase()
         CyEngine().removeLandmark(self.m_pCurrentPlot)
-        for iPlayerX in xrange(gc.getMAX_PLAYERS()): # noqa
+        for iPlayerX in xrange(gc.getMAX_PLAYERS()):
             CyEngine().removeSign(self.m_pCurrentPlot, iPlayerX)
     elif self.iPlayerAddMode == "AddLandMark":
         iIndex = -1
-        for i in xrange(CyEngine().getNumSigns()): # noqa
+        for i in xrange(CyEngine().getNumSigns()):
             pSign = CyEngine().getSignByIndex(i)
             if pSign.getPlot().getX() != self.m_pCurrentPlot.getX():
                 continue
@@ -448,7 +453,7 @@ class CvWorldBuilderScreen:
         self.m_pCurrentPlot.setOwner(self.m_iCurrentPlayer)
   ## Python Effects ##
     elif self.iPlayerAddMode == "Units":
-        for i in xrange(iChange): # noqa
+        for i in xrange(iChange):
             gc.getPlayer(self.m_iCurrentPlayer).initUnit(self.iSelection, self.m_pCurrentPlot.getX(), self.m_pCurrentPlot.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.NO_DIRECTION)
     elif self.iPlayerAddMode == "Buildings":
         if self.m_pCurrentPlot.isCity():
@@ -588,12 +593,12 @@ class CvWorldBuilderScreen:
     if self.iPlayerAddMode == "EraseAll":
       self.m_pCurrentPlot.erase()
       CyEngine().removeLandmark(self.m_pCurrentPlot)
-      for iPlayerX in xrange(gc.getMAX_PLAYERS()): # noqa
+      for iPlayerX in xrange(gc.getMAX_PLAYERS()):
         CyEngine().removeSign(self.m_pCurrentPlot, iPlayerX)
     elif self.iPlayerAddMode == "Ownership":
       self.m_pCurrentPlot.setOwner(-1)
     elif self.iPlayerAddMode == "Units":
-        for i in xrange (self.m_pCurrentPlot.getNumUnits()): # noqa
+        for i in xrange (self.m_pCurrentPlot.getNumUnits()):
             pUnit = self.m_pCurrentPlot.getUnit(i)
             if pUnit.getUnitType() == self.iSelection:
                 pUnit.kill(False, PlayerTypes.NO_PLAYER)
@@ -1122,7 +1127,7 @@ class CvWorldBuilderScreen:
                                   iX, iY, iButtonWidth, iButtonWidth, WidgetTypes.WIDGET_PYTHON, 1029, 28, ButtonStyles.BUTTON_STYLE_LABEL)
             iX += iAdjust
             screen.addDropDownBoxGFC("WorldBuilderPlayerChoice", iX, iY, screen.getXResolution() - 8 - iX, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for iPlayer in xrange(gc.getMAX_PLAYERS()): # noqa
+            for iPlayer in xrange(gc.getMAX_PLAYERS()):
                 if gc.getPlayer(iPlayer).isEverAlive():
                     sName = gc.getPlayer(iPlayer).getName()
                     if not gc.getPlayer(iPlayer).isAlive():
@@ -1200,7 +1205,7 @@ class CvWorldBuilderScreen:
             iX += iAdjust
             screen.addDropDownBoxGFC("WorldBuilderPlayerChoice", iX, iY, screen.getXResolution() - 8 - iX, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
             screen.addPullDownString("WorldBuilderPlayerChoice", CyTranslator().getText("TXT_KEY_WB_LANDMARKS", ()), gc.getBARBARIAN_PLAYER(), gc.getBARBARIAN_PLAYER(), self.m_iCurrentPlayer == gc.getBARBARIAN_PLAYER())
-            for iPlayer in xrange(gc.getMAX_PLAYERS()): # noqa
+            for iPlayer in xrange(gc.getMAX_PLAYERS()):
                 if iPlayer == gc.getBARBARIAN_PLAYER():
                     continue
                 if gc.getPlayer(iPlayer).isEverAlive():
@@ -1263,7 +1268,7 @@ class CvWorldBuilderScreen:
             screen.setImageButton("WorldBuilderRevealAll", CyArtFileMgr().getInterfaceArtInfo("WORLDBUILDER_REVEAL_ALL_TILES").getPath(), iX, iY, iButtonWidth, iButtonWidth, WidgetTypes.WIDGET_WB_REVEAL_ALL_BUTTON, -1, -1)
             iX += iAdjust
             screen.addDropDownBoxGFC("WorldBuilderPlayerChoice", iX, iY, screen.getXResolution() - 8 - iX, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for iPlayer in xrange(gc.getMAX_PLAYERS()): # noqa
+            for iPlayer in xrange(gc.getMAX_PLAYERS()):
                 if gc.getPlayer(iPlayer).isEverAlive():
                     sName = gc.getPlayer(iPlayer).getName()
                     if not gc.getPlayer(iPlayer).isAlive():
@@ -1338,7 +1343,7 @@ class CvWorldBuilderScreen:
   def createTechList(self):
     global lTech
     lTech = []
-    for i in xrange(gc.getNumTechInfos()): # noqa
+    for i in xrange(gc.getNumTechInfos()):
       ItemInfo = gc.getTechInfo(i)
       if self.iSelectClass3 == -1 or self.iSelectClass3 == ItemInfo.getEra():
         lTech.append(i)
@@ -1351,7 +1356,9 @@ class CvWorldBuilderScreen:
     TableStyle = TableStyles.TABLE_STYLE_STANDARD
     #PAE: Added -3 into menue = extra alphabetische Sortierung
 
-    CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "setSelectionTable - %d %d %s" %(iCivilization, self.iSelection, self.iPlayerAddMode), None, 2, None, ColorTypes(10), 0, 0, False, False)
+    # Flunky Debug
+    # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "setSelectionTable - %d %d %s" %(iCivilization, self.iSelection, self.iPlayerAddMode), None, 2, None, ColorTypes(10), 0, 0, False, False)
+
     self.lItems = []
 
     if self.iPlayerAddMode == "Units":
@@ -1359,7 +1366,7 @@ class CvWorldBuilderScreen:
         screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
         screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), -2, -2, -2 == self.iSelectClass)
         screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_PEDIA_NON_COMBAT",()), -1, -1, -1 == self.iSelectClass)
-        for iCombatClass in xrange(gc.getNumUnitCombatInfos()): # noqa
+        for iCombatClass in xrange(gc.getNumUnitCombatInfos()):
             screen.addPullDownString("WBSelectClass", gc.getUnitCombatInfo(iCombatClass).getDescription(), iCombatClass, iCombatClass, iCombatClass == self.iSelectClass)
 
         # PAE
@@ -1367,10 +1374,10 @@ class CvWorldBuilderScreen:
         # Era
         screen.addDropDownBoxGFC("TechEra", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
         screen.addPullDownString("TechEra", CyTranslator().getText("TXT_KEY_WB_CITY_ALL", ()), -1, -1, True)
-        for i in xrange(gc.getNumEraInfos()): # noqa
+        for i in xrange(gc.getNumEraInfos()):
             screen.addPullDownString("TechEra", gc.getEraInfo(i).getDescription(), i, i, i == self.iSelectClass3)
 
-        for i in xrange(gc.getNumUnitInfos()): # noqa
+        for i in xrange(gc.getNumUnitInfos()):
             ItemInfo = gc.getUnitInfo(i)
             if bHideInactive:
                 iClass = ItemInfo.getUnitClassType()
@@ -1403,7 +1410,8 @@ class CvWorldBuilderScreen:
             text = item[0]
             if not gc.getPlayer(self.m_iCurrentPlayer).canTrain(item[1],0,0):
                 text = CyTranslator().getText("[COLOR_WARNING_TEXT]", ()) + item[0] + "</color>"
-            CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "List every unit! - %s %d %d" %(gc.getUnitInfo(item[1]).getDescription(), 8202, item[1]), None, 2, None, ColorTypes(10), 0, 0, False, False)
+            # Flunky Debug
+            # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "List every unit! - %s %d %d" %(gc.getUnitInfo(item[1]).getDescription(), 8202, item[1]), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
             screen.setTableText("WBSelectItem", 0, iRow, "<font=3>" + text + "</font>", gc.getUnitInfo(item[1]).getButton(), WidgetTypes.WIDGET_PYTHON, 8202, item[1], CvUtil.FONT_LEFT_JUSTIFY)
         if not bValid:
@@ -1421,7 +1429,7 @@ class CvWorldBuilderScreen:
         screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_TEAM_WONDER", ()), 3, 3, 3 == self.iSelectClass)
         screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_WORLD_WONDER", ()), 4, 4, 4 == self.iSelectClass)
 
-        for i in xrange(gc.getNumBuildingInfos()): # noqa
+        for i in xrange(gc.getNumBuildingInfos()):
             ItemInfo = gc.getBuildingInfo(i)
             iClass = ItemInfo.getBuildingClassType()
             # show only CIV building:
@@ -1473,7 +1481,7 @@ class CvWorldBuilderScreen:
         screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_PEDIA_WB_WIND",()), -3, -3, -3 == self.iSelectClass)
         screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_CONCEPT_NATURAL_DISASTERS", ()), -4, -4, -4 == self.iSelectClass)
 
-        for i in xrange(gc.getNumFeatureInfos()): # noqa
+        for i in xrange(gc.getNumFeatureInfos()):
             ItemInfo = gc.getFeatureInfo(i)
             if self.iSelectClass == -3:
                 if "WIND" not in ItemInfo.getType():
@@ -1510,7 +1518,7 @@ class CvWorldBuilderScreen:
         iY = 25
         screen.addDropDownBoxGFC("WBSelectClass", 0, iY, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
         screen.addPullDownString("WBSelectClass", CyTranslator().getText("TXT_KEY_WB_CITY_ALL",()), 0, 0, 0 == self.iSelectClass)
-        for i in xrange(gc.getNumImprovementInfos()): # noqa
+        for i in xrange(gc.getNumImprovementInfos()):
             ItemInfo = gc.getImprovementInfo(i)
             if ItemInfo.isGraphicalOnly():
                 continue
@@ -1547,7 +1555,7 @@ class CvWorldBuilderScreen:
             screen.addPullDownString("WBSelectClass", sText, iBonusClass, iBonusClass, iBonusClass == self.iSelectClass)
             iBonusClass += 1
 
-        for i in xrange(gc.getNumBonusInfos()): # noqa
+        for i in xrange(gc.getNumBonusInfos()):
             ItemInfo = gc.getBonusInfo(i)
             if ItemInfo.getBonusClassType() != self.iSelectClass and self.iSelectClass > -1:
                 continue
@@ -1572,7 +1580,7 @@ class CvWorldBuilderScreen:
 
     elif self.iPlayerAddMode == "Routes":
         iY = 25
-        for i in xrange(gc.getNumRouteInfos()): # noqa
+        for i in xrange(gc.getNumRouteInfos()):
             ItemInfo = gc.getRouteInfo(i)
             self.lItems.append([ItemInfo.getDescription(), i])
         # PAE sort
@@ -1595,7 +1603,7 @@ class CvWorldBuilderScreen:
     elif self.iPlayerAddMode == "Terrain":
         iY = 25
         self.lItems = []
-        for i in xrange(gc.getNumTerrainInfos()): # noqa
+        for i in xrange(gc.getNumTerrainInfos()):
             ItemInfo = gc.getTerrainInfo(i)
             if ItemInfo.isGraphicalOnly():
                 continue
@@ -1627,7 +1635,7 @@ class CvWorldBuilderScreen:
 
         screen.addTableControlGFC("WBSelectItem", 1, 0, 25, iWidth, iHeight, False, False, 24, 24, TableStyle)
         screen.setTableColumnHeader("WBSelectItem", 0, "", iWidth)
-        for i in xrange(PlotTypes.NUM_PLOT_TYPES): # noqa
+        for i in xrange(PlotTypes.NUM_PLOT_TYPES):
             screen.appendTableRow("WBSelectItem")
         item = gc.getInfoTypeForString("TERRAIN_PEAK")
         if self.iSelection == -1:
@@ -1652,13 +1660,12 @@ class CvWorldBuilderScreen:
     screen.appendTableRow("WBCurrentItem")
 
     if self.iPlayerAddMode == "Units":
-        # Flunky fix WB
+        # Flunky fix WB for strange Bug-Mod behaviour
         ItemInfo = gc.getUnitInfo(self.iSelection)
-        # ItemInfo = gc.getUnitInfo(self.iSelection)
+
         sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
         if ItemInfo:
             screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 8202, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
-            # screen.setTableText("WBCurrentItem", 0, 0 , sText, ItemInfo.getButton(), WidgetTypes.WIDGET_PYTHON, 8202, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
     elif self.iPlayerAddMode == "Buildings":
         ItemInfo = gc.getBuildingInfo(self.iSelection)
         sText = "<font=3>" + CyTranslator().getText("[COLOR_HIGHLIGHT_TEXT]", ()) + ItemInfo.getDescription() + "</color></font>"
@@ -1681,7 +1688,7 @@ class CvWorldBuilderScreen:
         screen.setTableText("WBCurrentItem", 0, 0 , sText, sButton, WidgetTypes.WIDGET_PYTHON, 7874, self.iSelection, CvUtil.FONT_LEFT_JUSTIFY)
         if ItemInfo.getNumVarieties() > 1:
             screen.addDropDownBoxGFC("WBSelectClass2", 0, 25, iWidth, WidgetTypes.WIDGET_GENERAL, -1, -1, FontTypes.GAME_FONT)
-            for i in xrange(ItemInfo.getNumVarieties()): # noqa
+            for i in xrange(ItemInfo.getNumVarieties()):
                 screen.addPullDownString("WBSelectClass2", CyTranslator().getText("TXT_KEY_WB_FEATURE_VARIETY", (i,)), i, i, i == self.iSelectClass2)
         else:
             self.iSelectClass2 = 0
@@ -1707,7 +1714,7 @@ class CvWorldBuilderScreen:
 
 ## Platy Reveal Mode Start ##
   def revealAll(self, bReveal):
-    for i in xrange(CyMap().numPlots()): # noqa
+    for i in xrange(CyMap().numPlots()):
         pPlot = CyMap().plotByIndex(i)
         if pPlot.isNone():
             continue
@@ -1809,8 +1816,8 @@ class CvWorldBuilderScreen:
     CyEngine().clearColoredPlots(PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS)
     CyEngine().addColoredPlotAlt(self.m_pRiverStartPlot.getX(), self.m_pRiverStartPlot.getY(), PlotStyles.PLOT_STYLE_RIVER_SOUTH, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS, "COLOR_GREEN", 1)
 
-    for x in xrange(self.m_pRiverStartPlot.getX() - 1, self.m_pRiverStartPlot.getX() + 2): # noqa
-        for y in xrange(self.m_pRiverStartPlot.getY() - 1, self.m_pRiverStartPlot.getY() + 2): # noqa
+    for x in xrange(self.m_pRiverStartPlot.getX() - 1, self.m_pRiverStartPlot.getX() + 2):
+        for y in xrange(self.m_pRiverStartPlot.getY() - 1, self.m_pRiverStartPlot.getY() + 2):
             if x == self.m_pRiverStartPlot.getX() and y == self.m_pRiverStartPlot.getY():
                 continue
             CyEngine().addColoredPlotAlt(x, y, PlotStyles.PLOT_STYLE_BOX_FILL, PlotLandscapeLayers.PLOT_LANDSCAPE_LAYER_REVEALED_PLOTS, "COLOR_WHITE", .2)
@@ -1895,7 +1902,7 @@ class CvWorldBuilderScreen:
     global bPython
     global bHideInactive
     # Flunky Debug
-    # CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "CvPlatyBuilderScreen handleInput - %s, prev: %d, new: %d" %(inputClass.getFunctionName(), self.iSelection, inputClass.getData2()), None, 2, None, ColorTypes(10), 0, 0, False, False)
+    CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "CvPlatyBuilderScreen handleInput - %s, prev: %d, new: %d" %(inputClass.getFunctionName(), self.iSelection, inputClass.getData2()), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
     if inputClass.getFunctionName() == "TechEra":
         self.iSelectClass3 = inputClass.getData() - 1
@@ -1903,7 +1910,7 @@ class CvWorldBuilderScreen:
         self.refreshSideMenu()
 
     if inputClass.getFunctionName() == "WorldBuilderEraseAll":
-        for i in xrange(CyMap().numPlots()): # noqa
+        for i in xrange(CyMap().numPlots()):
             self.m_pCurrentPlot = CyMap().plotByIndex(i)
             self.placeObject()
 

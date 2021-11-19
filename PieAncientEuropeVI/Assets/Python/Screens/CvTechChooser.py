@@ -33,14 +33,21 @@ ClockOpt = BugCore.game.NJAGC
 
 import BugUtil
 
-FLAVORS = [ TechPrefs.FLAVOR_PRODUCTION, TechPrefs.FLAVOR_GOLD, TechPrefs.FLAVOR_SCIENCE,
-            TechPrefs.FLAVOR_CULTURE, TechPrefs.FLAVOR_RELIGION ]
-UNIT_CLASSES = [ "UNITCLASS_ENGINEER", "UNITCLASS_MERCHANT", "UNITCLASS_SCIENTIST",
-                 "UNITCLASS_ARTIST", "UNITCLASS_PROPHET" ]
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
+
+FLAVORS = [TechPrefs.FLAVOR_PRODUCTION, TechPrefs.FLAVOR_GOLD, TechPrefs.FLAVOR_SCIENCE,
+           TechPrefs.FLAVOR_CULTURE, TechPrefs.FLAVOR_RELIGION]
+UNIT_CLASSES = ["UNITCLASS_ENGINEER", "UNITCLASS_MERCHANT", "UNITCLASS_SCIENTIST",
+                "UNITCLASS_ARTIST", "UNITCLASS_PROPHET"]
 # Mod BUG - GP Tech Prefs - end
 
 # Mod BUG - 3.19 No Espionage - start
-import GameUtil
+# import GameUtil
 # Mod BUG - 3.19 No Espionage - end
 
 # Mod BUG - Mac Support - start
@@ -495,7 +502,7 @@ class CvTechChooser:
             if eLoopUnit != -1:
 # Mod BUG - 3.19 No Espionage - start
                 # CvUnitInfo.getEspionagePoints() was added in 319
-                if GameUtil.getVersion() < 319 or gc.getUnitInfo(eLoopUnit).getEspionagePoints() == 0 or not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
+                if gc.getDefineINT("CIV4_VERSION") < 319 or gc.getUnitInfo(eLoopUnit).getEspionagePoints() == 0 or not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_ESPIONAGE):
 # Mod BUG - 3.19 No Espionage - end
                     screen.addDDSGFCAt( szFreeUnitButton, szTechRecord, gc.getPlayer(gc.getGame().getActivePlayer()).getUnitButton(eLoopUnit), iX + fX, iY + self.Y_ROW, self.TEXTURE_SIZE, self.TEXTURE_SIZE, WidgetTypes.WIDGET_HELP_FREE_UNIT, eLoopUnit, i, False )
                     fX += self.X_INCREMENT

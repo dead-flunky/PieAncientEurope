@@ -39,6 +39,11 @@ import BugUtil
 import CvUtil
 import re
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 # constants
 
 UNKNOWN_CHAR = "?"

@@ -3918,7 +3918,7 @@ void CvPlot::invalidateBorderDangerCache()
 {
 	/* for( int iI = 0; iI < MAX_TEAMS; iI++ )
 	{
-	m_abBorderDangerCache[iI] = false;
+		m_abBorderDangerCache[iI] = false;
 	} */
 	for (int iDX = -BORDER_DANGER_RANGE; iDX <= BORDER_DANGER_RANGE; iDX++)
 	{
@@ -3943,7 +3943,7 @@ PlayerTypes CvPlot::calculateCulturalOwner() const
 {
 	PROFILE("CvPlot::calculateCulturalOwner()")
 
-		CvCity* pLoopCity;
+	CvCity* pLoopCity;
 	CvCity* pBestCity;
 	CvPlot* pLoopPlot;
 	PlayerTypes eBestPlayer;
@@ -4068,7 +4068,7 @@ PlayerTypes CvPlot::calculateCulturalOwner() const
 		if (!bValid
 			// Super Forts begin *culture*
 			|| (!GET_PLAYER(eBestPlayer).isAlive() 
-			&& GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+				&& GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
 			)
 			// Super Forts end
 		{
@@ -4407,6 +4407,7 @@ bool CvPlot::isEnemyCity(const CvUnit& kUnit) const
 	return false;
 }
 
+// TODO check for usage outside of super forts
 //super forts - doto keldath
 bool CvPlot::isFortImprovement() const
 {
@@ -4417,7 +4418,7 @@ bool CvPlot::isFortImprovement() const
 	if (getImprovementType() == NO_IMPROVEMENT)
 		return false;
 	//if (!GC.getImprovementInfo(getImprovementType()).isActsAsCity())
-	if (GC.getImprovementInfo(getImprovementType()).isFort())
+	if (!GC.getImprovementInfo(getImprovementType()).isFort())
 		return false;
 	return true;
 }
@@ -4898,11 +4899,11 @@ int CvPlot::getLatitude() const
 
 	if (GC.getMapINLINE().isWrapXINLINE() || !(GC.getMapINLINE().isWrapYINLINE()))
 	{
-	iLatitude = ((getY_INLINE() * 100) / GC.getMapINLINE().getGridHeightINLINE());
+		iLatitude = ((getY_INLINE() * 100) / GC.getMapINLINE().getGridHeightINLINE());
 	}
 	else
 	{
-	iLatitude = ((getX_INLINE() * 100) / GC.getMapINLINE().getGridWidthINLINE());
+		iLatitude = ((getX_INLINE() * 100) / GC.getMapINLINE().getGridWidthINLINE());
 	}
 
 	iLatitude = ((iLatitude * (GC.getMapINLINE().getTopLatitude() - GC.getMapINLINE().getBottomLatitude())) / 100);
@@ -6191,10 +6192,10 @@ void CvPlot::setTerrainType(TerrainTypes eNewValue, bool bRecalculate, bool bReb
 
 	if (getTerrainType() != eNewValue)
 	{
-		if ((getTerrainType() != NO_TERRAIN) &&
-			(eNewValue != NO_TERRAIN) &&
-			((GC.getTerrainInfo(getTerrainType()).getSeeFromLevel() != GC.getTerrainInfo(eNewValue).getSeeFromLevel()) ||
-			(GC.getTerrainInfo(getTerrainType()).getSeeThroughLevel() != GC.getTerrainInfo(eNewValue).getSeeThroughLevel())))
+		if (getTerrainType() != NO_TERRAIN
+			&& eNewValue != NO_TERRAIN
+			&& (GC.getTerrainInfo(getTerrainType()).getSeeFromLevel() != GC.getTerrainInfo(eNewValue).getSeeFromLevel()
+				|| GC.getTerrainInfo(getTerrainType()).getSeeThroughLevel() != GC.getTerrainInfo(eNewValue).getSeeThroughLevel()))
 		{
 			bUpdateSight = true;
 		}
@@ -6266,9 +6267,9 @@ void CvPlot::setFeatureType(FeatureTypes eNewValue, int iVariety)
 
 	if ((eOldFeature != eNewValue) || (m_iFeatureVariety != iVariety))
 	{
-		if ((eOldFeature == NO_FEATURE) ||
-			(eNewValue == NO_FEATURE) ||
-			(GC.getFeatureInfo(eOldFeature).getSeeThroughChange() != GC.getFeatureInfo(eNewValue).getSeeThroughChange()))
+		if (eOldFeature == NO_FEATURE
+			|| eNewValue == NO_FEATURE
+			|| GC.getFeatureInfo(eOldFeature).getSeeThroughChange() != GC.getFeatureInfo(eNewValue).getSeeThroughChange())
 		{
 			bUpdateSight = true;
 		}
@@ -6294,8 +6295,8 @@ void CvPlot::setFeatureType(FeatureTypes eNewValue, int iVariety)
 
 		updateFeatureSymbol();
 
-		if (((eOldFeature != NO_FEATURE) && (GC.getFeatureInfo(eOldFeature).getArtInfo()->isRiverArt())) || 
-			((getFeatureType() != NO_FEATURE) && (GC.getFeatureInfo(getFeatureType()).getArtInfo()->isRiverArt())))
+		if (eOldFeature != NO_FEATURE && GC.getFeatureInfo(eOldFeature).getArtInfo()->isRiverArt()
+		    || getFeatureType() != NO_FEATURE && GC.getFeatureInfo(getFeatureType()).getArtInfo()->isRiverArt())
 		{
 			updateRiverSymbolArt(true);
 		}
@@ -6587,8 +6588,8 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 		}
 
 		// Building or removing a fort will now force a plotgroup update to verify resource connections.
-		if ( (NO_IMPROVEMENT != getImprovementType() && GC.getImprovementInfo(getImprovementType()).isActsAsCity()) !=
-			(NO_IMPROVEMENT != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity()) )
+		if ((NO_IMPROVEMENT != getImprovementType() && GC.getImprovementInfo(getImprovementType()).isActsAsCity())
+			!= (NO_IMPROVEMENT != eOldImprovement && GC.getImprovementInfo(eOldImprovement).isActsAsCity()))
 		{
 			updatePlotGroup();
 		}
@@ -6835,12 +6836,12 @@ void CvPlot::updateWorkingCity()
 					if (pLoopCity->getOwnerINLINE() == getOwnerINLINE())
 					{
 						// XXX use getGameTurnAcquired() instead???
-						if ((pBestCity == NULL) ||
-							(GC.getCityPlotPriority()[iI] < GC.getCityPlotPriority()[iBestPlot]) ||
-							((GC.getCityPlotPriority()[iI] == GC.getCityPlotPriority()[iBestPlot]) &&
-							((pLoopCity->getGameTurnFounded() < pBestCity->getGameTurnFounded()) ||
-							((pLoopCity->getGameTurnFounded() == pBestCity->getGameTurnFounded()) &&
-							(pLoopCity->getID() < pBestCity->getID())))))
+						if (pBestCity == NULL
+							|| GC.getCityPlotPriority()[iI] < GC.getCityPlotPriority()[iBestPlot]
+							|| (GC.getCityPlotPriority()[iI] == GC.getCityPlotPriority()[iBestPlot]
+								&& (pLoopCity->getGameTurnFounded() < pBestCity->getGameTurnFounded()
+									|| (pLoopCity->getGameTurnFounded() == pBestCity->getGameTurnFounded()
+										&& pLoopCity->getID() < pBestCity->getID()))))
 						{
 							iBestPlot = iI;
 							pBestCity = pLoopCity;
@@ -8785,9 +8786,9 @@ void CvPlot::updateFeatureSymbol(bool bForce)
 
 	gDLL->getEngineIFace()->RebuildTileArt(m_iX,m_iY);
 
-	if ((eFeature == NO_FEATURE) ||
-		(GC.getFeatureInfo(eFeature).getArtInfo()->isRiverArt()) ||
-		(GC.getFeatureInfo(eFeature).getArtInfo()->getTileArtType() != TILE_ART_TYPE_NONE))
+	if (eFeature == NO_FEATURE
+		|| GC.getFeatureInfo(eFeature).getArtInfo()->isRiverArt()
+		|| GC.getFeatureInfo(eFeature).getArtInfo()->getTileArtType() != TILE_ART_TYPE_NONE)
 	{
 		gDLL->getFeatureIFace()->destroy(m_pFeatureSymbol);
 		return;
@@ -9430,7 +9431,7 @@ void CvPlot::doFeature()
 {
 	PROFILE("CvPlot::doFeature()")
 
-		CvCity* pCity;
+	CvCity* pCity;
 	CvPlot* pLoopPlot;
 	CvWString szBuffer;
 	int iProbability;
@@ -9551,7 +9552,7 @@ void CvPlot::doCulture()
 {
 	PROFILE("CvPlot::doCulture()")
 
-		CLLNode<IDInfo>* pUnitNode;
+	CLLNode<IDInfo>* pUnitNode;
 	CvCity* pCity;
 	CvUnit* pLoopUnit;
 	CvWString szBuffer;
@@ -10627,20 +10628,20 @@ int CvPlot::getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUp
 			/* ImprovementTypes eUpgradeImprovement = (ImprovementTypes)GC.getImprovementInfo(eImprovement).getImprovementUpgrade();
 			if (eUpgradeImprovement != NO_IMPROVEMENT)
 			{
-			//unless it's commerce on a low food tile, in which case only use 1 level higher
-			//if ((eYield != YIELD_COMMERCE) || (getYield(YIELD_FOOD) >= GC.getFOOD_CONSUMPTION_PER_POPULATION()))
-			{
-			ImprovementTypes eUpgradeImprovement2 = (ImprovementTypes)GC.getImprovementInfo(eUpgradeImprovement).getImprovementUpgrade();
-			if (eUpgradeImprovement2 != NO_IMPROVEMENT)
-			{
-			eUpgradeImprovement = eUpgradeImprovement2;				
-			}
-			}
+				//unless it's commerce on a low food tile, in which case only use 1 level higher
+				//if ((eYield != YIELD_COMMERCE) || (getYield(YIELD_FOOD) >= GC.getFOOD_CONSUMPTION_PER_POPULATION()))
+				{
+					ImprovementTypes eUpgradeImprovement2 = (ImprovementTypes)GC.getImprovementInfo(eUpgradeImprovement).getImprovementUpgrade();
+					if (eUpgradeImprovement2 != NO_IMPROVEMENT)
+					{
+						eUpgradeImprovement = eUpgradeImprovement2;
+					}
+				}
 			}
 
 			if ((eUpgradeImprovement != NO_IMPROVEMENT) && (eUpgradeImprovement != eImprovement))
 			{
-			eImprovement = eUpgradeImprovement;
+				eImprovement = eUpgradeImprovement;
 			} */ // original code
 
 			// K-Mod. Stuff that. Just use the final improvement.

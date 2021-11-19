@@ -99,9 +99,9 @@
 ## Author: EmperorFool
 
 from CvPythonExtensions import (CyGlobalContext, TradeableItems, DenialTypes,
-                                CyCity, YieldTypes, TradeData)
+                                CyCity, YieldTypes, TradeData, GameOptionTypes)
 import BugUtil
-import GameUtil
+# import GameUtil
 import PlayerUtil
 import CvUtil
 
@@ -142,7 +142,7 @@ def getTechTradePartners(playerOrID):
     """
     Returns a list of CyPlayers that can trade technologies with <player>.
     """
-    if not GameUtil.isTechTrading():
+    if gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_TECH_TRADING):
         return ()
     return getTradePartnersByTeam(playerOrID, lambda fromTeam, toTeam: fromTeam.isTechTrading() or toTeam.isTechTrading())
 

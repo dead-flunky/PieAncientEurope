@@ -8,7 +8,9 @@
 ## TODO:
 ## - Use onPlayerChangeStateReligion event
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyGame, ColorTypes, InputTypes,
+                                EventContextTypes,CyInterface, PopupStates,
+                                CyMap, CommerceTypes)
 import CvUtil
 import Popup as PyPopup
 import PyHelpers
@@ -17,6 +19,11 @@ import time
 import BugCore
 import BugUtil
 import TradeUtil
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+xrange = range
 
 OPEN_LOG_EVENT_ID = CvUtil.getNewEventID("Autolog.OpenLog")
 CUSTOM_ENTRY_EVENT_ID = CvUtil.getNewEventID("Autolog.CustomEntry")
@@ -59,7 +66,7 @@ def StartLogger(vsFileName):
 		szfileName = gc.getPlayer(ePlayer).getName()
 	else:
 		szfileName = vsFileName
-	
+
 	ziStyle = AutologOpt.getFormatStyle()
 #	' valid styles are plain (0), html (1), forum with " for color(2) or forum without " for color(3)'
 	if (ziStyle == 1):
@@ -68,7 +75,7 @@ def StartLogger(vsFileName):
 	else:
 		if not (szfileName.endswith(".txt")):
 			szfileName = szfileName + ".txt"
-	
+
 	Logger.setLogFileName(szfileName)
 	if (not AutologOpt.isSilent()):
 		message = BugUtil.getText("TXT_KEY_AUTOLOG_LOGGING_GAME", (szfileName, ))
@@ -80,7 +87,7 @@ class autologEventManager:
 
 		global Logger
 		Logger = autolog.autologInstance()
-		
+
 		AutoLogEvent(eventManager)
 
 		# additions to self.Events
@@ -228,7 +235,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		self.WonLastRound = 0
 		self.WdlAttacker = None
 		self.WdlDefender = None
-		
+
 		self.CIVAttitude = None
 		self.CIVCivics = None
 		self.CIVReligion = None
@@ -328,7 +335,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		'Called at the End of the game'
 
 	def onEndGameTurn(self, argsList):
-		iGameTurn = argsList[0]
+# 		iGameTurn = argsList[0]
 
 		if isLoggingOn():
 			self.checkStuff()
@@ -349,7 +356,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 				zsTurn = "%i" % (zcurrturn)
 			else:
 				zsTurn = "%i/%i" % (zcurrturn, zmaxturn)
-				
+
 			message = BugUtil.getText("TXT_KEY_AUTOLOG_TURN", (zsTurn, zyear, zCurrDateTime))
 
 			Logger.writeLog_pending_flush()
@@ -460,8 +467,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 	def onCombatLogCalc(self, argsList):
 		if (AutologOpt.isLogCombat()):
 			genericArgs = argsList[0][0]
-			cdAttacker = genericArgs[0]
-			cdDefender = genericArgs[1]
+# 			cdAttacker = genericArgs[0]
+# 			cdDefender = genericArgs[1]
 			iCombatOdds = genericArgs[2]
 
 			self.fOdds = float(iCombatOdds)/10
@@ -477,8 +484,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pWinner,pLoser = argsList
 			if (pWinner.getOwner() == CyGame().getActivePlayer()
 			or pLoser.getOwner() == CyGame().getActivePlayer()):
-				playerX = PyPlayer(pWinner.getOwner())
-				playerY = PyPlayer(pLoser.getOwner())
+# 				playerX = PyPlayer(pWinner.getOwner())
+# 				playerY = PyPlayer(pLoser.getOwner())
 				winnerHealth = float(pWinner.baseCombatStr()) * float(pWinner.currHitPoints()) / float(pWinner.maxHitPoints())
 				zsBattleLocn = self.getUnitLocation(pWinner)
 
@@ -513,23 +520,23 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		cdAttacker = genericArgs[0]
 		cdDefender = genericArgs[1]
 		iIsAttacker = genericArgs[2]
-		iDamage = genericArgs[3]
+# 		iDamage = genericArgs[3]
 
 		self.WdlAttacker = cdAttacker
 		self.WdlDefender = cdDefender
-		
+
 		if (iIsAttacker == 0):
 			self.WonLastRound = 0
-			
+
 		elif (iIsAttacker == 1):
 			self.WonLastRound = 1
 
 	def onSelectionGroupPushMission(self, argsList):
 		'selection group mission'
 		eOwner = argsList[0]
-		eMission = argsList[1]
-		iNumUnits = argsList[2]
-		listUnitIds = argsList[3]
+# 		eMission = argsList[1]
+# 		iNumUnits = argsList[2]
+# 		listUnitIds = argsList[3]
 
 #		print eOwner, eMission, iNumUnits, listUnitIds
 
@@ -649,7 +656,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 	def onTechAcquired(self, argsList):
 		if gc.getGame().getGameTurn() == 0:
 			return
-		
+
 		if (AutologOpt.isLogTechnology()):
 			iTechType, iTeam, iPlayer, bAnnounce = argsList
 
@@ -813,7 +820,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 	def onCityRazed(self, argsList):
 		if (AutologOpt.isLogCityRazed()):
 			city, iPlayer = argsList
-			owner = PyPlayer(city.getOwner())
+# 			owner = PyPlayer(city.getOwner())
 			razor = PyPlayer(iPlayer)
 			if (iPlayer == CyGame().getActivePlayer()):
 				message = BugUtil.getText("TXT_KEY_AUTOLOG_CITY_RAZED", (city.getName(), ))
@@ -846,7 +853,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 	def onCultureExpansion(self, argsList):
 		if (AutologOpt.isLogCityBorders()):
 			pCity = argsList[0]
-			iPlayer = argsList[1]
+			# iPlayer = argsList[1]
 			if pCity.getOwner() == CyGame().getActivePlayer():
 				message = BugUtil.getText("TXT_KEY_AUTOLOG_CITY_EXPANDED", (pCity.getName(), ))
 				Logger.writeLog(message, vColor="RoyalBlue")
@@ -854,7 +861,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 	def onCityGrowth(self, argsList):
 		if (AutologOpt.isLogCityGrowth()):
 			pCity = argsList[0]
-			iPlayer = argsList[1]
+			# iPlayer = argsList[1]
 			#CvUtil.pyPrint("%s has grown to size %i" %(pCity.getName(),pCity.getPopulation()))
 			if pCity.getOwner() == CyGame().getActivePlayer():
 				message = BugUtil.getText("TXT_KEY_AUTOLOG_CITY_GROWS", (pCity.getName(), pCity.getPopulation()))
@@ -882,7 +889,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		'Improvement Built'
 		iImprovement, iX, iY = argsList
 
-		if iImprovement in (-1, gc.getInfoTypeForString("IMPROVEMENT_GOODY_HUT"), gc.getInfoTypeForString("IMPROVEMENT_CITY_RUINS")):  
+		if iImprovement in (-1, gc.getInfoTypeForString("IMPROVEMENT_GOODY_HUT"), gc.getInfoTypeForString("IMPROVEMENT_CITY_RUINS")):
 			return
 
 		pPlot = CyMap().plot(iX,iY)
@@ -905,7 +912,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		'Improvement Destroyed'
 		iImprovement, iOwner, iX, iY = argsList
 
-		if iImprovement in (-1, gc.getInfoTypeForString("IMPROVEMENT_GOODY_HUT"), gc.getInfoTypeForString("IMPROVEMENT_CITY_RUINS")):  
+		if iImprovement in (-1, gc.getInfoTypeForString("IMPROVEMENT_GOODY_HUT"), gc.getInfoTypeForString("IMPROVEMENT_CITY_RUINS")):
 			return
 
 		pPlot = CyMap().plot(iX,iY)
@@ -965,7 +972,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 	def onVassalState(self, argsList):
 		'Vassal State'
 		iMaster, iVassal, bVassal = argsList
-		
+
 		if (AutologOpt.isLogVassals()
 		and gc.getTeam(iMaster).isHasMet(gc.getActivePlayer().getTeam())
 		and gc.getTeam(iVassal).isHasMet(gc.getActivePlayer().getTeam())):
@@ -1000,25 +1007,25 @@ class AutoLogEvent(AbstractAutoLogEvent):
 					szTargetItems = szTargetItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_OFFER", 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_OFFER",
 									(pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 									szOfferItems,
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									szTargetItems))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onCityOffered(self, argsList):
 		eOfferPlayer, eTargetPlayer, iCityID = argsList
 		if AutologOpt.isLogTradeOffer():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pOfferPlayer = gc.getPlayer(eOfferPlayer)
 			pCityOffered = pOfferPlayer.getCity(iCityID)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CITY_OFFER", 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CITY_OFFER",
 									(pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 									pCityOffered.getName(),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onHelpOffered(self, argsList):
 		eOfferPlayer, eTargetPlayer, pTrade = argsList
 		if AutologOpt.isLogTradeOffer():
@@ -1033,33 +1040,33 @@ class AutoLogEvent(AbstractAutoLogEvent):
 				for i in xrange(pTrade.getOtherCount()):
 					szOfferItems = szOfferItems + TradeUtil.format(eOfferPlayer, pTrade.getOtherTrade(i)) + ", "
 			szOfferItems = szOfferItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_OFFER", 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_OFFER",
 									(pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 									szOfferItems,
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onPeaceOffered(self, argsList):
 		eOfferPlayer, eTargetPlayer = argsList
 		if AutologOpt.isLogTradeOffer():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pOfferPlayer = gc.getPlayer(eOfferPlayer)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_PEACE_OFFER", 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_PEACE_OFFER",
 									(pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onVassalOffered(self, argsList):
 		eOfferPlayer, eTargetPlayer = argsList
 		if AutologOpt.isLogTradeOffer():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pOfferPlayer = gc.getPlayer(eOfferPlayer)
 			message = ""
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_VASSAL_OFFER", 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_VASSAL_OFFER",
 									(pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onDealCanceled(self, argsList):
 		eOfferPlayer, eTargetPlayer, pTrade = argsList
 		if AutologOpt.isLogTradeOffer() and pTrade != None:
@@ -1081,18 +1088,18 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
 			if szTargetItems:
-				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_CANCEL", 
+				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_CANCEL",
 										(pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 										szOfferItems,
 										pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 										szTargetItems))
 			else:
-				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GIFT_CANCEL", 
+				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GIFT_CANCEL",
 										(pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 										szOfferItems,
 										pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Red")
-	
+
 	def onDealAccepted(self, argsList):
 		eTargetPlayer, eOfferPlayer, pTrade = argsList
 		if AutologOpt.isLogTradeOffer():
@@ -1114,18 +1121,18 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
 			if szTargetItems:
-				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_ACCEPT", 
+				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_ACCEPT",
 										(pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 										szTargetItems,
 										pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 										szOfferItems))
 			else:
-				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GIFT_ACCEPT", 
+				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GIFT_ACCEPT",
 										(pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 										szOfferItems,
 										pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Green")
-	
+
 	def onDealRejected(self, argsList):
 		eTargetPlayer, eOfferPlayer, pTrade = argsList
 		if AutologOpt.isLogTradeOffer():
@@ -1147,18 +1154,18 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			szOfferItems = szOfferItems.rstrip(", ")
 			szTargetItems = szTargetItems.rstrip(", ")
 			if szTargetItems:
-				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_REJECT", 
+				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_DEAL_REJECT",
 										(pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 										szTargetItems,
 										pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0),
 										szOfferItems))
 			else:
-				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GIFT_REJECT", 
+				message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GIFT_REJECT",
 										(pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 										szOfferItems,
 										pOfferPlayer.getName(), pOfferPlayer.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Red")
-	
+
 	def onHelpDemanded(self, argsList):
 		eDemandPlayer, eTargetPlayer, pTrade = argsList
 		if AutologOpt.isLogTributeDemand():
@@ -1169,12 +1176,12 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									szItems))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onHelpAccepted(self, argsList):
 		eTargetPlayer, eDemandPlayer, pTrade = argsList
 		if AutologOpt.isLogTributeDemand():
@@ -1185,13 +1192,13 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									szItems))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_ACCEPT", (pTargetPlayer.getName(),))
 			Logger.writeLog(message, vColor="Green")
-	
+
 	def onHelpRejected(self, argsList):
 		eTargetPlayer, eDemandPlayer, pTrade = argsList
 		if AutologOpt.isLogTributeDemand():
@@ -1202,13 +1209,13 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_HELP_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									szItems))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_REJECT", (pTargetPlayer.getName(),))
 			Logger.writeLog(message, vColor="Red")
-	
+
 	def onTributeDemanded(self, argsList):
 		eDemandPlayer, eTargetPlayer, pTrade = argsList
 		if AutologOpt.isLogTributeDemand():
@@ -1219,12 +1226,12 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									szItems))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onTributeAccepted(self, argsList):
 		eTargetPlayer, eDemandPlayer, pTrade = argsList
 		if AutologOpt.isLogTributeDemand():
@@ -1235,13 +1242,13 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									szItems))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_ACCEPT", (pTargetPlayer.getName(),))
 			Logger.writeLog(message, vColor="Green")
-	
+
 	def onTributeRejected(self, argsList):
 		eTargetPlayer, eDemandPlayer, pTrade = argsList
 		if AutologOpt.isLogTributeDemand():
@@ -1252,8 +1259,8 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			for i in xrange(pTrade.getCount()):
 				szItems = szItems + TradeUtil.format(eTargetPlayer, pTrade.getTrade(i)) + ", "
 			szItems = szItems.rstrip(", ")
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_TRIBUTE_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									szItems))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_REJECT", (pTargetPlayer.getName(),))
@@ -1264,31 +1271,31 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		if AutologOpt.isLogReligionDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_RELIGION_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_RELIGION_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									gc.getReligionInfo(eReligion).getDescription()))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onReligionAccepted(self, argsList):
 		eTargetPlayer, eDemandPlayer, eReligion = argsList
 		if AutologOpt.isLogReligionDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_RELIGION_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_RELIGION_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									gc.getReligionInfo(eReligion).getDescription()))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_ACCEPT", (pTargetPlayer.getName(),))
 			Logger.writeLog(message, vColor="Green")
-	
+
 	def onReligionRejected(self, argsList):
 		eTargetPlayer, eDemandPlayer, eReligion = argsList
 		if AutologOpt.isLogReligionDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_RELIGION_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_RELIGION_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									gc.getReligionInfo(eReligion).getDescription()))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_REJECT", (pTargetPlayer.getName(),))
@@ -1299,31 +1306,31 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		if AutologOpt.isLogCivicDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CIVIC_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CIVIC_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									gc.getCivicInfo(eCivic).getDescription()))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onCivicAccepted(self, argsList):
 		eTargetPlayer, eDemandPlayer, eCivic = argsList
 		if AutologOpt.isLogCivicDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CIVIC_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CIVIC_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									gc.getCivicInfo(eCivic).getDescription()))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_ACCEPT", (pTargetPlayer.getName(),))
 			Logger.writeLog(message, vColor="Green")
-	
+
 	def onCivicRejected(self, argsList):
 		eTargetPlayer, eDemandPlayer, eCivic = argsList
 		if AutologOpt.isLogCivicDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CIVIC_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_CIVIC_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									gc.getCivicInfo(eCivic).getDescription()))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_REJECT", (pTargetPlayer.getName(),))
@@ -1335,33 +1342,33 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			pVictim = gc.getPlayer(eVictim)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_WAR_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_WAR_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									pVictim.getName(), pVictim.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onWarAccepted(self, argsList):
 		eTargetPlayer, eDemandPlayer, eVictim = argsList
 		if AutologOpt.isLogWarDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			pVictim = gc.getPlayer(eVictim)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_WAR_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_WAR_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									pVictim.getName(), pVictim.getCivilizationShortDescription(0)))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_ACCEPT", (pTargetPlayer.getName(),))
 			Logger.writeLog(message, vColor="Green")
-	
+
 	def onWarRejected(self, argsList):
 		eTargetPlayer, eDemandPlayer, eVictim = argsList
 		if AutologOpt.isLogWarDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			pVictim = gc.getPlayer(eVictim)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_WAR_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_WAR_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									pVictim.getName(), pVictim.getCivilizationShortDescription(0)))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_REJECT", (pTargetPlayer.getName(),))
@@ -1373,33 +1380,33 @@ class AutoLogEvent(AbstractAutoLogEvent):
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			pVictim = gc.getPlayer(eVictim)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_EMBARGO_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_EMBARGO_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									pVictim.getName(), pVictim.getCivilizationShortDescription(0)))
 			Logger.writeLog(message, vColor="Navy")
-	
+
 	def onEmbargoAccepted(self, argsList):
 		eTargetPlayer, eDemandPlayer, eVictim = argsList
 		if AutologOpt.isLogEmbargoDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			pVictim = gc.getPlayer(eVictim)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_EMBARGO_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_EMBARGO_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									pVictim.getName(), pVictim.getCivilizationShortDescription(0)))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_ACCEPT", (pTargetPlayer.getName(),))
 			Logger.writeLog(message, vColor="Green")
-	
+
 	def onEmbargoRejected(self, argsList):
 		eTargetPlayer, eDemandPlayer, eVictim = argsList
 		if AutologOpt.isLogEmbargoDemand():
 			pTargetPlayer = gc.getPlayer(eTargetPlayer)
 			pDemandPlayer = gc.getPlayer(eDemandPlayer)
 			pVictim = gc.getPlayer(eVictim)
-			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_EMBARGO_DEMAND", 
-									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0), 
+			message = BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_EMBARGO_DEMAND",
+									(pDemandPlayer.getName(), pDemandPlayer.getCivilizationShortDescription(0),
 									pTargetPlayer.getName(), pTargetPlayer.getCivilizationShortDescription(0),
 									pVictim.getName(), pVictim.getCivilizationShortDescription(0)))
 			message = message + BugUtil.getText("TXT_KEY_AUTOLOG_DIPLO_GENERIC_REJECT", (pTargetPlayer.getName(),))
@@ -1513,7 +1520,7 @@ class AutoLogEvent(AbstractAutoLogEvent):
 		ziMaxCiv = gc.getGame().countCivPlayersEverAlive()
 		if (not self.CIVReligion):
 			self.storeStuff()
-		
+
 		Logger.writeLog("")
 		Logger.writeLog("dumpStuff")
 		Logger.writeLog("state religion")

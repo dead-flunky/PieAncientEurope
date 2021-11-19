@@ -94,7 +94,7 @@ import InputUtil
 import CvStrategyOverlay
 import BugHelp
 import BugOptionsScreen
-import BugUtil
+# import BugUtil
 
 # TODO remove
 # DEBUG code for Python 3 linter
@@ -358,9 +358,10 @@ class CvEventManager:
             theKey = int(key)
             # <f1rpo> (advc.007b)
             # Added not bCtrl/bAlt/bShift checks so that each cheat is triggered by only one combination of modifier keys
-            if theKey == int(InputTypes.KB_R) and not self.bShift and self.bCtrl and self.bAlt:
-                BugUtil.warn("Note (K-Mod): Reloading of Art Defines (Ctrl+Alt+R) is disabled")
-                return 1  # Don't use this key combination for anything else
+
+            # if theKey == int(InputTypes.KB_R) and not self.bShift and self.bCtrl and self.bAlt:
+            #    BugUtil.warn("Note (K-Mod): Reloading of Art Defines (Ctrl+Alt+R) is disabled")
+            #    return 1  # Don't use this key combination for anything else
             # </f1rpo>
 
             # Flunky PAE disabled BUG custom shortcuts

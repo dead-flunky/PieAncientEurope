@@ -142,6 +142,11 @@ import time
 import traceback
 import types
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 gc = CyGlobalContext()
 localText = CyTranslator()
 interface = CyInterface()

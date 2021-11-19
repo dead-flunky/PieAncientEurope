@@ -17,10 +17,14 @@ import BugCore
 # import BugPath
 import BugUtil
 import ColorUtil
-import GameUtil
+# import GameUtil
 # import PlayerUtil
 # import TechUtil
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 AdvisorOpt = BugCore.game.Advisors
 # Mod BUG - end
@@ -1299,7 +1303,7 @@ class CvVictoryScreen:
 
 # rewritten for K-Mod
     def getListCultureCities(self, iTeam, victory):
-        maxCityCulture = GameUtil.getCultureThreshold(victory.getCityCulture())
+        maxCityCulture = gc.getGame().getCultureThreshold(victory.getCityCulture())
 
         if iTeam < 0:
             return []

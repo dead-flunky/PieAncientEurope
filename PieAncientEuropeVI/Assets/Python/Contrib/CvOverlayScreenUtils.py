@@ -6,7 +6,7 @@
 ##
 ## Author: Del69, EmperorFool
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyEngine, CyGlobalContext, CommerceTypes)
 import CvDotMapOverlayScreen
 import BugUtil
 import CvUtil
@@ -83,12 +83,12 @@ class CvOverlayScreenUtils:
 
     def leftMouseDown (self, argsList):
         # return 1 to consume the input
-        screenEnum = argsList[0]
+        # screenEnum = argsList[0]
         return 0
 
     def rightMouseDown (self, argsList):
         # return 1 to consume the input
-        screenEnum = argsList[0]
+        # screenEnum = argsList[0]
         return 0
 
     def mouseOverPlot(self, argsList):
@@ -132,25 +132,25 @@ class CvOverlayScreenUtils:
 
     # Screen closing
     def onClose (self, argsList):
-        screenEnum = argsList[0]
+        # screenEnum = argsList[0]
         return 0
 
     # Forced screen update
     def forceScreenUpdate (self, argsList):
-        screenEnum = argsList[0]
+        # screenEnum = argsList[0]
         # place call to update function here
         return 0
 
     # Forced redraw
     def forceScreenRedraw (self, argsList):
-        screenEnum = argsList[0]
+        # screenEnum = argsList[0]
         # place call to redraw function here
 
         return 0
 
     # Minimap Clicked
     def minimapClicked(self, argsList):
-        screenEnum = argsList[0]
+        # screenEnum = argsList[0]
         # place call to mini map function here
         return 0
 
@@ -192,7 +192,7 @@ class OverlaySign:
         """
         Adds an icon to the end of the signs string
         """
-        game = gc.getGame()
+        # game = gc.getGame()
         for iconIndex in ICON_TYPES:
             if iconType == iconIndex:
                 function = "add" + ICON_TYPES[iconType]
