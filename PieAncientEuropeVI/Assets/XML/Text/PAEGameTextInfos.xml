@@ -82,11 +82,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_INFO_CIVIL_WAR_5</Tag>
-    <English>A civil war has broken out in %s1_city!</English>
-    <French>Une guerre civile a &#233;clat&#233; dans %s1_city !</French>
-    <German>Ein B&#252;rgerkrieg ist in %s1_city ausgebrochen!</German>
-    <Italian>Una guerra civile &#232; scoppiata in %s1_city!</Italian>
-    <Spanish>&#161;Ha estallado una guerra civil en %s1_city!</Spanish>
+    <English>[ICON_STRENGTH] A civil war has broken out in %s1_city!</English>
+    <French>[ICON_STRENGTH] Une guerre civile a &#233;clat&#233; dans %s1_city !</French>
+    <German>[ICON_STRENGTH] Ein B&#252;rgerkrieg ist in %s1_city ausgebrochen!</German>
+    <Italian>[ICON_STRENGTH] Una guerra civile &#232; scoppiata in %s1_city!</Italian>
+    <Spanish>[ICON_STRENGTH] &#161;Ha estallado una guerra civil en %s1_city!</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_POPUP_TRADE_INFO_6</Tag>
@@ -349,7 +349,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <Tag>TXT_KEY_MESSAGE_RODUNG_1</Tag>
     <English>A forest has been clearcut to supply wood for manufacturing weapons in %s1.</English>
     <French>Une for&#234;t a &#233;t&#233; coup&#233;e pour produire des armes &#224; %s1.</French>
-    <German>Es wurde f&#252;r die Waffenproduktion ein Waldabschnitt bei %s1 gerodet.</German>
+    <German>F&#252;r die Waffenproduktion wurde ein Waldabschnitt bei %s1 gerodet.</German>
     <Italian>Una foresta &#232; stata tagliata per la produzione di armi a %s1.</Italian>
     <Spanish>Un bosque fue talado para producci&#243;n de armas en %s1.</Spanish>
   </TEXT>
@@ -358,7 +358,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>You have clearcut a forest for weapons production in %s2 territory! As a result, the attitude of your neighbour (%s1) towards you deteriorates by 1.</English>
     <French>Vous avez coup&#233; une for&#234;t situ&#233;e en territoire %s2 pour produire des armes. Vos relations avec %s1 s'en trouvent affect&#233;es (-1).</French>
     <German>Ihr habt f&#252;r die Waffenproduktion von einem %s2 Hoheitsgebiet Wald gerodet! Die Haltung dieses Nachbars (%s1) zu Eurer Nation verschlechtert sich daher um -1.</German>
-    <Italian>You have clearcut a forest for weapons production in %s2 territory! As a result, the attitude of your neighbour (%s1) towards you deteriorates by 1.</Italian>
+    <Italian>Hai disboscato una foresta per la produzione di armi nel territorio %s2! Di conseguenza, l'atteggiamento del tuo vicino (%s1) nei tuoi confronti si deteriora di 1.</Italian>
     <Spanish>&#161;Has talado un bosque para producci&#243;n de armas de un territorio %s2 extranjero! La actitud de tu vecino (%s1) hacia tu naci&#243;n se reduce en -1.</Spanish>
   </TEXT>
   <TEXT>
@@ -1294,7 +1294,7 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <English>The defense of your city of %s1 was destroyed by the cunning of a wooden horse manned with %s2 soldiers! The gates are now wide open!</English>
     <French>Les d&#233;fenses de notre ville de %s1 ont &#233;t&#233; r&#233;duites &#224; n&#233;ant par un fourbe cadeau %s2, un grand cheval de bois ... rempli de soldats ! Les portes sont maintenant grandes ouvertes !</French>
     <German>Die Verteidigung Eurer Stadt %s1 wurde durch die List eines mit %s2 Soldaten bemannten h&#246;lzernen Pferdes zunichte gemacht! Die Tore stehen nun weit offen!</German>
-    <Italian>The defense of your city of %s1 was destroyed by the cunning of a wooden horse manned with %s2 soldiers! The gates are now wide open!</Italian>
+    <Italian>La difesa della tua citt&#224; di %s1 &#232; stata distrutta dall'astuzia di un cavallo di legno equipaggiato con %s2 soldati! I cancelli ora sono spalancati!</Italian>
     <Spanish>&#161;La defensa de tu ciudad fue destru&#237;da por la artima&#241;a de un caballo de madera tripulado con soldados %s2! &#161;Las puertas se han abierto de par en par!</Spanish>
   </TEXT>
   <TEXT>
@@ -4611,11 +4611,11 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_DISASTER_SEESTURM_FISCHERBOOT</Tag>
-    <English>A fishing improvement was swallowed by the sea!</English>
-    <French>Un bateau de p&#234;che a &#233;t&#233; englouti par les flots !</French>
-    <German>Eine Fischerei-Modernisierung wurde vom Meer verschluckt!</German>
-    <Italian>A fishing improvement was swallowed by the sea!</Italian>
-    <Spanish>&#161;Una mejora de pesca fue tragada por el mar!</Spanish>
+    <English>Your fishing boats have been swallowed by the sea!</English>
+    <French>Vos bateaux de p&#234;che ont &#233;t&#233; aval&#233;s par la mer !</French>
+    <German>Eure Fischerboote wurden vom Meer verschluckt!</German>
+    <Italian>Le tue barche da pesca sono state inghiottite dal mare!</Italian>
+    <Spanish>&#161;Sus barcos de pesca se han tragado el mar!</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_DISASTER_TORNADO</Tag>
@@ -7963,11 +7963,11 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_INFO_CIVIL_WAR_3</Tag>
-    <English>The mob in %s1 could kill a unit.</English>
-    <French>La foule dans %s1 pourrait tuer une unit&#233;.</French>
-    <German>Der Mob in %s1 konnte eine Einheit t&#246;ten.</German>
-    <Italian>Il mob in %s1 potrebbe uccidere un'unit&#224;.</Italian>
-    <Spanish>La mafia en %s1 podr&#237;a matar a una unidad.</Spanish>
+    <English>[ICON_STRENGTH] The mob in %s1 could kill a unit.</English>
+    <French>[ICON_STRENGTH] La foule dans %s1 pourrait tuer une unit&#233;.</French>
+    <German>[ICON_STRENGTH] Der Mob in %s1 konnte eine Einheit t&#246;ten.</German>
+    <Italian>[ICON_STRENGTH] Il mob in %s1 potrebbe uccidere un'unit&#224;.</Italian>
+    <Spanish>[ICON_STRENGTH] La mafia en %s1 podr&#237;a matar a una unidad.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_GET_XP_BY_SLAVE_LOSE</Tag>
@@ -8035,11 +8035,11 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_INFO_CIVIL_WAR_2</Tag>
-    <English>Several citizens were slaughtered in %s1_city.</English>
-    <French>De nombreux citoyens ont &#233;t&#233; massacr&#233;s &#224; %s1_city.</French>
-    <German>Es wurden etliche B&#252;rger in %s1_city niedergemetzelt.</German>
-    <Italian>Diversi cittadini sono stati massacrati in %s1_city.</Italian>
-    <Spanish>Varios ciudadanos fueron asesinados en %s1_city.</Spanish>
+    <English>Several citizens were slaughtered in %s1_city (-1 [ICON_ANGRYPOP]).</English>
+    <French>De nombreux citoyens ont &#233;t&#233; massacr&#233;s &#224; %s1_city (-1 [ICON_ANGRYPOP]).</French>
+    <German>Es wurden etliche B&#252;rger in %s1_city niedergemetzelt (-1 [ICON_ANGRYPOP]).</German>
+    <Italian>Diversi cittadini sono stati massacrati in %s1_city (-1 [ICON_ANGRYPOP]).</Italian>
+    <Spanish>Varios ciudadanos fueron asesinados en %s1_city (-1 [ICON_ANGRYPOP]).</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_BONUS_SOLD3</Tag>
@@ -8299,11 +8299,11 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_INFO_CIVIL_WAR_6</Tag>
-    <English>A civil war is still raging in %s1! There [NUM2:is:are] %d2 [NUM3:unit:units] against %d3 pop!</English>
-    <French>La guerre civile fait toujours rage dans %s1_city ! Il y a %d2 [NUM2:unit&#233;:unit&#233;s] contre %d3 [NUM3:insurg&#233;:insurg&#233;s] !</French>
-    <German>In %s1 tobt immer noch ein B&#252;rgerkrieg! Es [NUM2:steht:stehen] %d2 [NUM3:Einheit:Einheiten] gegen %d3 Bev&#246;lkerung!</German>
-    <Italian>Una guerra civile &#232; ancora in corso in %s1! Ci sono %d2 unit&#225; contro %d3 popolazione!</Italian>
-    <Spanish>&#161;Todav&#237;a hay una guerra civil en %s1! &#161;Hay %d2 [NUM3:unidad:unidades] contra %d3 poblaci&#243;n!</Spanish>
+    <English>[ICON_STRENGTH] A civil war is still raging in %s1! There [NUM2:is:are] %d2 [NUM3:unit:units] against %d3 pop!</English>
+    <French>[ICON_STRENGTH] La guerre civile fait toujours rage dans %s1_city ! Il y a %d2 [NUM2:unit&#233;:unit&#233;s] contre %d3 [NUM3:insurg&#233;:insurg&#233;s] !</French>
+    <German>[ICON_STRENGTH] In %s1 tobt immer noch ein B&#252;rgerkrieg! Es [NUM2:steht:stehen] %d2 [NUM3:Einheit:Einheiten] gegen %d3 Bev&#246;lkerung!</German>
+    <Italian>[ICON_STRENGTH] Una guerra civile &#232; ancora in corso in %s1! Ci sono %d2 unit&#225; contro %d3 popolazione!</Italian>
+    <Spanish>[ICON_STRENGTH] &#161;Todav&#237;a hay una guerra civil en %s1! &#161;Hay %d2 [NUM3:unidad:unidades] contra %d3 poblaci&#243;n!</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_HORSEMAN_MACEDON4</Tag>
@@ -8388,10 +8388,10 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
   <TEXT>
     <Tag>TXT_KEY_MISC_YOU_KILLED_ENEMY_UNIT</Tag>
     <English>While defending, your %s1_UnitName has defeated a %s3_owner_adjective %s2_EnUName!</English>
-    <French>En se d&#233;fendant, votre %s1_UnitName a vaincu [NUM2:un:une:des:des] %s2_EnUName (%s3_owner_adjective) !</French>
-    <German>Eure Einheit %s1_UnitName hat w&#228;hrend eines Verteidigungsman&#246;vers eine Einheit %s2_EnUName (%s3_owner_adjective) geschlagen!</German>
-    <Italian>Difendendo, la tua unit&#224; %s1_UnitName ha ucciso l'unit&#224; nemica %s2_EnUName (%s3_owner_adjective)!</Italian>
-    <Spanish>Mientras se [NUM1:defend&#237;a:defend&#237;a:defend&#237;an:defend&#237;an], [NUM1:vuestro:vuestra:vuestros:vuestras] %s1_UnitName [NUM1:ha:ha:han:han] derrotado [NUM2:un:una:unos:unas] %s2_EnUName (%s3_owner_adjective).</Spanish>
+    <French>En se d&#233;fendant, votre %s1_UnitName a vaincu [NUM2:un:une:des:des] %s2_EnUName %s3_owner_adjective !</French>
+    <German>Eure Einheit %s1_UnitName hat w&#228;hrend eines Verteidigungsman&#246;vers eine %s3_owner_adjective Einheit %s2_EnUName geschlagen!</German>
+    <Italian>Difendendo, la tua unit&#224; %s1_UnitName ha ucciso l'unit&#224; %s3_owner_adjective nemica %s2_EnUName !</Italian>
+    <Spanish>Mientras se [NUM1:defend&#237;a:defend&#237;a:defend&#237;an:defend&#237;an], [NUM1:vuestro:vuestra:vuestros:vuestras] %s1_UnitName [NUM1:ha:ha:han:han] derrotado [NUM2:un:una:unos:unas] %s2_EnUName %s3_owner_adjective.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_MISC_YOU_UNIT_DESTROYED_ENEMY</Tag>
@@ -8408,6 +8408,14 @@ El sol se alza en el a&#241;o %s1_year. %s3_leader, vuestro pueblo os ha conferi
     <German>Eure Einheit %s1_UnitName wurde w&#228;hrend eines Verteidigungsman&#246;vers von einer Einheit %s2_EnUName (%s3_owner_adjective) geschlagen!</German>
     <Italian>Difendendo, la tua unit&#224; %s1_UnitName &#232; stata distrutta dall'unit&#224; nemica %s2_EnUName (%s3_owner_adjective)!</Italian>
     <Spanish>Mientras se [NUM1:defend&#237;a:defend&#237;a:defend&#237;an:defend&#237;an], [NUM1:vuestro:vuestra:vuestros:vuestras] %s1_UnitName [NUM1:ha sido derrotado:ha sido derrotada:han sido derrotados:han sido derrotadas] por [NUM2:un:una:unos:unas] %s2_EnUName (%s3_owner_adjective).</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_UNIT_STACK</Tag>
+    <English>(%d1) Unit Stack:</English>
+    <French>(%d1) Tas d'unit&#233;s :</French>
+    <German>(%d1) Einheitenstapel:</German>
+    <Italian>(%d1) Gruppo unit&#224;:</Italian>
+    <Spanish>(%d1) Apilamiento:</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_UNIT_RELI</Tag>

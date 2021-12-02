@@ -5737,6 +5737,32 @@
     <Spanish>Manejo de la batalla</Spanish>
   </TEXT>
   <TEXT>
+    <Tag>TXT_KEY_BUILDING_THOLOS</Tag>
+    <English>
+Tholos Tomb
+    </English>
+    <French>
+Tombeau de Tholos
+    </French>
+    <German>
+Tholosgrab
+    </German>
+    <Italian>
+Tomba a Tholos
+    </Italian>
+    <Spanish>
+Tumba de Tholos
+    </Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_BUILDING_GARUM</Tag>
+    <English>Garum manufactory</English>
+    <French>Manufacture de garum</French>
+    <German>Garum-Manufaktur</German>
+    <Italian>Manifatture di garum</Italian>
+    <Spanish>Manufactura de garum</Spanish>
+  </TEXT>
+  <TEXT>
     <Tag>TXT_KEY_UNIT_LEGION_DECURIO</Tag>
     <English>Decuria</English>
     <French>Decuria</French>

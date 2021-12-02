@@ -12935,7 +12935,7 @@
       <iHillsAttack>0</iHillsAttack>
       <iHillsDefense>0</iHillsDefense>
       <iKamikazePercent>0</iKamikazePercent>
-      <iFlightChanceChange>20</iFlightChanceChange>
+      <iFlightChanceChange>10</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>

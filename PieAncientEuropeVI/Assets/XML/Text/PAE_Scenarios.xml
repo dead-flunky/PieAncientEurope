@@ -233,6 +233,198 @@
     <Spanish>&#161;Creado por Thorgal y basado en el mapa Imperium Romanum de Inex![NEWLINE][NEWLINE]Un mapa verdaderamente grande con espacio para todo el universo PAE, desde Britania hasta la India.</Spanish>
   </TEXT>
   <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN2</Tag>
+    <English>In the struggle for supremacy in Sicily, Syracuse is caught between the fronts of Rome and Carthage.</English>
+    <French>Dans la lutte pour la supr&#233;matie en Sicile, Syracuse se retrouve entre les fronts de Rome et de Carthage.</French>
+    <German>Im Kampf um die Vorherrschaft auf Sizilien ger&#228;t Syrakus zwischen die Fronten von Rom und Karthago.</German>
+    <Italian>Nella lotta per la supremazia in Sicilia, Siracusa si trova tra i fronti di Roma e Cartagine.</Italian>
+    <Spanish>En la lucha por la supremac&#237;a en Sicilia, Siracusa se encuentra entre los frentes de Roma y Cartago.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN3</Tag>
+    <English>In the fight against Rome, our Macedonian friend Alexander II sends men and ships for the Greeks' freedom struggle in Sicily.</English>
+    <French>Dans la lutte contre Rome, notre ami mac&#233;donien Alexandre II envoie des hommes et des navires pour la lutte pour la libert&#233; des Grecs en Sicile.</French>
+    <German>Im Kampf gegen Rom sendet unser makedonischer Freund Alexander II M&#228;nner und Schiffe f&#252;r den Freiheitskampf der Griechen auf Sizilien.</German>
+    <Italian>Nella lotta contro Roma, il nostro amico macedone Alessandro II invia uomini e navi per la lotta per la libert&#224; dei greci in Sicilia.</Italian>
+    <Spanish>En la lucha contra Roma, nuestro amigo macedonio Alejandro II env&#237;a hombres y barcos para la lucha por la libertad de los griegos en Sicilia.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN50</Tag>
+    <English>In 261 BC, the Senate of Rome decides to build a navy based on a capsized Punic ship.</English>
+    <French>En 261 avant JC, le S&#233;nat de Rome d&#233;cide de construire une marine bas&#233;e sur un navire punique chavir&#233;.</French>
+    <German>Im Jahre 261 vor Christus beschlie&#223;t der Senat von Rom den Bau einer Kriegsflotte auf Basis eines gekenterten punischen Schiffes.</German>
+    <Italian>Nel 261 a.C., il Senato di Roma decide di costruire una marina basata su una nave punica capovolta.</Italian>
+    <Spanish>En el 261 a. C., el Senado de Roma decide construir una armada basada en un barco p&#250;nico volcado.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN65</Tag>
+    <English>Consul Lucius Cornelius Scipio lands in Corsica and Sardinia in 259 BC. Can he also occupy the islands permanently?</English>
+    <French>Le consul Lucius Cornelius Scipion d&#233;barque en Corse et en Sardaigne en 259 av. Peut-il aussi occuper les &#238;les en permanence ?</French>
+    <German>Konsul Lucius Cornelius Scipio landet 259 vor Christus auf Korsika und Sardinien. Ob er die Inseln auch dauerhaft besetzen kann?</German>
+    <Italian>Il console Lucio Cornelio Scipione sbarca in Corsica e Sardegna nel 259 a.C. Pu&#242; anche occupare le isole in modo permanente?</Italian>
+    <Spanish>El c&#243;nsul Lucius Cornelius Scipio aterriza en C&#243;rcega y Cerde&#241;a en el 259 a. C. &#191;Puede tambi&#233;n ocupar las islas de forma permanente?</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN75</Tag>
+    <English>Taking advantage of the weakness of Carthage, the local Numidian tribes rise in an uprising to shake off the supremacy of the Punians.</English>
+    <French>Profitant de la faiblesse de Carthage, les tribus numides locales se soul&#232;vent pour secouer la supr&#233;matie des Punians.</French>
+    <German>Die Schw&#228;che von Karthago ausnutzend, erheben sich die lokalen Numiderst&#228;mme zu einem Aufstand um die Vorherrschaft der Punier abzusch&#252;tteln.</German>
+    <Italian>Approfittando della debolezza di Cartagine, le trib&#249; numidi locali si sollevano in una rivolta per scrollarsi di dosso la supremazia dei Puni.</Italian>
+    <Spanish>Aprovechando la debilidad de Cartago, las tribus n&#250;midas locales se levantan en un levantamiento para sacudirse la supremac&#237;a de los punianos.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN110</Tag>
+    <English>In 256 BC, consul Marcus Atilius Regulus lands near Aspis in North Africa and threatens Carthage directly.</English>
+    <French>En 256 avant JC, le consul Marcus Atilius Regulus d&#233;barque pr&#232;s d'Aspis en Afrique du Nord et menace directement Carthage.</French>
+    <German>Im Jahr 256 vor Christus landet Konsul Marcus Atilius Regulus bei Aspis in Nordafrika und bedroht Karthago direkt.</German>
+    <Italian>Nel 256 a.C., il console Marco Attilio Rego sbarca vicino ad Aspis in Nord Africa e minaccia direttamente Cartagine.</Italian>
+    <Spanish>En 256 a. C., el c&#243;nsul Marco Atilio Regulus aterriza cerca de Aspis en el norte de &#193;frica y amenaza a Cartago directamente.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN160</Tag>
+    <English>Be careful! Punians land in front of Agrigentum and try to recapture it!</English>
+    <French>Fais attention! Les Puniens d&#233;barquent devant Agrigente et tentent de la reprendre !</French>
+    <German>Habt Acht! Punier landen vor Agrigentum und versuchen es zur&#252;ckzuerobern!</German>
+    <Italian>Stai attento! I Puniani sbarcano davanti ad Agrigentum e cercano di riconquistarla!</Italian>
+    <Spanish>&#161;Ten cuidado! &#161;Los punianos aterrizan frente a Agrigentum e intentan recuperarlo!</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN185</Tag>
+    <English>After the lost naval battle of Drepana in 249 BC and heavy losses in storms (Kamarina, 255 BC), Rome discontinues its naval program, but encourages wealthy Romans to take private pirate trips off the coasts of the Punians.</English>
+    <French>Apr&#232;s la bataille navale perdue de Drepana en 249 av.JC. et de lourdes pertes dans les temp&#234;tes (Kamarina, 255 av. JC.), Rome interrompt son programme naval, mais encourage les riches Romains &#224; entreprendre des voyages de pirates priv&#233;s au large des c&#244;tes des Puniens.</French>
+    <German>Nach der verlorenen Seeschlacht von Drepana 249 v. Chr. und schweren Verlusten in St&#252;rmen (Kamarina, 255 v.Chr.) stellt Rom sein Flottenprogramm ein, ermuntert aber wohlhabende R&#246;mer zu privaten Kaperfahrten vor den K&#252;sten der Punier.</German>
+    <Italian>Dopo la perduta battaglia navale di Drepana nel 249 aC e pesanti perdite nelle tempeste (Kamarina, 255 aC), Roma interrompe il suo programma navale, ma incoraggia i ricchi romani a fare viaggi privati &#8203;&#8203;dei pirati al largo delle coste dei Puni.</Italian>
+    <Spanish>Despu&#233;s de la batalla naval perdida de Drepana en 249 a. C. y grandes p&#233;rdidas en tormentas (Kamarina, 255 a. C.), Roma interrumpe su programa naval, pero anima a los romanos adinerados a emprender viajes piratas privados frente a las costas de los punianos.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN195</Tag>
+    <English>After the war on land and sea stagnated, the Punic fleet undertook raids on Italy's south coast.</English>
+    <French>Apr&#232;s la stagnation de la guerre sur terre et sur mer, la flotte punique entreprit des raids sur la c&#244;te sud de l'Italie.</French>
+    <German>Nachdem der Krieg zu Land und zur See stagniert, unternimmt die punische Flotte Pl&#252;nderungsz&#252;ge an der italienischen S&#252;dk&#252;ste.</German>
+    <Italian>Dopo la stagnazione della guerra per terra e per mare, la flotta punica intraprese incursioni sulla costa meridionale dell'Italia.</Italian>
+    <Spanish>Despu&#233;s de que la guerra en tierra y mar se estanc&#243;, la flota p&#250;nica emprendi&#243; incursiones en la costa sur de Italia.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN265</Tag>
+    <English>In a final effort, Rome is building a new navy to finally end the conflict after 23 years.</English>
+    <French>Dans un dernier effort, Rome construit une nouvelle marine pour enfin mettre fin au conflit apr&#232;s 23 ans.</French>
+    <German>In einem letzten Kraftakt baut Rom eine neue Kriegsflotte um den Konflikt nach 23 Jahren endlich zu beenden.</German>
+    <Italian>In un ultimo sforzo, Roma sta costruendo una nuova marina per porre fine al conflitto dopo 23 anni.</Italian>
+    <Spanish>En un esfuerzo final, Roma est&#225; construyendo una nueva armada para finalmente poner fin al conflicto despu&#233;s de 23 a&#241;os.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_1STPUNICWAR_TURN280</Tag>
+    <English>The inhabitants of the former Etruscan city of Faleria rise up against Roman domination!</English>
+    <French>Les habitants de l'ancienne cit&#233; &#233;trusque de Faleria se soul&#232;vent contre la domination romaine !</French>
+    <German>Die Einwohner von der ehemals etruskischen Stadt Faleria erheben sich gegen die r&#246;mische Vorherrschaft!</German>
+    <Italian>Gli abitanti dell'ex citt&#224; etrusca di Faleria si ribellano alla dominazione romana!</Italian>
+    <Spanish>&#161;Los habitantes de la antigua ciudad etrusca de Faleria se levantan contra la dominaci&#243;n romana!</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_2</Tag>
+    <English>Motivated by Hannibal's approach, the Boier rise against Rome and harass their newly founded colonies in the Po Valley.</English>
+    <French>Motiv&#233;s par l'approche d'Hannibal, les Boier se soul&#232;vent contre Rome et harc&#232;lent leurs colonies nouvellement fond&#233;es dans la vall&#233;e du P&#244;.</French>
+    <German>Von Hannibals Anmarsch motiviert, erheben sich die Boier gegen Rom und bedr&#228;ngen deren neu gegr&#252;ndeten Kolonien in der Po-Ebene.</German>
+    <Italian>Motivati &#8203;&#8203;dall'approccio di Annibale, i Boier insorgono contro Roma e molestano le loro colonie appena fondate nella Pianura Padana.</Italian>
+    <Spanish>Motivados por el enfoque de Hannibal, los Boier se alzan contra Roma y hostigan a sus colonias reci&#233;n fundadas en el valle del Po.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_3</Tag>
+    <English>In order to divert the Romans from Hannibal, the Punians make the coast near western Sicily unsafe (2nd Battle of Lilybaeum 218 BC).</English>
+    <French>Afin de d&#233;tourner les Romains d'Hannibal, les Puniens rendent dangereuse la c&#244;te pr&#232;s de la Sicile occidentale (2e bataille de Lilybaeum 218 avant JC).</French>
+    <German>Um die R&#246;mer von Hannibal abzulenken, machen die Punier die K&#252;ste bei Westsizilien unsicher (2. Schlacht von Lilybaeum 218 v.Chr.).</German>
+    <Italian>Per distogliere i Romani da Annibale, i Puni rendono pericolante la costa vicino alla Sicilia occidentale (II Battaglia di Lilybaeum 218 aC).</Italian>
+    <Spanish>Para desviar a los romanos de An&#237;bal, los punianos hacen que la costa cerca del oeste de Sicilia sea insegura (segunda batalla de Lilybaeum 218 a. C.).</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_4</Tag>
+    <English>Gnaeus Cornelius Scipio Calvus lands in Iberia to carry the war into the Punic territories and to cut off Hannibal's supplies.</English>
+    <French>Gnaeus Cornelius Scipio Calvus d&#233;barque dans la p&#233;ninsule ib&#233;rique pour mener la guerre dans les territoires puniques et couper les approvisionnements d'Hannibal.</French>
+    <German>Gnaeus Cornelius Scipio Calvus landet in Iberien, um den Krieg in die Gebiete der Punier zu tragen und um Hannibal vom Nachschub abzuschneiden.</German>
+    <Italian>Gneo Cornelio Scipione Calvo sbarca in Iberia per portare la guerra nei territori punici e per tagliare i rifornimenti ad Annibale.</Italian>
+    <Spanish>Cneo Cornelio Escipi&#243;n Calvus aterriza en Iberia para llevar la guerra a los territorios p&#250;nicos y cortar los suministros de An&#237;bal.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_5</Tag>
+    <English>The Scipio brothers Gnaeus and Publius liberate Sagunt from Punic rule.</English>
+    <French>Les fr&#232;res Scipion Gnaeus et Publius lib&#232;rent Sagunt de la domination punique.</French>
+    <German>Die Scipio-Br&#252;der Gnaeus und Publius befreien Sagunt von der punischen Herrschaft.</German>
+    <Italian>I fratelli Scipione Gneo e Publio liberano Sagunt dal dominio punico.</Italian>
+    <Spanish>Los hermanos Escipi&#243;n Cneo y Publio liberan a Sagunto del dominio p&#250;nico.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_6</Tag>
+    <English>Motivated by the victories of the Scipio brothers, the Iberians rose against Punic rule and defected to Rome.</English>
+    <French>Motiv&#233;s par les victoires des fr&#232;res Scipion, les Ib&#232;res se sont soulev&#233;s contre la domination punique et ont fait d&#233;fection &#224; Rome.</French>
+    <German>Von den Siegen der Scipio-Br&#252;der motiviert, erheben sich die Iberer gegen die punische Herrschaft und laufen zu Rom &#252;ber.</German>
+    <Italian>Motivati &#8203;&#8203;dalle vittorie dei fratelli Scipione, gli iberici insorsero contro il dominio punico e disertarono a Roma.</Italian>
+    <Spanish>Motivados por las victorias de los hermanos Escipi&#243;n, los &#237;beros se levantaron contra el dominio p&#250;nico y desertaron a Roma.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_7</Tag>
+    <English>While Hannibal is fighting in southern Italy, the Boier destroy a Roman army under Consul Lucius Postumius Albinus near Ariminum and press Rome from the north.</English>
+    <French>Alors qu'Hannibal combat dans le sud de l'Italie, les Boier d&#233;truisent une arm&#233;e romaine dirig&#233;e par le consul Lucius Postumius Albinus pr&#232;s d'Ariminum et font pression sur Rome par le nord.</French>
+    <German>W&#228;hrend Hannibal im S&#252;den Italiens k&#228;mpft, vernichten die Boier bei Ariminum ein r&#246;misches Heer unter Konsul Lucius Postumius Albinus und bedr&#228;ngen Rom vom Norden aus.</German>
+    <Italian>Mentre Annibale combatte nell'Italia meridionale, i Boier distruggono un esercito romano sotto il console Lucius Postumius Albinus vicino ad Ariminum e spingono Roma da nord.</Italian>
+    <Spanish>Mientras Hannibal lucha en el sur de Italia, los Boier destruyen un ej&#233;rcito romano al mando del c&#243;nsul Lucius Postumius Albinus cerca de Ariminum y presionan a Roma desde el norte.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_8</Tag>
+    <English>Raised in Carthage, the Massilian prince Massinissa allies himself with Carthage in the fight against his rival Syphax and against Rome.</English>
+    <French>Elev&#233; &#224; Carthage, le prince massilien Massinissa s'allie &#224; Carthage dans la lutte contre son rival Syphax et contre Rome.</French>
+    <German>In Karthago aufgewachsen, verb&#252;ndet sich der Massilier-F&#252;rst Massinissa mit Karthago im Kampf gegen seinen Rivalen Syphax und gegen Rom.</German>
+    <Italian>Cresciuto a Cartagine, il principe massiliano Massinissa si allea con Cartagine nella lotta contro la rivale Siface e contro Roma.</Italian>
+    <Spanish>Criado en Cartago, el pr&#237;ncipe massiliano Massinissa se al&#237;a con Cartago en la lucha contra su rival Syphax y contra Roma.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_9</Tag>
+    <English>After the battle of Cannae (216 BC), Capua falls away from Rome and allies himself with Hannibal.</English>
+    <French>Apr&#232;s la bataille de Cannes (216 avant JC), Capoue se s&#233;pare de Rome et s'allie &#224; Hannibal.</French>
+    <German>Nach der Schlacht von Cannae (216 vor Christus) f&#228;llt Capua von Rom ab und verb&#252;ndet sich mit Hannibal.</German>
+    <Italian>Dopo la battaglia di Canne (216 aC), Capua si allontana da Roma e si allea con Annibale.</Italian>
+    <Spanish>Despu&#233;s de la batalla de Cannas (216 a. C.), Capua se aleja de Roma y se al&#237;a con An&#237;bal.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_10</Tag>
+    <English>To support a Sardinian rebellion, the Punians land on their island (215 BC).</English>
+    <French>Pour soutenir une r&#233;bellion sarde, les Punians d&#233;barquent sur leur &#238;le (215 a.JC).</French>
+    <German>Zur Unterst&#252;tzung einer sardischen Rebellion landen die Punier auf deren Insel (215 v.Chr.).</German>
+    <Italian>Per sostenere una ribellione sarda, i Puni sbarcano nella loro isola (215 aC).</Italian>
+    <Spanish>Para apoyar una rebeli&#243;n de Cerde&#241;a, los punianos desembarcan en su isla (215 a. C.).</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_15</Tag>
+    <English>The eponymous son of the fallen Publius Cornelius Scipio conquered in 209 BC. by surprise the most important base of the Punians in Iberia.</English>
+    <French>Le fils &#233;ponyme du d&#233;chu Publius Cornelius Scipion conquis en 209 av. par surprise la base la plus importante des Punians en Ib&#233;rie.</French>
+    <German>Der gleichnamige Sohn des gefallenen Publius Cornelius Scipio erobert 209 v.Chr. im Handstreich die wichtigste Basis der Punier in Iberien.</German>
+    <Italian>L'omonimo figlio del caduto Publio Cornelio Scipione conquist&#242; nel 209 a.C. di sorpresa la base pi&#249; importante dei Puni in Iberia.</Italian>
+    <Spanish>El hijo ep&#243;nimo del ca&#237;do Publio Cornelio Escipi&#243;n conquist&#243; en 209 a. C. por sorpresa la base m&#225;s importante de los punianos en Iberia.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_12</Tag>
+    <English>When Syphax is defeated, Massinissa moves with his warriors to Iberia to support Hasdrubal Barca in the fight against Rome.</English>
+    <French>Lorsque Syphax est vaincu, Massinissa se d&#233;place avec ses guerriers vers Iberia pour soutenir Hasdrubal Barca dans la lutte contre Rome.</French>
+    <German>Als Syphax besiegt ist, zieht Massinissa mit seinen Kriegern nach Iberien um Hasdrubal Barca im Kampf gegen Rom zu unterst&#252;tzen.</German>
+    <Italian>Quando Syphax viene sconfitto, Massinissa si trasferisce con i suoi guerrieri in Iberia per sostenere Asdrubale Barca nella lotta contro Roma.</Italian>
+    <Spanish>Cuando Syphax es derrotado, Massinissa se traslada con sus guerreros a Iberia para apoyar a Hasdrubal Barca en la lucha contra Roma.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_13</Tag>
+    <English>Fearing Hannibal, Tarentum opened in 212 BC. his army the city gates (only three years later can Rome recapture the city).</English>
+    <French>Craignant Hannibal, Tarentum a ouvert ses portes en 212 av. son arm&#233;e aux portes de la ville (trois ans plus tard seulement Rome peut reprendre la ville).</French>
+    <German>Aus Angst vor Hannibal &#246;ffnet Tarent 212 v.Chr. seiner Armee die Stadttore (erst drei Jahre sp&#228;ter kann Rom die Stadt zur&#252;ck erobern).</German>
+    <Italian>Temendo Annibale, Tarentum apr&#236; nel 212 a.C. il suo esercito le porte della citt&#224; (solo tre anni dopo Roma pu&#242; riconquistare la citt&#224;).</Italian>
+    <Spanish>Temiendo a An&#237;bal, Tarentum abri&#243; sus puertas en el 212 a. C. su ej&#233;rcito las puertas de la ciudad (s&#243;lo tres a&#241;os despu&#233;s puede Roma reconquistar la ciudad).</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_14</Tag>
+    <English>After numerous defeats, there is chaos in Rome. Citizens protest against the Senate's policies.</English>
+    <French>Apr&#232;s de nombreuses d&#233;faites, c'est le chaos &#224; Rome. Les citoyens protestent contre les politiques du S&#233;nat.</French>
+    <German>Nach zahlreichen Niederlagen herrscht in Rom Chaos. Die B&#252;rger protestieren gegen die Politik des Senats.</German>
+    <Italian>Dopo numerose sconfitte, a Roma &#232; il caos. I cittadini protestano contro le politiche del Senato.</Italian>
+    <Spanish>Despu&#233;s de numerosas derrotas, reina el caos en Roma. Los ciudadanos protestan contra las pol&#237;ticas del Senado.</Spanish>
+  </TEXT>
+  <TEXT>
     <Tag>TXT_KEY_SCENARIO_SMALL_LIMES_GERMANICUS</Tag>
     <English>Created by JohnDay! [NEWLINE][NEWLINE]A scenario about the Limes Germanicus on a small map (60x40). The Burgundians are playable as OCC.</English>
     <French>Cr&#233;&#233; par JohnDay![NEWLINE][NEWLINE]Petite carte (60x40) consacr&#233;e au limes Germanicus. La civilsation des Burgondes est jouables en OCC.</French>
@@ -271,6 +463,46 @@
     <German>Erstellt von JohnDay![NEWLINE][NEWLINE]Griechenland 1200 vor Christus. Die mykenische Kultur ist zerst&#246;rt und es beginnt f&#252;r Griechenland das Dunkle Zeitalter. Vereinzelte Stadtstaaten (Polis) bilden sich und ringen um das &#220;berleben gegen barbarische Nachbarst&#228;dte. W&#228;hle eine der gro&#223;en Poleis und versuche Griechenland unter deine Kontrolle zu bringen.</German>
     <Italian>Created by JohnDay![NEWLINE][NEWLINE]Greece 1200 before Christ. The Mycenaean culture has been destroyed and the Greek Dark Ages begin. Isolated city-states (Polis) get formed and fight for survival against barbaric neighbor cities. Choose one of the big poleis and try to get Greece under control.</Italian>
     <Spanish>&#161;Creado por JohnDay![NEWLINE][NEWLINE]Grecia, 1200 antes de Cristo. La cultura mic&#233;nica ha sido destruida y la edad oscura griega ha comenzado. Las ciudades-estado (polis) se han formado y luchan por su supervivencia contra las ciudades vecinas b&#225;rbaras. Escoge una de las grandes polis e intenta tomar toda Grecia bajo tu control.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_16</Tag>
+    <English>In the struggle for supremacy in Numidia, Syphax from the tribe of the Massaesylians allied with Rome.</English>
+    <French>Dans la lutte pour la supr&#233;matie en Numidie, Syphax de la tribu des Mass&#233;syliens s'allie &#224; Rome.</French>
+    <German>Im Kampf um die Vorherrschaft in Numidien verb&#252;ndet sich Syphax vom Stamm der Mass&#228;sylier mit Rom.</German>
+    <Italian>Nella lotta per la supremazia in Numidia, Syphax della trib&#249; dei Massaesili si alle&#242; con Roma.</Italian>
+    <Spanish>En la lucha por la supremac&#237;a en Numidia, Syphax de la tribu de Massaesylians se ali&#243; con Roma.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_17</Tag>
+    <English>After marching across the Alps, Hasdrubal Barca fell in the Battle of Metaus in 207 BC. (with him dies the last hope of victory over Rome).</English>
+    <French>Apr&#232;s avoir travers&#233; les Alpes, Hasdrubal Barca est tomb&#233; lors de la bataille de Metaus en 207 av. (avec lui meurt le dernier espoir de victoire sur Rome).</French>
+    <German>Nach dem Marsch &#252;ber die Alpen f&#228;llt Hasdrubal Barca in der Schlacht am Metaus 207 v.Chr. (mit ihm stirbt die letzte Hoffnung auf den Sieg &#252;ber Rom).</German>
+    <Italian>Dopo aver marciato attraverso le Alpi, Asdrubale Barca cadde nella battaglia del Metao nel 207 a.C. (con lui muore l'ultima speranza di vittoria su Roma).</Italian>
+    <Spanish>Despu&#233;s de marchar a trav&#233;s de los Alpes, Asdr&#250;bal Barca cay&#243; en la batalla de Metaus en 207 a. C. (con &#233;l muere la &#250;ltima esperanza de victoria sobre Roma).</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_18</Tag>
+    <English>When Hasdrubal Gisgo married his daughter Sophonisbe with the Numid ruler Syphax, he switched to Carthage.</English>
+    <French>Lorsque Hasdrubal Gisgo a &#233;pous&#233; sa fille Sophonisbe avec le souverain numide Syphax, il est pass&#233; &#224; Carthage.</French>
+    <German>Als Hasdrubal Gisgo seine Tochter Sophonisbe mit dem Numiderf&#252;rst Syphax vem&#228;hlt, wechselt dieser auf die Seite Karthagos.</German>
+    <Italian>Quando Asdrubale Gisgo spos&#242; sua figlia Sofonisbe con il sovrano numide Syphax, pass&#242; a Cartagine.</Italian>
+    <Spanish>Cuando Hasdrubal Gisgo cas&#243; a su hija Sophonisbe con el gobernante n&#250;mida Syphax, se mud&#243; a Cartago.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_19</Tag>
+    <English>When a victory for Rome was on the horizon, Massinissa switched sides and formed an alliance with Rome. Annoyed that his fianc&#233;e Sophonisbe was married to Syphax, he becomes a sharp opponent of the Punians and conquers large areas in North Africa in the following years.</English>
+    <French>Alors qu'une victoire pour Rome se profile &#224; l'horizon, Massinissa change de camp et forme une alliance avec Rome. Agac&#233; que sa fianc&#233;e Sophonisbe soit mari&#233;e &#224; Syphax, il devient un adversaire farouche des Punians et conquiert de vastes territoires en Afrique du Nord dans les ann&#233;es qui suivent.</French>
+    <German>Als sich ein Sieg Roms abzeichnet, wechselt Massinissa die Seiten und verb&#252;ndet sich mit Rom. Dar&#252;ber ver&#228;rgert, dass seine Verlobte Sophonisbe mit Syphax verm&#228;hlt wurde, wird er ein scharfer Gegner der Punier und erobert in den Folgejahren weite Gebiete in Nordafrika.</German>
+    <Italian>Quando una vittoria per Roma era all'orizzonte, Massinissa cambi&#242; schieramento e form&#242; un'alleanza con Roma. Infastidito dal fatto che la sua fidanzata Sophonisbe fosse sposata con Syphax, diventa un forte oppositore dei Puni e negli anni successivi conquista vaste aree del Nord Africa.</Italian>
+    <Spanish>Cuando una victoria de Roma estaba en el horizonte, Massinissa cambi&#243; de bando y form&#243; una alianza con Roma. Molesto porque su prometida Sophonisbe estaba casada con Syphax, se convierte en un fuerte oponente de los punianos y conquista grandes &#225;reas en el norte de &#193;frica en los a&#241;os siguientes.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_20</Tag>
+    <English>14 years late, the Roman plan to bring the war to Africa can be implemented by Publius Cornelius Scipio Africanus. As a result, Hannibal and Mago Barca are recalled from Italy to defend their hometown.</English>
+    <French>14 ans plus tard, le plan romain d'amener la guerre en Afrique peut &#234;tre mis en oeuvre par Publius Cornelius Scipio Africanus. En cons&#233;quence, Hannibal et Mago Barca sont rappel&#233;s d'Italie pour d&#233;fendre leur ville natale.</French>
+    <German>Mit 14 Jahren Versp&#228;tung kann der r&#246;mische Plan, den Krieg nach Afrika zu tragen, durch Publius Cornelius Scipio Africanus umgesetzt werden. Infolge dessen werden Hannibal und Mago Barca aus Italien abberufen um ihre Heimatstadt zu verteidigen.</German>
+    <Italian>Con 14 anni di ritardo, il piano romano per portare la guerra in Africa pu&#242; essere attuato da Publio Cornelio Scipione l'Africano. Di conseguenza, Annibale e Mago Barca vengono richiamati dall'Italia per difendere la loro citt&#224; natale.</Italian>
+    <Spanish>Con 14 a&#241;os de retraso, Publius Cornelius Scipio Africanus puede implementar el plan romano para llevar la guerra a &#193;frica. Como resultado, Hannibal y Mago Barca son llamados de Italia para defender su ciudad natal.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_CIV_POLIS_ATHEN2</Tag>
@@ -393,7 +625,7 @@
     <Spanish>Gamespeed Eurasia XL</Spanish>
   </TEXT>
   <TEXT>
-    <Tag>TXT_KEY_SCENARIO_SECOND_PUNIC_WAR_EVENT1</Tag>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_1</Tag>
     <English>After an eight-month siege, Hannibal conquered 218 BC. The riotous city Sagunt (Spain). Previously asked by the besieged for help, the Romans now accuse Hannibal of breach of contract and again declare war on Carthage. This is followed by a fierce sixteen-year struggle for supremacy in the western Mediterranean.</English>
     <French>Apr&#232;s un si&#232;ge de huit mois, Hannibal conquiert en 218 av. J.-C. la ville insurg&#233;e de Sagunt (Espagne). Auparavant sollicit&#233;s par les assi&#233;g&#233;s, les Romains accusent d&#233;sormais Hannibal de rupture de contrat et d&#233;clarent &#224; nouveau la guerre &#224; Carthage. S'ensuit une lutte acharn&#233;e de seize ans pour la supr&#233;matie en M&#233;diterran&#233;e occidentale.</French>
     <German>Nach achtmonatiger Belagerung erobert Hannibal 218 v. Chr. die aufr&#252;hrerische Stadt Sagunt (Spanien). Zuvor von den Belagerten um Hilfe gebeten, werfen die R&#246;mer Hannibal nun Vertragsbruch vor und erkl&#228;ren Karthago erneut den Krieg. Es folgt ein erbitterter sechzehnj&#228;hriger Kampf um die Vorherrschaft im westlichen Mittelmeer.</German>
@@ -401,7 +633,7 @@
     <Spanish>Despu&#233;s de un asedio de ocho meses, An&#237;bal conquist&#243; 218 a. C. La ciudad desenfrenada de Sagunt (Espa&#241;a). Previamente solicitados por los asediados por ayuda, los romanos ahora acusan a An&#237;bal de incumplimiento de contrato y nuevamente declaran la guerra a Cartago. Esto es seguido por una feroz lucha de diecis&#233;is a&#241;os por la supremac&#237;a en el Mediterr&#225;neo occidental.</Spanish>
   </TEXT>
   <TEXT>
-    <Tag>TXT_KEY_SCENARIO_SECOND_PUNIC_WAR_EVENT2</Tag>
+    <Tag>TXT_KEY_MESSAGE_2NDPUNICWAR_11</Tag>
     <English>After the death of Hiero II, his grandson Jerome placed himself on the side of the Carthaginians, who promise him rule over all of Sicily in the event of victory over Rome. But the attempt to liberate the island fails. After three years of siege by Roman troops Syracuse falls in the year 212 BC. The scholar Archimedes is killed and numerous art treasures are taken to Rome.</English>
     <French>Apr&#232;s la mort de Hi&#233;ro II, son petit-fils, J&#233;r&#244;me, s'est rang&#233; du c&#244;t&#233; des Carthaginois, qui lui promettent de r&#233;gner sur toute la Sicile en cas de victoire sur Rome. Mais la tentative de lib&#233;ration de l'&#238;le &#233;choue. Apr&#232;s trois ans de si&#232;ge par les troupes romaines, Syracuse tombe en l'an 212 av. Le savant Archim&#232;de est tu&#233; et de nombreux tr&#233;sors d'art sont transport&#233;s &#224; Rome.</French>
     <German>Nach dem Tod Hierons II, stellt sich sein Enkel Hieronymus auf die Seite der Karthager, die ihm im Falle des Sieges &#252;ber Rom die Herrschaft &#252;ber ganz Sizilien versprechen. Doch der Versuch, die Insel zu befreien, scheitert. Nach dreij&#228;hriger Belagerung durch r&#246;mische Truppen f&#228;llt Syrakus im Jahr 212 v.Chr. Dabei wird der Gelehrte Archimedes get&#246;tet und zahlreiche Kunstsch&#228;tze werden nach Rom verschleppt.</German>
@@ -1591,6 +1823,14 @@
     <German><Text>italisch:italischen:italische:italischer</Text><Gender>Neuter:Neuter:Neuter:Male</Gender><Plural>0:0:0:0</Plural></German>
     <Italian><Text>battriana:battriana:battriani:battriane</Text><Gender>Male:Female:Male:Female</Gender><Plural>0:0:1:1</Plural></Italian>
     <Spanish><Text>bactriano:bactriana:bactrianos:bactrianas</Text><Gender>Male:Female:Male:Female</Gender><Plural>0:0:1:1</Plural></Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_GAMESPEED_SECONDPUNICWAR_JD_BARCAS</Tag>
+    <English>Gamespeed SecondPunicWar 218BC</English>
+    <French>Vitesse de jeu SecondPunicWar 218BC</French>
+    <German>Spielgeschwindigkeit SecondPunicWar 218BC</German>
+    <Italian>Velocit&#224; di gioco SecondPunicWar 218BC</Italian>
+    <Spanish>Velocidad del juego SecondPunicWar 218BC</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_CIV_POLIS_THEBEN1</Tag>
@@ -2938,11 +3178,11 @@
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_DAWN_OF_MAN_PAE_CIVIII_RISEOFROME</Tag>
-    <English>Greetings, exalted Head of State![NEWLINE][NEWLINE]The blows of sharp blades resound through the valleys of Europe and the waters of the Mediterranean as four powerful powers - Rome, Carthage, Macedonia and Persia - vie to build the greatest empire of the ancient world. In the north, the dark forests of Europe and the vast plains of Eurasia are populated by wild bands of Gauls, Teutons and Scythians. The Egyptians continue to cultivate fertile alluvial land along the Nile, although their glorious days are only distant memories.[NEWLINE][NEWLINE]This scenario begins with Rome already at war with Carthage and Macedonia at war with Persia. When playing Rome, your tough, upgradeable legions, when not engaged in combat, can be used to build roads and fortresses. Such faster moving emigrants can be used to colonize new countries. Roman castles can be built to guard your borders. As Carthage, Macedonia or Persia, you must always be vigilant of the growing power of Rome.[NEWLINE][NEWLINE]Your people have put their trust in you and have given you unlimited power. In return, can you build a vast Imperial civilization and reward your people with the comforts of life, a life filled with the joys of Bacchanalia?</English>
-    <French>Salutations, exalt&#233; chef de l'Etat![NEWLINE][NEWLINE]Les coups de lames tranchantes r&#233;sonnent &#224; nouveau dans les vall&#233;es de l'Europe et &#224; travers les eaux de la M&#233;diterran&#233;e alors que quatre puissantes puissances - Rome, Carthage, la Mac&#233;doine et la Perse - se disputent la construction du plus grand empire du monde antique. Au nord, les sombres for&#234;ts d'Europe et les vastes plaines d'Eurasie sont peupl&#233;es de bandes sauvages de Gaulois, de Teutons et de Scythes. Les Egyptiens continuent &#224; cultiver des terres alluviales fertiles le long du Nil, bien que leurs jours glorieux ne soient que des souvenirs lointains.[NEWLINE][NEWLINE]Ce sc&#233;nario commence avec Rome d&#233;j&#224; en guerre avec Carthage et la Mac&#233;doine en guerre avec la Perse. Lorsque vous jouez &#224; Rome, vos l&#233;gions robustes et am&#233;liorables, lorsqu'elles ne sont pas engag&#233;es dans un combat, peuvent &#234;tre utilis&#233;es pour construire des routes et des forteresses. Ces &#233;migrants se d&#233;pla&#231;ant plus rapidement peuvent &#234;tre utilis&#233;s pour coloniser de nouveaux pays. Des ch&#226;teaux romains peuvent &#234;tre construits pour garder vos fronti&#232;res. Comme Carthage, Mac&#233;doine ou Perse, vous devez toujours &#234;tre vigilant face &#224; la puissance grandissante de Rome.[NEWLINE][NEWLINE]Votre peuple vous a fait confiance et vous a donn&#233; un pouvoir illimit&#233;. En retour, pouvez-vous b&#226;tir une vaste civilisation imp&#233;riale et r&#233;compenser votre peuple avec le confort de la vie, une vie remplie des joies des Bacchanales?</French>
-    <German>Seid gegr&#252;&#223;t erhabenes Staatsoberhaupt![NEWLINE][NEWLINE]Die Hiebe scharfer Klingen hallen erneut durch die T&#228;ler Europas und &#252;ber die Gew&#228;sser des Mittelmeeres, wenn vier starke M&#228;chte - Rom, Karthago, Makedonien und Persien - wetteifern, das gr&#246;&#223;te Imperium der Antike zu errichten. Im Norden sind die finsteren W&#228;lder Europas und die ausgedehnten Ebenen Eurasiens von wilden Banden der Gallier, Germanen und Skythen bev&#246;lkert. Entlang des Nils bewirtschaften die &#196;gypter weiterhin fruchtbares Schwemmland, obwohl ihre ruhmreichen Tage nur noch entfernte Erinnerungen sind.[NEWLINE][NEWLINE]Dieses Szenario beginnt damit, dass Rom bereits mit Karthago im Krieg liegt und Makedonien mit Persien Krieg f&#252;hrt. Wenn Ihr Rom spielt, k&#246;nnen Eure z&#228;hen, aufr&#252;stbaren Legionen, wenn sie nicht in K&#228;mpfe verwickelt sind, eingesetzt werden, um Stra&#223;en und Festungen zu errichten. Sich so schneller bewegende Auswanderer k&#246;nnen verwendet werden, um neue L&#228;nder zu besiedeln. R&#246;mische Kastelle k&#246;nnen errichtet werden, um Eure Grenzen zu bewachen. Als Karthago, Makedonien oder Persien m&#252;sst Ihr stets wachsam gegen&#252;ber der wachsenden Macht Roms sein.[NEWLINE][NEWLINE]Euer Volk hat sein Vertrauen in Euch gesetzt und Euch mit uneingeschr&#228;nkter Macht ausgestattet. K&#246;nnt Ihr im Gegenzug eine gewaltige imperiale Zivilisation errichten und Euer Volk mit den Annehmlichkeiten des Lebens belohnen, einem Leben erf&#252;llt mit den Freuden der Bacchanalien?</German>
-    <Italian>Saluti, esaltato Capo di Stato![NEWLINE][NEWLINE]I colpi di lame affilate risuonano attraverso le valli dell'Europa e attraverso le acque del Mediterraneo mentre quattro potenti potenze - Roma, Cartagine, Macedonia e Persia - gareggiano per costruire il pi&#249; grande impero del mondo antico. Nel nord, le foreste oscure dell'Europa e le vaste pianure dell'Eurasia sono popolate da bande selvagge di Galli, Teutoni e Sciti. Gli egiziani continuano a coltivare fertili terre alluvionali lungo il Nilo, anche se i loro giorni gloriosi sono solo lontani ricordi.[NEWLINE][NEWLINE]Questo scenario inizia con Roma gi&#224; in guerra con Cartagine e la Macedonia in guerra con la Persia. Quando giochi a Roma, le tue legioni dure e potenziabili, quando non sono impegnate in combattimento, possono essere utilizzate per costruire strade e fortezze. Questi emigranti che si spostano pi&#249; velocemente possono essere usati per colonizzare nuovi paesi. I castelli romani possono essere costruiti per proteggere i tuoi confini. Come Cartagine, Macedonia o Persia, devi sempre essere vigile del crescente potere di Roma.[NEWLINE][NEWLINE]La tua gente ha riposto la sua fiducia in te e ti ha dato potere illimitato. In cambio, puoi costruire una vasta civilt&#224; imperiale e ricompensare il tuo popolo con le comodit&#224; della vita, una vita piena delle gioie di Bacchanalia?</Italian>
-    <Spanish>&#161;Saludos, exaltado Jefe de Estado![NEWLINE][NEWLINE]Los golpes de hojas afiladas resuenan en los valles de Europa y en las aguas del Mediterr&#225;neo mientras cuatro poderosas potencias (Roma, Cartago, Macedonia y Persia) compiten por construir el imperio m&#225;s grande del mundo antiguo. En el norte, los bosques oscuros de Europa y las vastas llanuras de Eurasia est&#225;n pobladas por bandas salvajes de galos, teutones y escitas. Los egipcios contin&#250;an cultivando tierras aluviales f&#233;rtiles a lo largo del Nilo, aunque sus d&#237;as gloriosos son solo recuerdos lejanos.[NEWLINE][NEWLINE]Este escenario comienza con Roma ya en guerra con Cartago y Macedonia en guerra con Persia. Cuando juegas a Roma, tus legiones resistentes y actualizables, cuando no est&#225;n en combate, pueden usarse para construir carreteras y fortalezas. Estos emigrantes que se mueven m&#225;s r&#225;pido se pueden utilizar para colonizar nuevos pa&#237;ses. Se pueden construir castillos romanos para proteger sus fronteras. Como Cartago, Macedonia o Persia, siempre debes estar atento al creciente poder de Roma.[NEWLINE][NEWLINE]Tu gente ha depositado su confianza en ti y te ha dado poder ilimitado. A cambio, &#191;puedes construir una vasta civilizaci&#243;n imperial y recompensar a tu gente con las comodidades de la vida, una vida llena de las alegr&#237;as de las bacanales?</Spanish>
+    <English>Greetings, exalted Head of State![NEWLINE][NEWLINE]The blows of sharp blades resound through the valleys of Europe and the waters of the Mediterranean as four powerful powers - Rome, Carthage, Macedonia and Persia - vie to build the greatest empire of the ancient world. In the north, the dark forests of Europe and the vast plains of Eurasia are populated by wild bands of Gauls, Teutons and Scythians. The Egyptians continue to cultivate fertile alluvial land along the Nile, although their glorious days are only distant memories.[NEWLINE][NEWLINE]This scenario begins with Rome already at war with Carthage and Macedonia at war with Persia. When playing Rome, your tough, upgradeable legions, when not engaged in combat, can be used to build roads and fortresses. Roman castles can be built to guard your borders. As Carthage, Macedonia or Persia, you must always be vigilant of the growing power of Rome.[NEWLINE][NEWLINE]Your people have put their trust in you and have given you unlimited power. In return, can you build a vast Imperial civilization and reward your people with the comforts of life, a life filled with the joys of Bacchanalia?</English>
+    <French>Salutations, exalt&#233; chef de l'Etat![NEWLINE][NEWLINE]Les coups de lames tranchantes r&#233;sonnent &#224; nouveau dans les vall&#233;es de l'Europe et &#224; travers les eaux de la M&#233;diterran&#233;e alors que quatre puissantes puissances - Rome, Carthage, la Mac&#233;doine et la Perse - se disputent la construction du plus grand empire du monde antique. Au nord, les sombres for&#234;ts d'Europe et les vastes plaines d'Eurasie sont peupl&#233;es de bandes sauvages de Gaulois, de Teutons et de Scythes. Les Egyptiens continuent &#224; cultiver des terres alluviales fertiles le long du Nil, bien que leurs jours glorieux ne soient que des souvenirs lointains.[NEWLINE][NEWLINE]Ce sc&#233;nario commence avec Rome d&#233;j&#224; en guerre avec Carthage et la Mac&#233;doine en guerre avec la Perse. Lorsque vous jouez &#224; Rome, vos l&#233;gions robustes et am&#233;liorables, lorsqu'elles ne sont pas engag&#233;es dans un combat, peuvent &#234;tre utilis&#233;es pour construire des routes et des forteresses. Des ch&#226;teaux romains peuvent &#234;tre construits pour garder vos fronti&#232;res. Comme Carthage, Mac&#233;doine ou Perse, vous devez toujours &#234;tre vigilant face &#224; la puissance grandissante de Rome.[NEWLINE][NEWLINE]Votre peuple vous a fait confiance et vous a donn&#233; un pouvoir illimit&#233;. En retour, pouvez-vous b&#226;tir une vaste civilisation imp&#233;riale et r&#233;compenser votre peuple avec le confort de la vie, une vie remplie des joies des Bacchanales?</French>
+    <German>Seid gegr&#252;&#223;t erhabenes Staatsoberhaupt![NEWLINE][NEWLINE]Die Hiebe scharfer Klingen hallen erneut durch die T&#228;ler Europas und &#252;ber die Gew&#228;sser des Mittelmeeres, wenn vier starke M&#228;chte - Rom, Karthago, Makedonien und Persien - wetteifern, das gr&#246;&#223;te Imperium der Antike zu errichten. Im Norden sind die finsteren W&#228;lder Europas und die ausgedehnten Ebenen Eurasiens von wilden Banden der Gallier, Germanen und Skythen bev&#246;lkert. Entlang des Nils bewirtschaften die &#196;gypter weiterhin fruchtbares Schwemmland, obwohl ihre ruhmreichen Tage nur noch entfernte Erinnerungen sind.[NEWLINE][NEWLINE]Dieses Szenario beginnt damit, dass Rom bereits mit Karthago im Krieg liegt und Makedonien mit Persien Krieg f&#252;hrt. Wenn Ihr Rom spielt, k&#246;nnen Eure z&#228;hen, aufr&#252;stbaren Legionen, wenn sie nicht in K&#228;mpfe verwickelt sind, eingesetzt werden, um Stra&#223;en und Festungen zu errichten. R&#246;mische Kastelle k&#246;nnen errichtet werden, um Eure Grenzen zu bewachen. Als Karthago, Makedonien oder Persien m&#252;sst Ihr stets wachsam gegen&#252;ber der wachsenden Macht Roms sein.[NEWLINE][NEWLINE]Euer Volk hat sein Vertrauen in Euch gesetzt und Euch mit uneingeschr&#228;nkter Macht ausgestattet. K&#246;nnt Ihr im Gegenzug eine gewaltige imperiale Zivilisation errichten und Euer Volk mit den Annehmlichkeiten des Lebens belohnen, einem Leben erf&#252;llt mit den Freuden der Bacchanalien?</German>
+    <Italian>Saluti, esaltato Capo di Stato![NEWLINE][NEWLINE]I colpi di lame affilate risuonano attraverso le valli dell'Europa e attraverso le acque del Mediterraneo mentre quattro potenti potenze - Roma, Cartagine, Macedonia e Persia - gareggiano per costruire il pi&#249; grande impero del mondo antico. Nel nord, le foreste oscure dell'Europa e le vaste pianure dell'Eurasia sono popolate da bande selvagge di Galli, Teutoni e Sciti. Gli egiziani continuano a coltivare fertili terre alluvionali lungo il Nilo, anche se i loro giorni gloriosi sono solo lontani ricordi.[NEWLINE][NEWLINE]Questo scenario inizia con Roma gi&#224; in guerra con Cartagine e la Macedonia in guerra con la Persia. Quando giochi a Roma, le tue legioni dure e potenziabili, quando non sono impegnate in combattimento, possono essere utilizzate per costruire strade e fortezze. I castelli romani possono essere costruiti per proteggere i tuoi confini. Come Cartagine, Macedonia o Persia, devi sempre essere vigile del crescente potere di Roma.[NEWLINE][NEWLINE]La tua gente ha riposto la sua fiducia in te e ti ha dato potere illimitato. In cambio, puoi costruire una vasta civilt&#224; imperiale e ricompensare il tuo popolo con le comodit&#224; della vita, una vita piena delle gioie di Bacchanalia?</Italian>
+    <Spanish>&#161;Saludos, exaltado Jefe de Estado![NEWLINE][NEWLINE]Los golpes de hojas afiladas resuenan en los valles de Europa y en las aguas del Mediterr&#225;neo mientras cuatro poderosas potencias (Roma, Cartago, Macedonia y Persia) compiten por construir el imperio m&#225;s grande del mundo antiguo. En el norte, los bosques oscuros de Europa y las vastas llanuras de Eurasia est&#225;n pobladas por bandas salvajes de galos, teutones y escitas. Los egipcios contin&#250;an cultivando tierras aluviales f&#233;rtiles a lo largo del Nilo, aunque sus d&#237;as gloriosos son solo recuerdos lejanos.[NEWLINE][NEWLINE]Este escenario comienza con Roma ya en guerra con Cartago y Macedonia en guerra con Persia. Cuando juegas a Roma, tus legiones resistentes y actualizables, cuando no est&#225;n en combate, pueden usarse para construir carreteras y fortalezas. Se pueden construir castillos romanos para proteger sus fronteras. Como Cartago, Macedonia o Persia, siempre debes estar atento al creciente poder de Roma.[NEWLINE][NEWLINE]Tu gente ha depositado su confianza en ti y te ha dado poder ilimitado. A cambio, &#191;puedes construir una vasta civilizaci&#243;n imperial y recompensar a tu gente con las comodidades de la vida, una vida llena de las alegr&#237;as de las bacanales?</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_CIV_SHORT_RHEGION</Tag>
@@ -3116,7 +3356,7 @@
     <Tag>TXT_KEY_CIV_NUMIDIA_WEST</Tag>
     <English>West Numidia</English>
     <French>Numidie occidentale</French>
-    <German><Text>Westnumidien</Text><Gender>Neuter</Gender><Plural>0</Plural></German>
+    <German><Text>West-Numidien</Text><Gender>Neuter</Gender><Plural>0</Plural></German>
     <Italian><Text>Numidia occidentale</Text><Gender>Male</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Numidia occidental</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>
@@ -3124,7 +3364,7 @@
     <Tag>TXT_KEY_CIV_NUMIDIA_OST</Tag>
     <English>East Numidia</English>
     <French>Numidie orientale</French>
-    <German><Text>Ostnumidien</Text><Gender>Neuter</Gender><Plural>0</Plural></German>
+    <German><Text>Ost-Numidien</Text><Gender>Neuter</Gender><Plural>0</Plural></German>
     <Italian><Text>Numidia orientale</Text><Gender>Male</Gender><Plural>0</Plural></Italian>
     <Spanish><Text>Numidia oriental</Text><Gender>Female</Gender><Plural>0</Plural></Spanish>
   </TEXT>

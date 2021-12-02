@@ -421,9 +421,7 @@ TeamTypes CvPlot::getTeam() const
 void CvPlot::doTurn()
 {
 	PROFILE_FUNC();
-// Super Forts begin	
-	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
-// Super Forts end
+
 	if (getForceUnownedTimer() > 0)
 	{
 		changeForceUnownedTimer(-1);
@@ -438,7 +436,7 @@ void CvPlot::doTurn()
 	{
 		changeImprovementDuration(1);
 		// Super Forts begin *upgrade*
-		if(!isBeingWorked() & superForts)
+		if(!isBeingWorked() & GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
 		{
 			doImprovementUpgrade();
 		}
@@ -446,7 +444,7 @@ void CvPlot::doTurn()
 	}
 
 	// Super Forts begin *bombard*
-	if (superForts && !isBombarded() && getDefenseDamage() > 0)
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && !isBombarded() && getDefenseDamage() > 0)
 	{
 		changeDefenseDamage(-(GC.getDefineINT("CITY_DEFENSE_DAMAGE_HEAL_RATE")));
 	}
@@ -551,17 +549,14 @@ void CvPlot::doImprovement()
 }
 
 void CvPlot::doImprovementUpgrade()
-{
-// Super Forts begin	
-	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
-// Super Forts begin		
+{	
 	if (getImprovementType() != NO_IMPROVEMENT)
 	{
 		ImprovementTypes eImprovementUpdrade = (ImprovementTypes)GC.getImprovementInfo(getImprovementType()).getImprovementUpgrade();
 		if (eImprovementUpdrade != NO_IMPROVEMENT)
 		{
 // Super Forts begin
-			if (!superForts && (
+			if (!GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && (
 // Super Forts begin				
 				isBeingWorked() || GC.getImprovementInfo(eImprovementUpdrade).isOutsideBorders())
 				)
@@ -574,7 +569,7 @@ void CvPlot::doImprovementUpgrade()
 				}
 			}
 // Super Forts begin *upgrade* - added if-else statement - doto adjustment
-			else if(superForts &&
+			else if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
 				GC.getImprovementInfo(getImprovementType()).isUpgradeRequiresFortify())
 			{
 				bool bDefenderFound = false;
@@ -6398,13 +6393,12 @@ BonusTypes CvPlot::getBonusType(TeamTypes eTeam) const
 BonusTypes CvPlot::getNonObsoleteBonusType(TeamTypes eTeam, bool bCheckConnected) const // K-Mod added bCheckConnected
 {
 	FAssert(eTeam != NO_TEAM);
-//doto super forts
-//on kill civ, city change owner is executed, 
-//due to change culture.
-//so i added a safe check from an assert that popped when the team was dead
-	if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && !GET_TEAM(eTeam).isAlive())
+	//doto super forts
+	//on kill civ, city change owner is executed, due to change culture.
+	//so i added a safe check from an assert that popped when the team was dead
+	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && !GET_TEAM(eTeam).isAlive())
 		return NO_BONUS;
-//end of doto super forts
+	//end of doto super forts
 	FAssert(GET_TEAM(eTeam).isAlive()); // K-Mod
 
 	BonusTypes eBonus = getBonusType(eTeam);

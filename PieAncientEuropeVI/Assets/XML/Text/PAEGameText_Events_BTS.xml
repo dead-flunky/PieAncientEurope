@@ -1673,20 +1673,20 @@
     <Spanish>&#161;Nuestros hermanos %s1:3 nos han obsequiado con [COLOR_HIGHLIGHT_TEXT]Bronce[COLOR_REVERT] para ayudarnos en la guerra!</Spanish>
   </TEXT>
   <TEXT>
-    <Tag>TXT_KEY_EVENTTRIGGER_HURRICANE</Tag>
-    <English>The %s1_civ_adjective city of %s2_city took a direct hit from a powerful hurricane.</English>
-    <French>La ville %s1:2_civ_adjective de %s2_city a &#233;t&#233; touch&#233;e par un violent ouragan.</French>
-    <German>Die %s1:3_civ_adjective Stadt %s2_city ist unmittelbar von einem heftigen Hurrikan getroffen worden.</German>
-    <Italian>La citt&#224; %s1_civ_adjective di %s2_city &#232; stata colpita in pieno da un potente uragano.</Italian>
-    <Spanish>La ciudad %s1:2 de %s2_city ha sufridos los estragos directos de un fuerte hurac&#225;n.</Spanish>
+    <Tag>TXT_KEY_EVENTTRIGGER_CITY_FIRE_1</Tag>
+    <English>A severe fire raged in the %s1_civ_adjective city of %s2_city.</English>
+    <French>Un grave incendie a fait rage dans la ville %s1:2_civ_adjective de %s2_city.</French>
+    <German>In der %s1:2_civ_adjective Stadt %s2_city hat ein heftiger Brand gew&#252;tet.</German>
+    <Italian>Un grave incendio &#232; divampato nella citt&#224; %s1_civ_adjective di %s2_city.</Italian>
+    <Spanish>Un severo incendio arras&#243; la ciudad %s1:2_civ_adjective de %s2_city.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_EVENT_TRIGGER_HURRICANE_1</Tag>
-    <English>A powerful hurricane has made a direct hit on %s2_city.</English>
-    <French>Un puissant ouragan a touch&#233; %s2_city de plein fouet.</French>
-    <German>Ein heftiger Hurrikan hat in der Stadt %s2_city gew&#252;tet.</German>
-    <Italian>Un potente uragano si &#232; abbattuto su %s2_city.</Italian>
-    <Spanish>Un fuerte hurac&#225;n ha azotado directamente %s2_city.</Spanish>
+    <English>A powerful storm has made a direct hit on %s2_city.</English>
+    <French>Une puissant temp&#234;te a touch&#233; %s2_city de plein fouet.</French>
+    <German>Ein heftiger Sturm hat in der Stadt %s2_city gew&#252;tet.</German>
+    <Italian>Una forte tempesta si &#232; abbattuto su %s2_city.</Italian>
+    <Spanish>Una fuerte tormenta ha azotado directamente %s2_city.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_EVENT_HURRICANE_1</Tag>
@@ -4831,6 +4831,46 @@
     <German>Eine kleine Spende k&#246;nnen wir uns wohl leisten.</German>
     <Italian>Possiamo permetterci una piccola donazione.</Italian>
     <Spanish>Nos podemos permitir un peque&#241;o donativo.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENTTRIGGER_HURRICANE</Tag>
+    <English>The %s1_civ_adjective city of %s2_city took a direct hit from a devastating storm.</English>
+    <French>La ville %s1:2_civ_adjective de %s2_city a &#233;t&#233; touch&#233;e par une temp&#234;te d&#233;vastatrice.</French>
+    <German>Die %s1:3_civ_adjective Stadt %s2_city ist unmittelbar von einem verheerenden Sturm getroffen worden.</German>
+    <Italian>La citt&#224; %s1_civ_adjective di %s2_city &#232; stata colpita in pieno da una tempesta devastante.</Italian>
+    <Spanish>La ciudad %s1:2_civ_adjective de %s2_city ha sufridos los estragos directos de una tormenta devastadora.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENT_TRIGGER_CITY_FIRE_1</Tag>
+    <English>A violent fire raged in the city of %s2_city.</English>
+    <French>Un violent incendie a fait rage dans la ville de %s2_city.</French>
+    <German>Ein heftiger Brand hat in der Stadt %s2_city gew&#252;tet.</German>
+    <Italian>Un violento incendio &#232; divampato nella citt&#224; di %s2_city.</Italian>
+    <Spanish>Un violento incendio arras&#243; la ciudad de %s2_city.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENTTRIGGER_CITY_FIRE_2</Tag>
+    <English>The %s1_civ_adjective city of %s2_city fell victim to a huge fire.</English>
+    <French>La ville %s1:2_civ_adjective de %s2_city a &#233;t&#233; victime d'un immense incendie.</French>
+    <German>Die %s1:3_civ_adjective Stadt %s2_city ist Opfer eines gewaltigen Brandes geworden.</German>
+    <Italian>La citt&#224; %s1_civ_adjective di %s2_city &#232; stata vittima di un enorme incendio.</Italian>
+    <Spanish>La ciudad %s1:2_civ_adjective de %s2_city fue v&#237;ctima de un gran incendio.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENTTRIGGER_CITY_FIRE_3</Tag>
+    <English>A violent fire destroyed parts of the %s1_civ_adjective city of %s2_city.</English>
+    <French>Un violent incendie a d&#233;truit des parties de la ville %s1:2_civ_adjective de %s2_city.</French>
+    <German>Ein heftiger Brand zerst&#246;rte Teile der %s1:2_civ_adjective Stadt %s2_city.</German>
+    <Italian>Un violento incendio distrusse parti della citt&#224; %s1_civ_adjective di %s2_city.</Italian>
+    <Spanish>Un violento incendio destruy&#243; partes de la ciudad %s1:2_civ_adjective de %s2_city.</Spanish>
+  </TEXT>
+  <TEXT>
+    <Tag>TXT_KEY_EVENTTRIGGER_CITY_FIRE_4</Tag>
+    <English>A gigantic fire seemed to swallow the %s1_civ_adjective city of %s2_city.</English>
+    <French>Un gigantesque incendie semblait engloutir la ville %s1:2_civ_adjective de %s2_city.</French>
+    <German>Ein gigantischer Brand schien die %s1:3_civ_adjective Stadt %s2_city zu verschlucken.</German>
+    <Italian>Un gigantesco incendio sembr&#242; inghiottire la citt&#224; %s1_civ_adjective di %s2_city.</Italian>
+    <Spanish>Un fuego gigantesco pareci&#243; devorar la ciudad %s1:2_civ_adjective de %s2_city.</Spanish>
   </TEXT>
   <TEXT>
     <Tag>TXT_KEY_EVENT_TRIGGER_TIN_1</Tag>

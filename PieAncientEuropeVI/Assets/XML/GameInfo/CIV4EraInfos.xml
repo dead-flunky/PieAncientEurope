@@ -96,19 +96,19 @@
       <iStartingGold>10</iStartingGold>
       <iFreePopulation>0</iFreePopulation>
       <iStartPercent>10</iStartPercent>
-      <iGrowthPercent>100</iGrowthPercent>
-      <iTrainPercent>100</iTrainPercent>
-      <iConstructPercent>100</iConstructPercent>
-      <iCreatePercent>100</iCreatePercent>
-      <iResearchPercent>125</iResearchPercent>
+      <iGrowthPercent>110</iGrowthPercent>
+      <iTrainPercent>110</iTrainPercent>
+      <iConstructPercent>110</iConstructPercent>
+      <iCreatePercent>110</iCreatePercent>
+      <iResearchPercent>110</iResearchPercent>
       <!-- BBAI start: effectively modify cost for all techs from this era.  Default: 0 -->
 	  <iTechCostModifier>0</iTechCostModifier>
 	  <!-- BBAI end -->
 	  <iBuildPercent>110</iBuildPercent>
       <iImprovementPercent>100</iImprovementPercent>
-      <iGreatPeoplePercent>100</iGreatPeoplePercent>
-      <iCulturePercent>100</iCulturePercent>
-      <iAnarchyPercent>100</iAnarchyPercent>
+      <iGreatPeoplePercent>110</iGreatPeoplePercent>
+      <iCulturePercent>110</iCulturePercent>
+      <iAnarchyPercent>75</iAnarchyPercent>
       <iEventChancePerTurn>2</iEventChancePerTurn>
       <iSoundtrackSpace>200</iSoundtrackSpace>
       <bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
@@ -158,9 +158,9 @@
       <Description>TXT_KEY_ERA_IRON</Description>
       <Strategy>TXT_KEY_ERA_ANCIENT_STRATEGY</Strategy>
       <bNoGoodies>0</bNoGoodies>
-      <bNoAnimals>1</bNoAnimals>
+      <bNoAnimals>0</bNoAnimals>
       <bNoBarbUnits>0</bNoBarbUnits>
-      <bNoBarbCities>1</bNoBarbCities>
+      <bNoBarbCities>0</bNoBarbCities>
       <iAdvancedStartPoints>1200</iAdvancedStartPoints>
       <iStartingUnitMultiplier>1</iStartingUnitMultiplier>
       <iStartingDefenseUnits>1</iStartingDefenseUnits>
@@ -169,18 +169,18 @@
       <iStartingGold>10</iStartingGold>
       <iFreePopulation>0</iFreePopulation>
       <iStartPercent>10</iStartPercent>
-      <iGrowthPercent>100</iGrowthPercent>
-      <iTrainPercent>100</iTrainPercent>
-      <iConstructPercent>100</iConstructPercent>
-      <iCreatePercent>100</iCreatePercent>
+      <iGrowthPercent>125</iGrowthPercent>
+      <iTrainPercent>125</iTrainPercent>
+      <iConstructPercent>125</iConstructPercent>
+      <iCreatePercent>125</iCreatePercent>
       <iResearchPercent>125</iResearchPercent>
       <!-- BBAI start: effectively modify cost for all techs from this era.  Default: 4 -->
 	  <iTechCostModifier>6</iTechCostModifier>
 	  <!-- BBAI end -->
-	  <iBuildPercent>100</iBuildPercent>
+	  <iBuildPercent>125</iBuildPercent>
       <iImprovementPercent>100</iImprovementPercent>
-      <iGreatPeoplePercent>100</iGreatPeoplePercent>
-      <iCulturePercent>100</iCulturePercent>
+      <iGreatPeoplePercent>125</iGreatPeoplePercent>
+      <iCulturePercent>125</iCulturePercent>
       <iAnarchyPercent>100</iAnarchyPercent>
       <iEventChancePerTurn>2</iEventChancePerTurn>
       <iSoundtrackSpace>200</iSoundtrackSpace>
@@ -235,7 +235,7 @@
       <Description>TXT_KEY_ERA_CLASSICAL</Description>
       <Strategy>TXT_KEY_ERA_CLASSICAL_STRATEGY</Strategy>
       <bNoGoodies>0</bNoGoodies>
-      <bNoAnimals>1</bNoAnimals>
+      <bNoAnimals>0</bNoAnimals>
       <bNoBarbUnits>0</bNoBarbUnits>
       <bNoBarbCities>0</bNoBarbCities>
       <iAdvancedStartPoints>1200</iAdvancedStartPoints>
@@ -248,17 +248,17 @@
       <iStartPercent>10</iStartPercent>
       <iGrowthPercent>125</iGrowthPercent>
       <iTrainPercent>125</iTrainPercent>
-      <iConstructPercent>100</iConstructPercent>
-      <iCreatePercent>100</iCreatePercent>
+      <iConstructPercent>125</iConstructPercent>
+      <iCreatePercent>125</iCreatePercent>
       <iResearchPercent>125</iResearchPercent>
       <!-- BBAI start: effectively modify cost for all techs from this era.  Default: 9 -->
 	  <iTechCostModifier>12</iTechCostModifier>
 	  <!-- BBAI end -->
 	  <iBuildPercent>125</iBuildPercent>
       <iImprovementPercent>100</iImprovementPercent>
-      <iGreatPeoplePercent>100</iGreatPeoplePercent>
-      <iCulturePercent>100</iCulturePercent>
-      <iAnarchyPercent>100</iAnarchyPercent>
+      <iGreatPeoplePercent>125</iGreatPeoplePercent>
+      <iCulturePercent>125</iCulturePercent>
+      <iAnarchyPercent>125</iAnarchyPercent>
       <iEventChancePerTurn>4</iEventChancePerTurn>
       <iSoundtrackSpace>200</iSoundtrackSpace>
       <bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>
@@ -333,8 +333,8 @@
       <Type>ERA_LATE_ANTIQUITY</Type>
       <Description>TXT_KEY_ERA_LATE_ANTIQUITY</Description>
       <Strategy>TXT_KEY_ERA_CLASSICAL_STRATEGY</Strategy>
-      <bNoGoodies>1</bNoGoodies>
-      <bNoAnimals>1</bNoAnimals>
+      <bNoGoodies>0</bNoGoodies>
+      <bNoAnimals>0</bNoAnimals>
       <bNoBarbUnits>0</bNoBarbUnits>
       <bNoBarbCities>0</bNoBarbCities>
       <iAdvancedStartPoints>1200</iAdvancedStartPoints>
@@ -345,19 +345,19 @@
       <iStartingGold>10</iStartingGold>
       <iFreePopulation>0</iFreePopulation>
       <iStartPercent>10</iStartPercent>
-      <iGrowthPercent>125</iGrowthPercent>
-      <iTrainPercent>125</iTrainPercent>
-      <iConstructPercent>100</iConstructPercent>
-      <iCreatePercent>100</iCreatePercent>
+      <iGrowthPercent>150</iGrowthPercent>
+      <iTrainPercent>150</iTrainPercent>
+      <iConstructPercent>150</iConstructPercent>
+      <iCreatePercent>150</iCreatePercent>
       <iResearchPercent>150</iResearchPercent>
       <!-- BBAI start: effectively modify cost for all techs from this era.  Default: 14 -->
 	  <iTechCostModifier>16</iTechCostModifier>
 	  <!-- BBAI end -->
-	  <iBuildPercent>125</iBuildPercent>
+      <iBuildPercent>150</iBuildPercent>
       <iImprovementPercent>100</iImprovementPercent>
-      <iGreatPeoplePercent>100</iGreatPeoplePercent>
-      <iCulturePercent>100</iCulturePercent>
-      <iAnarchyPercent>100</iAnarchyPercent>
+      <iGreatPeoplePercent>150</iGreatPeoplePercent>
+      <iCulturePercent>150</iCulturePercent>
+      <iAnarchyPercent>150</iAnarchyPercent>
       <iEventChancePerTurn>4</iEventChancePerTurn>
       <iSoundtrackSpace>200</iSoundtrackSpace>
       <bFirstSoundtrackFirst>0</bFirstSoundtrackFirst>

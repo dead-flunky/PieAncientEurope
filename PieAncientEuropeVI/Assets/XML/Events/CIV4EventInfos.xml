@@ -2566,7 +2566,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -2652,7 +2652,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -5368,7 +5368,7 @@
       <PythonCanDo>canApplyHurricane1</PythonCanDo>
       <PythonHelp/>
       <Button>,Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5</Button>
-      <iAIValue>1000</iAIValue>
+      <iAIValue>100</iAIValue>
     </EventInfo>
     <EventInfo>
       <Type>EVENT_HURRICANE_2</Type>
@@ -5449,7 +5449,7 @@
       <PythonCanDo>canApplyHurricane2</PythonCanDo>
       <PythonHelp/>
       <Button>,Art/Interface/Buttons/Process/Blank.dds,Art/Interface/Buttons/Beyond_the_Sword_Atlas.dds,8,5</Button>
-      <iAIValue>1000</iAIValue>
+      <iAIValue>100</iAIValue>
     </EventInfo>
     <EventInfo>
       <Type>EVENT_CYCLONE_1</Type>
@@ -5841,7 +5841,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -6094,7 +6094,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -19580,7 +19580,7 @@
         </PlotExtraYield>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -24264,7 +24264,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -24431,7 +24431,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -24571,7 +24571,13 @@
       <UnitClassPromotions/>
       <BuildingClass>NONE</BuildingClass>
       <iBuildingChange>0</iBuildingChange>
-      <BuildingExtraYields/>
+      <BuildingExtraYields>
+        <BuildingExtraYield>
+          <BuildingClass>BUILDINGCLASS_GARUM</BuildingClass>
+          <YieldType>YIELD_COMMERCE</YieldType>
+          <iExtraYield>2</iExtraYield>
+        </BuildingExtraYield>
+      </BuildingExtraYields>
       <BuildingExtraCommerces/>
       <BuildingExtraHappies/>
       <BuildingExtraHealths/>
@@ -24595,12 +24601,7 @@
       <iRouteChange>0</iRouteChange>
       <BonusRevealed>NONE</BonusRevealed>
       <BonusGift>NONE</BonusGift>
-      <PlotExtraYields>
-        <PlotExtraYield>
-          <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
-        </PlotExtraYield>
-      </PlotExtraYields>
+      <PlotExtraYields/>
       <iConvertOwnCities>0</iConvertOwnCities>
       <iConvertOtherCities>0</iConvertOtherCities>
       <iMaxNumReligions>-1</iMaxNumReligions>
@@ -24765,7 +24766,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>
@@ -25100,7 +25101,7 @@
       <PlotExtraYields>
         <PlotExtraYield>
           <YieldType>YIELD_COMMERCE</YieldType>
-          <iExtraYield>1</iExtraYield>
+          <iExtraYield>2</iExtraYield>
         </PlotExtraYield>
       </PlotExtraYields>
       <iConvertOwnCities>0</iConvertOwnCities>

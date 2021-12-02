@@ -139,6 +139,18 @@
       <VictoryThresholds/>
     </BuildingClassInfo>
     <BuildingClassInfo>
+      <Type>BUILDINGCLASS_GARUM</Type>
+      <Description>TXT_KEY_BUILDING_GARUM</Description>
+      <iMaxGlobalInstances>-1</iMaxGlobalInstances>
+      <iMaxTeamInstances>-1</iMaxTeamInstances>
+      <iMaxPlayerInstances>-1</iMaxPlayerInstances>
+      <iExtraPlayerInstances>0</iExtraPlayerInstances>
+      <bNoLimit>0</bNoLimit>
+      <bMonument>0</bMonument>
+      <DefaultBuilding>BUILDING_GARUM</DefaultBuilding>
+      <VictoryThresholds/>
+    </BuildingClassInfo>
+    <BuildingClassInfo>
       <Type>BUILDINGCLASS_SALINE</Type>
       <Description>TXT_KEY_BUILDING_SALINE</Description>
       <iMaxGlobalInstances>-1</iMaxGlobalInstances>

@@ -511,7 +511,7 @@
         </Building>
         <Building>
           <BuildingClassType>BUILDINGCLASS_STEINGRAB</BuildingClassType>
-          <BuildingType>BUILDING_TUMULUS</BuildingType>
+          <BuildingType>BUILDING_THOLOS</BuildingType>
         </Building>
         <Building>
           <BuildingClassType>BUILDINGCLASS_ARENA</BuildingClassType>
@@ -3809,7 +3809,7 @@
         </Building>
         <Building>
           <BuildingClassType>BUILDINGCLASS_STEINGRAB</BuildingClassType>
-          <BuildingType>BUILDING_TUMULUS</BuildingType>
+          <BuildingType>BUILDING_THOLOS</BuildingType>
         </Building>
         <Building>
           <BuildingClassType>BUILDINGCLASS_ARENA</BuildingClassType>
@@ -7887,7 +7887,7 @@
         <City>Genua</City>
         <City>Helmantike</City>
         <City>Juvavum</City>
-        <City>Kyrene</City>
+        <City>TXT_KEY_CITY_NAME_C114</City>
         <City>Lugdunum</City>
         <City>Mogontiacum</City>
         <City>Novaesium</City>
@@ -9342,7 +9342,7 @@
         </Building>
         <Building>
           <BuildingClassType>BUILDINGCLASS_STEINGRAB</BuildingClassType>
-          <BuildingType>BUILDING_TUMULUS</BuildingType>
+          <BuildingType>BUILDING_THOLOS</BuildingType>
         </Building>
         <Building>
           <BuildingClassType>BUILDINGCLASS_ARENA</BuildingClassType>

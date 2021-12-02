@@ -434,6 +434,30 @@ def canDoBrothersInNeed1(argsList):
 
     return canTriggerBrothersInNeed(newArgs)
 
+####### City Fire / Stadtbrand ######
+
+def canTriggerCityFire(argsList):
+    eTrigger = argsList[0]
+    ePlayer = argsList[1]
+    iCity = argsList[2]
+
+    player = gc.getPlayer(ePlayer)
+    city = player.getCity(iCity)
+
+    if city.isNone():
+        return False
+
+    if city.plot().getLatitude() <= 0:
+        return False
+
+    if city.getPopulation() < 3:
+        return False
+        
+    if city.isHasBuilding(gc.getInfoTypeForString("BUILDING_FEUERWEHR")):
+        return False
+
+    return True
+
 ######## HURRICANE ###########
 
 
@@ -497,21 +521,37 @@ def applyHurricane1(argsList):
             else:
                 listExpensiveBuildings.append(iBuilding)
 
+    # PAE
+    if city.getPopulation() >= 12:
+        iRange = 3
+    elif city.getPopulation() >= 6:
+        iRange = 2
+    else:
+        iRange = 1
+
     if listCheapBuildings:
-        iBuilding = listCheapBuildings[gc.getGame().getSorenRandNum(
-            len(listCheapBuildings), "Hurricane event cheap building destroyed")]
-        szBuffer = localText.getText("TXT_KEY_EVENT_CITY_IMPROVEMENT_DESTROYED", (gc.getBuildingInfo(iBuilding).getTextKey(), ))
-        CyInterface().addMessage(kTriggeredData.ePlayer, False, gc.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BOMBARDED", InterfaceMessageTypes.MESSAGE_TYPE_INFO,
-                                 gc.getBuildingInfo(iBuilding).getButton(), gc.getInfoTypeForString("COLOR_RED"), city.getX(), city.getY(), True, True)
-        city.setNumRealBuilding(iBuilding, 0)
+        for _ in range(iRange):
+            iBuilding = listCheapBuildings[gc.getGame().getSorenRandNum(
+                len(listCheapBuildings), "Hurricane event cheap building destroyed")]
+            if city.getNumRealBuilding(iBuilding) > 0:
+                szBuffer = localText.getText("TXT_KEY_EVENT_CITY_IMPROVEMENT_DESTROYED", (gc.getBuildingInfo(iBuilding).getTextKey(), ))
+                CyInterface().addMessage(kTriggeredData.ePlayer, False, gc.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BOMBARDED", InterfaceMessageTypes.MESSAGE_TYPE_INFO,
+                                         gc.getBuildingInfo(iBuilding).getButton(), gc.getInfoTypeForString("COLOR_RED"), city.getX(), city.getY(), True, True)
+                city.setNumRealBuilding(iBuilding, 0)
+
+    # PAE
+    if iRange > 1:
+        iRange = 1 + gc.getGame().getSorenRandNum(iRange, "Hurricane event amount of expensive building destroyed")
 
     if listExpensiveBuildings:
-        iBuilding = listExpensiveBuildings[gc.getGame().getSorenRandNum(
-            len(listExpensiveBuildings), "Hurricane event expensive building destroyed")]
-        szBuffer = localText.getText("TXT_KEY_EVENT_CITY_IMPROVEMENT_DESTROYED", (gc.getBuildingInfo(iBuilding).getTextKey(), ))
-        CyInterface().addMessage(kTriggeredData.ePlayer, False, gc.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BOMBARDED", InterfaceMessageTypes.MESSAGE_TYPE_INFO,
-                                 gc.getBuildingInfo(iBuilding).getButton(), gc.getInfoTypeForString("COLOR_RED"), city.getX(), city.getY(), True, True)
-        city.setNumRealBuilding(iBuilding, 0)
+        for _ in range(iRange):
+            iBuilding = listExpensiveBuildings[gc.getGame().getSorenRandNum(
+                len(listExpensiveBuildings), "Hurricane event expensive building destroyed")]
+            if city.getNumRealBuilding(iBuilding) > 0:
+                szBuffer = localText.getText("TXT_KEY_EVENT_CITY_IMPROVEMENT_DESTROYED", (gc.getBuildingInfo(iBuilding).getTextKey(), ))
+                CyInterface().addMessage(kTriggeredData.ePlayer, False, gc.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BOMBARDED", InterfaceMessageTypes.MESSAGE_TYPE_INFO,
+                                         gc.getBuildingInfo(iBuilding).getButton(), gc.getInfoTypeForString("COLOR_RED"), city.getX(), city.getY(), True, True)
+                city.setNumRealBuilding(iBuilding, 0)
 
 
 ######## CYCLONE ###########
@@ -1090,8 +1130,8 @@ def canTriggerTheHuns(argsList):
     # bFound = False
     # while loopCity:
         # if loopCity.canTrain(iCounterUnit, False, False):
-        # bFound = True
-        # break
+            # bFound = True
+            # break
 
         # (loopCity, iter) = player.nextCity(iter, False)
 
@@ -2232,8 +2272,7 @@ def canTriggerEliteSwordsDone(argsList):
     iUnitClassType1 = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_KURZSCHWERT')
     iUnitClassType2 = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_SCHILDTRAEGER')
     iUnitClassType3 = CvUtil.findInfoTypeNum(gc.getUnitClassInfo, gc.getNumUnitClassInfos(), 'UNITCLASS_SWORDSMAN')
-    iUnits = player.getUnitClassCount(iUnitClassType1) + player.getUnitClassCount(iUnitClassType2) + \
-        player.getUnitClassCount(iUnitClassType3)
+    iUnits = player.getUnitClassCount(iUnitClassType1) + player.getUnitClassCount(iUnitClassType2) + player.getUnitClassCount(iUnitClassType3)
     if iUnits < iNumUnits:
         return False
 

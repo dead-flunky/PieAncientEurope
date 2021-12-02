@@ -635,8 +635,7 @@ class CvEventManager:
                     iCost = 80
                 if pUnit.isHasPromotion(gc.getInfoTypeForString("PROMOTION_MERCENARY")):
                     iCost = iCost / 2
-                # Flunky - fix mercenary warrior sale bug -  thx to RobAnybody
-                iGold = CvUtil.myRandom(max(0, iCost-4), "695_confirmed") + 5
+                iGold = CvUtil.myRandom(iCost, "695_confirmed") + 5
 
                 SpecialPromosArray = [
                     gc.getInfoTypeForString("PROMOTION_WILDLIFE"),
@@ -769,6 +768,7 @@ class CvEventManager:
                     if iNum > 0:
                         for _ in xrange(iNum):
                             CvUtil.spawnUnit(gc.getInfoTypeForString("UNIT_GOLDKARREN"), pCity.plot(), pPlayer)
+                        for _ in xrange(iNum*2):
                             CvUtil.spawnUnit(gc.getInfoTypeForString("UNIT_SLAVE"), pCity.plot(), pPlayer)
                         pCity.setPopulation(iNum)
 
@@ -2301,10 +2301,12 @@ class CvEventManager:
         # Historische Texte ---------
         PAE_Turn_Features.doHistory()
 
+
     # global
     def onEndGameTurn(self, argsList):
         'Called at the end of the end of each turn'
         iGameTurn = argsList[0]
+
         # PAE Debug Mark
         # """
 
@@ -2320,6 +2322,8 @@ class CvEventManager:
                 PeloponnesianWarKeinpferd.onEndGameTurn(iGameTurn)
             elif sScenarioName == "WarOfDiadochiJD":
                 Diadochi_JD.onEndGameTurn(iGameTurn)
+            elif sScenarioName == "SecondPunicWar":
+                SecondPunicWar.onEndGameTurn(iGameTurn)
 
         # PAE V: Treibgut erstellen
         # PAE V: Barbarenfort erstellen
@@ -4502,17 +4506,19 @@ class CvEventManager:
                     CyInterface().addMessage(iOwner, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_SLAVES_4",
                                                                                       (city.getName(), iSlaves)), None, 2, None, ColorTypes(7), 0, 0, False, False)
 
-        # Deportation von Einwohnern
+        # Deportation von Einwohnern und Versorgungskarren
         PAE_City.doDeportation(city, iPlayer, iOwner)
+
+        PAE_City.getCityMissionar(city, iPlayer)
 
         if pOwner.isAlive():
             # - Nearest city revolts
             if iOwner > -1 and iOwner != iPlayer:
                 PAE_City.doNextCityRevolt(city.getX(), city.getY(), iOwner, iPlayer)
 
-        # --- Partisans!
-        #    if city.canConscript():
-        # Seek Plots
+            # --- Partisans!
+            #    if city.canConscript():
+            # Seek Plots
             rebelPlotArray = []
             PartisanPlot1 = []
             PartisanPlot2 = []
@@ -4664,7 +4670,7 @@ class CvEventManager:
                 PAE_City.doCaptureSlaves(pCity, iNewOwner, iPreviousOwner)
                 # ---- Settled slaves -> Freed Slaves (Befreite Sklaven)
                 PAE_Sklaven.freeSlaves(pCity, pPlayer)
-                # Deportation von Einwohnern => neuer Besitzer bekommt Auswanderer
+                # Deportation von Einwohnern => neuer Besitzer bekommt Auswanderer und Versorgungskarren
                 if not bTrade:
                     PAE_City.doDeportation(pCity, iNewOwner, iPreviousOwner)
 

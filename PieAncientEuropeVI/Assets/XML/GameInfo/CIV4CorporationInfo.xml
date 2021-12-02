@@ -73,7 +73,7 @@
                                 <iCommerceProduced>10</iCommerceProduced>
                         </CommercesProduced>
                         <YieldsProduced>
-                                <iYieldProduced>20</iYieldProduced>
+                                <iYieldProduced>15</iYieldProduced>
                                 <iYieldProduced>0</iYieldProduced>
                                 <iYieldProduced>0</iYieldProduced>
                         </YieldsProduced>
@@ -111,9 +111,9 @@
                                 <iCommerceProduced>10</iCommerceProduced>
                         </CommercesProduced>
                         <YieldsProduced>
-                                <iYieldProduced>20</iYieldProduced>
+                                <iYieldProduced>10</iYieldProduced>
                                 <iYieldProduced>0</iYieldProduced>
-                                <iYieldProduced>20</iYieldProduced>
+                                <iYieldProduced>10</iYieldProduced>
                         </YieldsProduced>
                         <Button>Art/Interface/Buttons/Corporations/button_corp3.dds</Button>
                         <MovieFile>NONE</MovieFile>
@@ -321,8 +321,8 @@
                                 <iCommerceProduced>10</iCommerceProduced>
                         </CommercesProduced>
                         <YieldsProduced>
-                                <iYieldProduced>20</iYieldProduced>
-                                <iYieldProduced>20</iYieldProduced>
+                                <iYieldProduced>10</iYieldProduced>
+                                <iYieldProduced>10</iYieldProduced>
                                 <iYieldProduced>0</iYieldProduced>
                         </YieldsProduced>
                         <Button>Art/Interface/Buttons/Corporations/button_corp9.dds</Button>

@@ -86,26 +86,36 @@
       <iInflationPercent>10</iInflationPercent>
       <iInflationOffset>-660</iInflationOffset>
       <iVictoryDelayPercent>150</iVictoryDelayPercent>
-<!--  10 Jahre: -5000 bis -2000 -->
-<!--  5 Jahre: -2000 bis  -500 -->
-<!--  1 Jahre:  -500 bis  -300 -->
-<!--  2 Jahre:  -300 bis   500 -->
+<!--  10 Jahre: -5000 bis -3000 -->
+<!--  15 Jahre: -3000 bis -1500 -->
+<!--  5 Jahre:  -1500 bis -900 -->
+<!--  3 Jahre:  -900 bis  -600 -->
+<!--  2 Jahre:  -600 bis  -200 -->
+<!--  2 Jahre:  -200 bis   500 -->
       <GameTurnInfos>
         <GameTurnInfo>
           <iMonthIncrement>120</iMonthIncrement>
-          <iTurnsPerIncrement>300</iTurnsPerIncrement>
+          <iTurnsPerIncrement>200</iTurnsPerIncrement>
+        </GameTurnInfo>
+        <GameTurnInfo>
+          <iMonthIncrement>180</iMonthIncrement>
+          <iTurnsPerIncrement>100</iTurnsPerIncrement>
         </GameTurnInfo>
         <GameTurnInfo>
           <iMonthIncrement>60</iMonthIncrement>
-          <iTurnsPerIncrement>300</iTurnsPerIncrement>
+          <iTurnsPerIncrement>120</iTurnsPerIncrement>
         </GameTurnInfo>
         <GameTurnInfo>
-          <iMonthIncrement>12</iMonthIncrement>
+          <iMonthIncrement>36</iMonthIncrement>
           <iTurnsPerIncrement>200</iTurnsPerIncrement>
         </GameTurnInfo>
         <GameTurnInfo>
           <iMonthIncrement>24</iMonthIncrement>
-          <iTurnsPerIncrement>400</iTurnsPerIncrement>
+          <iTurnsPerIncrement>200</iTurnsPerIncrement>
+        </GameTurnInfo>
+        <GameTurnInfo>
+          <iMonthIncrement>12</iMonthIncrement>
+          <iTurnsPerIncrement>700</iTurnsPerIncrement>
         </GameTurnInfo>
       </GameTurnInfos>
     </GameSpeedInfo>
@@ -135,18 +145,25 @@
       <iInflationPercent>20</iInflationPercent>
       <iInflationOffset>-450</iInflationOffset>
       <iVictoryDelayPercent>100</iVictoryDelayPercent>
-<!--  15 Jahre: -5000 bis -3200 -->
-<!--  10 Jahre: -3200 bis -1200 -->
-<!--  3 Jahre: -1200 bis  -600 -->
-<!--  2 Jahre:  -600 bis   500 -->
+<!--  15 Jahre: -5000 bis -3800 -->
+<!--  20 Jahre: -3800 bis -1400 -->
+<!--  10 Jahre: -1400 bis -900 -->
+<!--  3 Jahre:  -900 bis  -600 -->
+<!--  2 Jahre:  -600 bis  -200 -->
+<!--  1 Jahre:  -200 bis   300 -->
+<!--  2 Jahre:   300 bis   500 -->
       <GameTurnInfos>
         <GameTurnInfo>
           <iMonthIncrement>180</iMonthIncrement>
+          <iTurnsPerIncrement>80</iTurnsPerIncrement>
+        </GameTurnInfo>
+        <GameTurnInfo>
+          <iMonthIncrement>240</iMonthIncrement>
           <iTurnsPerIncrement>120</iTurnsPerIncrement>
         </GameTurnInfo>
         <GameTurnInfo>
           <iMonthIncrement>120</iMonthIncrement>
-          <iTurnsPerIncrement>200</iTurnsPerIncrement>
+          <iTurnsPerIncrement>50</iTurnsPerIncrement>
         </GameTurnInfo>
         <GameTurnInfo>
           <iMonthIncrement>36</iMonthIncrement>
@@ -154,7 +171,15 @@
         </GameTurnInfo>
         <GameTurnInfo>
           <iMonthIncrement>24</iMonthIncrement>
-          <iTurnsPerIncrement>550</iTurnsPerIncrement>
+          <iTurnsPerIncrement>200</iTurnsPerIncrement>
+        </GameTurnInfo>
+        <GameTurnInfo>
+          <iMonthIncrement>12</iMonthIncrement>
+          <iTurnsPerIncrement>500</iTurnsPerIncrement>
+        </GameTurnInfo>
+        <GameTurnInfo>
+          <iMonthIncrement>24</iMonthIncrement>
+          <iTurnsPerIncrement>100</iTurnsPerIncrement>
         </GameTurnInfo>
       </GameTurnInfos>
     </GameSpeedInfo>
@@ -351,6 +376,40 @@
         <GameTurnInfo>
           <iMonthIncrement>24</iMonthIncrement>
           <iTurnsPerIncrement>500</iTurnsPerIncrement>
+        </GameTurnInfo>
+      </GameTurnInfos>
+    </GameSpeedInfo>
+    <GameSpeedInfo>
+      <Type>GAMESPEED_SECONDPUNICWAR_JD_BARCAS</Type>
+      <Description>TXT_KEY_GAMESPEED_SECONDPUNICWAR_JD_BARCAS</Description>
+      <Help>TXT_KEY_GAMESPEED_SPECIAL</Help>
+      <iGrowthPercent>100</iGrowthPercent>
+      <iTrainPercent>150</iTrainPercent>
+      <iConstructPercent>100</iConstructPercent>
+      <iCreatePercent>100</iCreatePercent>
+      <iResearchPercent>500</iResearchPercent>
+      <iBuildPercent>100</iBuildPercent>
+      <iImprovementPercent>100</iImprovementPercent>
+      <iGreatPeoplePercent>100</iGreatPeoplePercent>
+      <iCulturePercent>200</iCulturePercent>
+      <iAnarchyPercent>100</iAnarchyPercent>
+      <iBarbPercent>100</iBarbPercent>
+      <iFeatureProductionPercent>100</iFeatureProductionPercent>
+      <iUnitDiscoverPercent>100</iUnitDiscoverPercent>
+      <iUnitHurryPercent>100</iUnitHurryPercent>
+      <iUnitTradePercent>100</iUnitTradePercent>
+      <iUnitGreatWorkPercent>100</iUnitGreatWorkPercent>
+      <iGoldenAgePercent>100</iGoldenAgePercent>
+      <iHurryPercent>100</iHurryPercent>
+      <iHurryConscriptAngerPercent>100</iHurryConscriptAngerPercent>
+      <iInflationPercent>10</iInflationPercent>
+      <iInflationOffset>-450</iInflationOffset>
+      <iVictoryDelayPercent>100</iVictoryDelayPercent>
+<!-- Im Szenario: CALENDAR_MONTHS -->
+      <GameTurnInfos>
+        <GameTurnInfo>
+          <iMonthIncrement>1</iMonthIncrement>
+          <iTurnsPerIncrement>1200</iTurnsPerIncrement>
         </GameTurnInfo>
       </GameTurnInfos>
     </GameSpeedInfo>

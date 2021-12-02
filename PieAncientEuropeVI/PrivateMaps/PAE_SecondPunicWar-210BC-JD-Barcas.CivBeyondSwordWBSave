@@ -2,8 +2,8 @@ Platy Builder
 Version=11
 BeginGame
 	Era=ERA_MEDIEVAL
-	Speed=GAMESPEED_WAROFDIADOCHI_JD
-	Calendar=CALENDAR_YEARS
+	Speed=GAMESPEED_SECONDPUNICWAR_JD_BARCAS
+	Calendar=CALENDAR_MONTHS
 	Option=GAMEOPTION_NO_CITY_RAZING
 	Option=GAMEOPTION_NO_CITY_FLIPPING
 	Option=GAMEOPTION_NO_TECH_BROKERING
@@ -12,12 +12,12 @@ BeginGame
 	Option=GAMEOPTION_NO_VASSAL_STATES
 	Victory=VICTORY_CONQUEST
 	Victory=VICTORY_DOMINATION
-	GameTurn=93
+	GameTurn=12
 	MaxTurns=0
 	MaxCityElimination=0
 	NumAdvancedStartPoints=660
 	TargetScore=0
-	StartYear=-210
+	StartYear=-220
 	Description=TXT_KEY_SCENARIO_SECONDPUNICWAR_JD_210BC
 	ModPath=
 EndGame
@@ -3109,7 +3109,7 @@ BeginPlayer
 	CivType=CIVILIZATION_CELT
 	Color=PLAYERCOLOR_MIDDLE_GREEN
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=300
 	StartingX=26, StartingY=47
@@ -3146,7 +3146,7 @@ BeginPlayer
 	CivType=CIVILIZATION_CELT
 	Color=PLAYERCOLOR_GREYISH_RED
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=600
 	StateReligion=RELIGION_CELTIC
@@ -3218,7 +3218,7 @@ BeginPlayer
 	CivType=CIVILIZATION_CELT
 	Color=PLAYERCOLOR_CAPUA
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=300
 	StartingX=26, StartingY=47
@@ -3325,7 +3325,7 @@ BeginPlayer
 	CivType=CIVILIZATION_BRITEN
 	Color=PLAYERCOLOR_BROWN
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=300
 	StateReligion=RELIGION_CELTIC
@@ -3394,7 +3394,7 @@ BeginPlayer
 	CivType=CIVILIZATION_GERMANEN
 	Color=PLAYERCOLOR_TYRIAN_PURPLE
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=300
 	StateReligion=RELIGION_NORDIC
@@ -3435,7 +3435,7 @@ BeginPlayer
 	CivType=CIVILIZATION_GALLIEN
 	Color=PLAYERCOLOR_CARTHAGE_NEW
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=300
 	StateReligion=RELIGION_CELTIC
@@ -3505,7 +3505,7 @@ BeginPlayer
 	CivType=CIVILIZATION_GALLIEN
 	Color=PLAYERCOLOR_BLUE_AND_WHITE
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=400
 	StateReligion=RELIGION_CELTIC
@@ -3540,7 +3540,7 @@ BeginPlayer
 	CivType=CIVILIZATION_GALLIEN
 	Color=PLAYERCOLOR_SCIPIO
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=400
 	StateReligion=RELIGION_CELTIC
@@ -3575,7 +3575,7 @@ BeginPlayer
 	CivType=CIVILIZATION_CELT
 	Color=PLAYERCOLOR_ISRABLUE
 	ArtStyle=ARTSTYLE_NORSE
-	PlayableCiv=1
+	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=400
 	StartingX=26, StartingY=47
@@ -3743,7 +3743,7 @@ BeginPlayer
 	PlayableCiv=0
 	MinorNationStatus=0
 	StartingGold=500
-	StartingEra=ERA_MEDIEVAL
+	StartingEra=ERA_CLASSICAL
 	RandomStartLocation=false
 	CivicOption=CIVICOPTION_GOVERNMENT, Civic=CIVIC_DESPOTISM
 	CivicOption=CIVICOPTION_LEGAL, Civic=CIVIC_BARBARISM
@@ -3772,7 +3772,7 @@ EndMap
 ### Plot Info ###
 BeginPlot
 	x=0,y=0
-	ScriptData=PAE_SECONDPUNICWAR_JD_Barcas_210BC
+	ScriptData=SecondPunicWar
 	FeatureType=FEATURE_DARK_ICE, FeatureVariety=0
 	TerrainType=TERRAIN_DESERT
 	PlotType=2
@@ -10750,12 +10750,14 @@ BeginPlot
 	BeginUnit
 		UnitType=UNIT_CARAVAN, UnitOwner=4
 		Level=1, Experience=0
+		PromotionType=PROMOTION_DESERT_DOUBLEMOVE
 		FacingDirection=4
 		UnitAIType=UNITAI_MERCHANT
 	EndUnit
 	BeginUnit
 		UnitType=UNIT_CARAVAN, UnitOwner=4
 		Level=1, Experience=0
+		PromotionType=PROMOTION_DESERT_DOUBLEMOVE
 		FacingDirection=4
 		UnitAIType=UNITAI_MERCHANT
 	EndUnit

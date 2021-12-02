@@ -1221,19 +1221,20 @@ def init():
         gc.getInfoTypeForString("BONUS_HORSE"),
         gc.getInfoTypeForString("BONUS_STONE"),
         gc.getInfoTypeForString("BONUS_MARBLE"),
-        gc.getInfoTypeForString("BONUS_SLAVES")
+        gc.getInfoTypeForString("BONUS_SLAVES"),
+        gc.getInfoTypeForString("BONUS_HUNDE")
     ]
 
     LBonusStratCultivatable = [
         gc.getInfoTypeForString("BONUS_CAMEL"),
-        gc.getInfoTypeForString("BONUS_HORSE"),
-        gc.getInfoTypeForString("BONUS_HUNDE")
+        gc.getInfoTypeForString("BONUS_HORSE")
     ]
 
     LBonus4Units = [
         gc.getInfoTypeForString("BONUS_BRONZE"),
         gc.getInfoTypeForString("BONUS_IRON"),
-        gc.getInfoTypeForString("BONUS_HORSE")
+        gc.getInfoTypeForString("BONUS_HORSE"),
+        gc.getInfoTypeForString("BONUS_HUNDE")
     ]
 
     LNoRankUnits = [

@@ -15,6 +15,11 @@ import PAE_Unit
 import PAE_Mercenaries
 import PAE_Lists as L
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 # Defines
 gc = CyGlobalContext()
 
@@ -204,7 +209,7 @@ def onModNetMessage(argsList):
         # -- Einfluss verbessern --
         elif iData4 == 0:
 
-            #iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
+            # iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
             iBuildingHappiness = pCity.getExtraHappiness()
             # Button 0: kleine Spende
             iGold1 = pCity.getPopulation() * 4
@@ -282,7 +287,7 @@ def onModNetMessage(argsList):
         # -- Tribut fordern --
         elif iData4 == 1:
 
-            #iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
+            # iBuilding = gc.getInfoTypeForString("BUILDING_PROVINZPALAST")
             iBuildingHappiness = pCity.getExtraHappiness()
             iUnit1 = gc.getInfoTypeForString("UNIT_GOLDKARREN")
             iUnhappy1 = 2
@@ -1079,6 +1084,10 @@ def doDisbandCity(pCity, pUnit, pPlayer):
     iRand = CvUtil.myRandom(10, "disbandCity")
     if iRand < 8:
 
+        # Missionar
+        getCityMissionar (pCity, pCity.getOwner())
+
+        # Emigrant
         if not isCityState(pCity.getOwner()):
             iUnitType = gc.getInfoTypeForString("UNIT_EMIGRANT")
             pNewUnit = pPlayer.initUnit(iUnitType, pCity.getX(), pCity.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
@@ -1430,10 +1439,10 @@ def doRenegadeCity(pCity, iNewOwner, LoserUnit):
     pCity.setCulture (iNewOwner, 0, True)
 
     if LoserUnit != None:
-        #iLoserOwner = LoserUnit.getOwner()
+        # iLoserOwner = LoserUnit.getOwner()
         iLoserID = LoserUnit.getID()
     else:
-        #iLoserOwner = -1
+        # iLoserOwner = -1
         iLoserID = -1
 
     iRange = pPlot.getNumUnits()
@@ -1853,9 +1862,12 @@ def doJewRevolt(pCity):
             # Einen guenstigen Plot auswaehlen
             rebelPlotArray = []
             rebelPlotArrayB = []
-            for i in xrange(3):
-                for j in xrange(3):
-                    loopPlot = gc.getMap().plot(pCity.getX() + i - 1, pCity.getY() + j - 1)
+
+            iX = pCity.getX()
+            iY = pCity.getY()
+            for i in xrange(-1,2):
+                for j in xrange(-1,2):
+                    loopPlot = plotXY(iX, iY, x, y)
                     if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                         if loopPlot.getOwner() == iPlayer:
                             if loopPlot.isHills():
@@ -2133,10 +2145,10 @@ def removeCivicBuilding(pCity):
 def removeNoBonusNoBuilding(pCity):
     iPlayer = pCity.getOwner()
     pPlayer = gc.getPlayer(iPlayer)
-    # Buildings with prereq bonus gets checked : remove chance 10%
+    # Buildings with prereq bonus gets checked : remove chance 5%
     building = gc.getInfoTypeForString("BUILDING_SCHMIEDE_BRONZE")
     if pCity.isHasBuilding(building):
-        if CvUtil.myRandom(10, "removeNoBonusNoBuilding1") == 1:
+        if CvUtil.myRandom(20, "removeNoBonusNoBuilding1") == 1:
             bonus0 = gc.getInfoTypeForString("BONUS_COPPER")
             # bonus1 = gc.getInfoTypeForString("BONUS_COAL")
             # bonus2 = gc.getInfoTypeForString("BONUS_ZINN")
@@ -2166,7 +2178,7 @@ def removeNoBonusNoBuilding(pCity):
     ]
     for building in lBuildings:
         if pCity.isHasBuilding(building):
-            if CvUtil.myRandom(10, "removeNoBonusNoBuilding2") == 1:
+            if CvUtil.myRandom(20, "removeNoBonusNoBuilding2") == 1:
                 # bonus1 = gc.getInfoTypeForString("BONUS_WHEAT")
                 # bonus2 = gc.getInfoTypeForString("BONUS_GERSTE")
                 # bonus3 = gc.getInfoTypeForString("BONUS_HAFER")
@@ -2194,7 +2206,7 @@ def removeNoBonusNoBuilding(pCity):
     ]
     for building in lBuildings:
         if pCity.isHasBuilding(building):
-            if CvUtil.myRandom(10, "removeNoBonusNoBuilding3") == 1:
+            if CvUtil.myRandom(20, "removeNoBonusNoBuilding3") == 1:
                 bonus = bonusMissing(pCity, building)
                 if bonus is not None:
                     pCity.setNumRealBuilding(building, 0)
@@ -2746,6 +2758,10 @@ def doDeportation(pCity, iNewOwner, iPreviousOwner):
     iCulture = pCity.findHighestCulture()
     if iCulture == -1: iCulture = iPreviousOwner
     CvUtil.addScriptData(NewUnit, "p", iCulture)
+    # Versorger erstellen 33.3%
+    if CvUtil.myRandom(10, "PAE_City:doDeportation Create Suppy Wagon") < 3:
+        NewUnit = CvUtil.spawnUnit(gc.getInfoTypeForString("UNIT_SUPPLY_WAGON"), pCity.plot(), pPlayer)
+        PAE_Unit.initSupply(NewUnit)
 
 def doSettledSlavesAndReservists(pCity):
     bRevolt = False
@@ -2918,9 +2934,11 @@ def doSettledSlavesAndReservists(pCity):
                 # Einen guenstigen Plot auswaehlen
                 rebelPlotArray = []
                 rebelPlotArrayB = []
-                for i in xrange(3):
-                    for j in xrange(3):
-                        loopPlot = gc.getMap().plot(pCity.getX() + i - 1, pCity.getY() + j - 1)
+                iX = pCity.getX()
+                iY = pCity.getY()
+                for i in xrange(-1,2):
+                    for j in xrange(-1,2):
+                        loopPlot = plotXY(iX, iY, x, y)
                         if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
                             if loopPlot.getOwner() == iPlayer:
                                 if loopPlot.isHills():
@@ -3274,20 +3292,22 @@ def correctCityBuildings(pCity, pPlayer, pPreviousOwner):
     bSetTradeRoad = False
     iTradeRoad = gc.getInfoTypeForString("ROUTE_TRADE_ROAD")
     iBuilding = gc.getInfoTypeForString("BUILDING_HANDELSZENTRUM")
-    if pCity.isHasBuilding(iBuilding): bSetTradeRoad = True
+    if pCity.isHasBuilding(iBuilding):
+        bSetTradeRoad = True
     else:
-      iX = pCity.plot().getX()
-      iY = pCity.plot().getY()
-      for i in xrange(3):
-        for j in xrange(3):
-          loopPlot = gc.getMap().plot(iX + i - 1, iY + j - 1)
-          if not loopPlot.isNone():
-            if loopPlot.getRouteType() == iTradeRoad:
-              bSetTradeRoad = True
-              break
-        if bSetTradeRoad: break
+        iX = pCity.getX()
+        iY = pCity.getY()
+        for i in xrange(-1,2):
+            for j in xrange(-1,2):
+                loopPlot = plotXY(iX, iY, x, y)
+                if loopPlot is not None and not loopPlot.isNone():
+                    if loopPlot.getRouteType() == iTradeRoad:
+                        bSetTradeRoad = True
+                        break
+            if bSetTradeRoad:
+                break
     if bSetTradeRoad:
-      pCity.plot().setRouteType(iTradeRoad)
+        pCity.plot().setRouteType(iTradeRoad)
 
 
 def doFreeTechMissionary(iTechType, iPlayer):
@@ -3601,6 +3621,7 @@ def doCheckCityName(pCity):
   elif sScenarioName == "BarbaricumRiseOfGreekPoleis": Filename = "Cities_BarbaricumRiseOfGreece.txt"
   elif sScenarioName == "EuropeMini": Filename = "Cities_Europe_Mini.txt"
   elif sScenarioName == "EuropeLarge" or sScenarioName == "SchmelzEuro": Filename = "Cities_Europe_Large.txt"
+  elif sScenarioName == "CivIIIRiseOfRome": Filename = "Cities_CivIIIRiseOfRome.txt"
 
   if Filename != "":
     # init
@@ -3608,8 +3629,8 @@ def doCheckCityName(pCity):
     thisCityX = pCity.getX()
     thisCityY = pCity.getY()
 
-    MyFile = open("Mods/PieAncientEuropeVI/Assets/XML/Misc/" + Filename)
-    for CurString in MyFile.readlines():
+    CityNamesFile = open("Mods/PieAncientEuropeVI/Assets/XML/Misc/" + Filename)
+    for CurString in CityNamesFile.readlines():
       if "#" in CurString: continue
       if "x=" in CurString or "X=" in CurString:
         xRange = getRangeCut(CurString[2:])
@@ -3644,7 +3665,7 @@ def doCheckCityName(pCity):
           if bRename:
             pCity.setName(cityName,0)
             break # for CurString
-    MyFile.close()
+    CityNamesFile.close()
 
 def getRangeCut(string):
     string = str(string)
@@ -3665,24 +3686,6 @@ def getRangeCut(string):
             xyRange.append(iBegin)
         return xyRange
 
-    # if "-" not in string:
-    #     return [int(string)]
-    # else:
-    #     for i in xrange(len(string)):
-    #         if string[i] == "-":
-    #             iPos = i
-    #             break
-    #     iBegin = int(string[:iPos])
-    #     iEnd = string[iPos+1:]
-    #     iDiff = int(iEnd) - int(iBegin)
-    #     if iDiff < 0:
-    #         iDiff *= -1
-    #     xyRange = []
-    #     xyRange.append(iBegin)
-    #     for i in xrange (iDiff):
-    #         iBegin += 1
-    #         xyRange.append(iBegin)
-    #     return xyRange
 
 # PAE Stadtstatus
 # 0: Siedlung
@@ -3883,7 +3886,7 @@ def doPanhellenismus(iPlayer):
           pCity.setHasCorporation(iCorp, 1, 0, 1)
 
     iHegemonTeam = pPlayer.getTeam()
-    #pHegemonTeam = gc.getTeam(iHegemonTeam)
+    # pHegemonTeam = gc.getTeam(iHegemonTeam)
     iRange = gc.getMAX_PLAYERS()
     for _ in xrange(iRange):
       pLoopPlayer = gc.getPlayer(_)
@@ -3919,6 +3922,16 @@ def getHolyRelic(pCity, iPlayer):
 
           if pPlayer.isHuman():
             CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_INFO_RELIC", (pCity.getName(),)), None, 2, gc.getUnitInfo(gc.getInfoTypeForString("UNIT_RELIC")).getButton(), ColorTypes(8), pCity.getX(), pCity.getY(), True, True)
+
+# onCityRazed: Missionar erstellen
+def getCityMissionar (pCity, iPlayer):
+    pPlayer = gc.getPlayer(iPlayer)
+    iReligion = pPlayer.getStateReligion()
+    if iReligion > -1 and pCity.isHasReligion(iReligion):
+        for iUnit in xrange(gc.getNumUnitInfos()):
+            if gc.getUnitInfo(iUnit).getPrereqReligion() == iReligion and "MISSIONARY" in gc.getUnitInfo(iUnit).getTextKey():
+                CvUtil.spawnUnit(iUnit, pCity.plot(), pPlayer)
+                break
 
 def isCityState(iPlayer):
     # city states / Stadtstaaten
