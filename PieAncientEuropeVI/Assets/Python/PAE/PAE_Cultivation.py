@@ -219,7 +219,7 @@ def canHaveBonus(pPlot, eBonus, bIgnoreLatitude):
 	if pPlot.getFeatureType() != -1:
 		if gc.getBonusInfo(eBonus).isFeature(pPlot.getFeatureType()):
 			if gc.getBonusInfo(eBonus).isFeatureTerrain(pPlot.getTerrainType()):
-			return True
+				return True
 
 	return False
 

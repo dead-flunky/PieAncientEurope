@@ -393,7 +393,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
                 for i in xrange(iNumCivs): lCivs.append(i)
 
                 # Datei auslesen und bei disable Tech Civ aus der Liste droppen
-                datei = open("Mods/PieAncientEuropeVI/Assets/XML/Civilizations/CIV4CivilizationInfos.xml")
+                datei = open("Mods/PieAncientEuropeVII/Assets/XML/Civilizations/CIV4CivilizationInfos.xml")
                 for zeile in datei:
                   if "<CivilizationInfo>" in zeile: bRead = False
                   if "<Type>CIVILIZATION" in zeile: sCiv = zeile[zeile.find(">")+1:zeile.find("</")]

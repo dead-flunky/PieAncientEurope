@@ -1,0 +1,5 @@
+// Set the resource
+resource_path "Mods/PieAncientEuropeVII/Resource";
+
+// Setup common properties
+include "Mods/PieAncientEuropeVII/Resource/Themes/Civ4/Civ4Theme.thm";

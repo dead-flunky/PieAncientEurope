@@ -3628,7 +3628,7 @@ def doCheckCityName(pCity):
 		thisCityX = pCity.getX()
 		thisCityY = pCity.getY()
 
-		CityNamesFile = open("Mods/PieAncientEuropeVI/Assets/XML/Misc/" + Filename)
+		CityNamesFile = open("Mods/PieAncientEuropeVII/Assets/XML/Misc/" + Filename)
 		for CurString in CityNamesFile.readlines():
 			if "#" in CurString: continue
 			if "x=" in CurString or "X=" in CurString:

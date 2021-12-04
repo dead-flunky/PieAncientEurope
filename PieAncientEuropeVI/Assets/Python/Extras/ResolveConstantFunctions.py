@@ -8,7 +8,7 @@ import os
 import glob
 import re
 import CvUtil
-Mod = "PieAncientEuropeVI"
+Mod = "PieAncientEuropeVII"
 ModOut = "PAE_Opt"
 
 PyModPath = os.path.join("Mods", Mod, "Assets", "Python")
