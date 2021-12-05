@@ -76,7 +76,12 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 
         self.X_SCREEN = 500
         self.Y_SCREEN = 396
-        self.W_SCREEN = 1024
+        # PAE
+        screen = self.getScreen()
+        if screen.getXResolution() > 1024:
+            self.W_SCREEN = screen.getXResolution() - 60
+        else:
+            self.W_SCREEN = 1024 # Sevopedia
         self.H_SCREEN = 768
 
         self.H_PANEL = 55
@@ -405,7 +410,10 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
         screen.addDDSGFC(self.BACKGROUND_ID, ArtFileMgr.getInterfaceArtInfo("SCREEN_BG_OPAQUE").getPath(), 0, 0, self.W_SCREEN, self.H_SCREEN, WidgetTypes.WIDGET_GENERAL, -1, -1)
         screen.addPanel(self.TOP_PANEL_ID, u"", u"", True, False, self.X_TOP_PANEL, self.Y_TOP_PANEL, self.W_TOP_PANEL, self.H_TOP_PANEL, PanelStyles.PANEL_STYLE_TOPBAR)
         screen.addPanel(self.BOT_PANEL_ID, u"", u"", True, False, self.X_BOT_PANEL, self.Y_BOT_PANEL, self.W_BOT_PANEL, self.H_BOT_PANEL, PanelStyles.PANEL_STYLE_BOTTOMBAR)
-        screen.setDimensions(screen.centerX(0), screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
+        # PAE
+        screen.setDimensions((screen.getXResolution() - self.W_SCREEN) / 2, screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
+        # Sevopedia
+        #screen.setDimensions(screen.centerX(0), screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
 
         screen.setText(self.HEAD_ID, "Background", self.HEAD_TEXT, CvUtil.FONT_CENTER_JUSTIFY, self.X_TITLE, self.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL,      -1, -1)
         screen.setText(self.BACK_ID, "Background", self.BACK_TEXT, CvUtil.FONT_LEFT_JUSTIFY,   self.X_BACK,  self.Y_BACK,  0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_PEDIA_BACK,    1, -1)
