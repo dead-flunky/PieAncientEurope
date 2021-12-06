@@ -26,78 +26,78 @@ Depth = 0      # Stack depth ( != len(Locs) after return-event )
 
 # ====== Trace stuff to save frame stack
 def traceit(frame, event, arg):
-    CvUtil.pyPrint("\t" + event + "\t" + str(frame.f_code.co_name))
-    if event == "call":
-        if frame.f_code.co_name == "extendedExceptHook":
-            # Abort trace in case of exception handling
-            sys.settrace(None)
-            return
+	CvUtil.pyPrint("\t" + event + "\t" + str(frame.f_code.co_name))
+	if event == "call":
+		if frame.f_code.co_name == "extendedExceptHook":
+			# Abort trace in case of exception handling
+			sys.settrace(None)
+			return
 
-        globals()["Depth"] += 1
-        Locs[Depth:] = [frame.f_locals]
-    return traceit_2
+		globals()["Depth"] += 1
+		Locs[Depth:] = [frame.f_locals]
+	return traceit_2
 
 
 def traceit_2(frame, event, arg):
-    if event == "return":
-        globals()["Depth"] -= 1
-        # print "Depth:", Depth
-        return
+	if event == "return":
+		globals()["Depth"] -= 1
+		# print "Depth:", Depth
+		return
 
 
 # ====== Exception stuff to print out local variables
 def print_callers_locals(fOut=sys.stdout, loc=None):
-    """Print the local variables dict."""
+	"""Print the local variables dict."""
 
-    if not loc:
-        return
+	if not loc:
+		return
 
-    s = ""
-    for var_name in loc:
-        var_value = str(loc[var_name]).replace("\n", "\n\t\t")
-        s += "\t%s: %s\n" % (var_name, var_value)
+	s = ""
+	for var_name in loc:
+		var_value = str(loc[var_name]).replace("\n", "\n\t\t")
+		s += "\t%s: %s\n" % (var_name, var_value)
 
-    fOut.write(s)
-    fOut.write(linesep)
+	fOut.write(s)
+	fOut.write(linesep)
 
 
 # Superseeds CvUtil.myExceptHook
 def extendedExceptHook(the_type, value, tb):
-    lines = traceback.format_exception(the_type, value, tb)
-    pre = "---------------------Traceback lines-----------------------\n"
-    mid = "---------------------Local variables-----------------------\n"
-    trace = "\n".join(lines)
-    post = "-----------------------------------------------------------\n"
-    if SHOWEXCEPTIONS:
-        fOut = sys.stderr
-    else:
-        fOut = sys.stdout
+	lines = traceback.format_exception(the_type, value, tb)
+	pre = "---------------------Traceback lines-----------------------\n"
+	mid = "---------------------Local variables-----------------------\n"
+	trace = "\n".join(lines)
+	post = "-----------------------------------------------------------\n"
+	if SHOWEXCEPTIONS:
+		fOut = sys.stderr
+	else:
+		fOut = sys.stdout
 
-    fTmp = StringIO.StringIO()
-    fTmp.write(pre)
-    fTmp.write(trace)
-    fTmp.write(mid)
-    print_callers_locals(fTmp, Locs[-1])
-    fTmp.write(post)
+	fTmp = StringIO.StringIO()
+	fTmp.write(pre)
+	fTmp.write(trace)
+	fTmp.write(mid)
+	print_callers_locals(fTmp, Locs[-1])
+	fTmp.write(post)
 
-    if _USE_REMOTE:
-        fTmp.write("Starting remote console... Connect with "\
-                   "'telnet %s %s' or 'nc -C %s %s'\n" % (
-                       CONFIG_REMOTE["host"], CONFIG_REMOTE["port"],
-                       CONFIG_REMOTE["host"], CONFIG_REMOTE["port"])
-                  )
+	if _USE_REMOTE:
+		fTmp.write("Starting remote console... Connect with "\
+					"'telnet %s %s' or 'nc -C %s %s'\n" % (
+					CONFIG_REMOTE["host"], CONFIG_REMOTE["port"],
+					CONFIG_REMOTE["host"], CONFIG_REMOTE["port"])
+				)
 
-    fOut.write(fTmp.getvalue())
-    if hasattr(fOut, "flush"):
-        fOut.flush()
+	fOut.write(fTmp.getvalue())
+	if hasattr(fOut, "flush"):
+		fOut.flush()
 
-    if _USE_REMOTE:
-        if not Remote:
-            globals()["Remote"] = RemotePdb(CONFIG_REMOTE["host"], CONFIG_REMOTE["port"])
+	if _USE_REMOTE:
+		if not Remote:
+			globals()["Remote"] = RemotePdb(CONFIG_REMOTE["host"], CONFIG_REMOTE["port"])
 
-        Remote.set_trace()
+		Remote.set_trace()
 
 
 def init_extended_debug():
-    sys.settrace(traceit)
-    sys.excepthook = extendedExceptHook
+	sys.settrace(traceit)
+	sys.excepthook = extendedExceptHook
