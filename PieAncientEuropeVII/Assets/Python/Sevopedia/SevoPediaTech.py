@@ -9,6 +9,7 @@
 # additional work by Gaurav, Progor, Ket, Vovan, Fitchn, LunarMongoose
 # see ReadMe for details
 #
+# changes for PAE (Pie) Dec 2021
 
 from CvPythonExtensions import *
 import CvUtil
@@ -28,44 +29,39 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 
 		self.X_TECH_PANE = self.top.X_PEDIA_PAGE
 		self.Y_TECH_PANE = self.top.Y_PEDIA_PAGE
-		self.W_TECH_PANE = 300
-		self.H_TECH_PANE = 116
+		self.W_TECH_PANE = 320
+		self.H_TECH_PANE = 100
 
-		self.W_ICON = 100
-		self.H_ICON = 100
+		self.W_ICON = 96
+		self.H_ICON = 96
 		self.X_ICON = self.X_TECH_PANE + (self.H_TECH_PANE - self.H_ICON) / 2
 		self.Y_ICON = self.Y_TECH_PANE + (self.H_TECH_PANE - self.H_ICON) / 2
 
 		self.ICON_SIZE = 64
 		self.BUTTON_SIZE = 64
 
-		self.X_COST = self.X_TECH_PANE + 110
-		self.Y_COST = self.Y_TECH_PANE + 47
+		self.X_COST = self.X_TECH_PANE + 100
+		self.Y_COST = self.Y_TECH_PANE + 30
 
-		self.X_CIVS = self.X_TECH_PANE + self.W_TECH_PANE + 10
+		self.X_CIVS = self.X_TECH_PANE + self.W_TECH_PANE + 6
 		self.Y_CIVS = self.Y_TECH_PANE
 		self.W_CIVS = self.top.R_PEDIA_PAGE - self.X_CIVS
-		self.H_CIVS = 110
-
-		self.X_QUOTE_PANE = self.X_TECH_PANE
-		self.Y_QUOTE_PANE = self.Y_TECH_PANE + self.H_TECH_PANE + 10
-		self.W_QUOTE_PANE = self.top.R_PEDIA_PAGE - self.X_QUOTE_PANE
-		self.H_QUOTE_PANE = 110
+		self.H_CIVS = 100
 
 		self.X_PREREQ_PANE = self.X_TECH_PANE
-		self.Y_PREREQ_PANE = self.Y_QUOTE_PANE + self.H_QUOTE_PANE + 10
+		self.Y_PREREQ_PANE = self.Y_TECH_PANE + self.H_TECH_PANE + 6
 		self.W_PREREQ_PANE = self.top.W_PEDIA_PAGE / 2 - 5
-		self.H_PREREQ_PANE = 124
+		self.H_PREREQ_PANE = 100
 
-		self.X_LEADS_TO_PANE = self.X_PREREQ_PANE + self.W_PREREQ_PANE + 10
+		self.X_LEADS_TO_PANE = self.X_PREREQ_PANE + self.W_PREREQ_PANE + 6
 		self.Y_LEADS_TO_PANE = self.Y_PREREQ_PANE
 		self.W_LEADS_TO_PANE = self.W_PREREQ_PANE
 		self.H_LEADS_TO_PANE = self.H_PREREQ_PANE
 
 		self.X_SPECIAL_PANE = self.X_TECH_PANE
 		self.W_SPECIAL_PANE = self.W_PREREQ_PANE
-		self.Y_SPECIAL_PANE = self.Y_PREREQ_PANE + self.H_PREREQ_PANE + 10
-		self.H_SPECIAL_PANE = self.top.B_PEDIA_PAGE - self.Y_SPECIAL_PANE
+		self.Y_SPECIAL_PANE = self.Y_PREREQ_PANE + self.H_PREREQ_PANE + 6
+		self.H_SPECIAL_PANE = self.H_PREREQ_PANE * 2 + 6
 
 		self.X_UNIT_PANE = self.X_LEADS_TO_PANE
 		self.W_UNIT_PANE = self.W_LEADS_TO_PANE
@@ -74,9 +70,13 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 
 		self.X_BUILDING_PANE = self.X_UNIT_PANE
 		self.W_BUILDING_PANE = self.W_UNIT_PANE
-		self.Y_BUILDING_PANE = self.Y_UNIT_PANE + self.H_UNIT_PANE + 10
+		self.Y_BUILDING_PANE = self.Y_UNIT_PANE + self.H_UNIT_PANE + 6
 		self.H_BUILDING_PANE = self.H_PREREQ_PANE
 
+		self.X_QUOTE_PANE = self.X_TECH_PANE
+		self.Y_QUOTE_PANE = self.Y_SPECIAL_PANE + self.H_SPECIAL_PANE + 6
+		self.W_QUOTE_PANE = self.top.R_PEDIA_PAGE - self.X_QUOTE_PANE
+		self.H_QUOTE_PANE = 220
 
 
 	def interfaceScreen(self, iTech):
@@ -92,6 +92,9 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 			szCostText = localText.getText("TXT_KEY_PEDIA_COST", (gc.getTeam(gc.getGame().getActiveTeam()).getResearchCost(iTech),)) + u"%c" % (gc.getCommerceInfo(CommerceTypes.COMMERCE_RESEARCH).getChar())
 		screen.setLabel(self.top.getNextWidgetName(), "Background", u"<font=4>" + szCostText.upper() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_COST + 25, self.Y_COST, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
+		# Zeitalter (PAE)
+		screen.setLabel(self.top.getNextWidgetName(), "Background", u"<font=4>" + gc.getEraInfo(gc.getTechInfo(self.iTech).getEra()).getDescription() + u"</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_COST + 25, self.Y_COST + 25, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
+
 		self.placeCivilizations()
 		self.placePrereqs()
 		self.placeLeadsTo()
@@ -104,8 +107,8 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 
 	def placeCivilizations(self):
 		screen = self.top.getScreen()
-		panelName = self.top.getNextWidgetName()
-		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CATEGORY_CIV", ()), "", False, True, self.X_CIVS, self.Y_CIVS, self.W_CIVS, self.H_CIVS, PanelStyles.PANEL_STYLE_BLUE50 )
+		panelName = self.top.getNextWidgetName()	#	TXT_KEY_PEDIA_CATEGORY_CIV
+		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CIVS_ENABLED", ()), "", False, True, self.X_CIVS, self.Y_CIVS, self.W_CIVS, self.H_CIVS, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
 		for iCiv in xrange(gc.getNumCivilizationInfos()):
 			civ = gc.getCivilizationInfo(iCiv)
@@ -118,7 +121,6 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		for i in xrange(iNumCivs):
 			if not gc.getCivilizationInfo(i).isCivilizationDisableTechs(self.iTech) and i != gc.getInfoTypeForString("CIVILIZATION_MINOR"):
 				lCivs.append(i)
-
 		if len(lCivs) != iNumCivs - 1:
 			for item in lCivs:
 				screen.attachImageButton( panelName, "", gc.getCivilizationInfo(item).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, item, 1, False)
@@ -196,7 +198,11 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		for eLoopUnit in xrange(gc.getNumUnitInfos()):
 			if (eLoopUnit != -1):
 				if (isTechRequiredForUnit(self.iTech, eLoopUnit)):
-					screen.attachImageButton(panelName, "", gc.getUnitInfo(eLoopUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False)
+					# PAE show correct unit button each CIV
+					szButton = gc.getUnitInfo(eLoopUnit).getButton()
+					if self.top.iActivePlayer != -1:
+						szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
+					screen.attachImageButton(panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False)
 
 
 
@@ -208,8 +214,8 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		for eLoopBuilding in xrange(gc.getNumBuildingInfos()):
 			if (eLoopBuilding != -1):
 				if (isTechRequiredForBuilding(self.iTech, eLoopBuilding)):
-						screen.attachImageButton(panelName, "", gc.getBuildingInfo(eLoopBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoopBuilding, 1, False)
-						
+					screen.attachImageButton(panelName, "", gc.getBuildingInfo(eLoopBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoopBuilding, 1, False)
+					
 		for eLoopProject in xrange(gc.getNumProjectInfos()):
 			if (isTechRequiredForProject(self.iTech, eLoopProject)):
 				screen.attachImageButton(panelName, "", gc.getProjectInfo(eLoopProject).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, eLoopProject, 1, False)
@@ -222,6 +228,39 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		listName = self.top.getNextWidgetName()
 		szSpecialText = CyGameTextMgr().getTechHelp(self.iTech, True, False, False, False, -1)[1:]
+		
+		# PAE ---------
+		# Obsolete Unit
+		if self.iTech == gc.getInfoTypeForString("TECH_GRENZHEER"):
+			if szSpecialText != "": szSpecialText += "\n"
+			szSpecialText += CyTranslator().getText("TXT_KEY_TECH_OBSOLETES", (gc.getUnitInfo(gc.getInfoTypeForString("UNIT_PRAETORIAN")).getDescription(),))
+
+		# Spionagemissionen (werden erst im Spiel angezeigt, da Spionage auch ausgeschaltet sein kann -> getNumEspionageMissionInfos() = 0)
+		for eLoopEspionage in xrange(gc.getNumEspionageMissionInfos()):
+			if gc.getEspionageMissionInfo(eLoopEspionage).getTechPrereq() == self.iTech:
+				if szSpecialText != "": szSpecialText += "\n"
+				szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_ESPIONAGE_MISSIONS", (gc.getEspionageMissionInfo(eLoopEspionage).getDescription(),))
+
+		# Freie Einheit bei Kult
+		if self.iTech == gc.getInfoTypeForString("TECH_FRUCHTBARKEIT") or self.iTech == gc.getInfoTypeForString("TECH_GLADIATOR"):
+			if szSpecialText != "": szSpecialText += "\n"
+			szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_UNIT_1", ())
+
+		# Freie Einheit bei Religion
+		if self.iTech == gc.getInfoTypeForString("TECH_RELIGION_CELTIC") or self.iTech == gc.getInfoTypeForString("TECH_RELIGION_NORDIC") \
+		or self.iTech == gc.getInfoTypeForString("TECH_RELIGION_SUMER") or self.iTech == gc.getInfoTypeForString("TECH_RELIGION_GREEK") \
+		or self.iTech == gc.getInfoTypeForString("TECH_RELIGION_HINDU") or self.iTech == gc.getInfoTypeForString("TECH_DUALISMUS"):
+			if szSpecialText != "": szSpecialText += "\n"
+			szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_UNIT_2", ())
+
+		# PAE - Tradeable/conquerable
+		if szSpecialText != "": szSpecialText += "\n"
+		if gc.getTechInfo(self.iTech).isTrade():
+			szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_TRADEABLE", ())
+		else:
+			szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_NOT_TRADEABLE", ())
+		
+		# BTS: Auflistung
 		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+30, self.W_SPECIAL_PANE-35, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
 
@@ -231,8 +270,18 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel(panelName, "", "", True, True,
 			self.X_QUOTE_PANE, self.Y_QUOTE_PANE, self.W_QUOTE_PANE, self.H_QUOTE_PANE, PanelStyles.PANEL_STYLE_BLUE50)
+		
 		szQuote = gc.getTechInfo(self.iTech).getQuote()
-		szQuote += u"\n\n" + gc.getTechInfo(self.iTech).getCivilopedia()
+		
+		# PAE additional strategy text
+		if len(gc.getTechInfo(self.iTech).getStrategy()) > 0:
+		   szQuote += u"\n\n"
+		   szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_STRATEGY", ())
+		   szQuote += gc.getTechInfo(self.iTech).getStrategy()
+		szQuote += u"\n\n"
+		szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_BACKGROUND", ())
+		szQuote += gc.getTechInfo(self.iTech).getCivilopedia()
+		
 		szQuoteTextWidget = self.top.getNextWidgetName()
 		screen.addMultilineText(szQuoteTextWidget, szQuote, self.X_QUOTE_PANE + 15, self.Y_QUOTE_PANE + 15,
 		    self.W_QUOTE_PANE - (15 * 2), self.H_QUOTE_PANE - (15 * 2), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
