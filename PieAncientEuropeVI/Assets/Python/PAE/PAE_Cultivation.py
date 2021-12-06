@@ -868,9 +868,9 @@ def elephant(pCity, bPrioPlotOnly):
 												if loopPlot.getTerrainType() == lTerrains[iJ]:
 													lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
 													break
-											else:
-												# 4. irgendeinen passenden ohne Improvement
-												lPlotPrio[iFirstBlock + iSecondBlock + 1].append(loopPlot)
+												else:
+													# 4. irgendeinen passenden ohne Improvement
+													lPlotPrio[iFirstBlock + iSecondBlock + 1].append(loopPlot)
 									# 3. nach Improvements selektieren
 									elif loopPlot.getImprovementType() == iImpCamp:
 										lPlotPrio[iFirstBlock].append(loopPlot)
