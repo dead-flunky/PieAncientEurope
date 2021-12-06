@@ -24,4 +24,4 @@ normalScreenUtils = CvOverlayScreenUtils.CvOverlayScreenUtils()
 
 
 def getScreenUtils():
-    return normalScreenUtils
+	return normalScreenUtils

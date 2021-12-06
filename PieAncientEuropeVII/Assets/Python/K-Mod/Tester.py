@@ -19,56 +19,56 @@ localText = CyTranslator()
 
 class Tester :
 
-    def __init__(self, customEM):
+	def __init__(self, customEM):
 
-        CvUtil.pyPrint("Initializing Tester")
+		CvUtil.pyPrint("Initializing Tester")
 
-        self.LOG_DEBUG = True
+		self.LOG_DEBUG = True
 
-        customEM.addEventHandler( "kbdEvent", self.onKbdEvent )
+		customEM.addEventHandler( "kbdEvent", self.onKbdEvent )
 
-        self.customEM = customEM
+		self.customEM = customEM
 
-    def removeEventHandlers( self ) :
-        CvUtil.pyPrint("Removing event handlers from Tester")
+	def removeEventHandlers( self ) :
+		CvUtil.pyPrint("Removing event handlers from Tester")
 
-        self.customEM.removeEventHandler( "kbdEvent", self.onKbdEvent )
-
-
-    def blankHandler( self, playerID, netUserData, popupReturn ) :
-        # Dummy handler to take the second event for popup
-        return
+		self.customEM.removeEventHandler( "kbdEvent", self.onKbdEvent )
 
 
-    def onKbdEvent(self, argsList ):
-        'keypress handler'
-        eventType,key,mx,my,px,py = argsList
+	def blankHandler( self, playerID, netUserData, popupReturn ) :
+		# Dummy handler to take the second event for popup
+		return
 
-        if eventType == 6:
-            theKey=int(key)
 
-            if theKey == int(InputTypes.KB_S) and self.customEM.bShift and self.customEM.bCtrl:
-                self.showStrandedPopup()
+	def onKbdEvent(self, argsList ):
+		'keypress handler'
+		eventType,key,mx,my,px,py = argsList
 
-    def showStrandedPopup( self ) :
+		if eventType == 6:
+			theKey=int(key)
 
-        bodStr = "Stranded units by player:\n"
-        for iPlayer in xrange(0,gc.getMAX_PLAYERS()) :
-            pPlayer = gc.getPlayer(iPlayer)
+			if theKey == int(InputTypes.KB_S) and self.customEM.bShift and self.customEM.bCtrl:
+				self.showStrandedPopup()
 
-            if pPlayer.isAlive():
+	def showStrandedPopup( self ) :
 
-                bodStr += "\n\n%d: %s"%(iPlayer, pPlayer.getCivilizationDescription(0))
+		bodStr = "Stranded units by player:\n"
+		for iPlayer in xrange(0,gc.getMAX_PLAYERS()) :
+			pPlayer = gc.getPlayer(iPlayer)
 
-                unitList = PyPlayer(iPlayer).getUnitList()
+			if pPlayer.isAlive():
 
-                for pUnit in unitList:
+				bodStr += "\n\n%d: %s"%(iPlayer, pPlayer.getCivilizationDescription(0))
 
-                    pGroup = pUnit.getGroup()
-                    if pGroup.getHeadUnit().getID() == pUnit.getID():
-                        if pGroup.isStranded():
-                            bodStr += "\n   %s (%d units) at (%d, %d)"%(pUnit.getName(),pGroup.getNumUnits(),pUnit.getX(),pUnit.getY())
+				unitList = PyPlayer(iPlayer).getUnitList()
 
-        popup = PyPopup.PyPopup()
-        popup.setBodyString(bodStr)
-        popup.launch()
+				for pUnit in unitList:
+
+					pGroup = pUnit.getGroup()
+					if pGroup.getHeadUnit().getID() == pUnit.getID():
+						if pGroup.isStranded():
+							bodStr += "\n   %s (%d units) at (%d, %d)"%(pUnit.getName(),pGroup.getNumUnits(),pUnit.getX(),pUnit.getY())
+
+		popup = PyPopup.PyPopup()
+		popup.setBodyString(bodStr)
+		popup.launch()
