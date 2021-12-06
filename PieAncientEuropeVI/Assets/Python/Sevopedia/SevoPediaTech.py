@@ -112,7 +112,17 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 			if civ.isCivilizationFreeTechs(self.iTech):
 				screen.attachImageButton(panelName, "", civ.getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, iCiv, 1, False)
 
+		# PAE
+		lCivs = []
+		iNumCivs = gc.getNumCivilizationInfos()
+		for i in xrange(iNumCivs):
+			if not gc.getCivilizationInfo(i).isCivilizationDisableTechs(self.iTech) and i != gc.getInfoTypeForString("CIVILIZATION_MINOR"):
+				lCivs.append(i)
 
+		if len(lCivs) != iNumCivs - 1:
+			for item in lCivs:
+				screen.attachImageButton( panelName, "", gc.getCivilizationInfo(item).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIV, item, 1, False)
+		# -----
 
 	def placeLeadsTo(self):
 		screen = self.top.getScreen()
