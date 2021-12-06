@@ -11,11 +11,16 @@
 #
 # changes for PAE (Pie) Dec 2021
 
-from CvPythonExtensions import *
+from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
+								CyGInterfaceScreen, WidgetTypes, FontTypes,
+								CommerceTypes, FontSymbols, YieldTypes, CyGame,
+								PanelStyles, PopupStates, TableStyles,
+								CyGameTextMgr,CivilopediaPageTypes,
+								ActivationTypes)
 import string
 
 import CvUtil
-import ScreenInput
+# import ScreenInput
 import SevoScreenEnums
 
 import CvPediaScreen
@@ -43,6 +48,11 @@ import UnitUpgradesGraph
 import TraitUtil
 import BugCore
 import BugUtil
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
 
 gc = CyGlobalContext()
 ArtFileMgr = CyArtFileMgr()
@@ -872,6 +882,6 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 			item = getInfo(i)
 			if item:
 				list.append((item.getDescription(), i))
-		#if self.isSortLists() and not noSort:
+		# if self.isSortLists() and not noSort:
 		list.sort()
 		return list

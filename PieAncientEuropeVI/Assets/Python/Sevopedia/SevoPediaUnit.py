@@ -25,7 +25,7 @@ class SevoPediaUnit:
 	def __init__(self, main):
 		self.iUnit = -1
 		self.top = main
-		
+
 		self.X_UNIT_PANE = self.top.X_PEDIA_PAGE
 		self.Y_UNIT_PANE = self.top.Y_PEDIA_PAGE
 		self.W_UNIT_PANE = 350
@@ -121,7 +121,7 @@ class SevoPediaUnit:
 		szName = self.top.getNextWidgetName()
 		szMovement = localText.getText("TXT_KEY_PEDIA_MOVEMENT", (gc.getUnitInfo(self.iUnit).getMoves(),))
 		screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szMovement.upper() + u"%c" % CyGame().getSymbolID(FontSymbols.MOVES_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
-		
+
 		# PAE: not buildable units
 		if gc.getUnitInfo(self.iUnit).getProductionCost() == -1:
 			szText = localText.getText("TXT_KEY_PEDIA_NOCOST", ())
@@ -138,11 +138,11 @@ class SevoPediaUnit:
 				szText += u" %d%c" % (iKosten / 2, gc.getYieldInfo(YieldTypes.YIELD_FOOD).getChar())
 			szText += u"</font>"
 			screen.appendListBoxStringNoUpdate(panelName, szText, WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
-		
+
 		if (gc.getUnitInfo(self.iUnit).getAirRange() > 0):
 			szRange = localText.getText("TXT_KEY_PEDIA_RANGE", (gc.getUnitInfo(self.iUnit).getAirRange(),))
 			screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szRange.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
-		
+
 		# PAE more infos
 		iUnitClass = gc.getUnitInfo(self.iUnit).getUnitClassType()
 		if gc.getUnitClassInfo(iUnitClass).getMaxPlayerInstances() != -1:
@@ -153,10 +153,10 @@ class SevoPediaUnit:
 			szText = localText.getText("TXT_KEY_PEDIA_MAX_GLOBAL", ( gc.getUnitClassInfo(iUnitClass).getMaxGlobalInstances(), ) )
 			screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
-		if (gc.getUnitInfo(self.iUnit).getExtraCost() > 0):
+		if gc.getUnitInfo(self.iUnit).getExtraCost() > 0:
 			szText = localText.getText("TXT_KEY_UNIT_EXTRA_COST", ( gc.getUnitInfo(self.iUnit).getExtraCost(), ) )
 			screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText.upper() + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
-		
+
 		screen.updateListBox(panelName)
 
 
@@ -166,10 +166,10 @@ class SevoPediaUnit:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True, self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
-		
+
 		# BTS was: Tech | Bonus | Religion | Building
 		# PAE swaps displayed requirements: Tech | Religion | Building | Coorp | Bonus (Bonus at last because of AND and OR)
-		
+
 		# add tech buttons
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqAndTech()
 		if (iPrereq >= 0):
@@ -178,22 +178,22 @@ class SevoPediaUnit:
 			iPrereq = gc.getUnitInfo(self.iUnit).getPrereqAndTechs(j)
 			if (iPrereq >= 0):
 				screen.attachImageButton(panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, -1, False)
-		
+
 		# Religion
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqReligion()
 		if (iPrereq >= 0):
 			screen.attachImageButton(panelName, "", gc.getReligionInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_HELP_RELIGION, iPrereq, -1, False)
-		
+
 		# Building
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqBuilding()
 		if (iPrereq >= 0):
 			screen.attachImageButton(panelName, "", gc.getBuildingInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iPrereq, -1, False)
-		
+
 		# Corporation
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqCorporation()
-		if (iPrereq >= 0):
+		if iPrereq >= 0:
 				screen.attachImageButton( panelName, "", gc.getCorporationInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CORPORATION, iPrereq, -1, False )
-		
+
 		# Bonuses
 		bFirst = True
 		iPrereq = gc.getUnitInfo(self.iUnit).getPrereqAndBonus()
@@ -238,11 +238,11 @@ class SevoPediaUnit:
 				eLoopUnit = gc.getUnitClassInfo(k).getDefaultUnitIndex()
 			else:
 				eLoopUnit = gc.getCivilizationInfo(gc.getGame().getActiveCivilizationType()).getCivilizationUnits(k)
-			if (eLoopUnit >= 0 and gc.getUnitInfo(self.iUnit).getUpgradeUnitClass(k)):
+			if eLoopUnit >= 0 and gc.getUnitInfo(self.iUnit).getUpgradeUnitClass(k):
 				# PAE correct CIV unit button
 				szButton = gc.getUnitInfo(eLoopUnit).getButton()
 				if self.top.iActivePlayer != -1:
-						szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
+					szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(eLoopUnit)
 				screen.attachImageButton(panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoopUnit, 1, False)
 
 
@@ -280,9 +280,10 @@ class SevoPediaUnit:
 		rowListName = self.top.getNextWidgetName()
 		screen.addMultiListControlGFC(rowListName, "", self.X_PROMO_PANE+15, self.Y_PROMO_PANE+40, self.W_PROMO_PANE-20, self.H_PROMO_PANE-40, 1, self.PROMOTION_ICON_SIZE, self.PROMOTION_ICON_SIZE, TableStyles.TABLE_STYLE_STANDARD)
 		for k in xrange(gc.getNumPromotionInfos()):
-			if (isPromotionValid(k, self.iUnit, False) and not gc.getPromotionInfo(k).isGraphicalOnly()):
+			if isPromotionValid(k, self.iUnit, False) and not gc.getPromotionInfo(k).isGraphicalOnly():
 				# PAE break at unit battle formations
-				if "_FORM_" in gc.getPromotionInfo(k).getType(): break
+				if "_FORM_" in gc.getPromotionInfo(k).getType():
+					break
 				screen.appendMultiListButton(rowListName, gc.getPromotionInfo(k).getButton(), 0, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, k, -1, False)
 
 

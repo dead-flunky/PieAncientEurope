@@ -406,7 +406,7 @@ def createCivilopedia():
 	global bUsingSevopedia
 	if pediaMainScreen is None:
 		# import SevoPediaUtil
-		if AdvisorOpt.Sevopedia():
+		if True: #AdvisorOpt.Sevopedia():
 			import SevoPediaMain
 			# import SevoPediaHistory
 			bUsingSevopedia = True
@@ -463,7 +463,7 @@ def createCivilopedia():
 		})
 		global HandleNavigationMap
 		HandleNavigationMap = {
-		CvScreenEnums.MAIN_INTERFACE: mainInterface,
+			CvScreenEnums.MAIN_INTERFACE: mainInterface,
 			CvScreenEnums.PEDIA_MAIN: pediaMainScreen,
 			CvScreenEnums.PEDIA_TECH: pediaMainScreen,
 			CvScreenEnums.PEDIA_UNIT: pediaMainScreen,
