@@ -160,7 +160,8 @@ def onModNetMessage(argsList):
 				#if iAnz == 1: szBuffer = szBuffer + CyTranslator().getText("TXT_KEY_POPUP_PROVINZHAUPTSTADT_THX_MAIN2_SINGULAR",("", ))
 				#else: szBuffer = szBuffer + CyTranslator().getText("TXT_KEY_POPUP_PROVINZHAUPTSTADT_THX_MAIN2_PLURAL",(iAnz, ))
 				szBuffer = szBuffer + CyTranslator().getText("TXT_KEY_POPUP_PROVINZHAUPTSTADT_THX_MAIN2", (gc.getUnitInfo(lGift[iRand]).getDescriptionForm(0),))
-				if bDouble: szBuffer = szBuffer + u" (2x)"
+				if bDouble:
+					szBuffer = szBuffer + u" (2x)"
 
 				popupInfo = CyPopupInfo()
 				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
@@ -2215,9 +2216,9 @@ def removeNoBonusNoBuilding(pCity):
 						if iPlayer == gc.getGame().getActivePlayer():
 							# Hier können 2 Resourcen abhängig sein (allgemeiner Text, nur das Gebäude und kein Bonus wird bekannt gegeben)
 							if building == gc.getInfoTypeForString("BUILDING_IVORY_MARKET"):
-							  CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_NOBONUSNOBUILDING_4", (pCity.getName(), gc.getBonusInfo(bonus).getDescription(), gc.getBuildingInfo(building).getDescription())), None, 2, gc.getBuildingInfo(building).getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
+								CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_NOBONUSNOBUILDING_4", (pCity.getName(), gc.getBonusInfo(bonus).getDescription(), gc.getBuildingInfo(building).getDescription())), None, 2, gc.getBuildingInfo(building).getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
 							else:
-							  CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_NOBONUSNOBUILDING_1", (pCity.getName(), gc.getBonusInfo(bonus).getDescription(), gc.getBuildingInfo(building).getDescription())), None, 2, gc.getBuildingInfo(building).getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
+								CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_NOBONUSNOBUILDING_1", (pCity.getName(), gc.getBonusInfo(bonus).getDescription(), gc.getBuildingInfo(building).getDescription())), None, 2, gc.getBuildingInfo(building).getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
 							popupInfo = CyPopupInfo()
 							popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
 							popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_CITY_NOBONUSNOBUILDING_1", (pCity.getName(), gc.getBonusInfo(bonus).getDescription(), gc.getBuildingInfo(building).getDescription())))
@@ -3736,7 +3737,8 @@ def doCheckCivilWar(pCity):
 		bHuman = pPlayer.isHuman()
 
 		# check General oder Rhetoriker
-		if doCityCheckRevoltEnd(pCity): return
+		if doCityCheckRevoltEnd(pCity):
+			return
 
 		# alle Einheiten verletzen
 		lUnits = doCivilWarHarmUnits(pCity)
@@ -3774,7 +3776,8 @@ def doCheckCivilWar(pCity):
 
 				# Die Einheiten gewinnen gegen Pop
 				if iRand > iMilitaryUnits:
-					if iPop > 1: pCity.changePopulation(-1)
+					if iPop > 1:
+						pCity.changePopulation(-1)
 					# Es wurden etliche Bürger in %s niedergemetzelt.
 					if pPlayer.isHuman():
 						CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_INFO_CIVIL_WAR_2", (pCity.getName(),)), None, 2, gc.getBuildingInfo(gc.getInfoTypeForString("BUILDING_CIVIL_WAR")).getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
@@ -3787,7 +3790,7 @@ def doCheckCivilWar(pCity):
 					for loopUnit in lUnits:
 						if loopUnit.getDamage() > 74: lHarmedUnits.append(loopUnit)
 
-					if len(lHarmedUnits):
+					if lHarmedUnits:
 
 						# kill heavy injured unit
 						iRand = CvUtil.myRandom(len(lHarmedUnits), "iRandCityCivilWarUnitLost")
@@ -3846,7 +3849,8 @@ def doStartCivilWar(pCity, iChance):
 
 		# Die Einheiten gewinnen gegen Pop
 		if CvUtil.myRandom(2, "iRandCityCivilWarPop-1") == 1:
-			if pCity.getPopulation() > 1: pCity.changePopulation(-1)
+			if pCity.getPopulation() > 1:
+				pCity.changePopulation(-1)
 			# Es wurden etliche Bürger in %s niedergemetzelt.
 			if pPlayer.isHuman():
 				CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_INFO_CIVIL_WAR_2", (pCity.getName(),)), None, 2, gc.getBuildingInfo(gc.getInfoTypeForString("BUILDING_CIVIL_WAR")).getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)

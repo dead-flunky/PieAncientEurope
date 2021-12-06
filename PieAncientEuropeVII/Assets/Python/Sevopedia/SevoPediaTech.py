@@ -107,8 +107,8 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 
 	def placeCivilizations(self):
 		screen = self.top.getScreen()
-		panelName = self.top.getNextWidgetName()	#	TXT_KEY_PEDIA_CATEGORY_CIV
-		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_CIVS_ENABLED", ()), "", False, True, self.X_CIVS, self.Y_CIVS, self.W_CIVS, self.H_CIVS, PanelStyles.PANEL_STYLE_BLUE50 )
+		panelName = self.top.getNextWidgetName() # TXT_KEY_PEDIA_CATEGORY_CIV
+		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_CIVS_ENABLED", ()), "", False, True, self.X_CIVS, self.Y_CIVS, self.W_CIVS, self.H_CIVS, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
 		for iCiv in xrange(gc.getNumCivilizationInfos()):
 			civ = gc.getCivilizationInfo(iCiv)
@@ -215,7 +215,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 			if (eLoopBuilding != -1):
 				if (isTechRequiredForBuilding(self.iTech, eLoopBuilding)):
 					screen.attachImageButton(panelName, "", gc.getBuildingInfo(eLoopBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoopBuilding, 1, False)
-					
+
 		for eLoopProject in xrange(gc.getNumProjectInfos()):
 			if (isTechRequiredForProject(self.iTech, eLoopProject)):
 				screen.attachImageButton(panelName, "", gc.getProjectInfo(eLoopProject).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROJECT, eLoopProject, 1, False)
@@ -228,7 +228,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50)
 		listName = self.top.getNextWidgetName()
 		szSpecialText = CyGameTextMgr().getTechHelp(self.iTech, True, False, False, False, -1)[1:]
-		
+
 		# PAE ---------
 		# Obsolete Unit
 		if self.iTech == gc.getInfoTypeForString("TECH_GRENZHEER"):
@@ -259,7 +259,7 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 			szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_TRADEABLE", ())
 		else:
 			szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_NOT_TRADEABLE", ())
-		
+
 		# BTS: Auflistung
 		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+30, self.W_SPECIAL_PANE-35, self.H_SPECIAL_PANE-10, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
@@ -270,18 +270,18 @@ class SevoPediaTech(CvPediaScreen.CvPediaScreen):
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel(panelName, "", "", True, True,
 			self.X_QUOTE_PANE, self.Y_QUOTE_PANE, self.W_QUOTE_PANE, self.H_QUOTE_PANE, PanelStyles.PANEL_STYLE_BLUE50)
-		
+
 		szQuote = gc.getTechInfo(self.iTech).getQuote()
-		
+
 		# PAE additional strategy text
 		if len(gc.getTechInfo(self.iTech).getStrategy()) > 0:
-		   szQuote += u"\n\n"
-		   szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_STRATEGY", ())
-		   szQuote += gc.getTechInfo(self.iTech).getStrategy()
+			szQuote += u"\n\n"
+			szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_STRATEGY", ())
+			szQuote += gc.getTechInfo(self.iTech).getStrategy()
 		szQuote += u"\n\n"
 		szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_BACKGROUND", ())
 		szQuote += gc.getTechInfo(self.iTech).getCivilopedia()
-		
+
 		szQuoteTextWidget = self.top.getNextWidgetName()
 		screen.addMultilineText(szQuoteTextWidget, szQuote, self.X_QUOTE_PANE + 15, self.Y_QUOTE_PANE + 15,
 		    self.W_QUOTE_PANE - (15 * 2), self.H_QUOTE_PANE - (15 * 2), WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)

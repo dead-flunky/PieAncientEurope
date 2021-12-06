@@ -131,7 +131,7 @@ def doSandsturm():
 					break
 
 	# Schritt 2: Sandsturm setzen
-	if len(lDesert):
+	if lDesert:
 		OwnerArray = []
 		#  0 = WORLDSIZE_DUEL
 		#  1 = WORLDSIZE_TINY
@@ -140,42 +140,44 @@ def doSandsturm():
 		#  4 = WORLDSIZE_LARGE
 		#  5 = WORLDSIZE_HUGE
 		iMaxEffect = max(1, gc.getMap().getWorldSize() - 1)
-		for _ in xrange(iMaxEffect):
-			if len(lDesert):
-				iRand = CvUtil.myRandom(len(lDesert), "doSandsturmGetRandomXCoord")
-				iPlotX = lDesert[iRand]
+		iCount = 0
+		while lDesert and iCount < iMaxEffect:
+			iCount += 1
+			iRand = CvUtil.myRandom(len(lDesert), "doSandsturmGetRandomXCoord")
+			iPlotX = lDesert[iRand]
 
-				# Sandsturm 3 breit
-				# entlang der x-Koordinate auf allen y Plots
-				for x in xrange(3):
-					for y in xrange(iMapH):
-						loopPlot = plotXY(iPlotX, y, x, 0)
-						if loopPlot is not None and not loopPlot.isNone():
-							if loopPlot.getFeatureType() == iDarkIce: continue
-							if loopPlot.getTerrainType() != terr_desert: continue
-							if loopPlot.getFeatureType() != -1: continue
-							if loopPlot.getImprovementType() != -1: continue
-							if loopPlot.isPeak(): continue
+			# Sandsturm 3 breit
+			# entlang der x-Koordinate auf allen y Plots
+			for x in xrange(3):
+				for y in xrange(iMapH):
+					loopPlot = plotXY(iPlotX, y, x, 0)
+					if loopPlot is not None and not loopPlot.isNone():
+						if loopPlot.getFeatureType() == iDarkIce:
+							continue
+						if loopPlot.getTerrainType() != terr_desert:
+							continue
+						if loopPlot.getFeatureType() != -1:
+							continue
+						if loopPlot.getImprovementType() != -1:
+							continue
+						if loopPlot.isPeak():
+							continue
+						loopPlot.setFeatureType(feat_desertstorm, 0)
 
-							loopPlot.setFeatureType(feat_desertstorm, 0)
+						# Besitzer herausfinden
+						if loopPlot.getOwner() not in OwnerArray:
+							OwnerArray.append(loopPlot.getOwner())
 
-							# Besitzer herausfinden
-							if loopPlot.getOwner() not in OwnerArray:
-								OwnerArray.append(loopPlot.getOwner())
-
-				# Remove x-Koordinaten 3 Felder breit
-				for i in xrange(-3,4):
-					j = iPlotX + i
-					if j in lDesert:
-						lDesert.remove(j)
-
+			# Remove x-Koordinaten 3 Felder breit
+			for i in xrange(-3,4):
+				j = iPlotX + i
+				if j in lDesert:
+					lDesert.remove(j)
 
 		# Sturmmeldung an die Plot-Besitzer
-		iRange = len(OwnerArray)
-		for i in xrange(iRange):
-			if OwnerArray[i] != -1:
-				if gc.getPlayer(OwnerArray[i]).isHuman():
-					CyInterface().addMessage(gc.getPlayer(OwnerArray[i]).getID(), True, 12, CyTranslator().getText("TXT_KEY_DISASTER_DESERTSTORM", ("", )), None, 2, gc.getFeatureInfo(feat_desertstorm).getButton(), ColorTypes(7), -1, -1, False, False)
+		for iOwner in OwnerArray:
+			if iOwner != -1 and gc.getPlayer(iOwner).isHuman():
+				CyInterface().addMessage(iOwner, True, 12, CyTranslator().getText("TXT_KEY_DISASTER_DESERTSTORM", ("", )), None, 2, gc.getFeatureInfo(feat_desertstorm).getButton(), ColorTypes(7), -1, -1, False, False)
 
 
 def doGrasshopper():
@@ -1936,6 +1938,5 @@ def doOracleShowsDisaster(iX,iY):
 							if not loopPlot.isVisible(iTeam, 0):
 								# setRevealed (TeamType eTeam, BOOL bNewValue, BOOL bTerrainOnly, TeamType eFromTeam)
 								loopPlot.setRevealed(iTeam, 0, 1, -1)
-				return
 
 # ++++++++++++++++++ ENDE Naturkatastrophen / Disasters +++++++++++++++++++++++++++++

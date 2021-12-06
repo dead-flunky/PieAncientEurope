@@ -386,8 +386,10 @@ def doCultivation_AI(pUnit):
 		if iDistance != -1:
 			if eBonusOnBoard in L.LBonusPlantation:
 				if not isCityHasBonus(loopCity, eBonusOnBoard):
-					if iDistance == 0: iValue = 1
-					else: iValue = 1/iDistance
+					if iDistance == 0:
+						iValue = 1
+					else:
+						iValue = 1/iDistance
 			elif _isCityCultivationPossible(loopCity, iTyp):
 				if iDistance == 0: iValue = 2
 				else: iValue = 1/iDistance
@@ -738,7 +740,8 @@ def horse(pCity, bPrioPlotOnly):
 		loopPlot = pCity.getCityIndexPlot(iI)
 		# die beste position finden:
 		if loopPlot is not None and not loopPlot.isNone():
-			if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus: return []
+			if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus:
+				return []
 			elif loopPlot.getTerrainType() in lTerrains:
 				if loopPlot.getOwner() == pCity.getOwner():
 					# damit es nicht auf Inseln aufploppt
@@ -759,8 +762,10 @@ def horse(pCity, bPrioPlotOnly):
 									for iJ in xrange(iSecondBlock):
 										if loopPlot.getImprovementType() == lImprovements[iJ]:
 											lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
-	if bPrioPlotOnly: return trimPlots(lPlotPrio)
-	else: return lAllPossiblePlots
+	if bPrioPlotOnly:
+		return trimPlots(lPlotPrio)
+	else:
+		return lAllPossiblePlots
 
 def camel(pCity, bPrioPlotOnly):
 	iPlayer = pCity.getOwner()
@@ -787,7 +792,8 @@ def camel(pCity, bPrioPlotOnly):
 		loopPlot = pCity.getCityIndexPlot(iI)
 		# die beste position finden:
 		if loopPlot is not None and not loopPlot.isNone():
-			if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus: return []
+			if loopPlot.getBonusType(-1) in L.LBonusStratCultivatable and loopPlot.getBonusType(-1) != eBonus:
+				return []
 			elif not loopPlot.isHills():
 				if loopPlot.getTerrainType() in lTerrains:
 					if loopPlot.getOwner() == pCity.getOwner():
@@ -809,8 +815,10 @@ def camel(pCity, bPrioPlotOnly):
 													lPlotPrio[iFirstBlock+1].append(loopPlot)
 										else:
 											lPlotPrio[iFirstBlock+2].append(loopPlot)
-	if bPrioPlotOnly: return trimPlots(lPlotPrio)
-	else: return lAllPossiblePlots
+	if bPrioPlotOnly:
+		return trimPlots(lPlotPrio)
+	else:
+		return lAllPossiblePlots
 
 def elephant(pCity, bPrioPlotOnly):
 	iPlayer = pCity.getOwner()
@@ -934,10 +942,9 @@ def dog(pCity, bPrioPlotOnly):
 	else: return lAllPossiblePlots
 
 def trimPlots(lPlots):
-	if len(lPlots):
-		for k in lPlots:
-			if k:
-				return k
+	for k in lPlots:
+		if k:
+			return k
 
 def doBuildingCultivate(pCity, iBuildingType):
 	iPlayer = pCity.getOwner()
