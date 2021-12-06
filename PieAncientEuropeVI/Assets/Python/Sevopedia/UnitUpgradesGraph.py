@@ -53,7 +53,7 @@ unitHorizontalMargin = 20
 unitVerticalMargin = 20
 
 #Spacing refers to the space between unit icons
-unitHorizontalSpacing = 40
+unitHorizontalSpacing = 75
 unitVerticalSpacing = 5
 
 #The same concepts apply to the promotions graphs as to the unit graphs

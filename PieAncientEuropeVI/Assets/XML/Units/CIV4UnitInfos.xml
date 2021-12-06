@@ -6911,9 +6911,7 @@
       <PrereqCorporation>NONE</PrereqCorporation>
       <PrereqBuilding>BUILDING_STADT</PrereqBuilding>
       <PrereqTech>TECH_KETTENPANZER</PrereqTech>
-      <TechTypes>
-        <PrereqTech>TECH_KETTENPANZER</PrereqTech>
-      </TechTypes>
+      <TechTypes/>
       <BonusType>NONE</BonusType>
       <PrereqBonuses>
         <BonusType>BONUS_BRONZE</BonusType>
