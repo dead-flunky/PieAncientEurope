@@ -33,14 +33,14 @@ class SevoPediaUnit:
 
 		self.W_ICON = 100
 		self.H_ICON = 100
-		self.X_ICON = self.X_UNIT_PANE + (self.H_UNIT_PANE - self.H_ICON) / 2 - 10
+		self.X_ICON = self.X_UNIT_PANE + 10
 		self.Y_ICON = self.Y_UNIT_PANE + (self.H_UNIT_PANE - self.H_ICON) / 2
 
 		self.ICON_SIZE = 64
 		self.BUTTON_SIZE = 64
 		self.PROMOTION_ICON_SIZE = 32
 
-		self.X_STATS_PANE = self.X_UNIT_PANE + 130
+		self.X_STATS_PANE = self.X_ICON + self.W_ICON + 10
 		self.Y_STATS_PANE = self.Y_UNIT_PANE + 42
 		self.W_STATS_PANE = 250
 		self.H_STATS_PANE = self.H_UNIT_PANE

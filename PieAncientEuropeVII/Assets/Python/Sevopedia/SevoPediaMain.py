@@ -160,6 +160,8 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 			SevoScreenEnums.PEDIA_UNIT_CATEGORIES   : self.placeUnitCategories,
 			SevoScreenEnums.PEDIA_PROMOTIONS        : self.placePromotions,
 			SevoScreenEnums.PEDIA_PROMOTION_TREE    : self.placePromotionTree,
+			SevoScreenEnums.PEDIA_RANKS         : self.placeRanks,
+			SevoScreenEnums.PEDIA_FORMATIONS    : self.placeFormations,
 			SevoScreenEnums.PEDIA_BUILDINGS     : self.placeBuildings,
 			SevoScreenEnums.PEDIA_NATIONAL_WONDERS  : self.placeNationalWonders,
 			SevoScreenEnums.PEDIA_GREAT_WONDERS : self.placeGreatWonders,
@@ -186,20 +188,22 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 		self.pediaIndex     = SevoPediaIndex.SevoPediaIndex(self)
 
 		self.mapScreenFunctions = {
-			SevoScreenEnums.PEDIA_TECHS     : SevoPediaTech.SevoPediaTech(self),
-			SevoScreenEnums.PEDIA_UNITS     : SevoPediaUnit.SevoPediaUnit(self),
-			SevoScreenEnums.PEDIA_UNIT_CATEGORIES   : SevoPediaUnitChart.SevoPediaUnitChart(self),
-			SevoScreenEnums.PEDIA_PROMOTIONS        : SevoPediaPromotion.SevoPediaPromotion(self),
-			SevoScreenEnums.PEDIA_BUILDINGS     : self.pediaBuilding,
-			SevoScreenEnums.PEDIA_NATIONAL_WONDERS  : SevoPediaBuilding.SevoPediaBuilding(self),
+			SevoScreenEnums.PEDIA_TECHS   : SevoPediaTech.SevoPediaTech(self),
+			SevoScreenEnums.PEDIA_UNITS   : SevoPediaUnit.SevoPediaUnit(self),
+			SevoScreenEnums.PEDIA_UNIT_CATEGORIES : SevoPediaUnitChart.SevoPediaUnitChart(self),
+			SevoScreenEnums.PEDIA_PROMOTIONS      : SevoPediaPromotion.SevoPediaPromotion(self),
+			SevoScreenEnums.PEDIA_RANKS           : SevoPediaPromotion.SevoPediaPromotion(self),
+			SevoScreenEnums.PEDIA_FORMATIONS      : SevoPediaPromotion.SevoPediaPromotion(self),
+			SevoScreenEnums.PEDIA_BUILDINGS       : self.pediaBuilding,
+			SevoScreenEnums.PEDIA_NATIONAL_WONDERS: SevoPediaBuilding.SevoPediaBuilding(self),
 			SevoScreenEnums.PEDIA_GREAT_WONDERS : SevoPediaBuilding.SevoPediaBuilding(self),
 			SevoScreenEnums.PEDIA_PROJECTS      : SevoPediaProject.SevoPediaProject(self),
-			SevoScreenEnums.PEDIA_SPECIALISTS       : SevoPediaSpecialist.SevoPediaSpecialist(self),
+			SevoScreenEnums.PEDIA_SPECIALISTS   : SevoPediaSpecialist.SevoPediaSpecialist(self),
 			SevoScreenEnums.PEDIA_TERRAINS      : SevoPediaTerrain.SevoPediaTerrain(self),
 			SevoScreenEnums.PEDIA_FEATURES      : SevoPediaFeature.SevoPediaFeature(self),
 			SevoScreenEnums.PEDIA_BONUSES       : SevoPediaBonus.SevoPediaBonus(self),
 			SevoScreenEnums.PEDIA_IMPROVEMENTS  : SevoPediaImprovement.SevoPediaImprovement(self),
-			SevoScreenEnums.PEDIA_CIVS      : SevoPediaCivilization.SevoPediaCivilization(self),
+			SevoScreenEnums.PEDIA_CIVS          : SevoPediaCivilization.SevoPediaCivilization(self),
 			SevoScreenEnums.PEDIA_LEADERS       : self.pediaLeader,
 			# SevoScreenEnums.PEDIA_TRAITS      : SevoPediaTrait.SevoPediaTrait(self),
 			SevoScreenEnums.PEDIA_CIVICS        : SevoPediaCivic.SevoPediaCivic(self),
@@ -372,6 +376,14 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 		self.szCategoryConceptsNew  = localText.getText("TXT_KEY_PEDIA_CATEGORY_CONCEPT_NEW", ())
 		self.szCategoryHints        = localText.getText("TXT_KEY_PEDIA_CATEGORY_HINTS", ())
 		self.szCategoryShortcuts    = localText.getText("TXT_KEY_PEDIA_CATEGORY_SHORTCUTS", ())
+		# PAE
+		self.szCategoryRank = localText.getText("TXT_KEY_PEDIA_CATEGORY_RANKS", ())
+		self.szCategoryForm = localText.getText("TXT_KEY_PEDIA_CATEGORY_FORMATIONS", ())
+		self.szCategorySpecialUnits = localText.getText("TXT_KEY_PEDIA_CATEGORY_SPECIAL_UNITS", ())
+		self.szCategorySpecialBuildings = localText.getText("TXT_KEY_PEDIA_CATEGORY_SPECIAL_BUILDINGS", ())
+		self.szCategoryVeterans = localText.getText("TXT_KEY_PEDIA_CATEGORY_VETERANS", ())
+		self.szCategoryTraits = localText.getText("TXT_KEY_PEDIA_CATEGORY_TRAITS", ())
+		self.szCategoryTimelineUnits = localText.getText("TXT_KEY_PEDIA_CATEGORY_TIMELINE_UNITS", ())
 
 		self.categoryList = [
 			["TECHS",   self.szCategoryTechs],
@@ -380,6 +392,8 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 			["UNITS",   self.szCategoryUnitCategories],
 			["PROMOTIONS",  self.szCategoryPromotions],
 			["PROMOTIONS",  self.szCategoryPromotionTree],
+			["PROMOTIONS",  self.szCategoryRank],
+			["PROMOTIONS",  self.szCategoryForm],
 			["BUILDINGS",   self.szCategoryBuildings],
 			["BUILDINGS",   self.szCategoryNationalWonders],
 			["BUILDINGS",   self.szCategoryGreatWonders],
@@ -486,7 +500,34 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 		self.placeItems(WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, gc.getPromotionInfo)
 
 	def getPromotionList(self):
-		return self.getSortedList(gc.getNumPromotionInfos(), gc.getPromotionInfo)
+		#return self.getSortedList(gc.getNumPromotionInfos(), gc.getPromotionInfo, True)
+		list = []
+		for i in xrange(gc.getNumPromotionInfos()):
+			item = gc.getPromotionInfo(i)
+			if item:
+				if "_FORM" in item.getTextKey(): break
+				list.append((item.getDescription(), i))
+		return list
+		
+	def placeRanks(self):
+		list = []
+		for i in xrange(gc.getNumPromotionInfos()):
+			item = gc.getPromotionInfo(i)
+			if item:
+				if "_RANG_" in item.getTextKey():
+					list.append((item.getDescription(), i))
+		self.list = list
+		self.placeItems(WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, gc.getPromotionInfo)
+
+	def placeFormations(self):
+		list = []
+		for i in xrange(gc.getNumPromotionInfos()):
+			item = gc.getPromotionInfo(i)
+			if item:
+				if "_FORM_" in item.getTextKey():
+					list.append((item.getDescription(), i))
+		self.list = list
+		self.placeItems(WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, gc.getPromotionInfo)
 
 
 	def placePromotionTree(self):
@@ -874,7 +915,7 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 
 
 	def isSortLists(self):
-		return AdvisorOpt.SevopediaSortItemList()
+		return #AdvisorOpt.SevopediaSortItemList()
 
 	def getSortedList(self, numInfos, getInfo, noSort=False):
 		list = []
@@ -882,6 +923,7 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 			item = getInfo(i)
 			if item:
 				list.append((item.getDescription(), i))
-		# if self.isSortLists() and not noSort:
-		list.sort()
+		#if self.isSortLists() and not noSort:
+		if not noSort:
+			list.sort()
 		return list
