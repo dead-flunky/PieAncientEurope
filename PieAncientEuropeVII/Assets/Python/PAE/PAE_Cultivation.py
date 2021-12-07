@@ -826,9 +826,8 @@ def elephant(pCity, bPrioPlotOnly):
 	lFeatures = [
 		gc.getInfoTypeForString("FEATURE_JUNGLE")
 	]
-	iJ = 0
-
 	iFirstBlock = len(lFeatures)
+
 	lTerrains = [
 		gc.getInfoTypeForString("TERRAIN_GRASS"),
 		gc.getInfoTypeForString("TERRAIN_PLAINS")
@@ -852,34 +851,39 @@ def elephant(pCity, bPrioPlotOnly):
 				return []
 			elif not loopPlot.isHills():
 				if loopPlot.getOwner() == pCity.getOwner():
-					if loopPlot.getTerrainType() in lTerrains and loopPlot.getFeatureType() in lFeatures:
+					if loopPlot.getTerrainType() in lTerrains or loopPlot.getFeatureType() in lFeatures:
 						if loopPlot.getArea() == pCity.plot().getArea():
 							if canHaveBonus(loopPlot, eBonus, True):
 								if _canBuildingCultivate(loopPlot, iPlayer):
 									lAllPossiblePlots.append(loopPlot)
 									if loopPlot.getImprovementType() == -1:
-										# 1. jungle, unworked
-										if loopPlot.getFeatureType() == lFeatures[iJ]:
-											lPlotPrio[iJ].append(loopPlot)
-										else:
+										if loopPlot.getFeatureType() in lFeatures:
+											# 1. jungle, unworked
+											for iJ in xrange(iFirstBlock):
+												if loopPlot.getFeatureType() == lFeatures[iJ]:
+													lPlotPrio[iJ].append(loopPlot)
+													break
+										elif loopPlot.getTerrainType() in lTerrains:
 											# 2. grass, unworked
 											# 3. plains, unworked
 											for iK in xrange(iSecondBlock):
 												if loopPlot.getTerrainType() == lTerrains[iK]:
 													lPlotPrio[iK + iFirstBlock + 1].append(loopPlot)
 													break
-												else:
-													# 4. irgendeinen passenden ohne Improvement
-													lPlotPrio[iFirstBlock + iSecondBlock + 1].append(loopPlot)
-									# 3. nach Improvements selektieren
+										else:
+											# 4. irgendeinen passenden ohne Improvement
+											lPlotPrio[iFirstBlock + iSecondBlock + 1].append(loopPlot)
+									# 5. nach Improvements selektieren
 									elif loopPlot.getImprovementType() == iImpCamp:
 										lPlotPrio[iFirstBlock].append(loopPlot)
-									# 7. irgendeinen passenden mit falschem Improvement
+									# 6. irgendeinen passenden mit falschem Improvement
 									# TODO: kann gewachsene Huetten zerstoeren
 									else:
 										lPlotPrio[iFirstBlock + iSecondBlock + 2].append(loopPlot)
-	if bPrioPlotOnly: return trimPlots(lPlotPrio)
-	else: return lAllPossiblePlots
+	if bPrioPlotOnly:
+		return trimPlots(lPlotPrio)
+	else:
+		return lAllPossiblePlots
 
 
 def dog(pCity, bPrioPlotOnly):
