@@ -160,8 +160,8 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 			SevoScreenEnums.PEDIA_UNIT_CATEGORIES   : self.placeUnitCategories,
 			SevoScreenEnums.PEDIA_PROMOTIONS        : self.placePromotions,
 			SevoScreenEnums.PEDIA_PROMOTION_TREE    : self.placePromotionTree,
-			SevoScreenEnums.PEDIA_RANKS         : self.placeRanks,
-			SevoScreenEnums.PEDIA_FORMATIONS    : self.placeFormations,
+			SevoScreenEnums.PEDIA_RANKS         : self.placeRanks,			# PAE Ranks
+			SevoScreenEnums.PEDIA_FORMATIONS    : self.placeFormations,		# PAE Formations
 			SevoScreenEnums.PEDIA_BUILDINGS     : self.placeBuildings,
 			SevoScreenEnums.PEDIA_NATIONAL_WONDERS  : self.placeNationalWonders,
 			SevoScreenEnums.PEDIA_GREAT_WONDERS : self.placeGreatWonders,
@@ -192,8 +192,8 @@ class SevoPediaMain(CvPediaScreen.CvPediaScreen):
 			SevoScreenEnums.PEDIA_UNITS   : SevoPediaUnit.SevoPediaUnit(self),
 			SevoScreenEnums.PEDIA_UNIT_CATEGORIES : SevoPediaUnitChart.SevoPediaUnitChart(self),
 			SevoScreenEnums.PEDIA_PROMOTIONS      : SevoPediaPromotion.SevoPediaPromotion(self),
-			SevoScreenEnums.PEDIA_RANKS           : SevoPediaPromotion.SevoPediaPromotion(self),
-			SevoScreenEnums.PEDIA_FORMATIONS      : SevoPediaPromotion.SevoPediaPromotion(self),
+			SevoScreenEnums.PEDIA_RANKS           : SevoPediaPromotion.SevoPediaPromotion(self),	# PAE Rank
+			SevoScreenEnums.PEDIA_FORMATIONS      : SevoPediaPromotion.SevoPediaPromotion(self),	# PAE Formations
 			SevoScreenEnums.PEDIA_BUILDINGS       : self.pediaBuilding,
 			SevoScreenEnums.PEDIA_NATIONAL_WONDERS: SevoPediaBuilding.SevoPediaBuilding(self),
 			SevoScreenEnums.PEDIA_GREAT_WONDERS : SevoPediaBuilding.SevoPediaBuilding(self),
