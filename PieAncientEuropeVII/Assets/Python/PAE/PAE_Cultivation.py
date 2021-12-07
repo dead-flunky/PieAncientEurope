@@ -864,9 +864,9 @@ def elephant(pCity, bPrioPlotOnly):
 										else:
 											# 2. grass, unworked
 											# 3. plains, unworked
-											for iJ in xrange(iSecondBlock):
-												if loopPlot.getTerrainType() == lTerrains[iJ]:
-													lPlotPrio[iJ + iFirstBlock + 1].append(loopPlot)
+											for iK in xrange(iSecondBlock):
+												if loopPlot.getTerrainType() == lTerrains[iK]:
+													lPlotPrio[iK + iFirstBlock + 1].append(loopPlot)
 													break
 												else:
 													# 4. irgendeinen passenden ohne Improvement
