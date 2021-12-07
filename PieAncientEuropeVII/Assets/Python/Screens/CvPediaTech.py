@@ -88,7 +88,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 				if bNotActive: # or self.top.iLastScreen != CvScreenEnums.PEDIA_TECH:  # PAE different Link menu height
 						self.top.setPediaCommonWidgets()
 
-				# Header...
+				# Header
 				szHeader = u"<font=4b>" + gc.getTechInfo(self.iTech).getDescription().upper() + u"</font>"
 				screen.setLabel(self.top.getNextWidgetName(), "Background", szHeader, CvUtil.FONT_CENTER_JUSTIFY, self.top.X_SCREEN, self.top.Y_TITLE, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, CivilopediaPageTypes.CIVILOPEDIA_PAGE_TECH, iTech)
 
@@ -132,8 +132,8 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 
 				# Place Civs: Anzeige nur(!) bei disabled Techs (PAE)
 				if not gc.getTechInfo(iTech).isDisable():
-				  lCivs = self.getTechOfCivs()
-				  if len(lCivs) > 0: self.placeCivs(lCivs)
+					lCivs = self.getTechOfCivs()
+					if len(lCivs) > 0: self.placeCivs(lCivs)
 
 				# Place the Special abilities block
 				self.placeSpecial()
@@ -287,8 +287,8 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 
 				# Obsolete Unit
 				if self.iTech == gc.getInfoTypeForString("TECH_GRENZHEER"):
-				  if szSpecialText != "": szSpecialText += "\n"
-				  szSpecialText += CyTranslator().getText("TXT_KEY_TECH_OBSOLETES", (gc.getUnitInfo(gc.getInfoTypeForString("UNIT_PRAETORIAN")).getDescription(),))
+					if szSpecialText != "": szSpecialText += "\n"
+					szSpecialText += CyTranslator().getText("TXT_KEY_TECH_OBSOLETES", (gc.getUnitInfo(gc.getInfoTypeForString("UNIT_PRAETORIAN")).getDescription(),))
 
 				# Spionagemissionen (werden erst im Spiel angezeigt, da Spionage auch ausgeschaltet sein kann -> getNumEspionageMissionInfos() = 0)
 				for eLoopEspionage in xrange(gc.getNumEspionageMissionInfos()):
@@ -298,8 +298,8 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 
 				# Freie Einheit bei Kult
 				if self.iTech == gc.getInfoTypeForString("TECH_FRUCHTBARKEIT") or self.iTech == gc.getInfoTypeForString("TECH_GLADIATOR"):
-				  if szSpecialText != "": szSpecialText += "\n"
-				  szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_UNIT_1", ())
+					if szSpecialText != "": szSpecialText += "\n"
+					szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_UNIT_1", ())
 
 				# Freie Einheit bei Religion
 				if self.iTech == gc.getInfoTypeForString("TECH_RELIGION_CELTIC") or self.iTech == gc.getInfoTypeForString("TECH_RELIGION_NORDIC") \
@@ -311,7 +311,7 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 				# PAE - Tradeable/conquerable
 				if szSpecialText != "": szSpecialText += "\n"
 				if gc.getTechInfo(self.iTech).isTrade():
-				  szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_TRADEABLE", ())
+					szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_TRADEABLE", ())
 				else:
 				  szSpecialText += CyTranslator().getText("TXT_KEY_MESSAGE_TECH_NOT_TRADEABLE", ())
 
@@ -329,9 +329,9 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 
 				szQuote = gc.getTechInfo(self.iTech).getQuote()
 				if len(gc.getTechInfo(self.iTech).getStrategy()) > 0:
-				   szQuote += u"\n\n"
-				   szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_STRATEGY", ())
-				   szQuote += gc.getTechInfo(self.iTech).getStrategy()
+					szQuote += u"\n\n"
+					szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_STRATEGY", ())
+					szQuote += gc.getTechInfo(self.iTech).getStrategy()
 				szQuote += u"\n\n"
 				szQuote += localText.getText("TXT_KEY_CIVILOPEDIA_BACKGROUND", ())
 				szQuote += gc.getTechInfo(self.iTech).getCivilopedia()
@@ -359,11 +359,11 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 						# Buchstabe
 						B = techsList[iI][0][:1]
 						if A == "" or A != B and not B.isdigit():
-						  A = B
-						  i += 1 # Zeile in der linken Navi
-						  # Buchstabe anzeigen
-						  if bRedraw:
-							screen.appendListBoxStringNoUpdate( self.top.LIST_ID, u"<font=2>[" + A + u"]</font>", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_CENTER_JUSTIFY )
+							A = B
+							i += 1 # Zeile in der linken Navi
+							# Buchstabe anzeigen
+							if bRedraw:
+								screen.appendListBoxStringNoUpdate( self.top.LIST_ID, u"<font=2>[" + A + u"]</font>", WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_CENTER_JUSTIFY )
 
 
 						# Name anzeigen

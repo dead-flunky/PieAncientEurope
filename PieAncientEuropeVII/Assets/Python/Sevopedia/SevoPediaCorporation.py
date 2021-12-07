@@ -48,10 +48,17 @@ class SevoPediaCorporation:
 		self.Y_ICON = self.Y_MAIN_PANE + (self.H_MAIN_PANE - self.H_ICON) / 2
 		self.ICON_SIZE = 64
 
+		# PAE: buildings/untis pane
+		self.X_BUILDING_PANE = self.X_MAIN_PANE
+		self.Y_BUILDING_PANE = self.Y_SPECIAL + self.H_SPECIAL + 10
+		self.W_BUILDING_PANE = self.top.R_PEDIA_PAGE - self.X_BUILDING_PANE
+		self.H_BUILDING_PANE = 110
+
 		self.X_TEXT = self.X_MAIN_PANE
-		self.Y_TEXT = self.Y_SPECIAL + self.H_SPECIAL + 10
+		self.Y_TEXT = self.Y_BUILDING_PANE + self.H_BUILDING_PANE + 10
 		self.W_TEXT = self.top.R_PEDIA_PAGE - self.X_TEXT
 		self.H_TEXT = self.top.B_PEDIA_PAGE - self.Y_TEXT
+
 
 
 
@@ -66,6 +73,7 @@ class SevoPediaCorporation:
 		self.placeSpecial()
 		self.placeRequires()
 		self.placeText()
+		self.placeAllows()
 
 
 
@@ -74,21 +82,35 @@ class SevoPediaCorporation:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel(panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True, self.X_REQUIRES, self.Y_REQUIRES, self.W_REQUIRES, self.H_REQUIRES, PanelStyles.PANEL_STYLE_BLUE50)
 		screen.attachLabel(panelName, "", "  ")
+
 		iTech = gc.getCorporationInfo(self.iCorporation).getTechPrereq()
 		if (iTech > -1):
 			screen.attachImageButton(panelName, "", gc.getTechInfo(iTech).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iTech, 1, False)
+
 		for iBuilding in xrange(gc.getNumBuildingInfos()):
 			if (gc.getBuildingInfo(iBuilding).getFoundsCorporation() == self.iCorporation):
 				screen.attachImageButton(panelName, "", gc.getBuildingInfo(iBuilding).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iBuilding, 1, False)
+
 		for iUnit in xrange(gc.getNumUnitInfos()):
 			bRequired = False
 			for iBuilding in xrange(gc.getNumBuildingInfos()):
 				if (gc.getBuildingInfo(iBuilding).getFoundsCorporation() == self.iCorporation):
 					if gc.getUnitInfo(iUnit).getBuildings(iBuilding) or gc.getUnitInfo(iUnit).getForceBuildings(iBuilding):
 						bRequired = True
+						# PAE: get religion
+						iPrereqReligion = gc.getBuildingInfo(iBuilding).getPrereqReligion()
 						break
+
 			if bRequired:
-				screen.attachImageButton(panelName, "", gc.getUnitInfo(iUnit).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUnit, 1, False)
+				# PAE: ethnic button
+				szButton = gc.getUnitInfo(iUnit).getButton()
+				if self.top.iActivePlayer != -1:
+						szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(iUnit)
+				screen.attachImageButton(panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUnit, 1, False)
+
+				# PAE: add religion button
+				if (iPrereqReligion >= 0):
+					screen.attachImageButton( panelName, "", gc.getReligionInfo(iPrereqReligion).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, iPrereqReligion, 1, False )
 
 
 
@@ -108,6 +130,29 @@ class SevoPediaCorporation:
 		screen.addPanel(panelName, "", "", True, True, self.X_TEXT, self.Y_TEXT, self.W_TEXT, self.H_TEXT, PanelStyles.PANEL_STYLE_BLUE50)
 		szText = gc.getCorporationInfo(self.iCorporation).getCivilopedia()
 		screen.attachMultilineText(panelName, "Text", szText, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
+
+
+	# PAE: Place buildings, units
+	def placeAllows(self):
+
+		screen = self.top.getScreen()
+
+		panelName = self.top.getNextWidgetName()
+		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_ALLOWS", ()), "", False, True, self.X_BUILDING_PANE, self.Y_BUILDING_PANE, self.W_BUILDING_PANE, self.H_BUILDING_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
+
+		screen.attachLabel(panelName, "", "  ")
+
+		# Buildings
+		for eLoop in xrange(gc.getNumBuildingInfos()):
+			if (eLoop != -1):
+				if (gc.getBuildingInfo(eLoop).getPrereqCorporation() == self.iCorporation):
+					screen.attachImageButton( panelName, "", gc.getBuildingInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoop, 1, False )
+
+		# Units
+		for eLoop in xrange(gc.getNumUnitInfos()):
+			if (eLoop != -1):
+				if (gc.getUnitInfo(eLoop).getPrereqCorporation() == self.iCorporation):
+					screen.attachImageButton( panelName, "", gc.getUnitInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoop, 1, False )
 
 
 

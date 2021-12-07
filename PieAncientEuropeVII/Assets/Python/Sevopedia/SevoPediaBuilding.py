@@ -9,10 +9,10 @@
 # additional work by Gaurav, Progor, Ket, Vovan, Fitchn, LunarMongoose
 # see ReadMe for details
 #
+# PAE panel changes and other stuff (Pie) Dec 2021
 
 from CvPythonExtensions import *
 import CvUtil
-import ScreenInput
 import SevoScreenEnums
 
 gc = CyGlobalContext()
@@ -29,23 +29,23 @@ class SevoPediaBuilding:
 
 		self.X_BUILDING_PANE = self.top.X_PEDIA_PAGE
 		self.Y_BUILDING_PANE = self.top.Y_PEDIA_PAGE
-		self.W_BUILDING_PANE = 323
-		self.H_BUILDING_PANE = 116
+		self.W_BUILDING_PANE = 500
+		self.H_BUILDING_PANE = 200
 
 		self.W_ICON = 100
 		self.H_ICON = 100
-		self.X_ICON = self.X_BUILDING_PANE + (self.H_BUILDING_PANE - self.H_ICON) / 2
-		self.Y_ICON = self.Y_BUILDING_PANE + (self.H_BUILDING_PANE - self.H_ICON) / 2
+		self.X_ICON = self.top.X_PEDIA_PAGE + 50
+		self.Y_ICON = self.top.Y_PEDIA_PAGE + 25
 		self.ICON_SIZE = 64
 
-		self.X_STATS_PANE = self.X_BUILDING_PANE + 110
-		self.Y_STATS_PANE = self.Y_BUILDING_PANE + 17
-		self.W_STATS_PANE = 190
-		self.H_STATS_PANE = 110 - 20
+		self.X_STATS_PANE = self.X_BUILDING_PANE + 200
+		self.Y_STATS_PANE = self.Y_BUILDING_PANE + 20
+		self.W_STATS_PANE = self.W_BUILDING_PANE - 210
+		self.H_STATS_PANE = self.H_BUILDING_PANE - 20
 
-		self.X_PREREQ_PANE = self.X_BUILDING_PANE
+		self.X_PREREQ_PANE = self.top.X_PEDIA_PAGE
 		self.W_PREREQ_PANE = self.W_BUILDING_PANE
-		self.Y_PREREQ_PANE = self.Y_BUILDING_PANE + self.H_BUILDING_PANE + 10
+		self.Y_PREREQ_PANE = self.Y_BUILDING_PANE + self.H_BUILDING_PANE
 		self.H_PREREQ_PANE = 110
 
 		self.X_BUILDING_ANIMATION = self.X_BUILDING_PANE + self.W_BUILDING_PANE + 10
@@ -56,12 +56,12 @@ class SevoPediaBuilding:
 		self.Z_ROTATION_BUILDING_ANIMATION = 30
 		self.SCALE_ANIMATION = 0.7
 
-		self.X_SPECIAL_PANE = self.X_BUILDING_PANE
+		self.X_SPECIAL_PANE = self.top.X_PEDIA_PAGE
 		self.Y_SPECIAL_PANE = self.Y_PREREQ_PANE + self.H_PREREQ_PANE + 10
 		self.W_SPECIAL_PANE = self.top.R_PEDIA_PAGE - self.X_SPECIAL_PANE
 		self.H_SPECIAL_PANE = 190
 
-		self.X_HISTORY_PANE = self.X_SPECIAL_PANE
+		self.X_HISTORY_PANE = self.top.X_PEDIA_PAGE
 		self.W_HISTORY_PANE = self.W_SPECIAL_PANE
 		self.Y_HISTORY_PANE = self.Y_SPECIAL_PANE + self.H_SPECIAL_PANE + 10
 		self.H_HISTORY_PANE = self.top.B_PEDIA_PAGE - self.Y_HISTORY_PANE
@@ -170,6 +170,10 @@ class SevoPediaBuilding:
 			szText = localText.getText("TXT_KEY_PEDIA_GREAT_PEOPLE", (buildingInfo.getGreatPeopleRateChange(),)).upper()
 			screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText + u"%c" % CyGame().getSymbolID(FontSymbols.GREAT_PEOPLE_CHAR) + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
 
+		# PAE: Conquest Probabilty
+		szText = localText.getText("TXT_KEY_PEDIA_CONQUER",()).upper() + u": " + str(buildingInfo.getConquestProbability()) + u"%"
+		screen.appendListBoxStringNoUpdate(panelName, u"<font=3>" + szText + u"</font>", WidgetTypes.WIDGET_GENERAL, 0, 0, CvUtil.FONT_LEFT_JUSTIFY)
+
 		screen.updateListBox(panelName)
 
 
@@ -180,10 +184,17 @@ class SevoPediaBuilding:
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_REQUIRES", ()), "", False, True, self.X_PREREQ_PANE, self.Y_PREREQ_PANE, self.W_PREREQ_PANE, self.H_PREREQ_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		screen.attachLabel(panelName, "", "  ")
 
+		# add tech buttons
 		for iPrereq in xrange(gc.getNumTechInfos()):
 			if isTechRequiredForBuilding(iPrereq, self.iBuilding):
 				screen.attachImageButton( panelName, "", gc.getTechInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH, iPrereq, 1, False )
 
+		# PAE: add req buildings
+		for iPrereq in xrange(gc.getNumBuildingInfos()):
+		  if gc.getBuildingInfo(self.iBuilding).isBuildingClassNeededInCity (gc.getBuildingInfo(iPrereq).getBuildingClassType()):
+			screen.attachImageButton( panelName, "", gc.getBuildingInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iPrereq, -1, False )
+
+		# add resource buttons
 		iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqAndBonus()
 		if (iPrereq >= 0):
 			screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
@@ -205,9 +216,30 @@ class SevoPediaBuilding:
 						bFirst = False
 					screen.attachImageButton( panelName, "", gc.getBonusInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, iPrereq, -1, False )
 
+		# add religion button
 		iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqReligion()
 		if (iPrereq >= 0):
 			screen.attachImageButton( panelName, "", gc.getReligionInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_RELIGION, iPrereq, -1, False )
+
+		# PAE: add corporation button
+		iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqCorporation()
+		if (iPrereq >= 0):
+			screen.attachImageButton( panelName, "", gc.getCorporationInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_CORPORATION, iPrereq, -1, False )
+
+		# PAE: Units that can build the building
+		# Sevopedia funkt damit nicht richtig
+		#bFirst = True
+		#for iUnit in xrange(gc.getNumUnitInfos()):
+		#	if gc.getUnitInfo(iUnit).getBuildings(self.iBuilding):
+		#		if not bFirst:
+		#			screen.attachLabel(panelName, "", localText.getText("TXT_KEY_OR", ()))
+		#		else:
+		#			bFirst = False
+		#		# PAE: ethnic unit button
+		#		szButton = gc.getUnitInfo(iUnit).getButton()
+		#		if self.top.iActivePlayer != -1:
+		#			szButton = gc.getPlayer(self.top.iActivePlayer).getUnitButton(iUnit)
+		#		screen.attachImageButton(panelName, "", szButton, GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUnit, 1, False)
 
 
 
@@ -216,7 +248,21 @@ class SevoPediaBuilding:
 		panelName = self.top.getNextWidgetName()
 		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_SPECIAL_ABILITIES", ()), "", True, False, self.X_SPECIAL_PANE, self.Y_SPECIAL_PANE, self.W_SPECIAL_PANE, self.H_SPECIAL_PANE, PanelStyles.PANEL_STYLE_BLUE50 )
 		listName = self.top.getNextWidgetName()
-		szSpecialText = CyGameTextMgr().getBuildingHelp(self.iBuilding, True, False, False, None)[1:]
+
+		szSpecialText = ""
+
+		# PAE: Part of Victory type
+		iBuildingClassType = gc.getBuildingInfo(self.iBuilding).getBuildingClassType()
+		for iLoopVC in xrange(gc.getNumVictoryInfos()):
+			victory = gc.getVictoryInfo(iLoopVC)
+			if (gc.getBuildingClassInfo(iBuildingClassType).getVictoryThreshold(iLoopVC) > 0):
+				szSpecialText += localText.getText("TXT_KEY_BUILDING_PART_OF_VICTORY", (victory.getDescription(),)) + localText.getText("[NEWLINE]", ())
+
+		# PAE: negative food storage
+		if gc.getBuildingInfo(self.iBuilding).getFoodKept() < 0:
+			szSpecialText += localText.getText("TXT_KEY_BUILDING_STORES_FOOD2", (gc.getBuildingInfo(self.iBuilding).getFoodKept(),)) + localText.getText("[NEWLINE]", ())
+
+		szSpecialText += CyGameTextMgr().getBuildingHelp(self.iBuilding, True, False, False, None)[1:]
 		screen.addMultilineText(listName, szSpecialText, self.X_SPECIAL_PANE+5, self.Y_SPECIAL_PANE+30, self.W_SPECIAL_PANE-10, self.H_SPECIAL_PANE-35, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
 
