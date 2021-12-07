@@ -459,10 +459,7 @@ def createCivilopedia():
 			SevoScreenEnums.PEDIA_CONCEPTS: pediaMainScreen,
 			SevoScreenEnums.PEDIA_BTS_CONCEPTS: pediaMainScreen,
 			SevoScreenEnums.PEDIA_HINTS: pediaMainScreen,
-			SevoScreenEnums.PEDIA_SHORTCUTS: pediaMainScreen,
-			# PAE
-			SevoScreenEnums.PEDIA_RANKS: pediaMainScreen,
-			SevoScreenEnums.PEDIA_FORMATIONS: pediaMainScreen,
+			SevoScreenEnums.PEDIA_SHORTCUTS: pediaMainScreen
 		})
 		global HandleNavigationMap
 		HandleNavigationMap = {
@@ -509,10 +506,7 @@ def createCivilopedia():
 			SevoScreenEnums.PEDIA_CONCEPTS: pediaMainScreen,
 			SevoScreenEnums.PEDIA_BTS_CONCEPTS: pediaMainScreen,
 			SevoScreenEnums.PEDIA_HINTS: pediaMainScreen,
-			SevoScreenEnums.PEDIA_SHORTCUTS: pediaMainScreen,
-			# PAE
-			SevoScreenEnums.PEDIA_RANKS: pediaMainScreen,
-			SevoScreenEnums.PEDIA_FORMATIONS: pediaMainScreen,
+			SevoScreenEnums.PEDIA_SHORTCUTS: pediaMainScreen
 		}
 
 
