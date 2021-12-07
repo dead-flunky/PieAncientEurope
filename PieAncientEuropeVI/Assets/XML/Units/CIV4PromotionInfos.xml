@@ -4739,10 +4739,6 @@
           <bUnitCombat>1</bUnitCombat>
         </UnitCombat>
         <UnitCombat>
-          <UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
-          <bUnitCombat>1</bUnitCombat>
-        </UnitCombat>
-        <UnitCombat>
           <UnitCombatType>UNITCOMBAT_AXEMAN</UnitCombatType>
           <bUnitCombat>1</bUnitCombat>
         </UnitCombat>
@@ -4840,10 +4836,6 @@
           <bUnitCombat>1</bUnitCombat>
         </UnitCombat>
         <UnitCombat>
-          <UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
-          <bUnitCombat>1</bUnitCombat>
-        </UnitCombat>
-        <UnitCombat>
           <UnitCombatType>UNITCOMBAT_AXEMAN</UnitCombatType>
           <bUnitCombat>1</bUnitCombat>
         </UnitCombat>
@@ -4938,10 +4930,6 @@
       <UnitCombats>
         <UnitCombat>
           <UnitCombatType>UNITCOMBAT_RECON</UnitCombatType>
-          <bUnitCombat>1</bUnitCombat>
-        </UnitCombat>
-        <UnitCombat>
-          <UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
           <bUnitCombat>1</bUnitCombat>
         </UnitCombat>
         <UnitCombat>
