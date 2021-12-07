@@ -48,8 +48,14 @@ class SevoPediaReligion:
 		self.Y_ICON = self.Y_MAIN_PANE + (self.H_MAIN_PANE - self.H_ICON) / 2
 		self.ICON_SIZE = 64
 
+		# PAE: buildings pane
+		self.X_BUILDING_PANE = self.X_MAIN_PANE
+		self.Y_BUILDING_PANE = self.Y_SPECIAL + self.H_SPECIAL + 10
+		self.W_BUILDING_PANE = self.top.R_PEDIA_PAGE - self.X_BUILDING_PANE
+		self.H_BUILDING_PANE = 110
+
 		self.X_TEXT = self.X_MAIN_PANE
-		self.Y_TEXT = self.Y_SPECIAL + self.H_SPECIAL + 10
+		self.Y_TEXT = self.Y_BUILDING_PANE + self.H_BUILDING_PANE + 10
 		self.W_TEXT = self.top.R_PEDIA_PAGE - self.X_TEXT
 		self.H_TEXT = self.top.B_PEDIA_PAGE - self.Y_TEXT
 
@@ -66,6 +72,7 @@ class SevoPediaReligion:
 		self.placeSpecial()
 		self.placeRequires()
 		self.placeText()
+		self.placeAllows()
 
 
 
@@ -93,12 +100,45 @@ class SevoPediaReligion:
 			if len( special ) != 0:
 				screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY )
 
+		# PAE: Special Units
+		if self.iReligion == gc.getInfoTypeForString("RELIGION_JUDAISM"):
+			iUnit = gc.getInfoTypeForString("UNIT_STADTWACHE_ISRAEL")
+			special = localText.getText("TXT_KEY_PEDIA_REL_UNIT", ()) + " " + gc.getUnitInfo(iUnit).getDescription()
+			screen.appendListBoxString( listName, special, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, iUnit, 1, CvUtil.FONT_LEFT_JUSTIFY )
+
+
+
+	# PAE: Place buildings, units, promotions
+	def placeAllows(self):
+		screen = self.top.getScreen()
+		panelName = self.top.getNextWidgetName()
+		screen.addPanel( panelName, localText.getText("TXT_KEY_PEDIA_ALLOWS", ()), "", False, True, self.X_BUILDING_PANE, self.Y_BUILDING_PANE, self.W_BUILDING_PANE, self.H_BUILDING_PANE, PanelStyles.PANEL_STYLE_BLUE50)
+		screen.attachLabel(panelName, "", "  ")
+
+		# Buildings
+		for eLoop in xrange(gc.getNumBuildingInfos()):
+			if (eLoop != -1):
+				if (gc.getBuildingInfo(eLoop).getPrereqReligion() == self.iReligion or gc.getBuildingInfo(eLoop).getHolyCity() == self.iReligion):
+					screen.attachImageButton( panelName, "", gc.getBuildingInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, eLoop, 1, False)
+
+		# Units
+		for eLoop in xrange(gc.getNumUnitInfos()):
+			if (eLoop != -1):
+				if (gc.getUnitInfo(eLoop).getPrereqReligion() == self.iReligion):
+					screen.attachImageButton( panelName, "", gc.getUnitInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_UNIT, eLoop, 1, False)
+
+		# Promotions
+		for eLoop in xrange(gc.getNumPromotionInfos()):
+			if (eLoop != -1):
+				if (gc.getPromotionInfo(eLoop).getStateReligionPrereq() == self.iReligion):
+					screen.attachImageButton( panelName, "", gc.getPromotionInfo(eLoop).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_PROMOTION, eLoop, 1, False)
+
 
 
 	def placeText(self):
 		screen = self.top.getScreen()
 		panelName = self.top.getNextWidgetName()
-		screen.addPanel( panelName, "", "", True, True, self.X_TEXT, self.Y_TEXT, self.W_TEXT, self.H_TEXT, PanelStyles.PANEL_STYLE_BLUE50 )
+		screen.addPanel( panelName, "", "", True, True, self.X_TEXT, self.Y_TEXT, self.W_TEXT, self.H_TEXT, PanelStyles.PANEL_STYLE_BLUE50)
 		szText = gc.getReligionInfo(self.iReligion).getCivilopedia()
 		screen.attachMultilineText( panelName, "Text", szText, WidgetTypes.WIDGET_GENERAL, -1, -1, CvUtil.FONT_LEFT_JUSTIFY)
 
