@@ -77,7 +77,7 @@ class CvPediaBuilding:
 
 		bNotActive = (not screen.isActive())
 		if bNotActive: # or self.top.iLastScreen != CvScreenEnums.PEDIA_BUILDING: # PAE different Link menu height
-				self.top.setPediaCommonWidgets()
+			self.top.setPediaCommonWidgets()
 
 		# Header
 		szHeader = u"<font=4b>" + gc.getBuildingInfo(self.iBuilding).getDescription().upper() + u"</font>"
@@ -242,8 +242,8 @@ class CvPediaBuilding:
 
 		# add req buildings
 		for iPrereq in xrange(gc.getNumBuildingInfos()):
-		  if gc.getBuildingInfo(self.iBuilding).isBuildingClassNeededInCity (gc.getBuildingInfo(iPrereq).getBuildingClassType()):
-			screen.attachImageButton( panelName, "", gc.getBuildingInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iPrereq, -1, False )
+			if gc.getBuildingInfo(self.iBuilding).isBuildingClassNeededInCity (gc.getBuildingInfo(iPrereq).getBuildingClassType()):
+				screen.attachImageButton( panelName, "", gc.getBuildingInfo(iPrereq).getButton(), GenericButtonSizes.BUTTON_SIZE_CUSTOM, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BUILDING, iPrereq, -1, False )
 
 		# add resource buttons
 		iPrereq = gc.getBuildingInfo(self.iBuilding).getPrereqAndBonus()
@@ -375,15 +375,19 @@ class CvPediaBuilding:
 		screen.setSelectedListBoxStringGFC(self.top.LIST_ID, iSelected)
 
 	def getBuildingType(self, iBuilding):
-		if (isWorldWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())): return 1
+		if (isWorldWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())):
+			return 1
 
-		if (isTeamWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())): return 1
+		if (isTeamWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())):
+			return 1
 
-		if (isNationalWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())): return 2
+		if (isNationalWonderClass(gc.getBuildingInfo(iBuilding).getBuildingClassType())):
+			return 2
 
 		# Special Building
 		lBuildingClasses = self.getStandardBuildings()
-		if iBuilding not in lBuildingClasses: return 3
+		if iBuilding not in lBuildingClasses:
+			return 3
 
 		# Regular building
 		return 0
@@ -394,7 +398,8 @@ class CvPediaBuilding:
 		iCount = 0
 
 		lBuildingClasses = []
-		if iTyp == 0 or iTyp == 3: lBuildingClasses = self.getStandardBuildings()
+		if iTyp == 0 or iTyp == 3:
+			lBuildingClasses = self.getStandardBuildings()
 
 		for iBuilding in xrange(gc.getNumBuildingInfos()):
 			if not gc.getBuildingInfo(iBuilding).isGraphicalOnly() and gc.getBuildingInfo(iBuilding).getArtDefineTag() != "ART_DEF_BUILDING_FAKE":
@@ -402,7 +407,7 @@ class CvPediaBuilding:
 					iTyp == 1 and self.getBuildingType(iBuilding) == 1 or \
 					iTyp == 2 and self.getBuildingType(iBuilding) == 2 or \
 					iTyp == 3 and self.getBuildingType(iBuilding) == 3 or \
-					iTyp == 0 and self.getBuildingType(iBuilding) == 3: # normal und special bei Tyü 0 anzeigen
+					iTyp == 0 and self.getBuildingType(iBuilding) == 3: # normal und special bei Typ 0 anzeigen
 						listBuildings.append(iBuilding)
 						iCount += 1
 

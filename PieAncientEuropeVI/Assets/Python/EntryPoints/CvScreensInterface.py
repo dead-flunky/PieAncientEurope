@@ -406,7 +406,7 @@ def createCivilopedia():
 	global bUsingSevopedia
 	if pediaMainScreen is None:
 		# import SevoPediaUtil
-		if True: #AdvisorOpt.Sevopedia():
+		if AdvisorOpt.Sevopedia():
 			import SevoPediaMain
 			# import SevoPediaHistory
 			bUsingSevopedia = True

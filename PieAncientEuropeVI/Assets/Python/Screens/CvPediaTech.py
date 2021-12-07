@@ -133,7 +133,8 @@ class CvPediaTech(CvPediaScreen.CvPediaScreen):
 				# Place Civs: Anzeige nur(!) bei disabled Techs (PAE)
 				if not gc.getTechInfo(iTech).isDisable():
 					lCivs = self.getTechOfCivs()
-					if len(lCivs) > 0: self.placeCivs(lCivs)
+					if lCivs:
+						self.placeCivs(lCivs)
 
 				# Place the Special abilities block
 				self.placeSpecial()
