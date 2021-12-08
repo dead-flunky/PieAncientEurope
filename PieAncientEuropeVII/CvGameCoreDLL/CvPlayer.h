@@ -821,6 +821,9 @@ public:
 	int getUnitClassMaking(UnitClassTypes eIndex) const;																							// Exposed to Python
 	void changeUnitClassMaking(UnitClassTypes eIndex, int iChange);
 	int getUnitClassCountPlusMaking(UnitClassTypes eIndex) const;																			// Exposed to Python
+	// Flunky for PAE - dynamic unit limits
+	int getUnitClassExtra(UnitClassTypes eIndex) const;
+	void changeUnitClassExtra(UnitClassTypes eIndex, int iChange);
 
 	int getBuildingClassCount(BuildingClassTypes eIndex) const;																				// Exposed to Python
 	bool isBuildingClassMaxedOut(BuildingClassTypes eIndex, int iExtra = 0) const;										// Exposed to Python
@@ -1294,6 +1297,8 @@ protected:
 	int** m_paiExtraBuildingCommerce;
 	int* m_paiFeatureHappiness;
 	int* m_paiUnitClassCount;
+	// Flunky for PAE - dynamic unit limits
+	int* m_paiUnitClassExtra;
 	int* m_paiUnitClassMaking;
 	int* m_paiBuildingClassCount;
 	int* m_paiBuildingClassMaking;

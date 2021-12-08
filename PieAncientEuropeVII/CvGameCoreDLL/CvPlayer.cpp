@@ -69,6 +69,8 @@ CvPlayer::CvPlayer()
 	m_paiFeatureHappiness = NULL;
 	m_paiUnitClassCount = NULL;
 	m_paiUnitClassMaking = NULL;
+	// Flunky for PAE - dynamic unit limits
+	m_paiUnitClassExtra = NULL;
 	m_paiBuildingClassCount = NULL;
 	m_paiBuildingClassMaking = NULL;
 	m_paiHurryCount = NULL;
@@ -577,6 +579,8 @@ void CvPlayer::uninit()
 	SAFE_DELETE_ARRAY(m_paiFeatureHappiness);
 	SAFE_DELETE_ARRAY(m_paiUnitClassCount);
 	SAFE_DELETE_ARRAY(m_paiUnitClassMaking);
+	// Flunky for PAE - dynamic unit limits
+	SAFE_DELETE_ARRAY(m_paiUnitClassExtra);
 	SAFE_DELETE_ARRAY(m_paiBuildingClassCount);
 	SAFE_DELETE_ARRAY(m_paiBuildingClassMaking);
 	SAFE_DELETE_ARRAY(m_paiHurryCount);
@@ -873,15 +877,20 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 		{
 			m_paiFeatureHappiness[iI] = 0;
 		}
-
+			
 		FAssertMsg(m_paiUnitClassCount==NULL, "about to leak memory, CvPlayer::m_paiUnitClassCount");
 		m_paiUnitClassCount = new int [GC.getNumUnitClassInfos()];
 		FAssertMsg(m_paiUnitClassMaking==NULL, "about to leak memory, CvPlayer::m_paiUnitClassMaking");
 		m_paiUnitClassMaking = new int [GC.getNumUnitClassInfos()];
+		// Flunky for PAE - dynamic unit limits
+		FAssertMsg(m_paiUnitClassExtra==NULL, "about to leak memory, CvPlayer::m_paiUnitClassExtra");
+		m_paiUnitClassExtra = new int [GC.getNumUnitClassInfos()];
 		for (iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
 		{
 			m_paiUnitClassCount[iI] = 0;
 			m_paiUnitClassMaking[iI] = 0;
+			// Flunky for PAE - dynamic unit limits
+			m_paiUnitClassExtra[iI] = 0;
 		}
 
 		FAssertMsg(m_paiBuildingClassCount==NULL, "about to leak memory, CvPlayer::m_paiBuildingClassCount");
@@ -12643,6 +12652,14 @@ int CvPlayer::getUnitClassCount(UnitClassTypes eIndex) const
 	return m_paiUnitClassCount[eIndex];
 }
 
+// Flunky for PAE - dynamic unit limits
+int CvPlayer::getUnitClassExtra(UnitClassTypes eIndex) const
+{
+	FAssertMsg(eIndex >= 0, "eIndex is expected to be non-negative (invalid Index)");
+	FAssertMsg(eIndex < GC.getNumUnitClassInfos(), "eIndex is expected to be within maximum bounds (invalid Index)");
+	return m_paiUnitClassExtra[eIndex];
+}
+
 
 bool CvPlayer::isUnitClassMaxedOut(UnitClassTypes eIndex, int iExtra) const
 {
@@ -12657,7 +12674,7 @@ bool CvPlayer::isUnitClassMaxedOut(UnitClassTypes eIndex, int iExtra) const
 	// Flunky: units can defect to another civ and can be captured etc. So they are often above the limit
 	// FAssertMsg(getUnitClassCount(eIndex) <= GC.getUnitClassInfo(eIndex).getMaxPlayerInstances(), "getUnitClassCount is expected to be less than maximum bound of MaxPlayerInstances (invalid index)");
 
-	return ((getUnitClassCount(eIndex) + iExtra) >= GC.getUnitClassInfo(eIndex).getMaxPlayerInstances());
+	return ((getUnitClassCount(eIndex) + iExtra) >= GC.getUnitClassInfo(eIndex).getMaxPlayerInstances() /*Flunky for PAE - dynamic unit limits*/ + getUnitClassExtra(eIndex));
 }
 
 
@@ -12667,6 +12684,15 @@ void CvPlayer::changeUnitClassCount(UnitClassTypes eIndex, int iChange)
 	FAssertMsg(eIndex < GC.getNumUnitClassInfos(), "eIndex is expected to be within maximum bounds (invalid Index)");
 	m_paiUnitClassCount[eIndex] = (m_paiUnitClassCount[eIndex] + iChange);
 	FAssert(getUnitClassCount(eIndex) >= 0);
+}
+
+// Flunky for PAE - dynamic unit limits
+void CvPlayer::changeUnitClassExtra(UnitClassTypes eIndex, int iChange)
+{
+	FAssertMsg(eIndex >= 0, "eIndex is expected to be non-negative (invalid Index)");
+	FAssertMsg(eIndex < GC.getNumUnitClassInfos(), "eIndex is expected to be within maximum bounds (invalid Index)");
+	m_paiUnitClassExtra[eIndex] = (m_paiUnitClassExtra[eIndex] + iChange);
+	FAssert(getUnitClassExtra(eIndex) >= 0);
 }
 
 
@@ -17527,6 +17553,8 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	pStream->Read(GC.getNumFeatureInfos(), m_paiFeatureHappiness);
 	pStream->Read(GC.getNumUnitClassInfos(), m_paiUnitClassCount);
 	pStream->Read(GC.getNumUnitClassInfos(), m_paiUnitClassMaking);
+	// Flunky for PAE - dynamic unit limits
+	pStream->Read(GC.getNumUnitClassInfos(), m_paiUnitClassExtra);	
 	pStream->Read(GC.getNumBuildingClassInfos(), m_paiBuildingClassCount);
 	pStream->Read(GC.getNumBuildingClassInfos(), m_paiBuildingClassMaking);
 	pStream->Read(GC.getNumHurryInfos(), m_paiHurryCount);
@@ -17998,6 +18026,8 @@ void CvPlayer::write(FDataStreamBase* pStream)
 	pStream->Write(GC.getNumFeatureInfos(), m_paiFeatureHappiness);
 	pStream->Write(GC.getNumUnitClassInfos(), m_paiUnitClassCount);
 	pStream->Write(GC.getNumUnitClassInfos(), m_paiUnitClassMaking);
+	// Flunky for PAE - dynamic unit limits
+	pStream->Write(GC.getNumUnitClassInfos(), m_paiUnitClassExtra);
 	pStream->Write(GC.getNumBuildingClassInfos(), m_paiBuildingClassCount);
 	pStream->Write(GC.getNumBuildingClassInfos(), m_paiBuildingClassMaking);
 	pStream->Write(GC.getNumHurryInfos(), m_paiHurryCount);
