@@ -360,6 +360,7 @@ public:
 	int* getCommerceModifierArray() const; // K-Mod
 	int getSpecialistExtraCommerce(int i) const; // K-Mod, Exposed to Python
 	int* getSpecialistExtraCommerceArray() const; // K-Mod
+	int getUnitExtraPlayerInstances(int i) const; // Flunky
 	bool isCommerceFlexible(int i) const;	// Exposed to Python
 	bool isTerrainTrade(int i) const;			// Exposed to Python
 
@@ -427,6 +428,7 @@ protected:
 
 	int* m_piCommerceModifier; // K-Mod
 	int* m_piSpecialistExtraCommerce; // K-Mod
+	int* m_piUnitExtraPlayerInstances; // Flunky
 	bool* m_pbCommerceFlexible;
 	bool* m_pbTerrainTrade;
 

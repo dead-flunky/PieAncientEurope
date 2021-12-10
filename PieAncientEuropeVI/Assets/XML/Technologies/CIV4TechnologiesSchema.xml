@@ -61,6 +61,16 @@
 	<ElementType name="SpecialistExtraCommerces" content="eltOnly">
 		<element type="iCommerce" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<!-- Flunky for PAE UnitExtraPlayerInstances -->
+	<ElementType name="UnitClassType" content="textOnly"/>
+	<ElementType name="iExtra" content="textOnly" dt:type="int"/>
+	<ElementType name="UnitExtraPlayerInstances" content="eltOnly">
+		<element type="UnitClassType"/>
+		<element type="iExtra"/>
+	</ElementType>
+	<ElementType name="UnitsExtraPlayerInstances" content="eltOnly">
+		<element type="UnitExtraPlayerInstances" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="bFlexible" content="textOnly" dt:type="boolean"/>
 	<ElementType name="CommerceFlexible" content="eltOnly">
 		<element type="bFlexible" minOccurs="0" maxOccurs="*"/>
@@ -146,6 +156,8 @@
 		<element type="DomainExtraMoves"/>
 		<element type="CommerceModifiers" minOccurs="0"/>
 		<element type="SpecialistExtraCommerces" minOccurs="0"/>
+		<!-- Flunky for PAE UnitExtraPlayerInstances -->
+		<element type="UnitsExtraPlayerInstances" minOccurs="0"/>
 		<element type="CommerceFlexible"/>
 		<element type="TerrainTrades"/>
 		<element type="bRiverTrade"/>
