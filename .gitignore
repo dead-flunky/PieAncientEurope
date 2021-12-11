@@ -1,8 +1,8 @@
 *.bak
-Makefile.settings
-*.obj
-*.sdf
-*.exp
+/PieAncientEuropeVI/CvGameCoreDLL/Project/Makefile.settings
+/PieAncientEuropeVI/CvGameCoreDLL/Project/temp_files/Debug/*.obj
+/PieAncientEuropeVI/CvGameCoreDLL/Project/*.sdf
+/PieAncientEuropeVI/CvGameCoreDLL/Project/temp_files/Debug/*.exp
 /CvGameCoreDLL_orig
 *.suo
 *.ilk
@@ -20,6 +20,4 @@ Makefile.settings
 *.FPK
 /PieAncientEuropeVI/CvGameCoreDLL/Boost-1.32.0
 /PieAncientEuropeVI/CvGameCoreDLL/Python24
-*.opensdf
-PieAncientEuropeVII/CvGameCoreDLL/Project/temp_files/
-PieAncientEuropeVII/CvGameCoreDLL/Project/Debug
+/PieAncientEuropeVI/CvGameCoreDLL/Project/*.opensdf
