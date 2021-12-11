@@ -5562,8 +5562,8 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 			{
 				if (pPlot->getUpgradeProgress() > 0
 					|| pPlot->isBeingWorked()
-					   /* Super Forts begin *text* *upgrade* */
-						&& !GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify() 
+						/* Super Forts begin *text* *upgrade* */
+						&& !GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify()
 						&& !GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS)
 						/* Super Forts end */)
 				{
@@ -5572,8 +5572,8 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 					szString.append(gDLL->getText("TXT_KEY_PLOT_IMP_UPGRADE", iTurns, GC.getImprovementInfo((ImprovementTypes) GC.getImprovementInfo(eImprovement).getImprovementUpgrade()).getTextKeyWide()));
 				}
 // Super Forts begin *text* *upgrade* from mnai
-				else if (GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify() 
-				&& GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+				else if (GC.getImprovementInfo(eImprovement).isUpgradeRequiresFortify()
+						&& GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
 				{
 					szString.append(gDLL->getText("TXT_KEY_PLOT_FORTIFY_TO_UPGRADE", GC.getImprovementInfo((ImprovementTypes) GC.getImprovementInfo(eImprovement).getImprovementUpgrade()).getTextKeyWide()));
 				}
