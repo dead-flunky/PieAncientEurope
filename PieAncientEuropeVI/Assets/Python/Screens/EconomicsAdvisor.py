@@ -73,6 +73,17 @@ class EconomicsAdvisor:
         screen.setRenderInterfaceOnly(True);
         screen.showScreen( PopupStates.POPUPSTATE_IMMEDIATE, False)
 
+# # Flunky - Economics Screen Resolution - start
+# Easy to do, but why? The narrow screen shows all there is
+#         if screen.getXResolution() > 1024:
+#             self.W_SCREEN = screen.getXResolution() - 60
+#         else:
+#             self.W_SCREEN = 1024
+
+#         # Set the background and exit button, and show the screen
+#         screen.setDimensions((screen.getXResolution() - self.W_SCREEN) / 2, screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
+# # Flunky - Economics Screen Resolution - end
+
         # Set the background and exit button, and show the screen
         screen.setDimensions(screen.centerX(0), screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
 
