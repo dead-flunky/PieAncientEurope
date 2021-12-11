@@ -4,7 +4,7 @@ from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
                                 FontTypes, NotifyCode, WidgetTypes, PanelStyles,
                                 CyInterface, InterfaceDirtyBits, CyGame,
                                 CyGInterfaceScreen, CommerceTypes, PopupStates,
-                                ButtonStyles, YieldTypes, PollutionTypes, PlayerTypes)
+                                ButtonStyles, YieldTypes)
 # import PyHelpers
 import CvUtil
 # import ScreenInput
@@ -13,6 +13,10 @@ import BugDll
 import BugUtil
 import PlayerUtil
 import TradeUtil
+# TODO remove
+# DEBUG code for Python 3 linter
+unicode = str
+xrange = range
 
 # globals
 gc = CyGlobalContext()
@@ -51,21 +55,6 @@ class EconomicsAdvisor:
         self.X_EXIT = self.W_SCREEN - 30
         #self.Y_EXIT = 726
         self.Y_EXIT = self.H_SCREEN - 42
-
-        self.PAGE_NAME_LIST = [
-            "TXT_KEY_ECONOMICS_ADVISOR_FINANCE_TAB",
-            "TXT_KEY_ECONOMICS_ADVISOR_ENVIRONMENT_TAB",
-            ]
-        self.PAGE_DRAW_LIST = [
-            self.drawFinance,
-            self.drawEnvironment,
-            ]
-
-#        self.DX_LINK = (self.X_EXIT - self.X_LINK) / (len (self.PAGE_NAME_LIST) + 1)
-        self.DX_LINK = self.X_EXIT / (len (self.PAGE_NAME_LIST) + 1)
-        self.Y_LINK = self.H_SCREEN - 42
-
-        self.iPage = 0
 
         self.nWidgetCount = 0
 
@@ -106,27 +95,9 @@ class EconomicsAdvisor:
         self.drawContents()
 
     def drawContents(self):
-        screen = self.getScreen()
         self.deleteAllWidgets()
 
-        # draw the current page
-        if (self.iPage >= 0 and self.iPage < len(self.PAGE_NAME_LIST)):
-            self.PAGE_DRAW_LIST[self.iPage]()
-
-        # Link to other economics advisor pages...
-        # ... Only display links once global warming has been activated (currently this feature is disabled; ie. we always show the screen)
-        if (True or CyGame().getGwEventTally() >= 0 or CyGame().isDebugMode()):
-            xLink = self.DX_LINK / 2
-
-            for i in xrange (len(self.PAGE_NAME_LIST)):
-                #szTextId = self.getNextWidgetName()
-                szTextId = "EconomicsAdvisorTabButton"+str(i)
-                if (self.iPage != i):
-                    screen.setText (szTextId, "", u"<font=4>" + localText.getText (self.PAGE_NAME_LIST[i], ()).upper() + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, xLink, self.Y_LINK, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, i, -1)
-                else:
-                    screen.setText (szTextId, "", u"<font=4>" + localText.getColorText (self.PAGE_NAME_LIST[i], (), gc.getInfoTypeForString ("COLOR_YELLOW")).upper() + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, xLink, self.Y_LINK, 0, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-                xLink += self.DX_LINK
-
+        self.drawFinance()
 
     def drawFinance(self):
         screen = self.getScreen()
@@ -478,191 +449,6 @@ class EconomicsAdvisor:
 
         return 0
 
-    def drawEnvironment(self):
-        screen = self.getScreen()
-        # Header...
-        screen.setLabel(self.WIDGET_HEADER, "Background", u"<font=4b>" + localText.getText("TXT_KEY_ECONOMICS_ADVISOR_ENVIRONMENT_TAB", ()).upper() + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_SCREEN, self.Y_TITLE, self.Z_CONTROLS, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
-
-        game = CyGame()
-        player = gc.getPlayer(self.iActiveLeader)
-
-        szTopPanel = self.getNextWidgetName()
-        screen.addPanel(szTopPanel, u"", "", True, True, self.X_LEFT_PANEL, self.Y_TOP_PANEL, self.X_RIGHT_PANEL + self.PANE_WIDTH - self.X_LEFT_PANEL, self.H_TOP_PANEL, PanelStyles.PANEL_STYLE_MAIN )
-
-
-        iGlobalWarmingIndex = game.getGlobalWarmingIndex()
-        iGlobalWarmingChances = game.getGlobalWarmingChances()
-        iGwEventTally = game.getGwEventTally()
-
-        # calculate expected number events per turn. Prob is out of 1000, so we divide by 1000 and multiply by 100 to get percent.
-        #fWarmingPercent = float(game.getGlobalWarmingChances() * gc.getDefineINT("GLOBAL_WARMING_PROB")) / (10.0*gc.getGameSpeedInfo(game.getGameSpeedType()).getVictoryDelayPercent())
-
-        # calculate the 'severity rating' as used in the GW unhappiness calculation
-        iSeverityRating = game.calculateGwSeverityRating()
-
-        szText = localText.getText("TXT_KEY_GW_SEVERITY_RATING", ()).upper() + ": "
-
-        # hopefully the words for low, medium, and high for sealevel will be good enough for GW severity as well...
-        if (iSeverityRating < 30):
-            szText += localText.getColorText("TXT_KEY_SEALEVEL_LOW", (), gc.getInfoTypeForString ("COLOR_GREEN")).upper()
-        elif (iSeverityRating < 75):
-            szText += localText.getColorText("TXT_KEY_SEALEVEL_MEDIUM", (), gc.getInfoTypeForString ("COLOR_YELLOW")).upper()
-        else:
-            szText += localText.getColorText("TXT_KEY_SEALEVEL_HIGH", (), gc.getInfoTypeForString ("COLOR_RED")).upper()
-
-        if (CyGame().isDebugMode()):
-            szText += u" (%d)" % iSeverityRating
-
-        screen.setLabel(self.getNextWidgetName(), szTopPanel, u"<font=4>" + szText + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, (self.X_LEFT_PANEL + self.PANE_WIDTH + self.X_RIGHT_PANEL)/2, self.Y_TOP_PANEL + self.H_TOP_PANEL/2 - self.Y_SPACING/2, self.Z_CONTROLS + self.DZ, FontTypes.TITLE_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        szLeftPanel = self.getNextWidgetName()
-        screen.addPanel(szLeftPanel, u"", "", True, True, self.X_LEFT_PANEL, self.Y_LOCATION, self.PANE_WIDTH, self.PANE_HEIGHT, PanelStyles.PANEL_STYLE_MAIN )
-        screen.setLabel(self.getNextWidgetName(), "Background",  u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_DOMESTIC", ()).upper() + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH/2, self.Y_LOCATION + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        szMiddlePanel = self.getNextWidgetName()
-        screen.addPanel(szMiddlePanel, u"", "", True, True, self.X_MIDDLE_PANEL, self.Y_LOCATION, self.PANE_WIDTH, self.PANE_HEIGHT, PanelStyles.PANEL_STYLE_MAIN )
-        screen.setLabel(self.getNextWidgetName(), "Background",  u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_GLOBAL", ()).upper() + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_MIDDLE_PANEL + self.PANE_WIDTH/2, self.Y_LOCATION + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        szRightPanel = self.getNextWidgetName()
-        screen.addPanel(szRightPanel, u"", "", True, True, self.X_RIGHT_PANEL, self.Y_LOCATION, self.PANE_WIDTH, self.PANE_HEIGHT, PanelStyles.PANEL_STYLE_MAIN )
-        screen.setLabel(self.getNextWidgetName(), "Background",  u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_EFFECTS", ()).upper() + u"</font>", CvUtil.FONT_CENTER_JUSTIFY, self.X_RIGHT_PANEL + self.PANE_WIDTH/2, self.Y_LOCATION + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        # Left panel: domestic
-        yLocation  = self.Y_LOCATION
-
-        iPopulation = player.calculatePollution(PollutionTypes.POLLUTION_POPULATION)
-        iBuildings = player.calculatePollution(PollutionTypes.POLLUTION_BUILDINGS)
-        iResources = player.calculatePollution(PollutionTypes.POLLUTION_BONUSES)
-        iPower = player.calculatePollution(PollutionTypes.POLLUTION_POWER)
-        iLocalPollution = player.calculatePollution(PollutionTypes.POLLUTION_ALL)
-        iLocalThreshold = game.calculateGwSustainabilityThreshold(self.iActiveLeader)
-
-        # Here we check which types of pollution we are actually producing.
-        # maybe this is pointless – we could just display information for all types...
-        iPollutionTypes = (iPopulation != 0)*PollutionTypes.POLLUTION_POPULATION | (iBuildings != 0)*PollutionTypes.POLLUTION_BUILDINGS | (iResources != 0)*PollutionTypes.POLLUTION_BONUSES | (iPower != 0)*PollutionTypes.POLLUTION_POWER
-
-        iLocalDefence = game.calculateGwLandDefence(self.iActiveLeader)
-
-        yLocation += 1.5*self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_POLLUTION", ()) + ":</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, iPollutionTypes, -1 )
-
-        # I'm using some existing text keys which seem to match. Hopefully they aren't broken for non-english languages.
-        if iPopulation != 0:
-            yLocation += self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_DEMO_SCREEN_POPULATION_TEXT", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + 2*self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_POPULATION, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iPopulation) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_POPULATION, -1 )
-
-        if iBuildings != 0:
-            yLocation += self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_CONCEPT_BUILDINGS", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + 2*self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_BUILDINGS, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iBuildings) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_BUILDINGS, -1 )
-
-
-        if iResources != 0:
-            yLocation += self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_CONCEPT_RESOURCES", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + 2*self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_BONUSES, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iResources) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_BONUSES, -1 )
-
-        # note. TXT_KEY_POWER doesn't really match for french.. it gives something meaning "strength".
-        if iPower != 0:
-            yLocation += self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_TECH_ELECTRICITY", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + 2*self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_POWER, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iPower) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_POWER, -1 )
-
-        yLocation += self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_TOTAL", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, iPollutionTypes, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iLocalPollution) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, iPollutionTypes, -1 )
-
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_TOTAL_OFFSETS", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_OFFSETS, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(-iLocalDefence) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_OFFSETS, -1, -1 )
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_TOTAL_IMPACT", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iLocalPollution - iLocalDefence) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_LOCAL_THRESHOLD", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_LEFT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_SUSTAINABILITY_THRESHOLD, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iLocalThreshold) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_LEFT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_SUSTAINABILITY_THRESHOLD, -1, -1 )
-
-
-        # Middle panel: Global
-        yLocation  = self.Y_LOCATION
-
-        iGlobalPollution = game.calculateGlobalPollution()
-        # Note, the following code is inefficient. We already have the pollution from the active player, but we're recalculating it now.
-        #for i in xrange(gc.getMAX_PLAYERS()):
-        #    loopPlayer = gc.getPlayer(i)
-        #    if (loopPlayer.isAlive()):
-        #        iLocalPollution += loopPlayer.calculatePollution(POLLUTION_ALL)
-
-        iGlobalDefence = game.calculateGwLandDefence(PlayerTypes.NO_PLAYER)
-        iThreshold = game.calculateGwSustainabilityThreshold(PlayerTypes.NO_PLAYER)
-        iChangeRate = iGlobalPollution-iGlobalDefence-iThreshold - iGlobalWarmingIndex*gc.getDefineINT("GLOBAL_WARMING_RESTORATION_RATE")/100
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_TOTAL_POLLUTION", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_MIDDLE_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_ALL, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iGlobalPollution) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_MIDDLE_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_SOURCE, PollutionTypes.POLLUTION_ALL, -1 )
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_TOTAL_OFFSETS", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_MIDDLE_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_OFFSETS, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(-iGlobalDefence) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_MIDDLE_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_POLLUTION_OFFSETS, -1, -1 )
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_THRESHOLD", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_MIDDLE_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_SUSTAINABILITY_THRESHOLD, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iThreshold) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_MIDDLE_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_SUSTAINABILITY_THRESHOLD, -1, -1 )
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_GW_CHANGE_RATE", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_MIDDLE_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(max(0, iChangeRate)) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_MIDDLE_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        #iResponsibility = (100*iLocalPollution*iThreshold) / (game.calculateGwSustainabilityThreshold(self.iActiveLeader) * iGlobalPollution)
-        iResponsibility = 100*(iLocalPollution - iLocalDefence)
-        iResponsibility /= max(1, iLocalThreshold)
-        iResponsibility *= iThreshold
-        iResponsibility /= max(1, iGlobalPollution-iGlobalDefence)
-
-        if (iGwEventTally >= 0 or CyGame().isDebugMode()):
-            yLocation += 1.5 * self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_RELATIVE_CONTRIBUTION", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_MIDDLE_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GW_RELATIVE_CONTRIBUTION, -1, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iResponsibility) + "%</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_MIDDLE_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GW_RELATIVE_CONTRIBUTION, -1, -1 )
-
-        # Right panel: Effects
-        yLocation = self.Y_LOCATION
-
-        #screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iGlobalWarmingIndex) + "("+unicode(iGlobalWarmingChances)+")" + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_RIGHT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        yLocation += 1.5 * self.Y_SPACING
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_GW_INDEX", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_RIGHT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GW_INDEX, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iGlobalWarmingIndex) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_RIGHT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GW_INDEX, -1, -1 )
-
-        yLocation += 1.5 * self.Y_SPACING
-        fExpectedEvents = 1.0 * iGlobalWarmingChances * gc.getDefineINT("GLOBAL_WARMING_PROB") / (10.0 * gc.getGameSpeedInfo(game.getGameSpeedType()).getVictoryDelayPercent())
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_EXPECTED_EVENTS", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_RIGHT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-        screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + u"%0.1f" % fExpectedEvents + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_RIGHT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        if (iGwEventTally >= 0):
-            yLocation += 1.5 * self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_EVENT_TALLY", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_RIGHT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iGwEventTally) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_RIGHT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-        iGwPercentAnger = player.getGwPercentAnger()
-        if (iGwPercentAnger >= 2):
-            yLocation += 1.5 * self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_ENVIRONMENT_LOCAL_ANGER_LEVEL", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_RIGHT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GW_UNHAPPY, -1, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(iGwPercentAnger) + "%</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_RIGHT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_HELP_GW_UNHAPPY, -1, -1 )
-
-        # test
-        if (CyGame().isDebugMode()):
-            yLocation += 1.5 * self.Y_SPACING
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + localText.getText("TXT_KEY_CHANCES", ()) + "</font>", CvUtil.FONT_LEFT_JUSTIFY, self.X_RIGHT_PANEL + self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-            screen.setLabel(self.getNextWidgetName(), "Background", u"<font=3>" + unicode(game.getGlobalWarmingChances()) + "</font>", CvUtil.FONT_RIGHT_JUSTIFY, self.X_RIGHT_PANEL + self.PANE_WIDTH - self.TEXT_MARGIN, yLocation + self.TEXT_MARGIN, self.Z_CONTROLS + self.DZ, FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1 )
-
-
-        return 0
-
-
     # returns a unique ID for a widget in this screen
     def getNextWidgetName(self):
         szName = self.WIDGET_ID + str(self.nWidgetCount)
@@ -688,14 +474,6 @@ class EconomicsAdvisor:
             iIndex = screen.getSelectedPullDownID(self.DEBUG_DROPDOWN_ID)
             self.iActiveLeader = screen.getPullDownData(self.DEBUG_DROPDOWN_ID, iIndex)
             self.drawContents()
-        elif (iNotifyCode == NotifyCode.NOTIFY_CLICKED):
-            # There are only a few clickable widgets in this screen, so lets just assume that if it was a "general" button,
-            # then it was one of the change-tab buttons. (or exit)
-            if (inputClass.getButtonType() == WidgetTypes.WIDGET_GENERAL):
-                iData1 = inputClass.getData1()
-                if (iData1 != self.iPage and iData1 >= 0 and iData1 < len(self.PAGE_NAME_LIST)):
-                    self.iPage = iData1
-                    self.drawContents()
         return 0
 
     def update(self, fDelta):
