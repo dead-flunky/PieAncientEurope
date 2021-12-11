@@ -1013,7 +1013,6 @@ m_piPrereqOrTechs(NULL),
 m_piPrereqAndTechs(NULL),
 m_piCommerceModifier(NULL), // K-Mod
 m_piSpecialistExtraCommerce(NULL), // K-Mod
-m_piUnitExtraPlayerInstances(NULL), // Flunky
 m_pbCommerceFlexible(NULL),
 m_pbTerrainTrade(NULL)
 {
@@ -1034,7 +1033,6 @@ CvTechInfo::~CvTechInfo()
 	SAFE_DELETE_ARRAY(m_piPrereqAndTechs);
 	SAFE_DELETE_ARRAY(m_piCommerceModifier); // K-Mod
 	SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerce); // K-Mod
-	SAFE_DELETE_ARRAY(m_piUnitExtraPlayerInstances); // Flunky
 	SAFE_DELETE_ARRAY(m_pbCommerceFlexible);
 	SAFE_DELETE_ARRAY(m_pbTerrainTrade);
 }
@@ -1305,13 +1303,6 @@ int* CvTechInfo::getSpecialistExtraCommerceArray() const
 }
 // K-Mod end
 
-int CvTechInfo::getUnitExtraPlayerInstances(int i) const
-{
-	FAssertMsg(m_piUnitExtraPlayerInstances, "Tech info not initialised");
-	FASSERT_BOUNDS(0, GC.getNumUnitClassInfos(), i, "CvTechInfo::getUnitExtraPlayerInstances");
-	return m_piUnitExtraPlayerInstances ? m_piUnitExtraPlayerInstances[i] : 0;
-}
-
 bool CvTechInfo::isCommerceFlexible(int i) const
 {
 	FAssertMsg(i < NUM_COMMERCE_TYPES, "Index out of bounds");
@@ -1400,11 +1391,6 @@ void CvTechInfo::read(FDataStreamBase* stream)
 	}
 	// K-Mod end
 
-	// Flunky
-	SAFE_DELETE_ARRAY(m_piUnitExtraPlayerInstances);
-	m_piUnitExtraPlayerInstances = new int[GC.getNumUnitClassInfos()];
-	stream->Read(GC.getNumUnitClassInfos(), m_piUnitExtraPlayerInstances);
-
 	SAFE_DELETE_ARRAY(m_pbCommerceFlexible);
 	m_pbCommerceFlexible = new bool[NUM_COMMERCE_TYPES];
 	stream->Read(NUM_COMMERCE_TYPES, m_pbCommerceFlexible);
@@ -1469,7 +1455,6 @@ void CvTechInfo::write(FDataStreamBase* stream)
 	stream->Write(GC.getNUM_AND_TECH_PREREQS(), m_piPrereqAndTechs);
 	stream->Write(NUM_COMMERCE_TYPES, m_piCommerceModifier); // K-Mod. uiFlag >= 2
 	stream->Write(NUM_COMMERCE_TYPES, m_piSpecialistExtraCommerce); // K-Mod. uiFlag >= 1
-	stream->Write(GC.getNumUnitClassInfos(), m_piUnitExtraPlayerInstances); // Flunky
 	stream->Write(NUM_COMMERCE_TYPES, m_pbCommerceFlexible);
 	stream->Write(GC.getNumTerrainInfos(), m_pbTerrainTrade);
 
@@ -1552,8 +1537,6 @@ bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 		pXML->InitList(&m_piSpecialistExtraCommerce, NUM_COMMERCE_TYPES);
 	}
 	// K-Mod end
-	// Flunky for PAE UnitExtraPlayerInstances  
-	pXML->SetVariableListTagPair(&m_piUnitExtraPlayerInstances, "UnitsExtraPlayerInstances", sizeof(GC.getUnitClassInfo((UnitClassTypes)0)), GC.getNumUnitClassInfos());
 
 	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(),"CommerceFlexible"))
 	{
