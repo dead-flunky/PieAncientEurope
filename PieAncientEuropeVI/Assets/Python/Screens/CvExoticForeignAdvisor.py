@@ -47,6 +47,17 @@ localText = CyTranslator()
 PyPlayer = DomPyHelpers.DomPyPlayer
 PyCity = DomPyHelpers.DomPyCity
 
+# tech trade columns
+(iTechColLeader,
+ iTechColStatus,
+ iTechColWants,
+ iTechColCantYou,
+ iTechColResearch,
+ iTechColGold,
+ iTechColWill,
+ iTechColWont,
+ iTechColCantThem,
+) = range(9)
 # Debugging help
 def ExoticForPrint (stuff):
   stuff = "ExoForAdv: " + stuff
@@ -1113,8 +1124,9 @@ class CvExoticForeignAdvisor (CvForeignAdvisor.CvForeignAdvisor):
             if inputClass.getData() == int(InputTypes.KB_LSHIFT) or inputClass.getData() == int(InputTypes.KB_RSHIFT):
                 self.iShiftKeyDown = inputClass.getID()
 
-        #kmod
-        if self.iScreen == self.SCREEN_DICT["BONUS"]:
-            return self.resIconGrid.handleInput(inputClass)
-        elif self.iScreen == self.SCREEN_DICT["TECH"]:
-            return self.techIconGrid.handleInput(inputClass)
+        #kmod - requires IconGrid_BUG
+        #if self.iScreen == self.SCREEN_DICT["BONUS"]:
+        #    return self.resIconGrid.handleInput(inputClass)
+        #elif self.iScreen == self.SCREEN_DICT["TECH"]:
+        #    return self.techIconGrid.handleInput(inputClass)
+        return 0
