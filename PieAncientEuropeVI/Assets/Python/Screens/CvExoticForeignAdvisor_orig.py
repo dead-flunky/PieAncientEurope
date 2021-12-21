@@ -1,50 +1,30 @@
-# Sid Meier's Civilization 4
-# Copyright Firaxis Games 2005
+## Sid Meier's Civilization 4
+## Copyright Firaxis Games 2005
 
 # Thanks to Requies and Elhoim from CivFanatics for this interface mod
 
-import re
-import TechTree
-import DomPyHelpers
-import CvForeignAdvisor
-import IconGrid
-from CvPythonExtensions import (
-	CyGlobalContext,
-	CyArtFileMgr,
-	CyTranslator,
-	FontTypes,
-	NotifyCode,
-	WidgetTypes,
-	PanelStyles,
-	CyGameTextMgr,
-	InputTypes,
-	YieldTypes,
-	TradeData,
-	TradeableItems,
-	PopupStates,
-	CyGame,
-	CommerceTypes,
-	MouseFlags,
-	TableStyles,
-	ButtonStyles,
-	GenericButtonSizes,
-	DenialTypes,
-	GameOptionTypes,
-	InterfaceDirtyBits,
-	CyInterface,
-)
+# This file has been edited for K-Mod in various places. Some changes marked, others not.
+
+from CvPythonExtensions import *
 import CvUtil
+import ScreenInput
+import CvScreenEnums
+import math
 
-# import ScreenInput
-# import CvScreenEnums
-# import math
-import PlayerUtil
+############################################
+### BEGIN CHANGES ENHANCED INTERFACE MOD ###
+############################################
+import IconGrid
 
-# TODO remove
-# DEBUG code for Python 3 linter
-# unicode = str
-# xrange = range
+# from IconGrid import IconGrid
+##########################################
+### END CHANGES ENHANCED INTERFACE MOD ###
+##########################################
 
+import CvForeignAdvisor
+import DomPyHelpers
+import TechTree
+import re
 
 # globals
 gc = CyGlobalContext()
@@ -53,19 +33,6 @@ localText = CyTranslator()
 
 PyPlayer = DomPyHelpers.DomPyPlayer
 PyCity = DomPyHelpers.DomPyCity
-
-# tech trade columns
-(
-	iTechColLeader,
-	iTechColStatus,
-	iTechColWants,
-	iTechColCantYou,
-	iTechColResearch,
-	iTechColGold,
-	iTechColWill,
-	iTechColWont,
-	iTechColCantThem,
-) = range(9)
 
 # Debugging help
 def ExoticForPrint(stuff):
@@ -162,7 +129,6 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		# If 'False', use icon size 64x64
 		self.TECH_USE_SMALL_ICONS = True
 
-		self.TECH_STATUS_COL_WIDTH = 40
 		self.TECH_GOLD_COL_WIDTH = 60
 
 		###############
@@ -219,15 +185,28 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			"TECH",
 		]
 
+		# K-Mod
+		self.LABEL_WIDTH_LIST = []
+		self.iLanguageLoaded = -1
+		# K-Mod end
+
 		self.iDefaultScreen = self.SCREEN_DICT["RELATIONS"]
 
 	def interfaceScreen(self, iScreen):
 
 		self.ATTITUDE_DICT = {
-			"COLOR_GREEN": re.sub(":", "|", localText.getText("TXT_KEY_ATTITUDE_FRIENDLY", ())),
-			"COLOR_CYAN": re.sub(":", "|", localText.getText("TXT_KEY_ATTITUDE_PLEASED", ())),
-			"COLOR_MAGENTA": re.sub(":", "|", localText.getText("TXT_KEY_ATTITUDE_ANNOYED", ())),
-			"COLOR_RED": re.sub(":", "|", localText.getText("TXT_KEY_ATTITUDE_FURIOUS", ())),
+			"COLOR_GREEN": re.sub(
+				":", "|", localText.getText("TXT_KEY_ATTITUDE_FRIENDLY", ())
+			),
+			"COLOR_CYAN": re.sub(
+				":", "|", localText.getText("TXT_KEY_ATTITUDE_PLEASED", ())
+			),
+			"COLOR_MAGENTA": re.sub(
+				":", "|", localText.getText("TXT_KEY_ATTITUDE_ANNOYED", ())
+			),
+			"COLOR_RED": re.sub(
+				":", "|", localText.getText("TXT_KEY_ATTITUDE_FURIOUS", ())
+			),
 		}
 
 		self.objTechTree = TechTree.TechTree()
@@ -267,8 +246,29 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		############################################
 		# self.W_SCREEN = screen.getXResolution()
 		# self.H_SCREEN = screen.getYResolution()
-		self.X_EXIT = self.W_SCREEN - 10
-		self.DX_LINK = (self.X_EXIT - self.X_LINK) / (len(self.SCREEN_DICT) + 1)
+
+		# RJG Start - following line added as per RJG (http://forums.civfanatics.com/showpost.php?p=6996936&postcount=15)
+		# FROM BUG MA Widescreen START
+		# over-ride screen width, height
+
+		##
+		# K-Mod, 7/dec/12, karadoc
+		# returned the window to the standard size
+		##
+		# self.W_SCREEN = screen.getXResolution() - 40
+		# self.X_SCREEN = (screen.getXResolution() - 24) / 2
+		# self.L_SCREEN = 20
+
+		# if self.W_SCREEN < 1024:
+		# self.W_SCREEN = 1024
+		# self.L_SCREEN = 0
+
+		self.X_EXIT = self.W_SCREEN - 30
+		# FROM BUG MA Widescreen END
+
+		# self.X_EXIT = self.W_SCREEN - 10
+		# RJG End
+		# self.DX_LINK = (self.X_EXIT - self.X_LINK) / (len (self.SCREEN_DICT) + 1) # disabled by K-Mod
 
 		self.Y_EXIT = self.H_SCREEN - 42
 		self.Y_LINK = self.H_SCREEN - 42
@@ -285,7 +285,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			self.H_SCREEN,
 			WidgetTypes.WIDGET_GENERAL,
 			-1,
-			-1
+			-1,
 		)
 		screen.addPanel(
 			"TopPanel",
@@ -297,7 +297,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			0,
 			self.W_SCREEN,
 			55,
-			PanelStyles.PANEL_STYLE_TOPBAR
+			PanelStyles.PANEL_STYLE_TOPBAR,
 		)
 		screen.addPanel(
 			"BottomPanel",
@@ -309,16 +309,20 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			self.Y_BOTTOM_PANEL,
 			self.W_SCREEN,
 			55,
-			PanelStyles.PANEL_STYLE_BOTTOMBAR
+			PanelStyles.PANEL_STYLE_BOTTOMBAR,
 		)
 		##########################################
 		### END CHANGES ENHANCED INTERFACE MOD ###
 		##########################################
 
 		# Set the background and exit button, and show the screen
+		# RJG Start - following line added as per RJG (http://forums.civfanatics.com/showpost.php?p=6996936&postcount=15)
+		# K-Mod, undone
 		screen.setDimensions(
 			screen.centerX(0), screen.centerY(0), self.W_SCREEN, self.H_SCREEN
 		)
+		# screen.setDimensions(self.L_SCREEN, screen.centerY(0), self.W_SCREEN, self.H_SCREEN)
+		# RJG end
 		screen.showWindowBackground(False)
 		screen.setText(
 			self.EXIT_ID,
@@ -331,7 +335,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			FontTypes.TITLE_FONT,
 			WidgetTypes.WIDGET_CLOSE_SCREEN,
 			-1,
-			-1
+			-1,
 		)
 
 		self.nWidgetCount = 0
@@ -347,13 +351,12 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				WidgetTypes.WIDGET_GENERAL,
 				-1,
 				-1,
-				FontTypes.GAME_FONT
+				FontTypes.GAME_FONT,
 			)
-			for j in xrange(gc.getMAX_PLAYERS()):
+			for j in range(gc.getMAX_PLAYERS()):
 				if gc.getPlayer(j).isAlive():
-					bSelected = j == self.iActiveLeader
 					screen.addPullDownString(
-						self.szDropdownName, gc.getPlayer(j).getName(), j, j, bSelected
+						self.szDropdownName, gc.getPlayer(j).getName(), j, j, False
 					)
 		CyInterface().setDirty(InterfaceDirtyBits.Foreign_Screen_DIRTY_BIT, False)
 
@@ -365,9 +368,6 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 
 		if self.iScreen < 0:
 			return
-		self.objActiveLeader = gc.getPlayer(self.iActiveLeader)
-		self.iActiveTeam = self.objActiveLeader.getTeam()
-		self.objActiveTeam = gc.getTeam(self.iActiveTeam)
 		self.deleteAllWidgets()
 
 		screen = self.getScreen()
@@ -384,7 +384,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			FontTypes.TITLE_FONT,
 			WidgetTypes.WIDGET_GENERAL,
 			-1,
-			-1
+			-1,
 		)
 
 		if self.REV_SCREEN_DICT.has_key(self.iScreen):
@@ -392,9 +392,35 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		else:
 			return
 		# Link to other Foreign advisor screens
-		xLink = self.DX_LINK / 2
+		# xLink = self.DX_LINK / 2;
+		# K-Mod
+		xLink = 0
+		if self.iLanguageLoaded != CyGame().getCurrentLanguage():
+			self.LABEL_WIDTH_LIST[:] = []
+			width_list = []
+			for i in self.ORDER_LIST:
+				width_list.append(
+					CyInterface().determineWidth(
+						localText.getText(self.TXT_KEY_DICT[i], ()).upper()
+					)
+					+ 20
+				)
+			total_width = (
+				sum(width_list)
+				+ CyInterface().determineWidth(
+					localText.getText("TXT_KEY_PEDIA_SCREEN_EXIT", ()).upper()
+				)
+				+ 20
+			)
 
-		for i in xrange(len(self.ORDER_LIST)):
+			for i in width_list:
+				self.LABEL_WIDTH_LIST.append(
+					(self.X_EXIT * i + total_width / 2) / total_width
+				)
+			self.iLanguageLoaded = CyGame().getCurrentLanguage()
+		# K-Mod end (except that I've used LABEL_WIDTH_DICT below)
+
+		for i in range(len(self.ORDER_LIST)):
 			szTextId = self.getNextWidgetName()
 			szScreen = self.ORDER_LIST[i]
 			if self.iScreen != self.SCREEN_DICT[szScreen]:
@@ -411,7 +437,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					FontTypes.TITLE_FONT,
 					WidgetTypes.WIDGET_FOREIGN_ADVISOR,
 					self.SCREEN_DICT[szScreen],
-					-1
+					-1,
 				)
 			else:
 				screen.setText(
@@ -421,7 +447,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					+ localText.getColorText(
 						self.TXT_KEY_DICT[szScreen],
 						(),
-						gc.getInfoTypeForString("COLOR_YELLOW")
+						gc.getInfoTypeForString("COLOR_YELLOW"),
 					).upper()
 					+ u"</font>",
 					CvUtil.FONT_CENTER_JUSTIFY,
@@ -431,7 +457,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					FontTypes.TITLE_FONT,
 					WidgetTypes.WIDGET_FOREIGN_ADVISOR,
 					-1,
-					-1
+					-1,
 				)
 			xLink += self.DX_LINK
 
@@ -439,11 +465,12 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		CvForeignAdvisor.CvForeignAdvisor.drawActive(self)
 
 	def drawInfo(self, bInitial):
+		#   ExoticForPrint ("Entered drawInfo")
 
 		screen = self.getScreen()
 
 		# Get the Players
-		# playerActive = gc.getPlayer(self.iActiveLeader)
+		playerActive = gc.getPlayer(self.iActiveLeader)
 
 		# Put everything inside a main panel, so we get vertical scrolling
 		mainPanelName = self.getNextWidgetName()
@@ -457,15 +484,19 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			100,
 			self.W_SCREEN - 100,
 			self.H_SCREEN - 200,
-			PanelStyles.PANEL_STYLE_EMPTY
+			PanelStyles.PANEL_STYLE_EMPTY,
 		)
+
+		ltCivicOptions = range(gc.getNumCivicOptionInfos())
 
 		# loop through all players and display leaderheads
 		# Their leaderheads
-		for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
+		for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 			# PB Mod
-			if (self.bReduceOnSelectedLeaders
-				and not iLoopPlayer in self.listSelectedLeaders):
+			if (
+				self.bReduceOnSelectedLeaders
+				and not iLoopPlayer in self.listSelectedLeaders
+			):
 				continue
 			if (
 				gc.getPlayer(iLoopPlayer).isAlive()
@@ -496,7 +527,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					"",
 					False,
 					True,
-					PanelStyles.PANEL_STYLE_MAIN
+					PanelStyles.PANEL_STYLE_MAIN,
 				)
 
 				screen.attachImageButton(
@@ -506,8 +537,8 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					GenericButtonSizes.BUTTON_SIZE_46,
 					WidgetTypes.WIDGET_LEADERHEAD,
 					iLoopPlayer,
-					self.iActiveLeader,
-					False
+					-1,
+					False,
 				)
 
 				infoPanelName = self.getNextWidgetName()
@@ -518,10 +549,10 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					"",
 					False,
 					False,
-					PanelStyles.PANEL_STYLE_EMPTY
+					PanelStyles.PANEL_STYLE_EMPTY,
 				)
 
-				# religionName = self.getNextWidgetName()
+				religionName = self.getNextWidgetName()
 				szPlayerReligion = ""
 
 				if nPlayerReligion != -1:
@@ -537,7 +568,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					FontTypes.GAME_FONT,
 					WidgetTypes.WIDGET_GENERAL,
 					-1,
-					-1
+					-1,
 				)
 
 				screen.attachTextGFC(
@@ -545,12 +576,12 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					"",
 					localText.getText(
 						"TXT_KEY_FOREIGN_ADVISOR_TRADE",
-						(self.calculateTrade(self.iActiveLeader, iLoopPlayer),)
+						(self.calculateTrade(self.iActiveLeader, iLoopPlayer),),
 					),
 					FontTypes.GAME_FONT,
 					WidgetTypes.WIDGET_GENERAL,
 					-1,
-					-1
+					-1,
 				)
 
 				screen.attachTextGFC(
@@ -560,10 +591,10 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					FontTypes.GAME_FONT,
 					WidgetTypes.WIDGET_GENERAL,
 					-1,
-					-1
+					-1,
 				)
 
-				for nCivicOption in xrange(gc.getNumCivicOptionInfos()):
+				for nCivicOption in ltCivicOptions:
 					nCivic = gc.getPlayer(iLoopPlayer).getCivics(nCivicOption)
 					screen.attachImageButton(
 						infoPanelName,
@@ -573,11 +604,13 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 						WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC,
 						nCivic,
 						1,
-						False
+						False,
 					)
 				nFavoriteCivic = objLeaderHead.getFavoriteCivic()
-				if nFavoriteCivic != -1 and not gc.getGame().isOption(
-					GameOptionTypes.GAMEOPTION_RANDOM_PERSONALITIES
+				if (nFavoriteCivic != -1) and (
+					not gc.getGame().isOption(
+						GameOptionTypes.GAMEOPTION_RANDOM_PERSONALITIES
+					)
 				):
 					screen.attachTextGFC(
 						infoPanelName,
@@ -586,7 +619,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 						FontTypes.GAME_FONT,
 						WidgetTypes.WIDGET_GENERAL,
 						-1,
-						-1
+						-1,
 					)
 					objCivicInfo = gc.getCivicInfo(nFavoriteCivic)
 					screen.attachImageButton(
@@ -597,15 +630,11 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 						WidgetTypes.WIDGET_PEDIA_JUMP_TO_CIVIC,
 						nFavoriteCivic,
 						1,
-						False
+						False,
 					)
 					# screen.attachTextGFC(infoPanelName, "", "(" + gc.getCivicOptionInfo (objCivicInfo.getCivicOptionType()).getDescription() + ")", FontTypes.GAME_FONT, WidgetTypes.WIDGET_GENERAL, -1, -1)
 
 	def calculateTrade(self, nPlayer, nTradePartner):
-		# kmod:
-		# iDomesticYield, iDomesticCount, iForeignYield, iForeignCount = TradeUtil.calculateTradeRoutes(nPlayer, nTradePartner)
-		# return iDomesticYield + iForeignYield, iDomesticCount + iForeignCount
-
 		# Trade status...
 		nTotalTradeProfit = 0
 
@@ -616,11 +645,13 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		for pyLoopCity in cityList:
 			pLoopCity = pyLoopCity.GetCy()
 			# For each trade route possible
-			for nTradeRoute in xrange(gc.getDefineINT("MAX_TRADE_ROUTES")):
+			for nTradeRoute in range(gc.getDefineINT("MAX_TRADE_ROUTES")):
 				# Get the next trade city
 				pTradeCity = pLoopCity.getTradeCity(nTradeRoute)
+				# Not quite sure what this does but it's in the MainInterface
+				# and I pretty much C&Ped :p
 				if pTradeCity and pTradeCity.getOwner() >= 0:
-					for j in xrange(YieldTypes.NUM_YIELD_TYPES):
+					for j in range(YieldTypes.NUM_YIELD_TYPES):
 						nTradeProfit = pLoopCity.calculateTradeYield(
 							j, pLoopCity.calculateTradeProfit(pTradeCity)
 						)
@@ -635,7 +666,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		screen = self.getScreen()
 
 		# Get the Players
-		# playerActive = gc.getPlayer(self.iActiveLeader)
+		playerActive = gc.getPlayer(self.iActiveLeader)
 
 		# Put everything inside a main panel, so we get vertical scrolling
 		mainPanelName = self.getNextWidgetName()
@@ -649,7 +680,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			50,
 			self.W_SCREEN,
 			self.H_SCREEN - 100,
-			PanelStyles.PANEL_STYLE_EMPTY
+			PanelStyles.PANEL_STYLE_EMPTY,
 		)
 
 		screen.attachPanel(
@@ -659,18 +690,18 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			"",
 			False,
 			True,
-			PanelStyles.PANEL_STYLE_MAIN
+			PanelStyles.PANEL_STYLE_MAIN,
 		)
 
 		# loop through all players and display their leaderheads
 		if bInitial:
 			self.nCount = 0
 			self.ltPlayerRelations = [
-				[0] * gc.getMAX_PLAYERS() for i in xrange(gc.getMAX_PLAYERS())
+				[0] * gc.getMAX_PLAYERS() for i in range(gc.getMAX_PLAYERS())
 			]
 			self.ltPlayerMet = [False] * gc.getMAX_PLAYERS()
 
-			for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
+			for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 				if (
 					gc.getPlayer(iLoopPlayer).isAlive()
 					and (
@@ -683,10 +714,10 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					and not gc.getPlayer(iLoopPlayer).isMinorCiv()
 				):
 
-					#                   ExoticForPrint ("Player = %d" % iLoopPlayer)
+					#         ExoticForPrint ("Player = %d" % iLoopPlayer)
 					self.ltPlayerMet[iLoopPlayer] = True
 
-					for nHost in xrange(gc.getMAX_PLAYERS()):
+					for nHost in range(gc.getMAX_PLAYERS()):
 						if (
 							gc.getPlayer(nHost).isAlive()
 							and nHost != self.iActiveLeader
@@ -704,15 +735,19 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					# Player panel
 					self.nCount += 1
 			self.nSpread = self.W_SCREEN / self.nCount
+
 			if self.bReduceOnSelectedLeaders:
-				if not self.listSelectedLeaders:
+				if len(self.listSelectedLeaders) == 0:
 					self.listSelectedLeaders.append(self.iActiveLeader)
 				self.nSpread = self.W_SCREEN / (len(self.listSelectedLeaders))
+		#   ExoticForPrint ("# players = %d" % self.nCount)
+
 		nCount = 0
-		for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
+		for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 			if self.ltPlayerMet[iLoopPlayer]:
-				if iLoopPlayer != self.iActiveLeader:
-					# TODO: Bug, this selection is not right
+				if (
+					iLoopPlayer != self.iActiveLeader
+				):  # TODO: Bug, this selection is not right
 					# PB Mod
 					if (
 						self.bReduceOnSelectedLeaders
@@ -737,7 +772,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 						iLoopPlayer,
 						self.iActiveLeader,
 						ButtonStyles.BUTTON_STYLE_LABEL,
-						False
+						False,
 					)
 					if self.iSelectedLeader == iLoopPlayer:
 						screen.setState(szName, True)
@@ -760,30 +795,30 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			WidgetTypes.WIDGET_GENERAL,
 			-1,
 			-1,
-			nButtonStyle
+			nButtonStyle,
 		)
 
 		self.drawGlanceRows(
 			screen,
 			mainPanelName,
 			self.iSelectedLeader != self.iActiveLeader,
-			self.iSelectedLeader
+			self.iSelectedLeader,
 		)
 
 	def calculateRelations(self, nPlayer, nTarget):
-		if nPlayer == nTarget or not gc.getTeam(
-			gc.getPlayer(nPlayer).getTeam()
-		).isHasMet(gc.getPlayer(nTarget).getTeam()):
-			return None
-		nAttitude = 0
-		szAttitude = CyGameTextMgr().getAttitudeString(nPlayer, nTarget)
-		#     ExoticForPrint (("%d toward %d" % (nPlayer, nTarget)) + str(szAttitude))
-		ltPlusAndMinuses = re.findall("[-+][0-9]+\s?: ", szAttitude)
-		#     ExoticForPrint ("Length: %d" % len (ltPlusAndMinuses))
-		for i in xrange(len(ltPlusAndMinuses)):
-			nAttitude += int(ltPlusAndMinuses[i][:-2])
+		if nPlayer != nTarget and gc.getTeam(gc.getPlayer(nPlayer).getTeam()).isHasMet(
+			gc.getPlayer(nTarget).getTeam()
+		):
+			nAttitude = 0
+			szAttitude = CyGameTextMgr().getAttitudeString(nPlayer, nTarget)
+			#     ExoticForPrint (("%d toward %d" % (nPlayer, nTarget)) + str(szAttitude))
+			ltPlusAndMinuses = re.findall("[-+][0-9]+\s?: ", szAttitude)
+			#     ExoticForPrint ("Length: %d" % len (ltPlusAndMinuses))
+			for i in range(len(ltPlusAndMinuses)):
+				nAttitude += int(ltPlusAndMinuses[i][:-2])
 		#     ExoticForPrint ("Attitude: %d" % nAttitude)
-
+		else:
+			return None
 		return nAttitude
 
 	def drawGlanceRows(self, screen, mainPanelName, bSorted=False, nPlayer=1):
@@ -796,16 +831,12 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				ltSortedRelations.reverse()
 			self.bGlancePlus = not self.bGlancePlus
 		else:
-			# If not sorted, we take the original ID list and move active player to the front.
-			# ltSortedRelations = map(lambda x: (0, x), range(gc.getMAX_PLAYERS()))
-			nFirstElement = self.ltPlayerRelations[self.iActiveLeader][nPlayer]
-			ltSortedRelations.remove((nFirstElement, self.iActiveLeader))
-			ltSortedRelations.insert(0, (nFirstElement, self.iActiveLeader))
+			self.loadColIntoList(self.ltPlayerRelations, ltSortedRelations, nPlayer)
 		# loop through all players and display leaderheads
-		for nOffset in xrange(gc.getMAX_PLAYERS()):
+		for nOffset in range(gc.getMAX_PLAYERS()):
 			if ltSortedRelations[nOffset][1] != -1:
 				break
-		for i in xrange(self.nCount):
+		for i in range(self.nCount):
 			iLoopPlayer = ltSortedRelations[nOffset + i][1]
 			# PB Mod
 			if (
@@ -824,7 +855,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				"",
 				False,
 				True,
-				PanelStyles.PANEL_STYLE_MAIN
+				PanelStyles.PANEL_STYLE_MAIN,
 			)
 
 			szName = self.getNextWidgetName()
@@ -838,11 +869,11 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				WidgetTypes.WIDGET_LEADERHEAD,
 				iLoopPlayer,
 				self.iActiveLeader,
-				ButtonStyles.BUTTON_STYLE_LABEL
+				ButtonStyles.BUTTON_STYLE_LABEL,
 			)
 
 			nCount = 0
-			for j in xrange(gc.getMAX_PLAYERS()):
+			for j in range(gc.getMAX_PLAYERS()):
 				if self.ltPlayerMet[j]:
 					if j != self.iActiveLeader:  # TODO: Wrong selection, too.
 						# PB Mod
@@ -857,6 +888,8 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 						nAttitude = self.ltPlayerRelations[iLoopPlayer][j]
 						if nAttitude is not None:
 							szText = self.getAttitudeText(nAttitude, j, iLoopPlayer)
+
+
 						else:
 							szText = localText.getText(
 								"TXT_KEY_FOREIGN_ADVISOR_NONE", ()
@@ -872,40 +905,13 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 							FontTypes.GAME_FONT,
 							WidgetTypes.WIDGET_LEADERHEAD,
 							j,
-							iLoopPlayer
+							iLoopPlayer,
 						)
-
-						nCount += 1
-			if nCount > 8:
-				screen.attachImageButton(
-					playerPanelName,
-					"",
-					gc.getLeaderHeadInfo(
-						gc.getPlayer(iLoopPlayer).getLeaderType()
-					).getButton(),
-					GenericButtonSizes.BUTTON_SIZE_32,
-					WidgetTypes.WIDGET_LEADERHEAD,
-					iLoopPlayer,
-					self.iActiveLeader,
-					False
-				)
-			else:
-				screen.attachImageButton(
-					playerPanelName,
-					"",
-					gc.getLeaderHeadInfo(
-						gc.getPlayer(iLoopPlayer).getLeaderType()
-					).getButton(),
-					GenericButtonSizes.BUTTON_SIZE_46,
-					WidgetTypes.WIDGET_LEADERHEAD,
-					iLoopPlayer,
-					self.iActiveLeader,
-					False
-				)
+					nCount += 1
 
 	def loadColIntoList(self, ltPlayers, ltTarget, nCol):
 		nCount = 0
-		for i in xrange(len(ltTarget)):
+		for i in range(len(ltTarget)):
 			if self.ltPlayerMet[i]:
 				#       ExoticForPrint ("player met = %d; nCount = %d" % (i, nCount))
 				ltTarget[nCount] = (ltPlayers[i][nCol], i)
@@ -947,7 +953,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				IconGrid.GRID_TEXT_COLUMN,
 				IconGrid.GRID_MULTI_LIST_COLUMN,
 				IconGrid.GRID_MULTI_LIST_COLUMN,
-				IconGrid.GRID_TEXT_COLUMN
+				IconGrid.GRID_TEXT_COLUMN,
 			)
 		else:
 			columns = (
@@ -956,7 +962,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				IconGrid.GRID_MULTI_LIST_COLUMN,
 				IconGrid.GRID_MULTI_LIST_COLUMN,
 				IconGrid.GRID_MULTI_LIST_COLUMN,
-				IconGrid.GRID_TEXT_COLUMN
+				IconGrid.GRID_TEXT_COLUMN,
 			)
 		self.NUM_RESOURCE_COLUMNS = len(columns) - 1
 
@@ -989,7 +995,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			columns,
 			True,
 			self.SHOW_LEADER_NAMES,
-			self.SHOW_ROW_BORDERS
+			self.SHOW_ROW_BORDERS,
 		)
 
 		self.resIconGrid.setGroupBorder(self.GROUP_BORDER)
@@ -1012,38 +1018,38 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		)
 		self.resIconGrid.setHeader(
 			self.surplusCol,
-			localText.getText("TXT_KEY_FOREIGN_ADVISOR_FOR_TRADE_2", ())
+			localText.getText("TXT_KEY_FOREIGN_ADVISOR_FOR_TRADE_2", ()),
 		)
 		self.resIconGrid.setHeader(
 			self.usedCol,
-			localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_FOR_TRADE_2", ())
+			localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_FOR_TRADE_2", ()),
 		)
 		self.resIconGrid.setHeader(
 			self.willTradeCol,
-			localText.getText("TXT_KEY_FOREIGN_ADVISOR_FOR_TRADE_2", ())
+			localText.getText("TXT_KEY_FOREIGN_ADVISOR_FOR_TRADE_2", ()),
 		)
 		self.resIconGrid.setHeader(
 			self.wontTradeCol,
-			localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_FOR_TRADE_2", ())
+			localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_FOR_TRADE_2", ()),
 		)
 		self.resIconGrid.setHeader(
 			self.canPayCol,
-			(u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
+			(u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar()),
 		)
 		self.resIconGrid.setTextColWidth(self.canPayCol, self.RES_GOLD_COL_WIDTH)
 
 		if self.RES_SHOW_ACTIVE_TRADE:
 			self.resIconGrid.setHeader(
 				self.activeExportCol,
-				localText.getText("TXT_KEY_FOREIGN_ADVISOR_EXPORT", ())
+				localText.getText("TXT_KEY_FOREIGN_ADVISOR_EXPORT", ()),
 			)
 			self.resIconGrid.setHeader(
 				self.activeImportCol,
-				localText.getText("TXT_KEY_FOREIGN_ADVISOR_IMPORT", ())
+				localText.getText("TXT_KEY_FOREIGN_ADVISOR_IMPORT", ()),
 			)
 			self.resIconGrid.setHeader(
 				self.payingCol,
-				(u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
+				(u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar()),
 			)
 			self.resIconGrid.setTextColWidth(self.payingCol, self.RES_GOLD_COL_WIDTH)
 		if self.RES_SHOW_IMPORT_EXPORT_HEADER:
@@ -1128,9 +1134,9 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		tradeData.ItemType = TradeableItems.TRADE_RESOURCES
 		listSurplus = []
 
-		for iLoopBonus in xrange(gc.getNumBonusInfos()):
+		for iLoopBonus in range(gc.getNumBonusInfos()):
 			tradeData.iData = iLoopBonus
-			for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
+			for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 				# PB Mod
 				if (
 					self.bReduceOnSelectedLeaders
@@ -1165,7 +1171,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			self.SURPLUS_Y,
 			self.SURPLUS_WIDTH,
 			self.RES_SURPLUS_HEIGHT,
-			PanelStyles.PANEL_STYLE_MAIN
+			PanelStyles.PANEL_STYLE_MAIN,
 		)
 
 		self.availableMultiList = self.getNextWidgetName()
@@ -1179,13 +1185,13 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			1,
 			32,
 			32,
-			TableStyles.TABLE_STYLE_EMPTY
+			TableStyles.TABLE_STYLE_EMPTY,
 		)
 
 		self.availableTable = self.getNextWidgetName()
 		# add the circles behind the amounts
 		if self.RES_SHOW_SURPLUS_AMOUNT_ON_TOP:
-			for iIndex in xrange(len(listSurplus)):
+			for iIndex in range(len(listSurplus)):
 				screen.addDDSGFC(
 					self.availableTable + "Circle" + str(iIndex),
 					ArtFileMgr.getInterfaceArtInfo("WHITE_CIRCLE_40").getPath(),
@@ -1195,7 +1201,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					16,
 					WidgetTypes.WIDGET_GENERAL,
 					-1,
-					-1
+					-1,
 				)
 		# add the table showing the amounts
 		screen.addTableControlGFC(
@@ -1209,11 +1215,11 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			False,
 			16,
 			16,
-			TableStyles.TABLE_STYLE_EMPTY
+			TableStyles.TABLE_STYLE_EMPTY,
 		)
 
 		# Add the bonuses to the surplus panel with their amount
-		for iIndex in xrange(len(listSurplus)):
+		for iIndex in range(len(listSurplus)):
 			# screen.addCheckBoxGFCAt (self.mainAvailablePanel, "Foo" + str(iIndex), gc.getBonusInfo (listSurplus[iIndex]).getButton(), ArtFileMgr.getInterfaceArtInfo ("BUTTON_HILITE_SQUARE").getPath(), self.X_GLANCE_OFFSET + (self.RESOURCE_ICON_SIZE * iIndex), 10, 32, 32, WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS, listSurplus[iIndex], -1, ButtonStyles.BUTTON_STYLE_LABEL, False)
 			screen.appendMultiListButton(
 				self.availableMultiList,
@@ -1222,7 +1228,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
 				listSurplus[iIndex],
 				-1,
-				False
+				False,
 			)
 			screen.setTableColumnHeader(
 				self.availableTable, iIndex, u"", self.RESOURCE_ICON_SIZE
@@ -1250,7 +1256,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				WidgetTypes.WIDGET_GENERAL,
 				-1,
 				-1,
-				0
+				0,
 			)
 		# Assemble the panel that shows the trade table
 		self.TABLE_PANEL_X = self.RES_LEFT_RIGHT_SPACE
@@ -1273,7 +1279,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			self.TABLE_PANEL_Y,
 			self.TABLE_PANEL_WIDTH,
 			self.TABLE_PANEL_HEIGHT,
-			PanelStyles.PANEL_STYLE_MAIN
+			PanelStyles.PANEL_STYLE_MAIN,
 		)
 
 		self.resIconGrid.createGrid()
@@ -1284,7 +1290,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		tradeData.ItemType = TradeableItems.TRADE_RESOURCES
 		currentRow = 0
 
-		for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
+		for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 			# PB Mod
 			if (
 				self.bReduceOnSelectedLeaders
@@ -1310,7 +1316,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					self.leaderCol,
 					gc.getLeaderHeadInfo(currentPlayer.getLeaderType()).getButton(),
 					WidgetTypes.WIDGET_LEADERHEAD,
-					iLoopPlayer
+					iLoopPlayer,
 				)
 
 				# gold
@@ -1319,7 +1325,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					sAmount = str(gc.getPlayer(iLoopPlayer).AI_maxGoldPerTurnTrade(self.iActiveLeader))
 					self.resIconGrid.setText(currentRow, self.canPayCol, sAmount)
 				# bonuses
-				for iLoopBonus in xrange(gc.getNumBonusInfos()):
+				for iLoopBonus in range(gc.getNumBonusInfos()):
 					tradeData.iData = iLoopBonus
 					if activePlayer.canTradeItem(iLoopPlayer, tradeData, False):
 						if activePlayer.canTradeItem(iLoopPlayer, tradeData, not currentPlayer.isHuman()):  # surplus
@@ -1328,7 +1334,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 								self.surplusCol,
 								gc.getBonusInfo(iLoopBonus).getButton(),
 								WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-								iLoopBonus
+								iLoopBonus,
 							)
 						else:  # used
 							self.resIconGrid.addIcon(
@@ -1336,7 +1342,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 								self.usedCol,
 								gc.getBonusInfo(iLoopBonus).getButton(),
 								WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-								iLoopBonus
+								iLoopBonus,
 							)
 					if currentPlayer.canTradeItem(self.iActiveLeader, tradeData, False):
 						if currentPlayer.canTradeItem(
@@ -1347,7 +1353,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 								self.willTradeCol,
 								gc.getBonusInfo(iLoopBonus).getButton(),
 								WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-								iLoopBonus
+								iLoopBonus,
 							)
 						else:  # won't trade
 							self.resIconGrid.addIcon(
@@ -1355,18 +1361,18 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 								self.wontTradeCol,
 								gc.getBonusInfo(iLoopBonus).getButton(),
 								WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-								iLoopBonus
+								iLoopBonus,
 							)
 				if self.RES_SHOW_ACTIVE_TRADE:
 					amount = 0
-					for iLoopDeal in xrange(gc.getGame().getIndexAfterLastDeal()):
+					for iLoopDeal in range(gc.getGame().getIndexAfterLastDeal()):
 						deal = gc.getGame().getDeal(iLoopDeal)
 
 						# Kill Deal - start
 						if deal and not deal.isNone():
 							if (deal.getFirstPlayer() == iLoopPlayer
 								and deal.getSecondPlayer() == self.iActiveLeader):
-								for iLoopTradeItem in xrange(deal.getLengthFirstTrades()):
+								for iLoopTradeItem in range(deal.getLengthFirstTrades()):
 									tradeData2 = deal.getFirstTrade(iLoopTradeItem)
 									if (
 										tradeData2.ItemType
@@ -1382,9 +1388,9 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 											self.activeImportCol,
 											gc.getBonusInfo(tradeData2.iData).getButton(),
 											WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-											tradeData2.iData
+											tradeData2.iData,
 										)
-								for iLoopTradeItem in xrange(deal.getLengthSecondTrades()):
+								for iLoopTradeItem in range(deal.getLengthSecondTrades()):
 									tradeData2 = deal.getSecondTrade(iLoopTradeItem)
 									if (
 										tradeData2.ItemType
@@ -1400,11 +1406,11 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 											self.activeExportCol,
 											gc.getBonusInfo(tradeData2.iData).getButton(),
 											WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-											tradeData2.iData
+											tradeData2.iData,
 										)
 							if (deal.getSecondPlayer() == iLoopPlayer
 								and deal.getFirstPlayer() == self.iActiveLeader):
-								for iLoopTradeItem in xrange(deal.getLengthFirstTrades()):
+								for iLoopTradeItem in range(deal.getLengthFirstTrades()):
 									tradeData2 = deal.getFirstTrade(iLoopTradeItem)
 									if (
 										tradeData2.ItemType
@@ -1420,9 +1426,9 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 											self.activeExportCol,
 											gc.getBonusInfo(tradeData2.iData).getButton(),
 											WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-											tradeData2.iData
+											tradeData2.iData,
 										)
-								for iLoopTradeItem in xrange(deal.getLengthSecondTrades()):
+								for iLoopTradeItem in range(deal.getLengthSecondTrades()):
 									tradeData2 = deal.getSecondTrade(iLoopTradeItem)
 									if (
 										tradeData2.ItemType
@@ -1438,7 +1444,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 											self.activeImportCol,
 											gc.getBonusInfo(tradeData2.iData).getButton(),
 											WidgetTypes.WIDGET_PEDIA_JUMP_TO_BONUS,
-											tradeData2.iData
+											tradeData2.iData,
 										)
 					if amount != 0:
 						self.resIconGrid.setText(
@@ -1462,9 +1468,6 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 	def drawTechDeals(self, bInitial):
 		screen = self.getScreen()
 		activePlayer = gc.getPlayer(self.iActiveLeader)
-		iActiveTeam = activePlayer.getTeam()
-		# activeTeam = gc.getTeam(iActiveTeam)
-
 		self.initTechTable()
 
 		# Assemble the panel
@@ -1484,7 +1487,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			TECH_PANEL_Y,
 			TECH_PANEL_WIDTH,
 			TECH_PANEL_HEIGHT,
-			PanelStyles.PANEL_STYLE_MAIN
+			PanelStyles.PANEL_STYLE_MAIN,
 		)
 
 		self.techIconGrid.createGrid()
@@ -1494,7 +1497,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		tradeData.ItemType = TradeableItems.TRADE_TECHNOLOGIES
 		currentRow = 0
 
-		for iLoopPlayer in xrange(gc.getMAX_PLAYERS()):
+		for iLoopPlayer in range(gc.getMAX_PLAYERS()):
 			# PB Mod
 			if (
 				self.bReduceOnSelectedLeaders
@@ -1502,9 +1505,6 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			):
 				continue
 			currentPlayer = gc.getPlayer(iLoopPlayer)
-			iLoopTeam = currentPlayer.getTeam()
-			currentTeam = gc.getTeam(iLoopTeam)
-
 			if (
 				currentPlayer.isAlive()
 				and not currentPlayer.isBarbarian()
@@ -1523,22 +1523,11 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 				self.techIconGrid.appendRow(currentPlayer.getName(), message)
 				self.techIconGrid.addIcon(
 					currentRow,
-					iTechColLeader,
+					0,
 					gc.getLeaderHeadInfo(currentPlayer.getLeaderType()).getButton(),
 					WidgetTypes.WIDGET_LEADERHEAD,
-					iLoopPlayer
+					iLoopPlayer,
 				)
-
-				# Mod BUG - AI status - end
-				zsStatus = ""
-				if not PlayerUtil.isWillingToTalk(currentPlayer, activePlayer):
-					zsStatus += u"!"
-				if currentTeam.isAtWar(iActiveTeam):
-					zsStatus += self.WAR_ICON
-				elif currentTeam.isForcePeace(iActiveTeam):
-					zsStatus += self.PEACE_ICON
-				self.techIconGrid.setText(currentRow, iTechColStatus, zsStatus)
-				# Mod BUG - AI status - end
 
 				if (
 					gc.getTeam(activePlayer.getTeam()).isGoldTrading()
@@ -1547,13 +1536,13 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					sAmount = str(
 						gc.getPlayer(iLoopPlayer).AI_maxGoldTrade(self.iActiveLeader)
 					)
-					self.techIconGrid.setText(currentRow, iTechColGold, sAmount)
+					self.techIconGrid.setText(currentRow, 3, sAmount)
 				if (
 					gc.getTeam(activePlayer.getTeam()).isTechTrading()
 					or gc.getTeam(currentPlayer.getTeam()).isTechTrading()
 				):
 
-					for iLoopTech in xrange(gc.getNumTechInfos()):
+					for iLoopTech in range(gc.getNumTechInfos()):
 
 						tradeData.iData = iLoopTech
 						if (activePlayer.canTradeItem(iLoopPlayer, tradeData, False)
@@ -1561,28 +1550,17 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 							== DenialTypes.NO_DENIAL):  # wants
 							self.techIconGrid.addIcon(
 								currentRow,
-								iTechColWants,
+								1,
 								gc.getTechInfo(iLoopTech).getButton(),
 								WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH,
 								iLoopTech)
-						elif (
-							gc.getTeam(activePlayer.getTeam()).isHasTech(iLoopTech)
-							and currentPlayer.canResearch(iLoopTech, False)
-						):
-							self.techIconGrid.addIcon(
-								currentRow,
-								iTechColCantYou,
-								gc.getTechInfo(iLoopTech).getButton(),
-								WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH,
-								iLoopTech
-							)
 						elif currentPlayer.canResearch(iLoopTech, False):
 							self.techIconGrid.addIcon(
 								currentRow,
-								iTechColResearch,
+								2,
 								gc.getTechInfo(iLoopTech).getButton(),
 								WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH,
-								iLoopTech
+								iLoopTech,
 							)
 						if currentPlayer.canTradeItem(
 							self.iActiveLeader, tradeData, False
@@ -1595,29 +1573,28 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 							):  # will trade
 								self.techIconGrid.addIcon(
 									currentRow,
-									iTechColWill,
+									4,
 									gc.getTechInfo(iLoopTech).getButton(),
 									WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH,
-									iLoopTech
+									iLoopTech,
 								)
 							else:  # won't trade
 								self.techIconGrid.addIcon(
 									currentRow,
-									iTechColWont,
+									5,
 									gc.getTechInfo(iLoopTech).getButton(),
 									WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH,
-									iLoopTech
+									iLoopTech,
 								)
-						elif (
-							gc.getTeam(currentPlayer.getTeam()).isHasTech(iLoopTech)
-							and activePlayer.canResearch(iLoopTech, False)
-						):
+						elif gc.getTeam(currentPlayer.getTeam()).isHasTech(
+							iLoopTech
+						) and activePlayer.canResearch(iLoopTech, False):
 							self.techIconGrid.addIcon(
 								currentRow,
-								iTechColCantThem,
+								6,
 								gc.getTechInfo(iLoopTech).getButton(),
 								WidgetTypes.WIDGET_PEDIA_JUMP_TO_TECH,
-								iLoopTech
+								iLoopTech,
 							)
 				currentRow += 1
 		self.techIconGrid.refresh()
@@ -1632,14 +1609,12 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 
 		columns = (
 			IconGrid.GRID_ICON_COLUMN,
+			IconGrid.GRID_MULTI_LIST_COLUMN,
+			IconGrid.GRID_MULTI_LIST_COLUMN,
 			IconGrid.GRID_TEXT_COLUMN,
 			IconGrid.GRID_MULTI_LIST_COLUMN,
 			IconGrid.GRID_MULTI_LIST_COLUMN,
 			IconGrid.GRID_MULTI_LIST_COLUMN,
-			IconGrid.GRID_TEXT_COLUMN,
-			IconGrid.GRID_MULTI_LIST_COLUMN,
-			IconGrid.GRID_MULTI_LIST_COLUMN,
-			IconGrid.GRID_MULTI_LIST_COLUMN
 		)
 		self.techIconGridName = self.getNextWidgetName()
 		self.techIconGrid = IconGrid.IconGrid(
@@ -1652,7 +1627,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			columns,
 			self.TECH_USE_SMALL_ICONS,
 			self.SHOW_LEADER_NAMES,
-			self.SHOW_ROW_BORDERS
+			self.SHOW_ROW_BORDERS,
 		)
 
 		self.techIconGrid.setGroupBorder(self.GROUP_BORDER)
@@ -1660,38 +1635,35 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 		self.techIconGrid.setMinColumnSpace(self.MIN_COLUMN_SPACE)
 		self.techIconGrid.setMinRowSpace(self.MIN_ROW_SPACE)
 
-		#       self.techIconGrid.setHeader(iTechColLeader, localText.getText("TXT_KEY_FOREIGN_ADVISOR_LEADER", ()))
-		#       self.techIconGrid.setHeader(iTechColStatus, "")
-		self.techIconGrid.setTextColWidth(iTechColStatus, self.TECH_STATUS_COL_WIDTH)
 		self.techIconGrid.setHeader(
-			iTechColWants,
+			0,
+			localText.getText("TXT_KEY_FOREIGN_ADVISOR_LEADER", ())
+		)
+		self.techIconGrid.setHeader(
+			1,
 			localText.getText("TXT_KEY_FOREIGN_ADVISOR_WANTS", ())
 		)
 		self.techIconGrid.setHeader(
-			iTechColCantYou,
-			localText.getText("TXT_KEY_FOREIGN_ADVISOR_CANT_TRADE", ())
-		)
-		self.techIconGrid.setHeader(
-			iTechColResearch,
+			2,
 			localText.getText("TXT_KEY_FOREIGN_ADVISOR_CAN_RESEARCH", ())
 		)
 		self.techIconGrid.setHeader(
-			iTechColGold,
+			3,
 			(u"%c" % gc.getCommerceInfo(CommerceTypes.COMMERCE_GOLD).getChar())
 		)
 		self.techIconGrid.setTextColWidth(
-			iTechColGold,
+			3,
 			self.TECH_GOLD_COL_WIDTH)
 		self.techIconGrid.setHeader(
-			iTechColWill,
+			4,
 			localText.getText("TXT_KEY_FOREIGN_ADVISOR_FOR_TRADE_2", ())
 		)
 		self.techIconGrid.setHeader(
-			iTechColWont,
+			5,
 			localText.getText("TXT_KEY_FOREIGN_ADVISOR_NOT_FOR_TRADE_2", ())
 		)
 		self.techIconGrid.setHeader(
-			iTechColCantThem,
+			6,
 			localText.getText("TXT_KEY_FOREIGN_ADVISOR_CANT_TRADE", ())
 		)
 
@@ -1753,7 +1725,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					if self.iShiftKeyDown == 1:
 						self.listSelectedLeaders = []
 						self.lastRemovedLeader = -1
-					for j in xrange(nNumPLayers):
+					for j in range(nNumPLayers):
 						if listPlayers[j][0] == 0:
 							continue
 						if listPlayers[j][0] in self.listSelectedLeaders:
@@ -1797,7 +1769,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 					self.drawContents(False)
 		elif inputClass.getNotifyCode() == NotifyCode.NOTIFY_LISTBOX_ITEM_SELECTED:
 			if inputClass.getFunctionName() + str(inputClass.getID()) == self.getWidgetName(self.DEBUG_DROPDOWN_ID):
-				CvUtil.pyPrint("debug dropdown event")
+				print "debug dropdown event"
 				szName = self.getWidgetName(self.DEBUG_DROPDOWN_ID)
 				iIndex = self.getScreen().getSelectedPullDownID(szName)
 				# self.iActiveLeader = self.getScreen().getPullDownData(szName, iIndex)
