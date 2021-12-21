@@ -15,8 +15,8 @@ import PlayerUtil
 import TradeUtil
 # TODO remove
 # DEBUG code for Python 3 linter
-unicode = str
-xrange = range
+# unicode = str
+# xrange = range
 
 # globals
 gc = CyGlobalContext()
