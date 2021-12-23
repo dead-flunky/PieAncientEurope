@@ -31,7 +31,7 @@ from CvPythonExtensions import (
 	DenialTypes,
 	GameOptionTypes,
 	InterfaceDirtyBits,
-	CyInterface,
+	CyInterface
 )
 import CvUtil
 
@@ -351,7 +351,7 @@ class CvExoticForeignAdvisor(CvForeignAdvisor.CvForeignAdvisor):
 			)
 			for j in xrange(gc.getMAX_PLAYERS()):
 				if gc.getPlayer(j).isAlive():
-					bSelected = j == self.iActiveLeader
+					bSelected = (j == self.iActiveLeader)
 					screen.addPullDownString(
 						self.szDropdownName, gc.getPlayer(j).getName(), j, j, bSelected
 					)
