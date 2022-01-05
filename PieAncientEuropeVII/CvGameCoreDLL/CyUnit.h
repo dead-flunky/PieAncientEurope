@@ -353,6 +353,9 @@ public:
 	bool isPromotionReady();																					 
 	void setPromotionReady(bool bNewValue);													 
 	int getOwner();
+	// Flunky Unit-Culture
+	int getCulture();
+	void setCulture(PlayerTypes eNewValue);
 	int getVisualOwner();
 	int getCombatOwner(int /* TeamTypes*/ iForTeam);
 	int getTeam();

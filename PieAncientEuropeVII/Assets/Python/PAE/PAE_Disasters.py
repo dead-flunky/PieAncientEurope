@@ -11,6 +11,11 @@ import CvUtil
 import PAE_City
 import PAE_Unit
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+xrange = range
+
 ### Defines
 gc = CyGlobalContext()
 
@@ -508,7 +513,7 @@ def doTornado():
 						# City, Wahrscheinlichkeit in %
 						doDestroyCityBuildings(pCity, 25)
 						doKillUnits(pPlot, 10)
-						PAE_City.doCheckCityState(pCity)
+						pCity.doCheckCityState()
 
 				# rundherum Sturm kreieren
 				for i in xrange(3):
@@ -626,8 +631,6 @@ def doErdbeben(iX, iY):
 												# Message: Die Bevoelkerung der Stadt %s sank von %alt auf %neu!
 												CyInterface().addMessage(iPlayer, True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_CITY_SHRINKS_TO", (pCity.getName(), iPopAlt, iPopNeu)), None, 2, gc.getFeatureInfo(feat_erdbeben).getButton(), ColorTypes(7), loopPlot.getX(), loopPlot.getY(), True, True)
 
-									PAE_City.doCheckCityState(pCity)
-
 								# Modernisierungen zerstoeren
 								elif not loopPlot.isWater():
 									iRand = CvUtil.myRandom(10, "doErdbeben4")
@@ -704,8 +707,6 @@ def doErdbeben(iX, iY):
 										if gc.getPlayer(iPlayer).isHuman():
 											# Message: Die Bevoelkerung der Stadt %s sank von %alt auf %neu!
 											CyInterface().addMessage(iPlayer, True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_CITY_SHRINKS_TO", (pCity.getName(), iPopAlt, iPopNeu)), None, 2, gc.getFeatureInfo(feat_erdbeben).getButton(), ColorTypes(7), loopPlot.getX(), loopPlot.getY(), True, True)
-
-									PAE_City.doCheckCityState(pCity)
 
 								# Modernisierungen zerstoeren
 								elif not loopPlot.isWater():
@@ -793,7 +794,6 @@ def doErdbeben(iX, iY):
 
 									if pCity is not None and not pCity.isNone():
 										pCity.setFood(0)
-										PAE_City.doCheckCityState(pCity)
 										if iPlayer != -1 and gc.getPlayer(iPlayer).isHuman():
 											# Message: Die Bevoelkerung der Stadt %s sank von %alt auf %neu!
 											CyInterface().addMessage(iPlayer, True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_CITY_SHRINKS_TO", (pCity.getName(), iPopAlt, iPopNeu)), None, 2, gc.getFeatureInfo(feat_erdbeben).getButton(), ColorTypes(7), loopPlot.getX(), loopPlot.getY(), True, True)
@@ -1010,8 +1010,6 @@ def doVulkan(iX, iY, iSkala):
 								# Message: Die Bevoelkerung der Stadt %s sank von %alt auf %neu!
 								CyInterface().addMessage(iPlayer, True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_CITY_SHRINKS_TO", (pCity.getName(), iPopAlt, iPopNeu)), None, 2, gc.getFeatureInfo(feat_vulkan).getButton(), ColorTypes(7), loopPlot.getX(), loopPlot.getY(), True, True)
 
-							PAE_City.doCheckCityState(pCity)
-
 						# Modernisierungen zerstoeren
 						else:
 							loopPlot.setRouteType(-1)
@@ -1099,8 +1097,6 @@ def doVulkan(iX, iY, iSkala):
 							if iPlayer != -1 and gc.getPlayer(iPlayer).isHuman():
 								# Message: Die Bevoelkerung der Stadt %s sank von %alt auf %neu!
 								CyInterface().addMessage(iPlayer, True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_CITY_SHRINKS_TO", (pCity.getName(), iPopAlt, iPopNeu)), None, 2, gc.getFeatureInfo(feat_vulkan).getButton(), ColorTypes(7), loopPlot.getX(), loopPlot.getY(), True, True)
-
-							PAE_City.doCheckCityState(pCity)
 
 						# Modernisierungen zerstoeren
 						else:
@@ -1418,8 +1414,6 @@ def doTsunami(iX, iY):
 								# Message: Die Bevoelkerung der Stadt %s sank von %alt auf %neu!
 								CyInterface().addMessage(iPlayer, True, 12, CyTranslator().getText("TXT_KEY_MESSAGE_DISASTER_CITY_SHRINKS_TO", (pCity.getName(), iPopAlt, iPopNeu)), None, 2, gc.getFeatureInfo(feat_tsunami).getButton(), ColorTypes(7), loopPlot.getX(), loopPlot.getY(), True, True)
 
-						PAE_City.doCheckCityState(pCity)
-
 					# Land
 					else:
 						if iDamagePlots + 1 < iDamageMaxPlots:
@@ -1539,7 +1533,7 @@ def doMeteorites():
 				doDestroyCityBuildings(pCity, 33)
 				# Stadtmauern zerstoeren
 				doDestroyWalls(pCity)
-				PAE_City.doCheckCityState(pCity)
+				pCity.doCheckCityState()
 
 			# rundherum Brand generieren und dabei 50:50 Modernis und Strassen entfernen
 			for i in xrange(3):
@@ -1690,7 +1684,7 @@ def doComet():
 					doKillUnits(pPlot, 100)
 					doDestroyCityBuildings(pCity, 80)
 					doDestroyCityWonders(pCity, 25, feat_comet)
-					PAE_City.doCheckCityState(pCity)
+					pCity.doCheckCityState()
 
 				# rundherum Brand generieren und dabei 50:50 Modernis und Strassen entfernen
 				for i in xrange(7):
@@ -1771,7 +1765,7 @@ def doDestroyCityBuildings(pCity, iChance):
 						pOwner = gc.getPlayer(iOwner)
 						if pOwner.isHuman():
 							CyInterface().addMessage(pOwner.getID(), True, 8, CyTranslator().getText("TXT_KEY_DISASTER_DESTROYED_BUILDING", (pCity.getName(), pBuilding.getDescription())), None, 2, pBuilding.getButton(), ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
-		PAE_City.doCheckCityState(pCity)
+		pCity.doCheckCityState()
 		PAE_City.doCheckTraitBuildings(pCity)
 		PAE_City.doCheckGlobalTraitBuildings(iOwner)
 		if bDestroyed and pCity.getProductionProcess() != -1: pCity.clearOrderQueue()

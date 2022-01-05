@@ -797,6 +797,8 @@
 	<ElementType name="bAlwaysHeal" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bHillsDoubleMove" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bImmuneToFirstStrikes" content="textOnly" dt:type="boolean"/>
+	<!-- Flunky for PAE -->
+	<ElementType name="bFormation" content="textOnly" dt:type="boolean"/>
 	<ElementType name="iVisibilityChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iMovesChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iMoveDiscountChange" content="textOnly" dt:type="int"/>
@@ -886,6 +888,8 @@
         <!-- Flunky PAE - Flight -->
 		<element type="iFlightChanceChange"/>
 		<element type="iFlightMaxHealth"/>
+		<!-- Flunky for PAE -->
+		<element type="bFormation" minOccurs="0"/>
 		<element type="iRevoltProtection"/>
 		<element type="iCollateralDamageProtection"/>
 		<element type="iPillageChange"/>

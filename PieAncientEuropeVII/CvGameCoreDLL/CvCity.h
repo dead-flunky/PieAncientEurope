@@ -1080,7 +1080,12 @@ public:
 	void invalidateCommerceRankCache(CommerceTypes eCommerce = NO_COMMERCE);
 
 	int getBestYieldAvailable(YieldTypes eYield) const;
-
+	
+	// Flunky for PAE
+	virtual void AI_doReleaseSlaves() = 0;
+	void doCheckCityState();	// Exposed to Python
+	bool canRenegade(PlayerTypes iLoserPlayer);
+	int renegadeChance(PlayerTypes iLoserPlayer, int iDefenderUnits, int iAttackerUnits);
 protected:
 
 	int m_iID;

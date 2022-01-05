@@ -12473,3 +12473,57 @@ int CvCityAI::GetPowerImprovement(int eUnit)
 	// how much would it help our military to have access to "eUnit"?
 }
 */
+
+// Flunky for PAE
+void CvCityAI::AI_doReleaseSlaves()
+{
+	//# Inits
+	int iCityPop = getPopulation();
+	SpecialistTypes eSpecialistGlad = (SpecialistTypes) GC.getInfoTypeForString("SPECIALIST_GLADIATOR");
+	SpecialistTypes eSpecialistHouse = (SpecialistTypes) GC.getInfoTypeForString("SPECIALIST_SLAVE");
+	SpecialistTypes eSpecialistFood = (SpecialistTypes) GC.getInfoTypeForString("SPECIALIST_SLAVE_FOOD");
+	SpecialistTypes eSpecialistProd = (SpecialistTypes) GC.getInfoTypeForString("SPECIALIST_SLAVE_PROD");
+	int iCityGlads = getFreeSpecialistCount(eSpecialistGlad); // # SPECIALIST_GLADIATOR
+	int iCitySlavesHaus = getFreeSpecialistCount(eSpecialistHouse); // # SPECIALIST_SLAVE
+	int iCitySlavesFood = getFreeSpecialistCount(eSpecialistFood); // # SPECIALIST_SLAVE_FOOD
+	int iCitySlavesProd = getFreeSpecialistCount(eSpecialistProd); // # SPECIALIST_SLAVE_PROD
+	int iCitySlaves = iCitySlavesHaus + iCitySlavesFood + iCitySlavesProd + iCityGlads;
+	SpecialistTypes eSpecialist;
+	if (iCityPop >= iCitySlaves)
+		return;
+
+	UnitTypes iUnitSlave = (UnitTypes) GC.getInfoTypeForString("UNIT_SLAVE");
+	CvUnit* NewUnit;
+	while(iCitySlaves > 0 && iCityPop < iCitySlaves)
+	{
+		//# First prio: glads
+		if (iCityGlads > 0)
+		{
+			eSpecialist = eSpecialistGlad;
+			iCityGlads -= 1;
+		}
+		//# 1st prio: research
+		else if (iCitySlavesHaus > 0)
+		{
+			eSpecialist = eSpecialistHouse;
+			iCitySlavesHaus -= 1;
+		}
+		//# 2nd prio: prod
+		else if (iCitySlavesProd > 0)
+		{
+			eSpecialist = eSpecialistProd;
+			iCitySlavesProd -= 1;
+		}
+		//# 3rd prio: food
+		else // # iCitySlavesFood > 0:
+		{
+			eSpecialist = eSpecialistFood;
+			iCitySlavesFood -= 1;
+		}
+
+		NewUnit = GET_PLAYER(getOwnerINLINE()).initUnit(iUnitSlave, getX_INLINE(), getY_INLINE());
+		NewUnit->finishMoves();
+		changeFreeSpecialistCount(eSpecialist, -1);
+		iCitySlaves -= 1;
+	}
+}

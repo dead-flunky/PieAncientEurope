@@ -1682,6 +1682,8 @@ m_iKamikazePercent(0),
 // Flunky PAE - Flight
 m_iFlightChanceChange(0),
 m_iFlightMaxHealth(0),
+// Flunky Formations
+m_bFormation(false),
 m_bLeader(false),
 m_bBlitz(false),
 m_bAmphib(false),
@@ -1941,6 +1943,13 @@ int CvPromotionInfo::getFlightMaxHealth() const
 	return m_iFlightMaxHealth;
 }
 
+// Flunky Formations
+bool CvPromotionInfo::isFormation() const
+{
+	return m_bFormation;
+}
+
+
 bool CvPromotionInfo::isLeader() const			
 {
 	return m_bLeader;
@@ -2104,7 +2113,8 @@ void CvPromotionInfo::read(FDataStreamBase* stream)
 	// Flunky PAE - Flight
 	stream->Read(&m_iFlightChanceChange);
 	stream->Read(&m_iFlightMaxHealth);
-
+	// Flunky Formations
+	stream->Read(&m_bFormation);
 	stream->Read(&m_bLeader);
 	stream->Read(&m_bBlitz);
 	stream->Read(&m_bAmphib);
@@ -2202,7 +2212,8 @@ void CvPromotionInfo::write(FDataStreamBase* stream)
 	// Flunky PAE - Flight
 	stream->Write(m_iFlightChanceChange);
 	stream->Write(m_iFlightMaxHealth);
-
+	// Flunky Formations
+	stream->Write(m_bFormation);
 	stream->Write(m_bLeader);
 	stream->Write(m_bBlitz);
 	stream->Write(m_bAmphib);
@@ -2291,7 +2302,8 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	// Flunky PAE - Flight
 	pXML->GetChildXmlValByName(&m_iFlightChanceChange, "iFlightChanceChange");
 	pXML->GetChildXmlValByName(&m_iFlightMaxHealth, "iFlightMaxHealth");
-
+	// Flunky Formations
+	pXML->GetChildXmlValByName(&m_bFormation, "bFormation");
 	pXML->SetVariableListTagPair(&m_piTerrainAttackPercent, "TerrainAttacks", sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piTerrainDefensePercent, "TerrainDefenses", sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piFeatureAttackPercent, "FeatureAttacks", sizeof(GC.getFeatureInfo((FeatureTypes)0)), GC.getNumFeatureInfos());

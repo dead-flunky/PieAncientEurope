@@ -18,7 +18,7 @@ import PAE_City
 # TODO remove
 # DEBUG code for Python 3 linter
 # unicode = str
-# xrange = range
+xrange = range
 
 # Defines
 gc = CyGlobalContext()
@@ -1143,7 +1143,7 @@ def doAutomateMerchant(pUnit):
 					if _calculateBonusBuyingPrice(eBonusBuy, iBuyer, pCurrentCity.getOwner()) > gc.getPlayer(iBuyer).getGold():
 						popupInfo = CyPopupInfo()
 						popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
-						popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_TRADE_INFO_2", 
+						popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_TRADE_INFO_2",
 							(gc.getBonusInfo(eBonusBuy).getDescription(), pCurrentCity.getName())))
 						popupInfo.addPopup(iPlayer)
 					elif eBonusBuy not in lCitySaleableGoods:

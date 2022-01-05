@@ -12,6 +12,12 @@ import PAE_Barbaren
 import PAE_Lists as L
 
 import PyHelpers
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+xrange = range
+
 ### Defines
 gc = CyGlobalContext()
 PyPlayer = PyHelpers.PyPlayer

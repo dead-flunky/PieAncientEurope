@@ -32,6 +32,11 @@ import Popup as PyPopup
 
 import PAE_City
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+xrange = range
+
 gc = CyGlobalContext()
 ArtFileMgr = CyArtFileMgr()
 localText = CyTranslator()
@@ -470,7 +475,6 @@ class CvWorldBuilderScreen:
     # Stadtstatus pruefen / check city state
     pCity = self.m_pActivePlot.getPlotCity()
     pCity.setPopulation(iNewPop)
-    PAE_City.doCheckCityState(pCity)
     return 1
 
   def handleCityEditCultureCB (self, argsList) :
@@ -873,7 +877,7 @@ class CvWorldBuilderScreen:
           iY = self.m_pCurrentPlot.getY()
           pCity = pPlayer.initCity(iX, iY)
           # Trait-Gebaeude und Stadtstatus platzieren
-          PAE_City.doCheckCityState(pCity)
+          pCity.doCheckCityState()
           PAE_City.doCheckTraitBuildings(pCity)
           PAE_City.doCheckGlobalTraitBuildings(self.m_iCurrentPlayer)
     elif ((self.m_bNormalMap) and (self.m_normalMapTabCtrl.getActiveTab() == self.m_iImprovementTabID)):

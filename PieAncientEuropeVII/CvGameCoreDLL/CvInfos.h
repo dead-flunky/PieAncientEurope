@@ -511,6 +511,9 @@ public:
     int getFlightChanceChange() const;
     int getFlightMaxHealth() const;
 
+	// Flunky Formations
+	bool isFormation() const;				// Exposed to Python
+
 	const TCHAR* getSound() const;				// Exposed to Python
 	void setSound(const TCHAR* szVal);
 
@@ -543,25 +546,25 @@ protected:
 	int m_iPrereqOrPromotion2;
 	int m_iPrereqOrPromotion3; // K-Mod
 
-	int m_iTechPrereq;							
-	int m_iStateReligionPrereq;							
-	int m_iVisibilityChange;					
-	int m_iMovesChange;						
+	int m_iTechPrereq;
+	int m_iStateReligionPrereq;
+	int m_iVisibilityChange;
+	int m_iMovesChange;
 	int m_iMoveDiscountChange;
 	int m_iAirRangeChange;
 	int m_iInterceptChange;
 	int m_iEvasionChange;
-	int m_iWithdrawalChange;				
-	int m_iCargoChange;				
-	int m_iCollateralDamageChange;	
-	int m_iBombardRateChange;			
-	int m_iFirstStrikesChange;				
-	int m_iChanceFirstStrikesChange;	
-	int m_iEnemyHealChange;				
-	int m_iNeutralHealChange;				
-	int m_iFriendlyHealChange;				
-	int m_iSameTileHealChange;			
-	int m_iAdjacentTileHealChange;		
+	int m_iWithdrawalChange;
+	int m_iCargoChange;
+	int m_iCollateralDamageChange;
+	int m_iBombardRateChange;
+	int m_iFirstStrikesChange;
+	int m_iChanceFirstStrikesChange;
+	int m_iEnemyHealChange;
+	int m_iNeutralHealChange;
+	int m_iFriendlyHealChange;
+	int m_iSameTileHealChange;
+	int m_iAdjacentTileHealChange;
 	int m_iCombatPercent;
 	int m_iCityAttackPercent;
 	int m_iCityDefensePercent;
@@ -573,19 +576,21 @@ protected:
 	int m_iPillageChange;
 	int m_iUpgradeDiscount;
 	int m_iExperiencePercent;
-	int m_iKamikazePercent;		
+	int m_iKamikazePercent;
 	// Flunky PAE - Flight
 	int m_iFlightChanceChange;
 	int m_iFlightMaxHealth;
+	// Flunky Formations
+	bool m_bFormation;
 	
 	bool m_bLeader;
-	bool m_bBlitz;									
-	bool m_bAmphib;								
-	bool m_bRiver;									
-	bool m_bEnemyRoute;						
-	bool m_bAlwaysHeal;						
-	bool m_bHillsDoubleMove;				
-	bool m_bImmuneToFirstStrikes;		
+	bool m_bBlitz;
+	bool m_bAmphib;
+	bool m_bRiver;
+	bool m_bEnemyRoute;
+	bool m_bAlwaysHeal;
+	bool m_bHillsDoubleMove;
+	bool m_bImmuneToFirstStrikes;
 	CvString m_szSound;
 
 	// Arrays

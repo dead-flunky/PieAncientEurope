@@ -5493,6 +5493,11 @@ void CvCity::setPopulation(int iNewValue)
 				AI_setChooseProductionDirty(true);
 			}
 		}
+		// Flunky for PAE
+		doCheckCityState();
+		//# AI and its slaves
+		if (!GET_PLAYER(getOwner()).isHuman())
+			AI_doReleaseSlaves();
 
 		GET_PLAYER(getOwnerINLINE()).AI_makeAssignWorkDirty();
 
@@ -5517,7 +5522,122 @@ void CvCity::changePopulation(int iChange)
 	setPopulation(getPopulation() + iChange);
 }
 
+// Flunky for PAE
+bool CvCity::canRenegade(PlayerTypes iLoserPlayer)
+{
+	
+	if (GC.getGame().isOption(GAMEOPTION_NO_CITY_RAZING))
+		return false;
+	
+	if (getOwnerINLINE() != iLoserPlayer)
+		return false;
 
+	//# Trait Protective: Staedte laufen nicht ueber / cities do not renegade
+	if (hasTrait((TraitTypes) GC.getInfoTypeForString("TRAIT_PROTECTIVE")))
+		return false;
+
+	if (isCapital())
+		return false;
+
+	//# Nicht bei barbarischen Staedten:
+	if (getOwnerINLINE() == GC.getBARBARIAN_PLAYER())
+		return false;
+
+	//# ab PAE V: soll nur mehr Staedte betreffen
+	if (getNumBuilding((BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT")) == 0)
+		return false;
+
+	if (getPopulation() <= 1)
+		return false;
+	return true;
+}
+
+int CvCity::renegadeChance(PlayerTypes iLoserPlayer, int iDefenderUnits, int iAttackerUnits)
+{
+	//# Per defense point +1%
+	int iChanceDefense = getNaturalDefense() + getTotalDefense(0) - getDefenseDamage();
+	//# Per happy smile +5%
+	int iChanceHappiness = (happyLevel() - unhappyLevel(0)) * 2;
+
+	//# Wonders: 1st +20%, 2nd +16%, 3rd +12%, 8, 4, 0
+	int iChanceNWs = 60;
+	if (getNumNationalWonders() < 6)
+		iChanceNWs = getNumNationalWonders() * (11 - getNumNationalWonders()) * 2;
+
+	int iChanceWWs = 60;
+	if (getNumWorldWonders() < 6)
+		iChanceWWs = getNumWorldWonders() * (11 - getNumWorldWonders()) * 2;
+
+	//# City population +5% each pop
+	int iChancePop = getPopulation() * 2;
+	//# City connected with capital?
+	if (isConnectedToCapital(getOwner()))
+		iChancePop += 10;
+	else
+		iChancePop -= 10;
+
+	//# bei negativ Nahrung - !
+	iChancePop += foodDifference(1) * 5;
+
+	//# Abstand zur Hauptstadt
+	CvCity* pCapitalCity = GET_PLAYER(iLoserPlayer).getCapitalCity();
+	int iDistance = 50;
+	if (pCapitalCity != NULL)
+		iDistance = plotDistance(pCapitalCity->getX_INLINE(), pCapitalCity->getY_INLINE(), getX_INLINE(), getY_INLINE());
+
+	//# Total
+	return iDefenderUnits + iChanceDefense + iChanceHappiness + iChanceNWs + iChanceWWs + iChancePop - iAttackerUnits - iDistance;
+}
+
+//# PAE City status --------------------------
+//# Check City colony or province after events
+//# once getting a city: keep being a city
+void CvCity::doCheckCityState()
+{
+	BuildingTypes iBuildingSiedlung = (BuildingTypes) GC.getInfoTypeForString("BUILDING_SIEDLUNG");
+	BuildingTypes iBuildingKolonie = (BuildingTypes) GC.getInfoTypeForString("BUILDING_KOLONIE");
+	BuildingTypes iBuildingCity = (BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT");
+	BuildingTypes iBuildingProvinz = (BuildingTypes) GC.getInfoTypeForString("BUILDING_PROVINZ");
+	BuildingTypes iBuildingMetropole = (BuildingTypes) GC.getInfoTypeForString("BUILDING_METROPOLE");
+	
+	//# PAE Stadtstatus
+	int iPopDorf = 3;
+	int iPopStadt = 6;
+	int iPopProvinz = 12;
+	int iPopMetropole = 20;
+
+	if (getNumRealBuilding(iBuildingSiedlung) == 0)
+		setNumRealBuilding(iBuildingSiedlung, 1);
+
+	if (getPopulation() >= iPopDorf && getNumBuilding(iBuildingKolonie) == 0)
+		setNumRealBuilding(iBuildingKolonie, 1);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_1", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingKolonie).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		if (getProductionProcess() != -1)
+			clearOrderQueue();
+
+	if (getPopulation() >= iPopStadt && getNumBuilding(iBuildingCity) == 0)
+		setNumRealBuilding(iBuildingCity, 1);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_2", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		if (getProductionProcess() != -1)
+			clearOrderQueue();
+
+	if (getPopulation() >= iPopProvinz && getNumBuilding(iBuildingProvinz) == 0)
+		setNumRealBuilding(iBuildingProvinz, 1);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_3", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+
+	if (getPopulation() >= iPopMetropole && getNumBuilding(iBuildingMetropole) == 0)
+		setNumRealBuilding(iBuildingMetropole, 1);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_5", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingMetropole).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+
+	//# Falls extremer Bev.rueckgang: Meldungen von hoeheren Status beginnend
+	if (getPopulation() < iPopMetropole && getNumBuilding(iBuildingMetropole) == 1)
+		setNumRealBuilding(iBuildingMetropole, 0);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_6", (getName(), 0)), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+	if (getPopulation() < iPopProvinz && getNumBuilding(iBuildingProvinz) == 1)
+		setNumRealBuilding(iBuildingProvinz, 0);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_4", (getName(), 0)), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+
+}
 long CvCity::getRealPopulation() const
 {
     // Flunky for PAE: reduced population numbers for the statistic

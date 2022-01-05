@@ -357,6 +357,8 @@ void CvUnit::reset(int iID, UnitTypes eUnit, PlayerTypes eOwner, bool bConstruct
 
 	m_eOwner = eOwner;
 	m_eCapturingPlayer = NO_PLAYER;
+	// Flunky Unit-Culture
+	m_eCulture = eOwner;
 	m_eUnitType = eUnit;
 	m_pUnitInfo = (NO_UNIT != m_eUnitType) ? &GC.getUnitInfo(m_eUnitType) : NULL;
 	m_iBaseCombat = (NO_UNIT != m_eUnitType) ? m_pUnitInfo->getCombat() : 0;
@@ -1439,6 +1441,638 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, bool bVisible)
 }
 
 
+bool CvUnit::doLoserLoseHorse(PlayerTypes iWinnerPlayer)
+{
+	PlayerTypes iLoserPlayer = getOwner();
+	UnitTypes iLoserUnitType = getUnitType();
+	bool bDoIt = false;
+	UnitTypes iNewUnitType = NO_UNIT;
+	if (iLoserUnitType == GC.getInfoTypeForString("UNIT_AUXILIAR_HORSE"))
+	{
+		if (getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_ROME") || getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_ETRUSCANS"))
+			iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_AUXILIAR_ROME");
+		else if (getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_MACEDONIA"))
+			iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_AUXILIAR_MACEDON");
+		else 
+			iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_AUXILIAR");
+		bDoIt = true;
+	}
+	else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_HEAVY_HORSEMAN"))
+	{
+		iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_FOEDERATI");
+	}
+	else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_MOUNTED_SACRED_BAND_CARTHAGE"))
+	{
+		iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_CARTH_SACRED_BAND_OFFICER");
+	}
+	else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_EGYPT_CHEPESCH_RIDER"))
+	{
+		iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_EGYPT_CHEPESCH");
+	}
+	else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_MOUNTED_SCOUT"))
+	{
+		if (getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_ATHENS") || getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_GREECE"))
+			iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_SCOUT_GREEK");
+		else
+			iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_SCOUT");
+		bDoIt = true;
+	}
+	else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_WAR_CHARIOT"))
+	{
+		if (getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_DAKER") ||
+			getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_GERMANEN") ||
+			getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_VANDALS") ||
+			getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_GALLIEN") ||
+			getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_CELT") ||
+			getCivilizationType() == GC.getInfoTypeForString("CIVILIZATION_BRITEN"))
+		{
+			iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_STAMMESFUERST");
+			bDoIt = true;
+		}
+	}
+	else if (getUnitType() == GC.getInfoTypeForString("UNIT_PRAETORIAN_RIDER"))
+	{
+		iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_PRAETORIAN");
+		bDoIt = true;
+	}
+	//# exclude basic chariots
+	else if (GC.getUnitInfo(getUnitType()).getPrereqAndBonus() == GC.getInfoTypeForString("BONUS_HORSE"))
+	{
+		bDoIt = true;
+	}
+	if (bDoIt)
+	{
+		int iRand = GC.getGameINLINE().getSorenRandNum(10, "mountedToMelee");
+		if (iRand == 0 && iNewUnitType != NO_UNIT)
+		{
+			//# Create a new unit
+			CvUnit* pNewUnit = GET_PLAYER(iLoserPlayer).initUnit(iNewUnitType, getX_INLINE(), getY_INLINE());
+			pNewUnit->setExperience(getExperience());
+			pNewUnit->setLevel(getLevel());
+			pNewUnit->finishMoves();
+			pNewUnit->setDamage(50);
+			//# Check its promotions
+			if (pNewUnit->canAcquirePromotionAny())
+			{
+				for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
+				{
+					if (GC.getPromotionInfo((PromotionTypes) iI).isFormation())
+						//# Remove formations
+						//pNewUnit->setHasPromotion((PromotionTypes) iI, false);
+						continue;
+					if (isHasPromotion((PromotionTypes) iI))
+						pNewUnit->setHasPromotion((PromotionTypes) iI, true);
+				}
+			}
+
+			gDLL->getInterfaceIFace()->addHumanMessage(iWinnerPlayer, true, 5, gDLL->getText("TXT_KEY_MESSAGE_UNIT_LOST_HORSE_1",
+				(GC.getUnitInfo(iLoserUnitType).getDescription(), 0)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(7), 0, 0, false, false);
+			gDLL->getInterfaceIFace()->addHumanMessage(iLoserPlayer, true, 5, gDLL->getText("TXT_KEY_MESSAGE_UNIT_LOST_HORSE_2",
+				(GC.getUnitInfo(iLoserUnitType).getDescription(), 0)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(8), 0, 0, false, false);
+			return true;
+		}
+		if (iRand <= 2)
+		{
+			//# Create horse unit
+			//# Seek a Plot
+			int value = -1;
+			int maxValue = -1;
+			int idx = -1;
+			CvPlot* pAdjacentPlot;
+			for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
+			{
+				pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), (DirectionTypes)iI);
+				if (pAdjacentPlot != NULL && !pAdjacentPlot->isUnit())
+				{
+					if (!pAdjacentPlot->isWater() && !pAdjacentPlot->isImpassable() && !pAdjacentPlot->isCity())
+					{
+						value = GC.getGameINLINE().getSorenRandNum(100, "horseLost");
+						if (value > maxValue)
+						{
+							maxValue = value;
+							idx = iI;
+						}
+					}
+				}
+			}
+
+			//# Create Barbarian Horse Unit
+			if (idx != -1)
+			{
+				pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), (DirectionTypes)idx);
+				GET_PLAYER((PlayerTypes) GC.getBARBARIAN_PLAYER()).initUnit((UnitTypes) GC.getInfoTypeForString("UNIT_HORSE"), pAdjacentPlot->getX(), pAdjacentPlot->getY());
+			}
+			else
+			{
+				GET_PLAYER(iLoserPlayer).initUnit((UnitTypes) GC.getInfoTypeForString("UNIT_HORSE"), getX_INLINE(), getY_INLINE());
+			}
+			gDLL->getInterfaceIFace()->addHumanMessage(iLoserPlayer, true, 5, gDLL->getText("TXT_KEY_MESSAGE_ONLY_HORSE_LEFT",
+				(GC.getUnitInfo(iLoserUnitType).getDescription(), 0)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(6), 0, 0, false, false);
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CvUnit::canRenegade(CvUnit* pWinner)
+{
+	PlayerTypes iWinnerPlayer = pWinner->getOwner();
+	CvPlot* pWinnerPlot = pWinner->plot();
+	CvPlot* pLoserPlot = plot();
+	int iWinnerUnitAIType = pWinner->AI_getUnitAIType();
+	int iLoserUnitAIType = AI_getUnitAIType();
+	int iLoserUnitType = getUnitType();
+	PromotionTypes iPromoMercenary = (PromotionTypes) GC.getInfoTypeForString("PROMOTION_MERCENARY");
+	PromotionTypes iPromoLeader = (PromotionTypes) GC.getInfoTypeForString("PROMOTION_LEADER");
+	//# Ausnahmen
+	if (pWinner->isAnimal() || iWinnerUnitAIType == UNITAI_EXPLORE)
+		return false;
+	if (isAnimal() || iLoserUnitAIType == UNITAI_EXPLORE)
+		return false;
+	if (iLoserUnitType == GC.getInfoTypeForString("UNIT_WORKBOAT") ||
+		iLoserUnitType == GC.getInfoTypeForString("UNIT_TREIBGUT") ||
+		iLoserUnitType == GC.getInfoTypeForString("UNIT_CARVEL_TRADE") ||
+		iLoserUnitType == GC.getInfoTypeForString("UNIT_GAULOS") ||
+		iLoserUnitType == GC.getInfoTypeForString("UNIT_TRADE_MERCHANTMAN") ||
+		iLoserUnitType == GC.getInfoTypeForString("UNIT_TRADE_MERCHANT") ||
+		iLoserUnitType == GC.getInfoTypeForString("UNIT_CARAVAN"))
+		return false;
+	//# Rammen und Katapulte sollen nicht erobern
+	//# PAE V: Piraten sollen nur kentern: UnitInfos.xml: bNoCapture=1
+	if (pWinner->isNoCapture())
+		return false;
+	if (getUnitCombatType() == GC.getInfoTypeForString("UNITCOMBAT_SIEGE"))
+		return false;
+	if (isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_LOYALITAT")) && !isHasPromotion(iPromoMercenary))
+		return false;
+	if (isHasPromotion(iPromoLeader) || isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_BRANDER")))
+		return false;
+	if (isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_HERO")) || isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_LEADERSHIP")))
+		return false;
+	if (pLoserPlot->getNumUnits() == 1 && getCaptureUnitType(getCivilizationType()) != -1)
+		return false;
+	//# Attacking from Coast
+	if (pWinner->isCargo())
+	{
+		if (pWinnerPlot->isWater())
+		{
+			int iNumCargoSpace = 0;
+			int iNumCargoUnits = 0;
+			CLLNode<IDInfo>* pUnitNode;
+			CvUnit* pLoopUnit;
+			pUnitNode = pWinnerPlot->headUnitNode();
+
+			while (pUnitNode != NULL)
+			{
+				pLoopUnit = ::getUnit(pUnitNode->m_data);
+				pUnitNode = pLoserPlot->nextUnitNode(pUnitNode);
+
+				if (pLoopUnit->getOwner() == iWinnerPlayer)
+				{
+					iNumCargoSpace += pLoopUnit->cargoSpace();
+					iNumCargoUnits += pLoopUnit->getCargo();
+				}
+			}
+			if (iNumCargoSpace <= iNumCargoUnits)
+				return false;
+		}
+	}
+	return true;
+}
+
+bool CvUnit::doRenegadeUnit(CvUnit* pWinner)
+{
+	PlayerTypes iWinnerPlayer = pWinner->getOwner();
+	PlayerTypes iLoserPlayer = getOwner();
+	CvPlot* pLoserPlot = plot();
+	CvPlot* pWinnerPlot = pWinner->plot();
+	int iWinnerUnitAIType = pWinner->AI_getUnitAIType();
+	int iWinnerUnitType = pWinner->getUnitType();
+	int iLoserUnitAIType = AI_getUnitAIType();
+	int iLoserUnitType = getUnitType();
+
+	PromotionTypes iPromoMercenary = (PromotionTypes) GC.getInfoTypeForString("PROMOTION_MERCENARY");
+	PromotionTypes iPromoLeader = (PromotionTypes) GC.getInfoTypeForString("PROMOTION_LEADER");
+
+	if (!canRenegade(pWinner))
+		return false;
+
+	int iUnitRenegadeChance = 30;
+	if (pWinner->isHasPromotion(iPromoLeader))
+		iUnitRenegadeChance += 10;
+	//# Trait Charismatic: Mehr Ueberlaeufer / more renegades
+	if (GET_PLAYER(iWinnerPlayer).hasTrait((TraitTypes)GC.getInfoTypeForString("TRAIT_CHARISMATIC")))
+		iUnitRenegadeChance += 10;
+	if (GET_PLAYER(iLoserPlayer).hasTrait((TraitTypes) GC.getInfoTypeForString("TRAIT_CHARISMATIC")))
+		iUnitRenegadeChance -= 10;
+	if (isHasPromotion(iPromoMercenary))
+		iUnitRenegadeChance += 10;
+
+	if (pWinner->isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_CORVUS3")))
+		iUnitRenegadeChance = 75;
+	else if (pWinner->isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_CORVUS2")))
+		iUnitRenegadeChance = 50;
+	else if (pWinner->isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_CORVUS1")))
+		iUnitRenegadeChance = 30;
+
+	//# Winner gets Loser Unit
+	if (GC.getGameINLINE().getSorenRandNum(100, "renegade") < iUnitRenegadeChance)
+	{
+		UnitTypes iLoserUnitType = getUnitType();
+		//# Winner gets Loser Unit
+		if (GC.getGameINLINE().getSorenRandNum(4, "actualRenegade") == 0)
+		{
+			//# Piratenschiffe werden normale Schiffe, alles weitere bleibt der gleiche UnitType
+			UnitTypes iNewUnitType = iLoserUnitType;
+			if (iLoserUnitType == GC.getInfoTypeForString("UNIT_PIRAT_KONTERE")) 
+				iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_KONTERE");
+			else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_PIRAT_BIREME"))
+				iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_BIREME");
+			else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_PIRAT_TRIREME"))
+				iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_TRIREME");
+			else if (iLoserUnitType == GC.getInfoTypeForString("UNIT_PIRAT_LIBURNE"))
+				iNewUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_LIBURNE");
+
+			//# Create a new unit
+			CvUnit* pNewUnit = GET_PLAYER(pWinner->getOwner()).initUnit(iNewUnitType, pWinner->getX(), pWinner->getY());
+			pNewUnit->finishMoves();
+
+			if (getUnitCombatType() != -1)
+			{
+				pNewUnit->setDamage(90, NO_PLAYER);
+
+				pNewUnit->setExperience(getExperience(), -1);
+				pNewUnit->setLevel(getLevel());
+
+				//# Check its promotions
+				if (pNewUnit->canAcquirePromotionAny())
+				{
+					for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
+					{
+						if (GC.getPromotionInfo((PromotionTypes) iI).isFormation())
+							//# Remove formations
+							//pNewUnit->setHasPromotion((PromotionTypes) iI, false);
+							continue;
+						if (isHasPromotion((PromotionTypes) iI))
+							pNewUnit->setHasPromotion((PromotionTypes) iI, true);
+					}
+				}
+				//# PAE V: Loyal weg, Mercenary dazu
+				pNewUnit->setHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_LOYALITAT"), false);
+				pNewUnit->setHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_MERCENARY"), true);
+				//# PAE VI 6.11: Angst weg
+				pNewUnit->setHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_ANGST"), false);
+
+				//# PAE V: Trait-Promotions
+				//# 1. Agg und Protect Promos weg
+				//# (2. Trait nur fuer Eigenbau: eroberte Einheiten sollen diese Trait-Promos nicht erhalten) Stimmt nicht, sie erhalten die Promo bei initUnit() sowieso
+				if (!GET_PLAYER(pWinner->getOwner()).hasTrait((TraitTypes) GC.getInfoTypeForString("TRAIT_AGGRESSIVE")))
+					pNewUnit->setHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_TRAIT_AGGRESSIVE"), false);
+			}
+			gDLL->getInterfaceIFace()->addHumanMessage(pWinner->getOwner(), true, 5, gDLL->getText("TXT_KEY_MESSAGE_UNIT_DESERTION_1", (GC.getUnitInfo(iLoserUnitType).getDescription(), 0)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(14), pWinner->getX_INLINE(), pWinner->getY_INLINE(), false, false);
+			gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 5, gDLL->getText("TXT_KEY_MESSAGE_UNIT_DESERTION_2", (GC.getUnitInfo(iLoserUnitType).getDescription(), 0)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(12), pWinner->getX_INLINE(), pWinner->getY_INLINE(), false, false);
+			return true;
+		}
+		//# Winner gets Slave
+		else if (pWinner->getDomainType() == DOMAIN_LAND)
+		{
+			//# Ausnahmen
+			if (getUnitType() != GC.getInfoTypeForString("UNIT_BEGLEITHUND") &&
+				getUnitType() != GC.getInfoTypeForString("UNIT_KAMPFHUND") &&
+				getUnitType() != GC.getInfoTypeForString("UNIT_KAMPFHUND_TIBET") &&
+				getUnitType() != GC.getInfoTypeForString("UNIT_KAMPFHUND_MACEDON") &&
+				getUnitType() != GC.getInfoTypeForString("UNIT_KAMPFHUND_BRITEN") &&
+				getUnitType() != GC.getInfoTypeForString("UNIT_BURNING_PIGS") &&
+				getUnitCombatType() != GC.getInfoTypeForString("UNITCOMBAT_SIEGE"))
+			{
+				if (GET_TEAM(GET_PLAYER(pWinner->getOwner()).getTeam()).isHasTech((TechTypes) GC.getInfoTypeForString("TECH_ENSLAVEMENT")))
+				{
+					//# Create a slave unit
+					CvUnit* pNewUnit = GET_PLAYER(pWinner->getOwner()).initUnit((UnitTypes) GC.getInfoTypeForString("UNIT_SLAVE"), pWinner->getX_INLINE(), pWinner->getY_INLINE());
+					pNewUnit->finishMoves();
+					gDLL->getInterfaceIFace()->addHumanMessage(pWinner->getOwner(), true, 5, gDLL->getText("TXT_KEY_MESSAGE_UNIT_SLAVERY_1", (GC.getUnitInfo(iLoserUnitType).getDescription(), 0)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(14), 0, 0, false, false);
+					gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 5, gDLL->getText("TXT_KEY_MESSAGE_UNIT_SLAVERY_2", (GC.getUnitInfo(iLoserUnitType).getDescription(), 0)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(12), 0, 0, false, false);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	else
+		return false;
+}
+
+void CvUnit::renegade(PlayerTypes iNewOwner)
+{
+	if (isDead())
+		return;
+	
+	UnitTypes iUnitType = getUnitType();
+	if (iUnitType == NO_UNIT)
+		return;
+
+	UnitAITypes iUnitAIType = NO_UNITAI;
+	UnitCombatTypes iUnitCombatType = getUnitCombatType();
+	CvUnit* pNewUnit;
+
+
+	//# UnitAIType -1 (NO_UNITAI) -> UNITAI_UNKNOWN = 0 , ATTACK = 4, City Defense = 10
+	if (iUnitAIType == NO_UNITAI || iUnitAIType == UNITAI_UNKNOWN)
+		if (iUnitType == GC.getInfoTypeForString("UNIT_FREED_SLAVE"))
+			iUnitAIType = UNITAI_ENGINEER;
+		else if (iUnitType == GC.getInfoTypeForString("UNIT_TRADE_MERCHANT"))
+			iUnitAIType = UNITAI_MERCHANT;
+		else if (iUnitType == GC.getInfoTypeForString("UNIT_TRADE_MERCHANTMAN"))
+			iUnitAIType = UNITAI_MERCHANT;
+		else 
+			iUnitAIType = NO_UNITAI;
+
+	if (iUnitType == GC.getInfoTypeForString("UNIT_SLAVE"))
+	{
+		//# Slaves will be freed, nur wenn dessen Besitzer neu ist
+		iUnitAIType = UNITAI_ENGINEER;
+		iUnitType = (UnitTypes) GC.getInfoTypeForString("UNIT_FREED_SLAVE");
+	}
+	//# Emigrant und dessen Kultur
+	else if (iUnitType == GC.getInfoTypeForString("UNIT_EMIGRANT"))
+		iUnitAIType = UNITAI_SETTLE;
+	
+	pNewUnit = GET_PLAYER(iNewOwner).initUnit(iUnitType, getX_INLINE(), getY_INLINE(), iUnitAIType);
+	if (iUnitCombatType != NO_UNITCOMBAT)
+	{
+		pNewUnit->setExperience(getExperience(), -1);
+		pNewUnit->setLevel(getLevel());
+		
+		//# Check its promotions
+		if (pNewUnit->canAcquirePromotionAny())
+			for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
+			{
+				if (GC.getPromotionInfo((PromotionTypes) iI).isFormation())
+					continue;
+				if (isHasPromotion((PromotionTypes) iI))
+					pNewUnit->setHasPromotion((PromotionTypes) iI, true);
+			}
+
+		pNewUnit->setDamage(getDamage());
+	}
+	
+	if (iUnitType == GC.getInfoTypeForString("UNIT_EMIGRANT"))
+		pNewUnit->setCulture(getOwner());//CvUtil.addScriptData(pNewUnit, "p", getOwner());
+	//PAE_Unit.copyName(pNewUnit, iUnitType, getName());
+}
+
+//# ueberlaufende Stadt / City renegade
+//# When Unit gets attacked: LoserUnitID (must not get killed automatically) , no unit = None
+bool doRenegadeOnCombatResult(CvUnit* pWinner, CvUnit* pLoser)
+{
+	PlayerTypes iWinnerPlayer = pWinner->getOwnerINLINE();
+	PlayerTypes iLoserPlayer = pLoser->getOwnerINLINE();
+	CvPlot* pAdjacentPlot;
+	CLLNode<IDInfo>* pUnitNode;
+	CvUnit* pLoopUnit;
+	//pLoser->plot()->getPlotCity()
+
+
+	CvPlot* pLoserPlot = pLoser->plot();
+	if (!pLoserPlot->isCity())
+		return false;
+
+	CvCity* pCity = pLoserPlot->getPlotCity();
+	if (!pCity->canRenegade(iLoserPlayer))
+		return false;
+
+	TeamTypes iTeam = (TeamTypes) GET_PLAYER(pCity->getOwner()).getTeam();
+
+	//# Anz Einheiten im Umkreis von 1 Feld, mit denen man im Krieg ist (military units)
+	int iUnitAnzahl = 0;
+	int iI;
+	for (iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
+	{
+		pAdjacentPlot = plotDirection(pLoserPlot->getX_INLINE(), pLoserPlot->getY_INLINE(), ((DirectionTypes)iI));
+
+		if (pAdjacentPlot != NULL)
+		{
+			pUnitNode = pAdjacentPlot->headUnitNode();
+
+			while (pUnitNode != NULL)
+			{
+				pLoopUnit = ::getUnit(pUnitNode->m_data);
+				pUnitNode = pAdjacentPlot->nextUnitNode(pUnitNode);
+
+				if (pLoopUnit->isMilitaryHappiness())
+					if (GET_TEAM(iTeam).isAtWar(GET_PLAYER(pLoopUnit->getOwner()).getTeam()))
+						iUnitAnzahl += 1;
+			}
+		}
+	}
+
+	//# Anz Einheiten in der Stadt (military units)
+	int iUnitCity = 0;
+	int iChanceUnits = 0;
+	pUnitNode = pLoserPlot->headUnitNode();
+
+	while (pUnitNode != NULL)
+	{
+		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		pUnitNode = pLoserPlot->nextUnitNode(pUnitNode);
+
+		if (pLoopUnit->canFight())
+		{
+			iUnitCity += 1;
+			//# loyal units ?
+			if (pLoopUnit->isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_LOYALITAT")))
+				iChanceUnits += 3;
+			else
+				iChanceUnits += 1;
+		}
+	}
+
+	if (iUnitCity <= 1 || iUnitCity * 4 >= iUnitAnzahl)
+		return false;
+
+	int iChanceTotal = pCity->renegadeChance(iLoserPlayer, iChanceUnits, iUnitAnzahl);
+	bool bCityRenegade = false;
+	if (iChanceTotal < 100)
+	{
+		iChanceTotal = 100 - iChanceTotal;
+		if (GC.getGameINLINE().getSorenRandNum(100, "City renegades") < iChanceTotal)
+			bCityRenegade = true;
+	}
+	else
+		//# don't feel too safe
+		iChanceTotal = 1;
+	iChanceTotal = int(iChanceTotal);
+
+	//# Meldung an den Spieler
+	if (!bCityRenegade)
+	{
+		gDLL->getInterfaceIFace()->addHumanMessage(iWinnerPlayer, true, GC.getEVENT_MESSAGE_TIME(), gDLL->getText("TXT_KEY_MESSAGE_CITY_RENEGADE_CHANCE", (pCity->getName(), iChanceTotal)), NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(14), pLoserPlot->getX_INLINE(), pLoserPlot->getY_INLINE(), false, false);
+		return false;
+	}
+	//#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, u"Renegade city: "+str(pCity.getOwner()), None, 2, None, ColorTypes(10), 0, 0, False, False)
+	//# Goldvergabe
+	if (GET_PLAYER(iLoserPlayer).getNumCities() > 0)
+	{
+		int iGold = int(GET_PLAYER(iLoserPlayer).getGold() / GET_PLAYER(iLoserPlayer).getNumCities());
+		GET_PLAYER(iLoserPlayer).changeGold(-iGold);
+		GET_PLAYER(iWinnerPlayer).changeGold(iGold);
+		gDLL->getInterfaceIFace()->addHumanMessage(iWinnerPlayer, true, GC.getEVENT_MESSAGE_TIME(), gDLL->getText("TXT_KEY_MESSAGE_CITY_GOLD_1", ("", iGold)), "AS2D_REVOLTSTART", MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(8), pLoserPlot->getX_INLINE(), pLoserPlot->getY_INLINE(), false, false);
+		gDLL->getInterfaceIFace()->addHumanMessage(iLoserPlayer, true, GC.getEVENT_MESSAGE_TIME(), gDLL->getText("TXT_KEY_MESSAGE_CITY_GOLD_2", ("", iGold)), "AS2D_REVOLTSTART", MESSAGE_TYPE_MAJOR_EVENT, NULL, ColorTypes(7), pLoserPlot->getX_INLINE(), pLoserPlot->getY_INLINE(), false, false);
+	}
+	//# City renegades
+	if (iWinnerPlayer == -1)
+	{
+		iWinnerPlayer = (PlayerTypes) GC.getBARBARIAN_PLAYER();
+	}
+	if (pCity->getOwner() == iWinnerPlayer)
+	{
+		return false;
+	}
+
+	CvPlot* pPlot = pCity->plot();
+	int iOldOwner = pCity->getOwner();
+
+	//# Kultur vorher entfernen (sonst CtD)
+	pCity->setCulture(iWinnerPlayer, 0, true, true);
+
+	int iLoserID = -1;
+	if (pLoser != NULL)
+	{
+		iLoserID = pLoser->getID();
+	}
+	
+	int iRebel = GC.getInfoTypeForString("UNIT_REBELL");
+	int iPartisan = GC.getInfoTypeForString("UNIT_FREEDOM_FIGHTER");
+	int iTradeMerchant = GC.getInfoTypeForString("UNIT_TRADE_MERCHANT");
+	int iCaravan = GC.getInfoTypeForString("UNIT_CARAVAN");
+	int iCarvelTrade = GC.getInfoTypeForString("UNIT_CARVEL_TRADE");
+	int iGaulos = GC.getInfoTypeForString("UNIT_GAULOS");
+	int iTradeMerchantman = GC.getInfoTypeForString("UNIT_TRADE_MERCHANTMAN");
+	int iLoopUnitType;
+	//# Einheiten auslesen bevor die Stadt ueberlaeuft
+	pUnitNode = pPlot->headUnitNode();
+	while (pUnitNode != NULL)
+	{
+		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		pUnitNode = pPlot->nextUnitNode(pUnitNode);
+
+		//# Nicht die Einheit, die gerade gekillt wird killen, sonst Error
+		if (!pLoopUnit->isDead() && iLoserID != pLoopUnit->getID())
+		{
+			if (pLoopUnit->getCaptureUnitType(GET_PLAYER(iWinnerPlayer).getCivilizationType()) != NO_UNIT)
+			{
+				continue;
+			}
+			//# Freiheitskaempfer, Rebellen, Unsichtbare, Haendler rauswerfen
+			iLoopUnitType = pLoopUnit->getUnitType();
+			if (pLoopUnit->getInvisibleType() > -1 ||
+				iLoopUnitType == iRebel ||
+				iLoopUnitType == iPartisan ||
+				iLoopUnitType == iTradeMerchant ||
+				iLoopUnitType == iCaravan ||
+				iLoopUnitType == iCarvelTrade ||
+				iLoopUnitType == iGaulos ||
+				iLoopUnitType == iTradeMerchantman)
+			{
+				pLoopUnit->jumpToNearestValidPlot();
+			}
+			else if (pLoopUnit->getOwner() == iOldOwner)
+			{
+				//# Einige Einheiten bleiben loyal und fliehen
+				if (pLoopUnit->isHasPromotion((PromotionTypes) GC.getInfoTypeForString("PROMOTION_LOYALITAT")))
+				{
+					pLoopUnit->jumpToNearestValidPlot();
+				}
+				//# die restlichen Einheiten desertieren Chance 8:10
+				else if (GC.getGameINLINE().getSorenRandNum(100, "renCity1") < 80)
+				{
+					if (pLoopUnit->isCargo())
+					{
+						pLoopUnit->setTransportUnit(NULL); // # Fehlerquelle
+					}
+					pLoopUnit->renegade(iWinnerPlayer);
+				}
+				//# else: Einheit kann sich noch aus dem Staub machen
+				else
+				{
+					pLoopUnit->jumpToNearestValidPlot();
+				}
+			}
+			else
+			{
+				pLoopUnit->jumpToNearestValidPlot();
+			}
+		}
+	}
+	//# Stadt laeuft automatisch ueber (CyCity pCity, BOOL bConquest, BOOL bTrade)
+	GET_PLAYER(iWinnerPlayer).acquireCity(pCity, false, true, true);
+
+	if (iWinnerPlayer == GC.getBARBARIAN_PLAYER())
+	{
+		GET_PLAYER(iWinnerPlayer).initUnit((UnitTypes) iPartisan, pCity->getX_INLINE(), pCity->getY_INLINE(), UNITAI_CITY_DEFENSE, DIRECTION_SOUTH);
+		GET_PLAYER(iWinnerPlayer).initUnit((UnitTypes) iPartisan, pCity->getX_INLINE(), pCity->getY_INLINE(), UNITAI_CITY_DEFENSE, DIRECTION_SOUTH);
+		GET_PLAYER(iWinnerPlayer).initUnit((UnitTypes) iPartisan, pCity->getX_INLINE(), pCity->getY_INLINE(), UNITAI_ATTACK, DIRECTION_SOUTH);
+	}
+	//Flunky: sollte nicht nötig sein
+	//# Nochmaliger Check: Fremde Einheiten rauswerfen -- 
+	/*pUnitNode = pPlot->headUnitNode();
+	while (pUnitNode != NULL)
+	{
+		pLoopUnit = ::getUnit(pUnitNode->m_data);
+		pUnitNode = pPlot->nextUnitNode(pUnitNode);
+
+		//# Nicht die Einheit, die gerade gekillt wird killen, sonst Error
+		if (!pLoopUnit->isDead() && pLoopUnit->getOwner() != iWinnerPlayer && iLoserID != pLoopUnit->getID())
+			pLoopUnit->jumpToNearestValidPlot();
+	}*/
+
+	//# Pointer anpassen
+	if (pPlot->isCity())
+	{
+		pCity = pPlot->getPlotCity();
+		if (pCity != NULL)
+			//# Kultur regenerieren - funkt net
+			if (pCity->getCulture((PlayerTypes) iOldOwner) > 0)
+				pCity->changeCulture(iWinnerPlayer, pCity->getCulture((PlayerTypes) iOldOwner), true, true);
+
+			//# Stadtgroesse kontrollieren
+			if (pCity->getPopulation() < 1)
+				pCity->setPopulation(1);
+	}
+
+	//# refresh the variable
+	CvCity* pAcquiredCity = pLoserPlot->getPlotCity();
+
+	//# Message
+	if (GET_PLAYER(iWinnerPlayer).isHuman())
+	{
+		CvPopupInfo* pPopupInfo = new CvPopupInfo(BUTTONPOPUP_RAZECITY);
+		int iRand = 1 + GC.getGameINLINE().getSorenRandNum(5, "TXT_KEY_MESSAGE_CITY_RENEGADE_1_");
+		pPopupInfo->setText(gDLL->getText("TXT_KEY_MESSAGE_CITY_RENEGADE_1_"+iRand, (pAcquiredCity->getName())));
+
+		pPopupInfo->setData1(pAcquiredCity->getOwner());
+		pPopupInfo->setData2(pAcquiredCity->getID());
+		pPopupInfo->setData3(iLoserPlayer);
+		pPopupInfo->setOnClickedPythonCallback("popupRenegadeCity"); // # EntryPoints/CvScreenInterface und CvGameUtils / 706
+		//# Button 0: Keep
+		iRand = 1 + GC.getGameINLINE().getSorenRandNum(5, "TXT_KEY_POPUP_RENEGADE_CITY_KEEP_");
+		pPopupInfo->addPythonButton(gDLL->getText("TXT_KEY_POPUP_RENEGADE_CITY_KEEP_"+iRand), ",Art/Interface/Buttons/Actions/FoundCity.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,1,4");
+		//# Button 1: Enslave
+		pPopupInfo->addPythonButton(gDLL->getText("TXT_KEY_POPUP_RENEGADE_CITY_ENSLAVE_1"), ",Art/Interface/Buttons/Civics/Slavery.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,2");
+		//# Button 2: Raze
+		iRand = 1 + GC.getGameINLINE().getSorenRandNum(5, "TXT_KEY_POPUP_RENEGADE_CITY_RAZE_");
+		pPopupInfo->addPythonButton(gDLL->getText("TXT_KEY_POPUP_RENEGADE_CITY_RAZE_"+iRand), ",Art/Interface/Buttons/Builds/BuildCityRuins.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,9");
+		gDLL->getInterfaceIFace()->addPopup(pPopupInfo, iWinnerPlayer, false, true);
+	}
+	if (GET_PLAYER(iLoserPlayer).isHuman())
+	{
+		CvPopupInfo* pPopupInfo = new CvPopupInfo(BUTTONPOPUP_TEXT);
+		int iRand = 1 +  GC.getGameINLINE().getSorenRandNum(5, "TXT_KEY_MESSAGE_CITY_RENEGADE_2_");
+		pPopupInfo->setText(gDLL->getText("TXT_KEY_MESSAGE_CITY_RENEGADE_2_"+iRand, pAcquiredCity->getName()));
+		gDLL->getInterfaceIFace()->addPopup(pPopupInfo, iLoserPlayer, false, true);
+	}
+	return true;
+}
 void CvUnit::updateCombat(bool bQuick)
 {
 	CvWString szBuffer;
@@ -1714,6 +2348,8 @@ void CvUnit::updateCombat(bool bQuick)
 			CvEventReporter::getInstance().combatResult(this, pDefender, true, bSuicide, bCapture);
 
 			bool bAdvance = false;
+			// Flunky for PAE
+			bool bRenegade = false;
 
 			if (bSuicide)
 			{
@@ -1725,6 +2361,16 @@ void CvUnit::updateCombat(bool bQuick)
 			}
 			else
 			{
+				// Flunky for PAE
+				if (pDefender->plot()->isCity())
+					bRenegade = doRenegadeOnCombatResult(this, pDefender);
+				if (!bRenegade)
+					bRenegade = pDefender->doRenegadeUnit(this);
+				//# LOSER: Mounted -> Melee or Horse
+				//# Nur wenn die Einheit nicht desertiert hat: bUnitRenegades
+				if (!bRenegade && pDefender->getUnitCombatType() == GC.getInfoTypeForString("UNITCOMBAT_MOUNTED") || pDefender->getUnitCombatType() ==  GC.getInfoTypeForString("UNITCOMBAT_CHARIOT"))
+					pDefender->doLoserLoseHorse(getOwner());
+
 				bAdvance = canAdvance(pPlot, pDefender->canDefend() ? 1 : 0);
 
 				if (bAdvance)
@@ -1796,14 +2442,10 @@ void CvUnit::updateCombat(bool bQuick)
 			}
 			else
 			{
-				FAssertMsg(!pDefender->isFighting(), "Is pDefender->setCombatUnit(NULL); not enough for !pDefender->isFighting?");
+				int value = -1;
+				int maxValue = -1;
+				int idx = -1;
 
-				//int directions[NUM_DIRECTION_TYPES];
-				//
-				//for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++){
-				//	directions[iI] = iI;
-				//}
-				//std::random_shuffle(&directions[0], &directions[NUM_DIRECTION_TYPES]);
 				CvPlot* pAdjacentPlot;
 
 				int iX = pDefender->getX_INLINE();
@@ -1814,21 +2456,28 @@ void CvUnit::updateCombat(bool bQuick)
 
 					if (pAdjacentPlot != NULL)
 					{
-						FAssertMsg(pAdjacentPlot->getX_INLINE() != iX || pAdjacentPlot->getY_INLINE() != iY, "We found our old plot");
-						if (pDefender->canMoveInto(pAdjacentPlot , false, false, true))
+						if (pDefender->canMoveInto(pAdjacentPlot, false, false, true))
 						{
-							// TODO: select randomly one possible
-							pDefender->move(pAdjacentPlot, true);
-							// Attacker text
-							szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", pDefender->getNameKey(), getNameKey()); // The enemy %s1 barely escaped! --> The enemy %s1 barely escaped our unit %s2!
-							gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
-							// Defender text
-							szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey(), getNameKey()); // Our %s1 barely escaped! --> Our %s1 barely escaped from combat with a %s2!
-							gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
-
-							break;
+							value = GC.getGameINLINE().getSorenRandNum(100, "flightPlot");
+							if (value > maxValue)
+							{
+								maxValue = value;
+								idx = iI;
+							}
 						}
 					}
+				}
+
+				if (idx != -1)
+				{
+					pAdjacentPlot = plotDirection(iX, iY, (DirectionTypes)idx);
+					pDefender->move(pAdjacentPlot, true);
+					// Attacker text
+					szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE_2", pDefender->getNameKey(), getNameKey()); // The enemy %s1 barely escaped! --> The enemy %s1 barely escaped our unit %s2!
+					gDLL->getInterfaceIFace()->addHumanMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
+					// Defender text
+					szBuffer = gDLL->getText("TXT_KEY_MESSAGE_UNIT_ESCAPE", pDefender->getNameKey(), getNameKey()); // Our %s1 barely escaped! --> Our %s1 barely escaped from combat with a %s2!
+					gDLL->getInterfaceIFace()->addHumanMessage(pDefender->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_OUR_WITHDRAWL", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pDefender->getX_INLINE(), pDefender->getY_INLINE());
 				}
 			}
 
@@ -11845,10 +12494,20 @@ void CvUnit::collectBlockadeGold()
 	}
 }
 
-
 PlayerTypes CvUnit::getOwner() const
 {
 	return getOwnerINLINE();
+}
+
+// Flunky Unit Culture
+PlayerTypes CvUnit::getCulture() const
+{
+	return m_eCulture;
+}	
+
+void CvUnit::setCulture(PlayerTypes eNewValue)
+{
+	m_eCulture = eNewValue;
 }
 
 PlayerTypes CvUnit::getVisualOwner(TeamTypes eForTeam) const
@@ -12678,6 +13337,9 @@ void CvUnit::read(FDataStreamBase* pStream)
 
 	pStream->Read((int*)&m_eOwner);
 	pStream->Read((int*)&m_eCapturingPlayer);
+	// Flunky Unit-Culture
+	pStream->Read((int*)&m_eCulture);
+
 	pStream->Read((int*)&m_eUnitType);
 	FAssert(NO_UNIT != m_eUnitType);
 	m_pUnitInfo = (NO_UNIT != m_eUnitType) ? &GC.getUnitInfo(m_eUnitType) : NULL;
@@ -12783,6 +13445,10 @@ void CvUnit::write(FDataStreamBase* pStream)
 
 	pStream->Write(m_eOwner);
 	pStream->Write(m_eCapturingPlayer);
+	
+	// Flunky Unit-Culture
+	pStream->Write(m_eCulture);
+
 	pStream->Write(m_eUnitType);
 	pStream->Write(m_eLeaderUnitType);
 

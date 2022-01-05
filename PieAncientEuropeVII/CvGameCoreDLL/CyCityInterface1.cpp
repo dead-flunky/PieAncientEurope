@@ -470,5 +470,8 @@ void CyCityPythonInterface1(python::class_<CyCity>& x)
 
 		.def("getLiberationPlayer", &CyCity::getLiberationPlayer, "int ()")
 		.def("liberate", &CyCity::liberate, "void ()")
+		
+		.def("doCheckCityState", &CyCity::doCheckCityState, "void ()")
+		.def("AI_doReleaseSlaves", &CyCity::AI_doReleaseSlaves, "void ()")
 		;
 }

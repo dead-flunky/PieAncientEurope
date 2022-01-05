@@ -9,6 +9,12 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface,
 # import CvEventInterface
 import CvUtil
 import PyHelpers
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+xrange = range
+
 ### Defines
 gc = CyGlobalContext()
 PyPlayer = PyHelpers.PyPlayer
@@ -330,12 +336,12 @@ def doVikings():
 	if bMeldung:
 		if gc.getGame().getGameTurnYear() == 400:
 			for iPlayer in xrange(gc.getMAX_PLAYERS()):
-			  pPlayer = gc.getPlayer(iPlayer)
-			  if pPlayer.isAlive() and pPlayer.isHuman():
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
-				popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_VIKINGS", ("", )))
-				popupInfo.addPopup(pPlayer.getID())
+				pPlayer = gc.getPlayer(iPlayer)
+				if pPlayer.isAlive() and pPlayer.isHuman():
+					popupInfo = CyPopupInfo()
+					popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
+					popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_VIKINGS", ("", )))
+					popupInfo.addPopup(pPlayer.getID())
 			CyAudioGame().Play2DSound("AS2D_THEIRDECLAREWAR")
 
 def doHuns():

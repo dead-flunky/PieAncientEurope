@@ -10,7 +10,6 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface,
 # import CvEventInterface
 import CvUtil
 
-import PAE_Sklaven
 import PAE_Unit
 import PAE_Mercenaries
 import PAE_Lists as L
@@ -18,7 +17,7 @@ import PAE_Lists as L
 # TODO remove
 # DEBUG code for Python 3 linter
 # unicode = str
-# xrange = range
+xrange = range
 
 # Defines
 gc = CyGlobalContext()
@@ -456,65 +455,9 @@ def doMessageCityGrowing(pCity):
 				CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_GETS_UNHEALTY", (pCity.getName(),)), None, 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
 			else:
 				CyInterface().addMessage(iPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_IS_UNHEALTY", (pCity.getName(),)), None, 2, "Art/Interface/Buttons/General/button_alert_new.dds", ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
-
   # -----------------
 
-
-# PAE City status --------------------------
-# Check City colony or province after events
-# once getting a city: keep being a city
-def doCheckCityState(pCity):
-	if pCity is None or pCity.isNone():
-		return
-
-	iBuildingSiedlung = gc.getInfoTypeForString("BUILDING_SIEDLUNG")
-	iBuildingKolonie = gc.getInfoTypeForString("BUILDING_KOLONIE")
-	iBuildingCity = gc.getInfoTypeForString("BUILDING_STADT")
-	iBuildingProvinz = gc.getInfoTypeForString("BUILDING_PROVINZ")
-	iBuildingMetropole = gc.getInfoTypeForString("BUILDING_METROPOLE")
-
-	if pCity.getNumRealBuilding(iBuildingSiedlung) == 0:
-		pCity.setNumRealBuilding(iBuildingSiedlung, 1)
-
-	if pCity.getPopulation() >= iPopDorf and pCity.getNumRealBuilding(iBuildingKolonie) == 0:
-		pCity.setNumRealBuilding(iBuildingKolonie, 1)
-		if gc.getPlayer(pCity.getOwner()).isHuman():
-			CyInterface().addMessage(pCity.getOwner(), True, 15, CyTranslator().getText("TXT_INFO_CITYSTATUS_1", (pCity.getName(), 0)), "AS2D_WELOVEKING", 2, gc.getBuildingInfo(iBuildingKolonie).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
-		if pCity.getProductionProcess() != -1: pCity.clearOrderQueue()
-
-	if pCity.getPopulation() >= iPopStadt and pCity.getNumRealBuilding(iBuildingCity) == 0:
-		pCity.setNumRealBuilding(iBuildingCity, 1)
-		if gc.getPlayer(pCity.getOwner()).isHuman():
-			CyInterface().addMessage(pCity.getOwner(), True, 15, CyTranslator().getText("TXT_INFO_CITYSTATUS_2", (pCity.getName(), 0)), "AS2D_WELOVEKING", 2, gc.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
-		if pCity.getProductionProcess() != -1: pCity.clearOrderQueue()
-
-	if pCity.getPopulation() >= iPopProvinz and pCity.getNumRealBuilding(iBuildingProvinz) == 0:
-		pCity.setNumRealBuilding(iBuildingProvinz, 1)
-		if gc.getPlayer(pCity.getOwner()).isHuman():
-			CyInterface().addMessage(pCity.getOwner(), True, 15, CyTranslator().getText("TXT_INFO_CITYSTATUS_3", (pCity.getName(), 0)), "AS2D_WELOVEKING", 2, gc.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
-
-	if pCity.getPopulation() >= iPopMetropole and pCity.getNumRealBuilding(iBuildingMetropole) == 0:
-		pCity.setNumRealBuilding(iBuildingMetropole, 1)
-		if gc.getPlayer(pCity.getOwner()).isHuman():
-			CyInterface().addMessage(pCity.getOwner(), True, 15, CyTranslator().getText("TXT_INFO_CITYSTATUS_5", (pCity.getName(), 0)), "AS2D_WELOVEKING", 2, gc.getBuildingInfo(iBuildingMetropole).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
-
-	# Falls extremer Bev.rueckgang: Meldungen von hoeheren Status beginnend
-	if pCity.getPopulation() < iPopMetropole and pCity.getNumRealBuilding(iBuildingMetropole) == 1:
-		pCity.setNumRealBuilding(iBuildingMetropole, 0)
-		if gc.getPlayer(pCity.getOwner()).isHuman():
-			CyInterface().addMessage(pCity.getOwner(), True, 15, CyTranslator().getText("TXT_INFO_CITYSTATUS_6", (pCity.getName(), 0)), "AS2D_PLAGUE", 2, gc.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
-	if pCity.getPopulation() < iPopProvinz and pCity.getNumRealBuilding(iBuildingProvinz) == 1:
-		pCity.setNumRealBuilding(iBuildingProvinz, 0)
-		if gc.getPlayer(pCity.getOwner()).isHuman():
-			CyInterface().addMessage(pCity.getOwner(), True, 15, CyTranslator().getText("TXT_INFO_CITYSTATUS_4", (pCity.getName(), 0)), "AS2D_PLAGUE", 2, gc.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
-
-	# AI and its slaves
-	if not gc.getPlayer(pCity.getOwner()).isHuman():
-		PAE_Sklaven.doAIReleaseSlaves(pCity)
-
-
 # --------------------------------
-# Methode auch in CvWorldBuilderScreen.py - immer beide aendern
 def doCheckTraitBuildings(pCity):
 	pOwner = gc.getPlayer(pCity.getOwner())
 	# lokale Trait-Gebaeude
@@ -665,7 +608,6 @@ def doInquisitorPersecution2(iPlayer, iCity, iButton, iReligion, iUnit):
 			# decrease population by 1, even if mission fails
 			if pCity.getPopulation() > 1:
 				pCity.changePopulation(-1)
-				doCheckCityState(pCity)
 
 		# Persecution fails
 		elif pPlayer.isHuman():
@@ -1050,11 +992,12 @@ def doDesertification(pCity, pUnit):
 def doEmigrant(pCity, pUnit):
 	pPlot = pCity.plot()
 	# Kultur auslesen
-	txt = CvUtil.getScriptData(pUnit, ["p", "t"])
-	if txt != "":
-		iPlayerCulture = int(txt)
-	else:
-		iPlayerCulture = pUnit.getOwner()
+	iPlayerCulture = pUnit.getCulture()
+# 	txt = CvUtil.getScriptData(pUnit, ["p", "t"])
+# 	if txt != "":
+# 		iPlayerCulture = int(txt)
+# 	else:
+# 		iPlayerCulture = pUnit.getOwner()
 	# Kultur
 	iPlayerHC = pCity.findHighestCulture()
 	if iPlayerHC == -1: iPlayerHC = pCity.getOwner()
@@ -1073,8 +1016,6 @@ def doEmigrant(pCity, pUnit):
 	pUnit.kill(True, -1)  # RAMK_CTD
 
 	pCity.changePopulation(1)
-	# PAE Provinzcheck
-	doCheckCityState(pCity)
 
 	# ***TEST***
 	#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Emigrant 2 City (Zeile 6458)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -1249,163 +1190,6 @@ def doProvinceRebellion(pCity):
 								doRenegadeCity(loopCity, iNewOwner, None)
 		doRenegadeCity(pCity, iNewOwner, None)
 
-def doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer):
-	# Trait Protective: Staedte laufen nicht ueber / cities do not renegade
-	if pCity.hasTrait(gc.getInfoTypeForString("TRAIT_PROTECTIVE")): return False
-
-	#if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_ONE_CITY_CHALLENGE) and
-	if pCity.isCapital(): return False
-
-	# Nicht bei barbarischen Staedten:
-	if pCity.getOwner() == gc.getBARBARIAN_PLAYER(): return False
-
-	# ab PAE V: soll nur mehr Staedte betreffen
-	iBuilding = gc.getInfoTypeForString("BUILDING_STADT")
-	if pCity.isHasBuilding(iBuilding):
-		iLoserPlayer = pLoser.getOwner()
-		pLoserPlayer = gc.getPlayer(iLoserPlayer)
-		pWinnerPlayer = gc.getPlayer(iWinnerPlayer)
-		pLoserPlot = pLoser.plot()
-		# ab PAE V: ab Tech Enslavement / Sklaverei (removed)
-		#iTech = gc.getInfoTypeForString("TECH_ENSLAVEMENT")
-		iTeam = gc.getPlayer(pCity.getOwner()).getTeam()
-		pTeam = gc.getTeam(iTeam)
-		# if pTeam.isHasTech(iTech):
-
-		# Anz Einheiten im Umkreis von 1 Feld, mit denen man im Krieg ist (military units)
-		iUnitAnzahl = 0
-		iX = pLoserPlot.getX()
-		iY = pLoserPlot.getY()
-		for iI in xrange(DirectionTypes.NUM_DIRECTION_TYPES):
-			loopPlot = plotDirection(iX, iY, DirectionTypes(iI))
-			if loopPlot is not None and not loopPlot.isNone():
-				iRange = loopPlot.getNumUnits()
-				for iUnit in xrange(iRange):
-					pLoopUnit = loopPlot.getUnit(iUnit)
-					if pLoopUnit.isMilitaryHappiness():
-						if pTeam.isAtWar(gc.getPlayer(pLoopUnit.getOwner()).getTeam()):
-							iUnitAnzahl += 1
-
-		# Anz Einheiten in der Stadt (military units)
-		iPromoLoyal = gc.getInfoTypeForString("PROMOTION_LOYALITAT")
-		iUnitCity = 0
-		iChanceUnits = 0
-		iRange = pLoserPlot.getNumUnits()
-		for iUnit in xrange(iRange):
-			pLoopUnit = pLoserPlot.getUnit(iUnit)
-			if pLoopUnit.canFight():
-				iUnitCity += 1
-				# loyal units ?
-				if pLoopUnit.isHasPromotion(iPromoLoyal):
-					iChanceUnits += 3
-				else:
-					iChanceUnits += 1
-
-		bCityRenegade = False
-		if iUnitCity > 1 and iUnitCity * 4 < iUnitAnzahl and pCity.getPopulation() > 1:
-			# Per defense point +1%
-			iChanceDefense = pCity.getNaturalDefense() + pCity.getTotalDefense(0) - pCity.getDefenseDamage()
-			# Per happy smile +5%
-			iChanceHappiness = (pCity.happyLevel() - pCity.unhappyLevel(0)) * 2
-			# Wonders: 1st +20%, 2nd +16%, 3rd +12%, 8, 4, 0
-			iNumNWs = pCity.getNumNationalWonders()
-			if iNumNWs < 6:
-				iChanceNWs = iNumNWs * (11 - iNumNWs) * 2
-			else:
-				iChanceNWs = 60
-			iNumWWs = pCity.getNumWorldWonders()
-			if iNumWWs < 6:
-				iChanceWWs = iNumWWs * (11 - iNumWWs) * 2
-			else:
-				iChanceWWs = 60
-			# City population +5% each pop
-			iChancePop = pCity.getPopulation() * 2
-			# City connected with capital?
-			if not pCity.isConnectedToCapital(pCity.getOwner()):
-				iChancePop -= 10
-			else:
-				iChancePop += 10
-			# bei negativ Nahrung - !
-			iChancePop += pCity.foodDifference(1) * 5
-			# Abstand zur Hauptstadt
-			pCapitalCity = pLoserPlayer.getCapitalCity()
-			if not pCapitalCity.isNone() and pCapitalCity is not None:
-				iDistance = plotDistance(pCapitalCity.getX(), pCapitalCity.getY(), pCity.getX(), pCity.getY())
-			else:
-				iDistance = 50
-			# Total
-			iChanceTotal = iChanceUnits + iChanceDefense + iChanceHappiness + iChanceNWs + iChanceWWs + iChancePop - iUnitAnzahl - iDistance
-
-			if iChanceTotal < 100:
-				iChanceTotal = 100 - iChanceTotal
-				iRand = CvUtil.myRandom(100, "City renegades")
-				if iRand < iChanceTotal:
-					bCityRenegade = True
-			else:
-				# don't feel too safe
-				iChanceTotal = 1
-			iChanceTotal = int(iChanceTotal)
-
-			# Meldung an den Spieler
-			if not bCityRenegade and pWinnerPlayer.isHuman():
-				CyInterface().addMessage(iWinnerPlayer, True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_RENEGADE_CHANCE", (pCity.getName(), iChanceTotal)), None, 2, None, ColorTypes(14), 0, 0, False, False)
-
-		# ***TEST***
-		#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("hier 1",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-		#bCityRenegade = True # fuer testzwecke
-
-		if bCityRenegade:
-			#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, u"Renegade city: "+str(pCity.getOwner()), None, 2, None, ColorTypes(10), 0, 0, False, False)
-			# Goldvergabe
-			if pLoserPlayer.getNumCities() > 0:
-				iGold = int(pLoserPlayer.getGold() / pLoserPlayer.getNumCities())
-				pLoserPlayer.changeGold(-iGold)
-				pWinnerPlayer.changeGold(iGold)
-				if pWinnerPlayer.isHuman():
-					CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_GOLD_1", ("", iGold)), None, 2, None, ColorTypes(8), 0, 0, False, False)
-				if pLoserPlayer.isHuman():
-					CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_GOLD_2", ("", iGold)), None, 2, None, ColorTypes(7), 0, 0, False, False)
-			# City renegades
-			doRenegadeCity(pCity, iWinnerPlayer, pLoser)
-
-			# refresh the variable
-			pAcquiredCity = pLoserPlot.getPlotCity()
-			#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, u"Acquired city: "+str(pAcquiredCity.getOwner()), None, 2, None, ColorTypes(10), 0, 0, False, False)
-
-			# Message
-			if pWinnerPlayer.isHuman():
-				if iWinnerPlayer == gc.getGame().getActivePlayer(): CyAudioGame().Play2DSound('AS2D_REVOLTSTART')
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-				iRand = 1 + CvUtil.myRandom(5, "TXT_KEY_MESSAGE_CITY_RENEGADE_1_")
-				popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_CITY_RENEGADE_1_"+str(iRand), (pAcquiredCity.getName(), )))
-
-				popupInfo.setData1(pAcquiredCity.getOwner())
-				popupInfo.setData2(pAcquiredCity.getID())
-				popupInfo.setData3(iLoserPlayer)
-				popupInfo.setOnClickedPythonCallback("popupRenegadeCity")  # EntryPoints/CvScreenInterface und CvGameUtils / 706
-				# Button 0: Keep
-				iRand = 1 + CvUtil.myRandom(5, "TXT_KEY_POPUP_RENEGADE_CITY_KEEP_")
-				popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_RENEGADE_CITY_KEEP_"+str(iRand), ()), ",Art/Interface/Buttons/Actions/FoundCity.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,1,4")
-				# Button 1: Enslave
-				popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_RENEGADE_CITY_ENSLAVE_1", ()), ",Art/Interface/Buttons/Civics/Slavery.dds,Art/Interface/Buttons/Civics_Civilizations_Religions_Atlas.dds,8,2")
-				# Button 2: Raze
-				iRand = 1 + CvUtil.myRandom(5, "TXT_KEY_POPUP_RENEGADE_CITY_RAZE_")
-				popupInfo.addPythonButton(CyTranslator().getText("TXT_KEY_POPUP_RENEGADE_CITY_RAZE_"+str(iRand), ()), ",Art/Interface/Buttons/Builds/BuildCityRuins.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,8,9")
-				popupInfo.addPopup(iWinnerPlayer)
-
-			if pLoserPlayer.isHuman():
-				if iLoserPlayer == gc.getGame().getActivePlayer(): CyAudioGame().Play2DSound('AS2D_REVOLTSTART')
-				popupInfo = CyPopupInfo()
-				popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_TEXT)
-				iRand = 1 + CvUtil.myRandom(5, "TXT_KEY_MESSAGE_CITY_RENEGADE_2_")
-				popupInfo.setText(CyTranslator().getText("TXT_KEY_MESSAGE_CITY_RENEGADE_2_"+str(iRand), (pAcquiredCity.getName(), )))
-				popupInfo.addPopup(iLoserPlayer)
-
-			return True
-	return False
-
-
 # ueberlaufende Stadt / City renegade
 # When Unit gets attacked: LoserUnitID (must not get killed automatically) , no unit = None
 def doRenegadeCity(pCity, iNewOwner, LoserUnit):
@@ -1463,7 +1247,7 @@ def doRenegadeCity(pCity, iNewOwner, LoserUnit):
 				# die restlichen Einheiten desertieren Chance 8:10
 				elif CvUtil.myRandom(10, "renCity1") < 8:
 					if pLoopUnit.isCargo():
-					  pLoopUnit.setTransportUnit(None) # Fehlerquelle
+						 pLoopUnit.setTransportUnit(None) # Fehlerquelle
 					UnitArray.append(pLoopUnit)
 				# else: Einheit kann sich noch aus dem Staub machen
 				else:
@@ -1514,7 +1298,8 @@ def doRenegadeCity(pCity, iNewOwner, LoserUnit):
 		# Emigrant und dessen Kultur
 		elif iUnitType == gc.getInfoTypeForString('UNIT_EMIGRANT'):
 			NewUnit = pNewOwner.initUnit(iUnitType, iX, iY, UnitAITypes.UNITAI_SETTLE, DirectionTypes.DIRECTION_SOUTH)
-			CvUtil.addScriptData(NewUnit, "p", iOldOwner)
+			NewUnit.setCulture(iOldOwner)
+			# CvUtil.addScriptData(NewUnit, "p", iOldOwner)
 			PAE_Unit.copyName(NewUnit, iUnitType, pLoopUnit.getName())
 		elif iUnitType != -1:
 			NewUnit = pNewOwner.initUnit(iUnitType, iX, iY, UnitAITypes(iUnitAIType), DirectionTypes.DIRECTION_SOUTH)
@@ -1568,9 +1353,6 @@ def doRenegadeCity(pCity, iNewOwner, LoserUnit):
 			iPop = pCity.getPopulation()
 			if iPop < 1:
 				pCity.setPopulation(1)
-
-			# Kolonie/Provinz checken
-			doCheckCityState(pCity)
 
 
 def AI_defendAndHire(pCity, iPlayer):
@@ -1726,16 +1508,16 @@ def doUnitSupply(pCity, iPlayer):
 			pLoopUnit = pCityPlot.getUnit(i)
 			if pLoopUnit.getUnitCombatType() != -1:
 				if pLoopUnit.getUnitCombatType() == gc.getInfoTypeForString("UNITCOMBAT_HEALER"):
-				  if pLoopUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SUPPLY_WAGON"):
-					iExtraSupply = PAE_Unit.getSupply(pLoopUnit)
-					if iExtraSupply <= iMaintainUnits:
-						iMaintainUnits -= iExtraSupply
-						iExtraSupply = 0
-					else:
-						iExtraSupply -= iMaintainUnits
-						iMaintainUnits = 0
-					# set new supply tickets
-					PAE_Unit.setSupply(pLoopUnit, iExtraSupply)
+					if pLoopUnit.getUnitType() == gc.getInfoTypeForString("UNIT_SUPPLY_WAGON"):
+						iExtraSupply = PAE_Unit.getSupply(pLoopUnit)
+						if iExtraSupply <= iMaintainUnits:
+							iMaintainUnits -= iExtraSupply
+							iExtraSupply = 0
+						else:
+							iExtraSupply -= iMaintainUnits
+							iMaintainUnits = 0
+						# set new supply tickets
+						PAE_Unit.setSupply(pLoopUnit, iExtraSupply)
 				else:
 					lUnitsAll.append(pLoopUnit)
 
@@ -1866,8 +1648,8 @@ def doJewRevolt(pCity):
 
 			iX = pCity.getX()
 			iY = pCity.getY()
-			for i in xrange(-1,2):
-				for j in xrange(-1,2):
+			for x in xrange(-1,2):
+				for y in xrange(-1,2):
 					loopPlot = plotXY(iX, iY, x, y)
 					if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
 						if loopPlot.getOwner() == iPlayer:
@@ -2300,7 +2082,8 @@ def onEmigrantBuilt(city, unit):
 	# Sollte auf dem Plot keine Kultur sein (geht eigentlich nicht...), gehoert der Auswanderer zur Kultur des Besitzers
 	if iValueCulture < 1:
 		iPlayerCulture = unit.getOwner()
-	CvUtil.addScriptData(unit, "p", iPlayerCulture)
+	unit.setCulture(iPlayerCulture)
+	# CvUtil.addScriptData(unit, "p", iPlayerCulture)
 	# Kultur von dem Stadtplot abziehen
 	iCulture = pPlot.getCulture(iPlayerCulture) / iPop
 	pPlot.changeCulture(iPlayerCulture, -iCulture, 1)
@@ -2310,7 +2093,6 @@ def onEmigrantBuilt(city, unit):
 	if iPop > 1:
 		city.changePopulation(-1)
 
-	doCheckCityState(city)
 	# ***TEST***
 	# CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Auswanderer gebaut. Pop",iPop)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 	# CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",(city.getName(),city.getOwner())), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -2373,18 +2155,17 @@ def doEmigrantSpawn(pCity):
 			iPlayerCulture = pCity.findHighestCulture()
 			if iPlayerCulture == -1:
 				iPlayerCulture = iPlayer
-			CvUtil.addScriptData(NewUnit, "p", iPlayerCulture)
+			NewUnit.setCulture(iPlayerCulture)
+# 			CvUtil.addScriptData(NewUnit, "p", iPlayerCulture)
 			# Kultur von der Stadt abziehen
 			iCulture = pCity.getCulture(iPlayerCulture)
 			pCity.changeCulture(iPlayerCulture, -(iCulture/5), 1)
 
 			pCity.setPopulation(popNeu)
-			doCheckCityState(pCity)
 
 			if pPlayer.isHuman() and text != "":
 				CyInterface().addMessage(iPlayer, True, 10, text, "AS2D_REVOLTSTART", InterfaceMessageTypes.MESSAGE_TYPE_INFO, "Art/Interface/Buttons/Techs/button_brandschatzen.dds", ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
-			else:
-				PAE_Sklaven.doAIReleaseSlaves(pCity)
+
 		# ***TEST***
 		#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Emigrant verlaesst Stadt (Zeile 3624)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
@@ -2418,9 +2199,6 @@ def doLeprosy(pCity):
 
 			pCity.setPopulation(iNewPop)
 			bDecline = True
-
-			if not pPlayer.isHuman():
-				PAE_Sklaven.doAIReleaseSlaves(pCity)
 
 			# ***TEST***
 			#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Lepra (Zeile 3660)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
@@ -2640,13 +2418,13 @@ def doRevoltShrink(pCity):
 	iPlayer = pCity.getOwner()
 	pPlayer = gc.getPlayer(iPlayer)
 	if CvUtil.myRandom(4, "doRevoltShrink") == 1:
-	  if pCity.getPopulation() > 1:
-		pCity.changePopulation(-1)
-		if pPlayer.isHuman():
-			CyInterface().addMessage(iPlayer, False, 25, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_REVOLT_SHRINK", (pCity.getName(),)), "AS2D_REVOLTSTART", InterfaceMessageTypes.MESSAGE_TYPE_INFO, "Art/Interface/Buttons/Techs/button_brandschatzen.dds", ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
-		# ***TEST***
-		#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Stadtpop sinkt wegen Revolte (Zeile 4126)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-		return True
+		if pCity.getPopulation() > 1:
+			pCity.changePopulation(-1)
+			if pPlayer.isHuman():
+				CyInterface().addMessage(iPlayer, False, 25, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_REVOLT_SHRINK", (pCity.getName(),)), "AS2D_REVOLTSTART", InterfaceMessageTypes.MESSAGE_TYPE_INFO, "Art/Interface/Buttons/Techs/button_brandschatzen.dds", ColorTypes(7), pCity.getX(), pCity.getY(), True, True)
+			# ***TEST***
+			#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Stadtpop sinkt wegen Revolte (Zeile 4126)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+			return True
 	return False
 
 
@@ -2756,8 +2534,10 @@ def doDeportation(pCity, iNewOwner, iPreviousOwner):
 	NewUnit = CvUtil.spawnUnit(gc.getInfoTypeForString("UNIT_EMIGRANT"), pCity.plot(), pPlayer)
 	# Kultur vergeben
 	iCulture = pCity.findHighestCulture()
-	if iCulture == -1: iCulture = iPreviousOwner
-	CvUtil.addScriptData(NewUnit, "p", iCulture)
+	if iCulture == -1:
+		iCulture = iPreviousOwner
+	NewUnit.setCulture(iCulture)
+# 	CvUtil.addScriptData(NewUnit, "p", iCulture)
 	# Versorger erstellen 33.3%
 	if CvUtil.myRandom(10, "PAE_City:doDeportation Create Suppy Wagon") < 3:
 		NewUnit = CvUtil.spawnUnit(gc.getInfoTypeForString("UNIT_SUPPLY_WAGON"), pCity.plot(), pPlayer)
@@ -2936,8 +2716,8 @@ def doSettledSlavesAndReservists(pCity):
 				rebelPlotArrayB = []
 				iX = pCity.getX()
 				iY = pCity.getY()
-				for i in xrange(-1,2):
-					for j in xrange(-1,2):
+				for x in xrange(-1,2):
+					for y in xrange(-1,2):
 						loopPlot = plotXY(iX, iY, x, y)
 						if loopPlot is not None and not loopPlot.isNone() and not loopPlot.isUnit():
 							if loopPlot.getOwner() == iPlayer:
@@ -3040,7 +2820,7 @@ def doSettledSlavesAndReservists(pCity):
 			# KI soll Stadtsklaven freistellen 1:4
 			elif not pPlayer.isHuman():
 				if CvUtil.myRandom(4, "Stadtsklaven freistellen") == 1:
-					PAE_Sklaven.doAIReleaseSlaves(pCity)
+					pCity.doAIReleaseSlaves()
 
 	# Sklaven oder Gladiatoren: sobald das Christentum entdeckt wurde -> 2% per 3 turn revolt
 	iReligion = gc.getInfoTypeForString("RELIGION_CHRISTIANITY")
@@ -3297,8 +3077,8 @@ def correctCityBuildings(pCity, pPlayer, pPreviousOwner):
 	else:
 		iX = pCity.getX()
 		iY = pCity.getY()
-		for i in xrange(-1,2):
-			for j in xrange(-1,2):
+		for x in xrange(-1,2):
+			for y in xrange(-1,2):
 				loopPlot = plotXY(iX, iY, x, y)
 				if loopPlot is not None and not loopPlot.isNone():
 					if loopPlot.getRouteType() == iTradeRoad:
@@ -3542,8 +3322,7 @@ def doRefugeeToNeighborCity(pCity, iPreviousOwner, iNewOwner):
 								if iCulture > 1 and iPop > 0:
 									iChangeCulture = iCulture / iPop
 									loopCity.changeCulture(iPreviousOwner, iChangeCulture, 0)
-							# PAE Provinzcheck
-							doCheckCityState(loopCity)
+
 							# ***TEST***
 							#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Stadtpop gewachsen durch Krieg (Zeile 3493)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 

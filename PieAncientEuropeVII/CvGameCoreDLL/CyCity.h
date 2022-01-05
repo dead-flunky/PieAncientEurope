@@ -482,6 +482,10 @@ public:
 	std::string getScriptData() const;
 	void setScriptData(std::string szNewValue);
 
+	// Flunky for PAE
+	void doCheckCityState();
+	void AI_doReleaseSlaves();
+
 private:
 	CvCity* m_pCity;
 };

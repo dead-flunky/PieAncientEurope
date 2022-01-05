@@ -243,6 +243,9 @@ protected:
 
 	void AI_cachePlayerCloseness(int iMaxDistance);
 	void AI_updateWorkersNeededHere();
+	
+	// Flunky for PAE
+	void AI_doReleaseSlaves();
 
 	// added so under cheat mode we can call protected functions for testing
 	friend class CvGameTextMgr;

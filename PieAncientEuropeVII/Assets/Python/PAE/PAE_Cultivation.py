@@ -12,6 +12,12 @@ import CvUtil
 import PAE_Unit
 import PAE_Trade
 import PAE_Lists as L
+
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+xrange = range
+
 ### Defines
 gc = CyGlobalContext()
 

@@ -11,6 +11,11 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface, CyMap,
 import CvUtil
 import PAE_Lists as L
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+xrange = range
+
 # Defines
 gc = CyGlobalContext()
 localText = CyTranslator()
@@ -549,56 +554,6 @@ def doSell(iPlayer, iUnit):
 			InterfaceMessageTypes.MESSAGE_TYPE_INFO, "Art/Interface/Buttons/Units/button_slave.dds", ColorTypes(8), pUnit.getX(), pUnit.getY(), True, True)
 	pUnit.doCommand(CommandTypes.COMMAND_DELETE, -1, -1)
 	# pUnit.kill(True, -1)  # RAMK_CTD
-
-  ##############
-# AI: Release slaves when necessary (eg city shrinks)
-
-
-def doAIReleaseSlaves(pCity):
-	# Inits
-	iCityPop = pCity.getPopulation()
-	eSpecialistGlad = gc.getInfoTypeForString("SPECIALIST_GLADIATOR")
-	eSpecialistHouse = gc.getInfoTypeForString("SPECIALIST_SLAVE")
-	eSpecialistFood = gc.getInfoTypeForString("SPECIALIST_SLAVE_FOOD")
-	eSpecialistProd = gc.getInfoTypeForString("SPECIALIST_SLAVE_PROD")
-	iCityGlads = pCity.getFreeSpecialistCount(eSpecialistGlad)  # SPECIALIST_GLADIATOR
-	iCitySlavesHaus = pCity.getFreeSpecialistCount(eSpecialistHouse)  # SPECIALIST_SLAVE
-	iCitySlavesFood = pCity.getFreeSpecialistCount(eSpecialistFood)  # SPECIALIST_SLAVE_FOOD
-	iCitySlavesProd = pCity.getFreeSpecialistCount(eSpecialistProd)  # SPECIALIST_SLAVE_PROD
-	iCitySlaves = iCitySlavesHaus + iCitySlavesFood + iCitySlavesProd + iCityGlads
-
-	if iCityPop >= iCitySlaves:
-		return
-
-	iUnitSlave = gc.getInfoTypeForString("UNIT_SLAVE")
-	iX = pCity.getX()
-	iY = pCity.getY()
-
-	pPlayer = gc.getPlayer(pCity.getOwner())
-
-	while iCitySlaves > 0 and iCityPop < iCitySlaves:
-		# First prio: glads
-		if iCityGlads > 0:
-			iSpezi = eSpecialistGlad
-			iCityGlads -= 1
-		# 1st prio: research
-		elif iCitySlavesHaus > 0:
-			iSpezi = eSpecialistHouse
-			iCitySlavesHaus -= 1
-		# 2nd prio: prod
-		elif iCitySlavesProd > 0:
-			iSpezi = eSpecialistProd
-			iCitySlavesProd -= 1
-		# 3rd prio: food
-		else:  # iCitySlavesFood > 0:
-			iSpezi = eSpecialistFood
-			iCitySlavesFood -= 1
-
-		NewUnit = pPlayer.initUnit(iUnitSlave, iX, iY, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-		NewUnit.finishMoves()
-		pCity.changeFreeSpecialistCount(iSpezi, -1)
-		iCitySlaves -= 1
-
 
 # Feldsklaven und Minensklaven checken
 def doCheckSlavesAfterPillage(pUnit, pPlot):
