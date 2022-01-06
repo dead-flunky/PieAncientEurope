@@ -18,7 +18,7 @@ gc = CyGlobalContext()
 # TODO remove
 # DEBUG code for Python 3 linter
 # unicode = str
-xrange = range
+# xrange = range
 
 LGuerilla = []
 LWoodsman = []

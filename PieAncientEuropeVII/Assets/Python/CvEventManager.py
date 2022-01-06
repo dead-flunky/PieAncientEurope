@@ -23,11 +23,6 @@
 # 13 = orange
 # 14 = graublau
 #####################
-# import sys
-# import pickle
-# import math
-# import re
-# import itertools  # faster repeating of stuff
 
 from CvPythonExtensions import (CyGlobalContext, CyTranslator, plotXY,
 								DomainTypes, InputTypes, ColorTypes, CyMap, UnitAITypes, CommandTypes,
@@ -44,13 +39,6 @@ import Popup as PyPopup
 import CvCameraControls
 import CvTopCivs
 import CvAdvisorUtils
-# import CvWBPopups
-# import CvWorldBuilderScreen
-# import CvTechChooser
-# import CvScreenEnums
-
-### Starting points part 1 (by The_J) ###
-# import StartingPointsUtil
 
 # OOS Logging Tool by Gerikes
 import OOSLogger
@@ -94,7 +82,6 @@ import InputUtil
 import CvStrategyOverlay
 import BugHelp
 import BugOptionsScreen
-# import BugUtil
 
 # TODO remove
 # DEBUG code for Python 3 linter
@@ -2914,11 +2901,13 @@ class CvEventManager:
 								"TXT_KEY_MONEY_UNIT_KILLED", ("", iGold)), None, 2, None, ColorTypes(8), 0, 0, False, False)
 					# ***TEST***
 					#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Gold durch Einheitensieg (Zeile 1711)",iGold)), None, 2, None, ColorTypes(10), 0, 0, False, False)
-		CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("bCapture entspricht captureUnit == NO_UNIT (Zeile 2966)",bCapture == (pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT))), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
 		if pLoser.isFlight():
 			PAE_Unit.doUnitGetsPromo(pLoser, pWinner, pLoserPlot, False, bWinnerAnimal)
 		elif not bCapture:
+# 			Flunky: generell wenn nicht gefangen wurde, nicht nur wenn die Einheit per se nicht fangbar ist
+# 			CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("bCapture entspricht captureUnit == NO_UNIT (Zeile 2966)",bCapture == (pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT))), None, 2, None, ColorTypes(10), 0, 0, False, False)
+
 
 			# Feature: Wenn die Generalseinheit stirbt, ist in jeder Stadt Civil War! (GG Great General dies)
 			# Richtet sich nach der Anzahl der lebenden Generals

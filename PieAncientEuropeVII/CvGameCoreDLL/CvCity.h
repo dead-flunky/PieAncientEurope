@@ -1084,6 +1084,8 @@ public:
 	// Flunky for PAE
 	virtual void AI_doReleaseSlaves() = 0;
 	void doCheckCityState();	// Exposed to Python
+	void getCityLevelKey(CvWString &szString);
+	int getCityLevel();
 	bool canRenegade(PlayerTypes iLoserPlayer);
 	int renegadeChance(PlayerTypes iLoserPlayer, int iDefenderUnits, int iAttackerUnits);
 protected:
@@ -1176,6 +1178,9 @@ protected:
 	int m_iCitySizeBoost;
 	int m_iSpecialistFreeExperience;
 	int m_iEspionageDefenseModifier;
+	// Flunky PAE City level
+	int m_iCityLevel;
+	int m_iMinCityLevel;
 
 	bool m_bNeverLost;
 	bool m_bBombarded;

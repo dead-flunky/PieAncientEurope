@@ -29,7 +29,7 @@ localText = CyTranslator()
 # TODO remove
 # DEBUG code for Python 3 linter
 # unicode = str
-xrange = range
+# xrange = range
 
 ######## HOLY MOUNTAIN ###########
 

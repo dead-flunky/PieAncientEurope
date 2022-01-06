@@ -2,9 +2,6 @@
 # Copyright Firaxis Games 2005
 # Edited by Pie, Austria
 
-# import time
-
-# from CvPythonExtensions import *
 from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
 	CyUserProfile, PlayerOptionTypes, WidgetTypes, ControlTypes, DomainTypes,
 	CommerceTypes, CyInterface, CyGInterfaceScreen, ButtonStyles, InterfaceVisibility,
@@ -15,7 +12,6 @@ from CvPythonExtensions import (CyGlobalContext, CyArtFileMgr, CyTranslator,
 	InterfaceDirtyBits, NotifyCode, CyGlobeLayerManager, YieldTypes,
 	EndTurnButtonStates, getClockText, CultureLevelTypes, CityTabTypes)
 import CvUtil
-# import ScreenInput
 import CvScreenEnums
 import CvEventInterface
 import PyHelpers
@@ -23,65 +19,31 @@ import PyHelpers
 import PAE_Trade
 import PAE_Cultivation
 import PAE_Unit
-# import PAE_Mercenaries
 import PAE_City
 import PAE_Lists as L
 import PAE_Vassal
 
-# Mod BUG - DLL - start
-# import BugDll
-# Mod BUG - DLL - end
-
-# Mod BUG - Options - start
+# Options
 import BugCore
 import BugOptions
-# import BugOptionsScreen
-# import BugPath
 import BugUtil
 import CityUtil
-# Mod BUG - Options - end
 
-# Mod BUG - PLE - start
-# PleOpt = BugCore.game.PLE
-# Mod BUG - PLE - end
-
-# Mod BUG - Align Icons - start
-# import Scoreboard
+# Align Icons
 import PlayerUtil
-# Mod BUG - Align Icons - end
 
-# Mod BUG - Worst Enemy - start
+# Worst Enemy
 import AttitudeUtil
-# Mod BUG - Refuses to Talk - end
 
-# Mod BUG - Fractional Trade - start
+# Fractional Trade
 import TradeUtil
-# Mod BUG - Fractional Trade - end
 
-# import BugUnitPlot
-
-# Mod BUG - 3.17 No Espionage - start
-# import GameUtil
-# Mod BUG - 3.17 No Espionage - end
-
-# Mod BUG - Reminders - start
-# import ReminderEventManager
-# Mod BUG - Reminders - end
-
-# Mod BUG - Great General Bar - start
-# import GGUtil
-# Mod BUG - Great General Bar - end
-
-# Mod BUG - Great Person Bar - start
+# Great Person Bar
 import GPUtil
-# Mod BUG - Great Person Bar - end
 
-# Mod BUG - Progress Bar - Tick Marks - start
+# Progress Bar - Tick Marks
 import ProgressBarUtil
-# Mod BUG - Progress Bar - Tick Marks - end
 
-# PLE Code
-# import PLE
 import MonkeyTools as mt
 
 # TODO remove
@@ -116,11 +78,11 @@ MAX_DISPLAYABLE_BUILDINGS = 15
 MAX_DISPLAYABLE_TRADE_ROUTES = 4
 MAX_BONUS_ROWS = 10
 
-# Mod BUG - field of view slider - start
+# field of view slider - start
 DEFAULT_FIELD_OF_VIEW = 44
 # PAE (False for better ingame python programming)
 bFieldOfView = CyUserProfile().getPlayerOption(PlayerOptionTypes.PLAYEROPTION_MODDER_2)
-# Mod BUG - field of view slider - end
+# field of view slider - end
 
 # SPECIALIST STACKER        05/02/07      JOHNY
 MAX_CITIZEN_BUTTONS = 20 # kmod 8
@@ -255,14 +217,16 @@ import RawYields
 g_bRawShowing = False
 g_bYieldView, g_iYieldType = RawYields.getViewAndType(0)
 g_iYieldTiles = RawYields.WORKED_TILES
-RAW_YIELD_HELP = ("TXT_KEY_RAW_YIELD_VIEW_TRADE",
-				  "TXT_KEY_RAW_YIELD_VIEW_FOOD",
-				  "TXT_KEY_RAW_YIELD_VIEW_PRODUCTION",
-				  "TXT_KEY_RAW_YIELD_VIEW_COMMERCE",
-				  "TXT_KEY_RAW_YIELD_TILES_WORKED",
-				  "TXT_KEY_RAW_YIELD_TILES_CITY",
-				  "TXT_KEY_RAW_YIELD_TILES_OWNED",
-				  "TXT_KEY_RAW_YIELD_TILES_ALL" )
+RAW_YIELD_HELP = (
+	"TXT_KEY_RAW_YIELD_VIEW_TRADE",
+	"TXT_KEY_RAW_YIELD_VIEW_FOOD",
+	"TXT_KEY_RAW_YIELD_VIEW_PRODUCTION",
+	"TXT_KEY_RAW_YIELD_VIEW_COMMERCE",
+	"TXT_KEY_RAW_YIELD_TILES_WORKED",
+	"TXT_KEY_RAW_YIELD_TILES_CITY",
+	"TXT_KEY_RAW_YIELD_TILES_OWNED",
+	"TXT_KEY_RAW_YIELD_TILES_ALL"
+	)
 # Mod BUG - Raw Yields - end
 
 m_iNumPlotListButtons = 0

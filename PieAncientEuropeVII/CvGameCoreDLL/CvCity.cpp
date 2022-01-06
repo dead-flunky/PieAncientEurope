@@ -457,6 +457,9 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 	m_iCitySizeBoost = 0;
 	m_iSpecialistFreeExperience = 0;
 	m_iEspionageDefenseModifier = 0;
+	// Flunky PAE City level
+	m_iCityLevel = 0;
+	m_iMinCityLevel = 0;
 
 	m_bNeverLost = true;
 	m_bBombarded = false;
@@ -5607,37 +5610,95 @@ void CvCity::doCheckCityState()
 	int iPopMetropole = 20;
 
 	if (getNumRealBuilding(iBuildingSiedlung) == 0)
+	{
+		m_iCityLevel = 0;
+		m_iMinCityLevel = 0;
 		setNumRealBuilding(iBuildingSiedlung, 1);
+	}
 
 	if (getPopulation() >= iPopDorf && getNumBuilding(iBuildingKolonie) == 0)
+	{
+		m_iCityLevel = 1;
 		setNumRealBuilding(iBuildingKolonie, 1);
 		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_1", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingKolonie).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-		if (getProductionProcess() != -1)
+		if (getProductionProcess() != NO_PROCESS)
+		{
 			clearOrderQueue();
+		}
+	}
 
 	if (getPopulation() >= iPopStadt && getNumBuilding(iBuildingCity) == 0)
+	{
+		m_iCityLevel = 2;
+		m_iMinCityLevel = 2; // once city, always city
 		setNumRealBuilding(iBuildingCity, 1);
 		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_2", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-		if (getProductionProcess() != -1)
+		if (getProductionProcess() != NO_PROCESS)
+		{
 			clearOrderQueue();
-
+		}
+	}
 	if (getPopulation() >= iPopProvinz && getNumBuilding(iBuildingProvinz) == 0)
+	{
+		// Flunky PAE City level
+		m_iCityLevel = 3;
 		setNumRealBuilding(iBuildingProvinz, 1);
 		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_3", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-
+	}
 	if (getPopulation() >= iPopMetropole && getNumBuilding(iBuildingMetropole) == 0)
+	{
+		m_iCityLevel = 4;
 		setNumRealBuilding(iBuildingMetropole, 1);
 		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_5", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingMetropole).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-
+	}
 	//# Falls extremer Bev.rueckgang: Meldungen von hoeheren Status beginnend
 	if (getPopulation() < iPopMetropole && getNumBuilding(iBuildingMetropole) == 1)
+	{
+		m_iCityLevel = 3;
 		setNumRealBuilding(iBuildingMetropole, 0);
 		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_6", (getName(), 0)), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+	}
 	if (getPopulation() < iPopProvinz && getNumBuilding(iBuildingProvinz) == 1)
+	{
+		m_iCityLevel = 2;
 		setNumRealBuilding(iBuildingProvinz, 0);
 		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_4", (getName(), 0)), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-
+	}
 }
+
+void CvCity::getCityLevelKey(CvWString &szString)
+{
+	if (getCityLevel() == 4)
+		szString = gDLL->getText("TXT_KEY_BUILDING_METROPOLE");
+	else if (getCityLevel() == 3)
+		szString = gDLL->getText("TXT_KEY_BUILDING_PROVINZ");
+	else if (getCityLevel() == 2)
+		szString = gDLL->getText("TXT_KEY_BUILDING_STADT");
+	else if (getCityLevel() == 1)
+		szString = gDLL->getText("TXT_KEY_BUILDING_KOLONIE");
+	else if (getCityLevel() == 0)
+		szString = gDLL->getText("TXT_KEY_BUILDING_SIEDLUNG");
+}
+int CvCity::getCityLevel()
+{
+	/*BuildingTypes iBuildingSiedlung = (BuildingTypes) GC.getInfoTypeForString("BUILDING_SIEDLUNG");
+	BuildingTypes iBuildingKolonie = (BuildingTypes) GC.getInfoTypeForString("BUILDING_KOLONIE");
+	BuildingTypes iBuildingCity = (BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT");
+	BuildingTypes iBuildingProvinz = (BuildingTypes) GC.getInfoTypeForString("BUILDING_PROVINZ");
+	BuildingTypes iBuildingMetropole = (BuildingTypes) GC.getInfoTypeForString("BUILDING_METROPOLE");
+	
+	if (getNumBuilding(iBuildingMetropole) == 1)
+		return 4;
+	if (getNumBuilding(iBuildingProvinz) == 1)
+		return 3;
+	if (getNumBuilding(iBuildingCity) == 1)
+		return 2;
+	if (getNumBuilding(iBuildingKolonie) == 1)
+		return 1;
+	return 0;*/
+	return m_iCityLevel;
+}
+
 long CvCity::getRealPopulation() const
 {
     // Flunky for PAE: reduced population numbers for the statistic
@@ -13795,7 +13856,9 @@ void CvCity::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iCitySizeBoost);
 	pStream->Read(&m_iSpecialistFreeExperience);
 	pStream->Read(&m_iEspionageDefenseModifier);
-
+	// Flunky PAE City level
+	pStream->Read(&m_iCityLevel);
+	pStream->Read(&m_iMinCityLevel);
 	pStream->Read(&m_bNeverLost);
 	pStream->Read(&m_bBombarded);
 	pStream->Read(&m_bDrafted);
@@ -14034,6 +14097,9 @@ void CvCity::write(FDataStreamBase* pStream)
 	pStream->Write(m_iCitySizeBoost);
 	pStream->Write(m_iSpecialistFreeExperience);
 	pStream->Write(m_iEspionageDefenseModifier);
+	// Flunky PAE City level
+	pStream->Write(&m_iCityLevel);
+	pStream->Write(&m_iMinCityLevel);
 
 	pStream->Write(m_bNeverLost);
 	pStream->Write(m_bBombarded);
