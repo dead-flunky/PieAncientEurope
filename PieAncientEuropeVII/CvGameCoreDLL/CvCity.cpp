@@ -5620,7 +5620,7 @@ void CvCity::doCheckCityState()
 	{
 		m_iCityLevel = 1;
 		setNumRealBuilding(iBuildingKolonie, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_1", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingKolonie).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_1", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingKolonie).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
 		if (getProductionProcess() != NO_PROCESS)
 		{
 			clearOrderQueue();
@@ -5632,7 +5632,7 @@ void CvCity::doCheckCityState()
 		m_iCityLevel = 2;
 		m_iMinCityLevel = 2; // once city, always city
 		setNumRealBuilding(iBuildingCity, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_2", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_2", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
 		if (getProductionProcess() != NO_PROCESS)
 		{
 			clearOrderQueue();
@@ -5643,26 +5643,26 @@ void CvCity::doCheckCityState()
 		// Flunky PAE City level
 		m_iCityLevel = 3;
 		setNumRealBuilding(iBuildingProvinz, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_3", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_3", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
 	}
 	if (getPopulation() >= iPopMetropole && getNumBuilding(iBuildingMetropole) == 0)
 	{
 		m_iCityLevel = 4;
 		setNumRealBuilding(iBuildingMetropole, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_5", (getName(), 0)), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingMetropole).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_5", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingMetropole).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
 	}
 	//# Falls extremer Bev.rueckgang: Meldungen von hoeheren Status beginnend
 	if (getPopulation() < iPopMetropole && getNumBuilding(iBuildingMetropole) == 1)
 	{
 		m_iCityLevel = 3;
 		setNumRealBuilding(iBuildingMetropole, 0);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_6", (getName(), 0)), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_6", getName().GetCString()), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
 	}
 	if (getPopulation() < iPopProvinz && getNumBuilding(iBuildingProvinz) == 1)
 	{
 		m_iCityLevel = 2;
 		setNumRealBuilding(iBuildingProvinz, 0);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_4", (getName(), 0)), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_4", getName().GetCString()), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
 	}
 }
 
@@ -9349,8 +9349,6 @@ void CvCity::updateCommerce(CommerceTypes eIndex)
 	{
 		iNewCommerce = (getBaseCommerceRateTimes100(eIndex) * getTotalCommerceRateModifier(eIndex)) / 100;
 		iNewCommerce += getYieldRate(YIELD_PRODUCTION) * getProductionToCommerceModifier(eIndex);
-		// Flunky PAE hotfix. Do not write negative values. 
-		iNewCommerce = std::max(0, iNewCommerce); 
 	}
 
 	if (iOldCommerce != iNewCommerce)
@@ -9486,6 +9484,12 @@ void CvCity::updateBuildingCommerce()
 		for (iJ = 0; iJ < GC.getNumBuildingInfos(); iJ++)
 		{
 			iNewBuildingCommerce += getBuildingCommerceByBuilding(((CommerceTypes)iI), ((BuildingTypes)iJ));
+		}
+
+		// Flunky PAE hotfix. Do not write negative values.
+		if (iNewBuildingCommerce < 0)
+		{
+			iNewBuildingCommerce = 0;
 		}
 
 		if (getBuildingCommerce((CommerceTypes)iI) != iNewBuildingCommerce)
@@ -10260,6 +10264,9 @@ void CvCity::setCultureTimes100(PlayerTypes eIndex, int iNewValue, bool bPlots, 
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex expected to be < MAX_PLAYERS");
 
+	// Flunky for PAE Civil War: limit iNewValue >= 0
+	if (iNewValue < 0)
+		iNewValue = 0;
 /*
 ** K-Mod, 26/sep/10, Karadoc
 ** fixed so that plots actually get the culture difference
@@ -13187,10 +13194,11 @@ void CvCity::doPlotCultureTimes100(bool bUpdate, PlayerTypes ePlayer, int iCultu
 	//const double iB = log((double)iOuterRatio)/iCultureRange;
 
 	// free culture bonus for cities
-	iCultureRateTimes100+= bCityCulture ? 400 : 0;
+	iCultureRateTimes100 += bCityCulture ? 400 : 0;
 
 	// note, original code had "if (getCultureTimes100(ePlayer) > 0)". I took that part out.
-	if (eCultureLevel != NO_CULTURELEVEL &&	(std::abs(iCultureRateTimes100*iScale) >= 100 || bCityCulture))
+	// Flunky for PAE: put that part back in
+	if (eCultureLevel != NO_CULTURELEVEL && getCultureTimes100(ePlayer) > 0 && (std::abs(iCultureRateTimes100*iScale) >= 100 || bCityCulture))
 	{
 		for (int iDX = -iCultureRange; iDX <= iCultureRange; iDX++)
 		{
@@ -13207,10 +13215,10 @@ void CvCity::doPlotCultureTimes100(bool bUpdate, PlayerTypes ePlayer, int iCultu
 						if (pLoopPlot->isPotentialCityWorkForArea(area()))
 						{
 							//int iCultureToAdd = (int)(iScale*iCultureRateTimes100*exp(-iB*iDistance)/100);
-							// approxately = culture * ( (iScale-1)(iDistance - iRange)^2/(iRange^2) + 1 )
+							// approximately = culture * ( (iScale-1)(iDistance - iRange)^2/(iRange^2) + 1 )
 
 							// Cast to double to avoid overflow. (The world-builder can add a lot of culture in one hit.)
-                            int delta = iDistance-iCultureRange;
+							int delta = iDistance - iCultureRange;
 							int iCultureToAdd = static_cast<int>(iCultureRateTimes100 * static_cast<double>((iScale-1)*delta*delta + iCultureRange*iCultureRange) / (100.0*iCultureRange*iCultureRange));
 
 							pLoopPlot->changeCulture(ePlayer, iCultureToAdd, (bUpdate || !(pLoopPlot->isOwned())));
@@ -14098,8 +14106,8 @@ void CvCity::write(FDataStreamBase* pStream)
 	pStream->Write(m_iSpecialistFreeExperience);
 	pStream->Write(m_iEspionageDefenseModifier);
 	// Flunky PAE City level
-	pStream->Write(&m_iCityLevel);
-	pStream->Write(&m_iMinCityLevel);
+	pStream->Write(m_iCityLevel);
+	pStream->Write(m_iMinCityLevel);
 
 	pStream->Write(m_bNeverLost);
 	pStream->Write(m_bBombarded);

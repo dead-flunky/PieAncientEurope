@@ -114,7 +114,7 @@ class BugCityScreenOptionsTab(BugOptionsTab.BugOptionsTab):
 
     def createMiscellaneousPanel(self, screen, panel):
         self.addLabel(screen, panel, "Misc", "Miscellaneous:")
-        self.addCheckbox(screen, panel, "MiscHover__BaseCommerce")
+        # self.addCheckbox(screen, panel, "MiscHover__BaseCommerce")
         self.addCheckbox(screen, panel, "CityScreen__FoodAssist")
         self.addCheckbox(screen, panel, "CityScreen__Anger_Counter")
         # self.addCheckbox(screen, panel, "CityScreen__CultureTurns")

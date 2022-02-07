@@ -86,7 +86,7 @@ import BugOptionsScreen
 # TODO remove
 # DEBUG code for Python 3 linter
 # unicode = str
-xrange = range
+# xrange = range
 
 # Flag to enable Civ4 shell (See Extras/Pyconsole).
 # Note that the flag will also be used to enable/disable

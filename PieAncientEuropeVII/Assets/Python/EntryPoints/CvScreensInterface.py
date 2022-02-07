@@ -834,13 +834,9 @@ def handleInput(argsList):
 	'handle input is called when a screen is up'
 	inputClass = PyScreenInput.ScreenInput(argsList)
 
-	# Flunky Debug
-	# CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "CvScreensInterface handleInput - %s, %s, %s, %s" %(inputClass.getPythonFile(), inputClass.getData(), inputClass.getData1(), inputClass.getData2()), None, 2, None, ColorTypes(10), 0, 0, False, False)
 	# allows overides for mods
 	ret = CvScreenUtilsInterface.getScreenUtils().handleInput((inputClass.getPythonFile(), inputClass))
 
-	# Flunky Debug WorldBuilder
-	# CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "CvScreensInterface getScreenUtils - %s" %(ret), None, 2, None, ColorTypes(10), 0, 0, False, False)
 	# get the screen that is active from the HandleInputMap Dictionary
 	screen = HandleInputMap.get(inputClass.getPythonFile())
 

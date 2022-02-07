@@ -2489,6 +2489,10 @@ void CvUnit::updateCombat(bool bQuick)
 				//getGroup()->groupMove(pPlot, true, ((bAdvance) ? this : NULL));
 				getGroup()->groupMove(pPlot, true, bAdvance ? this : NULL, true); // K-Mod
 			}
+			else
+			{
+				changeMoves(std::max(GC.getMOVE_DENOMINATOR(), pPlot->movementCost(this, plot())));
+			}
 			checkRemoveSelectionAfterAttack();
 			getGroup()->clearMissionQueue();
 
@@ -11927,7 +11931,8 @@ int CvUnit::getExtraMoves() const
 void CvUnit::changeExtraMoves(int iChange)
 {
 	m_iExtraMoves += iChange;
-	FAssert(getExtraMoves() >= 0);
+	// Flunky for PAE: fortress promo has negative extraMoves.
+	//FAssert(getExtraMoves() >= 0);
 }
 
 

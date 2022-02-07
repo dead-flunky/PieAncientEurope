@@ -119,8 +119,6 @@ class CvOverlayScreenUtils:
         """
         screenEnum, inputClass = argsList
         if self.HandleInputMap and inputClass and self.HandleInputMap.has_key(screenEnum):
-            # Flunky Debug
-            # BugUtil.debug("CvOverlayScreenUtils - handleInput: %r", argsList)
             # get the screen that is active from the HandleInputMap Dictionary
             screen = self.HandleInputMap.get(inputClass.getPythonFile())
 

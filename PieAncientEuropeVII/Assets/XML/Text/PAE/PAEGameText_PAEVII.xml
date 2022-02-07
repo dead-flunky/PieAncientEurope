@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Civ4GameText xmlns="http://www.firaxis.com">
-  <TEXT>
-    <Tag>TXT_KEY_CITY_LEVEL</Tag>
-    <English>City level: %s</English>
-    <French>City level: %s</French>
-    <German>Stadtstufe: %s</German>
-    <Italian>City level: %s</Italian>
-    <Spanish>City level: %s</Spanish>
-  </TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_LEVEL_SIEDLUNG</Tag>
+		<English>City level: Settlement</English>
+		<French>City level: Communaut&#233;</French>
+		<German>Stadtstufe: Siedlung</German>
+		<Italian>City level: Abitato</Italian>
+		<Spanish>City level: Asentamiento</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_LEVEL_KOLONIE</Tag>
+		<English>City level: Village</English>
+		<French>City level: Village</French>
+		<German>Stadtstufe: Dorf</German>
+		<Italian>City level: Villaggio</Italian>
+		<Spanish>City level: Municipio</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_LEVEL_STADT</Tag>
+		<English>City level: City</English>
+		<French>City level: Ville</French>
+		<German>Stadtstufe: Stadt</German>
+		<Italian>City level: Citt&#224;</Italian>
+		<Spanish>City level: Ciudad</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_LEVEL_PROVINZ</Tag>
+		<English>City level: Provincial City</English>
+		<French>City level: Grande ville</French>
+		<German>Stadtstufe: Provinzstadt</German>
+		<Italian>City level: Citt&#224; Provinciale</Italian>
+		<Spanish>City level: Ciudad Provincial</Spanish>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_CITY_LEVEL_METROPOLE</Tag>
+		<English>City level: Metropolis</English>
+		<French>City level: M&#233;tropole</French>
+		<German>Stadtstufe: Metropole</German>
+		<Italian>City level: Metropolis</Italian>
+		<Spanish>City level: Metr&#243;polis</Spanish>
+	</TEXT>
 </Civ4GameText>

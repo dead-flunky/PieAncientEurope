@@ -1473,10 +1473,10 @@ int CyUnit::getCulture()
 	return m_pUnit ? m_pUnit->getCulture() : -1;
 }
 
-void CyUnit::setCulture(PlayerTypes eNewValue)
+void CyUnit::setCulture(int eNewValue)
 {
 	if (m_pUnit)
-		m_pUnit->setCulture(eNewValue);
+		m_pUnit->setCulture((PlayerTypes) eNewValue);
 }
 
 int CyUnit::getVisualOwner()
