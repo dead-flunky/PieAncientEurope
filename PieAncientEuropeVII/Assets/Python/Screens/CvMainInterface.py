@@ -8409,7 +8409,7 @@ class CvMainInterface:
                     # Manufaktur Einheiten
                     elif iconData[3]:
                         # "Art/Interface/Buttons/Unitoverlay/PAE_unitoverlay_promo.dds"
-                        screen.attachButtonGFC ("BottomButtonContainer", "", "", WidgetTypes.WIDGET_GENERAL, iRow, iCount)
+                        #screen.attachButtonGFC ("BottomButtonContainer", "", "", WidgetTypes.WIDGET_GENERAL, iRow, iCount)
                         screen.enableMultiListPulse("BottomButtonContainer", True, iRow, iCount) # Pie: double unit prod (manufactories)
                     iCount += 1
 
