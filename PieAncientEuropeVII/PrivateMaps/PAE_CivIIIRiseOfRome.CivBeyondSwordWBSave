@@ -11,12 +11,12 @@ BeginGame
 	Victory=VICTORY_DIPLOMATIC
 	Victory=VICTORY_RELIGION
 	Victory=VICTORY_7_WONDERS
-	GameTurn=800
+	GameTurn=660
 	MaxTurns=0
 	MaxCityElimination=0
-	NumAdvancedStartPoints=1152
+	NumAdvancedStartPoints=1000
 	TargetScore=0
-	StartYear=-6000
+	StartYear=-5000
 	Description=TXT_KEY_SCENARIO_CIVIII_RISEOFROME
 	ModPath=
 EndGame
