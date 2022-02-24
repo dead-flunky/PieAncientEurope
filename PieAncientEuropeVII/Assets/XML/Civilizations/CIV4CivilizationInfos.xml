@@ -6680,10 +6680,6 @@
           <bDisableTech>1</bDisableTech>
         </DisableTech>
         <DisableTech>
-          <TechType>TECH_BEWAFFNUNG3</TechType>
-          <bDisableTech>1</bDisableTech>
-        </DisableTech>
-        <DisableTech>
           <TechType>TECH_BEWAFFNUNG5</TechType>
           <bDisableTech>1</bDisableTech>
         </DisableTech>
