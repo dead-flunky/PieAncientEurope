@@ -1085,7 +1085,7 @@ public:
 	virtual void AI_doReleaseSlaves() = 0;
 	void doCheckCityState();	// Exposed to Python
 	void getCityLevelKey(CvWString &szString);
-	int getCityLevel();
+	int getCityLevel() const;
 	bool canRenegade(PlayerTypes iLoserPlayer);
 	int renegadeChance(PlayerTypes iLoserPlayer, int iDefenderUnits, int iAttackerUnits);
 protected:

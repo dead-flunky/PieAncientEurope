@@ -2865,6 +2865,8 @@ void getUnitAIString(CvWString& szString, UnitAITypes eUnitAI)
 	case UNITAI_MISSILE_AIR: szString = L"missile air"; break; // K-Mod (this string was missing)
 	case UNITAI_PARADROP: szString = L"paradrop"; break;
 	case UNITAI_ATTACK_CITY_LEMMING: szString = L"attack city lemming"; break;
+	case UNITAI_SUPPLY_WAGON: szString = L"supply wagon"; break;
+	
 
 	default: szString = CvWString::format(L"unknown(%d)", eUnitAI); break;
 	}

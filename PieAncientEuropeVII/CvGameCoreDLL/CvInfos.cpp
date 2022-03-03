@@ -398,7 +398,7 @@ bool CvHotkeyInfo::read(CvXMLLoadUtility* pXML)
 
 	return true;
 }
-
+	
 void CvHotkeyInfo::read(FDataStreamBase* pStream)
 {
 	CvInfoBase::read(pStream);
@@ -6659,6 +6659,8 @@ m_iDefenseModifier(0),
 m_iBombardDefenseModifier(0),
 m_iAllCityDefenseModifier(0),
 m_iEspionageDefenseModifier(0),
+/** Flunky for PAE **/
+m_iMinCityLevel(0),
 m_iMissionType(NO_MISSION),
 m_iVoteSourceType(NO_VOTESOURCE),
 m_fVisibilityPriority(0.0f),
@@ -7251,6 +7253,12 @@ void CvBuildingInfo::setMissionType(int iNewType)
 int CvBuildingInfo::getVoteSourceType() const
 {
 	return m_iVoteSourceType;
+}
+
+/** Flunky for PAE **/
+int CvBuildingInfo::getMinCityLevel() const
+{
+	return m_iMinCityLevel;
 }
 
 float CvBuildingInfo::getVisibilityPriority() const
@@ -7924,7 +7932,9 @@ void CvBuildingInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iEspionageDefenseModifier);
 	stream->Read(&m_iMissionType);
 	stream->Read(&m_iVoteSourceType);
-
+	/** Flunky for PAE **/
+	stream->Read(&m_iMinCityLevel);
+	
 	stream->Read(&m_fVisibilityPriority);
 
 	stream->Read(&m_bTeamShare);
@@ -8272,6 +8282,8 @@ void CvBuildingInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iEspionageDefenseModifier);
 	stream->Write(m_iMissionType);
 	stream->Write(m_iVoteSourceType);
+	/** Flunky for PAE **/
+	stream->Write(m_iMinCityLevel);
 
 	stream->Write(m_fVisibilityPriority);
 
@@ -8610,6 +8622,9 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iEspionageDefenseModifier, "iEspionageDefense");
 	pXML->GetChildXmlValByName(&m_iAssetValue, "iAsset");
 	pXML->GetChildXmlValByName(&m_iPowerValue, "iPower");
+	/** Flunky for PAE **/
+	pXML->GetChildXmlValByName(&m_iMinCityLevel, "iMinCityLevel", 0);
+
 	pXML->GetChildXmlValByName(&m_fVisibilityPriority, "fVisibilityPriority");
 
 	// if we can set the current xml node to it's next sibling

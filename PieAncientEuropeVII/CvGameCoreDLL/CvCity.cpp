@@ -1985,6 +1985,11 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 		return false;
 	}
 
+	if (GC.getBuildingInfo(eBuilding).getMinCityLevel() > getCityLevel())
+	{
+		return false;
+	}
+
 	if (GC.getBuildingInfo(eBuilding).isPrereqReligion())
 	{
 		//if (getReligionCount() > 0)
@@ -5602,68 +5607,77 @@ void CvCity::doCheckCityState()
 	BuildingTypes iBuildingCity = (BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT");
 	BuildingTypes iBuildingProvinz = (BuildingTypes) GC.getInfoTypeForString("BUILDING_PROVINZ");
 	BuildingTypes iBuildingMetropole = (BuildingTypes) GC.getInfoTypeForString("BUILDING_METROPOLE");
-	
+	BuildingTypes a_iBuildings[] = {iBuildingSiedlung, iBuildingKolonie, iBuildingCity, iBuildingProvinz, iBuildingMetropole};
 	//# PAE Stadtstatus
 	int iPopDorf = 3;
 	int iPopStadt = 6;
 	int iPopProvinz = 12;
 	int iPopMetropole = 20;
-
-	if (getNumRealBuilding(iBuildingSiedlung) == 0)
+	int a_iPop[] = {0, iPopDorf, iPopStadt, iPopProvinz, iPopMetropole};
+	int iSollCityLevel = 0;
+	int iPop = getPopulation();
+	int ii;
+	int nCityLevel = 5;
+	int maxSaveCityLevel = 2;
+	for (ii = 0; ii < nCityLevel; ii++)
 	{
-		m_iCityLevel = 0;
-		m_iMinCityLevel = 0;
-		setNumRealBuilding(iBuildingSiedlung, 1);
+		
+		if (iPop < a_iPop[ii])
+		{
+			break;
+		}
+		iSollCityLevel = ii;
+		
 	}
 
-	if (getPopulation() >= iPopDorf && getNumBuilding(iBuildingKolonie) == 0)
+	if (iSollCityLevel < m_iMinCityLevel)
 	{
-		m_iCityLevel = 1;
-		setNumRealBuilding(iBuildingKolonie, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_1", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingKolonie).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		iSollCityLevel = m_iMinCityLevel;
+	}
+	// required buildings
+	for (ii = 0; ii <= iSollCityLevel; ii++)
+	{
+		setNumRealBuilding(a_iBuildings[ii], 1);
+	}
+	// non-required buildings
+	for (ii = iSollCityLevel+1; ii < nCityLevel; ii++)
+	{
+		setNumRealBuilding(a_iBuildings[ii], 0);
+	}
+
+	char* a_sStatusText[] = {"TXT_INFO_CITYSTATUS_1", "TXT_INFO_CITYSTATUS_2", "TXT_INFO_CITYSTATUS_3", "TXT_INFO_CITYSTATUS_5"};
+	char* a_sStatusText_down[] = {"TXT_INFO_CITYSTATUS_6", "TXT_INFO_CITYSTATUS_4"};
+
+	if (iSollCityLevel > m_iCityLevel)
+	{
+		// gewachsen
+		char* sStatusText = a_sStatusText[iSollCityLevel-1];
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText(sStatusText, getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(a_iBuildings[iSollCityLevel]).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		
 		if (getProductionProcess() != NO_PROCESS)
 		{
 			clearOrderQueue();
 		}
+
+	}
+	else if (iSollCityLevel < m_iCityLevel)
+	{
+		// Falls extremer Bev.rueckgang: Meldungen von hoeheren Status beginnend
+		for (ii = m_iCityLevel; ii > iSollCityLevel; ii--)
+		{
+			gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText(a_sStatusText_down[nCityLevel - ii], getName().GetCString()), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(a_iBuildings[ii-1]).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		}
+		
 	}
 
-	if (getPopulation() >= iPopStadt && getNumBuilding(iBuildingCity) == 0)
+	m_iCityLevel = iSollCityLevel;
+
+	// once city, always city
+	if (m_iCityLevel > m_iMinCityLevel && m_iCityLevel <= maxSaveCityLevel)
 	{
-		m_iCityLevel = 2;
-		m_iMinCityLevel = 2; // once city, always city
-		setNumRealBuilding(iBuildingCity, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_2", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-		if (getProductionProcess() != NO_PROCESS)
-		{
-			clearOrderQueue();
-		}
+		m_iMinCityLevel = m_iCityLevel;
 	}
-	if (getPopulation() >= iPopProvinz && getNumBuilding(iBuildingProvinz) == 0)
-	{
-		// Flunky PAE City level
-		m_iCityLevel = 3;
-		setNumRealBuilding(iBuildingProvinz, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_3", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-	}
-	if (getPopulation() >= iPopMetropole && getNumBuilding(iBuildingMetropole) == 0)
-	{
-		m_iCityLevel = 4;
-		setNumRealBuilding(iBuildingMetropole, 1);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_5", getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingMetropole).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-	}
-	//# Falls extremer Bev.rueckgang: Meldungen von hoeheren Status beginnend
-	if (getPopulation() < iPopMetropole && getNumBuilding(iBuildingMetropole) == 1)
-	{
-		m_iCityLevel = 3;
-		setNumRealBuilding(iBuildingMetropole, 0);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_6", getName().GetCString()), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingProvinz).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-	}
-	if (getPopulation() < iPopProvinz && getNumBuilding(iBuildingProvinz) == 1)
-	{
-		m_iCityLevel = 2;
-		setNumRealBuilding(iBuildingProvinz, 0);
-		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText("TXT_INFO_CITYSTATUS_4", getName().GetCString()), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(iBuildingCity).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
-	}
+
 }
 
 void CvCity::getCityLevelKey(CvWString &szString)
@@ -5679,7 +5693,7 @@ void CvCity::getCityLevelKey(CvWString &szString)
 	else if (getCityLevel() == 0)
 		szString = gDLL->getText("TXT_KEY_BUILDING_SIEDLUNG");
 }
-int CvCity::getCityLevel()
+int CvCity::getCityLevel() const
 {
 	/*BuildingTypes iBuildingSiedlung = (BuildingTypes) GC.getInfoTypeForString("BUILDING_SIEDLUNG");
 	BuildingTypes iBuildingKolonie = (BuildingTypes) GC.getInfoTypeForString("BUILDING_KOLONIE");

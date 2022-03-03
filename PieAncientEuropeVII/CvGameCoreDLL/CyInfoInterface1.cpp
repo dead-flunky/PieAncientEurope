@@ -553,7 +553,8 @@ void CyInfoPythonInterface1()
 		.def("getEspionageDefenseModifier", &CvBuildingInfo::getEspionageDefenseModifier, "int ()")
 		.def("getMissionType", &CvBuildingInfo::getMissionType, "int ()")
 		.def("getVoteSourceType", &CvBuildingInfo::getVoteSourceType, "int ()")
-
+		// Flunky for PAE
+		.def("getMinCityLevel", &CvBuildingInfo::getMinCityLevel, "int ()")
 		.def("isTeamShare", &CvBuildingInfo::isTeamShare, "bool ()")
 		.def("isWater", &CvBuildingInfo::isWater, "bool ()")
 		.def("isRiver", &CvBuildingInfo::isRiver, "bool ()")
