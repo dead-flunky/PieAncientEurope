@@ -334,6 +334,8 @@
 	<ElementType name="BuildingClassNeededs" content="eltOnly">
 		<element type="BuildingClassNeeded" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
+	<!-- Flunky for PAE-->
+	<ElementType name="iMinCityLevel" content="textOnly" dt:type="int"/>
 	<ElementType name="SpecialistYieldChange" content="eltOnly">
 		<element type="SpecialistType"/>
 		<element type="YieldChanges"/>
@@ -499,6 +501,8 @@
 		<element type="iEspionageDefense"/>
 		<element type="iAsset"/>
 		<element type="iPower"/>
+		<!-- Flunky for PAE -->
+		<element type="iMinCityLevel" minOccurs="0"/>
 		<element type="fVisibilityPriority"/>
 		<element type="SeaPlotYieldChanges"/>
 		<element type="RiverPlotYieldChanges"/>

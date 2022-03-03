@@ -142,6 +142,9 @@ void CyInfoPythonInterface1()
 		.def("getExperiencePercent", &CvPromotionInfo::getExperiencePercent, "int ()")
 		.def("getKamikazePercent", &CvPromotionInfo::getKamikazePercent, "int ()")
 
+		// Flunky Formation
+		.def("isFormation", &CvPromotionInfo::isFormation, "bool ()")
+
 		.def("isLeader", &CvPromotionInfo::isLeader, "bool ()")
 		.def("isBlitz", &CvPromotionInfo::isBlitz, "bool ()")
 		.def("isAmphib", &CvPromotionInfo::isAmphib, "bool ()")
@@ -550,7 +553,8 @@ void CyInfoPythonInterface1()
 		.def("getEspionageDefenseModifier", &CvBuildingInfo::getEspionageDefenseModifier, "int ()")
 		.def("getMissionType", &CvBuildingInfo::getMissionType, "int ()")
 		.def("getVoteSourceType", &CvBuildingInfo::getVoteSourceType, "int ()")
-
+		// Flunky for PAE
+		.def("getMinCityLevel", &CvBuildingInfo::getMinCityLevel, "int ()")
 		.def("isTeamShare", &CvBuildingInfo::isTeamShare, "bool ()")
 		.def("isWater", &CvBuildingInfo::isWater, "bool ()")
 		.def("isRiver", &CvBuildingInfo::isRiver, "bool ()")

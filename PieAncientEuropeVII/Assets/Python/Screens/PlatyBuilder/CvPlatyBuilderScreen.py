@@ -1901,8 +1901,6 @@ class CvWorldBuilderScreen:
     global iChange
     global bPython
     global bHideInactive
-    # Flunky Debug
-    CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, "CvPlatyBuilderScreen handleInput - %s, prev: %d, new: %d" %(inputClass.getFunctionName(), self.iSelection, inputClass.getData2()), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
     if inputClass.getFunctionName() == "TechEra":
         self.iSelectClass3 = inputClass.getData() - 1

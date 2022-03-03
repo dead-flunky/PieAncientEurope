@@ -14535,6 +14535,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>20</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -14654,6 +14655,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -14786,6 +14788,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>20</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -14920,6 +14923,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>20</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15054,6 +15058,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>20</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15188,6 +15193,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>20</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15326,6 +15332,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15464,6 +15471,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15598,6 +15606,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15728,6 +15737,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15855,6 +15865,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -15966,6 +15977,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16056,6 +16068,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>50</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16142,6 +16155,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16232,6 +16246,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16330,6 +16345,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16403,6 +16419,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16481,6 +16498,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16559,6 +16577,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16629,6 +16648,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16734,6 +16754,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16831,6 +16852,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -16932,6 +16954,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>
@@ -17009,6 +17032,7 @@
       <iKamikazePercent>0</iKamikazePercent>
       <iFlightChanceChange>0</iFlightChanceChange>
       <iFlightMaxHealth>0</iFlightMaxHealth>
+      <bFormation>1</bFormation>
       <iRevoltProtection>0</iRevoltProtection>
       <iCollateralDamageProtection>0</iCollateralDamageProtection>
       <iPillageChange>0</iPillageChange>

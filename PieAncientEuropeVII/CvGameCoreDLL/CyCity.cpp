@@ -2280,3 +2280,21 @@ void CyCity::liberate(bool bConquest)
 		m_pCity->liberate(bConquest);
 	}
 }
+
+// Flunky for PAE
+void CyCity::doCheckCityState()
+{
+	if (m_pCity)
+	{
+		m_pCity->doCheckCityState();
+	}
+}
+
+
+void CyCity::AI_doReleaseSlaves()
+{
+	if (m_pCity)
+	{
+		m_pCity->AI_doReleaseSlaves();
+	}
+}

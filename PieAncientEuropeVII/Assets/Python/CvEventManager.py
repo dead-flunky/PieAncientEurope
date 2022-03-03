@@ -23,11 +23,6 @@
 # 13 = orange
 # 14 = graublau
 #####################
-# import sys
-# import pickle
-# import math
-# import re
-# import itertools  # faster repeating of stuff
 
 from CvPythonExtensions import (CyGlobalContext, CyTranslator, plotXY,
 								DomainTypes, InputTypes, ColorTypes, CyMap, UnitAITypes, CommandTypes,
@@ -44,13 +39,6 @@ import Popup as PyPopup
 import CvCameraControls
 import CvTopCivs
 import CvAdvisorUtils
-# import CvWBPopups
-# import CvWorldBuilderScreen
-# import CvTechChooser
-# import CvScreenEnums
-
-### Starting points part 1 (by The_J) ###
-# import StartingPointsUtil
 
 # OOS Logging Tool by Gerikes
 import OOSLogger
@@ -94,7 +82,6 @@ import InputUtil
 import CvStrategyOverlay
 import BugHelp
 import BugOptionsScreen
-# import BugUtil
 
 # TODO remove
 # DEBUG code for Python 3 linter
@@ -2222,7 +2209,7 @@ class CvEventManager:
 				(loopCity, pIter) = player.firstCity(False)
 				while loopCity:
 					if not loopCity.isNone() and loopCity.getOwner() == player.getID():  # only valid cities
-						PAE_City.doCheckCityState(loopCity)
+						loopCity.doCheckCityState()
 						PAE_City.doCheckTraitBuildings(loopCity)
 					(loopCity, pIter) = player.nextCity(pIter, False)
 
@@ -2850,53 +2837,9 @@ class CvEventManager:
 		#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Loser "+pLoser.getName()+" "+str(pLoserPlot.getX())+"|"+str(pLoserPlot.getY()),1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
 		bWinnerAnimal = pWinner.isAnimal()
-		# (pWinner.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
-		#  iWinnerUnitType in L.LUnitCanBeDomesticated or
-		#  iWinnerUnitType in L.LUnitWildAnimals or
-		#  iWinnerUnitType in L.LUnitWarAnimals or
-		#  iWinnerUnitType in L.LUnitDomesticated)
 		bLoserAnimal = pLoser.isAnimal()
-		# (pLoser.getUnitAIType() == UnitAITypes.UNITAI_ANIMAL or
-		# iLoserUnitType in L.LUnitCanBeDomesticated or
-		# iLoserUnitType in L.LUnitWildAnimals or
-		# iLoserUnitType in L.LUnitWarAnimals or
-		# iLoserUnitType in L.LUnitDomesticated)
 
 		self.unconditionalOnCombat(pWinner, pLoser)
-		# Flunky modified dll such that kamikaze from promotions kills with a chance and doesn't give strength (except for planes)
-		#### ---- betrifft Winner ---- ####
-		# iPromoFuror1 = gc.getInfoTypeForString('PROMOTION_FUROR1')
-		# if pWinner.isHasPromotion(iPromoFuror1):
-			# iPromoFuror2 = gc.getInfoTypeForString('PROMOTION_FUROR2')
-			# iPromoFuror3 = gc.getInfoTypeForString('PROMOTION_FUROR3')
-			# # ------- Furor germanicus / teutonicus: 30% / 20% / 10% Chance
-			# iWinnerST = pWinner.baseCombatStr()
-			# iLoserST = pLoser.baseCombatStr()
-			# # weak units without death calc (eg animal)
-			# # enemy units should be equal
-			# if iLoserST >= (iWinnerST / 5) * 4:
-				# iChanceSuicide = 30
-				# if pWinner.isHasPromotion(iPromoFuror3):
-					# iChanceSuicide = 10
-				# elif pWinner.isHasPromotion(iPromoFuror2):
-					# iChanceSuicide = 20
-
-				# if CvUtil.myRandom(100, "Furor") < iChanceSuicide:
-					# pWinner.kill(True, -1)
-					# bWinnerIsDead = True
-					# if pWinnerPlayer.isHuman():
-					  # CyInterface().addMessage(iWinnerPlayer, True, 5,
-					  # CyTranslator().getText("TXT_KEY_MESSAGE_UNIT_FUROR_SUICIDE", (pWinner.getName(), 0)),
-					  # None, 2, pWinner.getButton(), ColorTypes(7), pWinner.getX(), pWinner.getY(), True, True)
-
-		# Flunky PAE fixed bSuicide to iSuicide in dll, also including kamikaze from promotions
-		# # Angreifende brennende Schweine killen
-		# if pWinner.getUnitType() == gc.getInfoTypeForString("UNIT_BURNING_PIGS"):
-			# # Parallele zu isSuicide() im SDK direkt nach dieser Funktion:
-			# # pWinner.doCommand(CommandTypes.COMMAND_DELETE, 1, 1)
-			# pWinner.kill(True, -1)  # RAMK_CTD
-			# # Weil bSuicide in XML scheinbar so funktioniert, dass auf jeden Fall der Gegner stirbt (was ich nicht will)
-			# bWinnerIsDead = True
 
 		# Promotions for winner (Combat Stufen, Terrain Promos, City Promos)
 		if not bWinnerIsDead and gc.getUnitInfo(pLoser.getUnitType()).getCombat() > 0 and not pLoser.isOnlyDefensive():
@@ -2934,11 +2877,6 @@ class CvEventManager:
 		if not pLoserPlayer.isHuman() and pLoserPlot.getNumUnits() > 4:
 			PAE_Unit.doAIPlotFormations(pLoserPlot, iLoserPlayer)
 
-		# Einheit soll alles ausladen, wenn besiegt   #pie
-		# Geht nicht, leider wird zuerst das Cargo und dann die Einheit gekillt! Schade!
-		# Flunky: implemented in CvUnit::kill()
-		#    if pLoser.getDomainType() == DomainTypes.DOMAIN_LAND and pLoser.hasCargo(): pLoser.doCommand(CommandTypes.COMMAND_UNLOAD_ALL,0,0)
-
 		if bNavalUnit:
 			# ua. Treibgut erstellen
 			PAE_Unit.doNavalOnCombatResult(pWinner, pLoser, bWinnerIsDead)
@@ -2964,139 +2902,86 @@ class CvEventManager:
 					# ***TEST***
 					#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Gold durch Einheitensieg (Zeile 1711)",iGold)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-			# Flunky: moved to XML/DLL
-			# ------- Certain animals can be captured, when domestication has been researched
-			# ------- Bestimmte Tiere koennen eingefangen werden, wenn Domestizier-Tech erforscht wurde
-			# elif iLoserUnitType in L.LUnitCanBeDomesticated:
-				# iTech = -1
-				# if iLoserUnitType == gc.getInfoTypeForString("UNIT_HORSE"):
-					# iTech = gc.getInfoTypeForString("TECH_PFERDEZUCHT")
-				# elif iLoserUnitType == gc.getInfoTypeForString("UNIT_CAMEL"):
-					# iTech = gc.getInfoTypeForString("TECH_KAMELZUCHT")
-				# elif iLoserUnitType == gc.getInfoTypeForString("UNIT_ELEFANT"):
-					# iTech = gc.getInfoTypeForString("TECH_ELEFANTENZUCHT")
+		if pLoser.isFlight():
+			PAE_Unit.doUnitGetsPromo(pLoser, pWinner, pLoserPlot, False, bWinnerAnimal)
+		elif not bCapture:
+# 			Flunky: generell wenn nicht gefangen wurde, nicht nur wenn die Einheit per se nicht fangbar ist
+# 			CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("bCapture entspricht captureUnit == NO_UNIT (Zeile 2966)",bCapture == (pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT))), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-				# if iTech != -1:
-					# iThisTeam = pWinnerPlayer.getTeam()
-					# if gc.getTeam(iThisTeam).isHasTech(iTech):
-						# bUnitDone = True
-						# # Create a new unit
-						# NewUnit = pWinnerPlayer.initUnit(iLoserUnitType, pWinner.getX(), pWinner.getY(), UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
-						# NewUnit.finishMoves()
-						# if pWinnerPlayer.isHuman():
-							# CyInterface().addMessage(iWinnerPlayer, True, 5, CyTranslator().getText("TXT_KEY_UNIT_EROBERT", (unitY.getDescription(), 0)), None, 2, None, ColorTypes(8), 0, 0, False, False)
-		# ----- Ende Loser Unit (not captured)
 
-		#bUnitFlucht = False
-		#pLoserFlucht = None
+			# Feature: Wenn die Generalseinheit stirbt, ist in jeder Stadt Civil War! (GG Great General dies)
+			# Richtet sich nach der Anzahl der lebenden Generals
+			# PAE V: Einheiten im Stack bekommen Mercenary-Promo (je nach Anzahl an Generals im Stack)
 
-		if not bCapture:
+			if pLoser.getLeaderUnitType() != -1:
+				PAE_Unit.doDyingGeneral(pLoser, iWinnerPlayer)
 
-			# pLoser tries to flee if pLoser is not being domesticated and pLoser is not Treibgut
-			# Generals Formation (PROMOTION_FORM_LEADER_POSITION)
-			# Flunky: moved to dll
-			# if bWinnerIsDead or pWinner.isDead():
-				# iWinnerDamage = 100
-			# else:
-				# iWinnerDamage = pWinner.getDamage()
-			# bUnitFlucht, pLoserFlucht = PAE_Unit.flee(pLoser, pWinner, iWinnerDamage)
-			if pLoser.isFlight():
-				PAE_Unit.doUnitGetsPromo(pLoser, pWinner, pLoserPlot, False, bWinnerAnimal)
-			else:
-				# Feature: Wenn die Generalseinheit stirbt, ist in jeder Stadt Civil War! (GG Great General dies)
-				# Richtet sich nach der Anzahl der lebenden Generals
-				# PAE V: Einheiten im Stack bekommen Mercenary-Promo (je nach Anzahl an Generals im Stack)
+			# ------- Rebell takes over slaves if capturing
+			if iLoserUnitType == gc.getInfoTypeForString("UNIT_SLAVE") and iWinnerPlayer == gc.getBARBARIAN_PLAYER() and not bWinnerAnimal:
+				barbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
+				iUnitType = gc.getInfoTypeForString("UNIT_REBELL")
+				iNumUnits = pLoserPlot.getNumUnits()
+				for _ in xrange(iNumUnits):
+					NewUnit = barbPlayer.initUnit(iUnitType, pWinner.getX(), pWinner.getY(),
+												  UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
+					NewUnit.finishMoves()
+				if pLoserPlayer.isHuman():
+					CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_CAPTURED_SLAVES", ("", 0)), None, 2,
+											 "Art/Interface/Buttons/Units/button_rebell.dds", ColorTypes(7), pLoserPlot.getX(), pLoserPlot.getY(), True, True)
+				# ***TEST***
+				#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Rebell holt sich Bausklaven zu sich (Zeile 1947)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
 
-				if pLoser.getLeaderUnitType() != -1:
-					PAE_Unit.doDyingGeneral(pLoser, iWinnerPlayer)
+			if not bWinnerIsDead:
+				# pWinner may get bonus experience etc, if pLoser is not being domesticated and pLoser is not Treibgut
+				# ------- Feature 1: Generalseinheiten bekommen +1XP, wenn im selben Stack eine angreifende Einheit siegt (10%)
+				# ------- Feature 2: Eine Generalseinheit bekommt HERO Promotion wenn eine Einheit einen General oder einen Held besiegt.
+				# ------------------ Ist kein General im Stack bekommt die Promotion die Gewinner-Unit
+				# ------------------ Und Gewinner bekommt additional +3 XP
+				iPromoHero = gc.getInfoTypeForString("PROMOTION_HERO")
+				# ------- Diese Features betreffen nur attackierende Einheiten (keine defensiven)
+				if attackerWinner and not bWinnerAnimal and pWinner.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE:  # pWinner.isMadeAttack()
+					iPromoLeader = gc.getInfoTypeForString("PROMOTION_LEADER")
+					bPromoHero = False
+					bPromoHeroDone = False
+					if pLoser.isHasPromotion(iPromoLeader) or pLoser.isHasPromotion(iPromoHero):
+						bPromoHero = True
+						# Hero und +3 XP
+						bPromoHeroDone = PAE_Unit.doUnitGetsHero(pWinner, pLoser)
+					# for each general who accompanies the stack: +1 XP
+					# one general gets the hero promo, if not possessing
+					bLeaderAnwesend = PAE_Unit.getExperienceForLeader(pWinner, pLoser, bPromoHero and not bPromoHeroDone)
+					# Eine Einheit mit Mercenary-Promo kann diese verlieren, wenn ein General im Stack ist (5% Chance)
+					if bLeaderAnwesend:
+						PAE_Unit.removeMercenaryPromo(pWinner)
 
-				# ------- Rebell takes over slaves if capturing
-				if iLoserUnitType == gc.getInfoTypeForString("UNIT_SLAVE") and iWinnerPlayer == gc.getBARBARIAN_PLAYER() and not bWinnerAnimal:
-					barbPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
-					iUnitType = gc.getInfoTypeForString("UNIT_REBELL")
-					iNumUnits = pLoserPlot.getNumUnits()
-					for _ in xrange(iNumUnits):
-						NewUnit = barbPlayer.initUnit(iUnitType, pWinner.getX(), pWinner.getY(),
-													  UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
-						NewUnit.finishMoves()
-					if pLoserPlayer.isHuman():
-						CyInterface().addMessage(iLoserPlayer, True, 5, CyTranslator().getText("TXT_KEY_MESSAGE_CAPTURED_SLAVES", ("", 0)), None, 2,
-												 "Art/Interface/Buttons/Units/button_rebell.dds", ColorTypes(7), pLoserPlot.getX(), pLoserPlot.getY(), True, True)
-					# ***TEST***
-					#CyInterface().addMessage(gc.getGame().getActivePlayer(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_TEST",("Rebell holt sich Bausklaven zu sich (Zeile 1947)",1)), None, 2, None, ColorTypes(10), 0, 0, False, False)
+				if bLoserAnimal:
+					# Held Promo + 3 XP wenn Stier (Ur) oder Tier mit mehr als 3 Level erlegt wird
+					# nur wenn Einheit nicht schon ein Held ist
+					# und wenn Combat ST Sieger < als Combat ST vom Gegner
+					PAE_Unit.doHunterHero(pWinner, pLoser)
 
-				if not bWinnerIsDead:
-					# pWinner may get bonus experience etc, if pLoser is not being domesticated and pLoser is not Treibgut
-					# ------- Feature 1: Generalseinheiten bekommen +1XP, wenn im selben Stack eine angreifende Einheit siegt (10%)
-					# ------- Feature 2: Eine Generalseinheit bekommt HERO Promotion wenn eine Einheit einen General oder einen Held besiegt.
-					# ------------------ Ist kein General im Stack bekommt die Promotion die Gewinner-Unit
-					# ------------------ Und Gewinner bekommt additional +3 XP
-					iPromoHero = gc.getInfoTypeForString("PROMOTION_HERO")
-					# ------- Diese Features betreffen nur attackierende Einheiten (keine defensiven)
-					if attackerWinner and not bWinnerAnimal and pWinner.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE:  # pWinner.isMadeAttack()
-						iPromoLeader = gc.getInfoTypeForString("PROMOTION_LEADER")
-						bPromoHero = False
-						bPromoHeroDone = False
-						if pLoser.isHasPromotion(iPromoLeader) or pLoser.isHasPromotion(iPromoHero):
-							bPromoHero = True
-							# Hero und +3 XP
-							bPromoHeroDone = PAE_Unit.doUnitGetsHero(pWinner, pLoser)
-						# for each general who accompanies the stack: +1 XP
-						# one general gets the hero promo, if not possessing
-						bLeaderAnwesend = PAE_Unit.getExperienceForLeader(pWinner, pLoser, bPromoHero and not bPromoHeroDone)
-						# Eine Einheit mit Mercenary-Promo kann diese verlieren, wenn ein General im Stack ist (5% Chance)
-						if bLeaderAnwesend:
-							PAE_Unit.removeMercenaryPromo(pWinner)
+					# Ab Tech Jagd (Hunting) bringen Tiere Essen in nahegelegene Stadt (ausgenommen Kriegshunde)
+					if iLoserUnitType not in L.LUnitWarAnimals:
+						PAE_Unit.huntingResult(pLoser, pWinner)
+				else:
+					# Ab Tech Kriegerethos bekommen Sieger + XP
+					iTech = gc.getInfoTypeForString("TECH_KRIEGERETHOS")
+					pWinnerTeam = gc.getTeam(pWinnerPlayer.getTeam())
+					if pWinnerTeam.isHasTech(iTech):
+						iXP = 1
+						if pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_AGGRESSIVE")) \
+								or pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_EROBERER")):
+							iXP = 2
+						pWinner.changeExperience(iXP, -1, 0, 0, 0)
 
-					if bLoserAnimal:
-						# Held Promo + 3 XP wenn Stier (Ur) oder Tier mit mehr als 3 Level erlegt wird
-						# nur wenn Einheit nicht schon ein Held ist
-						# und wenn Combat ST Sieger < als Combat ST vom Gegner
-						PAE_Unit.doHunterHero(pWinner, pLoser)
+					# Unit ranks / Unit Rang Promo
+					if pLoser.isMilitaryHappiness() and pLoser.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE:
+						# PAE Feature 3: Unit Rang Promos
+						if attackerWinner or CvUtil.myRandom(2, "Rank of a defending unit") == 1:  # pWinner.isMadeAttack()
+							PAE_Unit.doRankPromo(pWinner)
 
-						# Ab Tech Jagd (Hunting) bringen Tiere Essen in nahegelegene Stadt (ausgenommen Kriegshunde)
-						if iLoserUnitType not in L.LUnitWarAnimals:
-							PAE_Unit.huntingResult(pLoser, pWinner)
-					else:
-						# Ab Tech Kriegerethos bekommen Sieger + XP
-						iTech = gc.getInfoTypeForString("TECH_KRIEGERETHOS")
-						pWinnerTeam = gc.getTeam(pWinnerPlayer.getTeam())
-						if pWinnerTeam.isHasTech(iTech):
-							iXP = 1
-							if pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_AGGRESSIVE")) \
-									or pWinnerPlayer.hasTrait(gc.getInfoTypeForString("TRAIT_EROBERER")):
-								iXP = 2
-							pWinner.changeExperience(iXP, -1, 0, 0, 0)
-
-						# Unit ranks / Unit Rang Promo
-						if pLoser.isMilitaryHappiness() and pLoser.getUnitAIType() != UnitAITypes.UNITAI_EXPLORE:
-							# PAE Feature 3: Unit Rang Promos
-							if attackerWinner or CvUtil.myRandom(2, "Rank of a defending unit") == 1:  # pWinner.isMadeAttack()
-								PAE_Unit.doRankPromo(pWinner)
-
-						# ---- Script DATAs in Units
-						PAE_Mercenaries.startMercTorture(pLoser, iWinnerPlayer)
-					# Flunky - increased indentation, because renegade should only trigger if winner is not dead
-					bCityRenegade = False
-					# Stadtverteidigung
-					if pLoserPlot.isCity():
-						pCity = pLoserPlot.getPlotCity()
-						if pCity.getOwner() == iLoserPlayer:
-							# ------ ueberlaufende Stadt - City renegades - renegade city
-							if not gc.getGame().isOption(GameOptionTypes.GAMEOPTION_NO_CITY_RAZING):
-								# nicht bei captureable units erlauben, da sie sonst bei renegade gecaptured wird und dann die ID zum killen weg ist (CtD)
-								if pLoser.getCaptureUnitType(gc.getPlayer(iWinnerPlayer).getCivilizationType()) == UnitTypes.NO_UNIT:
-									# pLoser wird nicht angetastet
-									#CvUtil.pyPrint('EventManager 2951: Unit %s, ID: %d' % (pLoser.getName(),pLoser.getID()))
-									bCityRenegade = PAE_City.doRenegadeOnCombatResult(pLoser, pCity, iWinnerPlayer)
-
-					if not bCityRenegade:
-						bUnitRenegades = PAE_Unit.renegade(pWinner, pLoser)
-
-						# LOSER: Mounted -> Melee or Horse
-						# Nur wenn die Einheit nicht desertiert hat: bUnitRenegades
-						if not bUnitRenegades and pLoser.getUnitCombatType() in [gc.getInfoTypeForString("UNITCOMBAT_MOUNTED"), gc.getInfoTypeForString("UNITCOMBAT_CHARIOT")]:
-							PAE_Unit.doLoserLoseHorse(pLoser, iWinnerPlayer)
+					# ---- Script DATAs in Units
+					PAE_Mercenaries.startMercTorture(pLoser, iWinnerPlayer)
 
 		# PAE Debug Mark
 		# """
@@ -4435,7 +4320,7 @@ class CvEventManager:
 
 		# Kolonie / Provinz ----------
 		# Stadt bekommt automatisch das Koloniegebaeude und Trait-Gebaeude
-		PAE_City.doCheckCityState(city)
+		city.doCheckCityState()
 		PAE_City.doCheckTraitBuildings(city)
 		PAE_City.doCheckGlobalTraitBuildings(city.getOwner())
 		# ----------------------------
@@ -4737,9 +4622,6 @@ class CvEventManager:
 					gc.getPlayer(gc.getBARBARIAN_PLAYER()).initUnit(iRebel, pCity.getX(), pCity.getY(),
 																	UnitAITypes.UNITAI_CITY_DEFENSE, DirectionTypes.DIRECTION_SOUTH)
 
-			# PAE Provinzcheck
-			PAE_City.doCheckCityState(pCity)
-
 		# PAE Debug Mark
 		# """
 
@@ -4822,10 +4704,6 @@ class CvEventManager:
 			CyInterface().addMessage(pCity.getOwner(), True, 10, CyTranslator().getText("TXT_KEY_MESSAGE_CITY_GROWTH",
 																						(pCity.getName(), pCity.getPopulation())), None, 2, None, ColorTypes(13), pCity.getX(), pCity.getY(), True, True)
 
-		# Kolonie / Provinz ----------
-		PAE_City.doCheckCityState(pCity)
-		# ----------------------------
-
 		# Negatives Nahrungslager durch Stadtstatusgebaeude vermeiden (Flunky)
 		if pCity.getFood() < 0:
 			pCity.setFood(0)
@@ -4863,9 +4741,6 @@ class CvEventManager:
 
 		# Trade feature: Check for free bonuses aquired via trade (Boggy)
 		PAE_Trade.doCityCheckFreeBonuses(pCity)
-
-		# PAE Provinzcheck
-		bCheckCityState = False
 
 		# +++++ AI Cities defend with bombardment of located units (Stadtverteidigung/Stadtbelagerung)
 		# +++++ AI Hires Units (mercenaries)
@@ -4939,7 +4814,7 @@ class CvEventManager:
 		if pCity.getOccupationTimer() > 0:
 			bRevoltEnd = PAE_City.doCityCheckRevoltEnd(pCity)
 			if not bRevoltEnd and pCity.getPopulation() > 1:
-				bCheckCityState = PAE_City.doRevoltShrink(pCity)
+				PAE_City.doRevoltShrink(pCity)
 		elif pCity.getPopulation() > 3:
 			PAE_City.doTurnCityRevolt(pCity)
 
@@ -4966,10 +4841,6 @@ class CvEventManager:
 				# Bei christlich beeinflussten Staedten - Kulte und Religionen langsam raus (alle!)
 				elif CvUtil.myRandom(5, "removePagans") == 1:  # 20%
 					PAE_Christen.removePagans(pCity)
-
-		# PAE Provinzcheck
-		if bCheckCityState:
-			PAE_City.doCheckCityState(pCity)
 
 		# CivilWar
 		PAE_City.doCheckCivilWar(pCity)
@@ -5003,12 +4874,8 @@ class CvEventManager:
 
 	def onCityHurry(self, argsList):
 		'City is renamed'
-		pCity = argsList[0]
+		# pCity = argsList[0]
 		# iHurryType = argsList[1]
-
-		# Kolonie / Provinz ----------
-		PAE_City.doCheckCityState(pCity)
-		# ----------------------------
 
 	def onVictory(self, argsList):
 		'Victory'

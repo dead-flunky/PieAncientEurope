@@ -457,6 +457,9 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 	m_iCitySizeBoost = 0;
 	m_iSpecialistFreeExperience = 0;
 	m_iEspionageDefenseModifier = 0;
+	// Flunky PAE City level
+	m_iCityLevel = 0;
+	m_iMinCityLevel = 0;
 
 	m_bNeverLost = true;
 	m_bBombarded = false;
@@ -1978,6 +1981,11 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 	}
 
 	if (getNumBuilding(eBuilding) >= GC.getCITY_MAX_NUM_BUILDINGS())
+	{
+		return false;
+	}
+
+	if (GC.getBuildingInfo(eBuilding).getMinCityLevel() > getCityLevel())
 	{
 		return false;
 	}
@@ -5493,6 +5501,11 @@ void CvCity::setPopulation(int iNewValue)
 				AI_setChooseProductionDirty(true);
 			}
 		}
+		// Flunky for PAE
+		doCheckCityState();
+		//# AI and its slaves
+		if (!GET_PLAYER(getOwner()).isHuman())
+			AI_doReleaseSlaves();
 
 		GET_PLAYER(getOwnerINLINE()).AI_makeAssignWorkDirty();
 
@@ -5517,6 +5530,188 @@ void CvCity::changePopulation(int iChange)
 	setPopulation(getPopulation() + iChange);
 }
 
+// Flunky for PAE
+bool CvCity::canRenegade(PlayerTypes iLoserPlayer)
+{
+	
+	if (GC.getGame().isOption(GAMEOPTION_NO_CITY_RAZING))
+		return false;
+	
+	if (getOwnerINLINE() != iLoserPlayer)
+		return false;
+
+	//# Trait Protective: Staedte laufen nicht ueber / cities do not renegade
+	if (hasTrait((TraitTypes) GC.getInfoTypeForString("TRAIT_PROTECTIVE")))
+		return false;
+
+	if (isCapital())
+		return false;
+
+	//# Nicht bei barbarischen Staedten:
+	if (getOwnerINLINE() == GC.getBARBARIAN_PLAYER())
+		return false;
+
+	//# ab PAE V: soll nur mehr Staedte betreffen
+	if (getNumBuilding((BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT")) == 0)
+		return false;
+
+	if (getPopulation() <= 1)
+		return false;
+	return true;
+}
+
+int CvCity::renegadeChance(PlayerTypes iLoserPlayer, int iDefenderUnits, int iAttackerUnits)
+{
+	//# Per defense point +1%
+	int iChanceDefense = getNaturalDefense() + getTotalDefense(0) - getDefenseDamage();
+	//# Per happy smile +5%
+	int iChanceHappiness = (happyLevel() - unhappyLevel(0)) * 2;
+
+	//# Wonders: 1st +20%, 2nd +16%, 3rd +12%, 8, 4, 0
+	int iChanceNWs = 60;
+	if (getNumNationalWonders() < 6)
+		iChanceNWs = getNumNationalWonders() * (11 - getNumNationalWonders()) * 2;
+
+	int iChanceWWs = 60;
+	if (getNumWorldWonders() < 6)
+		iChanceWWs = getNumWorldWonders() * (11 - getNumWorldWonders()) * 2;
+
+	//# City population +5% each pop
+	int iChancePop = getPopulation() * 2;
+	//# City connected with capital?
+	if (isConnectedToCapital(getOwner()))
+		iChancePop += 10;
+	else
+		iChancePop -= 10;
+
+	//# bei negativ Nahrung - !
+	iChancePop += foodDifference(1) * 5;
+
+	//# Abstand zur Hauptstadt
+	CvCity* pCapitalCity = GET_PLAYER(iLoserPlayer).getCapitalCity();
+	int iDistance = 50;
+	if (pCapitalCity != NULL)
+		iDistance = plotDistance(pCapitalCity->getX_INLINE(), pCapitalCity->getY_INLINE(), getX_INLINE(), getY_INLINE());
+
+	//# Total
+	return iDefenderUnits + iChanceDefense + iChanceHappiness + iChanceNWs + iChanceWWs + iChancePop - iAttackerUnits - iDistance;
+}
+
+//# PAE City status --------------------------
+//# Check City colony or province after events
+//# once getting a city: keep being a city
+void CvCity::doCheckCityState()
+{
+	BuildingTypes iBuildingSiedlung = (BuildingTypes) GC.getInfoTypeForString("BUILDING_SIEDLUNG");
+	BuildingTypes iBuildingKolonie = (BuildingTypes) GC.getInfoTypeForString("BUILDING_KOLONIE");
+	BuildingTypes iBuildingCity = (BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT");
+	BuildingTypes iBuildingProvinz = (BuildingTypes) GC.getInfoTypeForString("BUILDING_PROVINZ");
+	BuildingTypes iBuildingMetropole = (BuildingTypes) GC.getInfoTypeForString("BUILDING_METROPOLE");
+	BuildingTypes a_iBuildings[] = {iBuildingSiedlung, iBuildingKolonie, iBuildingCity, iBuildingProvinz, iBuildingMetropole};
+	//# PAE Stadtstatus
+	int iPopDorf = 3;
+	int iPopStadt = 6;
+	int iPopProvinz = 12;
+	int iPopMetropole = 20;
+	int a_iPop[] = {0, iPopDorf, iPopStadt, iPopProvinz, iPopMetropole};
+	int iSollCityLevel = 0;
+	int iPop = getPopulation();
+	int ii;
+	int nCityLevel = 5;
+	int maxSaveCityLevel = 2;
+	for (ii = 0; ii < nCityLevel; ii++)
+	{
+		
+		if (iPop < a_iPop[ii])
+		{
+			break;
+		}
+		iSollCityLevel = ii;
+		
+	}
+
+	if (iSollCityLevel < m_iMinCityLevel)
+	{
+		iSollCityLevel = m_iMinCityLevel;
+	}
+	// required buildings
+	for (ii = 0; ii <= iSollCityLevel; ii++)
+	{
+		setNumRealBuilding(a_iBuildings[ii], 1);
+	}
+	// non-required buildings
+	for (ii = iSollCityLevel+1; ii < nCityLevel; ii++)
+	{
+		setNumRealBuilding(a_iBuildings[ii], 0);
+	}
+
+	char* a_sStatusText[] = {"TXT_INFO_CITYSTATUS_1", "TXT_INFO_CITYSTATUS_2", "TXT_INFO_CITYSTATUS_3", "TXT_INFO_CITYSTATUS_5"};
+	char* a_sStatusText_down[] = {"TXT_INFO_CITYSTATUS_6", "TXT_INFO_CITYSTATUS_4"};
+
+	if (iSollCityLevel > m_iCityLevel)
+	{
+		// gewachsen
+		char* sStatusText = a_sStatusText[iSollCityLevel-1];
+		gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText(sStatusText, getName().GetCString()), "AS2D_WELOVEKING", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(a_iBuildings[iSollCityLevel]).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		
+		if (getProductionProcess() != NO_PROCESS)
+		{
+			clearOrderQueue();
+		}
+
+	}
+	else if (iSollCityLevel < m_iCityLevel)
+	{
+		// Falls extremer Bev.rueckgang: Meldungen von hoeheren Status beginnend
+		for (ii = m_iCityLevel; ii > iSollCityLevel; ii--)
+		{
+			gDLL->getInterfaceIFace()->addHumanMessage(getOwner(), true, 15, gDLL->getText(a_sStatusText_down[nCityLevel - ii], getName().GetCString()), "AS2D_PLAGUE", MESSAGE_TYPE_MAJOR_EVENT, GC.getBuildingInfo(a_iBuildings[ii-1]).getButton(), ColorTypes(13), getX_INLINE(), getY_INLINE(), true, true);
+		}
+		
+	}
+
+	m_iCityLevel = iSollCityLevel;
+
+	// once city, always city
+	if (m_iCityLevel > m_iMinCityLevel && m_iCityLevel <= maxSaveCityLevel)
+	{
+		m_iMinCityLevel = m_iCityLevel;
+	}
+
+}
+
+void CvCity::getCityLevelKey(CvWString &szString)
+{
+	if (getCityLevel() == 4)
+		szString = gDLL->getText("TXT_KEY_BUILDING_METROPOLE");
+	else if (getCityLevel() == 3)
+		szString = gDLL->getText("TXT_KEY_BUILDING_PROVINZ");
+	else if (getCityLevel() == 2)
+		szString = gDLL->getText("TXT_KEY_BUILDING_STADT");
+	else if (getCityLevel() == 1)
+		szString = gDLL->getText("TXT_KEY_BUILDING_KOLONIE");
+	else if (getCityLevel() == 0)
+		szString = gDLL->getText("TXT_KEY_BUILDING_SIEDLUNG");
+}
+int CvCity::getCityLevel() const
+{
+	/*BuildingTypes iBuildingSiedlung = (BuildingTypes) GC.getInfoTypeForString("BUILDING_SIEDLUNG");
+	BuildingTypes iBuildingKolonie = (BuildingTypes) GC.getInfoTypeForString("BUILDING_KOLONIE");
+	BuildingTypes iBuildingCity = (BuildingTypes) GC.getInfoTypeForString("BUILDING_STADT");
+	BuildingTypes iBuildingProvinz = (BuildingTypes) GC.getInfoTypeForString("BUILDING_PROVINZ");
+	BuildingTypes iBuildingMetropole = (BuildingTypes) GC.getInfoTypeForString("BUILDING_METROPOLE");
+	
+	if (getNumBuilding(iBuildingMetropole) == 1)
+		return 4;
+	if (getNumBuilding(iBuildingProvinz) == 1)
+		return 3;
+	if (getNumBuilding(iBuildingCity) == 1)
+		return 2;
+	if (getNumBuilding(iBuildingKolonie) == 1)
+		return 1;
+	return 0;*/
+	return m_iCityLevel;
+}
 
 long CvCity::getRealPopulation() const
 {
@@ -9168,8 +9363,6 @@ void CvCity::updateCommerce(CommerceTypes eIndex)
 	{
 		iNewCommerce = (getBaseCommerceRateTimes100(eIndex) * getTotalCommerceRateModifier(eIndex)) / 100;
 		iNewCommerce += getYieldRate(YIELD_PRODUCTION) * getProductionToCommerceModifier(eIndex);
-		// Flunky PAE hotfix. Do not write negative values. 
-		iNewCommerce = std::max(0, iNewCommerce); 
 	}
 
 	if (iOldCommerce != iNewCommerce)
@@ -9305,6 +9498,12 @@ void CvCity::updateBuildingCommerce()
 		for (iJ = 0; iJ < GC.getNumBuildingInfos(); iJ++)
 		{
 			iNewBuildingCommerce += getBuildingCommerceByBuilding(((CommerceTypes)iI), ((BuildingTypes)iJ));
+		}
+
+		// Flunky PAE hotfix. Do not write negative values.
+		if (iNewBuildingCommerce < 0)
+		{
+			iNewBuildingCommerce = 0;
 		}
 
 		if (getBuildingCommerce((CommerceTypes)iI) != iNewBuildingCommerce)
@@ -10079,6 +10278,9 @@ void CvCity::setCultureTimes100(PlayerTypes eIndex, int iNewValue, bool bPlots, 
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex expected to be < MAX_PLAYERS");
 
+	// Flunky for PAE Civil War: limit iNewValue >= 0
+	if (iNewValue < 0)
+		iNewValue = 0;
 /*
 ** K-Mod, 26/sep/10, Karadoc
 ** fixed so that plots actually get the culture difference
@@ -13006,10 +13208,11 @@ void CvCity::doPlotCultureTimes100(bool bUpdate, PlayerTypes ePlayer, int iCultu
 	//const double iB = log((double)iOuterRatio)/iCultureRange;
 
 	// free culture bonus for cities
-	iCultureRateTimes100+= bCityCulture ? 400 : 0;
+	iCultureRateTimes100 += bCityCulture ? 400 : 0;
 
 	// note, original code had "if (getCultureTimes100(ePlayer) > 0)". I took that part out.
-	if (eCultureLevel != NO_CULTURELEVEL &&	(std::abs(iCultureRateTimes100*iScale) >= 100 || bCityCulture))
+	// Flunky for PAE: put that part back in
+	if (eCultureLevel != NO_CULTURELEVEL && getCultureTimes100(ePlayer) > 0 && (std::abs(iCultureRateTimes100*iScale) >= 100 || bCityCulture))
 	{
 		for (int iDX = -iCultureRange; iDX <= iCultureRange; iDX++)
 		{
@@ -13026,10 +13229,10 @@ void CvCity::doPlotCultureTimes100(bool bUpdate, PlayerTypes ePlayer, int iCultu
 						if (pLoopPlot->isPotentialCityWorkForArea(area()))
 						{
 							//int iCultureToAdd = (int)(iScale*iCultureRateTimes100*exp(-iB*iDistance)/100);
-							// approxately = culture * ( (iScale-1)(iDistance - iRange)^2/(iRange^2) + 1 )
+							// approximately = culture * ( (iScale-1)(iDistance - iRange)^2/(iRange^2) + 1 )
 
 							// Cast to double to avoid overflow. (The world-builder can add a lot of culture in one hit.)
-                            int delta = iDistance-iCultureRange;
+							int delta = iDistance - iCultureRange;
 							int iCultureToAdd = static_cast<int>(iCultureRateTimes100 * static_cast<double>((iScale-1)*delta*delta + iCultureRange*iCultureRange) / (100.0*iCultureRange*iCultureRange));
 
 							pLoopPlot->changeCulture(ePlayer, iCultureToAdd, (bUpdate || !(pLoopPlot->isOwned())));
@@ -13675,7 +13878,9 @@ void CvCity::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iCitySizeBoost);
 	pStream->Read(&m_iSpecialistFreeExperience);
 	pStream->Read(&m_iEspionageDefenseModifier);
-
+	// Flunky PAE City level
+	pStream->Read(&m_iCityLevel);
+	pStream->Read(&m_iMinCityLevel);
 	pStream->Read(&m_bNeverLost);
 	pStream->Read(&m_bBombarded);
 	pStream->Read(&m_bDrafted);
@@ -13914,6 +14119,9 @@ void CvCity::write(FDataStreamBase* pStream)
 	pStream->Write(m_iCitySizeBoost);
 	pStream->Write(m_iSpecialistFreeExperience);
 	pStream->Write(m_iEspionageDefenseModifier);
+	// Flunky PAE City level
+	pStream->Write(m_iCityLevel);
+	pStream->Write(m_iMinCityLevel);
 
 	pStream->Write(m_bNeverLost);
 	pStream->Write(m_bBombarded);

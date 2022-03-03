@@ -1333,6 +1333,7 @@ enum UnitAITypes			// Exposed to Python
 	UNITAI_MISSILE_AIR, // unused by PAE
 	UNITAI_PARADROP, // unused by PAE
 	UNITAI_ATTACK_CITY_LEMMING,
+	UNITAI_SUPPLY_WAGON, // Flunky for PAE
 
 	NUM_UNITAI_TYPES
 };

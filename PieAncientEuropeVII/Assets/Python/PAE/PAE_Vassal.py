@@ -8,6 +8,11 @@ import CvUtil
 import PAE_City
 import PAE_Unit
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 # Defines
 gc = CyGlobalContext()
 
@@ -109,7 +114,7 @@ def onCityAcquired(pCity, iNewOwner, iPreviousOwner):
 
 								popupInfo = CyPopupInfo()
 								popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-								popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASSAL_10", (pCity.getName(), 
+								popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASSAL_10", (pCity.getName(),
 									pPlayer.getCivilizationAdjective(3), gc.getLeaderHeadInfo(pPlayer.getLeaderType()).getDescription())))
 								popupInfo.setData1(iNewOwner)
 								popupInfo.setData2(iPreviousOwner)
@@ -195,7 +200,7 @@ def onCityAcquired(pCity, iNewOwner, iPreviousOwner):
 							if iWinnerGold >= iBribe:
 								popupInfo = CyPopupInfo()
 								popupInfo.setButtonPopupType(ButtonPopupTypes.BUTTONPOPUP_PYTHON)
-								popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASSAL_08", (pPlayer.getCivilizationShortDescription(0), 
+								popupInfo.setText(CyTranslator().getText("TXT_KEY_POPUP_VASSAL_08", (pPlayer.getCivilizationShortDescription(0),
 									gc.getLeaderHeadInfo(pLoser.getLeaderType()).getDescription(), iBribe)))
 								popupInfo.setData1(iNewOwner)
 								popupInfo.setData2(iPreviousOwner)
@@ -1186,7 +1191,8 @@ def doGiveCity2Vassal(pCity, iNewOwner):
 		# Emigrant und dessen Kultur
 		elif iUnitType == gc.getInfoTypeForString('UNIT_EMIGRANT'):
 			NewUnit = pNewOwner.initUnit(iUnitType, iX, iY, UnitAITypes.UNITAI_SETTLE, DirectionTypes.DIRECTION_SOUTH)
-			CvUtil.addScriptData(NewUnit, "p", iOldOwner)
+			NewUnit.setCulture(iOldOwner)
+# 			CvUtil.addScriptData(NewUnit, "p", iOldOwner)
 			PAE_Unit.copyName(NewUnit, iUnitType, pLoopUnit.getName())
 		elif iUnitType != -1:
 			NewUnit = pNewOwner.initUnit(iUnitType, iX, iY, UnitAITypes(iUnitAIType), DirectionTypes.DIRECTION_SOUTH)
@@ -1211,8 +1217,6 @@ def doGiveCity2Vassal(pCity, iNewOwner):
 			# Stadtgroesse kontrollieren
 			if pCity.getPopulation() < 1:
 				pCity.setPopulation(1)
-			# Kolonie/Provinz checken
-			PAE_City.doCheckCityState(pCity)
 
 
 # ein Spieler, der zu einem Vasall wird, soll OpenBorders zu seinem Hegemon bekommen

@@ -421,6 +421,9 @@ bool CvUnitAI::AI_update()
 		case UNITAI_ATTACK_CITY_LEMMING:
 			AI_attackCityLemmingMove();
 			break;
+		// Flunky for PAE
+		case UNITAI_SUPPLY_WAGON:
+			AI_supplyWagonMove();
 
 		default:
 			FAssert(false);
@@ -760,7 +763,9 @@ int CvUnitAI::AI_groupFirstVal()
 	case UNITAI_ATTACK_CITY_LEMMING:
 		return 1;
 		break;
-
+		
+	case UNITAI_SUPPLY_WAGON: // Flunky for PAE TODO add value if required
+		break;
 	default:
 		FAssert(false);
 		break;
@@ -3988,6 +3993,10 @@ void CvUnitAI::AI_attackCityLemmingMove()
 	getGroup()->pushMission(MISSION_SKIP);
 }
 
+// Flunky for PAE
+void CvUnitAI::AI_supplyWagonMove()
+{
+}
 
 void CvUnitAI::AI_collateralMove()
 {

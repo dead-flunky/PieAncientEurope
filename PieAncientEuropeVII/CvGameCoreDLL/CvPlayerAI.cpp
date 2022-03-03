@@ -2191,8 +2191,10 @@ DomainTypes CvPlayerAI::AI_unitAIDomainType(UnitAITypes eUnitAI) const
 	case UNITAI_GREAT_SPY: // K-Mod
 	case UNITAI_SPY:
 	case UNITAI_ATTACK_CITY_LEMMING:
+	case UNITAI_SUPPLY_WAGON: // Flunky for PAE
 		return DOMAIN_LAND;
 		break;
+
 
 	case UNITAI_ICBM:
 		return DOMAIN_IMMOBILE;
@@ -11954,6 +11956,10 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, CvArea* pArea
 			bValid = false;
 			break;
 
+		case UNITAI_SUPPLY_WAGON: // Flunky for PAE
+			bValid = false;
+			break;
+
 		default:
 			FAssert(false);
 			break;
@@ -12385,6 +12391,7 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, CvArea* pArea
 	case UNITAI_MERCHANT:
 	case UNITAI_ENGINEER:
 	case UNITAI_GREAT_SPY: // K-Mod
+	case UNITAI_SUPPLY_WAGON: // Flunky for PAE TODO assign value
 		break;
 
 	case UNITAI_SPY:

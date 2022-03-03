@@ -1773,6 +1773,19 @@ void CvDLLWidgetData::parseCityNameHelp(CvWidgetDataStruct &widgetDataStruct, Cv
 	if (pHeadSelectedCity != NULL)
 	{
 		szBuffer.append(pHeadSelectedCity->getName());
+		
+		szBuffer.append(NEWLINE);
+		int level = pHeadSelectedCity->getCityLevel();
+		if (level == 4)
+			szBuffer.append(gDLL->getText("TXT_KEY_CITY_LEVEL_METROPOLE"));
+		else if (level == 3)
+			szBuffer.append(gDLL->getText("TXT_KEY_CITY_LEVEL_PROVINZ"));
+		else if (level == 2)
+			szBuffer.append(gDLL->getText("TXT_KEY_CITY_LEVEL_STADT"));
+		else if (level == 1)
+			szBuffer.append(gDLL->getText("TXT_KEY_CITY_LEVEL_KOLONIE"));
+		else if (level == 0)
+			szBuffer.append(gDLL->getText("TXT_KEY_CITY_LEVEL_SIEDLUNG"));
 
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_CITY_POPULATION", pHeadSelectedCity->getRealPopulation()));

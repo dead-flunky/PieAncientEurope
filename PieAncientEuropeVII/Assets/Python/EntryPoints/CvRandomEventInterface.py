@@ -21,7 +21,7 @@ from CvPythonExtensions import (CyGlobalContext, CyTranslator, UnitAITypes,
 # from EventSigns import placeLandmark # K-Mod
 from operator import itemgetter  # K-Mod (used to avoid OOS when sorting)
 # import CvEventInterface
-import PAE_City
+# import PAE_City
 
 gc = CyGlobalContext()
 localText = CyTranslator()
@@ -437,7 +437,7 @@ def canDoBrothersInNeed1(argsList):
 ####### City Fire / Stadtbrand ######
 
 def canTriggerCityFire(argsList):
-	eTrigger = argsList[0]
+# 	eTrigger = argsList[0]
 	ePlayer = argsList[1]
 	iCity = argsList[2]
 
@@ -452,7 +452,7 @@ def canTriggerCityFire(argsList):
 
 	if city.getPopulation() < 3:
 		return False
-		
+
 	if city.isHasBuilding(gc.getInfoTypeForString("BUILDING_FEUERWEHR")):
 		return False
 
@@ -3180,8 +3180,6 @@ def applyKastellDone2(argsList):
 	team.changeImprovementYieldChange(iKastell, 2, 2)
 
 ######## Isis ###########
-
-
 def canTriggerIsis(argsList):
 	kTriggeredData = argsList[0]
 	player = gc.getPlayer(kTriggeredData.ePlayer)
@@ -3205,10 +3203,7 @@ def canTriggerIsis(argsList):
 			bFound = True
 			break
 
-	if not bFound:
-		return False
-
-	return True
+	return bFound
 
 
 def expireIsis1(argsList):
@@ -3282,10 +3277,7 @@ def canTriggerMithras(argsList):
 			bFound = True
 			break
 
-	if not bFound:
-		return False
-
-	return True
+	return bFound
 
 
 def expireMithras1(argsList):
@@ -3333,8 +3325,6 @@ def canTriggerMithrasDone(argsList):
 	return True
 
 ######## Helle ###########
-
-
 def canTriggerHelle(argsList):
 	kTriggeredData = argsList[0]
 	player = gc.getPlayer(kTriggeredData.ePlayer)
@@ -3358,10 +3348,7 @@ def canTriggerHelle(argsList):
 			bFound = True
 			break
 
-	if not bFound:
-		return False
-
-	return True
+	return bFound
 
 
 def expireHelle1(argsList):
@@ -3409,8 +3396,6 @@ def canTriggerHelleDone(argsList):
 	return True
 
 ######## MEUTEREI ###########
-
-
 def canTriggerMeuterei(argsList):
 	kTriggeredData = argsList[0]
 
@@ -3496,8 +3481,6 @@ def applyKarawane(argsList):
 	player.initUnit(iUnitType, plot.getX(), plot.getY(), UnitAITypes.UNITAI_MERCHANT, DirectionTypes.DIRECTION_SOUTH)
 
 ######## BALEAREN und KRETA ###########
-
-
 def canTriggerBalearen(argsList):
 	kTriggeredData = argsList[0]
 	# trigger = gc.getEventTriggerInfo(kTriggeredData.eTrigger)
@@ -3602,8 +3585,6 @@ def applyBalearenDone(argsList):
 		player.initUnit(iUnitType, plot.getX(), plot.getY(), UnitAITypes.UNITAI_ATTACK, DirectionTypes.DIRECTION_SOUTH)
 
 ######## Soeldner ###########
-
-
 def canTriggerSoeldner(argsList):
 	kTriggeredData = argsList[0]
 	# trigger = gc.getEventTriggerInfo(kTriggeredData.eTrigger)
@@ -3647,8 +3628,6 @@ def canDoSoeldner1(argsList):
 	return canTriggerSoeldner(newArgs)
 
 ######## THORGAL ###########
-
-
 def applyThorgal(argsList):
 	# iEvent = argsList[0]
 	kTriggeredData = argsList[1]
@@ -3671,8 +3650,6 @@ def getHelpRome_Religion_3(argsList):
 	return szHelp
 
 ######## BEDUINEN ###########
-
-
 def canTriggerBeduinen(argsList):
 
 	kTriggeredData = argsList[0]
@@ -3743,20 +3720,7 @@ def applyBeduinen1(argsList):
 							UnitAITypes.UNITAI_ATTACK_CITY_LEMMING, DirectionTypes.DIRECTION_SOUTH)
 
 
-# Check City colony or province after events
-# Nicht wieder entfernen!!! Das braucht man in den Events!
-def doCheckCityStatus(argsList):
-	# iEvent = argsList[0]
-	kTriggeredData = argsList[1]
-
-	player = gc.getPlayer(kTriggeredData.ePlayer)
-	pCity = player.getCity(kTriggeredData.iCityId)
-
-	PAE_City.doCheckCityState(pCity)
-
 ######## BIER ###########
-
-
 def canTriggerBier(argsList):
 	kTriggeredData = argsList[0]
 
@@ -3765,10 +3729,7 @@ def canTriggerBier(argsList):
 
 	iGaerung = CvUtil.findInfoTypeNum(gc.getTechInfo, gc.getNumTechInfos(), 'TECH_GAERUNG')
 
-	if team.isHasTech(iGaerung):
-		return False
-
-	return True
+	return not team.isHasTech(iGaerung)
 
 
 def applyBier(argsList):

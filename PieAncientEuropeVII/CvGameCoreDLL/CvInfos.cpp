@@ -398,7 +398,7 @@ bool CvHotkeyInfo::read(CvXMLLoadUtility* pXML)
 
 	return true;
 }
-
+	
 void CvHotkeyInfo::read(FDataStreamBase* pStream)
 {
 	CvInfoBase::read(pStream);
@@ -1682,6 +1682,8 @@ m_iKamikazePercent(0),
 // Flunky PAE - Flight
 m_iFlightChanceChange(0),
 m_iFlightMaxHealth(0),
+// Flunky Formations
+m_bFormation(false),
 m_bLeader(false),
 m_bBlitz(false),
 m_bAmphib(false),
@@ -1941,6 +1943,13 @@ int CvPromotionInfo::getFlightMaxHealth() const
 	return m_iFlightMaxHealth;
 }
 
+// Flunky Formations
+bool CvPromotionInfo::isFormation() const
+{
+	return m_bFormation;
+}
+
+
 bool CvPromotionInfo::isLeader() const			
 {
 	return m_bLeader;
@@ -2104,7 +2113,8 @@ void CvPromotionInfo::read(FDataStreamBase* stream)
 	// Flunky PAE - Flight
 	stream->Read(&m_iFlightChanceChange);
 	stream->Read(&m_iFlightMaxHealth);
-
+	// Flunky Formations
+	stream->Read(&m_bFormation);
 	stream->Read(&m_bLeader);
 	stream->Read(&m_bBlitz);
 	stream->Read(&m_bAmphib);
@@ -2202,7 +2212,8 @@ void CvPromotionInfo::write(FDataStreamBase* stream)
 	// Flunky PAE - Flight
 	stream->Write(m_iFlightChanceChange);
 	stream->Write(m_iFlightMaxHealth);
-
+	// Flunky Formations
+	stream->Write(m_bFormation);
 	stream->Write(m_bLeader);
 	stream->Write(m_bBlitz);
 	stream->Write(m_bAmphib);
@@ -2291,7 +2302,8 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	// Flunky PAE - Flight
 	pXML->GetChildXmlValByName(&m_iFlightChanceChange, "iFlightChanceChange");
 	pXML->GetChildXmlValByName(&m_iFlightMaxHealth, "iFlightMaxHealth");
-
+	// Flunky Formations
+	pXML->GetChildXmlValByName(&m_bFormation, "bFormation");
 	pXML->SetVariableListTagPair(&m_piTerrainAttackPercent, "TerrainAttacks", sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piTerrainDefensePercent, "TerrainDefenses", sizeof(GC.getTerrainInfo((TerrainTypes)0)), GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piFeatureAttackPercent, "FeatureAttacks", sizeof(GC.getFeatureInfo((FeatureTypes)0)), GC.getNumFeatureInfos());
@@ -6647,6 +6659,8 @@ m_iDefenseModifier(0),
 m_iBombardDefenseModifier(0),
 m_iAllCityDefenseModifier(0),
 m_iEspionageDefenseModifier(0),
+/** Flunky for PAE **/
+m_iMinCityLevel(0),
 m_iMissionType(NO_MISSION),
 m_iVoteSourceType(NO_VOTESOURCE),
 m_fVisibilityPriority(0.0f),
@@ -7239,6 +7253,12 @@ void CvBuildingInfo::setMissionType(int iNewType)
 int CvBuildingInfo::getVoteSourceType() const
 {
 	return m_iVoteSourceType;
+}
+
+/** Flunky for PAE **/
+int CvBuildingInfo::getMinCityLevel() const
+{
+	return m_iMinCityLevel;
 }
 
 float CvBuildingInfo::getVisibilityPriority() const
@@ -7912,7 +7932,9 @@ void CvBuildingInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iEspionageDefenseModifier);
 	stream->Read(&m_iMissionType);
 	stream->Read(&m_iVoteSourceType);
-
+	/** Flunky for PAE **/
+	stream->Read(&m_iMinCityLevel);
+	
 	stream->Read(&m_fVisibilityPriority);
 
 	stream->Read(&m_bTeamShare);
@@ -8260,6 +8282,8 @@ void CvBuildingInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iEspionageDefenseModifier);
 	stream->Write(m_iMissionType);
 	stream->Write(m_iVoteSourceType);
+	/** Flunky for PAE **/
+	stream->Write(m_iMinCityLevel);
 
 	stream->Write(m_fVisibilityPriority);
 
@@ -8598,6 +8622,9 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iEspionageDefenseModifier, "iEspionageDefense");
 	pXML->GetChildXmlValByName(&m_iAssetValue, "iAsset");
 	pXML->GetChildXmlValByName(&m_iPowerValue, "iPower");
+	/** Flunky for PAE **/
+	pXML->GetChildXmlValByName(&m_iMinCityLevel, "iMinCityLevel", 0);
+
 	pXML->GetChildXmlValByName(&m_fVisibilityPriority, "fVisibilityPriority");
 
 	// if we can set the current xml node to it's next sibling

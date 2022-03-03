@@ -686,6 +686,7 @@ bool CvSelectionGroupAI::AI_isDeclareWar(const CvPlot* pPlot)
 			case UNITAI_ANIMAL:
 			case UNITAI_SETTLE:
 			case UNITAI_WORKER:
+			case UNITAI_SUPPLY_WAGON: // Flunky for PAE
 				break;
 			case UNITAI_ATTACK_CITY:
 			case UNITAI_ATTACK_CITY_LEMMING:

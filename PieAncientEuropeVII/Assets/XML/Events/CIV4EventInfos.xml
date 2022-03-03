@@ -1814,7 +1814,8 @@
           <iEventChance>100</iEventChance>
         </EventChance>
       </ClearEvents>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -1900,7 +1901,8 @@
           <iEventChance>100</iEventChance>
         </EventChance>
       </ClearEvents>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -5444,7 +5446,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo>canApplyHurricane2</PythonCanDo>
       <PythonHelp/>
@@ -5606,7 +5609,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo>canApplyHurricane2</PythonCanDo>
       <PythonHelp/>
@@ -5768,7 +5772,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo>canApplyHurricane2</PythonCanDo>
       <PythonHelp/>
@@ -8118,7 +8123,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -8199,7 +8205,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -8280,7 +8287,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -15928,7 +15936,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -16270,7 +16279,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -16599,7 +16609,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -17257,7 +17268,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -17338,7 +17350,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -17419,7 +17432,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -21383,7 +21397,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -22036,7 +22051,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -22122,7 +22138,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>
@@ -22208,7 +22225,8 @@
       <AdditionalEvents/>
       <EventTimes/>
       <ClearEvents/>
-      <PythonCallback>doCheckCityStatus</PythonCallback>
+      <!-- <PythonCallback>doCheckCityStatus</PythonCallback> -->
+      <PythonCallback/>
       <PythonExpireCheck/>
       <PythonCanDo/>
       <PythonHelp/>

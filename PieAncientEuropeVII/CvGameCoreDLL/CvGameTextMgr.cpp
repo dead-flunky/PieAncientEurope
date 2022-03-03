@@ -173,14 +173,20 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 		}
 		else
 		{
+			// Flunky for PAE: hotfix month B.C.
 			int iMonth = getTurnMonthForGame(iGameTurn, iStartYear, eCalendar, eSpeed);
+			int e = iMonth % GC.getNumMonthInfos();
+			if (e < 0)
+			{
+				e += GC.getNumMonthInfos();
+			}
 			if (bSave)
 			{
-				szString = (szYearBuffer + "-" + GC.getMonthInfo((MonthTypes)(iMonth % GC.getNumMonthInfos())).getDescription());
+				szString = (szYearBuffer + "-" + GC.getMonthInfo((MonthTypes) e).getDescription());
 			}
 			else
 			{
-				szString = (GC.getMonthInfo((MonthTypes)(iMonth % GC.getNumMonthInfos())).getDescription() + CvString(", ") + szYearBuffer);
+				szString = (GC.getMonthInfo((MonthTypes) e).getDescription() + CvString(", ") + szYearBuffer);
 			}
 		}
 		break;

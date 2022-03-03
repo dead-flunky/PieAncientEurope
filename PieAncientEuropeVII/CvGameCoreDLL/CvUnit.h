@@ -659,6 +659,10 @@ public:
 		return m_eOwner;
 	}
 #endif
+	// Flunky Unit-Culture
+	PlayerTypes getCulture() const; // TODO expose to Python
+	void setCulture(PlayerTypes eNewValue);
+
 	DllExport PlayerTypes getVisualOwner(TeamTypes eForTeam = NO_TEAM) const;																									// Exposed to Python
 	PlayerTypes getCombatOwner(TeamTypes eForTeam, const CvPlot* pPlot) const;																									// Exposed to Python
 	DllExport TeamTypes getTeam() const;																										// Exposed to Python
@@ -759,6 +763,12 @@ public:
 
 	bool isFlight();																		// Exposed to Python
 	void setFlight(bool bFlight);															// Exposed to Python
+
+	// Flunky PAE Renegade
+	bool doRenegadeUnit(CvUnit* pWinner);
+	bool canRenegade(CvUnit* pWinner);
+	void renegade(PlayerTypes iNewOwner);
+	bool doLoserLoseHorse(PlayerTypes iWinnerPlayer);
 
 	DllExport const CvArtInfoUnit* getArtInfo(int i, EraTypes eEra) const;										// Exposed to Python
 	DllExport const TCHAR* getButton() const;										// Exposed to Python
@@ -887,6 +897,9 @@ protected:
 
 	PlayerTypes m_eOwner;
 	PlayerTypes m_eCapturingPlayer;
+	// Flunky Unit-Culture
+	PlayerTypes m_eCulture;
+
 	UnitTypes m_eUnitType;
 	UnitTypes m_eLeaderUnitType;
 	CvUnitInfo *m_pUnitInfo;

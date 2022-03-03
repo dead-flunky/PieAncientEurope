@@ -1467,6 +1467,18 @@ int CyUnit::getOwner()
 	return m_pUnit ? m_pUnit->getOwnerINLINE() : -1;
 }
 
+// Flunky Unit-Culture
+int CyUnit::getCulture()
+{
+	return m_pUnit ? m_pUnit->getCulture() : -1;
+}
+
+void CyUnit::setCulture(int eNewValue)
+{
+	if (m_pUnit)
+		m_pUnit->setCulture((PlayerTypes) eNewValue);
+}
+
 int CyUnit::getVisualOwner()
 {
 	return m_pUnit ? m_pUnit->getVisualOwner() : -1;

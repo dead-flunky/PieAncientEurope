@@ -15,6 +15,11 @@
 from CvPythonExtensions import CyGlobalContext
 gc = CyGlobalContext()
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 LGuerilla = []
 LWoodsman = []
 LJungle = []

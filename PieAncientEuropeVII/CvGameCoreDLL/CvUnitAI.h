@@ -75,6 +75,8 @@ protected:
 	void AI_attackMove();
 	void AI_attackCityMove();
 	void AI_attackCityLemmingMove();
+	// Flunky for PAE
+	void AI_supplyWagonMove();
 	void AI_collateralMove();
 	void AI_pillageMove();
 	void AI_reserveMove();

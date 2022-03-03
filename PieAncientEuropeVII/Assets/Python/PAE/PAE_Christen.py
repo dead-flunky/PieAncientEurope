@@ -7,6 +7,11 @@ from CvPythonExtensions import (CyGlobalContext, CyInterface,
 # import CvEventInterface
 import CvUtil
 
+# TODO remove
+# DEBUG code for Python 3 linter
+# unicode = str
+# xrange = range
+
 ### Defines
 gc = CyGlobalContext()
 
