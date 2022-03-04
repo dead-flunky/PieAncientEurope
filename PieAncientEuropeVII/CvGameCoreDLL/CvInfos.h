@@ -3704,6 +3704,8 @@ protected:
 	int m_iConquestVictoryWeight;
 	int m_iDominationVictoryWeight;
 	int m_iDiplomacyVictoryWeight;
+	int m_iWonderVictoryWeight;
+	int m_iReligionVictoryWeight;
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/

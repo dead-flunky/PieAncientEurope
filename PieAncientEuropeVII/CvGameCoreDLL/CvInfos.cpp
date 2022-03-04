@@ -14109,6 +14109,8 @@ m_iSpaceVictoryWeight(0),
 m_iConquestVictoryWeight(0),
 m_iDominationVictoryWeight(0),
 m_iDiplomacyVictoryWeight(0),
+m_iWonderVictoryWeight(0),
+m_iReligionVictoryWeight(0),
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
@@ -14311,6 +14313,15 @@ int CvLeaderHeadInfo::getDominationVictoryWeight() const
 int CvLeaderHeadInfo::getDiplomacyVictoryWeight() const
 {
 	return m_iDiplomacyVictoryWeight;
+}
+
+int CvLeaderHeadInfo::getWonderVictoryWeight() const
+{
+	return m_iWonderVictoryWeight;
+}
+int CvLeaderHeadInfo::getReligionVictoryWeight() const
+{
+	return m_iReligionVictoryWeight;
 }
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
@@ -14773,6 +14784,8 @@ void CvLeaderHeadInfo::read(FDataStreamBase* stream)
 		stream->Read(&m_iConquestVictoryWeight);
 		stream->Read(&m_iDominationVictoryWeight);
 		stream->Read(&m_iDiplomacyVictoryWeight);
+		stream->Read(&m_iWonderVictoryWeight);
+		stream->Read(&m_iReligionVictoryWeight);
 	}
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
@@ -14934,6 +14947,8 @@ void CvLeaderHeadInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iConquestVictoryWeight);
 	stream->Write(m_iDominationVictoryWeight);
 	stream->Write(m_iDiplomacyVictoryWeight);
+	stream->Write(m_iWonderVictoryWeight);
+	stream->Write(m_iReligionVictoryWeight);
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
@@ -15058,6 +15073,8 @@ bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iConquestVictoryWeight, "iConquestVictoryWeight", 0);
 	pXML->GetChildXmlValByName(&m_iDominationVictoryWeight, "iDominationVictoryWeight", 0);
 	pXML->GetChildXmlValByName(&m_iDiplomacyVictoryWeight, "iDiplomacyVictoryWeight", 0);
+	pXML->GetChildXmlValByName(&m_iWonderVictoryWeight, "iWonderVictoryWeight", 0);
+	pXML->GetChildXmlValByName(&m_iReligionVictoryWeight, "iReligionVictoryWeight", 0);
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
