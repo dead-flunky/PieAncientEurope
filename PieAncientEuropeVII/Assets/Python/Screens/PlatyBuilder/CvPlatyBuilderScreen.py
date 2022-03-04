@@ -424,10 +424,30 @@ class CvWorldBuilderScreen:
       return 1
 
     if self.iPlayerAddMode == "EraseAll":
-        self.m_pCurrentPlot.erase()
-        CyEngine().removeLandmark(self.m_pCurrentPlot)
-        for iPlayerX in xrange(gc.getMAX_PLAYERS()):
-            CyEngine().removeSign(self.m_pCurrentPlot, iPlayerX)
+      # Platy: this erases everything (rivers, bonus resources, features, players data)
+      #self.m_pCurrentPlot.erase()
+
+      # PAE: keep rivers, bonus resources and plot features
+      if (self.m_pCurrentPlot != 0):
+        while (self.m_pCurrentPlot.getNumUnits() > 0):
+          pUnit = self.m_pCurrentPlot.getUnit(0)
+          pUnit.kill(false, PlayerTypes.NO_PLAYER)
+
+      #self.m_pCurrentPlot.setBonusType(-1)
+      #self.m_pCurrentPlot.setFeatureType(FeatureTypes.NO_FEATURE, -1)
+
+      if (self.m_pCurrentPlot.isCity()):
+        self.m_pCurrentPlot.getPlotCity().kill()
+
+      self.m_pCurrentPlot.setRouteType(-1)
+      #self.m_pCurrentPlot.setNOfRiver(False, CardinalDirectionTypes.NO_CARDINALDIRECTION)
+      #self.m_pCurrentPlot.setWOfRiver(False, CardinalDirectionTypes.NO_CARDINALDIRECTION)
+      self.m_pCurrentPlot.setImprovementType(-1)
+      # PAE End --------------------------------
+
+      CyEngine().removeLandmark(self.m_pCurrentPlot)
+      for iPlayerX in xrange(gc.getMAX_PLAYERS()):
+          CyEngine().removeSign(self.m_pCurrentPlot, iPlayerX)
     elif self.iPlayerAddMode == "AddLandMark":
         iIndex = -1
         for i in xrange(CyEngine().getNumSigns()):
