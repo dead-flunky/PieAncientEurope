@@ -2243,6 +2243,7 @@ class CvWBDesc:
 					"EuropeXL": "StartingPoints_EuropeXL.xml",
 					"Eurasia": "StartingPoints_Eurasia.xml",
 					"EurasiaXL": "StartingPoints_EurasiaXL.xml",
+					"EurasiaHugeJD": "StartingPoints_EurasiaHuge_JD.xml",
 					# "EasternMed": "StartingPoints_EasternMed.xml"
 					}
 		for plot in self.plotDesc:

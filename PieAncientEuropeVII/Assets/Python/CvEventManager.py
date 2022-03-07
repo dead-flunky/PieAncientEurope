@@ -2113,7 +2113,7 @@ class CvEventManager:
 
 		PAE_Christen.init()
 
-		### Starting points part 2 ###
+		### Starting points sind nun in pyWB/CvWBDesc.py ###
 		# MapName = CyMap().getMapScriptName()
 		sScenarioName = CvUtil.getScriptData(CyMap().plot(0, 0), ["S", "t"])
 
