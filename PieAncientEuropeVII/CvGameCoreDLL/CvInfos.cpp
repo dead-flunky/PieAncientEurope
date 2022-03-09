@@ -7809,7 +7809,7 @@ const CvArtInfoBuilding* CvBuildingInfo::getArtInfo() const
 const CvArtInfoMovie* CvBuildingInfo::getMovieInfo() const
 {
 	const TCHAR* pcTag = getMovieDefineTag();
-	if (NULL != pcTag && 0 != _tcscmp(pcTag, "NONE"))
+	if (NULL != pcTag && 0 != _tcscmp(pcTag, "NONE") && 0 != _tcscmp(pcTag, ""))
 	{
 		return ARTFILEMGR.getMovieArtInfo(pcTag);
 	}
@@ -14315,6 +14315,7 @@ int CvLeaderHeadInfo::getDiplomacyVictoryWeight() const
 	return m_iDiplomacyVictoryWeight;
 }
 
+// Pie additional victory weights
 int CvLeaderHeadInfo::getWonderVictoryWeight() const
 {
 	return m_iWonderVictoryWeight;
@@ -14784,6 +14785,7 @@ void CvLeaderHeadInfo::read(FDataStreamBase* stream)
 		stream->Read(&m_iConquestVictoryWeight);
 		stream->Read(&m_iDominationVictoryWeight);
 		stream->Read(&m_iDiplomacyVictoryWeight);
+		// Pie additional victory weights
 		stream->Read(&m_iWonderVictoryWeight);
 		stream->Read(&m_iReligionVictoryWeight);
 	}
@@ -14947,6 +14949,7 @@ void CvLeaderHeadInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iConquestVictoryWeight);
 	stream->Write(m_iDominationVictoryWeight);
 	stream->Write(m_iDiplomacyVictoryWeight);
+	// Pie additional victory weights
 	stream->Write(m_iWonderVictoryWeight);
 	stream->Write(m_iReligionVictoryWeight);
 /************************************************************************************************/
@@ -15073,6 +15076,7 @@ bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iConquestVictoryWeight, "iConquestVictoryWeight", 0);
 	pXML->GetChildXmlValByName(&m_iDominationVictoryWeight, "iDominationVictoryWeight", 0);
 	pXML->GetChildXmlValByName(&m_iDiplomacyVictoryWeight, "iDiplomacyVictoryWeight", 0);
+	// Pie additional victory weights
 	pXML->GetChildXmlValByName(&m_iWonderVictoryWeight, "iWonderVictoryWeight", 0);
 	pXML->GetChildXmlValByName(&m_iReligionVictoryWeight, "iReligionVictoryWeight", 0);
 /************************************************************************************************/

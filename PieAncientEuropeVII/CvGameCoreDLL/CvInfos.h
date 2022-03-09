@@ -3584,6 +3584,9 @@ public:
 	int getConquestVictoryWeight() const;
 	int getDominationVictoryWeight() const;
 	int getDiplomacyVictoryWeight() const;
+	// Flunky/Pie additional victory weights
+	int getWonderVictoryWeight() const;
+	int getReligionVictoryWeight() const;
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
@@ -3704,6 +3707,7 @@ protected:
 	int m_iConquestVictoryWeight;
 	int m_iDominationVictoryWeight;
 	int m_iDiplomacyVictoryWeight;
+	// Pie additional victory weights
 	int m_iWonderVictoryWeight;
 	int m_iReligionVictoryWeight;
 /************************************************************************************************/

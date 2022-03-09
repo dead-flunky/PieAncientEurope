@@ -25,6 +25,9 @@
 	<ElementType name="iConquestVictoryWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="iDominationVictoryWeight" content="textOnly" dt:type="int"/>
 	<ElementType name="iDiplomacyVictoryWeight" content="textOnly" dt:type="int"/>
+	<!-- PAE Victory -->
+	<ElementType name="iWonderVictoryWeight" content="textOnly" dt:type="int"/>
+	<ElementType name="iReligionVictoryWeight" content="textOnly" dt:type="int"/>
 	<!-- BBAI Victory Strategy -->
 	<ElementType name="iMaxWarRand" content="textOnly" dt:type="int"/>
 	<ElementType name="iMaxWarNearbyPowerRatio" content="textOnly" dt:type="int"/>
@@ -211,6 +214,9 @@
 		<element type="iConquestVictoryWeight" minOccurs="0"/>
 		<element type="iDominationVictoryWeight" minOccurs="0"/>
 		<element type="iDiplomacyVictoryWeight" minOccurs="0"/>
+		<!-- PAE Victory -->
+		<element type="iWonderVictoryWeight" minOccurs="0"/>
+		<element type="iReligionVictoryWeight" minOccurs="0"/>
 		<!-- BBAI Victory Strategy -->
 		<element type="iMaxWarRand"/>
 		<element type="iMaxWarNearbyPowerRatio"/>
