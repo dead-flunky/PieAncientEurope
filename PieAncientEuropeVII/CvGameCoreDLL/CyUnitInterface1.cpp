@@ -369,6 +369,7 @@ void CyUnitPythonInterface1(python::class_<CyUnit>& x)
 #		//.def("setFlight", &CyUnit::setFlight, "void (int iNewValue)")
 		
 		.def("setCulture", &CyUnit::setCulture, "void (int /*PlayerTypes*/ eIndex)")
+		.def("getCulture", &CyUnit::getCulture, "int /*PlayerTypes*/ eIndex ()")
 
 		.def("getExtraDomainModifier", &CyUnit::getExtraDomainModifier, "int ()")
 
