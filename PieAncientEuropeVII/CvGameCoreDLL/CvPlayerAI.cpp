@@ -5485,7 +5485,8 @@ TechTypes CvPlayerAI::AI_bestTech(int iMaxPathLength, bool bFreeTech, bool bAsyn
 		logBBAI("  Player %d (%S) selects tech %S with value %d. (Aiming for %S)",
 			getID(), getCivilizationDescription(0), GC.getTechInfo(eBestTech).getDescription(), techs[best_path_it->second.back()].first, GC.getTechInfo(techs[best_path_it->second.front()].second).getDescription());
 	}
-	FAssert(!isResearch() || getAdvancedStartPoints() < 0 || canResearch(eBestTech, false, bFreeTech));
+	FAssert(!isResearch() || getAdvancedStartPoints() < 0 || canResearch(eBestTech));
+	// kmod: FAssert(!isResearch() || getAdvancedStartPoints() < 0 || canResearch(eBestTech, false, bFreeTech));
 	return eBestTech;
 }
 
@@ -6639,7 +6640,8 @@ int CvPlayerAI::AI_techValue(TechTypes eTech, int iPathLength, bool bFreeTech, b
 
 					for (TechTypes iI = (TechTypes)0; iI < GC.getNumTechInfos(); iI=(TechTypes)(iI+1))
 					{
-						if (canResearch(iI, false, true))
+						if (canResearch(iI))
+						// kmod: if (canResearch(iI, false, true))
 						{
 							int iTechCost = kTeam.getResearchCost(iI);
 							iTotalTechCost += iTechCost;
@@ -14288,30 +14290,6 @@ int CvPlayerAI::AI_civicValue(CivicTypes eCivic) const
 	iValue += (iCities * 6 * iS * AI_getHealthWeight(-iS*kCivic.getUnhealthyPopulationModifier(), 1, true)) / 100;
 	// c.f	iValue += (iCities * 6 * AI_getHealthWeight(kCivic.getExtraHealth(), 1)) / 100;
 
-	// If the GW threshold has been reached, increase the value based on GW anger
-	if (kGame.getGlobalWarmingIndex() > 0)
-	{
-		// estimate the happiness boost...
-		// suppose pop pollution is 1/3 of total, and current relative contribution is around 100%
-		// and anger percent scales like 2* relative contribution...
-		// anger percent reduction will then be around (kCivic.getUnhealthyPopulationModifier()*2/3)%
-
-		// Unfortunately, since adopting this civic will lower the very same anger percent that is giving the civic value...
-		// the civic will be valued lower as soon as it is adopted. :(
-		// Fixing this problem (and others like it) is a bit tricky. For now, I'll just try to fudge around it.
-		int iGwAnger = getGwPercentAnger();
-		if (isCivic(eCivic)) // Fudge factor
-		{
-			iGwAnger *= 100;
-			iGwAnger /= 100 - 2*kCivic.getUnhealthyPopulationModifier()/3;
-			// Note, this fudge factor is actually pretty good at estimating what the GwAnger would have been.
-		}
-		int iCleanValue = (iCities * 12 * iS * AI_getHappinessWeight(iS*ROUND_DIVIDE(-kCivic.getUnhealthyPopulationModifier()*iGwAnger*2,300), 1, true)) / 100;
-		// This isn't a big reduction; and it should be the only part of this evaluation.
-		// Maybe I'll add more later; such as some flavour factors.
-
-		iValue += iCleanValue;
-	}
 // K-Mod end
 	if (bWarPlan)
 	{
@@ -22125,8 +22103,8 @@ void CvPlayerAI::AI_convertUnitAITypesForCrush()
 			}
 // Super Forts begin *AI_defense* - don't convert units guarding a fort
 			//doto - new specific call for fortcheck.
-			else if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-			{			
+			else
+			{
 				if (pPlot->isFortImprovement())
 				{
 					if (pPlot->getNumDefenders(pLoopUnit->getOwner()) == 1)
@@ -22335,7 +22313,7 @@ int CvPlayerAI::AI_getTotalFloatingDefendersNeeded(CvArea* pArea) const
 	}
 	
 // Super Forts begin *AI_defense* - Build a few extra floating defenders for occupying forts
-	iDefenders += GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) ? (iAreaCities / 2) : 0 ;
+	iDefenders += (iAreaCities / 2);
 // Super Forts end
 
 	return iDefenders;
@@ -24354,7 +24332,7 @@ int CvPlayerAI::AI_getPlotAirbaseValue(CvPlot* pPlot) const
 	int iMinFriendlyCityDistance = MAX_INT;
 	CvPlot* iMinFriendlyCityPlot = NULL;
 // super forts - doto - pMinOtherCityPlot commented back in - advc removed it.	
-	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
+	bool superForts = true;
 // Super Forts doto	
 	
 	int iOtherCityCount = 0;
@@ -24489,12 +24467,9 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 	
 	FAssert(pPlot != NULL);
 // Super Forts begin *canal*
-	bool superForts = GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS);
 
-// Flunky PAE disabled *choke* *canal* for bug search
-	int iCanalValue = superForts ? pPlot->getCanalValue() : 1;
-						/*Doto - the value 1 is for the check below to be true - 
-						so original code will kick in */ 
+	int iCanalValue = 1;
+	// kmod: int iCanalValue = pPlot->getCanalValue();
 	
 	if (iCanalValue > 0)
 	{
@@ -24541,12 +24516,7 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 					// K-Mod end
 					// Decrease value when within radius of a city
 // Super Forts begin *canal*
-// Flunky PAE disabled *choke* *canal* for bug search
-					if (superForts)
-					{
-						iCanalValue -= 5;
-					}
-					
+					iCanalValue -= 5;
 				}
 			}
 		}
@@ -24558,52 +24528,31 @@ int CvPlayerAI::AI_getPlotCanalValue(CvPlot* pPlot) const
 		{
 			if (pLoopPlot->isCity(true))
 			{
-// Super Forts begin 
-// Flunky PAE disabled *choke* *canal* for bug search
-				if 	(pLoopPlot->getCanalValue() > 0 && superForts)
-				{
-				// Decrease value when adjacent to a city or fort with a canal value
-					iCanalValue -= 10;
-				}
-				else
-				{
-					return 0;//original part
-				}
+				// if 	(pLoopPlot->getCanalValue() > 0)
+					// // Decrease value when adjacent to a city or fort with a canal value
+					// iCanalValue -= 10;
+				// else 
+				return 0;//original part
 // Super Forts begin 
 			}
 		}
 
 // Flunky PAE disabled *choke* *canal* for bug search
-		if (superForts)
-		{
-			iCanalValue *= 10;
-			// Favor plots with higher defense
-			int iDefenseModifier = pPlot->defenseModifier(getTeam(), false);
-			iCanalValue += iDefenseModifier;
-		}
+		iCanalValue *= 10;
+		// Favor plots with higher defense
+		int iDefenseModifier = pPlot->defenseModifier(getTeam(), false);
+		iCanalValue += iDefenseModifier;
 	}
 	
 	CvArea* pSecondWaterArea = pPlot->secondWaterArea();
-	if (pSecondWaterArea == NULL && !superForts)
-	{
-		return 0;
-	}
-	else if (!superForts)
-	{
-		//return 10 * std::min(0, pSecondWaterArea->getNumTiles() - 2);
-		return 10 * std::max(0, pSecondWaterArea->getNumTiles() - 2);
-	}
-	else
-	{
-		return std::max(0,iCanalValue);
-		// Super Forts end
-	}
+	return std::max(0,iCanalValue);
+	// Super Forts end
 }
 // Super Forts begin *choke*
 int CvPlayerAI::AI_getPlotChokeValue(CvPlot* pPlot) const
 {
 	PROFILE_FUNC();
-	
+
 	FAssert(pPlot != NULL);
 
 	int iChokeValue = pPlot->getChokeValue();
@@ -24637,7 +24586,7 @@ int CvPlayerAI::AI_getPlotChokeValue(CvPlot* pPlot) const
 					// Decrease value when within radius of a city
 					iChokeValue -= 5;
 				}
-			}
+				}
 		}
 	
 		for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
