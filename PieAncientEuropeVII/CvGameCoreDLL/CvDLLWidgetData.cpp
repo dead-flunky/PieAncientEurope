@@ -575,25 +575,6 @@ void CvDLLWidgetData::parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &w
 		parseCommerceModHelp(widgetDataStruct, szBuffer);
 		break;
 
-	// K-Mod. Environmental advisor widgets.
-	case WIDGET_HELP_POLLUTION_OFFSETS:
-		parsePollutionOffsetsHelp(widgetDataStruct, szBuffer);
-		break;
-	case WIDGET_HELP_POLLUTION_SOURCE:
-		parsePollutionHelp(widgetDataStruct, szBuffer);
-		break;
-	case WIDGET_HELP_SUSTAINABILITY_THRESHOLD:
-		szBuffer.assign(gDLL->getText("TXT_KEY_SUSTAINABILITY_THRESHOLD_HELP"));
-		break;
-	case WIDGET_HELP_GW_RELATIVE_CONTRIBUTION:
-		szBuffer.assign(gDLL->getText("TXT_KEY_GW_RELATIVE_CONTRIBUTION_HELP"));
-		break;
-	case WIDGET_HELP_GW_INDEX:
-		szBuffer.assign(gDLL->getText("TXT_KEY_GW_INDEX_HELP"));
-		break;
-	case WIDGET_HELP_GW_UNHAPPY:
-		szBuffer.assign(gDLL->getText("TXT_KEY_GW_UNHAPPY_HELP"));
-		break;
 	// K-Mod. Extra specialist commerce
 	case WIDGET_HELP_GLOBAL_COMMERCE_MODIFIER:
 		GAMETEXT.setCommerceChangeHelp(szBuffer, L"", L"", gDLL->getText("TXT_KEY_CIVIC_IN_ALL_CITIES").GetCString(), GC.getTechInfo((TechTypes)(widgetDataStruct.m_iData1)).getCommerceModifierArray(), true, false);
@@ -1083,8 +1064,7 @@ void CvDLLWidgetData::doPlotList(CvWidgetDataStruct &widgetDataStruct)
 		{
 			bWasCityScreenUp = gDLL->getInterfaceIFace()->isCityScreenUp();
 
-			//gDLL->getInterfaceIFace()->selectGroup(pUnit, gDLL->shiftKey(), gDLL->ctrlKey(), gDLL->altKey());
-			gDLL->getInterfaceIFace()->selectGroup(pUnit, GC.shiftKey(), GC.ctrlKey() || GC.altKey(), GC.altKey()); // K-Mod
+			gDLL->getInterfaceIFace()->selectGroup(pUnit, gDLL->shiftKey(), gDLL->ctrlKey(), gDLL->altKey());
 
 			if (bWasCityScreenUp)
 			{
@@ -1251,10 +1231,9 @@ void CvDLLWidgetData::doChangeSpecialist(CvWidgetDataStruct &widgetDataStruct)
 
 void CvDLLWidgetData::doResearch(CvWidgetDataStruct &widgetDataStruct)
 {
+	bool bShift = GC.shiftKey();
+	
 	/* original bts code
-	bool bShift;
-
-	bShift = GC.shiftKey();
 
 	if (!bShift)
 	{
@@ -1263,7 +1242,6 @@ void CvDLLWidgetData::doResearch(CvWidgetDataStruct &widgetDataStruct)
 			bShift = true;
 		}
 	} */
-	bool bShift = GC.shiftKey();
 
 /************************************************************************************************/
 /* UNOFFICIAL_PATCH                       12/07/09                             EmperorFool      */
@@ -3333,7 +3311,7 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 	{
 		return;
 	}
-
+	
 	// make sure its empty to start
 	szBuffer.clear();
 
@@ -4784,7 +4762,6 @@ void CvDLLWidgetData::parseMaintenanceHelp(CvWidgetDataStruct &widgetDataStruct,
 			CvWString szMaint = CvWString::format(L"%d.%02d", iMaintenanceValue/100, iMaintenanceValue%100);
 			szBuffer.append(NEWLINE);
 			szBuffer.append(gDLL->getText("TXT_KEY_MISC_TOTAL_MAINT_FLOAT", szMaint.GetCString()));
-			//
 
 			iMaintenanceValue = pHeadSelectedCity->getMaintenanceModifier();
 
@@ -5747,54 +5724,3 @@ void CvDLLWidgetData::parseScoreHelp(CvWidgetDataStruct& widgetDataStruct, CvWSt
 {
 	GAMETEXT.setScoreHelp(szBuffer, (PlayerTypes)widgetDataStruct.m_iData1);
 }
-
-/*
-** K-Mod, 5/jan/11, karadoc
-** Environmental advisor mouse-over text
-*/
-void CvDLLWidgetData::parsePollutionOffsetsHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	szBuffer.append(gDLL->getText("TXT_KEY_POLLUTION_OFFSETS_HELP"));
-
-	for (int iI = 0; iI < GC.getNumFeatureInfos(); ++iI)
-	{
-		int iWarmingDefence = GC.getFeatureInfo((FeatureTypes)iI).getWarmingDefense();
-
-		if (iWarmingDefence != 0)
-		{
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_OFFSET_PER_FEATURE", -iWarmingDefence, GC.getFeatureInfo((FeatureTypes)iI).getTextKeyWide()));
-		}
-	}
-}
-
-void CvDLLWidgetData::parsePollutionHelp(CvWidgetDataStruct &widgetDataStruct, CvWStringBuffer &szBuffer)
-{
-	int iFlags = (int)widgetDataStruct.m_iData1;
-
-	szBuffer.append(gDLL->getText("TXT_KEY_POLLUTION")+":");
-
-	if (iFlags & POLLUTION_POPULATION)
-	{
-		szBuffer.append(NEWLINE);
-		szBuffer.append(gDLL->getText("TXT_KEY_POLLUTION_FROM_POPULATION", GC.getDefineINT("GLOBAL_WARMING_POPULATION_WEIGHT")));
-	}
-	if (iFlags & POLLUTION_BUILDINGS)
-	{
-		szBuffer.append(NEWLINE);
-		szBuffer.append(gDLL->getText("TXT_KEY_POLLUTION_FROM_BUILDINGS", GC.getDefineINT("GLOBAL_WARMING_BUILDING_WEIGHT")));
-	}
-	if (iFlags & POLLUTION_BONUSES)
-	{
-		szBuffer.append(NEWLINE);
-		szBuffer.append(gDLL->getText("TXT_KEY_POLLUTION_FROM_BONUSES", GC.getDefineINT("GLOBAL_WARMING_BONUS_WEIGHT")));
-	}
-	if (iFlags & POLLUTION_POWER)
-	{
-		szBuffer.append(NEWLINE);
-		szBuffer.append(gDLL->getText("TXT_KEY_POLLUTION_FROM_POWER", GC.getDefineINT("GLOBAL_WARMING_POWER_WEIGHT")));
-	}
-}
-/*
-** K-Mod end
-*/

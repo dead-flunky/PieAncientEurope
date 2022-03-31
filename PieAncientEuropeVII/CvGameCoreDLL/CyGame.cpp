@@ -546,48 +546,6 @@ void CyGame::setAIAutoPlay(int iNewValue)
 		m_pGame->setAIAutoPlay(iNewValue);
 }
 
-/*
-** K-Mod, 11/dec/10, karadoc
-*/
-int CyGame::getGlobalWarmingIndex() const
-{
-	return (NULL != m_pGame ? m_pGame->getGlobalWarmingIndex() : 0);
-}
-
-int CyGame::getGlobalWarmingChances() const
-{
-	return (NULL != m_pGame ? m_pGame->getGlobalWarmingChances() : 0);
-}
-
-int CyGame::getGwEventTally() const
-{
-	return (NULL != m_pGame ? m_pGame->getGwEventTally() : -1);
-}
-
-int CyGame::calculateGlobalPollution() const
-{
-	return (NULL != m_pGame ? m_pGame->calculateGlobalPollution() : 0);
-}
-
-int CyGame::calculateGwLandDefence(int /* PlayerTypes */ ePlayer) const
-{
-	return (NULL != m_pGame ? m_pGame->calculateGwLandDefence((PlayerTypes)ePlayer) : 0);
-}
-
-int CyGame::calculateGwSustainabilityThreshold(int /* PlayerTypes */ ePlayer) const
-{
-	return (NULL != m_pGame ? m_pGame->calculateGwSustainabilityThreshold((PlayerTypes)ePlayer) : 0);
-}
-
-int CyGame::calculateGwSeverityRating() const
-{
-	return (NULL != m_pGame ? m_pGame->calculateGwSeverityRating() : 0);
-}
-/*
-** K-Mod end
-*/
-
-
 bool CyGame::isScoreDirty() const
 {
 	return m_pGame ? m_pGame->isScoreDirty() : false;

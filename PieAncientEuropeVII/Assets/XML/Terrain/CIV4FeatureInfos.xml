@@ -21,9 +21,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>10</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -150,9 +147,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>6</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -274,9 +268,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>10</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -394,9 +385,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>10</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>10</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -526,9 +514,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>8</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -646,9 +631,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>1</bNoCoast>
       <bNoRiver>1</bNoRiver>
       <bNoAdjacent>1</bNoAdjacent>
@@ -766,9 +748,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -881,9 +860,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1005,9 +981,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>20</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1129,9 +1102,6 @@
       <iDisappearance>1800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>10</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>10</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1253,9 +1223,6 @@
       <iDisappearance>2200</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>10</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1377,9 +1344,6 @@
       <iDisappearance>1800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>10</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1501,9 +1465,6 @@
       <iDisappearance>1000</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>100</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1539,9 +1500,6 @@
       <iDisappearance>1000</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>75</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1577,9 +1535,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1623,9 +1578,6 @@
       <iDisappearance>1800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>20</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1665,9 +1617,6 @@
       <iDisappearance>1800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>10</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1703,9 +1652,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1741,9 +1687,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1783,9 +1726,6 @@
       <iDisappearance>1800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>30</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1825,9 +1765,6 @@
       <iDisappearance>1000</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>10</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1863,9 +1800,6 @@
       <iDisappearance>1000</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1901,9 +1835,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1939,9 +1870,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -1977,9 +1905,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -2015,9 +1940,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -2053,9 +1975,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -2091,9 +2010,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -2129,9 +2045,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -2167,9 +2080,6 @@
       <iDisappearance>800</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>
@@ -2205,9 +2115,6 @@
       <iDisappearance>0</iDisappearance>
       <iGrowth>0</iGrowth>
       <iTurnDamage>0</iTurnDamage>
-<!--kmod-->
-      <iWarmingDefense>0</iWarmingDefense>
-<!--kmod-->	  
       <bNoCoast>0</bNoCoast>
       <bNoRiver>0</bNoRiver>
       <bNoAdjacent>0</bNoAdjacent>

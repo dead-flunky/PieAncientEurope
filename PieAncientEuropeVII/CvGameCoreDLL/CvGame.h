@@ -53,7 +53,6 @@ public:
 	DllExport void updateBuildingCommerce();
 	DllExport void updateCitySight(bool bIncrement);
 	DllExport void updateTradeRoutes();
-	void updateGwPercentAnger(); // K-Mod
 
 	DllExport void updateSelectionList();
 	DllExport void updateTestEndTurn();
@@ -245,24 +244,6 @@ public:
 	int getAIAutoPlay();																				// Exposed to Python
 	DllExport void setAIAutoPlay(int iNewValue);																// Exposed to Python
 	void changeAIAutoPlay(int iChange);
-/*
-** K-mod, 6/dec/10, karadoc
-*/
-	int getGlobalWarmingIndex() const;								// Exposed to Python
-	void setGlobalWarmingIndex(int iNewValue);
-	void changeGlobalWarmingIndex(int iChange);
-	int getGlobalWarmingChances() const;							// Exposed to Python
-	int getGwEventTally() const;							// Exposed to Python
-	void setGwEventTally(int iNewValue);
-	void changeGwEventTally(int iChange);
-
-	int calculateGlobalPollution() const; // Exposed to Python
-	int calculateGwLandDefence(PlayerTypes ePlayer = NO_PLAYER /* global */) const; // Exposed to Python
-	int calculateGwSustainabilityThreshold(PlayerTypes ePlayer = NO_PLAYER /* global */) const; // Exposed to Python
-	int calculateGwSeverityRating() const; // Exposed to Python
-/*
-** K-mod end
-*/
 
 	DllExport unsigned int getInitialTime();
 	DllExport void setInitialTime(unsigned int uiNewValue);
@@ -603,8 +584,6 @@ protected:
 	int m_iInitTech;
 	int m_iInitWonders;
 	int m_iAIAutoPlay;
-	int m_iGlobalWarmingIndex;	// K-Mod
-	int m_iGwEventTally;		// K-Mod
 
 	unsigned int m_uiInitialTime;
 
@@ -687,7 +666,6 @@ protected:
 	void doTurn();
 	void doDeals();
 	void doGlobalWarming();
-	CvPlot* getRandGWPlot(int iPool); // K-Mod
 	void doHolyCity();
 	void doHeadquarters();
 	void doDiploVote();

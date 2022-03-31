@@ -130,14 +130,6 @@ void CyGamePythonInterface()
 		.def("getAIAutoPlay", &CyGame::getAIAutoPlay)
 		.def("setAIAutoPlay", &CyGame::setAIAutoPlay)
 
-		.def("getGlobalWarmingIndex", &CyGame::getGlobalWarmingIndex)	// K-Mod
-		.def("getGlobalWarmingChances", &CyGame::getGlobalWarmingChances)	// K-Mod
-		.def("getGwEventTally", &CyGame::getGwEventTally)				// K-Mod
-		.def("calculateGlobalPollution", &CyGame::calculateGlobalPollution) // K-Mod
-		.def("calculateGwLandDefence", &CyGame::calculateGwLandDefence)	// K-Mod
-		.def("calculateGwSustainabilityThreshold", &CyGame::calculateGwSustainabilityThreshold)	// K-Mod
-		.def("calculateGwSeverityRating", &CyGame::calculateGwSeverityRating)	// K-Mod
-
 		.def("isScoreDirty", &CyGame::isScoreDirty, "bool ()")
 		.def("setScoreDirty", &CyGame::setScoreDirty)
 		.def("isCircumnavigated", &CyGame::isCircumnavigated, "bool () - is the globe circumnavigated?")

@@ -591,6 +591,7 @@ protected:
 	bool m_bAlwaysHeal;
 	bool m_bHillsDoubleMove;
 	bool m_bImmuneToFirstStrikes;
+
 	CvString m_szSound;
 
 	// Arrays
@@ -3207,7 +3208,6 @@ public:
 	int getDefenseModifier() const;						// Exposed to Python
 	int getAdvancedStartRemoveCost() const;						// Exposed to Python
 	int getTurnDamage() const;						// Exposed to Python
-	int getWarmingDefense() const; //GWmod
 
 	bool isNoCoast() const;						// Exposed to Python
 	bool isNoRiver() const;						// Exposed to Python
@@ -3216,7 +3216,7 @@ public:
 	bool isRequiresRiver() const;			// Exposed to Python
 	bool isAddsFreshWater() const;		// Exposed to Python
 	bool isImpassable() const;				// Exposed to Python
-//pae keldath feature movable on water
+	//PAE keldath feature movable on water
 	bool isWaterMovable() const;				// Exposed to Python
 	bool isNoCity() const;						// Exposed to Python
 	bool isNoImprovement() const;			// Exposed to Python
@@ -3261,7 +3261,6 @@ protected:
 	int m_iDefenseModifier;
 	int m_iAdvancedStartRemoveCost;
 	int m_iTurnDamage;
-	int m_iWarmingDefense; //GWMod new xml field M.A.
 
 	bool m_bNoCoast;
 	bool m_bNoRiver;
@@ -3270,7 +3269,7 @@ protected:
 	bool m_bRequiresRiver;
 	bool m_bAddsFreshWater;
 	bool m_bImpassable;
-//pae keldath movable feature on water
+	//PAE keldath movable feature on water
 	bool m_bWaterMovable;
 	bool m_bNoCity;
 	bool m_bNoImprovement;
@@ -3455,7 +3454,7 @@ protected:
 
 	bool m_bWater;
 	bool m_bImpassable;
-//pae keldath movable feature on water
+	//PAE keldath movable feature on water
 	bool m_bWaterMovable;
 	bool m_bFound;
 	bool m_bFoundCoast;
@@ -6424,7 +6423,7 @@ public:
 	CvUnitArtStyleTypeInfo();
 	virtual ~CvUnitArtStyleTypeInfo();
 
-    const TCHAR* getEarlyArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
+	const TCHAR* getEarlyArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
 	void setEarlyArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
 	const TCHAR* getLateArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j) const;
 	void setLateArtDefineTag(int /*Mesh Index*/ i, int /*UnitType*/ j, const TCHAR* szVal);
@@ -6442,7 +6441,7 @@ protected:
 		CvString szTag;
 	};
 	typedef std::vector<ArtDefneTag> ArtDefineArray;
-    ArtDefineArray m_azEarlyArtDefineTags;
+	ArtDefineArray m_azEarlyArtDefineTags;
 	ArtDefineArray m_azLateArtDefineTags;
 	ArtDefineArray m_azMiddleArtDefineTags;
 };

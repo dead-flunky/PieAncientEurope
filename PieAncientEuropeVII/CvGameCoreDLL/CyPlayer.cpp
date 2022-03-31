@@ -552,22 +552,6 @@ int CyPlayer::calculateResearchModifier(int /*TechTypes*/ eTech)
 	return m_pPlayer ? m_pPlayer->calculateResearchModifier((TechTypes)eTech) : -1;
 }
 
-/*
-** K-Mod, 18/dec/10, karadoc
-*/
-int CyPlayer::calculatePollution(int iTypes) const
-{
-	return m_pPlayer ? m_pPlayer->calculatePollution(iTypes) : 0;
-}
-
-int CyPlayer::getGwPercentAnger() const
-{
-	return m_pPlayer ? m_pPlayer->getGwPercentAnger() : 0;
-}
-/*
-** K-Mod end
-*/
-
 /* int CyPlayer::calculateBaseNetResearch()
 {
 	return m_pPlayer ? m_pPlayer->calculateBaseNetResearch() : -1;
@@ -2094,7 +2078,7 @@ bool CyPlayer::AI_demandRebukedWar(int /*PlayerTypes*/ ePlayer)
 
 AttitudeTypes CyPlayer::AI_getAttitude(int /*PlayerTypes*/ ePlayer)
 {
-	//Keldath Pae - there are lots of python places that call this 
+	//Keldath PAE - there are lots of python places that call this 
 	//which was probably implemented wrong since there are calls on self attitude.
 	//Flunky and me changed places to check this out, but i decided to add a bypass here.
 	//best practice is to fix the python, it also adds performance issues.

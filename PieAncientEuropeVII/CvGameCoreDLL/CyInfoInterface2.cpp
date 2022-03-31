@@ -388,8 +388,7 @@ void CyInfoPythonInterface2()
 		.def("getDefenseModifier", &CvFeatureInfo::getDefenseModifier, "int ()")
 		.def("getAdvancedStartRemoveCost", &CvFeatureInfo::getAdvancedStartRemoveCost, "int ()")
 		.def("getTurnDamage", &CvFeatureInfo::getTurnDamage, "int ()")
-		.def("getWarmingDefense", &CvFeatureInfo::getWarmingDefense, "int ()") //GWMod new XML field M.A.
-		
+
 		.def("isNoCoast", &CvFeatureInfo::isNoCoast, "bool ()")
 		.def("isNoRiver", &CvFeatureInfo::isNoRiver, "bool ()")
 		.def("isNoAdjacent", &CvFeatureInfo::isNoAdjacent, "bool ()")
@@ -397,7 +396,7 @@ void CyInfoPythonInterface2()
 		.def("isRequiresRiver", &CvFeatureInfo::isRequiresRiver, "bool ()")
 		.def("isAddsFreshWater", &CvFeatureInfo::isAddsFreshWater, "bool ()")
 		.def("isImpassable", &CvFeatureInfo::isImpassable, "bool ()")
-	//pae kedlath movable feature on water
+		//pae keldath movable feature on water
 		.def("isWaterMovable", &CvFeatureInfo::isWaterMovable, "bool ()")
 		.def("isNoCity", &CvFeatureInfo::isNoCity, "bool ()")
 		.def("isNoImprovement", &CvFeatureInfo::isNoImprovement, "bool ()")

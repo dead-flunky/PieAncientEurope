@@ -141,14 +141,6 @@ public:
 	int getAIAutoPlay() const;
 	void setAIAutoPlay(int iNewValue);
 
-	int getGlobalWarmingIndex() const;	// K-Mod
-	int getGlobalWarmingChances() const;	// K-Mod
-	int getGwEventTally() const;		// K-Mod
-	int calculateGlobalPollution() const; // K-Mod
-	int calculateGwLandDefence(int /* PlayerTypes */ ePlayer) const; // K-Mod
-	int calculateGwSustainabilityThreshold(int /* PlayerTypes */ ePlayer) const; // K-Mod
-	int calculateGwSeverityRating() const;
-
 	bool isScoreDirty() const;
 	void setScoreDirty(bool bNewValue);
 	bool isCircumnavigated() const;

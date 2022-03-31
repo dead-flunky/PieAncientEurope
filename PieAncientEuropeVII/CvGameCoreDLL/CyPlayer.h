@@ -153,8 +153,6 @@ public:
 	int calculateTotalCommerce();
 	int calculateResearchRate(int /*TechTypes*/ eTech);
 	int calculateResearchModifier(int /*TechTypes*/ eTech);
-	int calculatePollution(int iTypes) const; // K-Mod
-	int getGwPercentAnger() const; // K-Mod
 	// int calculateBaseNetResearch();
 	bool isResearch();
 	bool canEverResearch(int /*TechTypes*/ eTech);

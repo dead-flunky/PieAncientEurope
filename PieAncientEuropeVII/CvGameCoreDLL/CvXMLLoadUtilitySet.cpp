@@ -285,40 +285,7 @@ bool CvXMLLoadUtility::SetPostGlobalsGlobalDefines()
 		SetGlobalDefine("SHALLOW_WATER_TERRAIN", szVal);
 		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("SHALLOW_WATER_TERRAIN", idx);
-//GWMod Start M.A.
-		SetGlobalDefine("FROZEN_TERRAIN", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("FROZEN_TERRAIN", idx);
-		
-		SetGlobalDefine("COLD_TERRAIN", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("COLD_TERRAIN", idx);
-		
-		SetGlobalDefine("TEMPERATE_TERRAIN", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("TEMPERATE_TERRAIN", idx);
-		
-		SetGlobalDefine("DRY_TERRAIN", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("DRY_TERRAIN", idx);
-		
-		SetGlobalDefine("BARREN_TERRAIN", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("BARREN_TERRAIN", idx);
 
-		SetGlobalDefine("COLD_FEATURE", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("COLD_FEATURE", idx);
-
-		SetGlobalDefine("TEMPERATE_FEATURE", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("TEMPERATE_FEATURE", idx);
-
-		SetGlobalDefine("WARM_FEATURE", szVal);
-		idx = FindInInfoClass(szVal);
-		GC.getDefinesVarSystem()->SetValue("WARM_FEATURE", idx);
-
-//GWMod end M.A.
 		SetGlobalDefine("LAND_IMPROVEMENT", szVal);
 		idx = FindInInfoClass(szVal);
 		GC.getDefinesVarSystem()->SetValue("LAND_IMPROVEMENT", idx);
@@ -567,7 +534,7 @@ bool CvXMLLoadUtility::LoadGlobalText()
 		// CIV4GameText_Misc1.xml contains the text for the language options dropdown menu in the settings screen; so I'm going to assume that particular text file is
 		// well formed, and I'm going to use it to determine the current language name. (Note: I'd like to use the names from TXT_KEY_LANGUAGE_#, but that text isn't easy to access.)
 		// label text for the currently selected language -- that should correspond to the xml label used for that language.
-		std::string langauge_name;
+		std::string language_name;
 		if (LoadCivXml(m_pFXml, "xml\\text\\CIV4GameText_Misc1.xml"))
 		{
 			bool bValid = true;
@@ -591,7 +558,7 @@ bool CvXMLLoadUtility::LoadGlobalText()
 						if (gDLL->getXMLIFace()->GetLastLocatedNodeTagName(m_pFXml, buffer))
 						{
 							buffer[1023] = 0; // just in case the buffer isn't even terminated!
-							langauge_name.assign(buffer);
+							language_name.assign(buffer);
 						}
 					}
 				}
@@ -635,7 +602,7 @@ bool CvXMLLoadUtility::LoadGlobalText()
 			if (bLoaded)
 			{
 				// if the xml is successfully validated
-				SetGameText("Civ4GameText", "Civ4GameText/TEXT", langauge_name);
+				SetGameText("Civ4GameText", "Civ4GameText/TEXT", language_name);
 			}
 		}
 

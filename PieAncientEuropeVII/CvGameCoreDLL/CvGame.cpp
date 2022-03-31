@@ -359,12 +359,7 @@ void CvGame::regenerateMap()
 	CvEventReporter::getInstance().resetStatistics();
 
 	setInitialItems();
-// Super Forts begin *choke* *canal*
-	if (isOption(GAMEOPTION_SUPER_FORTS))
-	{
-		GC.getMapINLINE().calculateCanalAndChokePoints();
-	}
-// Super Forts end
+
 	initScoreCalculation();
 	setFinalInitialized(true);
 
@@ -464,8 +459,6 @@ void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 	m_iInitTech = 0;
 	m_iInitWonders = 0;
 	m_iAIAutoPlay = 0;
-	m_iGlobalWarmingIndex = 0;// K-Mod
-	m_iGwEventTally = -1; // K-Mod (-1 means Gw tally has not been activated yet)
 
 	m_uiInitialTime = 0;
 
@@ -2375,51 +2368,6 @@ void CvGame::updateTradeRoutes()
 	}
 }
 
-/*
-** K-Mod
-** calculate unhappiness due to the state of global warming
-*/
-void CvGame::updateGwPercentAnger()
-{
-	int iGlobalPollution;
-	int iGwSeverityRating;
-	int iGlobalDefence;
-
-	int iGwIndex = getGlobalWarmingIndex();
-
-	if (iGwIndex > 0)
-	{
-		iGlobalPollution = calculateGlobalPollution();
-		iGwSeverityRating = calculateGwSeverityRating();
-		iGlobalDefence = calculateGwLandDefence(NO_PLAYER);
-	}
-
-	for (int iI = 0; iI < MAX_CIV_PLAYERS; iI++)
-	{
-		CvPlayerAI& kPlayer = GET_PLAYER((PlayerTypes)iI);
-		int iAngerPercent = 0;
-		if (iGwIndex > 0 && kPlayer.isAlive() && !kPlayer.isMinorCiv())
-		{
-			// player unhappiness = base rate * severity rating * responsibility factor
-
-			int iLocalDefence = calculateGwLandDefence((PlayerTypes)iI);
-			int iResponsibilityFactor =	100*(kPlayer.calculatePollution() - iLocalDefence);
-
-			iResponsibilityFactor /= std::max(1, calculateGwSustainabilityThreshold((PlayerTypes)iI));
-			iResponsibilityFactor *= calculateGwSustainabilityThreshold();
-			iResponsibilityFactor /= std::max(1, iGlobalPollution - iGlobalDefence);
-			// amplify the affects of responsibility
-			iResponsibilityFactor = std::max(0, 2*iResponsibilityFactor-100);
-
-			iAngerPercent = GC.getDefineINT("GLOBAL_WARMING_BASE_ANGER_PERCENT") * iGwSeverityRating * iResponsibilityFactor;
-			iAngerPercent = ROUND_DIVIDE(iAngerPercent, 10000);// div, 100 * 100
-		}
-		kPlayer.setGwPercentAnger(iAngerPercent);
-	}
-}
-/*
-** K-Mod end
-*/
 
 void CvGame::testExtendedGame()
 {
@@ -2599,34 +2547,11 @@ void CvGame::selectUnit(CvUnit* pUnit, bool bClear, bool bToggle, bool bSound) c
 }
 
 
-// K-Mod. I've made an ugly hack to change the functionality of double-click from select-all to wake-all. Here's how it works:
-// if this function is called with only bAlt == true, but without the alt key actually down, then wake-all is triggered rather than select-all.
-// To achieve the select-all functionality without the alt key, call the function with bCtrl && bAlt.
 void CvGame::selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt) const
 {
 	PROFILE_FUNC();
 
 	FAssertMsg(pUnit != NULL, "pUnit == NULL unexpectedly");
-	// K-Mod. the hack (see above)
-	if (bAlt && !bShift && !bCtrl && !GC.altKey() && !gDLL->altKey()) // (using gDLL->altKey, to better match the state of bAlt)
-	{
-		// the caller says alt is pressed, but the computer says otherwise. Lets assume this is a double-click.
-		CvPlot* pUnitPlot = pUnit->plot();
-		CLLNode<IDInfo>* pUnitNode = pUnitPlot->headUnitNode();
-		while (pUnitNode != NULL)
-		{
-			CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
-			pUnitNode = pUnitPlot->nextUnitNode(pUnitNode);
-
-			if (pLoopUnit->getOwnerINLINE() == getActivePlayer() && pLoopUnit->isGroupHead() && pLoopUnit->isWaiting())
-			{
-				CvMessageControl::getInstance().sendDoCommand(pLoopUnit->getID(), COMMAND_WAKE, -1, -1, false);
-			}
-		}
-		gDLL->getInterfaceIFace()->selectUnit(pUnit, true, false, true);
-		return;
-	}
-	// K-Mod end
 
 	if (bAlt || bCtrl)
 	{
@@ -2645,12 +2570,7 @@ void CvGame::selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt) cons
 		}
 		else
 		{
-			//bGroup = gDLL->getInterfaceIFace()->mirrorsSelectionGroup();
-			// K-Mod. Treat shift as meaning we should always form a group
-			if (!gDLL->getInterfaceIFace()->mirrorsSelectionGroup())
-				selectionListGameNetMessage(GAMEMESSAGE_JOIN_GROUP);
-			bGroup = true; // note: sometimes this won't work. (see comments in CvGame::selectUnit.) Unfortunately, it's too fiddly to fix.
-			// K-Mod end
+			bGroup = gDLL->getInterfaceIFace()->mirrorsSelectionGroup();
 		}
 
 		CLLNode<IDInfo>* pUnitNode = pUnitPlot->headUnitNode();
@@ -2666,7 +2586,7 @@ void CvGame::selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt) cons
 			{
 				if (pLoopUnit->getDomainType() == eDomain && (!bCheckMoves || pLoopUnit->canMove())) // K-Mod added domain check and bCheckMoves.
 				{
-					//if (!isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || getTurnSlice() - pLoopUnit->getLastMoveTurn() > GC.getDefineINT("MIN_TIMER_UNIT_DOUBLE_MOVES")) // disabled by K-Mod
+					if (!isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || getTurnSlice() - pLoopUnit->getLastMoveTurn() > GC.getDefineINT("MIN_TIMER_UNIT_DOUBLE_MOVES"))
 					{
 						if (bAlt || (pLoopUnit->getUnitType() == pUnit->getUnitType()))
 						{
@@ -4201,130 +4121,6 @@ void CvGame::changeAIAutoPlay(int iChange)
 	setAIAutoPlay(getAIAutoPlay() + iChange);
 }
 
-/*
-** K-mod, 6/dec/10, karadoc
-** 18/dec/10 - added Gw calc functions
-*/
-int CvGame::getGlobalWarmingIndex() const
-{
-	return m_iGlobalWarmingIndex;
-}
-
-void CvGame::setGlobalWarmingIndex(int iNewValue)
-{
-	m_iGlobalWarmingIndex = std::max(0, iNewValue);
-}
-
-void CvGame::changeGlobalWarmingIndex(int iChange)
-{
-	setGlobalWarmingIndex(getGlobalWarmingIndex() + iChange);
-}
-
-int CvGame::getGlobalWarmingChances() const
-{
-	// Note: this is the number of chances global warming has to strike in the current turn
-	// as you can see, I've scaled it by the number of turns in the game. The probability per chance is also scaled like this.
-	// I estimate that the global warming index will actually be roughly proportional to the number of turns in the game
-	// so by scaling the chances, and the probability per chance, I hope to get roughly the same number of actually events per game
-	int iIndexPerChance = GC.getDefineINT("GLOBAL_WARMING_INDEX_PER_CHANCE");
-	iIndexPerChance*=GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getVictoryDelayPercent();
-	iIndexPerChance/=100;
-	return ROUND_DIVIDE(getGlobalWarmingIndex(), std::max(1, iIndexPerChance));
-}
-
-int CvGame::getGwEventTally() const
-{
-	return m_iGwEventTally;
-}
-
-void CvGame::setGwEventTally(int iNewValue)
-{
-	m_iGwEventTally = iNewValue;
-}
-
-void CvGame::changeGwEventTally(int iChange)
-{
-	setGwEventTally(getGwEventTally() + iChange);
-}
-
-// worldwide pollution
-int CvGame::calculateGlobalPollution() const
-{
-	int iGlobalPollution = 0;
-	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
-	{
-		CvPlayer& kPlayer = GET_PLAYER((PlayerTypes) iPlayer);
-		if (kPlayer.isAlive())
-		{
-			iGlobalPollution += kPlayer.calculatePollution();
-		}
-	}
-	return iGlobalPollution;
-}
-
-// if ePlayer == NO_PLAYER, all features are counted. Otherwise, only count features owned by the specified player.
-int CvGame::calculateGwLandDefence(PlayerTypes ePlayer) const
-{
-	int iTotal = 0;
-
-	for (int i = 0; i < GC.getMapINLINE().numPlotsINLINE(); ++i)
-	{
-		CvPlot* pPlot = GC.getMapINLINE().plotByIndexINLINE(i);
-
-		if (pPlot->getFeatureType() != NO_FEATURE)
-		{
-			if (ePlayer == NO_PLAYER || ePlayer == pPlot->getOwner())
-			{
-				iTotal += GC.getFeatureInfo(pPlot->getFeatureType()).getWarmingDefense();
-			}
-		}
-	}
-	return iTotal;
-}
-
-// again, NO_PLAYER means everyone
-int CvGame::calculateGwSustainabilityThreshold(PlayerTypes ePlayer) const
-{
-	// expect each pop to give ~10 pollution per turn at the time we cross the threshold, and ~1 pop per land tile...
-	// so default resistance should be around 10 per tile.
-	int iGlobalThreshold = GC.getMapINLINE().getLandPlots() * GC.getDefineINT("GLOBAL_WARMING_RESISTANCE");
-	
-	// maybe we should add some points for coastal tiles as well, so that watery maps don't get too much warming
-
-	if (ePlayer == NO_PLAYER)
-		return iGlobalThreshold;
-
-	// I have a few possible threshold distribution systems in mind:
-	// could be proportional to total natural food yield;
-	// or a combination of population, land size, total completed research, per player, etc.
-	// Currently, a player's share of the total threshold is just proportional to their land size (just like the threshold itself)
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
-	if (kPlayer.isAlive())
-	{
-		return iGlobalThreshold * kPlayer.getTotalLand() / std::max(1, GC.getMapINLINE().getLandPlots());
-	}
-	else
-		return 0;
-}
-
-int CvGame::calculateGwSeverityRating() const
-{
-	// Here are some of the properties I want from this function:
-	// - the severity should be a number between 0 and 100 (ie. a percentage value)
-	// - zero severity should mean zero global warming
-	// - the function should asymptote towards 100
-	//
-	// - It should be a function of the index divided by (total land area * game length).
-
-	// I recommend looking at the graph of this function to get a sense of how it works.
-
-	const long x = GC.getDefineINT("GLOBAL_WARMING_PROB") * GC.getGameINLINE().getGlobalWarmingIndex() / (std::max(1,4*GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getVictoryDelayPercent()*GC.getMapINLINE().getLandPlots()));
-	const long b = 70; // shape parameter. Lower values result in the function being steeper earlier.
-	return 100L - b*100L/(b+x*x);
-}
-/*
-** K-mod end
-*/
 
 unsigned int CvGame::getInitialTime()
 {
@@ -5730,13 +5526,8 @@ void CvGame::setVoteChosen(int iSelection, int iVoteId)
 
 CvCity* CvGame::getHolyCity(ReligionTypes eIndex)
 {
-// K-Mod
-	/* original bts code
-	FAssertMsg(eIndex >= 0, "eIndex is expected to be non-negative (invalid Index)");
-	FAssertMsg(eIndex < GC.getNumReligionInfos(), "eIndex is expected to be within maximum bounds (invalid Index)");
-	*/
+
 	FASSERT_BOUNDS(0, GC.getNumReligionInfos(), eIndex, "CvGame::getHolyCity");
-// K-Mod end
 	return getCity(m_paHolyCity[eIndex]);
 }
 
@@ -6188,9 +5979,6 @@ void CvGame::doDeals()
 	// K-Mod end
 }
 
-/*
-** original bts code
-**
 void CvGame::doGlobalWarming()
 {
 	int iGlobalWarmingDefense = 0;
@@ -6276,255 +6064,6 @@ void CvGame::doGlobalWarming()
 		}
 	}
 }
-** end original bts code
-**/
-
-/*
-** K-Mod, 5/dec/10, karadoc
-** complete rewrite of global warming, using some features from 'GWMod' by M.A.
-*/
-void CvGame::doGlobalWarming()
-{
-	PROFILE_FUNC();
-	/*
-	** Calculate change in GW index
-	*/
-	int iGlobalWarmingValue = GC.getGameINLINE().calculateGlobalPollution();
-
-	int iGlobalWarmingDefense = calculateGwSustainabilityThreshold(); // Natural global defence
-	iGlobalWarmingDefense+= calculateGwLandDefence(); // defence from features (forests & jungles)
-
-	changeGlobalWarmingIndex(iGlobalWarmingValue - iGlobalWarmingDefense);
-
-	// check if GW has 'activated'.
-	if (getGwEventTally() < 0 && getGlobalWarmingIndex() > 0)
-	{
-		setGwEventTally(0);
-
-		// Send a message saying that the threshold has been passed
-		CvWString szBuffer;
-
-		szBuffer = gDLL->getText("TXT_KEY_MISC_GLOBAL_WARMING_ACTIVE");
-		// add the message to the replay
-		GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, NO_PLAYER, szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
-
-		for (int iI = 0; iI < MAX_PLAYERS; iI++)
-		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
-			{
-				gDLL->getInterfaceIFace()->addHumanMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_GLOBALWARMING", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
-			}
-			
-			// Tell human players that the threshold has been reached
-			if (GET_PLAYER((PlayerTypes)iI).isHuman() && !isNetworkMultiPlayer())
-			{
-				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_TEXT);
-				if (pInfo != NULL)
-				{
-					pInfo->setText(gDLL->getText("TXT_KEY_POPUP_ENVIRONMENTAL_ADVISOR"));
-					gDLL->getInterfaceIFace()->addPopup(pInfo, (PlayerTypes)iI);
-				}
-			}
-		}
-
-	}
-
-	/*
-	** Apply the effects of GW
-	*/
-	int iGlobalWarmingRolls = getGlobalWarmingChances();
-
-	TerrainTypes eWarmingTerrain = ((TerrainTypes)(GC.getDefineINT("GLOBAL_WARMING_TERRAIN")));
-	TerrainTypes eFrozenTerrain = ((TerrainTypes)(GC.getDefineINT("FROZEN_TERRAIN")));
-	TerrainTypes eColdTerrain = ((TerrainTypes)(GC.getDefineINT("COLD_TERRAIN")));
-	TerrainTypes eTemperateTerrain = ((TerrainTypes)(GC.getDefineINT("TEMPERATE_TERRAIN")));
-	TerrainTypes eDryTerrain = ((TerrainTypes)(GC.getDefineINT("DRY_TERRAIN")));
-	TerrainTypes eBarrenTerrain = ((TerrainTypes)(GC.getDefineINT("BARREN_TERRAIN")));
-
-	FeatureTypes eColdFeature = ((FeatureTypes)(GC.getDefineINT("COLD_FEATURE")));
-	FeatureTypes eTemperateFeature = ((FeatureTypes)(GC.getDefineINT("TEMPERATE_FEATURE")));
-	FeatureTypes eWarmFeature = ((FeatureTypes)(GC.getDefineINT("WARM_FEATURE")));
-	FeatureTypes eFalloutFeature = ((FeatureTypes)(GC.getDefineINT("NUKE_FEATURE")));
-
-	//Global Warming
-	for (int iI = 0; iI < iGlobalWarmingRolls; iI++)
-	{
-		// note, warming prob out of 1000, not percent.
-		int iLeftOdds = 10*GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getVictoryDelayPercent();
-		if (getSorenRandNum(iLeftOdds, "Global Warming") < GC.getDefineINT("GLOBAL_WARMING_PROB"))
-		{
-			//CvPlot* pPlot = GC.getMapINLINE().syncRandPlot(RANDPLOT_LAND | RANDPLOT_NOT_CITY);
-
-			// Global warming is no longer completely random. getRandGWPlot will get a weighted random plot for us to strike
-			CvPlot* pPlot = getRandGWPlot(3);
-
-			if (pPlot != NULL)
-			{
-				bool bChanged = false;
-				/*
-				** rewritten terrain changing code:
-				*/
-				// 1) Melt frozen terrain
-				if (pPlot->getFeatureType() == eColdFeature)
-				{
-					pPlot->setFeatureType(NO_FEATURE);
-					bChanged = true;
-				}
-				else if (pPlot->getTerrainType() == eFrozenTerrain)
-				{
-						pPlot->setTerrainType(eColdTerrain);
-						bChanged = true;
-				}
-				else if (pPlot->getTerrainType() == eColdTerrain)
-				{
-					pPlot->setTerrainType(eTemperateTerrain);
-					bChanged = true;
-				}
-				// 2) Forest -> Jungle
-				else if (pPlot->getFeatureType() == eTemperateFeature)
-				{
-					pPlot->setFeatureType(eWarmFeature);
-					bChanged = true;
-				}
-				// 3) Remove other features
-				else if (pPlot->getFeatureType() != NO_FEATURE && pPlot->getFeatureType() != eFalloutFeature)
-				{
-					pPlot->setFeatureType(NO_FEATURE);
-					bChanged = true;
-				}
-				// 4) Dry the terrain
-				// Rising seas
-				else if (pPlot->getTerrainType() == eTemperateTerrain)
-				{
-					pPlot->setTerrainType(eDryTerrain);
-					bChanged = true;
-				}
-				else if (pPlot->getTerrainType() == eDryTerrain)
-				{
-					pPlot->setTerrainType(eBarrenTerrain);
-					bChanged = true;
-				}
-				/* 5) Sink coastal desert (disabled)
-				else if (pPlot->getTerrainType() == eBarrenTerrain)
-				{
-					if (isOption(GAMEOPTION_RISING_SEAS))
-					{
-						if (pPlot->isCoastalLand())
-						{
-							if (!pPlot->isHills() && !pPlot->isPeak())
-							{
-								pPlot->forceBumpUnits();
-								pPlot->setPlotType(PLOT_OCEAN);
-								bChanged = true;
-							}
-						}
-					}
-				}*/
-
-				if (bChanged)
-				{
-					// only destroy the improvement if the new terrain cannot support it
-					if (!pPlot->canHaveImprovement(pPlot->getImprovementType()))
-						pPlot->setImprovementType(NO_IMPROVEMENT);
-
-					CvCity* pCity = GC.getMapINLINE().findCity(pPlot->getX_INLINE(), pPlot->getY_INLINE(), NO_PLAYER, NO_TEAM, false);
-					if (pCity != NULL)
-					{
-						if (pPlot->isVisible(pCity->getTeam(), false))
-						{
-							CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_GLOBAL_WARMING_NEAR_CITY", pCity->getNameKey());
-							gDLL->getInterfaceIFace()->addHumanMessage(pCity->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_SQUISH", MESSAGE_TYPE_INFO, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pPlot->getX_INLINE(), pPlot->getY_INLINE(), true, true);
-						}
-					}
-					changeGwEventTally(1);
-				}
-			}
-		}
-	}
-	updateGwPercentAnger();
-
-	if (getGlobalWarmingIndex() > 0)
-	{
-		changeGlobalWarmingIndex(-getGlobalWarmingIndex()*GC.getDefineINT("GLOBAL_WARMING_RESTORATION_RATE", 0)/100);
-	}
-}
-
-// Choose the best plot for global warming to strike from a set of iPool random plots
-CvPlot* CvGame::getRandGWPlot(int iPool)
-{
-	CvPlot* pBestPlot = NULL;
-	CvPlot* pTestPlot = NULL;
-	TerrainTypes eTerrain = NO_TERRAIN;
-	int iBestScore = -1; // higher score means better target plot
-	int iTestScore;
-	int i;
-
-	const TerrainTypes eFrozenTerrain = ((TerrainTypes)(GC.getDefineINT("FROZEN_TERRAIN")));
-	const TerrainTypes eColdTerrain = ((TerrainTypes)(GC.getDefineINT("COLD_TERRAIN")));
-	const TerrainTypes eTemperateTerrain = ((TerrainTypes)(GC.getDefineINT("TEMPERATE_TERRAIN")));
-	const TerrainTypes eDryTerrain = ((TerrainTypes)(GC.getDefineINT("DRY_TERRAIN")));
-
-	const FeatureTypes eColdFeature = ((FeatureTypes)(GC.getDefineINT("COLD_FEATURE")));
-
-	// Currently we just choose the coldest tile; but I may include other tests in future versions
-	for (i = 0; i < iPool; i++)
-	{
-		// I want to be able to select a water tile with ice on it; so I can't just exclude water completely...
-		//CvPlot* pTestPlot = GC.getMapINLINE().syncRandPlot(RANDPLOT_LAND | RANDPLOT_NOT_CITY);
-		int j;
-		for (j = 0; j < 100; j++)
-		{
-			pTestPlot = GC.getMapINLINE().syncRandPlot(RANDPLOT_NOT_CITY);
-
-			if (pTestPlot == NULL)
-				break; // already checked 100 plots in the syncRandPlot funciton, so just give up.
-
-			// check for ice
-			if (pTestPlot->getFeatureType() == eColdFeature)
-			{
-				// pretend it's frozen terrain
-				eTerrain = eFrozenTerrain;
-				break;
-			}
-			// check for ordinary land plots
-			if (!pTestPlot->isWater() && !pTestPlot->isPeak())
-			{
-				eTerrain = pTestPlot->getTerrainType();
-				break;
-			}
-			// not a suitable plot, try again.
-		}
-
-		if (pTestPlot == NULL || j == 100)
-			continue;
-
-		// if only I could do this with a switch...
-
-		if (eTerrain == eFrozenTerrain)
-			iTestScore = 4;
-		else if (eTerrain == eColdTerrain)
-			iTestScore = 3;
-		else if (eTerrain == eTemperateTerrain)
-			iTestScore = 2;
-		else if (eTerrain == eDryTerrain)
-			iTestScore = 1;
-		else
-			iTestScore = 0;
-
-		if (iTestScore > iBestScore)
-		{
-			if (iBestScore > 0 || iTestScore >= 3)
-				return pTestPlot; // lets not target the ice too much...
-
-			pBestPlot = pTestPlot;
-			iBestScore = iTestScore;
-		}
-	}
-	return pBestPlot;
-}
-/*
-** K-Mod end
-*/
 
 
 void CvGame::doHolyCity()
@@ -8445,8 +7984,6 @@ void CvGame::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iInitTech);
 	pStream->Read(&m_iInitWonders);
 	pStream->Read(&m_iAIAutoPlay);
-	pStream->Read(&m_iGlobalWarmingIndex); // K-Mod
-	pStream->Read(&m_iGwEventTally); // K-Mod
 
 	// m_uiInitialTime not saved
 
@@ -8667,8 +8204,6 @@ void CvGame::write(FDataStreamBase* pStream)
 	pStream->Write(m_iInitTech);
 	pStream->Write(m_iInitWonders);
 	pStream->Write(m_iAIAutoPlay);
-	pStream->Write(m_iGlobalWarmingIndex); // K-Mod
-	pStream->Write(m_iGwEventTally); // K-Mod
 
 	// m_uiInitialTime not saved
 
