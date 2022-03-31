@@ -716,7 +716,6 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 	m_iLargestCityHappiness = 0;
 	m_iWarWearinessPercentAnger = 0;
 	m_iWarWearinessModifier = 0;
-	m_iGwPercentAnger = 0; // K-Mod
 	m_iFreeSpecialist = 0;
 	m_iNoForeignTradeCount = 0;
 	m_iNoCorporationsCount = 0;
@@ -2564,18 +2563,16 @@ void CvPlayer::killCities()
 		pLoopCity->kill(false);
 	}
 	// Super Forts begin *culture* - Clears culture from forts when a player dies
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	PlayerTypes ePlayer = getID();
+	for (int iI = 0; iI < GC.getMapINLINE().numPlots(); iI++)
 	{
-		PlayerTypes ePlayer = getID();
-		for (int iI = 0; iI < GC.getMapINLINE().numPlots(); iI++)
+		CvPlot* pLoopPlot = GC.getMapINLINE().plotByIndex(iI);
+		if (pLoopPlot->getOwner() == ePlayer)
 		{
-			CvPlot* pLoopPlot = GC.getMapINLINE().plotByIndex(iI);
-			if (pLoopPlot->getOwner() == ePlayer)
-			{
-				pLoopPlot->setOwner(pLoopPlot->calculateCulturalOwner(), true, false);
-			}
+			pLoopPlot->setOwner(pLoopPlot->calculateCulturalOwner(), true, false);
 		}
 	}
+
 	// Super Forts end
 	GC.getGameINLINE().updatePlotGroups();
 }
@@ -5563,8 +5560,8 @@ bool CvPlayer::canReceiveGoody(CvPlot* pPlot, GoodyTypes eGoody, CvUnit* pUnit) 
 		{
 			if (GC.getTechInfo((TechTypes) iI).isGoodyTech())
 			{
-				//if (canResearch((TechTypes)iI))
-				if (canResearch((TechTypes)iI, false, true)) // K-Mod
+				if (canResearch((TechTypes)iI))
+				// if (canResearch((TechTypes)iI, false, true)) // K-Mod
 				{
 					bTechFound = true;
 					break;
@@ -5759,8 +5756,8 @@ void CvPlayer::receiveGoody(CvPlot* pPlot, GoodyTypes eGoody, CvUnit* pUnit)
 		{
 			if (GC.getTechInfo((TechTypes) iI).isGoodyTech())
 			{
-				//if (canResearch((TechTypes)iI))
-				if (canResearch((TechTypes)iI, false, true)) // K-Mod
+				if (canResearch((TechTypes)iI))
+				// if (canResearch((TechTypes)iI, false, true)) // K-Mod
 				{
 					iValue = (1 + GC.getGameINLINE().getSorenRandNum(10000, "Goody Tech"));
 
@@ -7246,52 +7243,6 @@ int CvPlayer::calculateTotalCityUnhealthiness() const
 	return iTotalUnhealthiness;
 }
 
-/*
-** K-Mod
-** calculate the pollution output of a civ.
-** iTypes is a bit-field whos members are POLLUTION_POPULTION, _BUILDINGS, _BONUS, _POWER. (and _ALL)
-*/
-int CvPlayer::calculatePollution(int iTypes) const
-{
-	int iTotal = 0;
-
-	int iBuildingWeight = ((iTypes & POLLUTION_BUILDINGS) == 0)?0 :GC.getDefineINT("GLOBAL_WARMING_BUILDING_WEIGHT");
-	int iBonusWeight = ((iTypes & POLLUTION_BONUSES) == 0)?0 :GC.getDefineINT("GLOBAL_WARMING_BONUS_WEIGHT");
-	int iPowerWeight = ((iTypes & POLLUTION_POWER) == 0)?0 :GC.getDefineINT("GLOBAL_WARMING_POWER_WEIGHT");
-	int iPopWeight = ((iTypes & POLLUTION_POPULATION) == 0)?0 :GC.getDefineINT("GLOBAL_WARMING_POPULATION_WEIGHT");
-
-	int iLoop;
-	for (CvCity* pCity = firstCity(&iLoop); pCity != NULL; pCity = nextCity(&iLoop))
-	{
-		// note: "bad health" values are negative, except for population! (crazy, but true. Who writes this junk?)
-		iTotal -=
-			(pCity->totalBadBuildingHealth() * iBuildingWeight)
-			+ (pCity->getBonusBadHealth() * iBonusWeight)
-			+ (pCity->getPowerBadHealth() * iPowerWeight)
-			- (pCity->unhealthyPopulation() * iPopWeight);
-	}
-
-	return iTotal;
-}
-
-int CvPlayer::getGwPercentAnger() const
-{
-	return m_iGwPercentAnger;
-}
-
-void CvPlayer::setGwPercentAnger(int iNewValue)
-{
-	if (iNewValue != m_iGwPercentAnger)
-	{
-		m_iGwPercentAnger = iNewValue;
-		AI_makeAssignWorkDirty();
-	}
-}
-
-/*
-** K-Mod end
-*/
-
 // K-Mod
 int CvPlayer::getUnitCostMultiplier() const
 {
@@ -7811,7 +7762,8 @@ bool CvPlayer::canEverResearch(TechTypes eTech) const
 }
 
 
-bool CvPlayer::canResearch(TechTypes eTech, bool bTrade, bool bFree) const
+bool CvPlayer::canResearch(TechTypes eTech, bool bTrade) const
+// kmod bool CvPlayer::canResearch(TechTypes eTech, bool bTrade, bool bFree) const
 {
 	bool bFoundPossible;
 	bool bFoundValid;
@@ -7831,7 +7783,7 @@ bool CvPlayer::canResearch(TechTypes eTech, bool bTrade, bool bFree) const
 		}
 	}
 
-	if (!isResearch() && !bFree && getAdvancedStartPoints() < 0)
+	if (!isResearch() && /*kmod: !bFree && */ getAdvancedStartPoints() < 0)
 	{
 		return false;
 	}
@@ -13252,7 +13204,6 @@ void CvPlayer::setCivics(CivicOptionTypes eIndex, CivicTypes eNewValue)
 					}
 				}
 			}
-			GC.getGameINLINE().updateGwPercentAnger(); // K-Mod. (environmentalism can change this. It's nice to see the effects immediately.)
 		}
 
 		// K-Mod. Attitude cache.
@@ -17441,7 +17392,6 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	pStream->Read(&m_iLargestCityHappiness);
 	pStream->Read(&m_iWarWearinessPercentAnger);
 	pStream->Read(&m_iWarWearinessModifier);
-	pStream->Read(&m_iGwPercentAnger); // K-Mod
 	pStream->Read(&m_iFreeSpecialist);
 	pStream->Read(&m_iNoForeignTradeCount);
 	pStream->Read(&m_iNoCorporationsCount);
@@ -17922,7 +17872,6 @@ void CvPlayer::write(FDataStreamBase* pStream)
 	pStream->Write(m_iLargestCityHappiness);
 	pStream->Write(m_iWarWearinessPercentAnger);
 	pStream->Write(m_iWarWearinessModifier);
-	pStream->Write(m_iGwPercentAnger); // K-Mod
 	pStream->Write(m_iFreeSpecialist);
 	pStream->Write(m_iNoForeignTradeCount);
 	pStream->Write(m_iNoCorporationsCount);
@@ -22093,8 +22042,8 @@ bool CvPlayer::canStealTech(PlayerTypes eTarget, TechTypes eTech) const
 {
 	if (GET_TEAM(GET_PLAYER(eTarget).getTeam()).isHasTech(eTech))
 	{
-		//if (canResearch(eTech))
-		if (canResearch(eTech, false, true)) // K-Mod
+		if (canResearch(eTech))
+		// if (canResearch(eTech, false, true)) // K-Mod
 		{
 			return true;
 		}
