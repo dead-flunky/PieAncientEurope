@@ -436,7 +436,7 @@ void CvPlot::doTurn()
 	{
 		changeImprovementDuration(1);
 		// Super Forts begin *upgrade*
-		if(!isBeingWorked() & GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+		if(!isBeingWorked())
 		{
 			doImprovementUpgrade();
 		}
@@ -444,7 +444,7 @@ void CvPlot::doTurn()
 	}
 
 	// Super Forts begin *bombard*
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && !isBombarded() && getDefenseDamage() > 0)
+	if (!isBombarded() && getDefenseDamage() > 0)
 	{
 		changeDefenseDamage(-(GC.getDefineINT("CITY_DEFENSE_DAMAGE_HEAL_RATE")));
 	}
@@ -555,22 +555,7 @@ void CvPlot::doImprovementUpgrade()
 		ImprovementTypes eImprovementUpdrade = (ImprovementTypes)GC.getImprovementInfo(getImprovementType()).getImprovementUpgrade();
 		if (eImprovementUpdrade != NO_IMPROVEMENT)
 		{
-// Super Forts begin
-			if (!GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && (
-// Super Forts begin				
-				isBeingWorked() || GC.getImprovementInfo(eImprovementUpdrade).isOutsideBorders())
-				)
-			{
-				changeUpgradeProgress(GET_PLAYER(getOwnerINLINE()).getImprovementUpgradeRate());
-
-				if (getUpgradeProgress() >= GC.getGameINLINE().getImprovementUpgradeTime(getImprovementType()))
-				{
-					setImprovementType(eImprovementUpdrade);
-				}
-			}
-// Super Forts begin *upgrade* - added if-else statement - doto adjustment
-			else if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-				GC.getImprovementInfo(getImprovementType()).isUpgradeRequiresFortify())
+			if(GC.getImprovementInfo(getImprovementType()).isUpgradeRequiresFortify())
 			{
 				bool bDefenderFound = false;
 				CLinkList<IDInfo> oldUnits;
@@ -1813,8 +1798,7 @@ int CvPlot::seeFromLevel(TeamTypes eTeam) const
 	iLevel = GC.getTerrainInfo(getTerrainType()).getSeeFromLevel();
 
 	// Super Forts begin *vision*
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) 
-		&& getImprovementType() != NO_IMPROVEMENT)
+	if (getImprovementType() != NO_IMPROVEMENT)
 	{
 		iLevel += GC.getImprovementInfo(getImprovementType()).getSeeFrom();
 	}
@@ -2502,8 +2486,7 @@ bool CvPlot::canBuild(BuildTypes eBuild, PlayerTypes ePlayer, bool bTestVisible)
 			return false;
 		}
 		// Super Forts begin *build*
-		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-			GC.getImprovementInfo(eImprovement).getUniqueRange() > 0)
+		if (GC.getImprovementInfo(eImprovement).getUniqueRange() > 0)
 		{
 			int iUniqueRange = GC.getImprovementInfo(eImprovement).getUniqueRange();
 			for (int iDX = -iUniqueRange; iDX <= iUniqueRange; iDX++) 
@@ -2530,8 +2513,7 @@ bool CvPlot::canBuild(BuildTypes eBuild, PlayerTypes ePlayer, bool bTestVisible)
 				return false;
 			}
 			// Super Forts begin *AI_worker* - prevent forts from being built over when outside culture range
-			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && 
-				GC.getImprovementInfo(getImprovementType()).isFort())
+			if (GC.getImprovementInfo(getImprovementType()).isFort())
 			{
 				if (!isWithinCultureRange(ePlayer) && !(getCultureRangeForts(ePlayer) > 1))
 				{
@@ -2574,8 +2556,7 @@ bool CvPlot::canBuild(BuildTypes eBuild, PlayerTypes ePlayer, bool bTestVisible)
 				}
 			}
 			// Super Forts begin *AI_worker* - prevent workers from two different players from building a fort in the same plot
-			if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-				GC.getImprovementInfo(eImprovement).isFort())
+			if(GC.getImprovementInfo(eImprovement).isFort())
 			{
 				CLinkList<IDInfo> oldUnits;
 				CLLNode<IDInfo>* pUnitNode = headUnitNode();
@@ -3179,7 +3160,6 @@ int CvPlot::countAdjacentPassableSections(bool bWater) const
 	CvPlot* pAdjacentPlot;
 	int iPassableSections = 0;
 	bool bInPassableSection = false;
-
 	// Are we looking for water passages or land passages?
 	if(bWater)
 	{
@@ -3209,7 +3189,7 @@ int CvPlot::countAdjacentPassableSections(bool bWater) const
 					}
 					else if(!bInPassableSection)
 					{
-						bInPassableSection = true;
+					bInPassableSection = true;
 						++iPassableSections;
 					}
 				}
@@ -3299,11 +3279,11 @@ int CvPlot::getCanalValue() const
 {
 	return m_iCanalValue;
 }
-
 void CvPlot::setCanalValue(int iNewValue)
 {
 	m_iCanalValue = iNewValue;
 }
+
 
 void CvPlot::calculateCanalValue()
 {
@@ -3311,7 +3291,6 @@ void CvPlot::calculateCanalValue()
 	CvPlot *pAdjacentPlot, *apPlotsToCheck[4];
 	int iWaterSections, iPlotsFound, iMaxDistance;
 	int iCanalValue = 0;
-
 	if(isCoastalLand() && !isImpassable())
 	{
 		iWaterSections = countAdjacentPassableSections(true);
@@ -3341,7 +3320,7 @@ void CvPlot::calculateCanalValue()
 							apPlotsToCheck[iPlotsFound] = pAdjacentPlot;
 							if((++iPlotsFound) == iWaterSections)
 								break;
-						}
+							}
 					}
 					else
 					{
@@ -3379,17 +3358,14 @@ void CvPlot::calculateCanalValue()
 			iCanalValue = iMaxDistance * (iPlotsFound - 1);
 		}
 	}
-
 	setCanalValue(iCanalValue);
 }
 // Super Forts end
-
 // Super Forts begin *choke*
 int CvPlot::getChokeValue() const
 {
 	return m_iChokeValue;
 }
-
 void CvPlot::setChokeValue(int iNewValue)
 {
 	m_iChokeValue = iNewValue;
@@ -3402,7 +3378,6 @@ void CvPlot::calculateChokeValue()
 	int iPassableSections, iPlotsFound, iMaxDistance;
 	int iChokeValue = 0;
 	bool bWater = isWater();
-
 	if(!isImpassable() && countImpassableCardinalDirections() > 1)
 	{
 		iPassableSections = countAdjacentPassableSections(bWater);
@@ -3423,7 +3398,7 @@ void CvPlot::calculateChokeValue()
 						if (bWater && !isCardinalDirection((DirectionTypes)iI))
 						{
 							if (!(GC.getMapINLINE().plotINLINE(getX_INLINE(), pAdjacentPlot->getY_INLINE())->isWater()) && !(GC.getMapINLINE().plotINLINE(pAdjacentPlot->getX_INLINE(), getY_INLINE())->isWater()))
-							{
+								{
 								continue;
 							}
 						}
@@ -3459,7 +3434,7 @@ void CvPlot::calculateChokeValue()
 						// If no path was found then value is based off the number of plots in the region minus a minimum area
 						iDistance = std::min(apPlotsToCheck[iI]->countRegionPlots(this), apPlotsToCheck[iJ]->countRegionPlots(this)) - 4;
 						iDistance *= 4;
-					}
+						}
 					else
 					{
 						// Path already would have required 2 steps, but we forced the enemy to go another way so there is some value
@@ -3474,11 +3449,9 @@ void CvPlot::calculateChokeValue()
 			iChokeValue = iMaxDistance * (iPlotsFound - 1);
 		}
 	}
-
 	setChokeValue(iChokeValue);
 }
 // Super Forts end
-
 int CvPlot::defenseModifier(TeamTypes eDefender, bool bIgnoreBuilding, bool bHelp) const
 {
 	CvCity* pCity;
@@ -3510,10 +3483,7 @@ int CvPlot::defenseModifier(TeamTypes eDefender, bool bIgnoreBuilding, bool bHel
 			// Super Forts begin *bombard*
 			iModifier += GC.getImprovementInfo(eImprovement).getDefenseModifier();
 			// Super Forts begin *bombard*
-			if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-			{
-				iModifier -= getDefenseDamage();
-			}
+			iModifier -= getDefenseDamage();
 			// Super Forts end
 		}
 	}
@@ -3966,8 +3936,7 @@ PlayerTypes CvPlot::calculateCulturalOwner() const
 			if (iCulture > 0)
 			{
 				// Super Forts begin *culture* - modified if statement
-				if (isWithinCultureRange((PlayerTypes)iI)
-					|| (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && isWithinFortCultureRange((PlayerTypes)iI)))
+				if (isWithinCultureRange((PlayerTypes)iI) || isWithinFortCultureRange((PlayerTypes)iI))
 					//if (isWithinCultureRange((PlayerTypes)iI)) - Original Code
 					// Super Forts end
 				{
@@ -4062,9 +4031,7 @@ PlayerTypes CvPlot::calculateCulturalOwner() const
 
 		if (!bValid
 			// Super Forts begin *culture*
-			|| (!GET_PLAYER(eBestPlayer).isAlive() 
-				&& GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-			)
+			|| !GET_PLAYER(eBestPlayer).isAlive())
 			// Super Forts end
 		{
 			eBestPlayer = NO_PLAYER;
@@ -4406,8 +4373,6 @@ bool CvPlot::isEnemyCity(const CvUnit& kUnit) const
 //super forts - doto keldath
 bool CvPlot::isFortImprovement() const
 {
-	if (!GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-		return false;
 	if (getOwnerINLINE() == NO_PLAYER)
 		return false;
 	if (getImprovementType() == NO_IMPROVEMENT)
@@ -5759,8 +5724,7 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits, bool bUpdatePlotG
 				{
 					GET_PLAYER(getOwnerINLINE()).changeImprovementCount(getImprovementType(), -1);
 					// Super Forts begin *culture*
-					if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-						GC.getImprovementInfo(getImprovementType()).isActsAsCity())
+					if (GC.getImprovementInfo(getImprovementType()).isActsAsCity())
 					{
 						changeCultureRangeFortsWithinRange(getOwnerINLINE(), -1, GC.getImprovementInfo(getImprovementType()).getCultureRange(), false);
 					}
@@ -5820,8 +5784,7 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits, bool bUpdatePlotG
 				{
 					GET_PLAYER(getOwnerINLINE()).changeImprovementCount(getImprovementType(), 1);
 					// Super Forts begin *culture*
-					if (GC.getGame().isOption(GAMEOPTION_SUPER_FORTS) &&
-						GC.getImprovementInfo(getImprovementType()).isActsAsCity())
+					if (GC.getImprovementInfo(getImprovementType()).isActsAsCity())
 					{
 						changeCultureRangeFortsWithinRange(getOwnerINLINE(), 1, GC.getImprovementInfo(getImprovementType()).getCultureRange(), true);
 					}
@@ -6396,7 +6359,7 @@ BonusTypes CvPlot::getNonObsoleteBonusType(TeamTypes eTeam, bool bCheckConnected
 	//doto super forts
 	//on kill civ, city change owner is executed, due to change culture.
 	//so i added a safe check from an assert that popped when the team was dead
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && !GET_TEAM(eTeam).isAlive())
+	if (!GET_TEAM(eTeam).isAlive())
 		return NO_BONUS;
 	//end of doto super forts
 	FAssert(GET_TEAM(eTeam).isAlive()); // K-Mod
@@ -6501,8 +6464,7 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 			{
 				GET_PLAYER(getOwnerINLINE()).changeImprovementCount(getImprovementType(), -1);
 				// Super Forts begin *culture*
-				if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-					GC.getImprovementInfo(getImprovementType()).isActsAsCity())
+				if (GC.getImprovementInfo(getImprovementType()).isActsAsCity())
 				{
 					changeCultureRangeFortsWithinRange(getOwnerINLINE(), -1, GC.getImprovementInfo(getImprovementType()).getCultureRange(), true);
 				}
@@ -6510,10 +6472,7 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 			}
 		}
 // Super Forts begin *vision*
-		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-		{
-			updateSight(false, true);
-		}
+		updateSight(false, true);
 // Super Forts end
 
 		updatePlotGroupBonus(false);
@@ -6548,8 +6507,7 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 			{
 				GET_PLAYER(getOwnerINLINE()).changeImprovementCount(getImprovementType(), 1);
 				// Super Forts begin *culture*
-				if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-					GC.getImprovementInfo(getImprovementType()).isActsAsCity())
+				if (GC.getImprovementInfo(getImprovementType()).isActsAsCity())
 				{
 					changeCultureRangeFortsWithinRange(getOwnerINLINE(), 1, GC.getImprovementInfo(getImprovementType()).getCultureRange(), true);
 				}
@@ -6557,10 +6515,7 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 			}
 		}
 		// Super Forts begin *vision*
-		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-		{
-			updateSight(true, true);
-		}
+		updateSight(true, true);
 		// Super Forts end
 
 		updateIrrigated();
@@ -9555,59 +9510,57 @@ void CvPlot::doCulture()
 	int iCityStrength;
 
 	// Super Forts begin *culture*
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	doImprovementCulture();
+
+	ImprovementTypes eImprovement = getImprovementType();
+	if (eImprovement != NO_IMPROVEMENT)
 	{
-		doImprovementCulture();
-
-		ImprovementTypes eImprovement = getImprovementType();
-		if (eImprovement != NO_IMPROVEMENT)
+		// Check for a fort culture flip
+		if (GC.getImprovementInfo(eImprovement).isActsAsCity() && (getOwnershipDuration() > GC.getDefineINT("SUPER_FORTS_DURATION_BEFORE_REVOLT")))
 		{
-			// Check for a fort culture flip
-			if (GC.getImprovementInfo(eImprovement).isActsAsCity() && (getOwnershipDuration() > GC.getDefineINT("SUPER_FORTS_DURATION_BEFORE_REVOLT")))
+			eCulturalOwner = calculateCulturalOwner();
+			if (eCulturalOwner != NO_PLAYER)
 			{
-				eCulturalOwner = calculateCulturalOwner();
-				if (eCulturalOwner != NO_PLAYER)
+				if (GET_PLAYER(eCulturalOwner).getTeam() != getTeam())
 				{
-					if (GET_PLAYER(eCulturalOwner).getTeam() != getTeam())
+					bool bDefenderFound = false;
+					CLinkList<IDInfo> oldUnits;
+					pUnitNode = headUnitNode();
+
+					while (pUnitNode != NULL)
 					{
-						bool bDefenderFound = false;
-						CLinkList<IDInfo> oldUnits;
-						pUnitNode = headUnitNode();
+						oldUnits.insertAtEnd(pUnitNode->m_data);
+						pUnitNode = nextUnitNode(pUnitNode);
+					}
 
-						while (pUnitNode != NULL)
+					pUnitNode = oldUnits.head();
+
+					while (pUnitNode != NULL)
+					{
+						pLoopUnit = ::getUnit(pUnitNode->m_data);
+						pUnitNode = nextUnitNode(pUnitNode);
+						if(pLoopUnit->canDefend(this))
 						{
-							oldUnits.insertAtEnd(pUnitNode->m_data);
-							pUnitNode = nextUnitNode(pUnitNode);
-						}
-
-						pUnitNode = oldUnits.head();
-
-						while (pUnitNode != NULL)
-						{
-							pLoopUnit = ::getUnit(pUnitNode->m_data);
-							pUnitNode = nextUnitNode(pUnitNode);
-							if(pLoopUnit->canDefend(this))
+							if(pLoopUnit->getOwner() == getOwnerINLINE())
 							{
-								if(pLoopUnit->getOwner() == getOwnerINLINE())
-								{
-									bDefenderFound = true;
-									break;
-								}
+								bDefenderFound = true;
+								break;
 							}
 						}
-						if(!bDefenderFound)
-						{
-							szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_REVOLTED_JOINED", GC.getImprovementInfo(getImprovementType()).getText(), GET_PLAYER(eCulturalOwner).getCivilizationDescriptionKey());
-							gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_CULTUREFLIP", MESSAGE_TYPE_INFO, GC.getImprovementInfo(getImprovementType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), getX_INLINE(), getY_INLINE(), true, true);
-							gDLL->getInterfaceIFace()->addMessage(eCulturalOwner, false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_CULTUREFLIP", MESSAGE_TYPE_INFO, GC.getImprovementInfo(getImprovementType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), getX_INLINE(), getY_INLINE(), true, true);
-							setOwner(eCulturalOwner,true,true);
-						}
+					}
+					if(!bDefenderFound)
+					{
+						szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_REVOLTED_JOINED", GC.getImprovementInfo(getImprovementType()).getText(), GET_PLAYER(eCulturalOwner).getCivilizationDescriptionKey());
+						gDLL->getInterfaceIFace()->addMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_CULTUREFLIP", MESSAGE_TYPE_INFO, GC.getImprovementInfo(getImprovementType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), getX_INLINE(), getY_INLINE(), true, true);
+						gDLL->getInterfaceIFace()->addMessage(eCulturalOwner, false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_CULTUREFLIP", MESSAGE_TYPE_INFO, GC.getImprovementInfo(getImprovementType()).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), getX_INLINE(), getY_INLINE(), true, true);
+						setOwner(eCulturalOwner,true,true);
 					}
 				}
 			}
 		}
-		// Super Forts end
 	}
+	// Super Forts end
+	
 	pCity = getPlotCity();
 
 	if (pCity != NULL)
