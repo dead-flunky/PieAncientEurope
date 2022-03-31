@@ -1260,6 +1260,7 @@ void CvCity::chooseProduction(UnitTypes eTrainUnit, BuildingTypes eConstructBuil
 	FAssert(isHuman() && !isProductionAutomated());
 	if (isDisorder())
 	{
+		// Flunky: is this the source of a failed assert? 
 		AI_setChooseProductionDirty(true);
 		return;
 	}
@@ -1985,6 +1986,7 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 		return false;
 	}
 
+	// Flunky for PAE: city levels
 	if (GC.getBuildingInfo(eBuilding).getMinCityLevel() > getCityLevel())
 	{
 		return false;
@@ -3290,8 +3292,7 @@ int CvCity::getProductionDifference(int iProductionNeeded, int iProduction, int 
 		return 0;
 	}
 
-	int iFoodProduction = bFoodProduction ?
-			std::max(0, getYieldRate(YIELD_FOOD) - foodConsumption(true)) : 0;
+	int iFoodProduction = bFoodProduction ? std::max(0, (getYieldRate(YIELD_FOOD) - foodConsumption(true))) : 0;
 
 	int iOverflow = ((bOverflow) ? (getOverflowProduction() + getFeatureProduction()) : 0);
 
@@ -4474,15 +4475,6 @@ int CvCity::unhappyLevel(int iExtra) const
 		iAngerPercent += getConscriptPercentAnger(iExtra);
 		iAngerPercent += getDefyResolutionPercentAnger(iExtra);
 		iAngerPercent += getWarWearinessPercentAnger();
-// Flunky PAE no global warming anger in antiquity
-/*
-** K-Mod, 5/jan/11, karadoc
-** global warming anger _percent_; as part per 100.
-** Unfortunately, people who made the rest of the game used anger percent to mean part per 1000
-** so I have to multiply my GwPercentAnger by 10 to make it fit in.
-*/
-//		iAngerPercent += std::max(0, GET_PLAYER(getOwnerINLINE()).getGwPercentAnger()*10);
-// K-Mod end
 
 		for (iI = 0; iI < GC.getNumCivicInfos(); iI++)
 		{
@@ -6209,15 +6201,17 @@ int CvCity::calculateNumCitiesMaintenanceTimes100() const
 			iNumVassalCities += kLoopPlayer.getNumCities();
 		}
 	}
-
 	iNumVassalCities /= std::max(1, GET_TEAM(getTeam()).getNumMembers());
+
 /*
 ** K-Mod, 04/sep/10, karadoc
 ** Reduced vassal maintenance and removed maintenance cap
 */
 	/* original BTS code
 	int iNumCitiesMaintenance = (GET_PLAYER(getOwnerINLINE()).getNumCities() + iNumVassalCities) * iNumCitiesPercent;
-	iNumCitiesMaintenance = std::min(iNumCitiesMaintenance, GC.getHandicapInfo(getHandicapType()).getMaxNumCitiesMaintenance() * 100); */
+
+	iNumCitiesMaintenance = std::min(iNumCitiesMaintenance, GC.getHandicapInfo(getHandicapType()).getMaxNumCitiesMaintenance() * 100);
+	*/
 	int iNumCitiesMaintenance = (GET_PLAYER(getOwnerINLINE()).getNumCities() + iNumVassalCities / 2) * iNumCitiesPercent;
 /*
 ** K-Mod end
@@ -6368,7 +6362,7 @@ int CvCity::calculateCorporationMaintenanceTimes100(CorporationTypes eCorporatio
 	}
 
 	FAssert(iMaintenance >= 0);
-	// K-Mod note. This assert (and others like it) can fail sometimes during the process or updating plot groups; because the # of bonuses can be temporarily negative.
+	// K-Mod note. This assert (and others like it) can fail sometimes during the process of updating plot groups; because the # of bonuses can be temporarily negative.
 
 	return iMaintenance;
 }
@@ -8634,7 +8628,7 @@ void CvCity::setCultureLevel(CultureLevelTypes eNewValue, bool bUpdatePlotGroups
 				{
 					if (GC.getProcessInfo(getProductionProcess()).getProductionToCommerceModifier(COMMERCE_CULTURE) > 0)
 					{
-						popOrder(0, false, true);						
+						popOrder(0, false, true);
 					}
 				} */ // K-Mod does this in a different way, to avoid an overflow bug. (And a different way to the Unofficial Patch, to avoid OOS)
 			}
@@ -10280,7 +10274,9 @@ void CvCity::setCultureTimes100(PlayerTypes eIndex, int iNewValue, bool bPlots, 
 
 	// Flunky for PAE Civil War: limit iNewValue >= 0
 	if (iNewValue < 0)
+	{
 		iNewValue = 0;
+	}
 /*
 ** K-Mod, 26/sep/10, Karadoc
 ** fixed so that plots actually get the culture difference
@@ -11822,7 +11818,7 @@ void CvCity::setHasReligion(ReligionTypes eIndex, bool bNewValue, bool bAnnounce
 								{
 									CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_RELIGION_SPREAD", GC.getReligionInfo(eIndex).getTextKeyWide(), getNameKey());
 									gDLL->getInterfaceIFace()->addHumanMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getReligionInfo(eIndex).getSound(), MESSAGE_TYPE_MAJOR_EVENT, GC.getReligionInfo(eIndex).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), bArrows, bArrows);
-									// (K-Mod note: event time was originally "long".)
+									// (K-Mod note: event time was originally "EVENT_MESSAGE_TIME_LONG".)
 								}
 							}
 						}
@@ -12056,10 +12052,8 @@ void CvCity::setHasCorporation(CorporationTypes eIndex, bool bNewValue, bool bAn
 				{
 					if (getOwnerINLINE() == iI || GET_PLAYER((PlayerTypes)iI).hasHeadquarters(eIndex))
 					{
-						/* original bts code
 						CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_CORPORATION_SPREAD", GC.getCorporationInfo(eIndex).getTextKeyWide(), getNameKey());
 						gDLL->getInterfaceIFace()->addHumanMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getCorporationInfo(eIndex).getSound(), MESSAGE_TYPE_MAJOR_EVENT, GC.getCorporationInfo(eIndex).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), bArrows, bArrows);
-						*/
 
 						if (getOwnerINLINE() == iI)
 						{
@@ -12080,17 +12074,9 @@ void CvCity::setHasCorporation(CorporationTypes eIndex, bool bNewValue, bool bAn
 								}
 							}
 
-							CvWString szBuffer;
 							szBuffer = gDLL->getText("TXT_KEY_MISC_CORPORATION_SPREAD_BONUS", GC.getCorporationInfo(eIndex).getTextKeyWide(), szBonusString.getCString(), getNameKey(), szBonusList.GetCString());
 							gDLL->getInterfaceIFace()->addHumanMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getCorporationInfo(eIndex).getSound(), MESSAGE_TYPE_MINOR_EVENT, GC.getCorporationInfo(eIndex).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), bArrows, bArrows);
 						}
-						// K-Mod. We don't need two announcements every time a corp spreads. So I've put the general announcement inside this 'else' block.
-						else
-						{
-							CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_CORPORATION_SPREAD", GC.getCorporationInfo(eIndex).getTextKeyWide(), getNameKey());
-							gDLL->getInterfaceIFace()->addHumanMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getCorporationInfo(eIndex).getSound(), MESSAGE_TYPE_MAJOR_EVENT, GC.getCorporationInfo(eIndex).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), bArrows, bArrows);
-						}
-						// K-Mod end
 					}
 				}
 			}
@@ -12345,7 +12331,7 @@ void CvCity::pushOrder(OrderTypes eOrder, int iData1, int iData2, bool bSave, bo
 		{
 			bValid = true;
 			// K-Mod. For culture processes, use iData2 to flag the current culture level so that we know when to stop.
-			// We could do a similar thing with research processes and tech... but lets not.
+			// We could do a similar thing with research processes and tech... but let's not.
 			if (isHuman() && GC.getProcessInfo((ProcessTypes)iData1).getProductionToCommerceModifier(COMMERCE_CULTURE) > 0)
 			{
 				FAssert(iData2 == -1);
@@ -12967,7 +12953,6 @@ int CvCity::getOrderQueueLength()
 	return m_orderQueue.getLength();
 }
 
-
 OrderData* CvCity::getOrderFromQueue(int iIndex)
 {
 	CLLNode<OrderData>* pOrderNode;
@@ -12984,12 +12969,10 @@ OrderData* CvCity::getOrderFromQueue(int iIndex)
 	}
 }
 
-
 CLLNode<OrderData>* CvCity::nextOrderQueueNode(CLLNode<OrderData>* pNode) const
 {
 	return m_orderQueue.next(pNode);
 }
-
 
 CLLNode<OrderData>* CvCity::headOrderQueueNode() const
 {
@@ -13027,7 +13010,6 @@ void CvCity::setWallOverridePoints(const std::vector< std::pair<float, float> >&
 	m_kWallOverridePoints = kPoints;
 	setLayoutDirty(true);
 }
-
 
 const std::vector< std::pair<float, float> >& CvCity::getWallOverridePoints() const
 {
@@ -15407,62 +15389,6 @@ int CvCity::getBuildingHappyChange(BuildingClassTypes eBuildingClass) const
 /*                                                                                              */
 /* Bugfix                                                                                       */
 /************************************************************************************************/
-/* orginal bts code
-void CvCity::setBuildingHealthChange(BuildingClassTypes eBuildingClass, int iChange)
-{
-	for (BuildingChangeArray::iterator it = m_aBuildingHealthChange.begin(); it != m_aBuildingHealthChange.end(); ++it)
-	{
-		if ((*it).first == eBuildingClass)
-		{
-			if ((*it).second != iChange)
-			{
-				if ((*it).second > 0)
-				{
-					changeBuildingGoodHealth(-(*it).second);
-				}
-				else if ((*it).second < 0)
-				{
-					changeBuildingBadHealth((*it).second);
-				}
-
-				if (iChange == 0)
-				{
-					m_aBuildingHealthChange.erase(it);
-				}
-				else
-				{
-					(*it).second = iChange;
-				}
-
-				if (iChange > 0)
-				{
-					changeBuildingGoodHealth(iChange);
-				}
-				else if (iChange < 0)
-				{
-					changeBuildingBadHealth(-iChange);
-				}
-			}
-
-			return;
-		}
-	}
-
-	if (0 != iChange)
-	{
-		m_aBuildingHealthChange.push_back(std::make_pair(eBuildingClass, iChange));
-
-		if (iChange > 0)
-		{
-			changeBuildingGoodHappiness(iChange);
-		}
-		else if (iChange < 0)
-		{
-			changeBuildingGoodHappiness(-iChange);
-		}
-	}
-}
-*/
 void CvCity::setBuildingHealthChange(BuildingClassTypes eBuildingClass, int iChange)
 {
 	for (BuildingChangeArray::iterator it = m_aBuildingHealthChange.begin(); it != m_aBuildingHealthChange.end(); ++it)
