@@ -107,8 +107,8 @@ public:
 	TeamTypes getDeclareWarMove(const CvPlot* pPlot) const;															// Exposed to Python
 	bool canMoveInto(const CvPlot* pPlot, bool bAttack = false, bool bDeclareWar = false, bool bIgnoreLoad = false, bool bAssumeVisible = true, // K-Mod added bAssumeVisible. Exposed to Python
 			bool bCheckMadeAttack = true) const; // f1rpo (advc.001k)
-	bool canMoveOrAttackInto(const CvPlot* pPlot, bool bDeclareWar = false,								// Exposed to Python
-			bool bCheckMadeAttack = true) const; // f1rpo (advc.001k)
+	bool canMoveOrAttackInto(const CvPlot* pPlot, bool bDeclareWar = false, // Exposed to Python
+				bool bCheckMadeAttack = true) const; // f1rpo (advc.001k)
 	// bool canMoveThrough(const CvPlot* pPlot, bool bDeclareWar = false) const; // disabled by K-Mod (was exposed to Python)
 	void attack(CvPlot* pPlot, bool bQuick);
 	void attackForDamage(CvUnit *pDefender, int attackerDamageChange, int defenderDamageChange);
@@ -628,7 +628,7 @@ public:
 	int CvUnit::getSuicideChance() const;
 
 	int getDropRange() const;
-	
+
 	bool isMadeAttack() const;																																// Exposed to Python
 	void setMadeAttack(bool bNewValue);																							// Exposed to Python
 

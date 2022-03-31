@@ -104,11 +104,6 @@ bool CyUnit::canMoveOrAttackInto(CyPlot* pPlot, bool bDeclareWar)
 	return m_pUnit ? m_pUnit->canMoveOrAttackInto(pPlot->getPlot(), bDeclareWar) : false;
 }
 
-/*bool CyUnit::canMoveThrough(CyPlot* pPlot)
-{
-	return m_pUnit ? m_pUnit->canMoveThrough(pPlot->getPlot()) : false;
-}*/
-
 bool CyUnit::jumpToNearestValidPlot()
 {
 	return m_pUnit ? m_pUnit->jumpToNearestValidPlot() : false;
@@ -1039,11 +1034,6 @@ bool CyUnit::hasCargo()
 	return m_pUnit ? m_pUnit->hasCargo() : false;
 }
 
-/* bool CyUnit::canCargoAllMove()
-{
-	return m_pUnit ? m_pUnit->canCargoAllMove() : false;
-} */
-
 int CyUnit::getUnitAICargo(UnitAITypes eUnitAI)
 {
 	return m_pUnit ? m_pUnit->getUnitAICargo(eUnitAI) : -1;
@@ -1524,6 +1514,7 @@ bool CyUnit::isCargo()
 {
 	return m_pUnit ? m_pUnit->isCargo() : false;
 }
+
 void CyUnit::setTransportUnit(CyUnit* pTransportUnit)
 {
 	if (m_pUnit)

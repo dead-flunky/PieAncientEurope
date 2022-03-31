@@ -26,7 +26,7 @@
 struct ProfileSample
 {
 	ProfileSample(char *name)
-	{	
+	{
 		strcpy(Name, name);
 		Added=false;
 		Parent=-1;
@@ -68,20 +68,16 @@ public:
 	CProfileScope(ProfileSample *pSample)
 	{
 		m_pSample = pSample;
-		bValid = false;
-		//if (!giProfilerDisabled)
-		{
-			bValid = true;
+		bValid = true;
 #ifdef USE_INTERNAL_PROFILER
-			IFPBeginSample(m_pSample);
+		IFPBeginSample(m_pSample);
 #else
-			gDLL->BeginSample(m_pSample);
+		gDLL->BeginSample(m_pSample);
 #endif
-		}
 	};
 	~CProfileScope()
 	{
-		if(bValid )
+		if (bValid)
 		{
 #ifdef USE_INTERNAL_PROFILER
 			IFPEndSample(m_pSample);
@@ -104,7 +100,7 @@ private:
 #ifdef USE_INTERNAL_PROFILER
 #define PROFILE(name)\
 	static ProfileSample sample(name);\
-	CProfileScope ProfileScope(&sample);		
+	CProfileScope ProfileScope(&sample);
 
 //BEGIN & END macros:		Only needed if you don't want to use the scope macro above. 
 // Macros must be in the same scope
@@ -118,7 +114,7 @@ private:
 	static ProfileSample sample(__FUNCTION__);\
 	CProfileScope ProfileScope(&sample);	
 
-#define PROFILE_STACK_DUMP	dumpProfileStack();
+#define PROFILE_STACK_DUMP dumpProfileStack();
 #else
 #define PROFILE(name)\
 	static ProfileSample sample(name);\
@@ -134,9 +130,9 @@ private:
 
 #define PROFILE_FUNC()\
 	static ProfileSample sample(__FUNCTION__);\
-	CProfileScope ProfileScope(&sample);	
+	CProfileScope ProfileScope(&sample);
 
-#define PROFILE_STACK_DUMP ;
+#define PROFILE_STACK_DUMP;
 #endif
 #else
 #define PROFILE(name)				// Remove profiling code

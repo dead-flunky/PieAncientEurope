@@ -172,7 +172,6 @@ bool CySelectionGroup::isStranded()
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
 
-
 bool CySelectionGroup::at(int iX, int iY)
 {
 	return m_pSelectionGroup ? m_pSelectionGroup->at(iX, iY) : false;

@@ -144,7 +144,6 @@ void CyInfoPythonInterface1()
 
 		// Flunky Formation
 		.def("isFormation", &CvPromotionInfo::isFormation, "bool ()")
-
 		.def("isLeader", &CvPromotionInfo::isLeader, "bool ()")
 		.def("isBlitz", &CvPromotionInfo::isBlitz, "bool ()")
 		.def("isAmphib", &CvPromotionInfo::isAmphib, "bool ()")

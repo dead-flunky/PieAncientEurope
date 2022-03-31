@@ -344,7 +344,7 @@ public:
 
 	int getGovernmentCenterCount() const;																	
 	bool isGovernmentCenter() const;														// Exposed to Python
-	void changeGovernmentCenterCount(int iChange);		
+	void changeGovernmentCenterCount(int iChange);
 
 // BUG - Building Saved Maintenance - start
 	int getSavedMaintenanceTimes100ByBuilding(BuildingTypes eBuilding) const;
@@ -1080,7 +1080,7 @@ public:
 	void invalidateCommerceRankCache(CommerceTypes eCommerce = NO_COMMERCE);
 
 	int getBestYieldAvailable(YieldTypes eYield) const;
-	
+
 	// Flunky for PAE
 	virtual void AI_doReleaseSlaves() = 0;
 	void doCheckCityState();	// Exposed to Python
@@ -1288,12 +1288,12 @@ public:
 	void doPlotCultureTimes100(bool bUpdate, PlayerTypes ePlayer, int iCultureRateTimes100, bool bCityCulture);
 protected:
 	// K-Mod end
-	bool doCheckProduction();
 	void doProduction(bool bAllowNoProduction);
 	void doDecay();
 	void doReligion();
 	void doGreatPeople();
 	void doMeltdown();
+	bool doCheckProduction();
 
 	int getExtraProductionDifference(int iExtra, UnitTypes eUnit) const;
 	int getExtraProductionDifference(int iExtra, BuildingTypes eBuilding) const;

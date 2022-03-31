@@ -157,7 +157,7 @@ void CvDLLButtonPopup::OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, C
 					pInfo->setData1(2);
 					gDLL->getInterfaceIFace()->addPopup(pInfo, GC.getGameINLINE().getActivePlayer(), true);
 				}
-			} */
+			}*/
 			GC.getGameINLINE().doControl(CONTROL_RETIRE); // K-Mod
 			break;
 		case MM_REGENERATE_MAP:

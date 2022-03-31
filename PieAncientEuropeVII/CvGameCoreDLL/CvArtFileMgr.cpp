@@ -119,7 +119,7 @@ static CvArtFileMgr* gs_ArtFileMgr = NULL;
 
 CvArtFileMgr& CvArtFileMgr::GetInstance()
 {
-	if ( gs_ArtFileMgr == NULL )
+	if (gs_ArtFileMgr == NULL)
 	{
 		gs_ArtFileMgr = new CvArtFileMgr();
 

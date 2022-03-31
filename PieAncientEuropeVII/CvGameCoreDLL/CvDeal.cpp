@@ -255,9 +255,13 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 			bBumpUnits = bBumpUnits || pNode->m_data.m_eItemType == TRADE_PEACE; // K-Mod
 
 			if (bSave)
+			{
 				insertAtEndFirstTrades(pNode->m_data);
+			}
 			if (pNode->m_data.m_eItemType == TRADE_PERMANENT_ALLIANCE)
+			{
 				bAlliance = true;
+			}
 		}
 	}
 
@@ -279,10 +283,14 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 			bBumpUnits = bBumpUnits || pNode->m_data.m_eItemType == TRADE_PEACE; // K-Mod
 
 			if (bSave)
+			{
 				insertAtEndSecondTrades(pNode->m_data);
+			}
 
 			if (pNode->m_data.m_eItemType == TRADE_PERMANENT_ALLIANCE)
+			{
 				bAlliance = true;
+			}
 		}
 	}
 

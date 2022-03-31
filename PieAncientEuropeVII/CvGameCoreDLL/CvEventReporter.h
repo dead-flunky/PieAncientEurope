@@ -48,11 +48,11 @@ public:
 	void beginPlayerTurn(int iGameTurn, PlayerTypes);
 	void endPlayerTurn(int iGameTurn, PlayerTypes);
 
-	void firstContact(TeamTypes eTeamID1, TeamTypes eTeamID2);						
-	void combatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner, bool bSuicide, bool bCapture);					
-	void improvementBuilt(int iImprovementType, int iX, int iY);	
-	void improvementDestroyed(int iImprovementType, int iPlayer, int iX, int iY);	
-	void routeBuilt(int iRouteType, int iX, int iY);	
+	void firstContact(TeamTypes eTeamID1, TeamTypes eTeamID2);
+	void combatResult(CvUnit* pWinner, CvUnit* pLoser, bool attackerWinner, bool bSuicide, bool bCapture);
+	void improvementBuilt(int iImprovementType, int iX, int iY);
+	void improvementDestroyed(int iImprovementType, int iPlayer, int iX, int iY);
+	void routeBuilt(int iRouteType, int iX, int iY);
 	
 	void plotRevealed(CvPlot *pPlot, TeamTypes eTeam);
 	void plotFeatureRemoved(CvPlot *pPlot, FeatureTypes eFeature, CvCity* pCity);
