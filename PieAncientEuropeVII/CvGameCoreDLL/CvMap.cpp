@@ -1282,9 +1282,8 @@ void CvMap::resetPathDistance()
 	gDLL->getFAStarIFace()->ForceReset(&GC.getStepFinder());
 }
 
-// Super Forts begin *canal* *choke*
-int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvalidPlot)
-// Super Forts end
+int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest)
+// Super Forts: int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvalidPlot)
 {
 	FAStarNode* pNode;
 
@@ -1292,20 +1291,17 @@ int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvali
 	{
 		return -1;
 	}
-	int iInvalidPlot = 0;
-// Flunky PAE disabled *choke* *canal* for bug search
 // Super Forts begin *canal* *choke*
-	// 1 must be added because 0 is already being used as the default value for iInfo in GeneratePath()
-	if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
-	{
-		iInvalidPlot = (pInvalidPlot == NULL)? 0: GC.getMapINLINE().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
-	}
+	// int iInvalidPlot = 0;
+	// // 1 must be added because 0 is already being used as the default value for iInfo in GeneratePath()
+	// if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+	// {
+		// iInvalidPlot = (pInvalidPlot == NULL)? 0: GC.getMapINLINE().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
+	// }
 // Super Forts end
-	if (gDLL->getFAStarIFace()->GeneratePath(&GC.getStepFinder(), pSource->getX_INLINE(), 
-// Super Forts start
-		//pSource->getY_INLINE(), pDest->getX_INLINE(), pDest->getY_INLINE(), false, 0, true))
-	    pSource->getY_INLINE(), pDest->getX_INLINE(), pDest->getY_INLINE(), false, iInvalidPlot, true))
-// Super Forts end
+	if (gDLL->getFAStarIFace()->GeneratePath(&GC.getStepFinder(), pSource->getX_INLINE(),
+		pSource->getY_INLINE(), pDest->getX_INLINE(), pDest->getY_INLINE(), false, 0, true))
+		// Super Forts: pSource->getY_INLINE(), pDest->getX_INLINE(), pDest->getY_INLINE(), false, iInvalidPlot, true))
 	{
 		pNode = gDLL->getFAStarIFace()->GetLastNode(&GC.getStepFinder());
 
