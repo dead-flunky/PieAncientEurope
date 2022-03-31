@@ -258,10 +258,6 @@ public:
 	int calculateTotalCityHealthiness() const;																														// Exposed to Python
 	int calculateTotalCityUnhealthiness() const;																													// Exposed to Python
 
-	int calculatePollution(int iTypes = POLLUTION_ALL) const; // K-Mod, Exposed to Python
-	int getGwPercentAnger() const; // K-Mod, Exposed to Python
-	void setGwPercentAnger(int iNewValue); // K-Mod
-
 	int getUnitCostMultiplier() const; // K-Mod
 	int calculateUnitCost(int& iFreeUnits, int& iFreeMilitaryUnits, int& iPaidUnits, int& iPaidMilitaryUnits, int& iUnitCost, int& iMilitaryCost, int& iExtraCost) const; // (K-Mod changed iBaseUnitCost to iUnitCost)
 	int calculateUnitCost() const;																																				// Exposed to Python
@@ -282,7 +278,8 @@ public:
 
 	bool isResearch() const;																																							// Exposed to Python
 	DllExport bool canEverResearch(TechTypes eTech) const;																								// Exposed to Python
-	DllExport bool canResearch(TechTypes eTech, bool bTrade = false, bool bFree = false) const; // (K-Mod, added bFree. Does this break DllExport?) Exposed to Python
+	DllExport bool canResearch(TechTypes eTech, bool bTrade = false) const;																// Exposed to Python
+	// DllExport bool canResearch(TechTypes eTech, bool bTrade = false, bool bFree = false) const; // (K-Mod, added bFree. Does this break DllExport?) Exposed to Python
 	DllExport TechTypes getCurrentResearch() const;																												// Exposed to Python
 	bool isCurrentResearchRepeat() const;																																	// Exposed to Python
 	bool isNoResearchAvailable() const;																																		// Exposed to Python
@@ -1201,7 +1198,6 @@ protected:
 	int m_iLargestCityHappiness;
 	int m_iWarWearinessPercentAnger;
 	int m_iWarWearinessModifier;
-	int m_iGwPercentAnger; // K-Mod
 	int m_iFreeSpecialist;
 	int m_iNoForeignTradeCount;
 	int m_iNoCorporationsCount;
