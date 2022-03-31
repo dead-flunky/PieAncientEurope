@@ -1653,7 +1653,7 @@ void CvGame::doControl(ControlTypes eControl)
 
 					if (pUnit->getOwnerINLINE() == getActivePlayer())
 					{
-						//if (!isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || getTurnSlice() - pUnit->getLastMoveTurn() > GC.getDefineINT("MIN_TIMER_UNIT_DOUBLE_MOVES")) // disabled by K-Mod
+						if (!isMPOption(MPOPTION_SIMULTANEOUS_TURNS) || getTurnSlice() - pUnit->getLastMoveTurn() > GC.getDefineINT("MIN_TIMER_UNIT_DOUBLE_MOVES"))
 						{
 							if (pUnit->isHurt())
 							{
