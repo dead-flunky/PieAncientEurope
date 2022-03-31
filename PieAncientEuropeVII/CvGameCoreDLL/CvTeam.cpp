@@ -1012,7 +1012,7 @@ void CvTeam::doTurn()
 			for (TechTypes i = (TechTypes)0; i < GC.getNumTechInfos(); i = (TechTypes)(i+1))
 			{
 				//if (!isHasTech((TechTypes)iI))
-				if (!isHasTech(i) && kBarbPlayer.canResearch(i, 0, true)) // K-Mod. Make no progress on techs until prereqs are researched.
+				if (!isHasTech(i) && kBarbPlayer.canResearch(i)) // K-Mod. Make no progress on techs until prereqs are researched. // kmod kBarbPlayer.canResearch(i, 0, true)
 				{
 					int iCount = 0;
 					int iPossibleCount = 0;
