@@ -2641,7 +2641,7 @@ int CvSelectionGroup::getBombardTurns(CvCity* pCity /*super forts doto*/, CvPlot
 super forts doto
 	i decided to duplicate this function and cut the not needed parts it felt cleaner
 	*/
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pCity == NULL)
+	if (pCity == NULL)
 	{
 		return getFortBombardTurns(pPlot);
 	}
