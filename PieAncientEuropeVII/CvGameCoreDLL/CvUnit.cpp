@@ -3503,7 +3503,7 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 			}*/
 		}
 		//super forts improvement check - prefer animals cant enter / attack forts owned.
-		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pPlot->getImprovementType() != NO_IMPROVEMENT)
+		if (pPlot->getImprovementType() != NO_IMPROVEMENT)
 		{
 			// TODO change to isFort?
 			if (GC.getImprovementInfo(pPlot->getImprovementType()).isActsAsCity() && GC.getImprovementInfo(pPlot->getImprovementType()).getDefenseModifier() >= iMinDefenseForAnimals && pPlot->isOwned())
@@ -3542,10 +3542,9 @@ bool CvUnit::canMoveInto(const CvPlot* pPlot, bool bAttack, bool bDeclareWar, bo
 				return false;
 			}
 		} */
-		// K-Mod. Don't let noCapture units attack defenceless cities. (eg. cities with a worker in them)
+		// K-Mod. Don't let noCapture units attack defenseless cities. (eg. cities with a worker in them)
 		/*super forts keldath adjustment so attacks wont stop on forts -isEnemycity also checks for improvements so i added a specific imp check*/
-		if (pPlot->isEnemyCity(*this)
-			|| (!pPlot->isFortImprovement() && GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS)))
+		if (pPlot->isEnemyCity(*this) || /*TODO: is this keeping animals from attacking?*/ !pPlot->isFortImprovement()) 
 		{
 			if (!bAttack || !pPlot->isVisibleEnemyDefender(this))
 				return false;
@@ -4938,6 +4937,9 @@ bool CvUnit::canAirlift(const CvPlot* pPlot) const
 
 bool CvUnit::canAirliftAt(const CvPlot* pPlot, int iX, int iY) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvPlot* pTargetPlot;
 	CvCity* pTargetCity;
 
@@ -4948,9 +4950,9 @@ bool CvUnit::canAirliftAt(const CvPlot* pPlot, int iX, int iY) const
 
 	pTargetPlot = GC.getMapINLINE().plotINLINE(iX, iY);
 
-	// canMoveInto use to be here
+	// canMoveInto used to be here
 	// Super Forts begin *airlift*
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pTargetPlot->getTeam() != NO_TEAM)
+	if (pTargetPlot->getTeam() != NO_TEAM)
 	{
 		if (pTargetPlot->getTeam() == getTeam() || GET_TEAM(pTargetPlot->getTeam()).isVassal(getTeam()))
 		{
@@ -4992,6 +4994,9 @@ bool CvUnit::canAirliftAt(const CvPlot* pPlot, int iX, int iY) const
 
 bool CvUnit::airlift(int iX, int iY)
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvCity* pCity;
 	CvCity* pTargetCity;
 	CvPlot* pTargetPlot;
@@ -5033,6 +5038,9 @@ bool CvUnit::airlift(int iX, int iY)
 
 bool CvUnit::isNukeVictim(const CvPlot* pPlot, TeamTypes eTeam) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvPlot* pLoopPlot;
 	int iDX, iDY;
 
@@ -5073,6 +5081,9 @@ bool CvUnit::isNukeVictim(const CvPlot* pPlot, TeamTypes eTeam) const
 
 bool CvUnit::canNuke(const CvPlot* pPlot) const
 {
+	// Flunky disabled for PAE
+	return false;
+	
 	if (nukeRange() == -1)
 	{
 		return false;
@@ -5084,6 +5095,9 @@ bool CvUnit::canNuke(const CvPlot* pPlot) const
 
 bool CvUnit::canNukeAt(const CvPlot* pPlot, int iX, int iY) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvPlot* pTargetPlot;
 	int iI;
 
@@ -5122,6 +5136,9 @@ bool CvUnit::canNukeAt(const CvPlot* pPlot, int iX, int iY) const
 
 bool CvUnit::nuke(int iX, int iY)
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvPlot* pPlot;
 	CvWString szBuffer;
 	bool abTeamsAffected[MAX_TEAMS];
@@ -5310,6 +5327,9 @@ bool CvUnit::nuke(int iX, int iY)
 
 bool CvUnit::canRecon(const CvPlot* pPlot) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	if (getDomainType() != DOMAIN_AIR)
 	{
 		return false;
@@ -5332,6 +5352,9 @@ bool CvUnit::canRecon(const CvPlot* pPlot) const
 
 bool CvUnit::canReconAt(const CvPlot* pPlot, int iX, int iY) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	if (!canRecon(pPlot))
 	{
 		return false;
@@ -5349,6 +5372,9 @@ bool CvUnit::canReconAt(const CvPlot* pPlot, int iX, int iY) const
 
 bool CvUnit::recon(int iX, int iY)
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvPlot* pPlot;
 
 	if (!canReconAt(plot(), iX, iY))
@@ -5381,6 +5407,9 @@ bool CvUnit::recon(int iX, int iY)
 
 bool CvUnit::canParadrop(const CvPlot* pPlot) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	if (getDropRange() <= 0)
 	{
 		return false;
@@ -5403,6 +5432,9 @@ bool CvUnit::canParadrop(const CvPlot* pPlot) const
 
 bool CvUnit::canParadropAt(const CvPlot* pPlot, int iX, int iY) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	if (!canParadrop(pPlot))
 	{
 		return false;
@@ -5448,6 +5480,9 @@ bool CvUnit::canParadropAt(const CvPlot* pPlot, int iX, int iY) const
 
 bool CvUnit::paradrop(int iX, int iY)
 {
+	// Flunky disabled for PAE
+	return false;
+
 	if (!canParadropAt(plot(), iX, iY))
 	{
 		return false;
@@ -5487,6 +5522,9 @@ bool CvUnit::paradrop(int iX, int iY)
 
 bool CvUnit::canAirBomb(const CvPlot* pPlot) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	if (getDomainType() != DOMAIN_AIR)
 	{
 		return false;
@@ -5508,6 +5546,9 @@ bool CvUnit::canAirBomb(const CvPlot* pPlot) const
 
 bool CvUnit::canAirBombAt(const CvPlot* pPlot, int iX, int iY) const
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvCity* pCity;
 	CvPlot* pTargetPlot;
 
@@ -5579,6 +5620,9 @@ bool CvUnit::canAirBombAt(const CvPlot* pPlot, int iX, int iY) const
 
 bool CvUnit::airBomb(int iX, int iY)
 {
+	// Flunky disabled for PAE
+	return false;
+
 	CvCity* pCity;
 	CvPlot* pPlot;
 	CvWString szBuffer;
@@ -5767,13 +5811,9 @@ bool CvUnit::canBombard(const CvPlot* pPlot) const
 //in the bombardImprovementTarget theres a city added value
 but thats not needed there now.
 */
-	if (bombardTarget(pPlot) == NULL)
+	if (bombardTarget(pPlot) == NULL && bombardImprovementTarget(pPlot) == NULL)
 	{
-		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS)
-			&& (bombardImprovementTarget(pPlot) == NULL))
-			return false;
-		else
-			return false;
+		return false;
 	}
 // Super Forts doto end
 	return true;
@@ -5793,8 +5833,7 @@ bool CvUnit::bombard()
 //doto cleaner code - exported to fn.
 /*if theres no city - then its a fort
 canBombard checks that.*/
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-		pBombardCity == NULL)
+	if (pBombardCity == NULL)
 	{
 		return bombardFort();
 	}
@@ -6085,7 +6124,7 @@ bool CvUnit::pillage()
 		// end - super forts doto addition to remove culture on pillage
 		pPlot->setImprovementType((ImprovementTypes)(GC.getImprovementInfo(pPlot->getImprovementType()).getImprovementPillage()));
 		// begin - super forts doto addition to remove culture on pillage
-		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) && pPlot->isFortImprovement())
+		if (pPlot->isFortImprovement())
 		{
 			pPlot->changeCultureRangeFortsWithinRange(prePillageOwner, -1, prePillageImprovement, false);
 			pPlot->changeCultureRangeForts(prePillageOwner, -1);
@@ -8082,8 +8121,7 @@ bool CvUnit::build(BuildTypes eBuild)
 	if (bFinished)
 	{
 		// Super Forts begin *culture*
-		if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-			GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
+		if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
 		{
 			if(GC.getImprovementInfo((ImprovementTypes)GC.getBuildInfo(eBuild).getImprovement()).isActsAsCity())
 			{
@@ -8852,22 +8890,16 @@ int CvUnit::visibilityRange() const
 {
 	// Super Forts begin *vision*
 	int iImprovementVisibilityChange = 0;
-	if (GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS))
+
+	if(plot()->getImprovementType() != NO_IMPROVEMENT)
 	{
-		if(plot()->getImprovementType() != NO_IMPROVEMENT)
-		{
-			iImprovementVisibilityChange = GC.getImprovementInfo(plot()->getImprovementType()).getVisibilityChange();
-		}
-		//doto keldath trial at fixing an assert error.
-		int totalVis = GC.getDefineINT("UNIT_VISIBILITY_RANGE") + getExtraVisibilityRange() + iImprovementVisibilityChange;
-		return totalVis > 0 ? totalVis : 0;
+		iImprovementVisibilityChange = GC.getImprovementInfo(plot()->getImprovementType()).getVisibilityChange();
 	}
+	//doto keldath trial at fixing an assert error.
+	int totalVis = GC.getDefineINT("UNIT_VISIBILITY_RANGE") + getExtraVisibilityRange() + iImprovementVisibilityChange;
+	return totalVis > 0 ? totalVis : 0;
+
 	// Super Forts end
-	else
-	{
-		/* Original*/
-		return (GC.getDefineINT("UNIT_VISIBILITY_RANGE") + getExtraVisibilityRange());
-	}
 }
 
 
@@ -11138,8 +11170,7 @@ void CvUnit::setXY(int iX, int iY, bool bGroup, bool bUpdate, bool bShow, bool b
 		}
 		// Super Forts begin *culture* *text*
 		ImprovementTypes eImprovement = pNewPlot->getImprovementType();
-		if(GC.getGameINLINE().isOption(GAMEOPTION_SUPER_FORTS) &&
-			eImprovement != NO_IMPROVEMENT)
+		if(eImprovement != NO_IMPROVEMENT)
 		{
 			if(GC.getImprovementInfo(eImprovement).isActsAsCity() && !m_pUnitInfo->isNoCapture())//doto - adjustment qa 108
 			{
