@@ -199,28 +199,28 @@
           <PrereqTech>TECH_BEWAFFNUNG</PrereqTech>
           <iTime>200</iTime>
           <iProduction>20</iProduction>
-          <bRemove>0</bRemove>
+          <bRemove>1</bRemove>
         </FeatureStruct>
         <FeatureStruct>
           <FeatureType>FEATURE_FOREST_BURNT</FeatureType>
           <PrereqTech>TECH_BEWAFFNUNG</PrereqTech>
           <iTime>50</iTime>
           <iProduction>5</iProduction>
-          <bRemove>0</bRemove>
+          <bRemove>1</bRemove>
         </FeatureStruct>
         <FeatureStruct>
           <FeatureType>FEATURE_JUNGLE</FeatureType>
           <PrereqTech>TECH_BEWAFFNUNG2</PrereqTech>
           <iTime>200</iTime>
           <iProduction>20</iProduction>
-          <bRemove>0</bRemove>
+          <bRemove>1</bRemove>
         </FeatureStruct>
         <FeatureStruct>
           <FeatureType>FEATURE_DICHTERWALD</FeatureType>
           <PrereqTech>TECH_BEWAFFNUNG2</PrereqTech>
           <iTime>300</iTime>
           <iProduction>30</iProduction>
-          <bRemove>0</bRemove>
+          <bRemove>1</bRemove>
         </FeatureStruct>
       </FeatureStructs>
       <HotKey>KB_P</HotKey>
@@ -582,6 +582,25 @@
       <Button>,Art/Interface/Buttons/Builds/BuildCottage.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,7</Button>
     </BuildInfo>
     <BuildInfo>
+      <Type>BUILD_COTTAGE2</Type>
+      <Description>TXT_KEY_BUILD_COTTAGE</Description>
+      <Help>TXT_KEY_BUILD_COTTAGE_HELP</Help>
+      <PrereqTech>NONE</PrereqTech>
+      <iTime>1</iTime>
+      <iCost>0</iCost>
+      <bKill>1</bKill>
+      <ImprovementType>IMPROVEMENT_COTTAGE</ImprovementType>
+      <RouteType>NONE</RouteType>
+      <EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
+      <FeatureStructs/>
+      <HotKey>KB_T</HotKey>
+      <bAltDown>0</bAltDown>
+      <bShiftDown>0</bShiftDown>
+      <bCtrlDown>0</bCtrlDown>
+      <iHotKeyPriority>0</iHotKeyPriority>
+      <Button>,Art/Interface/Buttons/Builds/BuildCottage.dds,Art/Interface/Buttons/Actions_Builds_LeaderHeads_Specialists_Atlas.dds,2,7</Button>
+    </BuildInfo>
+    <BuildInfo>
       <Type>BUILD_COTTAGE_HILL</Type>
       <Description>TXT_KEY_BUILD_COTTAGE_HILL</Description>
       <Help/>
@@ -589,6 +608,25 @@
       <iTime>300</iTime>
       <iCost>15</iCost>
       <bKill>0</bKill>
+      <ImprovementType>IMPROVEMENT_COTTAGE_HILL</ImprovementType>
+      <RouteType>NONE</RouteType>
+      <EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>
+      <FeatureStructs/>
+      <HotKey>KB_T</HotKey>
+      <bAltDown>0</bAltDown>
+      <bShiftDown>0</bShiftDown>
+      <bCtrlDown>0</bCtrlDown>
+      <iHotKeyPriority>0</iHotKeyPriority>
+      <Button>Art/Interface/Buttons/Builds/button_imp_berghuette.dds</Button>
+    </BuildInfo>
+    <BuildInfo>
+      <Type>BUILD_COTTAGE_HILL2</Type>
+      <Description>TXT_KEY_BUILD_COTTAGE_HILL</Description>
+      <Help/>
+      <PrereqTech>NONE</PrereqTech>
+      <iTime>1</iTime>
+      <iCost>0</iCost>
+      <bKill>1</bKill>
       <ImprovementType>IMPROVEMENT_COTTAGE_HILL</ImprovementType>
       <RouteType>NONE</RouteType>
       <EntityEvent>ENTITY_EVENT_BUILD</EntityEvent>

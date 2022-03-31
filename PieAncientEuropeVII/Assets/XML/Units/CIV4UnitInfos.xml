@@ -2869,7 +2869,16 @@
         </UnitAI>
       </UnitAIs>
       <NotUnitAIs/>
-      <Builds/>
+      <Builds>
+        <Build>
+          <BuildType>BUILD_COTTAGE2</BuildType>
+          <bBuild>1</bBuild>
+        </Build>
+        <Build>
+          <BuildType>BUILD_COTTAGE_HILL2</BuildType>
+          <bBuild>1</bBuild>
+        </Build>
+      </Builds>
       <ReligionSpreads/>
       <CorporationSpreads/>
       <GreatPeoples/>

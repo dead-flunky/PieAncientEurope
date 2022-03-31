@@ -3,7 +3,7 @@
 <!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Soren Johnson (Firaxis Games) -->
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
-<!-- edited by Pierre Voak (pie), Austria -->
+<!-- edited for PAE -->
 <!-- Bonus Infos: YieldChanges: Food, Prod, Commerce -->
 <!-- WARNING: It is not recommended that you remove Bonuses due to complications with the LSystem -->
 <Civ4BonusInfos xmlns="x-schema:CIV4TerrainSchema.xml">
@@ -40,7 +40,7 @@
       <iPlayer>75</iPlayer>
       <iTilesPer>0</iTilesPer>
       <iMinLandPercent>0</iMinLandPercent>
-      <iUnique>2</iUnique>
+      <iUnique>0</iUnique>
       <iGroupRange>0</iGroupRange>
       <iGroupRand>0</iGroupRand>
       <bArea>0</bArea>
@@ -123,7 +123,7 @@
       <iPlayer>75</iPlayer>
       <iTilesPer>0</iTilesPer>
       <iMinLandPercent>0</iMinLandPercent>
-      <iUnique>2</iUnique>
+      <iUnique>0</iUnique>
       <iGroupRange>0</iGroupRange>
       <iGroupRand>0</iGroupRand>
       <bArea>0</bArea>
@@ -519,7 +519,7 @@
         <TerrainBoolean>
           <TerrainType>TERRAIN_TUNDRA</TerrainType>
           <bTerrain>1</bTerrain>
-        </TerrainBoolean>        
+        </TerrainBoolean>
       </FeatureTerrainBooleans>
     </BonusInfo>
     <BonusInfo>
@@ -540,21 +540,21 @@
       <iAIObjective>0</iAIObjective>
       <iHealth>0</iHealth>
       <iHappiness>0</iHappiness>
-      <iPlacementOrder>2</iPlacementOrder>
+      <iPlacementOrder>0</iPlacementOrder>
       <iConstAppearance>100</iConstAppearance>
       <iMinAreaSize>3</iMinAreaSize>
       <iMinLatitude>0</iMinLatitude>
       <iMaxLatitude>90</iMaxLatitude>
       <Rands>
-        <iRandApp1>50</iRandApp1>
+        <iRandApp1>0</iRandApp1>
         <iRandApp2>0</iRandApp2>
         <iRandApp3>0</iRandApp3>
         <iRandApp4>0</iRandApp4>
       </Rands>
-      <iPlayer>125</iPlayer>
+      <iPlayer>200</iPlayer>
       <iTilesPer>0</iTilesPer>
       <iMinLandPercent>0</iMinLandPercent>
-      <iUnique>2</iUnique>
+      <iUnique>3</iUnique>
       <iGroupRange>0</iGroupRange>
       <iGroupRand>0</iGroupRand>
       <bArea>0</bArea>
@@ -682,10 +682,10 @@
         <iRandApp3>0</iRandApp3>
         <iRandApp4>0</iRandApp4>
       </Rands>
-      <iPlayer>100</iPlayer>
+      <iPlayer>200</iPlayer>
       <iTilesPer>0</iTilesPer>
       <iMinLandPercent>0</iMinLandPercent>
-      <iUnique>4</iUnique>
+      <iUnique>2</iUnique>
       <iGroupRange>0</iGroupRange>
       <iGroupRand>0</iGroupRand>
       <bArea>0</bArea>
