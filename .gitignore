@@ -21,3 +21,7 @@
 /PieAncientEuropeVII/CvGameCoreDLL/Project/*.sdf
 /PieAncientEuropeVII/CvGameCoreDLL/Project/*.opensdf
 /PieAncientEuropeVII/CvGameCoreDLL/Project/temp_files/
+/CvGameCoreDLL_new
+issue_AI_memory_size.PNG
+issue_WB_apply.PNG
+PieAncientEuropeVII/CvGameCoreDLL/Project/Debug/CvGameCoreDLL-PAE.log
