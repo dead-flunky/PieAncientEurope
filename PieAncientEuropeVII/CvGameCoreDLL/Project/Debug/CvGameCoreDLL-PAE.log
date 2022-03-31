@@ -1,39 +1,5 @@
 ﻿  Building source list
   Running fastdep
-  _precompile.cpp
-  BetterBTSAI.cpp
-  CvArea.cpp
-  CvArtFileMgr.cpp
-  CvBugOptions.cpp
-  CvCity.cpp
-  CvCityAI.cpp
-  CvDeal.cpp
-  CvDiploParameters.cpp
-  CvDLLButtonPopup.cpp
-  CvDLLEntity.cpp
-  CvDLLPython.cpp
-  CvDllPythonEvents.cpp
-  CvDllTranslator.cpp
-  CvDLLWidgetData.cpp
-  CvEventReporter.cpp
-  CvFractal.cpp
-  CvGame.cpp
-  CvGameAI.cpp
-  CvGameCoreDLL.cpp
-  CvGameCoreUtils.cpp
-  CvGameInterface.cpp
-  CvGameTextMgr.cpp
-  CvGlobals.cpp
-  CvHallOfFameInfo.cpp
-  CvInfos.cpp
-  CvInfoWater.cpp
-  CvInitCore.cpp
-  CvMap.cpp
-  CvMapGenerator.cpp
-  CvMessageControl.cpp
-  CvMessageData.cpp
-  CvPlayer.cpp
-  CvPlayerAI.cpp
   CvPlot.cpp
   CvPlotGroup.cpp
   CvPopupInfo.cpp

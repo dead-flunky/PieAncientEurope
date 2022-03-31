@@ -3428,7 +3428,7 @@ void CvPlot::calculateChokeValue()
 			{
 				for (int iJ = iI + 1; iJ < iPlotsFound; ++iJ)
 				{
-					int iDistance = GC.getMapINLINE().calculatePathDistance(apPlotsToCheck[iI], apPlotsToCheck[iJ], this);
+					int iDistance = GC.getMapINLINE().calculatePathDistance(apPlotsToCheck[iI], apPlotsToCheck[iJ]); //, this
 					if(iDistance == -1)
 					{
 						// If no path was found then value is based off the number of plots in the region minus a minimum area
