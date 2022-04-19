@@ -5,6 +5,10 @@
 *.pch
 *.pdb
 /CvGameCoreDLL_orig
+*.mp3
+*.FPK
+*.mov
+*.bik
 /PieAncientEuropeVI/CvGameCoreDLL/Project/Makefile.settings
 /PieAncientEuropeVI/CvGameCoreDLL/Project/*.sdf
 /PieAncientEuropeVI/CvGameCoreDLL/Project/*.opensdf
