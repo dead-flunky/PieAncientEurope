@@ -11976,7 +11976,7 @@ int CvCityAI::AI_cityThreat(bool bDangerPercent)
 					}
 
 					// K-Mod
-					// Reduce threat level of our vassals, particularly from capilutated vassals.
+					// Reduce threat level of our vassals, particularly from capitulated vassals.
 					if (GET_TEAM(kLoopPlayer.getTeam()).isVassal(getTeam()))
 					{
 						iCivFactor = std::min(iCivFactor, GET_TEAM(kLoopPlayer.getTeam()).isCapitulated() ? 30 : 50);
