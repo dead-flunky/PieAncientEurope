@@ -4,5 +4,7 @@
 *.xml eol=crlf
 *.thm eol=crlf
 *.txt eol=crlf
+*.tmp eol=crlf
+*.TXT eol=crlf
 *.ini eol=crlf
 *.CivBeyondSwordWBSave eol=crlf
