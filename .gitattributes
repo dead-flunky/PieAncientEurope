@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+*.py eol=crlf
+*.xml eol=crlf
+*.thm eol=crlf
+*.txt eol=crlf
+*.ini eol=crlf
+*.CivBeyondSwordWBSave eol=crlf
